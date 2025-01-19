@@ -1,0 +1,70 @@
+Question:
+What is the best performing model benchmarking the ACE 2004 dataset in terms of RE+ Micro F1 metric?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?best_value)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ACE 2004")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_VALUE         ?cont?value.
+       BIND(xsd:float(?value) AS?value).
+      ?metric      orkgp:HAS_EVALUATION     ?eval;
+                    orkgp:GET_VALUE         ?value.
+      ?eval      orkgp:P31               ?eval2.
+      ?eval2      rdfs:label              ?metric_lbl.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?model      orkgp:HAS_EVALUATION     ?eval.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:P31               ?model2.
+      ?model2      rdfs:label              ?model_lbl.
+      ?model      orkgp:HAS_DATASET      ?dataset.
+      ?cont      orkgp:HAS_MODEL         ?model.
+      ?cont      orkgp:P31               ?cont2.
+      ?cont2      rdfs:label              ?model_lbl.
+      ?cont      orkgp:HAS_EVALUATION     ?eval.
+      ?cont      a                orkgp:Evaluation.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?metric      orkgp:P31               ?metric2.
+      ?metric2      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value).
+      ?eval      orkgp:HAS_DATASET        ?dataset.
+      ?cont      orkgp:P31               ?cont2.
+      ?cont      orkgp:HAS_MODEL         ?model.
+      ?cont      orkgp:P31               ?cont.
+      ?cont      orkgp:HAS_EVALUATION     ?eval.
+      ?cont      a                orkgp:Evaluation.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value).
+      ?dataset       orkgp:P31               ?dataset2.
+      ?dataset2      rdfs:label              ?dataset_lbl.
+      ?dataset2      orkgp:HAS_DATASET      ?dataset.
+      ?dataset      orkgp:P31               ?dataset.
+      ?dataset      orkgp:HAS_DATASET      ?dataset.
+      ?cont      orkgp:P31               ?cont.
+      ?cont      orkgp:HAS_MODEL         ?model.
+      ?cont      orkgp:P31               ?cont2.
+      ?cont      orkgp:HAS_EVALUATION     ?eval.
+      ?cont      a                orkgp:Evaluation.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value).
+      ?metric      rdfs:label              ?metric_lbl.
+      ?metric      orkgp:P31               ?metric2.
+      ?metric2      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value).
+      ?model      orkgp:HAS_DATASET      ?dataset.
+      ?model      orkgp:P31               ?model.
+      ?model      orkgp:HAS_MODEL         ?model.
+      ?model      orkgp:P31               ?model2.
+      ?model      orkgp:HAS_EVALUATION     ?eval.
+      ?model      a                orkgp:Model.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value).
+      ?dataset       orkgp:P31               ?dataset.
+      ?dataset      rdfs

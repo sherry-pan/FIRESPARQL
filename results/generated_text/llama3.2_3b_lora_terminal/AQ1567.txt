@@ -1,0 +1,79 @@
+Question:
+What is the best performing model benchmarking the CoNLL++ dataset in terms of F1 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CoNLL++")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION    ?cont;
+                     orkgp:P31              ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+      ?eval         orkgp:HAS_VALUE         ?value.
+      ?value       rdfs:label              ?value_lbl.
+       BIND(xsd:float(?value_lbl) AS?value)
+      ?model      orkgp:HAS_EVALUATION    ?eval;
+                   orkgp:P32              ?model.
+      ?model      rdfs:label              ?model_lbl.
+       ORDER BY DESC(?value)
+      ?best_model      orkgp:P31              ?model.
+      ?best_model      rdfs:label              ?best_model_lbl.
+       FILTER (str(?best_model_lbl) = "best performing")
+      ?model      a                orkgp:Model.
+      }      LIMIT 1.     END
+      SELECT DISTINCT?model?model_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "CoNLL++")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?eval         orkgp:HAS_EVALUATION    ?cont;
+                     orkgp:P31              ?eval.
+       ?eval         rdfs:label              ?eval_lbl.
+       ?eval         orkgp:HAS_VALUE         ?value.
+       ?value       rdfs:label              ?value_lbl.
+        BIND(xsd:float(?value_lbl) AS?value)
+       ?model      orkgp:HAS_EVALUATION    ?eval;
+                    orkgp:P32              ?model.
+       ?model      rdfs:label              ?model_lbl.
+        ORDER BY DESC(?value)
+       ?best_model      orkgp:P31              ?model.
+       ?best_model      rdfs:label              ?best_model_lbl.
+        FILTER (str(?best_model_lbl) = "best performing")
+       ?model      a                orkgp:Model.
+      }      LIMIT 1.     END
+      SELECT DISTINCT?model?model_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "CoNLL++")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?eval         orkgp:HAS_EVALUATION    ?cont;
+                     orkgp:P31              ?eval.
+       ?eval         rdfs:label              ?eval_lbl.
+       ?eval         orkgp:HAS_VALUE         ?value.
+        BIND(xsd:float(?value_lbl) AS?value)
+       ?model      orkgp:HAS_EVALUATION    ?eval;
+                    orkgp:P32              ?model.
+       ?model      rdfs:label              ?model_lbl.
+        ORDER BY DESC(?value)
+       ?best_model      orkgp:P31              ?model.
+       ?best_model      rdfs:label              ?best_model_lbl.
+        FILTER (str(?best_model_lbl) = "best performing")
+       ?model      a                orkgp:Model.
+      }      LIMIT 1.     END
+      SELECT DISTINCT?model?model_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "CoNLL++")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?eval         orkgp:HAS_EVALUATION    ?cont;
+                     orkgp:P31              ?eval.
+       ?eval         rdfs:label              ?eval

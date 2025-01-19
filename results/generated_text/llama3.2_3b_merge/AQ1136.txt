@@ -1,0 +1,78 @@
+Question:
+What is the top benchmark score and its metric on the Natural Questions (short) dataset?
+
+Generated SPARQL:
+ SELECT?metric,?metric_lbl, MAX(?value) AS?score
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Natural Questions (short)")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_EVALUATION    ?cont;
+                      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value)
+      ?metric       orkgp:HAS_EVALUATION    ?eval;
+                     orkgp:HAS_METRIC      ?m.
+      ?metric_lbl   rdfs:label              ?m_lbl.
+       BIND(xsd:float(?m_lbl) AS?metric_lbl)
+      ?cont          orkgp:P31               ?cont_lbl.
+       BIND(xsd:string(?cont_lbl) AS?cont_lbl)
+      ?cont_lbl      rdfs:label              ?cont_lbl.
+       BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+     } ORDER BY DESC(?score) LIMIT 1; 
+     SELECT?metric,?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Natural Questions (short)")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_EVALUATION    ?cont;
+                      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value)
+      ?metric       orkgp:HAS_EVALUATION    ?eval;
+                     orkgp:HAS_METRIC      ?m.
+      ?metric_lbl   rdfs:label              ?m_lbl.
+       BIND(xsd:float(?m_lbl) AS?metric_lbl)
+      ?cont          orkgp:P31               ?cont_lbl.
+       BIND(xsd:string(?cont_lbl) AS?cont_lbl)
+      ?cont_lbl      rdfs:label              ?cont_lbl.
+       BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+     } 
+     UNION
+     SELECT?metric,?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Natural Questions (short)")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_EVALUATION    ?cont;
+                      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value)
+      ?metric       orkgp:HAS_EVALUATION    ?eval;
+                     orkgp:HAS_METRIC      ?m.
+      ?metric_lbl   rdfs:label              ?m_lbl.
+       BIND(xsd:float(?m_lbl) AS?metric_lbl)
+      ?cont          orkgp:P31               ?cont_lbl.
+       BIND(xsd:string(?cont_lbl) AS?cont_lbl)
+      ?cont_lbl      orkgp:P31               ?cont_lbl.
+       BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+     } 
+     UNION
+     SELECT?metric,?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Natural Questions (short)")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_EVALUATION    ?cont;
+                      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value)
+      ?metric       orkgp:HAS_EVALUATION    ?eval;
+                     orkgp:HAS_METRIC      ?m.
+      ?metric_lbl   rdfs:label              ?m_lbl.
+       BIND(xsd:float(?m_lbl) AS?metric_lbl)
+      ?cont          or

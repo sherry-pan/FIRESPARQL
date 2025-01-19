@@ -1,0 +1,33 @@
+Question:
+What is the name of the top performing model in terms of A2 score when benchmarked on the ANLI test dataset?
+
+Generated SPARQL:
+"""
+    query = """
+    SELECT ?model ?model_lbl
+    WHERE {
+      orkgr:R13008 orkgp:compareContribution ?contrib.
+      ?contrib orkgp:P37 ?metric.
+      ?metric orkgp:HAS_VALUE ?value.
+      ?value orkgp:HAS_COMPARISON ?comparison.
+      ?comparison orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:P36 ?test_dataset.
+      ?test_dataset orkgp:P38 ?test_lbl.
+      ?test_lbl ?test_lbl_rdfslabel;
+      rdfs:label ?test_lbl_str.
+      FILTER(REGEX(?test_lbl_str, "ANLI"))
+      ?contrib orkgp:P38 ?benchmark.
+      ?benchmark orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:P36 ?test_dataset.
+      OPTIONAL {?dataset orkgp:P37 ?metric.
+               ?metric orkgp:HAS_VALUE ?value.
+               ?value orkgp:HAS_COMPARISON ?comparison.
+               ?comparison orkgp:HAS_MODEL ?model.
+               ?model rdfs:label ?model_lbl.
+              }
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+    """
+    return query
+<eos>

@@ -1,0 +1,82 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Habitat 2020 Object Nav test-std dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Habitat 2020 Object Nav test-std")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION     ?cont;
+                     orkgp:P31               ?eval.
+      ?eval         rdfs:label              ?metric_lbl.
+      ?eval         orkgp:HAS_VALUE          ?value.
+       BIND(xsd:float(?value) AS?value_float)
+      ?metric      orkgp:P32               ?eval.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?metric      orkgp:HAS_METRIC_VALUE  ?value.
+       BIND(xsd:float(?value) AS?value_float)
+      ?metric      orkgp:HAS_METRIC_VALUE  ?value.
+      ?metric      orkgp:P31               ?eval.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?metric      orkgp:HAS_METRIC_VALUE  ?value.
+       BIND(xsd:float(?value) AS?value_float)
+       BIND(xsd:float(?value_float) AS?value)
+     }  
+     ORDER BY DESC(?value)
+     LIMIT 10
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?metric      a                orkgp:Metric;
+                  rdfs:label      ?metric_lbl.
+      FILTER (str(?metric_lbl) = "accuracy")
+     ?cont          orkgp:HAS_DATASET      ?dataset.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?eval         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval         orkgp:HAS_EVALUATION     ?cont.
+     ?eval         orkgp:P31               ?eval.
+    }  
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?metric      a                orkgp:Metric;
+                  rdfs:label      ?metric_lbl.
+      FILTER (str(?metric_lbl) = "f1")
+     ?cont          orkgp:HAS_DATASET      ?dataset.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?eval         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval         orkgp:HAS_EVALUATION     ?cont.
+     ?eval         orkgp:P31               ?eval.
+    }  
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?metric      a                orkgp:Metric;
+                  rdfs:label      ?metric_lbl.
+      FILTER (str(?metric_lbl) = "mean-pooling loss")
+     ?cont          orkgp:HAS_DATASET      ?dataset.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?eval         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval         orkgp:HAS_EVALUATION     ?cont.
+     ?eval         orkgp:P31               ?eval.
+    }  
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?metric      a                orkgp:Metric;
+                  rdfs:label      ?metric_lbl.
+      FILTER (str(?metric_lbl) = "mean-pooling accuracy")
+     ?cont          orkgp:HAS_DATASET      ?dataset.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?eval         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval         orkgp:HAS_EVALUATION     ?cont.
+     ?eval         orkgp:P31               ?eval.
+    }  
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?metric      a                orkgp:Metric;
+                  rdfs:label      ?metric_lbl.
+      FILTER (str(?metric_lbl) = "f1")
+     ?cont          orkgp:HAS_DATASET      ?dataset.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?eval         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval         orkgp:HAS

@@ -1,0 +1,85 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_EVALUATION   ?eval;
+                   orkgp:HAS_MODEL        ?model.
+      OPTIONAL {?model      rdfs:label              ?model_lbl.}
+     ?paper      rdfs:label              ?paper_lbl.
+     ?model      orkgp:P31               ?cont;
+                 rkgp:HAS_SOURCE        ?paper.
+    } 
+    ORDER BY DESC(?value) LIMIT 1; 
+    GROUP BY?model?model_lbl. 
+    HAVING?value > 0.5. 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_EVALUATION   ?eval;
+                   orkgp:HAS_MODEL        ?model.
+      OPTIONAL {?model      rdfs:label              ?model_lbl.}
+     ?paper      rdfs:label              ?paper_lbl.
+     ?model      rkgp:HAS_SOURCE        ?paper.
+     ?model      orkgp:P31               ?cont.
+    } 
+    ORDER BY DESC(?value) LIMIT 1; 
+    GROUP BY?model?model_lbl. 
+    HAVING?value > 0.5. 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_EVALUATION   ?eval;
+                   orkgp:HAS_MODEL        ?model.
+      OPTIONAL {?model      rdfs:label              ?model_lbl.}
+     ?paper      rdfs:label              ?paper_lbl.
+     ?model      orkgp:P31               ?cont.
+     ?cont      orkgp:HAS_SOURCE        ?paper.
+    } 
+    ORDER BY DESC(?value) LIMIT 1; 
+    GROUP BY?model?model_lbl. 
+    HAVING?value > 0.5. 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_EVALUATION   ?eval;
+                   orkgp:HAS_MODEL        ?model.
+      OPTIONAL {?model      rdfs:label              ?model_lbl.}
+     ?paper      rdfs:label              ?paper_lbl.
+     ?model      rkgp:HAS_SOURCE        ?paper.
+     ?cont      orkgp:HAS_SOURCE        ?paper.
+    } 
+    ORDER BY DESC(?value) LIMIT 1; 
+    GROUP BY?model?model_lbl. 
+    HAVING?value > 0.5. 
+    UNION
+    SELECT

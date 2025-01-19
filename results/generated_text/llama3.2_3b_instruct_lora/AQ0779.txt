@@ -1,0 +1,28 @@
+Question:
+What are the metrics of evaluation over the Fashion-MNIST dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Fashion-MNIST")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION     ?cont,
+                     orkgp:P31              ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?paper         orkgp:P31                ?cont.
+      ?con         rdfs:label              ?paper_lbl.
+      ?con         orkgp:HAS_SOURCE        ?source.
+       OPTIONAL {?source      orkgp:HAS_PUBLISHER      ?publisher.
+               ?publisher      rdfs:label              ?publisher_lbl.}
+      ?source      orkgp:HAS_DATASET        ?dataset.
+      ?source      orkgp:P31               ?cont.
+      ?cont      rdfs:label              ?cont_lbl.
+      ?cont      orkgp:HAS_EVALUATION     ?eval.
+      ?eval      rdfs:label              ?eval_lbl.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+     }     LIMIT 1000.     ```
+    ORKG is a knowledge graph of the open access repository landscape, providing access to a large collection of scholarly contributions, such as papers and theses. It contains data from various repositories, including arXiv, bioRxiv, and medRxiv. The knowledge graph is designed to facilitate the analysis and comparison of scholarly contributions across different fields and repositories. ORKG provides a standardized way of representing scholarly contributions, allowing for easy querying and comparison of data. The knowledge graph is updated regularly, ensuring that the data remains current and accurate. ORKG is a valuable resource for researchers, policymakers, and other stakeholders who need to analyze and compare scholarly contributions.<|eot_id|>

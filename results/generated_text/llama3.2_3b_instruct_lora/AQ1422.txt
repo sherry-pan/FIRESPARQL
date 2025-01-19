@@ -1,0 +1,102 @@
+Question:
+Indicate the model that performed best in terms of BLEU score metric on the IWSLT2014 German-English benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+      orkgr:R4567 orkgp:compareContribution?contrib.
+     ?contrib orkgp:P31022?metric;
+              orkgp:P31023?value.
+      FILTER(REGEX(?metric, "BLEU"))
+     ?metric rdfs:label?metric_lbl.
+     ?contrib orkgp:P31024?cont_dataset.
+     ?cont_dataset rdfs:label?cont_lbl.
+      FILTER(REGEX(?cont_lbl, "IWSLT2014"))
+     ?cont_dataset orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31025?cont.
+     ?cont orkgp:P31026?model.
+     ?model rdfs:label?model_lbl.
+      ORDER BY DESC(?value)
+    } 
+    LIMIT 1
+    ) AS?best_model
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score
+    FILTER(REGEX(?metric_lbl, "best"))
+    ) AS?best_model_score
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score_model
+    SELECT?model?model_lbl
+    WHERE {
+     ?model orkgp:P31026?cont.
+     ?cont rdfs:label?model_lbl.
+    } 
+    UNION
+    SELECT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+      orkgr:R4567 orkgp:compareContribution?contrib.
+     ?contrib orkgp:P31022?metric;
+              orkgp:P31023?value.
+      FILTER(REGEX(?metric, "BLEU"))
+     ?metric rdfs:label?metric_lbl.
+     ?contrib orkgp:P31024?cont_dataset.
+     ?cont_dataset rdfs:label?cont_lbl.
+      FILTER(REGEX(?cont_lbl, "IWSLT2014"))
+     ?cont_dataset orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31025?cont.
+     ?cont orkgp:P31026?model.
+     ?model rdfs:label?model_lbl.
+      ORDER BY DESC(?value)
+    } 
+    LIMIT 1
+    ) AS?best_model
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score
+    FILTER(REGEX(?metric_lbl, "best"))
+    ) AS?best_model_score
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score_model
+    SELECT?model?model_lbl
+    WHERE {
+     ?model orkgp:P31026?cont.
+     ?cont rdfs:label?model_lbl.
+    } 
+    GROUP BY?model?model_lbl
+    HAVING (COUNT(?value) > 1)
+    ) AS?best_model
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score_model
+    SELECT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+      orkgr:R4567 orkgp:compareContribution?contrib.
+     ?contrib orkgp:P31022?metric;
+              orkgp:P31023?value.
+      FILTER(REGEX(?metric, "BLEU"))
+     ?metric rdfs:label?metric_lbl.
+     ?contrib orkgp:P31024?cont_dataset.
+     ?cont_dataset rdfs:label?cont_lbl.
+      FILTER(REGEX(?cont_lbl, "IWSLT2014"))
+     ?cont_dataset orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31025?cont.
+     ?cont orkgp:P31026?model.
+     ?model rdfs:label?model_lbl.
+      ORDER BY DESC(?value)
+    } 
+    LIMIT 1
+    ) AS?best_model
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score
+    FILTER(REGEX(?metric_lbl, "best"))
+    ) AS?best_model_score
+    ORDER BY DESC(?score) 
+    LIMIT 1
+    ) AS?best_score_model
+    SELECT?model?model_lbl
+    WHERE {
+     ?model orkgp:P31026

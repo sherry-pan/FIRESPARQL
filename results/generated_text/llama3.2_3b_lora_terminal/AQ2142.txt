@@ -1,0 +1,86 @@
+Question:
+List the code links in papers that use the 12-layer Transformer-XL model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model        a            orkgc:Model;
+                   rdfs:label      ?model_lbl.
+         FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_MODEL         ?model;
+                       orkgp:HAS_SOURCE_CODE   ?code.
+      ?code         rdfs:label              ?code_lbl.
+       FILTER (str(?code_lbl) = "code")
+     }     ORDER BY DESC(?cont)     LIMIT 1
+    SELECT?code
+    WHERE {
+     ?cont       orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+     ?model      rdfs:label              ?model_lbl.
+      FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+     ?cont       orkgp:HAS_DATASET       ?dataset.
+     ?dataset    rdfs:label              ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "benchmark")
+    }
+    UNION
+    SELECT?cont     ?cont_lbl
+    WHERE {
+     ?cont       orkgp:HAS_MODEL         ?model;
+                  orkgg:HAS_SOURCE_CODE   ?code.
+     ?model      rdfs:label              ?model_lbl.
+      FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+     ?cont       orkgp:HAS_DATASET       ?dataset.
+     ?dataset    rdfs:label              ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "benchmark")
+    }
+    UNION
+    SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+    WHERE {
+     ?cont       orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+     ?model      rdfs:label              ?model_lbl.
+      FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+     ?cont       orkgp:HAS_DATASET       ?dataset.
+     ?dataset    rdfs:label              ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "benchmark")
+     ?cont       orkgp:HAS_SOURCE_CODE   ?code.
+     ?code       rdfs:label              ?code_lbl.
+      FILTER (str(?code_lbl) = "code")
+    }
+    UNION
+    SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+    WHERE {
+     ?cont       orkgp:HAS_MODEL         ?model.
+     ?model      rdfs:label              ?model_lbl.
+      FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+     ?cont       orkgp:HAS_DATASET       ?dataset.
+     ?dataset    rdfs:label              ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "benchmark")
+     ?cont       orkgp:HAS_SOURCE_CODE   ?code.
+     ?code       rdfs:label              ?code_lbl.
+      FILTER (str(?code_lbl) = "code")
+    }
+    UNION
+    SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+    WHERE {
+     ?cont       orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+     ?model      rdfs:label              ?model_lbl.
+      FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+     ?cont       orkgp:HAS_DATASET       ?dataset.
+     ?dataset    rdfs:label              ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "benchmark")
+     ?cont       orkgp:HAS_SOURCE_CODE   ?code.
+     ?code       rkgp:HAS_SOURCE_CODE   ?code.
+      FILTER (str(?code) = "code")
+    }
+    UNION
+    SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+    WHERE {
+     ?cont       orkgp:HAS_MODEL         ?model.
+     ?model      rdfs:label              ?model_lbl.
+      FILTER (str(?model_lbl) = "12-layer Transformer-XL")
+     ?cont       orkgp:HAS_DATASET       ?dataset.
+     ?dataset    rdfs:label              ?

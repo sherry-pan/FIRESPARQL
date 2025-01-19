@@ -1,0 +1,85 @@
+Question:
+Provide a list of benchmarked datasets related to the Sentence Classification research area?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a            orkgc:Problem;
+              rdfs:label      ?problem_lbl.
+       FILTER (str(?problem_lbl) = "Sentence Classification")
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      ?cont         orkgp:HAS_DATASET      ?dataset.
+      ?cont         orkgp:P32               ?paper.
+      ?paper        orkgp:HAS_PROBLEM      ?problem.
+      ?paper        rdfs:label              ?paper_lbl.
+       FILTER (str(?paper_lbl) = "Sentence Classification")
+      ?benchmark      rdfs:label              ?benchmark_lbl.
+      ?cont         orkgp:P31               ?benchmark.
+     }      ORDER BY DESC(?benchmark_lbl)      LIMIT 100.     SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a            orkgc:Problem;
+              rdfs:label      ?problem_lbl.
+       FILTER (str(?problem_lbl) = "Sentence Classification")
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      ?cont         orkgp:HAS_DATASET      ?dataset.
+      ?cont         rdfs:label              ?benchmark_lbl.
+      ?benchmark      orkgp:P31               ?benchmark.
+      ?paper        orkgp:HAS_PROBLEM      ?problem.
+      ?paper        orkgp:P32               ?cont.
+      ?dataset       orkgp:P31               ?benchmark.
+     }      ORDER BY DESC(?benchmark_lbl)      LIMIT 100. 
+    Note: The two queries are equivalent but the first one is more efficient. 
+    The first query is preferred. 
+
+    SELECT DISTINCT?dataset?dataset_lbl
+    WHERE {
+     ?problem       a            orkgc:Problem;
+                    rdfs:label      ?problem_lbl.
+      FILTER (str(?problem_lbl) = "Sentence Classification")
+     ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+     ?cont         orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:P32               ?paper.
+     ?paper        orkgp:HAS_PROBLEM      ?problem.
+     ?paper        rdfs:label              ?paper_lbl.
+      FILTER (str(?paper_lbl) = "Sentence Classification")
+     ?benchmark      rdfs:label              ?benchmark_lbl.
+     ?cont         orkgp:P31               ?benchmark.
+    }      ORDER BY DESC(?benchmark_lbl)      LIMIT 100. 
+
+    SELECT DISTINCT?dataset?dataset_lbl
+    WHERE {
+     ?problem       a            orkgc:Problem;
+                    rdfs:label      ?problem_lbl.
+      FILTER (str(?problem_lbl) = "Sentence Classification")
+     ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+     ?cont         orkgp:HAS_DATASET      ?dataset.
+     ?cont         rdfs:label              ?benchmark_lbl.
+     ?benchmark      orkgp:P31               ?benchmark.
+     ?paper        orkgp:HAS_PROBLEM      ?problem.
+     ?paper        orkgp:P32               ?cont.
+     ?dataset       orkgp:P31               ?benchmark.
+    }      ORDER BY DESC(?benchmark_lbl)      LIMIT 100. 
+    SELECT DISTINCT?dataset?dataset_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+     ?cont         orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:P32               ?paper.
+     ?paper        orkgp:HAS_PROBLEM      ?problem.
+     ?problem       a            orkgc:Problem;
+                    rdfs:label      ?problem_lbl.
+      FILTER (str(?problem_lbl) = "Sentence Classification")
+     ?benchmark      rdfs:label              ?benchmark_lbl.
+     ?cont         orkgp:P31               ?benchmark.
+    }      ORDER BY DESC(?benchmark_lbl)      LIMIT 100. 
+
+    SELECT DISTINCT?dataset?dataset_lbl
+    WHERE {
+     ?problem       a            orkgc:Problem;
+                    rdfs:label      ?problem_lbl.
+      FILTER (str(?problem_lbl) = "Sentence Classification")
+

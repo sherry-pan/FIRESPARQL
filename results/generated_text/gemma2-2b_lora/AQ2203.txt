@@ -1,0 +1,23 @@
+Question:
+Where can I find code references in papers that have used the 6-layer QRNN model for benchmarking purposes?
+
+Generated SPARQL:
+"""
+    query = """
+    SELECT DISTINCT ?code
+    WHERE {
+      ?paper rdf:type orkgc:Paper.
+      ?paper orkgp:P31 ?dataset.
+      ?dataset rdfs:label ?dataset_lbl.
+      FILTER(REGEX(?dataset_lbl, "6-layer QRNN"))
+      ?benchmark orkgp:P33 ?cont.
+      ?cont rdfs:label ?cont_lbl.
+      ?cont rdfs:subClassOf ?model.
+      ?model rdfs:label ?model_lbl.
+      ?cont orkgp:P34 ?code.
+      ?code rdfs:label ?code_lbl.
+    }
+    ORDER BY DESC(?code_lbl)
+    """
+    return query
+<eos>

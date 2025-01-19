@@ -1,0 +1,20 @@
+Question:
+What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words to classfy user feedback as feature request? 
+
+Generated SPARQL:
+"""
+    # Write your code here
+    query = """
+    SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+    WHERE {
+      orkgr:R150300 orkgp:compareContribution ?contrib.
+      ?contrib orkgp:P37 ?metric.
+      ?metric rdfs:label ?metric_lbl.
+      ?contrib orkgp:P38 ?value.
+      FILTER(REGEX(?value, "naive bayes"))
+      ORDER BY DESC(?value)
+    }
+    GROUP BY ?metric ?metric_lbl
+    """
+    return query
+<eos>

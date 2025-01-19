@@ -1,0 +1,71 @@
+Question:
+What are the metrics of evaluation over the ObjectNet dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?value) AS?count)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ObjectNet")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION     ?cont,
+                     orkgp:P31               ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+      ?eval         orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+     }     ORDER BY DESC(?count)     LIMIT 1;     GROUP BY?metric?metric_lbl;     FILTER (str(?metric_lbl) = "Accuracy")
+    SELECT?metric?metric_lbl (COUNT(?value) AS?count)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ObjectNet")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION     ?cont,
+                     orkgp:P31               ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+      ?eval         orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?value       orkgp:HAS_VALUE         ?eval,
+                    orkgp:HAS_METRIC        ?metric.
+      ?value       rdfs:label              ?value_lbl.
+     }     ORDER BY DESC(?count)     LIMIT 1;     GROUP BY?metric?metric_lbl;     FILTER (str(?metric_lbl) = "F1-score")
+    SELECT?metric?metric_lbl (COUNT(?value) AS?count)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ObjectNet")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION     ?cont,
+                     orkgp:P31               ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+      ?eval         orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?value       orkgp:HAS_VALUE         ?eval,
+                    orkgp:HAS_METRIC        ?metric.
+      ?value       rdfs:label              ?value_lbl.
+      ?cont         orkgp:HAS_MODEL         ?model.
+      ?model       rdfs:label              ?model_lbl.
+     }     ORDER BY DESC(?count)     LIMIT 1;     GROUP BY?metric?metric_lbl;     FILTER (str(?metric_lbl) = "Mean Squared Error")
+    SELECT?metric?metric_lbl (COUNT(?value) AS?count)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ObjectNet")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION     ?cont,
+                     orkgp:P31               ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+      ?eval         orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?value       orkgp:HAS_VALUE         ?eval,
+                    orkgp:HAS_METRIC        ?metric.
+      ?value       rdfs:label              ?value_lbl.
+      ?cont         orkgp:HAS_MODEL         ?model.
+      ?model       rdfs:label              ?model_lbl.
+      ?model      orkgp:HAS_DATASET        ?dataset.
+      ?dataset      rdfs:label              ?dataset_lbl.
+     }     ORDER

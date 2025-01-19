@@ -1,0 +1,51 @@
+Question:
+What data format does CHEMDNER corpus have?
+
+Generated SPARQL:
+ SELECT?format
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CHEMDNER")
+      ?dataset      orkgp:HAS_DATASET      ?cont.
+      ?cont         rdfs:label              ?format_lbl.
+      ?format       rdfs:label              ?format_lbl.
+     } 
+    ```
+This is a SPARQL query. If you want to execute it, please copy it into a SPARQL endpoint or a SPARQL client like Blazegraph or PySPARQL. If you need help with the execution, please let me know. 
+
+This query is trying to answer the question "What data format does CHEMDNER corpus have?" by first finding the dataset labeled "CHEMDNER" and then finding the format of the data in that dataset. 
+
+Here is a breakdown of the query:
+
+- `SELECT?format`: This line specifies that we want to retrieve the values of the variable?format.
+- `WHERE {... }`: This is the main part of the query, where we define the relationships between the variables.
+- `?dataset       a                orkgc:Dataset;`: This line specifies that the variable?dataset is an instance of the class orkgc:Dataset.
+- `rdfs:label      ?dataset_lbl.`: This line specifies that the variable?dataset_lbl is the label of the dataset.
+- `FILTER (str(?dataset_lbl) = "CHEMDNER")`: This line filters the results to only include datasets with the label "CHEMDNER".
+- `?dataset      orkgp:HAS_DATASET      ?cont.`: This line specifies that the variable?cont is related to the dataset?dataset via the relationship orkgp:HAS_DATASET.
+- `?cont         rdfs:label              ?format_lbl.`: This line specifies that the variable?format_lbl is the label of the data in the dataset.
+- `?format       rdfs:label              ?format_lbl.`: This line specifies that the variable?format_lbl is the label of the format.
+- `}`: This line marks the end of the WHERE clause.
+
+Please note that the labels of the dataset and the format are assumed to be the same, which is not always the case in reality. In a real-world application, you would likely want to use a more sophisticated approach to determine the format. 
+
+Also, the dataset and the format are assumed to be the only instances in the knowledge graph with the corresponding labels. If there are multiple datasets with the same label or multiple formats with the same label, the query will return multiple results. 
+
+Finally, the query assumes that the dataset and the format are related via the HAS_DATASET and RDFS_LABEL relationships, respectively. If the actual relationships in the knowledge graph are different, the query will need to be adjusted accordingly. 
+
+Please let me know if you have any questions or need further clarification. 
+
+The SPARQL query is:
+
+```sparql
+SELECT?format
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CHEMDNER")
+ ?dataset      orkgp:HAS_DATASET      ?cont.
+ ?cont         rdfs:label              ?format_lbl.
+ ?format       rdfs:label              ?format_lbl.
+}
+```<|eot_id|>

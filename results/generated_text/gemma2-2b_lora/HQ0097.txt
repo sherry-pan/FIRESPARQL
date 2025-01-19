@@ -1,0 +1,18 @@
+Question:
+What types of nanocarriers do have therapeutic effect?
+
+Generated SPARQL:
+SELECT DISTINCT ?type
+    WHERE {
+      ?problem       a                orkgc:Problem;
+                      rdfs:label       ?problem_lbl.
+      FILTER (str(?problem_lbl) = "What types of nanocarriers do have therapeutic effect?")
+      ?study         orkgp:HAS_DATASET        ?dataset;
+                      rdfs:label               ?dataset_lbl.
+      ?dataset       orkgp:HAS_PROBLEM         ?problem;
+                      orkgp:HAS_BENCHMARK        ?benchmark.
+      ?benchmark     orkgp:HAS_CORTESPONDS_TO    ?contrib;
+                      orkgp:HAS_VALUE             ?value.
+      ?value         orkgp:HAS_TYPE              ?type.
+      ?type           rdfs:label               ?type_lbl.
+    }<eos>

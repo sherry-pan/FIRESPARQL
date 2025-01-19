@@ -1,0 +1,65 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "VTAB-1k")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_MODEL         ?model.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:HAS_MODEL_PERFS     ?model_perf.
+      ?model_perf orkgp:HAS_VALUE        ?value;
+                   orkgp:HAS_METRIC        ?metric.
+       ORDER BY DESC(?value)
+      ?params      a                orkgp:Metric;
+                   rdfs:label              ?params_lbl.
+      ?params_lbl   rdfs:label              ?params_lbl.
+      ?top         orkgp:HAS_MODEL_PERFS     ?model_perf;
+                   orkgp:P31               ?cont.
+      ?cont         rdfs:label              ?cont_lbl.
+      ?cont_lbl      rdfs:label              ?cont_lbl.
+      ?cont_lbl      a                orkgc:Dataset;
+                      rdfs:label              ?cont_lbl.
+      ?cont_lbl      orkgp:P31               ?cont.
+      ?cont_lbl      rdfs:label              ?cont_lbl.
+      ?cont_lbl      orkgp:HAS_DATASET      ?dataset_lbl.
+      ?cont_lbl      orkgp:HAS_EVALUATION   ?eval.
+      ?cont_lbl      orkgp:HAS_BENCHMARK     ?cont_bench.
+      ?cont_bench    orkgp:HAS_MODEL         ?cont_model.
+      ?cont_model    rdfs:label              ?cont_model_lbl.
+      ?cont_model_lbl      rdfs:label              ?cont_model_lbl.
+      ?cont_model_lbl      orkgp:HAS_MODEL_PERFS     ?cont_model_perf.
+      ?cont_model_perf      orkgp:HAS_VALUE        ?cont_value.
+      ?cont_value      orkgp:HAS_METRIC        ?cont_metric.
+      ?cont_metric      rdfs:label              ?cont_metric_lbl.
+      ?cont_metric_lbl      rdfs:label              ?cont_metric_lbl.
+      ?cont_metric_lbl      a                orkgp:Metric;
+                      rdfs:label              ?cont_metric_lbl.
+      ?cont_metric_lbl      orkgp:P31               ?cont.
+      ?cont_metric_lbl      orkgp:HAS_DATASET      ?cont_dataset.
+      ?cont_dataset      rdfs:label              ?cont_dataset_lbl.
+      ?cont_dataset_lbl      rdfs:label              ?cont_dataset_lbl.
+      ?cont_dataset_lbl      orkgp:HAS_EVALUATION   ?cont_eval.
+      ?cont_eval         orkgp:HAS_VALUE        ?cont_value.
+      ?cont_eval         orkgp:HAS_METRIC        ?cont_metric.
+      ?cont_eval         orkgp:HAS_BENCHMARK     ?cont_bench.
+      ?cont_bench       orkgp:HAS_MODEL         ?cont_model.
+      ?cont_bench       orkgp:HAS_MODEL_PERFS     ?cont_model_perf.
+      ?cont_bench       orkgp:HAS_VALUE        ?cont_value.
+      ?cont_bench       orkgp:HAS_METRIC        ?cont_metric.
+      ?cont_bench       orkgp:HAS_DATASET      ?cont_dataset.
+      ?cont_bench       orkgp:HAS_EVALUATION   ?cont_eval.
+      ?cont_bench       orkgp:HAS_BENCHMARK     ?cont_bench.
+      ?cont_bench       orkgp:P31               ?cont.
+      ?cont_bench       rdfs:label              ?cont_bench_lbl.
+      ?cont_bench_lbl      rdfs:label              ?cont_bench_lbl.
+      ?cont_bench_lbl      orkgp:HAS_MODEL         ?cont_model.
+      ?cont_bench_lbl      orkgp:HAS_MODEL_PERFS     ?

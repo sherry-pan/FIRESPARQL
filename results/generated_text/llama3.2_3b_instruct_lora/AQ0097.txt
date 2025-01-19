@@ -1,0 +1,85 @@
+Question:
+Can you list the models that have been evaluated on the Multimodal PISA dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Multimodal PISA")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+                ?model      rdfs:label              ?model_lbl.}
+      ?cont         orkgp:HAS_PAPER         ?paper.
+      ?dataset      rdfs:label              ?dataset_lbl.
+     } 
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Multimodal PISA")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+      OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+               ?model      rdfs:label              ?model_lbl.}
+     ?cont         orkgp:HAS_PAPER         ?paper.
+     ?dataset      rdfs:label              ?dataset_lbl.
+    } 
+    UNION
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Multimodal PISA")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?model         orkgp:HAS_MODEL         ?model.
+     ?model         rdfs:label              ?model_lbl.
+    } 
+    UNION
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Multimodal PISA")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgg:HAS_PAPER         ?paper.
+     ?cont         orkgp:HAS_CONT         ?cont.
+     ?cont         rdfs:label              ?cont_lbl.
+     ?model         orkgp:HAS_MODEL         ?model.
+     ?model         rdfs:label              ?model_lbl.
+    } 
+    UNION
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Multimodal PISA")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_PAPER         ?paper.
+     ?cont         orkgp:HAS_CONT         ?cont.
+      OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+               ?model      rdfs:label              ?model_lbl.}
+     ?dataset      rdfs:label              ?dataset_lbl.
+    } 
+    UNION
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Multimodal PISA")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_PAPER         ?paper.
+     ?cont         orkgp:HAS_CONT         ?cont.
+     ?cont         rdfs:label              ?cont_lbl.
+     ?model         orkgp:HAS

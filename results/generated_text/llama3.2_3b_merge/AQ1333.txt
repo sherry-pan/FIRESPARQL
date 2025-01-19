@@ -1,0 +1,66 @@
+Question:
+What is the top benchmark score and its metric on the WOS-46985 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "WOS-46985")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_VALUE         ?cont?value.
+       BIND(xsd:decimal(?value) AS?value).
+      ?metric      orkgp:HAS_EVALUATION     ?eval.
+      ?metric      rdfs:label               ?metric_lbl.
+      ?metric      orkgp:HAS_METRIC         ?metric_value.
+      ?metric_value    rdfs:label              ?metric_lbl.
+      ?metric_value    orkgp:HAS_VALUE         ?eval_value.
+       BIND(xsd:decimal(?eval_value) AS?eval_value).
+      ?eval_value      orkgp:HAS_METRIC_VALUE   ?eval_metric_value.
+      ?eval_metric_value    rdfs:label              ?eval_metric_lbl.
+       BIND(xsd:decimal(?eval_metric_value) AS?eval_metric_value).
+      ?eval_metric_value      orkgp:P31              ?eval_metric.
+       FILTER (str(?eval_metric_lbl) = "Top")
+      ?cont          orkgp:HAS_METRIC_VALUE     ?eval_metric_value.
+      ?cont          orkgp:HAS_DATASET          ?dataset.
+      ?cont          rdfs:label                 ?cont_lbl.
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+      ?cont          orkgp:P31                ?cont.
+      ?cont          orkgp:HAS_EVALUATION     ?eval.
+      ?cont          orkgp:HAS_METRIC         ?metric_value.
+      ?cont          orkgp:HAS_VALUE          ?eval_value.
+      ?cont          orkgp:HAS_DATASET        ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+      ?cont          orkgp:P31                ?cont.
+      ?cont          orkgp:HAS_EVALUATION     ?eval.
+      ?cont          orkgp:HAS_METRIC         ?metric_value.
+      ?cont          orkgp:HAS_VALUE          ?eval_value.
+      ?cont          orkgp:HAS_DATASET        ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+      ?cont          orkgp:P31                ?cont.
+      ?cont          orkgp:HAS_EVALUATION     ?eval.
+      ?cont          orkgp:HAS_METRIC         ?metric_value.
+      ?cont          orkgp:HAS_VALUE          ?eval_value.
+      ?cont          orkgp:HAS_DATASET        ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+      ?cont          orkgp:P31                ?cont.
+      ?cont          orkgp:HAS_EVALUATION     ?eval.
+      ?cont          orkgp:HAS_METRIC         ?metric_value.
+      ?cont          orkgp:HAS_VALUE          ?eval_value.
+      ?cont          orkgp:HAS_DATASET        ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+       BIND(xsd:decimal(?cont_lbl) AS?cont_lbl).
+      ?cont          orkgp:P31                ?cont.
+      ?cont          orkgp:HAS_EVALUATION     ?eval.
+      ?cont          orkgp:HAS_METRIC         ?metric_value.
+      ?cont          orkgp:HAS_VALUE          ?eval_value.
+      ?cont          orkgp:HAS_DATASET        ?dataset.
+      ?cont          orkgp:

@@ -1,0 +1,69 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Yelp Fine-grained classification dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric,?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Yelp Fine-grained classification")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_METRIC        ?metric;
+                      orkgp:HAS_VALUE         ?value.
+      ?metric         rdfs:label              ?metric_lbl.
+       OPTIONAL {?eval           orkgp:HAS_METRIC_VALUE     ?metric_value.
+               ?metric_value          rdfs:label              ?metric_value_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_DATASET      ?dataset.
+      ?cont         rdfs:label               ?cont_lbl.
+       FILTER (str(?cont_lbl) = "Yelp Fine-grained classification")
+      ?model      orkgp:HAS_CONTAINER     ?cont.
+      ?model      rdfs:label                ?model_lbl.
+       OPTIONAL {?model      orkgp:P31               ?model_lbl.
+               ?model_lbl          rdfs:label              ?model_lbl.}
+      ?paper      orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_PAPER   ?source_p.
+      ?source_p  rdfs:label                ?source_p_lbl.
+       OPTIONAL {?source_p  orkgp:P31               ?source_p_lbl.
+               ?source_p_lbl          rdfs:label              ?source_p_lbl.}
+      ?author     orkgp:HAS_SOURCE_PAPER   ?source_p;
+                  orkgp:HAS_AUTHORS        ?authors.
+      ?authors    rdfs:label                ?authors_lbl.
+       OPTIONAL {?authors    orkgp:P31               ?authors_lbl.
+               ?authors_lbl          rdfs:label              ?authors_lbl.}
+      ?author     orkgp:HAS_NAME          ?name.
+      ?name      rdfs:label                ?name_lbl.
+       FILTER (str(?name_lbl) = "Yelp Fine-grained classification")
+      ?problem    orkgp:HAS_SOURCE_PAPER   ?source_p;
+                  orkgp:HAS_PROBLEM        ?problem.
+      ?problem    rdfs:label                ?problem_lbl.
+       OPTIONAL {?problem    orkgp:P31               ?problem_lbl.
+               ?problem_lbl          rdfs:label              ?problem_lbl.}
+      ?paper      orkgp:HAS_SOURCE_PAPER   ?source_p;
+                  orkgp:HAS_SOURCE_CODE     ?source_c.
+      ?source_c   rdfs:label                ?source_c_lbl.
+       OPTIONAL {?source_c   orkgp:P31               ?source_c_lbl.
+               ?source_c_lbl          rdfs:label              ?source_c_lbl.}
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Yelp Fine-grained classification")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_DATASET      ?dataset.
+      ?cont         rdfs:label               ?cont_lbl.
+       FILTER (str(?cont_lbl) = "Yelp Fine-grained classification")
+      ?model      orkgp:HAS_CONTAINER     ?cont.
+      ?model      rdfs:label                ?model_lbl.
+       OPTIONAL {?model      orkgp:P31               ?model_lbl.
+               ?model_lbl          rdfs:label              ?model_lbl.}
+      ?paper      orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_PAPER   ?source_p.
+      ?source_p  rdfs:label                ?source_p_lbl.
+       OPTIONAL {?source_p  orkgp:P31               ?source_p_lbl.
+               ?source_p_lbl          rdfs:label              ?source_p_lbl.}
+      ?author     orkgp:HAS_SOURCE_PAPER   ?source_p;
+                  orkgp:HAS_AUTHORS        ?authors.
+      ?authors    rdfs:label                ?authors_lbl.
+       OPTIONAL {?authors

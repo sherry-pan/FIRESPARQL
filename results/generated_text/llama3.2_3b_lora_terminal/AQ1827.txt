@@ -1,0 +1,79 @@
+Question:
+Indicate the model that performed best in terms of Macro Recall metric on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?metric) AS?metric)
+    WHERE {
+     ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Macro Recall")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_MODEL         ?model.
+     ?model        a                orkgc:Model;
+                    rdfs:label              ?model_lbl.
+      BIND(xsd:decimal(?metric         ) AS?metric)
+     ?cont         orkgp:HAS_METRIC     ?metric;
+                    orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         rdfs:label             ?cont_lbl.
+     ?cont         orkgp:P31            ?paper.
+     ?paper        orkgp:HAS_MODEL     ?model.
+     ?cont         rdfs:label             ?cont_lbl.
+     ?cont         orkgp:P31            ?paper.
+     ?cont         orkgp:HAS_DATASET     ?dataset.
+      ORDER BY DESC(?metric)
+    }    ORDER BY DESC(?metric) 
+    LIMIT 1; 
+    ```sql
+    SELECT?model?model_lbl (MAX(?metric) AS?metric)
+    WHERE {
+     ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Macro Recall")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_MODEL         ?model.
+     ?model        a                orkgc:Model;
+                    rdfs:label              ?model_lbl.
+      BIND(xsd:decimal(?metric         ) AS?metric)
+     ?cont         orkgp:HAS_METRIC     ?metric;
+                    orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         rdfs:label             ?cont_lbl.
+     ?cont         orkgp:P31            ?paper.
+     ?paper        orkgp:HAS_MODEL     ?model.
+     ?cont         rdfs:label             ?cont_lbl.
+     ?cont         orkgp:P31            ?paper.
+     ?cont         orkgp:HAS_DATASET     ?dataset.
+      ORDER BY DESC(?metric)
+    }    ORDER BY DESC(?metric) 
+    LIMIT 1; 
+```
+
+    Note that this query may not work correctly due to the incomplete code in the prompt. The query provided seems to be a mix of the correct and incorrect parts of the query. In this case, the correct query is:
+    ```sql
+    SELECT?model?model_lbl (MAX(?metric) AS?metric)
+    WHERE {
+     ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Macro Recall")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_MODEL         ?model.
+     ?model        a                orkgc:Model;
+                    rdfs:label              ?model_lbl.
+      BIND(xsd:decimal(?metric         ) AS?metric)
+     ?cont         orkgp:HAS_METRIC     ?metric;
+                    orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         rdfs:label             ?cont_lbl.
+     ?cont         orkgp:P31            ?paper.
+     ?paper        orkgp:HAS_MODEL     ?model.
+     ?cont         rdfs:label             ?cont_lbl.
+     ?cont         orkgp:P31            ?paper.
+     ?cont         orkgp:HAS_DATASET     ?dataset.
+      ORDER BY DESC(?metric)
+    }    ORDER BY DESC(?metric) 
+    LIMIT 1;
+```
+    Please note that you need to adjust the query according to your actual data. The query above is based on the data provided in the prompt. If the data is different, you may need to adjust the query accordingly. 
+
+    Also, please note that the

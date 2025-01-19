@@ -1,0 +1,77 @@
+Question:
+List the code links in papers that use the POP3D model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper       a            orkgc:Paper;
+       FILTER (str(?paper) = "POP3D")
+      ?benchmark    orkgp:HAS_BENCHMARK       ?paper.
+      ?cont        orkgp:HAS_CODE           ?paper;
+      ?code        a                orkgc:Code;
+      ?code        rdfs:label          ?code_lbl.
+      ?code_lbl      rdfs:label          ?code.
+      ?code        orkgp:HAS_BENCHMARK     ?benchmark.
+     }     ORDER BY DESC(?cont)
+     LIMIT 10;     SELECT?code_lbl
+     WHERE {
+      ?code        orkgp:HAS_BENCHMARK     ?benchmark;
+      ?benchmark    orkgp:HAS_BENCHMARK     ?cont.
+      ?cont        orkgp:HAS_CODE           ?paper;
+      ?paper       orkgp:HAS_BENCHMARK       ?benchmark;
+      ?paper       orkgc:Paper;
+      ?paper       rdfs:label              ?code_lbl.
+      ?code_lbl      rdfs:label          ?code.
+      ?code        a                orkgc:Code.
+     }     ORDER BY DESC(?cont)
+     LIMIT 10;     SELECT DISTINCT?code
+     WHERE {
+      ?cont        orkgp:HAS_CODE           ?paper;
+      ?paper       orkgc:Paper;
+      ?paper       orkgp:HAS_BENCHMARK     ?benchmark;
+      ?benchmark    orkgp:HAS_BENCHMARK     ?cont;
+      ?cont        orkgp:P31              ?model.
+      ?model       rdfs:label              ?model_lbl.
+      ?model_lbl      rdfs:label          ?model.
+      ?model       orkgp:HAS_MODEL         ?model.
+      ?model       orkgp:HAS_MODEL         ?model2.
+      ?model2      rdfs:label              ?model_lbl2.
+      ?model_lbl2      rdfs:label          ?model.
+      ?model       a                orkgc:Model.
+      ?code        orkgp:HAS_CODE           ?paper;
+      ?paper       orkgp:HAS_BENCHMARK       ?benchmark;
+      ?benchmark    orkgp:HAS_MODEL         ?model.
+      ?code        a                orkgc:Code;
+      ?code        rdfs:label          ?code_lbl.
+      ?code_lbl      rdfs:label          ?code.
+      ?code        orkgp:HAS_BENCHMARK     ?benchmark.
+     }     ORDER BY DESC(?cont)
+     LIMIT 10;     SELECT DISTINCT?code
+     WHERE {
+      ?cont        orkgp:HAS_CODE           ?paper;
+      ?paper       orkgc:Paper;
+      ?paper       orkgp:HAS_BENCHMARK     ?benchmark;
+      ?benchmark    orkgp:HAS_MODEL         ?model.
+      ?model       orkgp:HAS_MODEL         ?model2.
+      ?model2      rdfs:label              ?model_lbl2.
+      ?model_lbl2      rdfs:label          ?model.
+      ?model       a                orkgc:Model.
+      ?code        orkgp:HAS_CODE           ?paper;
+      ?paper       orkgp:HAS_BENCHMARK       ?benchmark;
+      ?benchmark    orkgp:HAS_MODEL         ?model.
+      ?code        orkgp:HAS_BENCHMARK     ?benchmark;
+      ?code        a                orkgc:Code;
+      ?code        rdfs:label          ?code_lbl.
+      ?code_lbl      rdfs:label          ?code.
+      ?cont        orkgp:P31              ?model.
+      ?model       rdfs:label              ?model_lbl.
+      ?model_lbl      rdfs:label          ?model.
+      ?model       orkgp:HAS_MODEL         ?model.
+      ?model       orkgp:HAS_MODEL         ?model2.
+      ?model2      a                orkgc:Model.
+      ?code        orkgp:HAS_CODE           ?paper;
+      ?paper       orkgp:HAS_BENCHMARK       ?benchmark.
+      ?benchmark    orkgp:HAS_MODEL         ?model.
+      ?cont        orkgp:P31              ?model.
+      ?model       rdfs:label              ?model_lbl.
+      ?model_lbl      rdfs:label          ?

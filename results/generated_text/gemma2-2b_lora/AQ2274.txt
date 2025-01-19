@@ -1,0 +1,22 @@
+Question:
+Where can I find code references in papers that have used the PEGASUS model for benchmarking purposes?
+
+Generated SPARQL:
+"""
+    query = """
+    SELECT DISTINCT ?code
+    WHERE {
+      ?paper orkgp3b:P31 ?code.
+      ?code rdfs:label ?code_lbl.
+      BIND(
+        IF(
+          ?code_lbl = "PEGASUS",
+          "code"^^xsd:string,
+          "no_code"^^xsd:string
+        ) AS ?code_lbl
+      )
+      FILTER(REGEX(?code_lbl, "PEGASUS"))
+    }
+    """
+    return query
+<eos>

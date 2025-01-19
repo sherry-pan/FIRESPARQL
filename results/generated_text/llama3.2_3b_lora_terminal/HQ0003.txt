@@ -1,0 +1,82 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?method, COUNT(?method) as?freq
+     WHERE {
+      ?paper?paper_labels
+       FILTER(REGEX(?paper_labels, "Knowledge representation"))
+      ?paper orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31?cont.
+      ?cont rdfs:label?cont_labels.
+      ?cont_labels rdfs:label?cont_labels_labels.
+       FILTER(REGEX(?cont_labels_labels, "method"))
+      ?cont?cont_has_method?method.
+      ?method rdfs:label?method_labels.
+      ?cont?cont_has_paper?paper.
+       BIND(xsd:integer(1) AS?freq)
+       BIND(xsd:integer(COUNT(?cont?cont_has_method?method)) AS?freq)
+     } GROUP BY?method ORDER BY DESC(?freq) LIMIT 1; 
+    SELECT?method, COUNT(?method) as?freq
+    WHERE {
+     ?paper orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31?cont.
+     ?cont rdfs:label?cont_labels.
+     ?cont_labels rdfs:label?cont_labels_labels.
+     ?cont?cont_has_method?method.
+     ?method rdfs:label?method_labels.
+      BIND(xsd:integer(COUNT(?cont?cont_has_method?method)) AS?freq)
+    } GROUP BY?method ORDER BY DESC(?freq) LIMIT 1; 
+    SELECT?method, COUNT(?method) as?freq
+    WHERE {
+     ?paper orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31?cont.
+     ?cont rdfs:label?cont_labels.
+     ?cont_labels rdfs:label?cont_labels_labels.
+     ?cont?cont_has_method?method.
+     ?method rdfs:label?method_labels.
+     ?cont?cont_has_paper?paper.
+      FILTER(REGEX(?paper_labels, "Knowledge representation"))
+      BIND(xsd:integer(COUNT(?cont?cont_has_method?method)) AS?freq)
+    } GROUP BY?method ORDER BY DESC(?freq) LIMIT 1; 
+    SELECT?method, COUNT(?method) as?freq
+    WHERE {
+     ?paper orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31?cont.
+     ?cont rdfs:label?cont_labels.
+     ?cont_labels rdfs:label?cont_labels_labels.
+     ?cont?cont_has_method?method.
+     ?method rdfs:label?method_labels.
+     ?cont?cont_has_paper?paper.
+      FILTER(REGEX(?cont_labels_labels, "method"))
+      BIND(xsd:integer(COUNT(?cont?cont_has_method?method)) AS?freq)
+    } GROUP BY?method ORDER BY DESC(?freq) LIMIT 1; 
+    SELECT?method, COUNT(?method) as?freq
+    WHERE {
+     ?paper orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31?cont.
+     ?cont rdfs:label?cont_labels.
+     ?cont_labels rdfs:label?cont_labels_labels.
+     ?cont?cont_has_method?method.
+     ?method rdfs:label?method_labels.
+     ?cont?cont_has_paper?paper.
+      FILTER(REGEX(?paper_labels, "Knowledge representation"))
+      FILTER(REGEX(?cont_labels_labels, "method"))
+      BIND(xsd:integer(COUNT(?cont?cont_has_method?method)) AS?freq)
+    } GROUP BY?method ORDER BY DESC(?freq) LIMIT 1; 
+    SELECT?method, COUNT(?method) as?freq
+    WHERE {
+     ?paper orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31?cont.
+     ?cont rdfs:label?cont_labels.
+     ?cont_labels rdfs:label?cont_labels_labels.
+     ?cont?cont_has_method?method.
+     ?method rdfs:label?method_labels.
+     ?cont?cont_has_paper?paper.
+      FILTER(REGEX(?paper_labels, "Knowledge representation"))
+      FILTER(REGEX(?cont_labels_labels, "method"))
+      BIND(xsd:integer(COUNT(?cont?cont_has_method?method)) AS?freq)
+    } GROUP BY?method ORDER BY DESC(?freq) LIMIT 1; 
+    SELECT?method, COUNT(?method) as?freq
+    WHERE {
+     ?paper orkg

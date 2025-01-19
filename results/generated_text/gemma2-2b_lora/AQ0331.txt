@@ -1,0 +1,26 @@
+Question:
+Could you provide a list of models that have been tested on the BUCC Russian-to-English benchmark dataset?
+
+Generated SPARQL:
+"""
+    query = """
+    SELECT DISTINCT ?model ?model_lbl
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "BUCC Russian-to-English")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+      ?cont         orkgp:HAS_MODEL           ?model;
+                    orkgp:HAS_SOURCE_CODE      ?code.
+      ?model         rdfs:label               ?model_lbl.
+      ?code          rdfs:label               ?code_lbl.
+      OPTIONAL {?code      orkgp:HAS_SOURCE_HASHTAG    ?hashtgt.
+                ?hashtgt    rdfs:label                  ?hashtgt_lbl.}
+      OPTIONAL {?code      orkgp:HAS_SOURCE_DOI         ?doi.
+                ?doi         rdfs:label                  ?doi_lbl.}
+    }
+    ORDER BY ?model_lbl
+    """
+    return query
+<eos>

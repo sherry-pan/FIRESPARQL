@@ -1,0 +1,109 @@
+Question:
+Where can I find code references in papers that have used the MPAD-path model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+         FILTER (str(?model_lbl) = "MPAD-path")
+        ?benchmark      orkgp:HAS_DATASET       ?dataset.
+        ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont           orkgp:HAS_MODEL         ?model;
+                         orkgp:HAS_SOURCE_CODE   ?code.
+     }     ```
+
+SELECT?code
+WHERE {
+ ?model    a            orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?benchmark      orkgp:HAS_DATASET       ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+```sql
+-- If the above query does not work, try the following query. 
+SELECT?code
+WHERE {
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+UNION
+SELECT?code
+WHERE {
+ ?cont           orkgp:HAS_DATASET       ?dataset.
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+```sql
+-- If the above query does not work, try the following query.
+SELECT?code
+WHERE {
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+UNION
+SELECT?code
+WHERE {
+ ?cont           orkgp:HAS_DATASET       ?dataset.
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+UNION
+SELECT?code
+WHERE {
+ ?cont           orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_MODEL         ?model.
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_SOURCE_CODE   ?code.
+} 
+UNION
+SELECT?code
+WHERE {
+ ?cont           orkgp:HAS_DATASET       ?dataset.
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+} 
+```sql
+-- If the above query does not work, try the following query.
+SELECT?code
+WHERE {
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+UNION
+SELECT?code
+WHERE {
+ ?cont           orkgp:HAS_DATASET       ?dataset.
+ ?model    orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "MPAD-path")
+ ?cont           orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_SOURCE_CODE   ?code.
+} 
+UNION
+SELECT?code
+WHERE {
+ ?cont           orkgp:HAS_DATASET       ?

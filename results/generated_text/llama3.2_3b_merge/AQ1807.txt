@@ -1,0 +1,65 @@
+Question:
+Indicate the model that performed best in terms of Accuracy metric on the Kuzushiji-MNIST benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+      WHERE {
+       ?metric     a       orkgc:Metric;
+                    rdfs:label ?metric_lbl.
+        FILTER (str(?metric_lbl) = "Accuracy")
+       ?benchmark      orkgp:HAS_DATASET       ?dataset.
+       ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont           orkgp:P31               ?model.
+       ?model          rdfs:label               ?model_lbl.
+       ?cont           orkgp:HAS_METRIC        ?eval.
+       ?eval           orkgp:HAS_VALUE         ?value.
+        BIND(xsd:float(?value) AS?value_float)
+       ?eval           orkgp:HAS_MODEL         ?model.
+       ?cont           orkgp:HAS_EVALUATION    ?eval.
+       ?eval           orkgp:P32               ?conteval.
+       ?conteval      rdfs:label               ?conteval_lbl.
+       ?conteval      orkgp:HAS_MODEL         ?model.
+       ?conteval      orkgp:HAS_EVALUATION    ?eval.
+       ?conteval      orkgp:P32               ?contevalcont.
+       ?contevalcont  rdfs:label               ?contevalcont_lbl.
+       ?contevalcont  orkgp:HAS_MODEL         ?model.
+       ?contevalcont  orkgp:HAS_EVALUATION    ?evalcont.
+       ?evalcont      orkgp:HAS_VALUE         ?evalcont_value.
+        BIND(xsd:float(?evalcont_value) AS?evalcont_value_float)
+       ?contevalcont  orkgp:P31               ?contevalcontcont.
+       ?contevalcontcont  rdfs:label               ?contevalcontcont_lbl.
+       ?contevalcontcont  orkgp:HAS_MODEL         ?model.
+       ?contevalcontcont  orkgp:HAS_EVALUATION    ?evalcontcont.
+       ?evalcontcont    orkgp:HAS_VALUE         ?evalcontcont_value.
+        BIND(xsd:float(?evalcontcont_value) AS?evalcontcont_value_float)
+        ORDER BY DESC(?evalcontcont_value_float)
+       ?bestcontevalcont      orkgp:P30               ?bestcontevalcont.
+       ?bestcontevalcont      rdfs:label               ?bestcontevalcont_lbl.
+       ?bestcontevalcont      orkgp:HAS_MODEL         ?bestmodel.
+       ?bestmodel          rdfs:label               ?bestmodel_lbl.
+      }     LIMIT 1.     SELECT DISTINCT?model?model_lbl
+      WHERE {
+       ?metric     a       orkgc:Metric;
+                    rdfs:label ?metric_lbl.
+        FILTER (str(?metric_lbl) = "Accuracy")
+       ?benchmark      orkgp:HAS_DATASET       ?dataset.
+       ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont           orkgp:P31               ?model.
+       ?model          rdfs:label               ?model_lbl.
+       ?cont           orkgp:HAS_METRIC        ?eval.
+       ?eval           orkgp:HAS_VALUE         ?value.
+        BIND(xsd:float(?value) AS?value_float)
+       ?eval           orkgp:HAS_MODEL         ?model.
+       ?cont           orkgp:HAS_EVALUATION    ?eval.
+       ?eval           orkgp:P32               ?conteval.
+       ?conteval      rdfs:label               ?conteval_lbl.
+       ?conteval      orkgp:HAS_MODEL         ?model.
+       ?conteval      orkgp:HAS_EVALUATION    ?eval.
+       ?conteval      orkgp:P32               ?contevalcont.
+       ?contevalcont  rdfs:label               ?contevalcont_lbl.
+       ?contevalcont  orkgp:HAS_MODEL         ?model.
+       ?contevalcont  orkgp:HAS_EVALUATION    ?evalcont.
+       ?evalcont      orkgp:HAS_VALUE         ?evalcont_value.
+        BIND(xsd:float(?evalcont_value) AS?evalcont_value_float)
+       ?contevalcont  orkgp:P31               ?contevalcontcont.
+       ?contevalcontcont

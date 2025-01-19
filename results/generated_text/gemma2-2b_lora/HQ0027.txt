@@ -1,0 +1,28 @@
+Question:
+For which country of study overall prevalence of epilepsy is the highest?
+
+Generated SPARQL:
+SELECT DISTINCT ?country_code
+    WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label  ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Overall prevalence of epilepsy")
+      ?dataset    orkgp:HAS_DATASET       ?datasetRdf.
+      ?cont       orkgp:HAS_DATASET      ?datasetRdf.
+      ?cont      a                orkgp:CONT;
+                  rdfs:label         ?cont_lbl.
+      ?country    orkgp:HAS_SOURCE_DATASET       ?datasetRdf.
+      ?country   rdfs:label                      ?country_lbl.
+      ?country   orkgp:HAS_VALUE               ?metric;
+                  ?metric      rdfs:label            ?metric_lbl.
+      ?country   orkgp:HAS_VALUE               ?value;
+                  ?value       rdfs:label            ?value_lbl.
+      ?value      xsd:float                  ?value_num;
+                  orkgp:HAS_UNIT              ?unit;
+                  ?unit          rdfs:label           ?unit_lbl.
+      ?unit       rdfs:label                  ?unit_lbl.
+      ?unit      rdfs:P31                ?country;
+                 ?country         rdfs:P31           ?country_lbl.
+    }
+  }
+<eos>

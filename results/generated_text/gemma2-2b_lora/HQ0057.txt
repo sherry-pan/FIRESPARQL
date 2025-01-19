@@ -1,0 +1,26 @@
+Question:
+Where can all the data sets used in the compared studies be found?
+
+Generated SPARQL:
+SELECT DISTINCT ?data_set ?data_set_lbl
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "All the data sets used in the compared studies")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+      ?cont          orkgp:HAS_SOURCE_CODE      ?code;
+                      orkgp:P32                ?cont_lbl.
+      ?cont_lbl      rdfs:label               ?cont_lbl_lbl.
+      ?cont_lbl_lbl  ?cont_lbl_lbl_eng.
+      ?cont_lbl_lbl_eng    rdfs:label               ?cont_lbl_lbl_eng_eng;
+      ?cont_lbl_lbl_eng_eng  ?cont_lbl_lbl_eng_eng_enrd;
+      ?cont_lbl_lbl_eng_eng_enrd  rdfs:label               ?cont_lbl_lbl_eng_eng_enrd_enrd;
+      ?cont_lbl_lbl_eng_eng_enrd_enrd      orkgp:HAS_SOURCE_URL      ?url;
+      ?url                rdfs:label                 ?url_lbl.
+      ?url_lbl            rdfs:label                 ?url_lbl_eng;
+      ?url_lbl_eng         rdfs:label                 ?url_lbl_eng_enrd;
+      ?url_lbl_eng_enrd    orkgp:HAS_SOURCE_DATASET      ?dataset.
+    }
+  }
+<eos>

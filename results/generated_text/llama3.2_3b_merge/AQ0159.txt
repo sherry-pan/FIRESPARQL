@@ -1,0 +1,90 @@
+Question:
+What models are being evaluated on the MedSTS dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?model         orkgp:P31               ?paper;
+                      rdfs:label              ?model_lbl.
+      ?cont         rdfs:label              ?model_lbl.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?model         rdfs:label              ?model_lbl.
+      ?cont         orkgp:P31               ?model.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?cont         orkgp:P31               ?model;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper         rdfs:label              ?model_lbl.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?cont         orkgp:P31               ?model;
+                      orkgp:HAS_DATASET      ?dataset.
+      ?model         rdfs:label              ?model_lbl.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?cont         orkgp:P31               ?model;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:HAS_DATASET      ?dataset.
+      ?model         rdfs:label              ?model_lbl.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?cont         orkgp:P31               ?model.
+      ?paper         orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?model         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?model_lbl      rdfs:label              ?model.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?cont         orkgp:P31               ?model.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:HAS_DATASET      ?dataset.
+      ?model         rdfs:label              ?model_lbl.
+      ?model         orkgp:HAS_EVALUATION   ?eval.
+     }      UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+      ?cont         orkgp:P31               ?model;
+                      orkgp:HAS_DATASET      ?dataset.
+      ?paper         rdfs:label              ?model_lbl.
+      ?paper         orkg

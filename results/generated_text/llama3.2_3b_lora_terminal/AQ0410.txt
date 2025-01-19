@@ -1,0 +1,84 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the NYT24 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "NYT24")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?paper         orkgp:P31               ?cont;
+                        orkgp:P32               ?benchmark.
+       ?paper_lbl      rdfs:label              ?paper.
+      }    SELECT DISTINCT?cont?cont_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "NYT24")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont         orkgp:P31               ?dataset;
+                      orkgp:P32               ?benchmark.
+       ?cont_lbl      rdfs:label              ?cont.
+      }    UNION      SELECT DISTINCT?paper?paper_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "NYT24")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont         orkgp:P31               ?dataset;
+                      orkgp:P32               ?benchmark.
+       ?paper         orkgp:P31               ?cont;
+                      orkgp:P32               ?benchmark.
+       ?paper_lbl      rdfs:label              ?paper.
+      }    UNION      SELECT DISTINCT?cont?cont_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "NYT24")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont         orkgp:P31               ?dataset;
+                      orkgp:P32               ?benchmark.
+       ?cont_lbl      rdfs:label              ?cont.
+      }     ORDER BY DESC(?cont_lbl)
+    SELECT DISTINCT?paper?paper_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "NYT24")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?paper         orkgp:P31               ?cont;
+                    orkgp:P32               ?benchmark.
+     ?paper_lbl      rdfs:label              ?paper.
+    }    SELECT DISTINCT?cont?cont_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "NYT24")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:P31               ?dataset;
+                    orkgp:P32               ?benchmark.
+     ?cont_lbl      rdfs:label              ?cont.
+    }    UNION      SELECT DISTINCT?paper?paper_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "NYT24")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:P31               ?dataset;
+                    orkgp:P32               ?benchmark.
+     ?paper         orkgp:P31               ?cont;
+                    orkgp:P32               ?benchmark.
+     ?paper_lbl      rdfs:label              ?paper.
+    }    UNION      SELECT DISTINCT?cont?cont_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "NYT24")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:P31               ?dataset;
+                    orkgp:P32               ?benchmark.
+     ?cont_lbl      rdfs:label              ?cont.
+    }    ORDER BY DESC(?cont_lbl)      SELECT DISTINCT?cont?cont_lbl

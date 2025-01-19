@@ -1,0 +1,78 @@
+Question:
+Indicate the model that performed best in terms of Sequence error metric on the FSNS - Test benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+    WHERE {
+     ?metric      a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Sequence error")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+     ?eval           orkgp:HAS_METRIC         ?metric;
+                      orkgp:HAS_VALUE         ?value.
+     ?value         rdfs:label               ?value_lbl.
+     ?value         orkgp:HAS_MODEL         ?model.
+     ?model        rdfs:label               ?model_lbl.
+     ?model      orkgp:HAS_TEST_SET       ?testset.
+     ?testset     orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:P31               ?cont.
+     ?cont         rdfs:label               ?cont_lbl.
+     ?cont         orkgp:HAS_MODEL         ?model.
+     ?cont         orkgp:HAS_DATASET       ?dataset.
+     ?cont         orkgp:HAS_EVALUATION     ?eval.
+     ?cont         orkgp:HAS_TEST_SET       ?testset.
+     ?cont         a                       orkgp:Cont;
+                      rdfs:label               ?cont_lbl.
+     ?cont         orkgp:HAS_EVALUATION     ?eval.
+      BIND(xsd:float(?value_lbl) AS?value)
+      ORDER BY DESC(?value)
+     ?model      a                orkgp:Model;
+                  rdfs:label     ?model_lbl.
+     ?model      orkgp:HAS_DATASET     ?dataset.
+     ?dataset      a                orkgp:Dataset;
+                     rdfs:label     ?dataset_lbl.
+      BIND(xsd:float(?value_lbl) AS?value)
+      } 
+    SELECT?model?model_lbl
+    WHERE {
+     ?metric      a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Sequence error")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+     ?eval           orkgp:HAS_METRIC         ?metric;
+                      orkgp:HAS_VALUE         ?value.
+     ?value         rdfs:label               ?value_lbl.
+     ?value         orkgp:HAS_MODEL         ?model.
+     ?model        rdfs:label               ?model_lbl.
+     ?model      orkgp:HAS_TEST_SET       ?testset.
+     ?testset     orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:P31               ?cont.
+     ?cont         rdfs:label               ?cont_lbl.
+     ?cont         orkgp:HAS_MODEL         ?model.
+     ?cont         orkgp:HAS_DATASET       ?dataset.
+     ?cont         orkgp:HAS_EVALUATION     ?eval.
+     ?cont         orkgp:HAS_TEST_SET       ?testset.
+     ?cont         a                       orkgp:Cont;
+                      rdfs:label               ?cont_lbl.
+     ?cont         orkgp:HAS_EVALUATION     ?eval.
+      BIND(xsd:float(?value_lbl) AS?value)
+      ORDER BY DESC(?value)
+     ?model      a                orkgp:Model;
+                  rdfs:label     ?model_lbl.
+     ?cont         orkgp:HAS_DATASET     ?dataset.
+     ?dataset      a                orkgp:Dataset;
+                     rdfs:label     ?dataset_lbl.
+      BIND(xsd:float(?value_lbl) AS?value)
+      } 
+    SELECT?model?model_lbl
+    WHERE {
+     ?metric      a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Sequence error")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_EVALUATION

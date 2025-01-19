@@ -1,0 +1,72 @@
+Question:
+What is the name of the top performing model in terms of NLL score when benchmarked on the Nottingham dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Nottingham")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_EVALUATION   ?eval;
+                    orkgp:HAS_MODEL         ?model.
+      OPTIONAL {?model      rdfs:label              ?model_lbl.}
+     ?model      rdfs:label              ?model_lbl.
+      ORDER BY DESC(?value)
+     ?model      a                orkgp:Model;
+                  rdfs:label      ?model_lbl.
+     ?paper      orkgp:HAS_MODEL         ?model.
+     ?paper      orkgp:P31               ?cont.
+     ?cont      rdfs:label              ?cont_lbl.
+     ?cont      orkgp:HAS_DATASET      ?dataset;
+                orkgp:HAS_SOURCE      ?source.
+     ?source      rdfs:label              ?source_lbl.
+     ?source      orkgp:HAS_PUBLISHER    ?publisher.
+      OPTIONAL {?publisher      rdfs:label              ?publisher_lbl.}
+     ?publisher      rdfs:label              ?publisher_lbl.
+     ?source      orkgp:HAS_MODEL         ?model.
+     ?cont      orkgp:HAS_EVALUATION   ?eval.
+     ?cont      orkgp:HAS_VALUE        ?value.
+      BIND(xsd:float(?value) AS?value)
+     ?cont      a                orkgp:Cont;
+                  rdfs:label      ?cont_lbl.
+     ?cont      orkgp:HAS_DATASET      ?dataset;
+                orkgp:HAS_SOURCE      ?source.
+     ?source      orkgp:HAS_PUBLISHER    ?publisher.
+      OPTIONAL {?publisher      rdfs:label              ?publisher_lbl.}
+     ?paper      orkgp:HAS_SOURCE      ?source.
+     ?paper      orkgp:P31               ?cont.
+     ?paper      orkgp:HAS_DATASET      ?dataset.
+     ?dataset      rdfs:label              ?dataset_lbl.
+     ?dataset      orkgp:HAS_EVALUATION   ?eval.
+      BIND(xsd:float(?eval) AS?eval)
+     ?cont      orkgp:HAS_MODEL         ?model.
+     ?cont      orkgp:HAS_VALUE        ?value.
+     ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?benchmark      orkgp:HAS_SOURCE      ?source.
+     ?source      orkgp:HAS_PUBLISHER    ?publisher.
+      OPTIONAL {?publisher      rdfs:label              ?publisher_lbl.}
+     ?cont      a                orkgp:Cont.
+     ?cont      orkgp:HAS_DATASET      ?dataset;
+                orkgp:HAS_SOURCE      ?source.
+     ?cont      orkgp:HAS_PUBLISHER    ?publisher.
+      OPTIONAL {?publisher      rdfs:label              ?publisher_lbl.}
+     ?cont      orkgp:HAS_EVALUATION   ?eval.
+     ?cont      orkgp:HAS_VALUE        ?value.
+     ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont      orkgp:HAS_MODEL         ?model.
+      BIND(xsd:float(?value) AS?value)
+     ?cont      orkgp:HAS_DATASET      ?dataset;
+                orkgp:HAS_SOURCE      ?source.
+     ?cont      orkgp:HAS_PUBLISHER    ?publisher.
+      OPTIONAL {?publisher      rdfs:label              ?publisher_lbl.}
+     ?cont      orkgp:HAS_EVALUATION   ?eval.
+     ?cont      orkgp:HAS_VALUE        ?value.
+     ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont      orkgp:HAS_MODEL         ?model.
+      BIND(xsd:float(?value) AS?value)
+     ?cont      orkg

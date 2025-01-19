@@ -1,0 +1,49 @@
+Question:
+What is the best performing model benchmarking the AESLC dataset in terms of ROUGE-1 metric?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?eval) AS?score)
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "AESLC")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+     ?metric         rdfs:label              ?metric_lbl;
+                      orkgp:HAS_DATASET        ?dataset.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         rdfs:label               ?cont_lbl.
+     ?model       orkgp:HAS_CONTAINER     ?cont.
+     ?model      rdfs:label                ?model_lbl.
+     ?model      orkgp:HAS_MODEL         ?model_model.
+     ?model_model      orkgp:P31              ?model_model_model.
+     ?model_model      rdfs:label             ?model_model_lbl.
+     ?model_model      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value.
+      BIND(xsd:float(?value) AS?value)
+     ?paper      orkgp:HAS_EVALUATION     ?eval.
+     ?paper      rdfs:label                ?paper_lbl.
+     ?paper      orkgp:HAS_MODEL         ?model.
+     ?paper      orkgp:HAS_SOURCE        ?source.
+     ?source      rdfs:label                ?source_lbl.
+     ?source      orkgp:HAS_PUBMED_CIT     ?pubmed_cit.
+     ?pubmed_cit      rdfs:label             ?pubmed_cit_lbl.
+     ?source      orkgp:HAS_SOURCE_PAPERS ?source_paper.
+     ?source_paper      rdfs:label            ?source_paper_lbl.
+     ?source_paper      orkgp:HAS_SOURCE      ?source.
+     ?source_paper      orkgp:HAS_SOURCE_PAPERS ?source_paper.
+     ?cont         orkgp:HAS_SOURCE_PAPERS ?source_paper.
+     ?cont         rdfs:label               ?cont_lbl.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      BIND(xsd:float(?value) AS?value)
+      BIND(xsd:float(?model_model_model) AS?model_model_model)
+     ?metric      rdfs:label              ?metric_lbl.
+      FILTER (str(?metric_lbl) = "ROUGE-1")
+     ?cont         orkgp:P31               ?cont_cont.
+     ?cont_cont     rdfs:label              ?cont_cont_lbl.
+     ?cont         orkgp:HAS_EVALUATION   ?eval.
+      BIND(xsd:float(?eval) AS?eval)
+      ORDER BY DESC(?eval)
+      }     LIMIT 1.     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .     .

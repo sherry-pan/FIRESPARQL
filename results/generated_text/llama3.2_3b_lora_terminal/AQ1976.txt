@@ -1,0 +1,50 @@
+Question:
+Can you provide links to code used in papers that benchmark the SEE model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "SEE")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_MODEL         ?model;
+                       orkgp:HAS_SOURCE_CODE   ?code.
+     }     LIMIT 100;     ORDER BY DESC(?cont)
+    Note: The answer to the question "Can you provide links to code used in papers that benchmark the SEE model?" may not be a single value. The answer is a list of links to code. 
+    This problem is a classic example of a "link-based" question, where the answer is a list of links, and the query must be able to handle this. In order to generate the query, we need to consider the following:
+    - How can we get the list of papers that benchmark the SEE model?
+    - How can we get the list of code for each of those papers?
+    - How can we get the links to the code?
+
+    The answer to this question is a list of links to code, where each link is to a code repository that contains the code used in a specific paper. The code repository may be a GitHub repository, a GitLab repository, or any other type of repository that can be linked to. The code itself may be in a variety of programming languages, such as Python, Java, or C++.
+
+    The query must be able to handle the fact that the answer is a list of links, and it must be able to distinguish between the different papers that benchmark the SEE model. This requires the use of a `DISTINCT` keyword to ensure that each paper is only listed once.
+
+    The query must also be able to handle the fact that the code repository may contain multiple code files, and that the code files may be in different programming languages. This requires the use of a `?code` variable to represent the code, and the use of a `FILTER` clause to filter out any code that does not have a link to a code repository.
+
+    The final query must be able to retrieve the links to the code repositories, and it must be able or to filter out any code that does not have a link to a code repository.
+
+    Here is the SPARQL query that can be used to answer the question:
+     SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "SEE")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_MODEL         ?model;
+                       orkgp:HAS_SOURCE_CODE   ?code.
+      ?code           orkgp:HAS_CODE_REPO     ?code_repo.
+      ?code_repo      rdfs:label               ?code_repo_lbl.
+       FILTER (str(?code_repo_lbl) = "GitHub" OR str(?code_repo_lbl) = "GitLab")
+     }     LIMIT 100;     ORDER BY DESC(?cont)
+
+    Note that the `HAS_CODE_REPO` property is used to link the code to the code repository, and the `RDFS:label` property is used to get the label of the code repository. The `FILTER` clause is used to filter out any code that does not have a link to a code repository. The `LIMIT` and `ORDER BY` clauses are used to limit the number of results and sort the results in descending order based on the number of papers each code is used in. 
+
+    The final query is a complex query that requires the use of several different properties and variables to retrieve the links to the code repositories. It is a good example of how to use SPARQL to answer link-based questions. 
+
+    The query is able to handle the fact that the answer is a list of links, and it is able to distinguish between the different papers that benchmark the SEE model. It is also able to handle the fact that the code repository may contain multiple code files, and that the code files may be in different programming languages. 
+
+    The query is able to retrieve the links to the code repositories, and it is able or to filter out any code

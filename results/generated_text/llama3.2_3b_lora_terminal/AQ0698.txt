@@ -1,0 +1,91 @@
+Question:
+Can you list the metrics used to evaluate models on the TDM Tagged Corpus dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "TDM Tagged Corpus")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?model        orkgp:HAS_CONTRIBUTION   ?cont;
+                     orkgp:P31               ?model_lbl.
+      ?eval        orkgp:HAS_MODEL         ?model;
+                    orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+      }     ORDER BY DESC(?metric_lbl)    LIMIT 10; 
+      }     ``` 
+
+    SELECT DISTINCT?metric?metric_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "TDM Tagged Corpus")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?model        orkgp:HAS_CONTRIBUTION   ?cont;
+                    orkgp:P31               ?model_lbl.
+     ?eval        orkgp:HAS_MODEL         ?model;
+                  orkgp:HAS_METRIC        ?metric.
+     ?metric      rdfs:label              ?metric_lbl.
+    } ORDER BY DESC(?metric_lbl) LIMIT 10. 
+    ```
+## Step 1: Understand the Problem
+The problem is asking to generate a SPARQL query that can be used to query the Open Research Knowledge Graph (ORKG) for the metrics used to evaluate models on the TDM Tagged Corpus dataset.
+
+## Step 2: Identify the Relevant Variables
+The relevant variables in this problem are:
+-?dataset
+-?benchmark
+-?cont
+-?model
+-?eval
+-?metric
+-?metric_lbl
+
+## Step 3: Construct the SPARQL Query
+To construct the SPARQL query, we need to follow the following steps:
+- Filter the datasets to only include the TDM Tagged Corpus dataset.
+- For each dataset, find the benchmarks.
+- For each benchmark, find the contributions.
+- For each contribution, find the models.
+- For each model, find the evaluations.
+- For each evaluation, find the metrics.
+- For each metric, find the labels.
+
+## Step 4: Write the SPARQL Query
+The SPARQL query can be written as:
+```
+SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TDM Tagged Corpus")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?model        orkgp:HAS_CONTRIBUTION   ?cont;
+                orkgp:P31               ?model_lbl.
+ ?eval        orkgp:HAS_MODEL         ?model;
+               orkgp:HAS_METRIC        ?metric.
+ ?metric      rdfs:label              ?metric_lbl.
+}
+ORDER BY DESC(?metric_lbl) LIMIT 10.
+```
+The final answer is: 
+```
+SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TDM Tagged Corpus")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?model        orkgp:HAS_CONTRIBUTION   ?cont;
+                orkgp:P31               ?model_lbl.
+ ?eval        orkgp:HAS_MODEL         ?model;
+               orkgp:HAS_METRIC        ?metric.
+ ?metric      rdfs:label              ?metric_lbl.
+}
+ORDER BY DESC(?metric_lbl) LIMIT 10.
+```<|eot_id|>

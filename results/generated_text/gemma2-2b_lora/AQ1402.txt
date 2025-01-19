@@ -1,0 +1,24 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the NYT-single dataset?
+
+Generated SPARQL:
+"""
+    query = """
+    SELECT ?model ?model_lbl
+    WHERE {
+      orkgr:R130080 orkgp:compareContribution ?contrib.
+      ?contrib orkgp:P37 ?metric.
+      ?metric orkgp:HAS_VALUE ?value.
+      ?value orkgp:HAS_COMPARISON ?comparison.
+      ?comparison orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:P36 ?cont_lbl.
+      ?cont_lbl rdfs:label ?cont_lbl_lbl;
+                rdfs:label ?cont_lbl_lblP.
+      ?cont_lbl_lblP orkgp:P38 ?model.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+    """
+    return query
+<eos>

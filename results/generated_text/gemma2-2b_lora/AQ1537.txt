@@ -1,0 +1,23 @@
+Question:
+What is the name of the top performing model in terms of Number of params score when benchmarked on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+"""
+    query = """
+    SELECT ?model ?model_lbl
+    WHERE {
+      orkgr:R130000 orkgp:compareContribution ?contrib.
+      ?contrib orkgp:P37 ?metric.
+      ?metric orkgp:HAS_VALUE ?value.
+      ?value orkgp:HAS_COMPARISON ?comparison.
+      ?comparison orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:P36 ?benchmark.
+      ?benchmark orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:HAS_MODEL ?model.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+    """
+    return query
+<eos>

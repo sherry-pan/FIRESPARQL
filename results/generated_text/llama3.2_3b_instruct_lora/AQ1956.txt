@@ -1,0 +1,84 @@
+Question:
+Where can I find code references in papers that have used the CATTS-XSUM model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper       a            orkgc:Paper;
+                  rdfs:label ?paper_lbl.
+       FILTER (str(?paper_lbl) = "CATTS-XSUM")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?code          rdfs:label              ?code_lbl.
+       FILTER (str(?code_lbl) = "code references")
+     }    
+    SELECT DISTINCT?code
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label    ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CATTS-XSUM")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?code          rdfs:label              ?code_lbl.
+       FILTER (str(?code_lbl) = "code references")
+     }    
+    UNION
+    SELECT DISTINCT?code
+    WHERE {
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?cont           rdfs:label                ?cont_lbl.
+       FILTER (str(?cont_lbl) = "code references")
+      ?benchmark      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       rdfs:label              ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CATTS-XSUM")
+     }    
+    UNION
+    SELECT DISTINCT?code
+    WHERE {
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?cont           rdfs:label                ?cont_lbl.
+       FILTER (str(?cont_lbl) = "code references")
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       rdfs:label              ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CATTS-XSUM")
+      ?paper       orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper       orkgp:HAS_DATASET       ?dataset.
+      ?paper       orkgp:HAS_SOURCE_CODE     ?code.
+    }    
+    UNION
+    SELECT DISTINCT?code
+    WHERE {
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?cont           rdfs:label                ?cont_lbl.
+       FILTER (str(?cont_lbl) = "code references")
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       rdfs:label              ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CATTS-XSUM")
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?cont           orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper       orkgp:HAS_DATASET       ?dataset.
+      ?paper       orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper       orkgp:HAS_SOURCE_CODE     ?code.
+    }    
+    UNION
+    SELECT DISTINCT?code
+    WHERE {
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?cont           rdfs:label                ?cont_lbl.
+       FILTER (str(?cont_lbl) = "code references")
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       rdfs:label              ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CATTS-XSUM")
+      ?cont           orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper       orkgp:HAS_DATASET       ?dataset.
+      ?paper       orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper      

@@ -1,0 +1,48 @@
+Question:
+List the metrics that are used to evaluate models on the ART/CoreSC benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ART/CoreSC")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:P32               ?evaluator.
+      ?evaluator      rdfs:label              ?evaluator_lbl.
+       FILTER (str(?evaluator_lbl) = "Model")
+      ?cont           orkgp:P31               ?model.
+      ?model          rdfs:label              ?metric.
+     } 
+    SELECT DISTINCT?metric
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ART/CoreSC")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:P32               ?evaluator.
+      ?evaluator      rdfs:label              ?evaluator_lbl.
+       FILTER (str(?evaluator_lbl) = "Model")
+      ?cont           orkgp:P31               ?model.
+      ?model          rdfs:label              ?metric.
+      ?metric         orkgp:P34               ?metric_lbl.
+       FILTER (str(?metric_lbl) = "accuracy",?metric_lbl = "macro F1",?metric_lbl = "macro F1-weighted",?metric_lbl = "macro F1-weighted accuracy",?metric_lbl = "macro F1-weighted accuracy (AUC)",?metric_lbl = "macro F1-weighted accuracy (AUC) (S&P)",?metric_lbl = "macro F1-weighted accuracy (AUC) (S&P) (AUC)",?metric_lbl = "micro F1",?metric_lbl = "micro F1-weighted",?metric_lbl = "micro F1-weighted accuracy",?metric_lbl = "micro F1-weighted accuracy (AUC)",?metric_lbl = "micro F1-weighted accuracy (AUC) (S&P)",?metric_lbl = "micro F1-weighted accuracy (AUC) (S&P) (AUC)")
+       UNION
+      ?metric         rdfs:label              ?metric_lbl.
+       FILTER (str(?metric_lbl) = "accuracy", str(?metric_lbl) = "macro F1", str(?metric_lbl) = "macro F1-weighted", str(?metric_lbl) = "macro F1-weighted accuracy", str(?metric_lbl) = "macro F1-weighted accuracy (AUC)", str(?metric_lbl) = "macro F1-weighted accuracy (AUC) (S&P)", str(?metric_lbl) = "macro F1-weighted accuracy (AUC) (S&P) (AUC)", str(?metric_lbl) = "micro F1", str(?metric_lbl) = "micro F1-weighted", str(?metric_lbl) = "micro F1-weighted accuracy", str(?metric_lbl) = "micro F1-weighted accuracy (AUC)", str(?metric_lbl) = "micro F1-weighted accuracy (AUC) (S&P)", str(?metric_lbl) = "micro F1-weighted accuracy (AUC) (S&P) (AUC)")
+    }    SELECT?metric
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ART/CoreSC")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:P32               ?evaluator.
+      ?evaluator      rdfs:label              ?evaluator_lbl.
+       FILTER (str(?evaluator_lbl) = "Model")
+      ?cont           orkgp:P31               ?model.
+      ?model          rdfs:label              ?metric.
+      ?metric         orkgp:P34               ?metric_lbl.
+       FILTER (str(?metric_lbl) = "accuracy", str(?metric_lbl) = "macro F1", str(?metric_lbl) = "macro F1-weight

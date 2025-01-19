@@ -1,0 +1,71 @@
+Question:
+What is the best performing model benchmarking the iNaturalist 2018 dataset in terms of Top-1 Accuracy metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "iNaturalist 2018")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_MODEL         ?model.
+     ?model      rdfs:label              ?model_lbl.
+      OPTIONAL {?cont      orkgp:HAS_METRIC_LABEL     ?metric_lbl.
+              ?metric_lbl      rdfs:label              ?metric_lbl}
+     ?paper      orkgp:HAS_MODEL         ?model;
+                orkgp:HASCont          ?cont.
+      OPTIONAL {?paper      orkgp:HAS_PUBLISHER     ?publisher.
+               ?publisher      rdfs:label              ?publisher_lbl}
+      OPTIONAL {?paper      orkgp:HAS_SOURCE_CODE   ?source_code.
+               ?source_code      rdfs:label              ?source_code_lbl}
+      OPTIONAL {?paper      orkgp:HAS_DATASET        ?dataset.
+               ?dataset      rdfs:label              ?dataset_lbl}
+      OPTIONAL {?paper      orkgp:HAS_MODEL_EVALUATION?model_eval.
+               ?model_eval      orkgp:HAS_METRIC        ?metric;
+                                  orkgp:HAS_VALUE        ?value}
+     ?model_eval      orkgp:HAS_VALUE        ?value;
+                        orkgp:HAS_METRIC        ?metric.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_MODEL         ?model.
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+     ?model      rdfs:label              ?model_lbl.
+     ?model      a                        orkgp:Model.
+     ?dataset       a                orkgc:Dataset.
+     ?cont         a                        orkgp:Cont.
+     ?eval           a                        orkgp:Eval.
+     ?benchmark      a                        orkgp:Benchmark.
+     ?value         a                        orkgp:Value.
+     ?metric         a                        orkgp:Metric.
+     ?metric_lbl      rdfs:label               "Top-1 Accuracy"
+     ?model_lbl      rdfs:label               "ResNet50"
+     ?paper      orkgp:HAS_MODEL         ?model.
+     ?paper      orkgp:HASCont          ?cont.
+     ?paper      orkgp:HAS_PUBLISHER     ?publisher.
+     ?paper      orkgp:HAS_SOURCE_CODE   ?source_code.
+     ?paper      orkgp:HAS_DATASET        ?dataset.
+     ?paper      orkgp:HAS_MODEL_EVALUATION?model_eval.
+    }    SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "iNaturalist 2018")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_MODEL         ?model.
+     ?model      rdfs:label              ?model_lbl.
+      OPTIONAL {?cont      orkgp:HAS_METRIC_LABEL     ?metric_lbl.
+              ?metric_lbl      rdfs:label              ?metric_lbl}
+     ?paper      orkgp:HAS_MODEL         ?model;
+                orkgp:HASCont          ?cont.
+      OPTIONAL {?paper      orkgp:HAS_PUBLISHER     ?publisher.
+               ?publisher      rdfs
