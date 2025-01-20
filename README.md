@@ -27,3 +27,4 @@ https://docs.google.com/spreadsheets/d/1aAC9POjjjmql8HPK8a3lFUykZiGa0sa1dv2vOjzZ
 
 
 ### Preliminary results
+See folders /results/generated_text for the geneated SPARQL to the questions in SciQA test datasets with different LLMs.
