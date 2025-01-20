@@ -11,7 +11,7 @@ We conduct experiments on the SciQA Benchmark dataset and compare our results wi
 
 References:
 
-[1] iang, L., Yan, X., Usbeck, R.: A structure and content prompt-based method for knowledge graph question answering over scholarly data. In: QALD/SemREC@ISWC (2023)
+[1] Liang, L., Yan, X., Usbeck, R.: A structure and content prompt-based method for knowledge graph question answering over scholarly data. In: QALD/SemREC@ISWC (2023)
 
 [2] Taffa, T.A., Usbeck, R.: Leveraging llms in scholarly knowledge graph question answering. In: QALD/SemREC@ ISWC (2023)
 
