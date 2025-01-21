@@ -1,0 +1,11 @@
+SELECT?emergency_type
+     WHERE {
+      ?contribution      a            orkgc:Contrib;
+                         rdfs:label      ?contribution_label.
+       FILTER (str(?contribution_label) = "AMBER Alert")
+      ?contrib      orkgp:P32      ?cont;       orkgp:P31      ?paper.
+      ?cont        orkgp:HAS_DATASET      ?dataset.
+      ?dataset     orkgp:HAS_EMERGENCY_TYPE  ?emergency_type.
+      ?emergency_type rdfs:label      ?emergency_type_label.
+       FILTER (str(?emergency_type_label) = "Emergency type")
+     }

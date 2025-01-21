@@ -1,0 +1,14 @@
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R103931 orkgp:compareContribution?cont.
+        ?cont orkgp:P32?eval.
+        ?eval rdfs:label?metric_lbl.
+        ?cont orkgp:P33?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(STR(?dataset_lbl), "Hendrycks Test"))
+        ?cont orkgp:P34?value.
+         BIND(XSD:integer(?value) AS?value)
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1
+     ```; Joining the datasets for the given query would result in a query with multiple lines of code. To fix this, we can use a single line of code with multiple

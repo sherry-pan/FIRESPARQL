@@ -1,0 +1,30 @@
+SELECT?model?model_lbl
+    WHERE {
+     ?metric      a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Accuracy")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+     ?eval          orkgp:HAS_METRIC         ?metric;
+                     orkgp:HAS_VALUE         ?value.
+     ?value         rdfs:label               ?value_lbl.
+     ?value         orkgp:HAS_MODEL         ?model.
+     ?model        rdfs:label               ?model_lbl.
+      OPTIONAL {?model      orkgp:HAS_DATASET         ?dataset2.
+               ?dataset2       orkgp:HAS_BENCHMARK     ?benchmark2.
+               ?benchmark2      orkgp:HAS_EVALUATION     ?eval2.
+               ?eval2          orkgp:HAS_METRIC         ?metric2;
+                                  orkgp:HAS_VALUE         ?value2.
+               ?value2         orkgp:HAS_VALUE         ?value_lbl2.
+               ?value_lbl2      rdfs:label               ?value_lbl.
+               ?metric2         rdfs:label               ?metric_lbl.
+               ?metric_lbl        a               orkgc:Metric.
+               ?metric2         orkgp:HAS_MODEL         ?model2.
+               ?model2        rdfs:label               ?model_lbl.
+               ?dataset2       orkgp:HAS_MODEL         ?model.
+               ?model         rdfs:label               ?model_lbl.
+                }
+      ORDER BY DESC(?value_lbl)
+      LIMIT 1
+    }   .

@@ -1,0 +1,34 @@
+SELECT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl) = "Score")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:P31               ?model.
+      ?cont           orkgp:HAS_METRIC        ?metric;
+                       orkgp:P32               ?evalu;
+                       orkgp:P33               ?evalu2.
+      ?eval         rdfs:label               ?evalu_lbl.
+      ?eval2        rdfs:label               ?evalu_lbl2.
+      ?eval         orkgp:HAS_VALUE        ?eval_value.
+      ?eval_value   orkgp:HAS_MODEL        ?model;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?model      orkgp:HAS_MODEL_EVALUATION ?evalu2.
+      ?evalu      orkgp:P31               ?model.
+      ?evalu2     rdfs:label               ?evalu_lbl2.
+      ?cont           orkgp:HAS_MODEL        ?model.
+      ?model      rdfs:label               ?model_lbl.
+      ?cont           orkgp:P31               ?model.
+      ?cont           orkgp:P32               ?evalu.
+      ?cont           orkgp:P33               ?evalu2.
+      ?cont           orkgp:P32               ?eval.
+      ?cont           orkgp:P33               ?evalu2.
+       ORDER BY DESC(?eval_value)
+      ?model      orkgp:HAS_MODEL_EVALUATION ?evalu2.
+      ?model      rdfs:label               ?model_lbl.
+      ?cont           orkgp:P31               ?model.
+      ?cont           orkgp:P32               ?evalu.
+      ?cont           orkgp:P33               ?evalu2.
+      ?cont           orkgp:P32               ?eval.
+      ?cont           orkgp:P33               ?evalu2.      }     .

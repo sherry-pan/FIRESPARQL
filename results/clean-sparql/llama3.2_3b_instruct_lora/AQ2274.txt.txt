@@ -1,0 +1,15 @@
+SELECT DISTINCT?code
+     WHERE {
+      ?paper       a            orkgc:Paper;
+                  rdfs:label  ?paper_lbl.
+       FILTER (str(?paper_lbl) = "PEGASUS model for benchmarking purposes")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_SOURCE_CODE     ?code.
+      ?code          rdfs:label              ?code_lbl.
+       FILTER (str(?code_lbl) = "code references")
+      ?cont           orkgp:P31               ?cont_lbl.
+      ?cont_lbl      rdfs:label              ?cont_lbl_lbl.
+       FILTER (str(?cont_lbl_lbl) = "Papers with code")
+     }    .      ORDER BY DESC(?cont_lbl_lbl)
+    LIMIT 10

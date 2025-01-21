@@ -1,0 +1,17 @@
+SELECT?common
+     WHERE {
+      ?paper       a            orkgc:Paper;
+          ?paper      rdfs:label  ?paper_lbl.
+       FILTER(REGEX(?paper_lbl, "common lead"))
+      ?class      rdfs:label  ?class_lbl.
+      ?paper      orkgp:P10027    ?class.
+      ?class      rdfs:label      ?common.
+      ?common      rdfs:label      ?common_lbl.
+       FILTER(REGEX(?common_lbl, "common lead"))
+      ?compound     orkgp:P10026     ?class.
+      ?compound     rdfs:label        ?compound_lbl.
+      ?common      orkgp:P10027     ?compound.
+      ?common      rdfs:label        ?common_lbl.
+     }  
+     ORDER BY (COUNT(?common) DESC)
+     LIMIT 1

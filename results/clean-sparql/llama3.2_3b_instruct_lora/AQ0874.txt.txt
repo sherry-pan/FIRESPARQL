@@ -1,0 +1,22 @@
+SELECT DISTINCT?metric
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "NCBI Disease")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.}
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.}
+      ?model      rdfs:label              ?model_lbl.
+       FILTER (str(?model_lbl) = "models")
+       BIND(xsd:integer(?cont @?cont_lbl) as?cont_val)
+       BIND(xsd:integer(?model @?model_lbl) as?model_val)
+       BIND(xsd:string(?eval @?eval_lbl) as?eval_val)
+       BIND(xsd:string(?metric @?metric_lbl) as?metric_val)
+       BIND(xsd:string(?dataset_lbl) as?dataset_lbl)
+       BIND(xsd:string(?cont_lbl) as?cont_lbl)
+       BIND(xsd:string(?model_lbl) as?model_lbl)
+       BIND(xsd:string(?eval_lbl) as?eval_lbl)
+       BIND(xsd:string(?metric_lbl) as?metric_lbl)
+     } ORDER BY DESC(xsd:integer(?cont_val)) LIMIT 10;

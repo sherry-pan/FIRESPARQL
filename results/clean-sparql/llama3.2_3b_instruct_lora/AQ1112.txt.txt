@@ -1,0 +1,20 @@
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+               ?model      rdfs:label              ?model_lbl.}
+      ?paper      orkgp:HAS_CONTAINER      ?cont.
+       OPTIONAL {?paper      orkgp:HAS_AUTHOR        ?author.
+               ?author      rdfs:label              ?author_lbl.}
+      ?problem   rdfs:label              ?problem_lbl.
+      ?problem       orkgp:HAS_PROBLEM      ?problem;
+                      rdfs:label              ?problem_lbl.
+     } ORDER BY DESC(?score) LIMIT 1.

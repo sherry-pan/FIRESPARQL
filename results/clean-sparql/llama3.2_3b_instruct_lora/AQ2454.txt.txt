@@ -1,0 +1,14 @@
+SELECT DISTINCT?code
+     WHERE {
+      ?paper      a            orkgc:Paper;
+      ?paper      rdfs:label  ?paper_lbl.
+       FILTER (str(?paper_lbl) = "GPT-2 (small)")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model         rdfs:label              ?model_lbl.
+       FILTER (str(?model_lbl) = "GPT-2 (small)")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         orkgp:HAS_MODEL         ?model.
+      ?cont         orkgp:P32               ?code.
+    }

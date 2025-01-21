@@ -1,0 +1,16 @@
+SELECT?model?model_lbl
+     WHERE {
+      ?model       a            orkgc:Model;
+                   rdfs:label  ?model_lbl.
+       FILTER (str(?model_lbl) = "atmosphere")
+      ?model      orkgp:HAS_DATASET       ?dataset.
+      ?dataset    orkgp:HAS_DATASET        ?dataset2.
+      ?dataset2   rdfs:label              ?dataset_lbl.
+      ?cont      orkgp:HAS_DATASET        ?dataset2.
+      ?cont      orkgp:P32               ?paper.
+      ?paper     rdfs:label              ?paper_lbl.
+      ?cont      orkgp:HAS_MODEL         ?model.
+      ?cont      orkgp:HAS_VARIABLE     ?var.
+      ?var      rdfs:label              ?var_lbl.
+       ORDER BY DESC(?cont)
+       LIMIT 3
