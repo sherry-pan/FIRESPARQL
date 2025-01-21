@@ -1,0 +1,23 @@
+SELECT DISTINCT?code
+     WHERE {
+      ?paperskaggle     a            orkgc:Paper;
+                       rdfs:label      ?paperskaggle_lbl.  
+       FILTER (str(?paperskaggle_lbl) = "NASCell")
+      ?paperskaggle       orkgp:HAS_DATASET      ?dataset.
+      ?dataset           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark         rdfs:label              ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "NASCell")
+      ?benchmark         orkgp:HAS_SOURCE_CODE     ?code.
+      ?code            rdfs:label              ?code_lbl.
+       FILTER (str(?code_lbl) = "code")
+      ?cont         orkgp:HAS_PAPER         ?paperskaggle.
+      ?cont         rdfs:label                ?cont_lbl.
+       FILTER (str(?cont_lbl) = "cont")
+      ?cont         orkgp:HAS_MODEL         ?model.
+      ?model        rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "model")
+     } 
+     ORDER BY DESC(?cont_lbl)
+     LIMIT 1
+     OFFSET 0
+     UNION

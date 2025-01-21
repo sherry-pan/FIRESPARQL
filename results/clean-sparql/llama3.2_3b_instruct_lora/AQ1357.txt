@@ -1,0 +1,14 @@
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "BUCC German-to-English")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark      rdfs:label              ?metric.
+         BIND(xsd:integer(?value) AS?value)
+      ?metric      orkgp:P31               ?metric_lbl.
+     } ORDER BY DESC(?score) LIMIT 1; 
+     ```

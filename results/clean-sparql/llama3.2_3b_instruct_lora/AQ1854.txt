@@ -1,0 +1,14 @@
+SELECT?dataset?dataset_lbl
+     WHERE {
+      ?papers      a            orkgc:Paper;
+      ?papers      rdfs:label  ?papers_lbl.
+       FILTER(REGEX(?papers_lbl, "Joint Entity and Relation Extraction"))
+      ?papers      a            orkgc:Paper;
+      ?papers      rdfs:label  ?dataset_lbl.
+      ?cont       a            orkgc:Contrib;
+      ?cont       rdfs:label  ?cont_lbl.
+      ?cont       orkgp:P30   ?papers.
+      ?papers      orkgp:HAS_DATASET      ?datasets.
+      ?datasets      rdfs:label              ?dataset_lbl.
+       ORDER BY DESC(?cont      orkgp:P31)
+       LIMIT 10

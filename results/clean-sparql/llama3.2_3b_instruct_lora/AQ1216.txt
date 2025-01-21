@@ -1,0 +1,14 @@
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "BC5CDR-disease")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+               ?model      rdfs:label              ?model_lbl.}
+     } GROUP BY?metric?metric_lbl HAVING MAX(?value) OVER (PARTITION BY?metric?metric_lbl) >= 0.5; ORDER BY DESC(?score); LIMIT 1.

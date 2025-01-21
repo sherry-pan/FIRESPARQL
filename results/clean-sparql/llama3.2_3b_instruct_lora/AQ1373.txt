@@ -1,0 +1,34 @@
+SELECT?model?model_lbl
+    WHERE {
+     ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Sequence error")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+     ?eval          orkgp:HAS_METRIC         ?metric;
+                     orkgp:HAS_VALUE         ?value.
+      BIND(xsd:float(?value) AS?value)
+     ?cont      orkgp:HAS_EVALUATION     ?eval.
+     ?eval      orkgp:HAS_MODEL         ?model.
+     ?model     rdfs:label              ?model_lbl.
+     ?cont      orkgp:HAS_MODEL         ?model.
+     ?cont      rdfs:label              ?cont_lbl.
+     ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?cont      a                orkgp:Container;
+                  rdfs:label              ?cont_lbl.
+     ?cont      orkgp:HAS_SEQUENCE_ERROR     ?seq_err.
+     ?seq_err      rdfs:label              ?seq_err_lbl.
+      BIND(xsd:float(?seq_err_lbl) AS?seq_err)
+     ?model      rdfs:label              ?model_lbl.
+     ?model      orkgp:HAS_DATASET       ?dataset.
+     ?model      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?model      orkgp:HAS_EVALUATION     ?eval.
+     ?eval      orkgp:HAS_METRIC         ?metric;
+                 orkgp:HAS_VALUE         ?value.
+      BIND(xsd:float(?value) AS?value)
+      ORDER BY DESC(?value)
+     ?model      orkgp:P31               ?cont.
+     ?cont      rdfs:label              ?cont_lbl.
+    }     LIMIT 1.

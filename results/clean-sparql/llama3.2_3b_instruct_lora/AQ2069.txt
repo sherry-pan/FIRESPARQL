@@ -1,0 +1,19 @@
+SELECT DISTINCT?code
+     WHERE {
+      ?papers      a            orkgc:Paper;
+                  rdfs:label   ?papers_labels.
+       FILTER (str(?papers_labels) = "FABIR model")
+      ?papers      orkgp:P31   ?papers_models.
+      ?papers_models  rdfs:label   ?papers_models_labels.
+      ?papers_models  orkgp:HAS_DATASET   ?datasets.
+       OPTIONAL {?datasets      orkgp:HAS_CODE           ?code.}
+      ?cont         orkgp:P31   ?cont;
+                     rdfs:label   ?cont_labels.
+       FILTER (str(?cont_labels) = "FABIR")
+      ?cont         orkgp:HAS_DATASET   ?datasets.
+       OPTIONAL {?datasets      orkgp:HAS_CODE           ?code.}
+      ?cont         orkgp:HAS_MODEL     ?papers_models.
+       OPTIONAL {?papers_models      rdfs:label   ?papers_models_labels.}
+       OPTIONAL {?cont      orkgp:HAS_SOURCE_CODE   ?code.}
+    }  
+    )
