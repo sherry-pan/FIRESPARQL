@@ -7,11 +7,11 @@ We propose a RAG approach to generate the top k candidate properties or entities
 Structural inconsistencies arise due to LLMs’ lack of ontological knowledge of the ORKG, leading to errors in query structure, such as missing or abundant links (triples). We suggest that fine-tuning LLMs with ontological information from the ORKG can help address these structural issues, allowing the model to generate more accurate queries with appropriate multi-hop relations. We proposed to address these problems by fine-tuning LLMs with two different datasets: 1) the NL-SPARQL pairs in SciQA benchmark dataset and 2) the triples in ORKG.
 Additionally, we highlight the limitations of traditional machine translation evaluation metrics like BLEU and ROUGE, which rely on n-gram token overlap and fail to detect semantic issues in generated queries. These evaluation metrics lead to high scores despite low execution accuracy when queries contain incorrect properties or entities. To address this, we propose a more nuanced metric to evaluate the generated SPARQL queries, considering both structural correctness and semantic accuracy.
 
-We conducte experiments on the SciQA Benchmark dataset and compare our results with state-of-the-art approaches.
+We conduct experiments on the SciQA Benchmark dataset and compare our results with state-of-the-art approaches.
 
 References:
 
-[1] iang, L., Yan, X., Usbeck, R.: A structure and content prompt-based method for knowledge graph question answering over scholarly data. In: QALD/SemREC@ISWC (2023)
+[1] Liang, L., Yan, X., Usbeck, R.: A structure and content prompt-based method for knowledge graph question answering over scholarly data. In: QALD/SemREC@ISWC (2023)
 
 [2] Taffa, T.A., Usbeck, R.: Leveraging llms in scholarly knowledge graph question answering. In: QALD/SemREC@ ISWC (2023)
 
@@ -27,3 +27,4 @@ https://docs.google.com/spreadsheets/d/1aAC9POjjjmql8HPK8a3lFUykZiGa0sa1dv2vOjzZ
 
 
 ### Preliminary results
+See folders /results/generated_text for the geneated SPARQL to the questions in SciQA test datasets with different LLMs.
