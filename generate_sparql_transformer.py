@@ -17,9 +17,13 @@ def generate_sparql(question, question_id, model,tokenizer, output_dir):
     # question_id = "Q1"
 
     prompt = f"""
-    The Open Research Knowledge Graph (ORKG) is a semantic knowledge graph designed to represent, compare, and retrieve scholarly contributions. Given a natural language question, your task is to generate the corresponding SPARQL query that can be used to query the ORKG for the correct answer. Give me only the SPARQL query, no other text.
+    The Open Research Knowledge Graph (ORKG) is a semantic knowledge graph designed to represent, 
+    compare, and retrieve scholarly contributions. Given a natural language question in English, your task 
+    is to generate the corresponding SPARQL query to this question. The generated SPARQL query should be 
+    able to query the ORKG, getting correct answer to the input question. 
+    Give me only the SPARQL query, no other text.
     Input Question: {question}
-    Only output the SPARQL query here. No other text.
+    Output SPARQL Query:
     """
     inputs = tokenizer(prompt, return_tensors="pt")
 
@@ -62,7 +66,8 @@ if __name__ == "__main__":
 
 
 
-
+# Run the script
+# python generate_sparql_transformer.py saves/Llama-3.2-3B-Instruct/lora/train_2024-12-12-13-32-24  xueli_data/test_questions.csv results/generated_text/llama3.2_3b_lora_20250121
 
 
     

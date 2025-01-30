@@ -1,0 +1,45 @@
+```sparql
+SELECT ?code WHERE {
+  {
+    ?paper a orkgc:Paper;
+      orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+      orkgp:HAS_CODE ?code.
+    ?cont orkgp:HAS_PAPER ?paper;
+      rdfs:label ?cont_label.
+    FILTER(REGEX(?cont_label, "AxCell"))
+  }
+  UNION
+  {
+    ?paper a orkgc:Paper;
+      orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+      orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_label.
+    FILTER(REGEX(?model_label, "AxCell"))
+    ?cont orkgp:HAS_PAPER ?paper;
+      orkgp:HAS_CODE ?code.
+  }
+  UNION
+  {
+    ?dataset a orkgc:Dataset;
+      rdfs:label ?dataset_label.
+    FILTER(REGEX(?dataset_label, "benchmarking"))
+    ?cont orkgc:HAS_DATASET ?dataset;
+      rdfs:label ?cont_label;
+      orkgp:HAS_CODE ?code.
+  }
+  UNION
+  {
+    ?cont rdfs:label ?cont_label;
+      orkgp:HAS_PAPER ?paper.
+    ?paper a orkgc:Paper;
+      rdfs:label ?paper_label.
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+      orkgp:HAS_CODE ?code.
+    FILTER(REGEX(?cont_label, "AxCell"))
+  }
+}
+ORDER BY DESC(?cont)
+LIMIT 1
+```

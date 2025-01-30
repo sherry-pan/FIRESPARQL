@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R14435 orkgp:compareContribution ?cont.
+  ?cont orkgp:P31 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Oxford-IIIT Pets", "i"))
+  
+  ?cont orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkgp:P34 ?value.
+  
+  BIND(xsd:decimal(?value) AS ?value_decimal)
+}
+GROUP BY ?metric ?metric_lbl
+```

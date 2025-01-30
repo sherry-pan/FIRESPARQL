@@ -1,0 +1,16 @@
+```sparql
+SELECT ?title ?paper 
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ImageNet ReaL")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:P31 ?cont;
+         orkgp:P32 ?benchmark;
+         rdfs:label ?title.
+}
+ORDER BY ?title
+LIMIT 100
+OFFSET 0
+```

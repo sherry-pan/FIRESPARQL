@@ -1,0 +1,25 @@
+```sparql
+SELECT ?answer
+WHERE {
+  ?data a orkgc:Data;
+        rdfs:label ?label.
+  FILTER (str(?label) = "Are children examined in the studies?")
+  ?data orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:P33 ?dataset_prop.
+  ?dataset_prop orkgp:HAS_CONTRIB ?contrib;
+                orkgp:P33 ?cont.
+  ?contrib rdfs:label ?cont_lbl.
+  ?cont orkgp:P32 ?cont_prop.
+  ?cont_prop rdfs:label ?answer_lbl.
+  ?answer_lbl a orkgp:Label;
+              rdfs:label ?answer.
+  ?answer a orkgp:Answer;
+          rdfs:label ?cont_lbl.
+  FILTER (str(?cont_lbl) = "Yes")
+}
+ORDER BY DESC(?answer_lbl)
+LIMIT 1
+OFFSET 0
+```

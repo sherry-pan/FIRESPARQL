@@ -1,0 +1,27 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label "Reading Comprehension".
+           
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:P32 ?problem.
+
+  ?paper rkgp:P32 ?cont.
+
+  ?author rkgp:P32 ?paper.
+
+  FILTER(EXISTS {
+    ?cont rkgp:HAS_AUTHOR ?author.
+  })
+
+  FILTER(EXISTS {
+    ?cont rkgp:P40 ?dataset.
+  })
+}
+```

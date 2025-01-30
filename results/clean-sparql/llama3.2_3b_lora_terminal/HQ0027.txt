@@ -1,0 +1,18 @@
+```sparql
+SELECT ?country ?country_lbl
+WHERE {
+  ?study orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_DATA ?data.
+  ?data rdfs:label ?data_lbl.
+  FILTER (str(?data_lbl) = "overall prevalence of epilepsy")
+
+  ?study orkgp:P32 ?pub.
+  ?pub rdfs:label ?pub_lbl.
+  FILTER (str(?pub_lbl) = "overall prevalence of epilepsy")
+
+  ?pub orkgp:P31 ?country.
+  ?country rdfs:label ?country_lbl.
+}
+ORDER BY DESC(?country_lbl)
+LIMIT 1
+```

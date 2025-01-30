@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  orkgr:R114327 orkgp:cont_eq ?cont.
+  ?cont orkgp:P1457 ?eval.
+  ?eval orkgp:P1458 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkgp:P1432 ?dataset.
+  ?dataset orkgp:P1433 ?dataset_lbl.
+  FILTER (str(?metric_lbl) = "Bits per dim").
+  ?cont orkgp:P1434 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?eval)
+LIMIT 1
+```

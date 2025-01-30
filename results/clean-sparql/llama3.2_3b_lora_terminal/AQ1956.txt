@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?dataset ORKGP:has_benchmark ?benchmark;
+           ORKGP:has_model ?model.
+  ?model RDFS:label ?model_labels.
+  FILTER(REGEX(?model_labels, "CATTS-XSUM", "i"))
+  ?benchmark ORKGP:has_paper ?papers.
+  ?papers ORKGP:has_source_code ?code.
+  ?code RDFS:label ?code_labels.
+  FILTER(REGEX(?code_labels, "reference|code", "i"))
+}
+```

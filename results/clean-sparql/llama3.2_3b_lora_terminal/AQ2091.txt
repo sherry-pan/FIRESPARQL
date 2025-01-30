@@ -1,0 +1,15 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "Multi-Perspective Matching (single model)")
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_PAPER ?paper;
+        orkgp:HAS_SOURCE_CODE ?code.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Multi-Perspective Matching")
+}
+ORDER BY DESC(?code)
+LIMIT 10
+```

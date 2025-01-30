@@ -1,0 +1,15 @@
+```sparql
+SELECT ?code ?paper
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "DQN-PixelCNN")
+  
+  ?dataset orkgp:HAS_MODEL ?model;
+           orkgp:HAS_CODE ?code.
+
+  ?paper orkgp:P31 ?model.
+}
+ORDER BY ?paper
+LIMIT 10
+```

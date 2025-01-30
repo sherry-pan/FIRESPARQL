@@ -1,0 +1,46 @@
+```sparql
+SELECT ?code
+WHERE {
+  {
+    ?paper a orkgc:Paper;
+           rdfs:label ?paper_lbl.
+    FILTER (str(?paper_lbl) = "T-ConvS2S")
+    ?cont orkgp:HAS_PAPER ?paper;
+          orkgp:HAS_BENCHMARK ?benchmark;
+          rdfs:label ?code_lbl.
+    ?code rdfs:label ?code_lbl;
+          a orkgc:Code;
+          orkgp:SOURCE_CODE ?src.
+    ?src rdfs:label ?src_lbl.
+    FILTER (str(?src_lbl) = "code")
+  }
+  UNION
+  {
+    ?paper orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "t2t-s2s-200")
+    ?cont orkgp:HAS_PAPER ?paper;
+          orkgp:HAS_BENCHMARK ?benchmark;
+          rdfs:label ?code_lbl.
+    ?code rdfs:label ?code_lbl;
+          a orkgc:Code;
+          orkgp:SOURCE_CODE ?src.
+    ?src rdfs:label ?src_lbl.
+    FILTER (str(?src_lbl) = "code")
+  }
+  UNION
+  {
+    ?paper orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+    FILTER (str(?model_lbl) = "T-ConvS2S")
+    ?cont orkgp:HAS_PAPER ?paper;
+          orkgp:HAS_BENCHMARK ?benchmark;
+          rdfs:label ?code_lbl.
+    ?code rdfs:label ?code_lbl;
+          a orkgc:Code;
+          orkgp:SOURCE_CODE ?src.
+    ?src rdfs:label ?src_lbl.
+    FILTER (str(?src_lbl) = "code")
+  }
+}
+```

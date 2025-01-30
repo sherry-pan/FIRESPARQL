@@ -1,0 +1,15 @@
+```sparql
+SELECT ?method (COUNT(?method) AS ?freq)
+WHERE {
+  ?paper rdfs:label ?paper_labels.
+  FILTER(REGEX(?paper_labels, "Knowledge representation"))
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?cont.
+  ?cont rdfs:label ?cont_labels.
+  FILTER(REGEX(?cont_labels, "method"))
+  ?cont ?cont_has_method ?method.
+}
+GROUP BY ?method
+ORDER BY DESC(?freq)
+LIMIT 1
+```

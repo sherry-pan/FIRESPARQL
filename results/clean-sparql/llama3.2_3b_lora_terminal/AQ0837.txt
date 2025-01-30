@@ -1,0 +1,12 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Hutter Prize")
+  ?dataset orkgp:HAS_DATASET ?cont.
+  ?cont orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+```

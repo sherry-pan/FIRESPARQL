@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code_link
+WHERE {
+  ?paper a orkgc:Paper;
+         orkgp:HAS_PAPER ?benchmark.
+  ?benchmark orkgp:HAS_CODE_LINK ?code_link.
+  ?benchmark rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "A3C-CTS")
+}
+ORDER BY DESC(?benchmark)
+LIMIT 10
+```

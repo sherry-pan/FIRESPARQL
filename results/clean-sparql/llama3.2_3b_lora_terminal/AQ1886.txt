@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:P32 ?paper;
+        orkgp:P31 ?benchmark.
+  ?paper orkgp:HAS_PROBLEM ?problem.
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.
+  FILTER (str(?problem_lbl) = "Sentence Classification")
+}
+ORDER BY DESC(?dataset_lbl)
+LIMIT 100
+```

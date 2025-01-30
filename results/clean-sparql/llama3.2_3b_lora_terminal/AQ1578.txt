@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl (MAX(?eval_value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "X-Sum")
+  
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:P30 ?model.
+
+  ?model rdfs:label ?model_lbl;
+         orkgp:HAS_EVALUATION ?eval.
+
+  ?eval orkgp:VALUE ?eval_value;
+        orkgp:P31 ?metric.
+
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "ROUGE-2")
+}
+GROUP BY ?model ?model_lbl
+```

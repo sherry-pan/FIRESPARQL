@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_label.
+  FILTER (str(?paper_label) = "Multi-Perspective Matching (ensemble)")
+  
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code;
+             orkgp:HAS_MODEL ?model.
+  
+  ?model rdfs:label ?model_label.
+  FILTER (str(?model_label) = "Multi-Perspective Matching (ensemble)")
+  
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+}
+LIMIT 1000
+```

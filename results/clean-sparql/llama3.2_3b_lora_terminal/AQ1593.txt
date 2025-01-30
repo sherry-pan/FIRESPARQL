@@ -1,0 +1,14 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "1-of-100 Accuracy".
+  ?benchmark orkgp:HAS_DATASET/rdfs:label "PolyAI Reddit".
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_MODEL ?model;
+        orkgp:HAS_METRIC_VALUE ?value.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

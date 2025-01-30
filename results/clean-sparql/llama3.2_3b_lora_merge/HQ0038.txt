@@ -1,0 +1,12 @@
+```sparql
+SELECT ?mean
+WHERE {
+  ?paper ?P1 ?paper_value.
+  FILTER(REGEX(STR(?paper_value), "carbon-based", "i"))
+  ?paper ?P2 ?carbon_capacity.
+  BIND((?carbon_capacity) AS ?capacityList) 
+  ?carbon_capacity rdfs:label ?capacityValue.
+
+  BIND(AVG(?capacityValue) AS ?mean)
+}
+```

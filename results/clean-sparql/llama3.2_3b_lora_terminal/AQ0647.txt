@@ -1,0 +1,15 @@
+```sparql
+SELECT ?paper ?paper_lbl ?paper_id
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WOS-46985".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:P31 ?cont;
+         orkgp:P32 ?benchmark;
+         rdfs:label ?paper_lbl;
+         orkgp:paperID ?paper_id.
+}
+ORDER BY DESC(?paper_lbl)
+LIMIT 10
+```

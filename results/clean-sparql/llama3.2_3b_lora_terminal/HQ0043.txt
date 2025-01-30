@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?variable ?variable_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "atmosphere")
+  
+  ?model orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_VARIABLE ?variable.
+  ?variable rdfs:label ?variable_lbl.
+
+  ?model orkgp:P31 ?class.
+  ?class rdfs:label ?class_lbl.
+  FILTER (str(?class_lbl) = "atmosphere_model")
+} 
+ORDER BY DESC(?model_lbl)
+LIMIT 3
+```

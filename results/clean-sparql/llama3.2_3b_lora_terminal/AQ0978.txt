@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "DBpedia".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:P32 ?metric;
+        rdfs:label ?cont_lbl.
+  ?eval orkgp:HAS_EVALUATION ?eval;
+        rdfs:label ?eval_lbl.
+  FILTER (str(?eval_lbl) = "micro-accuracy")
+  ?metric rdfs:label ?metric_lbl.
+} 
+ORDER BY DESC(?cont_lbl)
+LIMIT 1
+```

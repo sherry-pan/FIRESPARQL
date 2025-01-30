@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ESC-50")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?cont;
+        orkgp:P32 ?eval.
+  ?metric a orkgp:EvaluationMetric.
+  ?eval rdfs:label ?eval_lbl.
+  BIND(fn:replace(str(?eval_lbl), "&quot;", "") AS ?metric_lbl)
+  ?metric orkgp:P32 ?eval;
+          orkgp:P31 ?metric.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 1
+```

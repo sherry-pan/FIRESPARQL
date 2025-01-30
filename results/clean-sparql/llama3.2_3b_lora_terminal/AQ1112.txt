@@ -1,0 +1,11 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?highest_value)
+WHERE {
+  ?contrib orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "WMT2014 English-German"@en.
+  ?contrib orkgp:HAS_METRIC ?metric_eval.
+  ?metric_eval orkgp:P20 ?value.
+  ?metric_eval rdfs:label ?metric_lbl.
+}
+GROUP BY ?metric ?metric_lbl
+```

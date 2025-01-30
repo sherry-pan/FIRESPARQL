@@ -1,0 +1,16 @@
+```sparql
+SELECT ?sector_labels ?frequency
+WHERE {
+  ?papers a orkgc:Paper.
+  ?papers rdfs:label ?papers_labels.
+  FILTER (str(?papers_labels) = "energy")
+  ?papers orkgp:P32 ?cont.
+  ?cont rdfs:label ?cont_labels.
+  ?cont orkgp:P32 ?sect.
+  ?sect rdfs:label ?sector_labels.
+  OPTIONAL {
+    ?sect orkgp:P33 ?sect_freq.
+    ?sect_freq rdfs:label ?frequency.
+  }
+}
+```

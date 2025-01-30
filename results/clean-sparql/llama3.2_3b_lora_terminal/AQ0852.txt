@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(?evaluators) AS ?evaluators)
+WHERE {
+  orkgr:R23451 orkgp:compareContribution ?cont;
+               orkgp:P4312 ?evaluators.
+  ?cont orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P4311 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?evaluators)
+LIMIT 1
+```

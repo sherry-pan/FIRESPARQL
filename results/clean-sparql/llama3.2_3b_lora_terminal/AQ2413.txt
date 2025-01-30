@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?paper ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "CvT-21 \\(384 res\\)", "i"))
+
+  ?paper orkgp:HAS_MODEL ?model;
+         orkgp:HAS_SOURCE_CODE ?code.
+
+  ?code rdfs:label ?code_lbl.
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

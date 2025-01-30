@@ -1,0 +1,12 @@
+```sparql
+SELECT ?metric (MAX(?value) AS ?top)
+WHERE {
+  orkgr:R15730 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P24 ?metric.
+  ?contrib orkgp:P23 ?value.
+  ?dataset a orkgr:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Nottingham", "i"))
+} 
+GROUP BY ?metric
+```
