@@ -1,0 +1,20 @@
+Question:
+What are the metrics of evaluation over the CommitmentBank dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?eval_metric_eval_set) AS?eval_count)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CommitmentBank")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_METRIC        ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+     }
+     GROUP BY?metric?metric_lbl
+     HAVING (SUM(?eval_count) > 1) 
+     ORDER BY DESC(?eval_count) 
+     LIMIT 5. 
+```
+    This SPARQL query is designed to extract the metrics of evaluation over the CommitmentBank dataset. It first filters the dataset to only include the CommitmentBank dataset, then it iterates over each evaluation and extracts the corresponding metrics. The results are then grouped by metric and ordered by the count of evaluations. Finally, the top 5 metrics are selected.<|eot_id|>

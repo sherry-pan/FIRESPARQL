@@ -1,0 +1,13 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper wdt:P921 wd:Q123456;
+         wdt:P31 wd:Q13442814;
+         wdt:P275 ?code .
+  FILTER (CONTAINS(LCASE(STR(?paper)), "see model") &&
+          CONTAINS(LCASE(STR(?paper)), "benchmark"))
+}
+```

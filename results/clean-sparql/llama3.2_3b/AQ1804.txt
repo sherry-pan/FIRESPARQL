@@ -1,0 +1,24 @@
+```sparql
+PREFIX ork: <http://www.openresearch.org/ork/>
+PREFIX vtab: <http://www.openresearch.org/ork/vtab/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelParamsScore ?dataset 
+WHERE {
+  ?model a ork:Model ;
+         rdfs:label ?modelLabel ;
+         ork:benchmarkedOn ?benchmarking .
+         
+  ?benchmarking a vtab:Benchmarking ;
+                schema:dataset ?dataset ;
+                schema:score ?modelParamsScore ;
+                ork:ranked ?rankedModel .
+
+  FILTER (STR(?modelParamsScore) = "Params") 
+  FILTER (STR(?dataset) = "VTAB-1k") 
+  FILTER (STR(?rankedModel) = "top")
+}
+ORDER BY DESC(?modelParamsScore) 
+LIMIT 1
+```

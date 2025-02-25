@@ -1,0 +1,67 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Enduro dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX wkm: <http://www.w3.org/2012/owlim/ontology#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX sparql: <http://www.w3.org/2000/01/rdf-schema#>
+
+     SELECT?model?score 
+     WHERE {
+      ?model rdfs:label?modelLabel.
+      ?model wkm:hasBenchmark?benchmark.
+      ?benchmark wkm:hasDataset?dataset.
+      ?dataset wkm:hasDataset?enduroDataset.
+      ?enduroDataset wkm:hasBenchmark?enduroBenchmark.
+      ?enduroBenchmark rdfs:label?enduroBenchmarkLabel.
+      ?enduroBenchmark wkm:hasScore?enduroScore.
+       FILTER (STRLEN(?enduroScore) > 0).
+      ?model skos:broader?topModel.
+      ?topModel wkm:hasScore?topScore.
+       FILTER (STRLEN(?topScore) > 0).
+       FILTER (STRLEN(?topScore) = (STRLEN(?enduroScore))).
+      ?model skos:broader?topModel.
+      ?topModel rdfs:label?topModelLabel.
+       FILTER (STRLEN(?topModelLabel) > 0).
+      ?model skos:broader?topModel.
+      ?topModel wkm:hasScore?topScore.
+       FILTER (STRLEN(?topScore) > 0).
+      ?model skos:broader?topModel.
+      ?topModel rdfs:label?topModelLabel.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?model skos:broader?topModel.
+      ?topModel skos:broader?topModel.
+      ?topModel skos:broader?topModel.
+      ?model skos:broader?topModel.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModel skos:broader?topModel.
+      ?topModel skos:broader?topModel.
+      ?topModel skos:broader?topModel.
+      ?topModel skos:broader?topModel.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel?topModelName.
+      ?topModelLabel skos:prefLabel

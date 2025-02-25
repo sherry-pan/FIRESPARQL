@@ -1,0 +1,14 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?papers a orkgc:Paper.
+  ?papers rdfs:label ?papers_lbl.
+  ?papers orkgp:P32 ?cont.
+  ?cont rdfs:label ?cont_lbl.
+  FILTER(REGEX(?cont_lbl, "Entity Disambiguation"))
+  ?papers orkgp:P33 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+}
+ORDER BY DESC(?dataset_lbl)
+LIMIT 10
+```

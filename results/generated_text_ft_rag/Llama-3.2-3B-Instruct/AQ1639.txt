@@ -1,0 +1,19 @@
+Question:
+Which model has achieved the highest Score score on the Cheetah, run (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?benchmark       a            orkgc:Benchmark;
+                       rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Cheetah, run (DMControl500k)")
+      ?dataset         orkgp:HAS_DATASET      ?benchmark;
+                        orkgp:HAS_EVALUATION   ?eval.
+      ?paper           orkgp:P31               ?eval;
+                       orkgp:HAS_DATASET      ?dataset.
+      ?contribution    orkgp:P31               ?paper;
+                       rdfs:label              ?model_lbl.
+      ?model          rdfs:label              ?model_lbl.
+     } ORDER BY DESC(?eval) LIMIT 5;`````
+
+    The SPARQL query is designed to retrieve the top 5 models that have achieved the highest score on the Cheetah, run (DMControl500k) benchmark dataset. The query starts by selecting the model and its label, and then filters the results to only include the specified benchmark. It then retrieves the dataset and evaluation for each benchmark, and uses this information to calculate the similarity between the question and each model's label. The results are ordered by the evaluation score in descending order, and the top 5 models are returned.<|eot_id|>

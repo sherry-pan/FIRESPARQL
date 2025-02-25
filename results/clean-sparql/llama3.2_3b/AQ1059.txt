@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+SELECT ?score ?metric
+WHERE {
+    ?dataset orkg:relatedBenchmarkMetric ?benchmarkMetric .
+    ?benchmarkMetric orkg:hasBenchmarkScore ?score ;
+                    orkg:hasMetric ?metric .
+    ?benchmarkResource orkg:hasName "MAZEA" .
+    ?dataset orkg:relatedBenchmark ?benchmarkResource .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

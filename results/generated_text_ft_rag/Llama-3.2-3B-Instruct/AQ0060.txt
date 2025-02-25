@@ -1,0 +1,71 @@
+Question:
+What models are being evaluated on the GAD dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?papers, orkgp:P31, orkgp:P31?cont.
+ ?cont orkgp:P31, orkgp:P31?eval.
+ ?eval orkgp:P27, orkgp:P27?dataset.
+ ?dataset orkgp:P23, orkgp:P23?GAD.
+ ?GAD rdfs:label?GAD_lbl.
+  FILTER(REGEX(?GAD_lbl, "GAD", "i"))
+ ?cont orkgp:P27, orkgp:P27?model.
+ ?model rdfs:label?model_lbl.
+  BIND(XSD:integer(0.9) AS?sim)
+  FILTER(ONCE(?cont?model?sim))
+}
+ORDER BY DESC(?sim)
+LIMIT 5
+``` 
+    end of SPARQL Query.     END
+```python
+def get_sparql_query():
+    return """
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?papers, orkgp:P31, orkgp:P31?cont.
+     ?cont orkgp:P31, orkgp:P31?eval.
+     ?eval orkgp:P27, orkgp:P27?dataset.
+     ?dataset orkgp:P23, orkgp:P23?GAD.
+     ?GAD rdfs:label?GAD_lbl.
+      FILTER(REGEX(?GAD_lbl, "GAD", "i"))
+     ?cont orkgp:P27, orkgp:P27?model.
+     ?model rdfs:label?model_lbl.
+      BIND(XSD:integer(0.9) AS?sim)
+      FILTER(ONCE(?cont?model?sim))
+    }
+    ORDER BY DESC(?sim)
+    LIMIT 5
+    """
+```python
+print(get_sparql_query())
+```python
+```
+
+    The final answer is the output of the provided Python code. 
+
+    Note: This code generates a SPARQL query based on the provided context. The actual SPARQL query might need adjustments based on the specific requirements of the problem or the structure of the RDF data. 
+
+    This code does not execute the SPARQL query; it only generates the query. To execute the query, you would need to use a SPARQL query engine or a tool that supports executing SPARQL queries. 
+
+    The code is written in a way that it can be easily understood and modified by someone familiar with SPARQL and RDF. 
+
+    The generated SPARQL query is a query that retrieves the top 5 models being evaluated on the GAD dataset, based on a similarity score calculated by keyword matching. The query uses the `REGEX` function to filter the results to only include resources that contain the string "GAD" in their labels. The `FILTER(ONCE)` function is used to ensure that each model is only counted once in the similarity score. The results are then ordered by the similarity score in descending order and limited to the top 5 models. 
+
+    The query also uses the `BIND` function to assign a default similarity score of 0.9 to each model. This is done to ensure that models that do not have a direct match with the question are still included in the results. 
+
+    The `ORDER BY DESC(?sim)` clause is used to order the results by the similarity score in descending order. The `LIMIT 5` clause is used to limit the results to the top 5 models. 
+
+    The `SELECT DISTINCT` clause is used to select only distinct models in the results. 
+
+    The `?model?model_lbl` syntax is used to select the labels of the models. The `?sim` variable is used to represent the similarity score. 
+
+    The `FILTER(REGEX(?GAD_lbl, "GAD", "i"))` clause is used to filter the results to only include resources that contain the string "GAD" in their labels. The `REGEX` function is used to perform a regular expression match. The `i` flag is used to make the match case-insensitive. 
+
+    The `FILTER(ONCE(?cont?model?sim))` clause is used to ensure that each model is only counted once in the similarity score. The `ONCE` function is used to ensure that the filter is only applied once for each model. 
+
+    The `BIND(XSD:integer(0.9) AS?sim)` clause is used to assign a default similarity score of 0.9 to each model. The `XSD:integer(0.9)` syntax is used to represent the default value as an integer. The `AS?sim` clause is used to assign the value to the `?sim` variable. 
+
+    The `ORDER BY DESC(?sim)` clause is used to order the results by the similarity score in descending order. The `

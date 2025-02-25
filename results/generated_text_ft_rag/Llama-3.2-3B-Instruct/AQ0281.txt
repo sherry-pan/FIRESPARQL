@@ -1,0 +1,21 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Boxing dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Boxing")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:P31              ?eval;
+                     rdfs:label              ?eval_lbl.
+      ?contribution  orkgp:P32               ?paper;
+                     rdfs:label              ?model_lbl.
+      ?model        orkgp:P31               ?contribution;
+                     rdfs:label              ?model_lbl.
+     } ORDER BY (DESC(?model_lbl).asc) LIMIT 5.```
+
+
+    The SPARQL query provided above is designed to retrieve models evaluated on the Atari 2600 Boxing dataset. The query starts by selecting distinct models and their labels. It then filters the dataset to only include the Atari 2600 Boxing dataset, and retrieves the evaluation for each dataset. The evaluation is then linked to the paper, and the paper is linked to the contribution and model. The query finally orders the results by model label and limits them to the top 5.<|eot_id|>

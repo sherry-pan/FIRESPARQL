@@ -1,0 +1,19 @@
+Question:
+Can you provide links to code used in papers that benchmark the Fine-Grained Gating model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code?code_lbl
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "Fine-Grained Gating")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:P31               ?model.
+      ?cont           rdfs:label              ?cont_lbl.
+      ?cont           orkgp:HAS_SOURCE_CODE   ?code.
+      ?code          rdfs:label               ?code_lbl.
+     }
+     ORDER BY DESC(?cont_lbl_rdfvalue)
+     LIMIT 10. 
+    ```<|eot_id|>

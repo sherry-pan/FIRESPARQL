@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?value ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset ;
+           rdfs:label ?dataset_lbl .
+  FILTER (str(?dataset_lbl) = "Automatically labeled Medline abstracts corpus")
+  ?benchmark orkgp:HAS_DATASET ?dataset .
+  ?cont orkgp:HAS_BENCHMARK ?benchmark .
+  ?eval orkgp:HAS_EVALUATION ?cont ;
+        orkgp:P32 ?value .
+  ?metric orkgp:P31 ?eval ;
+          rdfs:label ?metric_lbl .
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

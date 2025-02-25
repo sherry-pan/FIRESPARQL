@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/> 
+
+SELECT ?metric ?label ?unit ?description ?formula ?reference
+WHERE {
+  ?metric orkg:hasMetric "SST-5 Fine-grained classification".
+  OPTIONAL { ?metric orkg:hasLabel ?label. FILTER (lang(?label) = "en" || !bound(?label)) }
+  OPTIONAL { ?metric orkg:hasUnit ?unit. FILTER (!bound(?unit)) }
+  OPTIONAL { ?metric orkg:hasDescription ?description. FILTER (!bound(?description)) }
+  OPTIONAL { ?metric orkg:hasFormula ?formula. FILTER (!bound(?formula)) }
+  OPTIONAL { ?metric orkg:hasReference ?reference. FILTER (!bound(?reference)) }
+}
+LIMIT 10
+```

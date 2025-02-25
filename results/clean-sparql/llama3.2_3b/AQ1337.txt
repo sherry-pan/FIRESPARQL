@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg#>
+SELECT ?metric ?score ?paper
+WHERE {
+  ?metric orkg:metric "Benchmark".
+  ?metric orkg:metricType "Result".
+  ?metric orkg:dataset "Paper Field".
+  ?metric orkg:metricValue ?score.
+  ?paper orkg:paper "Paper Field Benchmark".
+  ?paper orkg:metric ?metric.
+  FILTER (xsd:decimal(?score) = ?maxScore)
+}
+GROUP BY ?metric ?score ?paper
+HAVING (?score = MAX(?score))
+```

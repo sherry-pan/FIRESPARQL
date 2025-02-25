@@ -1,0 +1,28 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 Fishing Derby benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?label
+WHERE {
+ ?metric rdfs:label?metric_label.
+  FILTER(REGEX(STR(?metric_label), "Atari 2600 Fishing Derby"))
+ ?dataset       a            orkgc:Dataset;
+                  rdfs:label   ?dataset_label.
+  FILTER(REGEX(STR(?dataset_label), "benchmark"))
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+  OPTIONAL {?cont           orkgp:P32              ?metric.}
+ ?eval          rdfs:label               ?eval_label.
+  OPTIONAL {?cont           orkgp:P33              ?eval.}
+ ?sim           rdfs:label               ?sim_label.
+  OPTIONAL {?cont           orkgp:P32              ?sim.}
+ ?cont           rdfs:label               ?cont_label.
+  FILTER(REGEX(STR(?cont_label), "metrics"))
+ ?eval         orkgp:P33               ?sim.
+ ?metric       rdfs:label               ?metric_label.
+  BIND(xsd:float(?metric_label) AS?eval)
+}
+ORDER BY DESC(XSD FLOAT(?eval))
+LIMIT 5
+```<|eot_id|>

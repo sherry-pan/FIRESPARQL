@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Supervised:".
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+
+  ?eval orkgp:HAS_EVALUATION ?cont;
+        orkgp:HAS_METRIC ?metric;
+        orkgp:HAS_VALUE ?value.
+
+  ?metric rdfs:label "SemEval 2013".
+
+  ?value orkgp:HAS_MODEL ?model.
+
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

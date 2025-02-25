@@ -1,0 +1,20 @@
+```sparql
+PREFIX fabir: <http://purl.org/fabir/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?paper ?link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper fabir:FABIR.
+  ?paper orkg:hasCode ?code.
+  ?code fabir:benchmarkFABIR.
+  ?code orkg:hasLink ?link.
+  ?link a orkg:Link.
+  ?link orkg:label ?linkLabel.
+  FILTER(LCASE(?linkLabel) = 'code').
+}
+GROUP BY ?link
+HAVING COUNT(DISTINCT ?link) > 1
+ORDER BY ?link
+LIMIT 10
+```

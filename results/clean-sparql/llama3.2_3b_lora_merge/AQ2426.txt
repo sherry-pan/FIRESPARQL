@@ -1,0 +1,13 @@
+```sparql
+SELECT ?paper ?code
+WHERE {
+  ?paper wdt:P31 wd:Q13442814;  # Assuming papers are classified using a standard item with id Q13442814
+         wdt:P6216 ?model.      # Assuming wdt:P6216 is the property for 'utilizes model'
+  ?model rdfs:label ?model_lbl.
+  FILTER(?model_lbl = "DY-MobileNetV3-Small"@en)
+  ?paper wdt:P1324 ?code.       # Assuming wdt:P1324 is the property for 'code link'
+}
+ORDER BY DESC(?code)
+```
+
+Note: Property IDs (`wdt:P31`, `wdt:P6216`, `wdt:P1324`) and the item ID (`wd:Q13442814`) are placeholders and should be replaced with accurate IDs specific to the dataset being queried against. The filter for `?model_lbl` includes an `@en` language tag to ensure it matches the English label.

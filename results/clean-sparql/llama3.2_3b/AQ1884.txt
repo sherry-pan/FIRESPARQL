@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT ?dataset ?datasetLabel WHERE {
+  ?dataset schema:about ?datasetLabel.
+  ?dataset schema:keyword "Text Summarization".
+  ?dataset wdt:P31 wd:Q5.
+  ?dataset rdfs:label ?datasetLabel.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+} 
+GROUP BY ?dataset ?datasetLabel
+HAVING (COUNT(?dataset) > 10) 
+ORDER BY DESC(COUNT(?dataset)) 
+LIMIT 10
+```

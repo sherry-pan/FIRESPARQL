@@ -1,0 +1,35 @@
+Question:
+What is the best performing model benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?evaluatorscore) AS?score)
+     WHERE {
+        ?contributionsubj rdfs:label?contributions_lbl.
+         FILTER(REGEX(?contributions_lbl, "Contribution.*"))
+        ?contributionsubj p:P31?evaluationsubj.
+        ?evaluationsubj rdfs:label?evaluatorscore.
+        ?evaluationsubj rdfs:label?evaluatorscore_lbl.
+        ?evaluationsubj p:P32?benchmarksubj.
+        ?benchmarksubj rdfs:label?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "ImageNet.*"))
+        ?benchmarksubj p:P33?modelsubj.
+        ?modelsubj rdfs:label?model_lbl.
+        ?evaluationsubj orkgp:HAS_DATASET?datasetsubj.
+         FILTER(REGEX(?datasetsubj, "ImageNet.*64x64"))
+        ?datasetsubj rdfs:label?dataset_lbl.
+        ?datasetsubj orkgp:HAS_EVALUATION?evalcontsubj.
+        ?evalcontsubj orkgp:P31?evalcontsubj.
+        ?evalcontsubj rdfs:label?evalcont_lbl.
+         FILTER(REGEX(?evalcont_lbl, "Bits per dim"))
+        ?evalcontsubj orkgp:HAS_MODEL?modelsubj.
+         BIND(xsd:float(?evalcont_lbl) AS?evalcontscore)
+        ?modelsubj orkgp:HAS_METRIC?metricsubj.
+        ?metricsubj rdfs:label?metric_lbl.
+         FILTER(REGEX(?metric_lbl, "Bits per dim"))
+        ?modelsubj orkgp:P32?evalcontsubj.
+     }  
+     GROUP BY?model?model_lbl
+     ORDER BY DESC(?score)
+```
+
+    Please note that the provided answer is a JSON list of dictionaries with uri, label, and score. The SPARQL query above is a direct representation of the answer. The query is designed to retrieve the best performing models based on the available metrics and filter the results to include only the models benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric. The query uses the `orkgp:HAS_DATASET` and `orkgp:HAS_EVALUATION` predicates to filter the results, and the `orkgp:P32` and `orkgp:P31` predicates to establish the relationships between the contributions, evaluations, and models. The query then groups the results by model and sorts them in descending order of the `?score` value.<|eot_id|>

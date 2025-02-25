@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?item ?itemLabel ?code ?codeLabel
+WHERE {
+  ?item wdt:P31 orkg:ScholarlyWork.
+  ?item wdt:P276 ?paper.
+  ?paper wdt:P138 ?benchmark.
+  ?benchmark wdt:P171 ?link.
+  ?item wdt:P108 ?code.
+  ?code wdt:P577 ?codeLabel.
+  FILTER (STR(?itemLabel) = "MFEC")
+}
+ORDER BY ?itemLabel
+LIMIT 10
+```

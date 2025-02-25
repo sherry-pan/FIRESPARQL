@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of Unpermuted Accuracy score when benchmarked on the Sequential CIFAR-10 dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?benchmark orkgp:P31?cont. 
+      ?cont orkgp:P32?eval. 
+      ?eval rdfs:label?eval_lbl.
+       FILTER(REGEX(STR(?eval_lbl), "Unpermuted Accuracy", "i"))
+      ?eval orkgp:P24?model.
+      ?model rdfs:label?model_lbl.
+     } 
+     ORDER BY DESC(?eval_lbl)
+     LIMIT 1
+     ```<|eot_id|>

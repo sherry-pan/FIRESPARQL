@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orwg/>
+PREFIX wot: <http://www.wot-semantics.org/wot/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?metricLabel 
+WHERE {
+  ?metric rdfs:label ?metricLabel.
+  ?metric schema:description "Metrics of evaluation over the Atari 2600 Tutankham dataset"@en.
+  ?dataset a orkg:Dataset.
+  ?dataset wot:hasMetric ?metric.
+  FILTER(LANG(?metricLabel) = 'en')
+}
+ORDER BY ASC(?metricLabel)
+```

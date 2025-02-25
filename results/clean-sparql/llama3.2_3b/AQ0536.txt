@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmarkedModel ?benchmarkModel.
+  ?benchmarkModel orkg:benchmarkedOn ?benchmarkDataset.
+  ?benchmarkDataset schema:name "Walker, walk (DMControl100k)".
+  ?paper orkg:hasTitle ?paperTitle.
+  BIND(STRAFTER(STR(?paper), "http://orkg.org/resource/") AS ?paperId)
+}
+ORDER BY ?paperTitle
+LIMIT 10
+```

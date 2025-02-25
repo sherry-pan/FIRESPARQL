@@ -1,0 +1,67 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the TempEval-3 dataset?
+
+Generated SPARQL:
+ SELECT?title?paper_id
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "TempEval-3")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+          ?paper         orkgp:P31               ?cont;
+                      orkgp:P32               ?benchmark.
+          ?paper         rdfs:label              ?title.
+          ?paper         orkgp:P31               ?paper_id.
+     }     ```
+
+
+
+SELECT?title?paper_id
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TempEval-3")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?paper         orkgp:P31               ?cont;
+                orkgp:P32               ?benchmark.
+ ?paper         rdfs:label              ?title.
+ ?paper         orkgp:P31               ?paper_id.
+}     ```
+
+
+
+    The provided context and question require generating a SPARQL query to retrieve research papers that include a benchmark for the TempEval-3 dataset. The query should filter the results based on the presence of the dataset name and retrieve the titles and IDs of the relevant papers.
+
+    The generated SPARQL query is as follows:
+
+    ```
+    SELECT?title?paper_id
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "TempEval-3")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?paper         orkgp:P31               ?cont;
+                    orkgp:P32               ?benchmark.
+     ?paper         rdfs:label              ?title.
+     ?paper         orkgp:P31               ?paper_id.
+    }
+    ```
+
+    This query uses the following variables:
+
+    *   `?title`: The title of the research paper.
+    *   `?paper_id`: The ID of the research paper.
+
+    The query works as follows:
+
+    1.  It selects the `?title` and `?paper_id` variables from the graph.
+    2.  It filters the results to include only datasets labeled as "TempEval-3".
+    3.  It then iterates through the filtered datasets and their corresponding benchmarks.
+    4.  For each benchmark, it retrieves the contributing papers and their titles.
+    5.  Finally, it returns the titles and IDs of the relevant papers.
+
+    This query can be executed on the ORKG RDF data to retrieve the desired research papers.<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+SELECT ?model ?modelLabel
+WHERE { 
+  ?model wdt:P31 wd:QXXXXXX;  # Assuming QXXXXXX is the type for a model
+         wdt:P9182 wd:Q96133007.  # The property and item for being tested on SciCite dataset
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+LIMIT 1000
+```
+
+Note: Assumptions have been made regarding the correct properties and items since the initial SPARQL contained placeholders like "Q...". Please replace `QXXXXXX` and `wd:Q96133007` with appropriate Wikidata item IDs.

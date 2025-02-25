@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:isTopModelFor ?dataset.
+  ?dataset orkg:datasetName "MLDoc Zero-Shot English-to-French".
+  ?model orkg:benchmarkedFor ?benchmark.
+  ?benchmark orkg:benchmarkName "Accuracy".
+  ?model orkg:hasAccuracy ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

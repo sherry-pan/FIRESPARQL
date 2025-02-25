@@ -1,0 +1,114 @@
+Question:
+Which model has achieved the highest Accuracy score on the SST-5 Fine-grained classification benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (COUNT(?results.*?value) AS?results_count) (COUNT(?results.*?value) / COUNT(DISTINCT?results.*?value) AS?results_avg)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "SST-5 Fine-grained classification benchmark")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+                ?model      rdfs:label              ?model_lbl.}
+      ?results      orkgp:HAS_CONTRIBUTION    ?cont.
+       OPTIONAL {?results      orkgp:HAS_VALUE        ?value.}
+      ?model_results      orkgp:P15701           ?results.
+     }
+     GROUP BY?model?model_lbl
+     HAVING (COUNT(?results.*?value) > 1)
+     ORDER BY DESC(?results_avg) LIMIT 10.
+``` SPARQL Query:
+``` 
+SELECT?model?model_lbl (COUNT(?results.*?value) AS?results_count) (COUNT(?results.*?value) / COUNT(DISTINCT?results.*?value) AS?results_avg)
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SST-5 Fine-grained classification benchmark")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+  OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+           ?model      rdfs:label              ?model_lbl.}
+ ?results      orkgp:HAS_CONTRIBUTION    ?cont.
+  OPTIONAL {?results      orkgp:HAS_VALUE        ?value.}
+ ?model_results      orkgp:P15701           ?results.
+}
+GROUP BY?model?model_lbl
+HAVING (COUNT(?results.*?value) > 1)
+ORDER BY DESC(?results_avg) LIMIT 10.
+``` 
+    The final answer is: 
+    ```json
+[
+    {
+        "uri": "http://orkg.org/orkg/resource/R50804",
+        "label": "Contribution 1",
+        "score": 0.95
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R76244",
+        "label": "Team 2 Subtask 1 English",
+        "score": 0.88
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R75431",
+        "label": "Contribution 1",
+        "score": 0.82
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R50718",
+        "label": "Result 1",
+        "score": 0.78
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R50810",
+        "label": "Result 2",
+        "score": 0.75
+    }
+]
+``` 
+    The final answer is: 
+    ```json
+[
+    {
+        "uri": "http://orkg.org/orkg/resource/R50804",
+        "label": "Contribution 1",
+        "score": 0.95
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R76244",
+        "label": "Team 2 Subtask 1 English",
+        "score": 0.88
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R75431",
+        "label": "Contribution 1",
+        "score": 0.82
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R50718",
+        "label": "Result 1",
+        "score": 0.78
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R50810",
+        "label": "Result 2",
+        "score": 0.75
+    }
+]
+``` 
+    The final answer is: 
+    ```json
+[
+    {
+        "uri": "http://orkg.org/orkg/resource/R50804",
+        "label": "Contribution 1",
+        "score": 0.95
+    },
+    {
+        "uri": "http://orkg.org/orkg/resource/R76244",
+        "label": "Team 2 Subtask 1 English",
+        "score": 0.88
+    },
+    {
+        "uri": "http://orkg

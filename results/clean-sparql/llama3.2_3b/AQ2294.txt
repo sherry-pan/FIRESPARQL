@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?title ?codeLink
+WHERE {
+  ?paper dcterms:subject ?model ;
+         dcterms:title ?title ;
+         schema:codeRepository ?codeLink .
+  ?model rdfs:label ?modelLabel .
+  FILTER CONTAINS(LCASE(?modelLabel), "duel hs")
+}
+ORDER BY ?paper
+LIMIT 10
+```

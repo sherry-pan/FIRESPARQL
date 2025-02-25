@@ -1,0 +1,81 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Gibson PointGoal Navigation dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?title?id 
+     WHERE {
+       ?paper a orkg:ResearchPaper.
+       ?paper schema:hasPart?benchmark.
+       ?benchmark schema:hasTarget?target.
+       ?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_Navigation>.
+       ?paper schema:hasPart?benchmark.
+       ?benchmark schema:hasTarget?target.
+       ?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_Navigation>.
+       ?paper orkg:hasTitle?title.
+       ?paper orkg:hasId?id.
+        FILTER (STR(?title)!= "" AND STR(?id)!= "")
+      } 
+    SELECT?paper?title?id
+    WHERE {
+       ?paper a orkg:ResearchPaper.
+       ?paper orkg:hasTitle?title.
+       ?paper orkg:hasId?id.
+       ?benchmark schema:hasTarget?target.
+       ?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_Navigation>.
+       ?benchmark schema:hasPart?benchmark.
+       ?benchmark schema:hasTarget?target.
+       ?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_Navigation>.
+    } 
+
+    ORKG Query:
+    {
+      "query": "SELECT?title?id WHERE {?paper orkg:hasTitle?title.?paper orkg:hasId?id. }",
+      "filter": "STR(?title)!= '' AND STR(?id)!= ''",
+      "dataset": "orkg:ResearchPaper",
+      "query": "SELECT?paper?title?id WHERE {?paper orkg:hasTitle?title.?paper orkg:hasId?id.?benchmark orkg:hasTarget?target.?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_Navigation>. }",
+      "filter": "STR(?title)!= '' AND STR(?id)!= ''",
+      "dataset": "orkg:ResearchPaper",
+      "variables": ["title", "id"]
+    } 
+    Output Answer:
+    {
+      "title": "Point Goal Navigation", 
+      "id": "orkg:12345"
+    }
+    {
+      "title": "Point Goal Navigation", 
+      "id": "orkg:67890"
+    } 
+    Note: The answer format may vary. 
+
+    To solve this problem, you can follow these steps:
+
+    1.  **Identify the relevant entities**: The question mentions research papers, benchmarks, and the Gibson PointGoal Navigation dataset. We need to find the entities that represent these concepts in the ORKG.
+    2.  **Construct the SPARQL query**: We'll use the identified entities to construct a SPARQL query that retrieves the required information.
+    3.  **Filter out irrelevant results**: We'll add filters to the SPARQL query to exclude irrelevant results, such as papers without titles or IDs.
+    4.  **Generate the ORKG query**: We'll convert the constructed SPARQL query into an ORKG query format.
+    5.  **Execute the ORKG query**: We'll execute the ORKG query to retrieve the required information.
+
+    Here's the corrected code:
+    ```python
+    import orkg
+
+    # Load the ORKG dataset
+    orkg_dataset = orkg.load_dataset('orkg')
+
+    # Construct the SPARQL query
+    sparql_query = """
+        PREFIX orkg: <http://orkg.org/ontology#>
+        PREFIX dbo: <http://dbpedia.org/ontology/>
+        PREFIX schema: <http://schema.org/>
+
+        SELECT?title?id 
+        WHERE {
+           ?paper a orkg:ResearchPaper.
+           ?paper schema:hasPart?benchmark.
+           ?benchmark schema:hasTarget?target.
+           ?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_N

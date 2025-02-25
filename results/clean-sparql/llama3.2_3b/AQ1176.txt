@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?benchmark ?metric ?value
+WHERE {
+    ?benchmark orkg:testedOn orkg:WNLI.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasValue ?value.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

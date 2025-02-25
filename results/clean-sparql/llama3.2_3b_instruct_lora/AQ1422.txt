@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl (MAX(?value) AS ?best_score)
+WHERE {
+  orkgr:R4567 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31022 ?metric;
+           orkgp:P31023 ?value;
+           orkgp:P31024 ?cont_dataset.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont_dataset rdfs:label ?cont_lbl.
+  FILTER(REGEX(?metric_lbl, "BLEU"))
+  FILTER(REGEX(?cont_lbl, "IWSLT2014"))
+  ?cont_dataset orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31025 ?cont.
+  ?cont orkgp:P31026 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+GROUP BY ?model ?model_lbl
+ORDER BY DESC(?best_score)
+LIMIT 1
+```

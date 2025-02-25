@@ -1,0 +1,43 @@
+Question:
+Provide a list of papers that have utilized the DQN-PixelCNN model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code?code_lbl
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?model.
+       FILTER(REGEX(STR(?model), "DQN-PixelCNN", "i"))
+      ?model rdfs:label?code_lbl.
+      ?model orkgp:P31?paper.
+      ?paper orkgp:P32?model.
+      ?model rdfs:label?code.
+       BIND(XSD:integer(1) AS?score).
+     } UNION
+     SELECT?paper?paper_lbl?code?code_lbl
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?model.
+      ?model rdfs:label?code_lbl.
+      ?model orkgp:P31?paper.
+      ?paper orkgp:P32?model.
+      ?model rdfs:label?code.
+       BIND(XSD:integer(1) AS?score).
+     }
+     ORDER BY DESC(?score)
+     LIMIT 5
+```
+
+
+    The provided SPARQL query can be broken down into several parts:
+    1. The first part of the query is used to find papers that mention the DQN-PixelCNN model. It uses the `FILTER(REGEX(STR(?model), "DQN-PixelCNN", "i"))` to search for the model's name in the model's label. However, since this query does not find any matches, it will not return any results.
+    2. The second part of the query is used to find papers that do not mention the DQN-PixelCNN model. It uses the `FILTER(XSD:integer(1) AS?score)` to assign a score of 1 to all papers, and then sorts the results in descending order by score.
+    3. The `ORDER BY DESC(?score)` clause is used to sort the results in descending order by score.
+    4. The `LIMIT 5` clause is used to limit the number of results to 5.
+    5. The `SELECT?code?code_lbl` clause is used to select the code and label of the papers.
+    6. The `?code_lbl` and `?code` are selected using the `?model rdfs:label?code_lbl` and `?model orkgp:P31?paper` clauses, respectively.
+    7. The `?paper` and `?paper_lbl` are selected using the `?cont orkgp:P32?model` and `?cont orkgp:P31?cont` clauses, respectively.
+    8. The `BIND(XSD:integer(1) AS?score)` clause is used to assign a score of 1 to all papers.
+    9. The `UNION` operator is used to combine the results of the two parts of the query.
+    10. The `ORKG` prefix is used to access the ORKG data.
+    11. The `RDF` prefix is used to access the RDF data.
+    12. The `XSD` prefix is used to access the XSD data.<|eot_id|>

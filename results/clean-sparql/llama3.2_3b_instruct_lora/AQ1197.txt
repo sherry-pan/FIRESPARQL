@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "STS Benchmark".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_VALUE ?value.
+  OPTIONAL { ?eval orkgp:HAS_METRIC ?metric. }
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

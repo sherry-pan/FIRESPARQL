@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paperskaggle a orkgc:Paper;
+                rdfs:label ?paperskaggle_lbl.
+  FILTER (str(?paperskaggle_lbl) = "NASCell")
+  
+  ?paperskaggle orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "NASCell")
+  
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+}
+```

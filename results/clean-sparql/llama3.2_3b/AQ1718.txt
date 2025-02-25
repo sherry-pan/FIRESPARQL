@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/sparql/>
+PREFIX vocab: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model vocab:related ?dataset.
+  ?dataset orkg:datasetName "Atari 2600 Up and Down".
+  ?model orkg:metric ?metric.
+  FILTER (str(?metric) = "Score")
+}
+ORDER BY ?metric
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.io/schema/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX cfr: <http://cfr.io/schema/ontology#>
+
+SELECT ?paper ?title ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper cfr:hasUtilizedModel "CRF with sentence expansion model".
+  ?paper cfr:hasCodeLink ?code.
+  ?paper rdfs:label ?title.
+  FILTER (lang(?title) = "en" && lang(?code) = "en")
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

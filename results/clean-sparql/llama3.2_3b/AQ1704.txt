@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score 
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset schema:description "Atari 2600 River Raid".
+    ?benchmark orkg:hasScore ?modelScore.
+    ?modelScore orkg:hasValue ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

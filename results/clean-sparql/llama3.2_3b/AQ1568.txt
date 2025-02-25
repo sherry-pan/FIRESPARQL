@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX wot: <http://www.w3.org/ns/wot/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?f1Score
+WHERE {
+  ?model a wot:Model.
+  ?model wot:hasEvaluationResult ?evaluationResult.
+  ?evaluationResult schema:dataset ?dataset.
+  ?dataset schema:name "CoNLL 2003 (English)".
+  ?evaluationResult schema:metric ?metric.
+  ?metric schema:name "F1 score"@en.
+  ?evaluationResult schema:score ?f1Score.
+  FILTER (REGEX(str(?f1Score), "^[0-9]+(\\.[0-9]+)?$"))
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

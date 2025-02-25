@@ -1,0 +1,78 @@
+Question:
+Where can I find code references in papers that have used the SRU++ Base model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "SRU++ Base")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_MODEL         ?model;
+                       orkgp:HAS_SOURCE_CODE   ?code.
+     } ORDER BY DESC(?cont.rdfs_label)
+```sql
+-- If you want to filter the results to only include papers, you can add the following line to the WHERE clause:
+    ?paper      rdfs:label   ?paper_lbl.
+    ?cont       orkgp:HAS_PAPER     ?paper.
+     FILTER (str(?paper_lbl) = "Papers that use the SRU++ Base model for benchmarking purposes")
+```sql
+-- If you want to filter the results to only include contributions, you can add the following line to the WHERE clause:
+    ?cont       rdfs:label   ?cont_lbl.
+     FILTER (str(?cont_lbl) = "Contribution 1")
+```sql
+-- If you want to filter the results to only include specific papers or contributions, you can add the following lines to the WHERE clause:
+    ?paper      rdfs:label   ?paper_lbl.
+    ?cont       rdfs:label   ?cont_lbl.
+     FILTER (str(?paper_lbl) = "Papers that use the SRU++ Base model for benchmarking purposes")
+     FILTER (str(?cont_lbl) = "Contribution 1")
+```sql
+-- If you want to filter the results to only include papers or contributions that have a specific score, you can add the following lines to the WHERE clause:
+    ?cont       orkgp:HAS_DATASET       ?dataset.
+    ?cont       orkgp:HAS_BENCHMARK     ?benchmark.
+    ?cont       rdfs:label   ?cont_lbl.
+     FILTER (str(?cont_lbl) = "Contribution 1")
+     FILTER (str(?cont.rdfs_label) >= "0.75")
+```sql
+-- If you want to filter the results to only include papers or contributions that have a specific score, you can add the following lines to the WHERE clause:
+    ?cont       orkgp:HAS_DATASET       ?dataset.
+    ?cont       orkgp:HAS_BENCHMARK     ?benchmark.
+    ?paper      rdfs:label   ?paper_lbl.
+     FILTER (str(?paper_lbl) = "Papers that use the SRU++ Base model for benchmarking purposes")
+     FILTER (str(?cont.rdfs_label) >= "0.75")
+```sql
+-- If you want to filter the results to only include papers or contributions that have a specific score, you can add the following lines to the WHERE clause:
+    ?cont       orkgp:HAS_DATASET       ?dataset.
+    ?cont       orkgp:HAS_BENCHMARK     ?benchmark.
+    ?cont       orkgp:HAS_MODEL         ?model;
+                 orkgp:HAS_SOURCE_CODE   ?code.
+    ?model    a            orkg:Model;
+               rdfs:label   ?model_lbl.
+     FILTER (str(?model_lbl) = "SRU++ Base")
+     FILTER (str(?cont.rdfs_label) >= "0.75")
+```sql
+-- If you want to filter the results to only include papers or contributions that have a specific score, you can add the following lines to the WHERE clause:
+    ?cont       orkgp:HAS_DATASET       ?dataset.
+    ?cont       orkgp:HAS_BENCHMARK     ?benchmark.
+    ?cont       orkgp:HAS_MODEL         ?model;
+                 orkgp:HAS_SOURCE_CODE   ?code.
+    ?model    a            orkg:Model;
+               rdfs:label   ?model_lbl.
+     FILTER (str(?model_lbl) = "SRU++ Base")
+     FILTER (str(?cont.rdfs_label) >= "0.75")
+     ORDER BY DESC(?cont.rdfs_label)
+```sql
+-- If you want to filter the results to only include papers or contributions that have a specific score, you can add the following lines to the WHERE clause:
+    ?cont       orkgp:HAS_DATASET       ?dataset.
+    ?cont       orkgp:HAS_BENCHMARK     ?benchmark.
+    ?cont       orkgp:HAS_MODEL         ?model;
+                 orkgp:HAS_SOURCE_CODE   ?code.
+    ?model    a            orkg:Model;
+               rdfs:label   ?model_lbl.
+     FILTER (str(?model_lbl) = "SRU++ Base")
+     FILTER (str(?cont.rdfs_label) >= "0.75")
+     ORDER BY DESC(?cont.rdfs_label)
+     LIMIT 10
+```sql
+--

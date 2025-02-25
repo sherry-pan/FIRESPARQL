@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX wot: <http://webontologies.org/ontology/>
+SELECT ?model
+WHERE {
+  ?model wot:hasModel ?modelLabel.
+  ?model orkg:hasPretrained ?pretrained.
+  ?pretrained orkg:hasMetric ?metric.
+  ?metric orkg:hasMetricValue ?metric_value.
+  ?metric orkg:hasMetricDataset ?dataset.
+  FILTER (str(?dataset) = "HMDB51").
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

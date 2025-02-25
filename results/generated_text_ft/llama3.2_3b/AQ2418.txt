@@ -1,0 +1,68 @@
+Question:
+Can you provide links to code used in papers that benchmark the ResNet-152 (SAM) model?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/#hasDatatypeValue>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX q: <http://query.wikidata.org/wmq/>
+     PREFIX wikibase: <http://wikiba.se/ontology#>
+
+     SELECT?paper?paperTitle?url 
+     WHERE {
+      ?paper a wd:Q12345678.
+       wdt:P276?paper. 
+      wd:Q12345678 wdt:P131 wd:Q12345678.
+      ?paper wdt:P162?link.
+      ?link skos:prefLabel?linkTitle.
+      ?paper rdfs:label?paperTitle.
+      ?link rdfs:label?url.
+       FILTER(LANG(?linkTitle) = 'en' && LANG(?url) = 'en' &&?linkTitle =?link.
+       FILTER(STR(?linkTitle)!= '' && STR(?url)!= '') 
+     } 
+    Note: Q12345678 is a placeholder Wikidata item ID. You should replace it with actual item ID of a paper that you want to query.
+    Note: This query assumes that all papers used in benchmarking the ResNet-152 (SAM) model have a link to their code in Wikidata. This assumption may not always be true.
+    Note: This query assumes that all papers use English as the primary language of publication. This assumption may not always be true.
+    Note: The query may return duplicate links, but since we're interested in links to code, the exact order of the links is not important.
+    Note: The query may not return all papers that benchmark the ResNet-152 (SAM) model, since this query only checks for papers that have a link to their code in Wikidata.
+    Note: The query may not return papers that do not have a link to their code in Wikidata, or papers that have a link to their code in a language other than English.
+
+    SELECT?paper?paperTitle?url 
+    WHERE {
+      ?paper a wd:Q12345678.
+       wdt:P276?paper. 
+      wd:Q12345678 wdt:P131 wd:Q12345678.
+      ?paper wdt:P162?link.
+      ?link skos:prefLabel?linkTitle.
+      ?paper rdfs:label?paperTitle.
+      ?link rdfs:label?url.
+       FILTER(LANG(?linkTitle) = 'en' && LANG(?url) = 'en' &&?linkTitle =?link.
+       FILTER(STR(?linkTitle)!= '' && STR(?url)!= '') 
+    } END; 
+    SELECT?paper?paperTitle?url 
+    WHERE {
+      ?paper a wd:Q12345678.
+       wdt:P276?paper. 
+       wd:Q12345678 wdt:P131 wd:Q12345678.
+      ?paper wdt:P162?link.
+      ?link skos:prefLabel?linkTitle.
+      ?paper rdfs:label?paperTitle.
+      ?link rdf:parseType?linkType.
+       FILTER(LANG(?linkTitle) = 'en' && LANG(?url) = 'en' &&?linkTitle =?link.
+       FILTER(STR(?linkTitle)!= '' && STR(?url)!= '') 
+    } END; 
+    UNION 
+    SELECT?paper?paperTitle?url 
+    WHERE {
+      ?paper a wd:Q12345678.
+       wdt:P276?paper. 
+       wd:Q12345678 wdt:P131 wd:Q12345678.
+      ?paper wdt:P162?link.
+      ?link skos:prefLabel?linkTitle.
+      ?paper rdfs:label?paperTitle.
+      ?link rdfs:label?url.
+      ?link rdfs:label?linkTitle.
+       FILTER

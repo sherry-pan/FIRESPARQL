@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://purl.org/orc/ontology/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?codeLink
+WHERE {
+  ?paper a orkg:Papers .
+  ?paper orkg:usesModel ?model .
+  ?model schema:name ?modelName .
+  ?model schema:spelling+lemma ?spellingLemma .
+  ?paper orkg:codeLink ?codeLink .
+  FILTER (REGEX(STR(?spellingLemma), "OTF spelling\\+lemma \\(single\\)"))
+}
+```

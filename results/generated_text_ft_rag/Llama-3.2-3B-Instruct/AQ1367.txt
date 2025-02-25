@@ -1,0 +1,89 @@
+Question:
+What is the highest benchmark result achieved on the REDDIT-B dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric,?value
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "REDDIT-B")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+  OPTIONAL {?benchmark      orkgp:HAS_EVALUATION     ?evaluation.
+           ?evaluation      orkgp:P32               ?metric.
+           ?evaluation      rdfs:label              ?eval_lbl.
+            FILTER (str(?eval_lbl) = "Top 1 Accuracy")
+           ?evaluation      orkgp:HAS_VALUE          ?value.}
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont         orkgp:P31               ?model.
+ ?model        rdfs:label              ?model_lbl.
+  ORDER BY DESC(?value)
+  LIMIT 1
+}
+```      ```
+```python
+import orkg
+
+# Initialize the knowledge graph
+kg = orkg.load_graph('path_to_your_graph')
+
+# Define the query
+query = """
+SELECT?metric,?value
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "REDDIT-B")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+  OPTIONAL {?benchmark      orkgp:HAS_EVALUATION     ?evaluation.
+           ?evaluation      orkgp:P32               ?metric.
+           ?evaluation      rdfs:label              ?eval_lbl.
+            FILTER (str(?eval_lbl) = "Top 1 Accuracy")
+           ?evaluation      orkgp:HAS_VALUE          ?value.}
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont         orkgp:P31               ?model.
+ ?model        rdfs:label              ?model_lbl.
+  ORDER BY DESC(?value)
+  LIMIT 1
+}
+"""
+
+# Execute the query
+results = kg.query(query)
+
+# Print the results
+for result in results:
+    print(f"Metric: {result['metric']}, Value: {result['value']}")
+```      ```
+```python
+    Note: You need to replace 'path_to_your_graph' with the actual path to your RDF data.
+```      ```
+```python
+    This code will print the metric and value of the highest benchmark result on REDDIT-B. If there is no data available for REDDIT-B, it will print nothing.
+```      ```
+```python
+    The SPARQL query is designed to find the highest benchmark result on REDDIT-B. However, since the dataset is not present in the provided data, it will not return any results. The query is modified to filter out the dataset label and only consider the evaluation and benchmark results.
+```      ```
+```python
+    The query uses the `FILTER` function to check if the dataset label is "REDDIT-B". If it is not, the query will skip the rest of the pattern. The query also uses the `OPTIONAL` clause to handle cases where the evaluation is not present.
+```      ```
+```python
+    The `ORDER BY DESC(?value)` clause sorts the results in descending order based on the value. The `LIMIT 1` clause limits the results to the top 1, which corresponds to the highest benchmark result.
+```      ```
+```python
+    Note: The query assumes that the dataset, evaluation, and benchmark are all represented as separate resources in the knowledge graph. If they are represented as a single resource, the query will need to be modified accordingly.
+```      ```
+```python
+    This code will not work if the dataset, evaluation, and benchmark are represented as a single resource in the knowledge graph. In that case, the query needs to be modified to handle the single resource. For example, the query could use the `orkgp:P32` predicate to link the evaluation to the metric.
+```      ```
+```python
+    The query also assumes that the evaluation and benchmark are represented as separate resources with labels. If they are represented as literals, the query will need to be modified to handle the literals.
+```      ```
+```python
+    This code will not work if the evaluation and benchmark are represented as literals in the knowledge graph. In that case, the query needs to be modified to handle the literals. For example, the query could use the `str(?eval_lbl) = "Top 1 Accuracy"` filter to check if the literal is equal to "Top 1 Accuracy".
+```      ```
+```python
+    The query uses the `orkg` library to execute the SPARQL query on the knowledge graph. The `kg.query()` function executes the query and returns the results.
+```      ```
+```python
+    The results are stored in the `results` variable. The `results` variable is a list of dictionaries, where each dictionary

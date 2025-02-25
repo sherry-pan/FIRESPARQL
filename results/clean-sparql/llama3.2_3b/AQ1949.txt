@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?link
+WHERE {
+    ?paper a orkg:Paper ;
+           schema:description ?description ;
+           orkg:utilizes ?model ;
+           schema:name ?title ;
+           orkg:hasLink ?link.
+    ?model schema:description ?modelDescription.
+    ?description schema:code ?code.
+    FILTER (
+        strContains(LCASE(?modelDescription), 'bert + bilstm + crf decoding') &&
+        strStartsWith(?link, 'http')
+    )
+}
+ORDER BY ?paper 
+LIMIT 10
+```

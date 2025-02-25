@@ -1,0 +1,89 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orcg.io/orcg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX vocab: <http://orcg.io/orcg/vocab/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     SELECT?metric?score 
+     WHERE {
+      ?dataset a vocab:Dataset.
+       vocab:hasBenchmark?benchmark.
+      ?benchmark vocab:hasMetric?metric.
+      ?benchmark vocab:hasScore?score.
+      ?benchmark vocab:hasDataset?dataset.
+      ?dataset rdfs:label "Atari 2600 Berzerk".
+      ?benchmark a vocab:Benchmark.
+      ?benchmark vocab:hasMetric?metric.
+      ?benchmark vocab:hasScore?score.
+      ?benchmark vocab:hasDataset?dataset.
+      ?benchmark vocab:hasHighestScore?highestBenchmark.
+      ?highestBenchmark vocab:hasMetric?highestMetric.
+      ?highestBenchmark vocab:hasScore?highestScore.
+      ?highestMetric rdfs:label?metric.
+      ?highestScore rdfs:label?score.
+       FILTER (str(?metric) = "Metric" AND str(?score) = "Score") 
+       } 
+    LIMIT 1 
+    You may assume that the query will only return one row. 
+
+    ```python
+    import pandas as pd
+
+    def generate_sparql_query(question):
+        # Your code here
+        pass
+
+    # Example usage:
+    question = "Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?"
+    query = generate_sparql_query(question)
+    print(query)
+    ```   
+
+
+    Please note that this code does not actually execute the SPARQL query. It is just an example of how you might define the `generate_sparql_query` function. To execute the query, you would use a SPARQL query engine like Apache Jena or PySparQL. 
+
+    Also note that the provided SPARQL query may not be the only possible query to answer the given question. The query is one possible solution, but there may be other queries that could also produce the desired results. 
+
+    Finally, please note that the SPARQL query is based on the provided question and the structure of the ORKG knowledge graph. The actual query may need to be adjusted if the structure of the knowledge graph changes. 
+
+    You can modify the query based on your actual requirements and the structure of your knowledge graph. 
+
+    Also, you can use other libraries like `sparqlwrapper` or `py-sparql` to execute the query. 
+
+    Please make sure to handle any exceptions that might occur during the execution of the query. 
+
+    Here is the code with the above considerations: 
+
+    ```python
+    import pandas as pd
+    from py-sparql-client import SPARQLClient
+
+    def generate_sparql_query(question):
+        # Define the prefix and the query
+        prefix = """
+        PREFIX orkg: <http://orcg.io/orcg/>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX vocab: <http://orcg.io/orcg/vocab/>
+        PREFIX dbpedia: <http://dbpedia.org/ontology/>
+        """
+        query = """
+        SELECT?metric?score 
+        WHERE {
+         ?dataset a vocab:Dataset.
+          vocab:hasBenchmark?benchmark.
+         ?benchmark vocab:hasMetric?metric.
+         ?benchmark vocab:hasScore?score.
+         ?benchmark vocab:hasDataset?dataset.
+         ?dataset rdfs:label "Atari 2600 Berkerk".
+         ?benchmark a vocab:Benchmark.
+         ?benchmark vocab:hasMetric?metric.
+         ?benchmark vocab:hasScore?score.
+         ?benchmark vocab:hasDataset?dataset.
+         ?benchmark vocab:hasHighestScore?highestBenchmark.
+         ?highestBenchmark vocab:hasMetric?highestMetric.
+         ?highestBenchmark vocab:hasScore?highestScore.
+         ?highestMetric r

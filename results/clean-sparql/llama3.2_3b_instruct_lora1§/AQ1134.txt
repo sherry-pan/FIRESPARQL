@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R103931 orkgp:compareContribution ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval rdfs:label ?metric_lbl.
+  ?cont orkgp:P33 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(CONTAINS(LCASE(STR(?dataset_lbl)), "hendrycks test"))
+  ?cont orkgp:P34 ?value.
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

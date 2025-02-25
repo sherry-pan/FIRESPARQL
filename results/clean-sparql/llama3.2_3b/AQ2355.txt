@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dcterms/>
+PREFIX schema: <http://schema.org/>
+PREFIX wikibase: <http://wikibase.org/ns#>
+
+SELECT ?p ?b ?e
+WHERE {
+  ?b rdfs:label ?bLabel.
+  ?b schema:description ?d.
+  ?b dcterms:hasFormat ?f.
+  ?f schema:contentURL ?e.
+  ?b wdt:P162 ?p.
+  FILTER (REGEX(?p, "BiLSTM-Attention \\+ ELMo", "i") && REGEX(?e, "code", "i"))
+}
+ORDER BY (COUNT(?e) DESC)
+LIMIT 10
+```

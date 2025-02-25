@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?paper ?paperId 
+WHERE {
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark wdt:P1595 <http://www.wikidata.org/entity/Q114395>.
+    ?benchmark wdt:P1073 ?dataset.
+    ?dataset wdt:P31 wd:Q11660.
+    ?dataset wd:P577 "Penn Treebank (Character Level)".
+    ?benchmark wdt:P1082 ?model.
+    ?paper orkg:hasModel ?model.
+    ?paper wdt:P1082 ?paperId.
+    SERVICE wikibase:label {
+        bd:serviceParam wikibase:language "en".
+    }
+}
+```

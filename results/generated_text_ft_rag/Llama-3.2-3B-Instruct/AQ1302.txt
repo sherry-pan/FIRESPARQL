@@ -1,0 +1,26 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Tennis dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?score,?metric, MAX(?score)
+WHERE {
+  {
+    SELECT?score,?metric
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Tennis")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+     ?value         rdfs:label              ?score.
+    }
+    ORDER BY DESC(?score)
+  }
+}
+```
+
+
+    Note: The SPARQL query provided is designed to retrieve the top benchmark score and its metric from the ORKG data, but it may not directly answer the question due to the absence of the Atari 2600 Tennis dataset. The query is based on the provided context and available data.<|eot_id|>

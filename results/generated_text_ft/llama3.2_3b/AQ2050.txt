@@ -1,0 +1,57 @@
+Question:
+Provide a list of papers that have utilized the MMV TSM-50x2 model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearch.org/ontology/orkg#>
+     PREFIX orkg2: <http://www.openresearch.org/ontology/orkg2#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bio: <http://purl.org/vocab/bio#>
+     PREFIX obo: <http://purl.org/obo/ontologies/obo#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX dc: <http://purl.org/dc/terms/>
+     PREFIX oag: <http://www.openresearch.org/ontology/oag#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX orkg1: <http://www.openresearch.org/ontology/orkg1#>
+
+     SELECT?paper?title?code?link
+     WHERE {
+       ?paper a orkg:Paper.
+       ?paper orkg1:utilizes?utilization.
+       ?utilization schema:hasCode?code.
+       ?code schema:hasLink?link.
+       ?paper schema:hasTitle?title.
+       ?utilization a orkg2:PaperUtilization.
+       ?utilization orkg1:utilizesPaper?paper.
+       ?utilization orkg1:hasModel?utilizationModel.
+       ?utilizationModel a orkg1:Model.
+       ?utilizationModel schema:hasName "MMV TSM-50x2".
+        FILTER (STR(?utilization) = "utilizes")
+        FILTER (STR(?code) = "code")
+        FILTER (STR(?link) = "link")
+        FILTER (STR(?title) = "title")
+    } GROUP BY?paper?title?code?link
+    ORDER BY?paper
+    LIMIT 10
+    ``` 
+    This is a SPARQL query that generates a list of papers that have utilized the MMV TSM-50x2 model and include the links to their code. The query uses various prefixes to define the vocabularies used in the query, and then selects the paper, title, code, and link from the graph. The query also filters the results to only include papers that have utilized the MMV TSM-50x2 model and have links to their code. The results are then grouped by paper, title, code, and link, and ordered by paper. Finally, the query limits the results to the first 10 papers that match the filter criteria. 
+
+    The query uses several variables and filters to navigate the graph:
+    - `?paper` represents the paper entity.
+    - `?utilization` represents the paper utilization entity.
+    - `?code` represents the code entity.
+    - `?link` represents the link entity.
+    - `?title` represents the title entity.
+    - `?utilizationModel` represents the model entity.
+    - The filter `FILTER (STR(?utilization) = "utilizes")` ensures that only papers with a utilization that has the label "utilizes" are selected.
+    - The filter `FILTER (STR(?code) = "code")` ensures that only papers with a code that has the label "code" are selected.
+    - The filter `FILTER (STR(?link) = "link")` ensures that only papers with a link that has the label "link" are selected.
+    - The filter `FILTER (STR(?title) = "title")` ensures that only papers with a title that has the label "title" are selected.
+
+    The query uses the `GROUP BY` clause to group the results by paper, title, code, and link, and the `ORDER BY` clause to order the results by paper. The `LIMIT` clause is used to limit the results to the first 10 papers that match the filter criteria. 
+
+    The query assumes that the ORKG graph contains entities with the following properties:
+    - `orkg:Paper`: represents a paper entity.
+    - `orkg1:utilizes`: represents a paper utilization entity.
+

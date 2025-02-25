@@ -1,0 +1,83 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the STEM-ECR v1.0 dataset?
+
+Generated SPARQL:
+ SELECT?evaluators
+     WHERE {
+      ?dataset       a            orkgc:Dataset;
+                      rdfs:label      ?dataset_labels.
+       FILTER (str(?dataset_labels) = "STEM-ECR v1.0")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION     ?eval.
+       OPTIONAL {?eval           orkgp:HAS_EVALUATOR     ?evaluators.}
+      ?paper           rdfs:label              ?paper_labels.
+       FILTER (str(?paper_labels) = "evaluation metrics")
+      ?eval           orkgp:HAS_PAPER          ?paper;
+                      orkgp:P31               ?evaluators.
+       OPTIONAL {?evaluators      rdfs:label              ?evaluators_labels.}
+      ?metrics         rdfs:label              ?metrics_labels.
+       FILTER (str(?metrics_labels) = "evaluation metrics")
+       BIND(xsd:float(?evaluators_labels) AS?evaluators_scores)
+       BIND(xsd:float(?metrics_labels) AS?metrics_labels)
+      ?sim           orkgp:HAS_METRIC         ?metrics;
+                      orkgp:HAS_EVALUATION     ?eval.
+       BIND(xsd:float(?evaluators_scores) +?metrics_labels AS?evaluators_scores)
+       BIND(xsd:float(?metrics_labels) +?evaluators_scores AS?sim)
+       BIND(xsd:float(?evaluators_scores) +?sim AS?evaluators_scores)
+       BIND(xsd:float(?sim) AS?sim_scores)
+       BIND(xsd:float(?evaluators_scores) AS?evaluators_scores)
+       FILTER (MAX(?sim_scores) >= 0.5)
+     }
+     ORDER BY DESC(?sim_scores)
+     LIMIT 10;
+```
+    Output SPARQL Query:
+    ```sparql
+SELECT DISTINCT?evaluators
+WHERE {
+ ?dataset       a            orkgc:Dataset;
+                 rdfs:label      ?dataset_labels.
+  FILTER (str(?dataset_labels) = "STEM-ECR v1.0")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                 orkgp:HAS_EVALUATION     ?eval.
+  OPTIONAL {?eval           orkgp:HAS_EVALUATOR     ?evaluators.}
+ ?paper           rdfs:label              ?paper_labels.
+  FILTER (str(?paper_labels) = "evaluation metrics")
+ ?eval           orkgp:HAS_PAPER          ?paper;
+                 orkgp:P31               ?evaluators.
+  OPTIONAL {?evaluators      rdfs:label              ?evaluators_labels.}
+ ?metrics         rdfs:label              ?metrics_labels.
+  FILTER (str(?metrics_labels) = "evaluation metrics")
+  BIND(xsd:float(?evaluators_labels) AS?evaluators_scores)
+  BIND(xsd:float(?metrics_labels) AS?metrics_labels)
+ ?sim           orkgp:HAS_METRIC         ?metrics;
+                orkgp:HAS_EVALUATION     ?eval.
+  BIND(xsd:float(?evaluators_scores) +?metrics_labels AS?evaluators_scores)
+  BIND(xsd:float(?metrics_labels) +?evaluators_scores AS?sim)
+  BIND(xsd:float(?evaluators_scores) +?sim AS?evaluators_scores)
+  BIND(xsd:float(?sim) AS?sim_scores)
+  BIND(xsd:float(?evaluators_scores) AS?evaluators_scores)
+  FILTER (MAX(?sim_scores) >= 0.5)
+}
+ORDER BY DESC(?sim_scores)
+LIMIT 10;
+```    Output SPARQL Query:
+    ```sparql
+SELECT DISTINCT?evaluators
+WHERE {
+ ?dataset       a            orkgc:Dataset;
+                 rdfs:label      ?dataset_labels.
+  FILTER (str(?dataset_labels) = "STEM-ECR v1.0")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                 orkgp:HAS_EVALUATION     ?eval.
+  OPTIONAL {?eval           orkgp:HAS_EVALUATOR     ?evaluators.}
+ ?paper           rdfs:label              ?paper_labels.
+  FILTER (str(?paper_labels) = "evaluation metrics")
+ ?eval           orkgp:HAS_PAPER          ?paper;
+                 orkgp:P31               ?evaluators.
+  OPTIONAL {?evaluators      rdfs:label              ?evaluators_labels.}
+ ?metrics         rdfs:label              ?metrics_labels.
+  FILTER (str(?metrics_labels) = "evaluation metrics")
+  BIND(xsd:float(?evaluators_labels) AS?evaluators_scores)
+  BIND(xsd:float(?metrics_labels) AS?metrics_labels)
+

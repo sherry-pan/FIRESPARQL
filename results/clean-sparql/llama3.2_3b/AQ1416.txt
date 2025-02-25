@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+SELECT ?model ?value
+WHERE {
+  ?model orkg:hasBenchmark "WMT2016 English-Russian".
+  ?model orkg:hasMetric "BLEU score".
+  ?model orkg:hasValue ?value.
+  FILTER (STR(?value) =~ "^\d+\.\d+$")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

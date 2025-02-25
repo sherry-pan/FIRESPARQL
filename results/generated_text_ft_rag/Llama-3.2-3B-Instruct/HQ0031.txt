@@ -1,0 +1,39 @@
+Question:
+What coolant does ASTRID reactor use?
+
+Generated SPARQL:
+ ```sparql
+SELECT?coolant
+WHERE {
+ ?retractor    a            orkgc:Reactor;
+                rdfs:label  ?retractor_lbl.
+}
+UNION
+SELECT?coolant
+WHERE {
+ ?cooler      orkgp:HAS_COOLER      ?coolant.
+ ?cooler      rdfs:label           ?coolant_lbl.
+}
+```
+    ```sparql
+SELECT?retractor_lbl?coolant_lbl (COUNT(?cooler) AS?score)
+WHERE {
+ ?retractor    a            orkgc:Reactor;
+                rdfs:label  ?retractor_lbl.
+}
+UNION
+SELECT?retractor_lbl?coolant_lbl (COUNT(?cooler) AS?score)
+WHERE {
+ ?cooler      orkgp:HAS_COOLER      ?coolant.
+ ?coolant      rdfs:label           ?coolant_lbl.
+}
+```
+```sparql
+SELECT?retractor_lbl?coolant_lbl (COUNT(?cooler) AS?score)
+WHERE {
+ ?retractor    orkgp:P31          ?parent.
+ ?parent      rdfs:label          ?retractor_lbl.
+ ?cooler      orkgp:HAS_COOLER    ?coolant.
+ ?coolant      rdfs:label          ?coolant_lbl.
+}
+```<|eot_id|>

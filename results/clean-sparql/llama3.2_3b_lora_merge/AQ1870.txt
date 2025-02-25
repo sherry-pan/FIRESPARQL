@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+    ?problem a orkgc:Problem;
+             rdfs:label "Semantic Role Labeling".
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    ?cont orkgp:HAS_DATASET ?dataset;
+          orkgp:P31 ?problem.
+    ?paper orkgp:P31 ?cont;
+           orkgp:HAS_EVALUATION ?eval.
+    ?eval rdfs:label "benchmarked";
+          orkgp:P32 ?cont.
+}
+ORDER BY ?dataset_lbl
+LIMIT 10
+```

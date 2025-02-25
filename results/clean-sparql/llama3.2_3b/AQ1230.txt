@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:name "Ball in cup, catch (DMControl100k)".
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:dataset ?dataset.
+    ?benchmark orkg:metric ?metric.
+    ?benchmark orkg:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

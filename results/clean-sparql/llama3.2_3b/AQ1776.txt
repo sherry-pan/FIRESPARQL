@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wot: <http://www.webontology.org/onto/2009/02/wot#>
+SELECT ?model ?numParams
+WHERE {
+  ?model orkg:hasDataset "ImageNet".
+  ?model wot:hasMetric ?metric.
+  ?metric wot:hasMetric "Number of params".
+  ?metric wot:hasValue ?numParams.
+}
+ORDER BY DESC(?numParams)
+LIMIT 1
+```

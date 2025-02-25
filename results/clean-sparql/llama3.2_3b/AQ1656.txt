@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?flopsValue
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasMetric ?metric.
+  ?metric schema:description "Benchmarking the Oxford-IIIT Pets dataset".
+  ?metric schema:hasMetric ?flops.
+  ?flops schema:description "FLOPS metric".
+  ?flops schema:maxValue ?flopsValue.
+}
+ORDER BY DESC(?flopsValue)
+LIMIT 1
+```

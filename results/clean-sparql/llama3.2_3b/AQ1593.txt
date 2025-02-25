@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model 
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark "PolyAI Reddit".
+  ?model orkg:accuracyMetric "1-of-100".
+  ?model orkg:bestResult ?bestResult.
+  ?bestResult schema:value ?numericBestResult.
+}
+ORDER BY DESC(?numericBestResult)
+LIMIT 1
+```

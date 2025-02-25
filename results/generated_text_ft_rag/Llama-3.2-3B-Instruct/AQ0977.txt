@@ -1,0 +1,24 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Amazon-2 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?eval) AS?eval_cnt)
+     WHERE {
+        ?eval       a            orkgc:Evaluation;
+                    rdfs:label  ?eval_lbl.
+         FILTER (str(?eval_lbl) = "Evaluation")
+        ?eval      orkgp:HAS_EVALUATION      ?eval_eval.
+        ?eval_eval  orkgp:P31              ?cont.
+        ?cont      orkgp:P31              ?contrib.
+        ?contrib   orkgp:P31              ?model.
+        ?model     rdfs:label              ?metric_lbl.
+        ?eval      orkgp:P32              ?metric.
+         OPTIONAL {?metric      orkgp:P30              ?eval_metric.}
+        ?eval_metric  orkgp:P31              ?eval_metric_eval.
+        ?eval_metric_eval  orkgp:P31              ?eval_metric_eval_eval.
+        ?eval_metric_eval_eval      rdfs:label              ?eval_metric_lbl.
+        ?eval_metric_eval_eval      orkgp:P31              ?eval_metric_eval_eval_eval.
+        ?eval_metric_eval_eval_eval      orkgp:P30              ?eval_metric_eval_eval_eval.
+        ?eval_metric_eval_eval_eval_eval      rdfs:label              ?eval_metric_eval_eval_eval.
+      } GROUP BY?metric?metric_lbl HAVING (SUM(?eval_cnt) > 1) ORDER BY DESC(?eval_cnt) LIMIT 5;
+```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```

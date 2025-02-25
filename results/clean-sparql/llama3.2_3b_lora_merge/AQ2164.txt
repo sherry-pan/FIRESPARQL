@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "AWD-LSTM")
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+}
+ORDER BY DESC(?code)
+LIMIT 1
+```

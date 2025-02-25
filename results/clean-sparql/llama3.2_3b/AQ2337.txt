@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.com/orkg#>
+PREFIX schema: <http://schema.org/>
+PREFIX a3c: <http://example.com/a3c#>
+PREFIX a3c_cts: <http://example.com/a3c-cts#>
+
+SELECT ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper schema:usesModel ?model.
+  ?model a a3c:A3C.
+  ?benchmark a a3c_cts:A3CCTS.
+  ?paper schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasCode ?codeLink.
+}
+```

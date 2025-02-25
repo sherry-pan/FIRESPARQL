@@ -1,0 +1,38 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the DBpedia dataset?
+
+Generated SPARQL:
+ SELECT?title?title_lbl?cont_id?cont_lbl
+     WHERE {
+      ?cont      a            orkgc:Contrib;
+                 rdfs:label ?cont_lbl.
+       FILTER(REGEX(STR(?cont_lbl), "DBpedia"))
+      ?cont      orkgp:P30   ?paper.
+      ?paper     rdfs:label   ?title_lbl.
+      ?paper     orkgp:P31     ?dataset.
+      ?dataset   rdfs:label   ?title.
+      ?cont      orkgp:P32     ?benchmark.
+      ?benchmark?contp:P41   ?eval.
+      ?eval      rdfs:label   ?eval_lbl.
+      ?eval      orkgp:P42     ?sim.
+      ?sim       rdfs:label   ?sim_lbl.
+      ?cont      orkgp:P43     ?cont_id.
+     }     
+```     SELECT?title?title_lbl?cont_id?cont_lbl
+     WHERE {
+      ?cont      a            orkgc:Contrib;
+                 rdfs:label ?cont_lbl.
+       FILTER(REGEX(STR(?cont_lbl), "DBpedia"))
+      ?cont      orkgp:P30   ?paper.
+      ?paper     rdfs:label   ?title_lbl.
+      ?paper     orkgp:P31     ?dataset.
+      ?dataset   rdfs:label   ?title.
+      ?cont      orkgp:P32     ?benchmark.
+      ?benchmark?contp:P41   ?eval.
+      ?eval      rdfs:label   ?eval_lbl.
+      ?eval      orkgp:P42     ?sim.
+      ?sim       rdfs:label   ?sim_lbl.
+      ?cont      orkgp:P43     ?cont_id.
+     }     
+```      ```
+Note: The output SPARQL query is the same as the provided solution. The query is designed to retrieve the title, label, contribution ID, and label of research papers that contain a benchmark over the DBpedia dataset. The FILTER(REGEX(STR(?cont_lbl), "DBpedia")) clause is used to filter the results to only include papers that have a label containing the string "DBpedia". The rest of the query follows the standard ORKG structure to retrieve the required information.<|eot_id|>

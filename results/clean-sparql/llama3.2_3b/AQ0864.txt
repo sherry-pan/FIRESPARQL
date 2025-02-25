@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?metric
+WHERE {
+    ?metric skos:broader ?classificationMetric.
+    ?classificationMetric rdfs:label "Evaluation Metric"@en.
+    ?metric rdfs:label ?metricLabel.
+    ?classificationMetric rdfs:label ?datasetLabel.
+    FILTER (CONTAINS(LCASE(?datasetLabel), "yelp fine-grained classification dataset"))
+}
+ORDER BY DESC(?metricLabel)
+LIMIT 10
+```

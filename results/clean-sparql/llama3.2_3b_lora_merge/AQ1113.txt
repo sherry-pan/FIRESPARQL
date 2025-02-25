@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "IWSLT2015 German-English")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        rdfs:label ?metric.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_VALUE ?value.
+  ?value rdfs:label ?score.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

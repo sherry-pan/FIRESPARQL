@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wmt: <http://www.openresearchknowledgegraph.org/metadata/wmt/>
+SELECT ?model ?scoreValue
+WHERE {
+  ?model orkg:hasScore ?score.
+  ?score wmt:dataset "WMT2014 English-German".
+  ?score wmt:benchmark "BLEU".
+  ?score wmt:score ?scoreValue.
+  FILTER (isNumeric(?scoreValue))
+}
+ORDER BY DESC(?scoreValue)
+LIMIT 1
+```

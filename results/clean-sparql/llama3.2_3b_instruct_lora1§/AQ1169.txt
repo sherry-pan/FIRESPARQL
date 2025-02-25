@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R12945 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P30 ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:P31 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    ?contrib orkgp:P32 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?metric orkgp:HAS_VALUE ?value.
+    FILTER(REGEX(STR(?benchmark_lbl), "Words in Context"))
+} 
+ORDER BY DESC(?score) 
+LIMIT 1
+```

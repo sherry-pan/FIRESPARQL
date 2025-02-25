@@ -1,0 +1,22 @@
+Question:
+Name the datasets that have been used for benchmarking in the citation classification research problem?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?dataset?dataset_lbl
+WHERE {
+ ?problem       a            orkgc:Problem;
+                 rdfs:label  ?problem_lbl.
+  FILTER (str(?problem_lbl) = "citation classification")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:HAS_EVALUATION    ?eval.
+ ?paper          rdfs:label              ?paper_lbl.
+ ?cont           rdfs:label              ?cont_lbl.
+ ?eval           rdfs:label              ?eval_lbl.
+ ?dataset       rdfs:label              ?dataset_lbl.
+}
+ORDER BY (DESC(?eval_lbl))
+LIMIT 5
+```    END SPARQL Query    ``` 
+    This query is based on the provided context. The query aims to retrieve datasets used for benchmarking in the citation classification research problem. The query filters the data based on the presence of the term "citation classification" in the problem labels. It then retrieves the datasets that have been used for benchmarking by joining the datasets with the evaluations. Finally, it orders the results by the evaluation labels in descending order and limits the output to the top 5 similar entities.<|eot_id|>

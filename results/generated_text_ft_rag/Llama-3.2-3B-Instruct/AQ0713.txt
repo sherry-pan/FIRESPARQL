@@ -1,0 +1,74 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SciGEN dataset?
+
+Generated SPARQL:
+ ```sparql
+    SELECT?metric?metric_lbl (COUNT(*) AS num_evalu) 
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "SciGEN")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+              ?metric          rdfs:label              ?metric_lbl.}
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      OPTIONAL {?cont      orkgp:HAS_CONTRIBUTION   ?contrib.
+               ?contrib     rdfs:label              ?contrib_lbl.}
+     ?contrib      rkgp:HAS_PAPER          ?cont;
+                    rkgp:HAS_VENUE         ?venue.
+      OPTIONAL {?contrib      rkgp:HAS_VENUE         ?venue;
+               ?venue      rdfs:label              ?venue_lbl.}
+     ?paper        a                orkgp:Paper;
+                    orkgp:HAS_CONTRIBUTION   ?contrib.
+      OPTIONAL {?paper      orkgp:HAS_CONTRIBUTION   ?contrib;
+               ?contrib      rkgp:HAS_PAPER          ?cont.}
+     ?sim         orkgp:HAS_PAPER          ?paper;
+                  orkgp:HAS_SIMILARITY     ?sim.
+      OPTIONAL {?sim         orkgp:HAS_SIMILARITY     ?sim;
+               ?sim           rdfs:label              ?sim_lbl.}
+     ?eval         orkgp:HAS_METRIC        ?metric.
+      OPTIONAL {?eval         orkgp:HAS_METRIC        ?metric;
+               ?metric          rdfs:label              ?metric_lbl.}
+     ?method      orkgp:HAS_BENCHMARK     ?benchmark.
+      OPTIONAL {?method      orkgp:HAS_BENCHMARK     ?benchmark;
+               ?benchmark      orkgp:HAS_DATASET      ?dataset.
+               ?dataset       rdfs:label              ?dataset_lbl.}
+     ?eval         orkgp:HAS_METHOD         ?method.
+      OPTIONAL {?eval         orkgp:HAS_METHOD         ?method;
+               ?method          rdfs:label              ?method_lbl.}
+     ?sim         orkgp:HAS_EVALUATION     ?eval.
+      OPTIONAL {?sim         orkgp:HAS_EVALUATION     ?eval;
+               ?eval           rdfs:label              ?eval_lbl.}
+     ?eval         orkgp:HAS_SIMILARITY     ?sim.
+      OPTIONAL {?eval         orkgp:HAS_SIMILARITY     ?sim;
+               ?sim           rdfs:label              ?sim_lbl.}
+     ?sim         orkgp:HAS_DATASET        ?dataset.
+      OPTIONAL {?sim         orkgp:HAS_DATASET        ?dataset;
+               ?dataset       rdfs:label              ?dataset_lbl.}
+     ?sim         orkgp:HAS_METHOD         ?method.
+      OPTIONAL {?sim         orkgp:HAS_METHOD         ?method;
+               ?method          rdfs:label              ?method_lbl.}
+     ?sim         orkgp:HAS_EVALUATION     ?eval.
+      OPTIONAL {?sim         orkgp:HAS_EVALUATION     ?eval;
+               ?eval           rdfs:label              ?eval_lbl.}
+     ?metric      orkgp:HAS_EVALUATION     ?eval.
+      OPTIONAL {?metric      orkgp:HAS_EVALUATION     ?eval;
+               ?eval           rdfs:label              ?eval_lbl.}
+     ?metric      orkgp:HAS_SIMILARITY     ?sim.
+      OPTIONAL {?metric      orkgp:HAS_SIMILARITY     ?sim;
+               ?sim           rdfs:label              ?sim_lbl.}
+     ?cont         orkgp:HAS_PAPER          ?paper.
+      OPTIONAL {?cont         orkgp:HAS_PAPER          ?paper;
+               ?paper       rkgp:HAS_VENUE         ?venue.
+               ?venue      rdfs:label              ?venue_lbl.}
+     ?cont         orkgp:HAS_CONTRIBUTION   ?contrib.
+      OPTIONAL {?cont         orkgp:HAS_CONTRIBUTION   ?contrib;
+               ?contrib      rdfs:label              ?contrib_lbl.}
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      OPTIONAL {?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+               ?benchmark      orkgp:HAS_DATASET      ?dataset.
+               ?dataset       rdfs:label              ?dataset_lbl.}
+     ?cont         orkgp:HAS_VENUE         ?venue.
+      OPTIONAL {?cont         orkgp:HAS_VENUE         ?venue;
+               ?venue

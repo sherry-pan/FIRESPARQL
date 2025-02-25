@@ -1,0 +1,24 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX wot: <http://www.wotontology.org/ontology/>
+     PREFIX owl: <http://www.wotontology.org/ontology/owl#>
+     PREFIX rdf: <http://www.wotontology.org/ontology/rdf#>
+     PREFIX rdfs: <http://www.wotontology.org/ontology/rdfs#>
+     PREFIX skos: <http://www.wotontology.org/ontology/skos#>
+     PREFIX xsd: <http://www.wotontology.org/ontology/xsd#>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     SELECT?model?accuracy 
+     WHERE {
+     ?m orkg:hasModel?model.
+     ?m orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:hasDataset "Yelp-5".
+     ?m orkg:hasAccuracy?accuracy.
+      FILTER (?accuracy >?benchmark orkg:hasBenchmark?benchmark orkg:hasAccuracy?accuracy. )
+      } 
+    LIMIT 1
+    ORDER BY DESC(?accuracy ) 
+    LIMIT 1
+    ```<|eot_id|>

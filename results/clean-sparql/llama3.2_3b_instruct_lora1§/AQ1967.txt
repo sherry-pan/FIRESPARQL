@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?paper ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "Flair-TDM")
+  
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code;
+        orkgp:HAS_PAPER ?paper.
+}
+```
+
+Note: This assumes the existence of the `orkgp:HAS_PAPER` property, which is necessary to link each contribution (`?cont`) to a paper (`?paper`). If this property is not available, the correct SPARQL query may require additional information about how papers are related in the data model.

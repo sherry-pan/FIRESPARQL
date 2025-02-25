@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(?eval) AS ?num_eval) 
+WHERE {
+  orkgr:R13444 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P53024 ?eval.
+  ?eval orkgp:P53025 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P53023 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "Atari 2600 Tutankham"))
+}
+GROUP BY ?metric ?metric_lbl
+```

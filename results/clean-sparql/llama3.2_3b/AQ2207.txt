@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code ?link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper schema:description ?description.
+  ?description schema:contains ?code.
+  ?paper schema:related ?related.
+  ?related schema:identifier ?link.
+  ?link schema:contentURL ?content.
+  ?content schema:description ?linkDescValue.
+  FILTER (CONTAINS(LCASE(?linkDescValue), "code used in this paper"))
+}
+```

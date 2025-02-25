@@ -1,0 +1,57 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wot: <http://www.wotontology.org/ontology/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://www.wotontology.org/ontology/vcard/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?model?score 
+     WHERE {
+       ?model schema:description "Cart Pole (OpenAI Gym)".
+       ?model orkg:performances?performance.
+       ?performance schema:benchmark "CartPole".
+       ?performance orkg:score?score.
+       ?performance rdfs:label?modelLabel.
+        FILTER (?modelLabel =?model).
+        FILTER (?score IS NUMERIC).
+        ORDER BY DESC(?score).
+        LIMIT 1
+    } 
+    END; 
+    ```
+
+
+
+The provided SPARQL query is:
+
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wot: <http://www.wotontology.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX vcard: <http://www.wotontology.org/ontology/vcard/>
+
+SELECT?model?score 
+WHERE {
+ ?model schema:description "Cart Pole (OpenAI Gym)".
+ ?model orkg:performances?performance.
+ ?performance schema:benchmark "CartPole".
+ ?performance orkg:score?score.
+ ?performance rdfs:label?modelLabel.
+  FILTER (?modelLabel =?model).
+  FILTER (?score IS NUMERIC).
+  ORDER BY DESC(?score).
+  LIMIT 1
+}
+```
+
+
+
+This SPARQL query retrieves the top-performing model in terms of score for the Cart Pole (OpenAI Gym) dataset. It first filters models based on their description, then retrieves their performances, filters out non-numeric scores, orders them by score in descending order, and limits the result to the top one.<|eot_id|>

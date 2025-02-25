@@ -1,0 +1,98 @@
+Question:
+Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?benchmark rdfs:label?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "SQuAD1.1 dev"))
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label     ?dataset_lbl.
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval      orkgp:HAS_VALUE        ?value.
+          ?value      rdfs:label              ?eval_lbl.}
+ ?cont         orkgp:HAS_EVALUATION     ?eval.
+  OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+          ?model      rdfs:label              ?model_lbl.}
+ ?paper       orkgp:HAS_CONTRIBUTION     ?cont.
+  OPTIONAL {?paper      orkgp:HAS_SOURCE_PAPER   ?source_pap.
+          ?source_pap      rdfs:label              ?source_pap_lbl.}
+ ?model      orkgp:HAS_SOURCE_PAPER     ?source_pap.
+ ?model      orkgp:P31                 ?model_lbl.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 10
+```    .sparql
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?benchmark       a                orkgc:Dataset;
+                   rdfs:label     ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "SQuAD1.1 dev"))
+ ?dataset         orkgp:HAS_DATASET      ?dataset;
+                   rdfs:label     ?dataset_lbl.
+ ?benchmark       orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval         orkgp:HAS_VALUE        ?value.
+          ?value         rdfs:label              ?eval_lbl.}
+ ?cont           orkgp:HAS_EVALUATION     ?eval.
+  OPTIONAL {?cont         orkgp:HAS_MODEL         ?model.
+          ?model         rdfs:label              ?model_lbl.}
+ ?paper         orkgp:HAS_CONTRIBUTION     ?cont.
+  OPTIONAL {?paper       orkgp:HAS_SOURCE_PAPER   ?source_pap.
+          ?source_pap       rdfs:label              ?source_pap_lbl.}
+ ?model         orkgp:HAS_SOURCE_PAPER     ?source_pap.
+ ?model         orkgp:P31                 ?model_lbl.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 10
+```python
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?benchmark       a                orkgc:Dataset;
+                   rdfs:label     ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "SQuAD1.1 dev"))
+ ?dataset         orkgp:HAS_DATASET      ?dataset;
+                   rdfs:label     ?dataset_lbl.
+ ?dataset         orkgp:P31              ?dataset_lbl.
+ ?cont           orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval         orkgp:HAS_VALUE        ?value.
+          ?value         rdfs:label              ?eval_lbl.}
+ ?cont           orkgp:HAS_EVALUATION     ?eval.
+  OPTIONAL {?cont         orkgp:HAS_MODEL         ?model.
+          ?model         rdfs:label              ?model_lbl.}
+ ?model         orkgp:HAS_MODEL         ?model;
+                  rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 10
+```python
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?benchmark       a                orkgc:Dataset;
+                   rdfs:label     ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "SQuAD1.1 dev"))
+ ?dataset         orkgp:HAS_DATASET      ?dataset;
+                   rdfs:label     ?dataset_lbl.
+ ?dataset         orkgp:P31              ?dataset_lbl.
+ ?cont           orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval         orkgp:HAS_VALUE        ?value.
+          ?value         rdfs:label              ?eval_lbl.}
+ ?cont           orkgp:HAS_EVALUATION     ?eval.
+  OPTIONAL {?cont         orkgp:HAS_MODEL         ?model.
+          ?model         rdfs:label              ?model_lbl.}
+ ?model         orkgp:HAS_MODEL         ?model;
+                  rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 10
+```python
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?cont         or

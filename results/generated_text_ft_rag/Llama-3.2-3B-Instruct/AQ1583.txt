@@ -1,0 +1,28 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Yelp-5")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?eval           orkgp:HAS_VALUE        ?value;
+                  orkgp:HAS_METRIC        ?metric.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                 orkgp:HAS_MODEL         ?model.
+ ?model        rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1;
+```     ```     
+
+Note: The above SPARQL query is based on the provided context and the input question. It may not be the only possible query to answer the question. The query is designed to retrieve the model with the highest Accuracy score on the Yelp-5 benchmark dataset. The query uses the `orkgp:HAS_BENCHMARK` and `orkgp:HAS_MODEL` properties to link the model to the benchmark, and then uses the `orkgp:HAS_VALUE` and `orkgp:HAS_METRIC` properties to link the value to the metric. The `FILTER` clauses are used to restrict the results to the Accuracy metric and the Yelp-5 dataset. The `ORDER BY DESC(?value)` clause is used to sort the results in descending order by value, and the `LIMIT 1` clause is used to retrieve only the top result. 
+
+Please note that the actual query may need to be adjusted based on the actual structure of the ORKG RDF data.<|eot_id|>

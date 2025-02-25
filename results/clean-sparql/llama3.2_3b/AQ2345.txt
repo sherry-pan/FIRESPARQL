@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.io/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg_schema: <http://orkg.io/schema/1.0.0/ontology#>
+PREFIX wot: <http://wot.io/ontology#>
+SELECT ?codeLink
+WHERE {
+  ?paper a orkg_schema:Paper.
+  ?paper orkg_schema:uses ?model.
+  ?model a orkg_schema:Model.
+  ?model orkg_schema:isBasedOn ?benchmarkURI.
+  ?benchmarkURI schema:keyword "DDQN-PC".
+  ?benchmarkURI schema:hasPart ?codeLink.
+}
+```

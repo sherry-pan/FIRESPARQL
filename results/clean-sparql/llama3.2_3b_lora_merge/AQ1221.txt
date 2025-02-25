@@ -1,0 +1,19 @@
+```sparql
+SELECT ?metric ?metric_value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_label.
+  FILTER (str(?dataset_label) = "Ball in cup, catch (DMControl500k)")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?cont;
+        orkgp:P32 ?metric.
+  ?metric rdfs:label ?metric_label.
+  ?value orkgp:HAS_VALUE ?eval;
+         rdfs:label ?metric_value.
+  ?eval a orkgp:Value.
+  BIND(xsd:float(?metric_value) AS ?metric_value_float)
+}
+ORDER BY DESC(?metric_value_float)
+LIMIT 1
+```

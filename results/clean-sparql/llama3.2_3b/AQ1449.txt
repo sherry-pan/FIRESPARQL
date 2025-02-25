@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX wot: <http://www.wotsemantic.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy 
+WHERE {
+    ?model wot:benchmarkedBy ?benchmark.
+    ?benchmark schema:dataset "RACE".
+    ?model wot:scoredAgainst ?score.
+    ?score schema:scoreType "Accuracy (High)".
+    ?score schema:value ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?mean_capacity
+WHERE {
+  ?class a orkgc:Class;
+         rdfs:label ?class_label.
+  FILTER (str(?class_label) = "carbon-based fuel")
+  ?contrib orkgp:P32 ?class;
+           orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_DATA ?data;
+           orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_CAPACITY ?capacity.
+  ?capacity rdfs:label ?mean_capacity.
+}
+```

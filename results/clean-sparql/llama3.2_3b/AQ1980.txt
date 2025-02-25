@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/> 
+
+SELECT ?item ?paper ?benchmark ?tcn 
+WHERE { 
+    ?item wdt:P31 dcmitype:Text. 
+    ?item rdfs:label ?itemLabel. 
+    ?item wdt:P50 ?paper. 
+    ?paper wdt:P31 dcmitype:Text. 
+    ?paper wdt:P31 ?benchmark. 
+    ?benchmark dcterms:relation ?tcn. 
+    FILTER (LANG(?itemLabel) = "en" || LANG(?itemLabel) = "en-GB") 
+}
+```
+(Note: Assumptions made for predicates such as `wdt:P50`, `wdt:P31`, and relationships. Please verify the property URIs as actual values were not provided in the original query and might need adjustments based on specific requirements and data model.)

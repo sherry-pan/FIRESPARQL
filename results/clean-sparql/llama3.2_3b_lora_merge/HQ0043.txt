@@ -1,0 +1,12 @@
+```sparql
+SELECT ?var (COUNT(?var) as ?count)
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "atmosphere models")
+  ?model orkgp:HAS_VARIABLE ?var.
+}
+GROUP BY ?var
+ORDER BY DESC(?count)
+LIMIT 3
+```

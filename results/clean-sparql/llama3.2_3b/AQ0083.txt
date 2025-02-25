@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wmt: <http://www.openresearchknowledgegraph.org/ontology/wmt/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model wmt:benchmarkedOn ?benchmarking.
+  ?benchmarking wmt:dataset "WMT2014-English-German".
+  ?model rdfs:label ?modelLabel.
+  FILTER(lang(?modelLabel) = "en")
+}
+ORDER BY ?model
+LIMIT 30
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/2017-01-13/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX orkg-benchmark: <http://orkg.org/schema/benchmark#>
+PREFIX orkg-dataset: <http://orkg.org/schema/dataset#>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset a orkg-dataset:Dataset;
+             orkg-dataset:datasetName "BUCC French-to-English";
+             orkg-dataset:relatedTo ?benchmark.
+    ?benchmark a orkg-benchmark:Benchmark;
+               orkg-benchmark:benchmarkResult ?result.
+    ?result orkg-benchmark:benchmarkResultMetric ?metric;
+            orkg-benchmark:benchmarkResultValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

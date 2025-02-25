@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ACE 2004?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?value
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACE 2004")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+  OPTIONAL {?benchmark      orkgp:HAS_EVALUATION     ?evaluation.
+          ?evaluation      rdfs:label              ?eval_lbl.
+          ?eval_lbl          orkgp:P32               ?metric.
+          ?eval_lbl          orkgp:HAS_VALUE          ?value.}
+}
+```    end of code block. 
+
+    This SPARQL query is designed to answer the given question. It first filters the dataset to only include the one labeled "ACE 2004". Then, it retrieves the benchmark results associated with this dataset. Finally, it retrieves the metric and value of each benchmark result. If a benchmark result does not have an evaluation, the optional pattern will not match, and the variable?value will not be bound. Therefore, the query will only return the top benchmark results for the specified dataset, if they exist.<|eot_id|>

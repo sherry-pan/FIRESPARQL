@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:dataset ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:datasetName "Atari 2600 Centipede".
+  ?dataset orkg:metric ?metric.
+  ?metric schema:description "Score".
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark schema:description "Score".
+  ?model orkg:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

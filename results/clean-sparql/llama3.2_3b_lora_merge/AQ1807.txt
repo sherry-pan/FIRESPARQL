@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+  
+  ?cont orkgp:HAS_METRIC ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_float)
+  
+  ?eval orkgp:HAS_MODEL ?model.
+  ?cont orkgp:HAS_EVALUATION ?eval.
+  
+  OPTIONAL {
+    ?evalcont orkgp:HAS_VALUE ?evalcont_value.
+    BIND(xsd:float(?evalcont_value) AS ?evalcont_value_float)
+  }
+
+  OPTIONAL {
+    ?contevalcontcont rdfs:label ?contevalcontcont_lbl.
+  }
+} 
+ORDER BY DESC(?value_float)
+LIMIT 1
+```

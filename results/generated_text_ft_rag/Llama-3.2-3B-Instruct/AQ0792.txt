@@ -1,0 +1,24 @@
+Question:
+List the metrics that are used to evaluate models on the Quasart-T benchmark dataset?
+
+Generated SPARQL:
+ ```
+SELECT?metric?metric_lbl
+WHERE {
+  orkgp:R76243 orkgp:label?metric_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "similarity|distance|cosine"))
+ ?metric orkgp:HAS_METRIC?eval_metric.
+  OPTIONAL {?eval_metric orkgp:HAS_VALUE?eval_value.
+   ?eval_value orkgp:HAS_DATASET?dataset.
+   ?dataset rdfs:label?dataset_lbl.
+    FILTER(REGEX(STR(?dataset_lbl), "Quasart-T"))
+   ?eval_value orkgp:HAS_EVALUATION?eval.
+   ?eval orkgp:HAS_DATASET?dataset.
+   ?dataset rdfs:label?dataset_lbl.
+    FILTER(REGEX(STR(?dataset_lbl), "Quasart-T"))
+   ?eval orkgp:HAS_MODEL?model.
+   ?model rdfs:label?model_lbl.
+    FILTER(REGEX(STR(?model_lbl), "models"))
+  }
+}
+```<|eot_id|>

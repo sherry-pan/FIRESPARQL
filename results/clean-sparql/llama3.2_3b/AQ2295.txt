@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://purl.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?author ?code
+WHERE {
+  ?paper schema:description ?description.
+  ?paper schema:author ?author.
+  ?paper schema:code ?code.
+  ?paper orkg:utilizesPriorNoop ?utilizes.
+  FILTER (lang(?description) = "en" || lang(?description) = "en-GB")
+  BIND (str(?description) AS ?title)
+}
+ORDER BY (?title)
+LIMIT 10
+```

@@ -1,0 +1,49 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the CoNLL 2012 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (COUNT(*) AS?freq)
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P2?paper_lbl.
+      ?paper orkgp:P5?model.
+      ?model orkgp:P6?f1.
+      ?cont orkgp:P8?cont_lbl.
+       FILTER(REGEX(STR(?cont_lbl), "CoNLL 2012"))
+      ?cont orkgp:P2?paper_lbl.
+       FILTER(REGEX(STR(?paper_lbl), "Named Entity Recognition"))
+      ?paper orkgp:P5?model.
+      ?model rdfs:label?model_lbl.
+       FILTER(REGEX(STR(?model_lbl), "Model"))
+     }
+     GROUP BY?model?model_lbl
+     HAVING (COUNT(*) >= 2)
+     ORDER BY DESC(?freq)
+``` 
+    This SPARQL query retrieves the models that have the best performance in terms of F1 metric on the CoNLL 2012 benchmark dataset. The query filters the results to only include models that have a label containing "Model" and have been evaluated on the CoNLL 2012 dataset and Named Entity Recognition tasks. The results are then grouped by model and sorted in descending order of frequency. The top model is the one with the highest frequency. 
+
+    Please note that this query may not return the exact results expected from the context, as the context provides a more detailed explanation of the process of identifying relevant entities. However, this query should give a good approximation of the model that performed best in terms of the F1 metric on the CoNLL 2012 benchmark dataset. 
+
+    Also, the query may return multiple models if there are multiple models that have the same high frequency. In this case, the query will return all of them. If you want to get only one model, you can add a LIMIT clause to the query, like this: `SELECT?model?model_lbl (COUNT(*) AS?freq) WHERE {... } GROUP BY?model?model_lbl HAVING (COUNT(*) >= 2) ORDER BY DESC(?freq) LIMIT 1`. 
+
+    Finally, please note that the query assumes that the RDF data is in the format described in the context. If the data is in a different format, the query may need to be adjusted accordingly. 
+
+    You can use the following command to execute the query:
+    ```bash
+sparql --query "SELECT?model?model_lbl (COUNT(*) AS?freq) WHERE {... } GROUP BY?model?model_lbl HAVING (COUNT(*) >= 2) ORDER BY DESC(?freq)" --data orkg-rdf-data
+``` 
+    This command will execute the query on the ORKG RDF data and print the results. The results will be in the format of a JSON array, where each element is an object containing the URI of the model, its label, and its frequency. 
+
+    Please note that you need to have the SPARQL client installed and configured on your system to execute the query. The command above is just an example and may need to be adjusted depending on your specific setup. 
+
+    Also, please note that the query may take some time to execute, depending on the size of the RDF data and the complexity of the query. You can use the `--timeout` option to set a timeout for the query, like this: `sparql --query "SELECT?model?model_lbl (COUNT(*) AS?freq) WHERE {... } GROUP BY?model?model_lbl HAVING (COUNT(*) >= 2) ORDER BY DESC(?freq)" --data orkg-rdf-data --timeout 300`. This will set a timeout of 5 minutes for the query. 
+
+    Finally, please note that the query may return multiple results if there are multiple models that have the same high frequency. In this case, the query will return all of them. If you want to get only one model, you can add a LIMIT clause to the query, like this: `SELECT?model?model_lbl (COUNT(*) AS?freq) WHERE {... } GROUP BY?model?model_lbl HAVING (COUNT(*) >= 2) ORDER BY DESC(?freq) LIMIT 1`. 
+
+    You can use the following command to execute the query:
+    ```bash
+sparql --query "SELECT?model?model_lbl (COUNT(*) AS?freq) WHERE {... } GROUP BY?model?model_lbl HAVING (COUNT(*) >= 2) ORDER BY DESC(?freq) LIMIT 1" --data orkg-rdf-data
+``` 
+    This command will execute the query on the ORKG RDF data and print the results. The results will be in the format of a JSON array, where each element is an object containing the URI of the model, its label, and its frequency. 
+
+    Please note that you need to have the SPARQL client installed and configured on your system to execute the query.

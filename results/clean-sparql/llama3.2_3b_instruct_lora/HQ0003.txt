@@ -1,0 +1,13 @@
+```sparql
+SELECT ?method (COUNT(?paper) AS ?paperCount)
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "Knowledge representation method", "i"))
+  ?cont orkgp:HAS_PAPER ?paper;
+        orkgp:P31 ?method.
+}
+GROUP BY ?method
+ORDER BY DESC(?paperCount)
+LIMIT 1
+```

@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?title ?id
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:has_benchmark ?benchmark.
+    ?benchmark dbpedia:dataset "DBpedia".
+    ?benchmark wdt:P31 ?benchmarkType.
+    ?benchmarkType owl:equivalentTo wd:Q5.
+    ?paper orkg:has_id ?id.
+    ?paper rdfs:label ?title.
+    FILTER (lang(?title) = "en")
+}
+LIMIT 100
+```

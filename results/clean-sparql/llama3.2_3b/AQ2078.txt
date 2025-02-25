@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://openresearch.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX biidafelemo: <http://www.biidafelemo.org/ontology/>
+PREFIX biidafelemo_ensemble: <http://www.biidafelemo.org/ensemble#>
+SELECT ?paper ?code
+WHERE {
+  ?paper biidafelemo:uses ?biidafelemo_ensemble_input.
+  ?paper biidafelemo_ensemble:output ?biidafelemo_ensemble_output.
+  ?biidafelemo_ensemble_output biidafelemo_ensemble:output_link ?code.
+  ?biidafelemo_ensemble_input biidafelemo_ensemble:input_link ?inputCode.
+  ?inputCode a biidafelemo_ensemble:input.
+  ?inputCode rdfs:label ?inputCodeLabel.
+  FILTER (CONTAINS(LCASE(STR(?inputCodeLabel)), "bidaf + self attention + elmo (ensemble)")).
+}
+GROUP BY ?paper ?code 
+ORDER BY DESC(COUNT(?paper))
+LIMIT 10
+```

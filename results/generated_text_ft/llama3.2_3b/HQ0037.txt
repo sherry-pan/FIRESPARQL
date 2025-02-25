@@ -1,0 +1,73 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX dcter: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?p?o
+     WHERE {
+     ?o orkg:hasContributedTo?c.
+     ?o foaf:name?name.
+     ?c dbo:subject?subject.
+     ?subject schema:name?subjectName.
+     ?o orkg:hasContributedTo?c1.
+     ?o foaf:name?name.
+     ?c1 dbo:subject?subject.
+     ?subject schema:name?subjectName.
+     ?p?o?o.
+      FILTER (?subjectName = "coronavirus"^^xsd:string).
+      ORDER BY (?o orkg:hasContributedTo?c COUNT(?c)). DESC
+      } GROUP BY (?o) HAVING COUNT(?c) > 1
+      LIMIT 1
+    END
+    Note: The query uses the following assumptions:
+    - All contributions are described using the dbo:subject property.
+    - All people contributing are described using the foaf:name property.
+    - The number of contributions is described using the orkg:hasContributedTo property.
+    - All articles are described using the dbo:subject property.
+    - All people are described using the foaf:name property.
+    - All entities mentioned are described using the schema:name property.
+    - The subject entity mentioned in the question is "coronavirus". 
+    - The query is limited to one person who has contributed to the largest number of articles. 
+
+    Please let me know if you need anything else! 
+    I will make sure to include the necessary information in the query. 
+    I will also make sure to document the assumptions used in the query. 
+    I will also make the necessary modifications to the query to match the format you requested. 
+
+    If you need any further assistance, please don't hesitate to ask. 
+
+    The query is ready for testing. 
+    Please let me know when you are ready to test it. 
+    I will make sure to provide the necessary information to test the query. 
+
+    Please provide the test data in the following format:
+    - A list of triples in the format (subject, predicate, object) where the subject is an entity in the knowledge graph, the predicate is a property, and the object is an entity in the knowledge graph.
+    - Each triple should be on a new line.
+    - The triples should be in the same format as the ones provided in the test dataset for the ORKG.
+    - The test data should include at least one triple for each entity mentioned in the query.
+    - The test data should include at least one triple for each property mentioned in the query.
+    - The test data should include at least one triple for each object mentioned in the query.
+    - The test data should include at least one triple for each subject mentioned in the query.
+    - The test data should include at least one triple for each object mentioned in the query.
+    - The test data should be in the same format as the ones provided in the test dataset for the ORKG.
+
+    Here is an example of test data:
+    - (coronavirus, dbo:subject, Article1)
+    - (coronavirus, dbo:subject, Article2)
+    - (John Doe, foaf:name, Person1)
+    - (John Doe, orkg:hasContributedTo, Article1)
+    - (John Doe, orkg:hasContributedTo, Article2)
+    - (Jane Smith, foaf:name, Person2)
+    - (Jane Smith, orkg:hasContributedTo, Article3)
+    - (Bob Johnson, foaf:name, Person3)
+    - (Bob Johnson, orkg:hasContributedTo, Article4)
+    - (Article1, dbo:subject, Coronavirus)
+    - (Article2, dbo:subject, Coronavirus)
+   

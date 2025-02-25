@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX snli: <http://schema.org/SNLI>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper schema:hasPart ?benchmark.
+  ?benchmark schema:hasPart ?dataset.
+  ?dataset schema:about snli:SNLI.
+  ?paper orkg:id ?id.
+  ?paper dbo:title ?title.
+  FILTER (CONTAINS(LCASE(STR(?dataset)), "snli"))
+}
+LIMIT 10
+```

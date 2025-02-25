@@ -1,0 +1,27 @@
+Question:
+Where can I find code references in papers that have used the SemExp model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "SemExp")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont           orkgp:HAS_MODEL         ?model.
+      ?cont           rdfs:label              ?cont_lbl.
+      ?cont           orkgp:HAS_CODE_REFERENCE?code.
+      ?code          orkgp:P31               ?cont.
+     }
+```json
+```
+    Please note that the output is in the format of a SPARQL query, which is used to query a knowledge graph. The query is designed to retrieve code references in papers that have used the SemExp model for benchmarking purposes. The query works as follows:
+
+1.  The query starts by selecting the `?code` variable.
+2.  It then filters the models to only those labeled as "SemExp".
+3.  Next, it retrieves the datasets associated with each benchmark, and then the contributions associated with each benchmark.
+4.  For each contribution, it retrieves the model used and the code reference.
+5.  Finally, it retrieves the label of the contribution and the code reference.
+
+    You can run this query on the ORKG knowledge graph to retrieve the code references in papers that have used the SemExp model for benchmarking purposes. The query will return a list of code references, along with their corresponding contribution labels.<|eot_id|>

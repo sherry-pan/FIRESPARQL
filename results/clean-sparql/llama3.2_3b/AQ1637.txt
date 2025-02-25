@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model schema:description "Cart Pole (OpenAI Gym)".
+  ?model orkg:performances ?performance.
+  ?performance schema:benchmark "CartPole".
+  ?performance orkg:score ?score.
+  FILTER (datatype(?score) = xsd:decimal || datatype(?score) = xsd:integer)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

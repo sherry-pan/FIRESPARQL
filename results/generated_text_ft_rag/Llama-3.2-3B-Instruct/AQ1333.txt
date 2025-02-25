@@ -1,0 +1,120 @@
+Question:
+What is the top benchmark score and its metric on the WOS-46985 dataset?
+
+Generated SPARQL:
+ SELECT?score?metric
+     WHERE {
+      ?benchmark       a                orkgc:Benchmark;
+                        rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Evaluation Top 1 Accuracy_86.1%")
+      ?eval         orkgp:HAS_EVALUATION      ?assess.
+      ?assess      orkgp:HAS_BENCHMARK      ?benchmark.
+      ?benchmark  orkgp:HAS_METRIC         ?metric.
+      ?metric      rdfs:label                ?metric_lbl.
+       FILTER (str(?metric_lbl) = "Top 1 Accuracy")
+      ?eval         orkgp:HAS_VALUE          ?value.
+      ?value      orkgp:HAS_SCORE         ?score.
+      ?score      rdfs:label                ?score_lbl.
+       FILTER (str(?score_lbl) = "86.1")
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1
+``` 
+    Output JSON:
+    [
+        {
+            "uri": "http://orkg.org/orkg/resource/R134742",
+            "label": "Evaluation Top 1 Accuracy_86.1%",
+            "score": 0.86
+        }
+    ] 
+    Output JSON with top 5:
+    [
+        {
+            "uri": "http://orkg.org/orkg/resource/R134742",
+            "label": "Evaluation Top 1 Accuracy_86.1%",
+            "score": 0.86
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135035",
+            "label": "Benchmark ImageNet ReaL",
+            "score": 0.826
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135036",
+            "label": "Benchmark ImageNet ReaL",
+            "score": 0.821
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135037",
+            "label": "Params_5m",
+            "score": 0.1859
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135038",
+            "label": "Benchmark ImageNet",
+            "score": 0.0
+        }
+    ] 
+    Output JSON with top 10:
+    [
+        {
+            "uri": "http://orkg.org/orkg/resource/R134742",
+            "label": "Evaluation Top 1 Accuracy_86.1%",
+            "score": 0.86
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135035",
+            "label": "Benchmark ImageNet ReaL",
+            "score": 0.826
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135036",
+            "label": "Benchmark ImageNet ReaL",
+            "score": 0.821
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135037",
+            "label": "Params_5m",
+            "score": 0.1859
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135038",
+            "label": "Benchmark ImageNet",
+            "score": 0.0
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R135039",
+            "label": "",
+            "score": 0.0
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R134744",
+            "label": "Benchmark ImageNet",
+            "score": 0.0
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R134743",
+            "label": "Params_5m",
+            "score": 0.1859
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R134744",
+            "label": "Benchmark ImageNet",
+            "score": 0.0
+        },
+        {
+            "uri": "http://orkg.org/orkg/resource/R134745",
+            "label": "Evaluation Top 1 Accuracy_82.1%",
+            "score": 0.821
+        }
+    ] 
+    Output SPARQL query with only the top 5:
+    SELECT?score?metric
+    WHERE {
+      ?benchmark       a                orkgc:Benchmark;
+                        rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Evaluation Top 1 Accuracy_86.1%")
+      ?eval         orkgp:HAS_EVALUATION      ?assess.
+      ?assess      orkgp:HAS_BENCHMARK      ?benchmark.
+      ?benchmark  orkgp:HAS_METRIC         ?

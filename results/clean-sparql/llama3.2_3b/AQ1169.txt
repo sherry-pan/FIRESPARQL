@@ -1,0 +1,13 @@
+```sparql
+PREFIX wot: <http://purl.org/wot/ontology/> 
+SELECT ?metric ?score 
+WHERE { 
+  ?dataset wot:hasBenchmark ?benchmark.
+  ?benchmark wot:hasMetric ?metric.
+  ?benchmark wot:hasDataset ?dataset.
+  ?benchmark wot:hasScore ?score.
+  FILTER (STR(?dataset) = "http://example.org/dataset/1")
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

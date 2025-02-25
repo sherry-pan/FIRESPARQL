@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "HMDB51".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_EVALUATION ?eval;
+        orkgp:HAS_MODEL ?model;
+        orkgp:HAS_METRIC ?metric.
+  ?model rdfs:label ?model_lbl.
+  ?metric rdfs:label "Pre-Training Dataset".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

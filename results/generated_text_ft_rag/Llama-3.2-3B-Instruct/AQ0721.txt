@@ -1,0 +1,19 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the DRI Corpus dataset?
+
+Generated SPARQL:
+ ```
+SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "DRI Corpus")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?metric        orkgp:HAS_VALUE         ?cont;
+                 orkgp:P31               ?cont_lbl.
+ ?cont_lbl      rdfs:label              ?metric_lbl.
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 10
+```<|eot_id|>

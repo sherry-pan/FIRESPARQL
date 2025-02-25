@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+SELECT ?metric ?score 
+WHERE {
+  ?dataset wdt:P31 wd:Q10389811; # Assuming Atari 2600 Ice Hockey is an instance of a dataset
+           wdt:P2002 wd:Q116857. # Assuming this property relates the dataset to specific benchmark tasks
+  ?scoreEntity wdt:P106 wdt:Q2532498; # Assuming the score entity is of the type score
+              wdt:P1346 ?score; # Assuming this property holds the score value
+              wdt:P135 ?metric; # Relation to a metric
+              wdt:P361 ?dataset. # Score is part of the dataset
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```
+
+Note: The properties (like `P2002`, `P106`, `P1346`, `P135`, `P361`) and values (like `Q10389811`, `Q116857`, `Q2532498`) used in this query are hypothetical and used for illustrative purposes. They need to be replaced with the correct ones based on the database schema and specific identifiers for Atari 2600 Ice Hockey dataset and related concepts.

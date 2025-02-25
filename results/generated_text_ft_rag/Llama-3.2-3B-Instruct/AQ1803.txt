@@ -1,0 +1,77 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Accuracy score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "VTAB-1k")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           rdfs:label              ?eval_lbl.
+       BIND(xsd:float(?eval_lbl) AS?eval_score)
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_CONTRIBUTION     ?cont.
+      ?model      rdfs:label                ?model_lbl.
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model_model      rdfs:label              ?model_model_lbl.
+       FILTER (str(?model_model_lbl) = "DeiT-Ti")
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "DeiT-Ti")
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model_model      rdfs:label              ?model_model_lbl.
+       FILTER (str(?model_model_lbl) = "CAIT-M-24")
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "CAIT-M-24")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+       ORDER BY DESC(?eval_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "CAIT-S-36")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "CAIT-S-36")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "DeiT-Ti")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "CAIT-M-24")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "CAIT-S-36")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "DeiT-Ti")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS_MODEL          ?model_model.
+      ?model      rdfs:label                ?model_lbl.
+       FILTER (str(?model_lbl) = "CAIT-M-24")
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label                ?cont_lbl.
+       BIND(xsd:float(?cont_lbl) AS?cont_score)
+      ?model      orkgp:HAS

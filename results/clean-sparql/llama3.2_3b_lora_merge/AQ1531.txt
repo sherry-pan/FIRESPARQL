@@ -1,0 +1,23 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Test perplexity")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_MODEL ?model.
+  
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgc:HAS_METRIC ?metric;
+         orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval a orkgc:Evaluation;
+        rdfs:label ?eval_lbl.
+  
+} 
+ORDER BY DESC(?eval_lbl)
+LIMIT 1
+```

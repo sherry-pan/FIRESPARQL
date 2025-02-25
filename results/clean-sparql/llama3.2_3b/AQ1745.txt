@@ -1,0 +1,16 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://example.org/orkg/>
+
+SELECT ?model ?f1score
+WHERE {
+    ?model schema:mainClass orkg:hasMainConcept ?concept.
+    ?model orkg:hasModelResult ?result.
+    ?result schema:hasMetric ?metric.
+    ?metric schema:name "F1 Score"^^xsd:string.
+    ?metric schema:value ?f1score.
+    ?concept schema:label "BUCC Chinese-to-English"^^xsd:string.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

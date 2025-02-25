@@ -1,0 +1,59 @@
+Question:
+Provide a list of papers that have utilized the CL-Titles-Parser model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl (COUNT(?code) AS?code_cnt)
+WHERE {
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?model rdfs:label?model_lbl.
+      FILTER(REGEX(STR(?model_lbl), "CL-Titles-Parser"))
+    }
+  }
+ ?paper orkgp:P31?cont.
+ ?cont orkgp:P50?model.
+ ?model?model_lbl.
+ ?cont orkgp:P60?code.
+ ?code rdfs:label?code_lbl.
+  FILTER(REGEX(STR(?code_lbl), "code"))
+}
+GROUP BY?model?model_lbl
+ORDER BY DESC(?code_cnt)
+LIMIT 10
+``` 
+    Note that the query is case-sensitive. To make the query case-insensitive, you can add a `str(?model_lbl)` function to the `FILTER` clause. For example:
+    ```sparql
+FILTER(REGEX(STR(?model_lbl), "cl-titles-parser", "i"))
+``` 
+    This will make the query case-insensitive, allowing it to match "CL-Titles-Parser", "CL-TITLES-PARSER", "cl-titles-parser", etc. 
+    Please note that the original query has been modified to return only the top 10 results, which are the ones with the most code links. If you want to get all the papers that use the CL-Titles-Parser model, you can remove the `LIMIT 10` clause. 
+    Also, note that the `str(?code_lbl)` function is used to convert the code label to a string, as the `REGEX` function requires a string as an argument. 
+    The `REGEX` function is case-sensitive, so I used the `i` flag to make the query case-insensitive. However, the `REGEX` function is not supported in all SPARQL engines, so you may need to use a different approach if you're using a different engine. 
+    Another approach is to use the `CASE` function to make the query case-insensitive. For example:
+    ```sparql
+FILTER(CASE?code_lbl WHEN "code" THEN 1 ELSE 0 END)
+``` 
+    This will achieve the same result as the `REGEX` function with the `i` flag, but it's more compatible with different SPARQL engines. 
+    Please note that the `str(?model_lbl)` function is not necessary in this case, as the `REGEX` function with the `i` flag will match the label regardless of its case. 
+    However, if you want to make the query case-insensitive, you can add the `str(?model_lbl)` function to the `FILTER` clause. For example:
+    ```sparql
+FILTER(REGEX(str(?model_lbl), "cl-titles-parser", "i"))
+``` 
+    This will make the query case-insensitive, allowing it to match "CL-Titles-Parser", "CL-TITLES-PARSER", "cl-titles-parser", etc. 
+    Please note that the original query has been modified to return only the top 10 results, which are the ones with the most code links. If you want to get all the papers that use the CL-Titles-Parser model, you can remove the `LIMIT 10` clause. 
+    Also, note that the `str(?code_lbl)` function is used to convert the code label to a string, as the `REGEX` function requires a string as an argument. 
+    The `REGEX` function is case-sensitive, so I used the `i` flag to make the query case-insensitive. However, the `REGEX` function is not supported in all SPARQL engines, so you may need to use a different approach if you're using a different engine. 
+    Another approach is to use the `CASE` function to make the query case-insensitive. For example:
+    ```sparql
+FILTER(CASE?code_lbl WHEN "code" THEN 1 ELSE 0 END)
+``` 
+    This will achieve the same result as the `REGEX` function with the `i` flag, but it's more compatible with different SPARQL engines. 
+    Please note that the `str(?model_lbl)` function is not necessary in this case, as the `REGEX` function with the `i` flag will match the label regardless of its case. 
+    However, if you want to make the query case-insensitive, you can add the `str(?model_lbl)` function to the `FILTER` clause. For example:
+    ```sparql
+FILTER(REGEX(str(?model_lbl), "cl-titles-parser", "i"))
+``` 
+    This will make the query case-insensitive, allowing it to match "CL-Titles-Parser", "CL-TITLES-PARSER", "cl-titles-parser", etc. 
+    Please note that the original query has

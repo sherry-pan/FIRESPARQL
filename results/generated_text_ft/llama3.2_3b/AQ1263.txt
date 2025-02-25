@@ -1,0 +1,73 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Seaquest dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX sparql: <http://www.w3.org/TR/sparql/#>
+     PREFIX orkgBenchmark: <http://example.org/orkg/benchmark#>
+     PREFIX orkgDataset: <http://example.org/orkg/dataset#>
+     PREFIX orkgMetric: <http://example.org/orkg/metric#>
+     PREFIX orkgModel: <http://example.org/orkg/model#>
+     PREFIX orkgResult: <http://example.org/orkg/result#>
+     PREFIX orkgScore: <http://example.org/orkg/score#>
+     PREFIX orkgTraining: <http://example.org/orkg/training#>
+     PREFIX orkgValidation: <http://example.org/orkg/validation#>
+     PREFIX orkgTest: <http://example.org/orkg/test#>
+     PREFIX orkgData: <http://example.org/orkg/data#>
+     SELECT?metric?value 
+     WHERE {
+      ?model orkg:label?label.
+      ?label schema:name?name.
+       FILTER (REGEX(STR(?name), "Atari 2600 Seaquest")).
+      ?result orkg:label?label.
+      ?label schema:name?name.
+       FILTER (REGEX(STR(?name), "top benchmark score")).
+      ?score orkg:label?label.
+      ?label schema:name?name.
+       FILTER (REGEX(STR(?name), "metric")).
+      ?metric orkg:label?metricLabel.
+      ?metricLabel schema:name?metricName.
+      ?metric orkg:metric?metricValue.
+      ?metricValue rdfs:label?metricValueLabel.
+      ?metricValue owl:equals?value.
+      ?model orkg:train?train.
+      ?train orkg:dataset?dataset.
+      ?dataset orkg:dataset?datasetLabel.
+      ?datasetLabel schema:name?datasetName.
+       FILTER (REGEX(STR(?datasetName), "Atari 2600 Seaquest")).
+      ?result orkg:dataset?dataset.
+      ?dataset orkg:dataset?datasetLabel.
+      ?datasetLabel schema:name?datasetName.
+       FILTER (REGEX(STR(?datasetName), "Atari 2600 Seaquest")).
+      ?result orkg:test?test.
+      ?test orkg:dataset?dataset.
+      ?dataset orkg:dataset?datasetLabel.
+      ?datasetLabel schema:name?datasetName.
+       FILTER (REGEX(STR(?datasetName), "Atari 2600 Seaquest")).
+      ?score orkg:dataset?dataset.
+      ?dataset orkg:dataset?datasetLabel.
+      ?datasetLabel schema:name?datasetName.
+       FILTER (REGEX(STR(?datasetName), "Atari 2600 Seaquest")).
+      ?score orkg:test?test.
+      ?test orkg:dataset?dataset.
+      ?dataset orkg:dataset?datasetLabel.
+      ?datasetLabel schema:name?datasetName.
+       FILTER (REGEX(STR(?datasetName), "Atari 2600 Seaquest")).
+      ?result orkg:score?score.
+      ?score orkg:metric?metric.
+      ?score orkg:value?value.
+       FILTER (REGEX(STR(?metric), "top benchmark score")).
+       BIND (STR(?value) AS?valueStr)
+       BIND (STR(?metric) AS?metricStr)
+       SERVICE orkgBenchmark {?benchmark orkg:label?benchmarkLabel.
+      ?benchmark orkg:dataset?dataset.
+      ?dataset orkg:dataset?datasetLabel.
+       FILTER (REGEX(STR(?datasetLabel), "Atari 2600 Seaquest")).
+      ?benchmark orkg:test?benchmarkTest.
+

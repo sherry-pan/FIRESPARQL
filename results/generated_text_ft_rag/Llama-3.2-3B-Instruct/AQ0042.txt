@@ -1,0 +1,77 @@
+Question:
+What are the models that have been benchmarked on the MNIST dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?cont      a            orkgc:Contribution;
+                 rdfs:label  ?cont_lbl.
+       FILTER (str(?cont_lbl) = "model")
+      ?cont      orkgp:P31      ?paper.
+      ?paper      rdfs:label      ?model_lbl.
+      ?cont      orkgp:P32      ?dataset.
+      ?dataset      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "MNIST")
+      ?cont      orkgp:P33      ?model.
+      ?model      rdfs:label      ?model.
+     }
+     GROUP BY?model
+     HAVING (COUNT(?model_lbl) > 1)
+     ORDER BY DESC(?model_lbl)
+     LIMIT 10. 
+     SELECT?cont     ?cont_lbl     ?model     ?model_lbl
+     WHERE {
+      ?cont      a            orkgc:Contribution;
+                 rdfs:label  ?cont_lbl.
+      ?cont      orkgp:P31      ?paper.
+      ?paper      rdfs:label      ?model_lbl.
+      ?cont      orkgp:P32      ?dataset.
+      ?dataset      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "MNIST")
+      ?cont      orkgp:P33      ?model.
+      ?model      rdfs:label      ?model.
+      ?cont      orkgp:P34      ?benchmark.
+      ?benchmark      rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "benchmark")
+      ?cont      orkgp:P35      ?eval.
+      ?eval      rdfs:label      ?eval_lbl.
+       FILTER (str(?eval_lbl) = "model")
+      ?cont      orkgp:P36      ?score.
+      ?score      rdfs:label      ?score_lbl.
+       FILTER (str(?score_lbl) = "good")
+      ?cont      orkgp:P37      ?model.
+      ?model      rdfs:label      ?model.
+     }
+     GROUP BY?cont     ?cont_lbl     ?model     ?model_lbl
+     HAVING (COUNT(?model_lbl) > 1)
+     ORDER BY DESC(?model_lbl)
+     LIMIT 5.
+``` 
+    Note: The above query uses the following properties and resources from the ORKG RDF data:
+    - orkgp:P31:      A type property that indicates a Contribution is a Paper.
+    - orkgp:P32:      A type property that indicates a Contribution is a Dataset.
+    - orkgp:P33:      A value property that indicates a Contribution has a Model.
+    - orkgp:P34:      A value property that indicates a Contribution has a Benchmark.
+    - orkgp:P35:      A value property that indicates a Contribution has an Evaluation.
+    - orkgp:P36:      A value property that indicates a Contribution has a Score.
+    - orkgp:P37:      A value property that indicates a Contribution has a Model.
+    - orkgc:Contribution:      The class of a Contribution.
+    - orkgp:P31:      A type property that indicates a Contribution is a Paper.
+    - orkgp:P32:      A type property that indicates a Contribution is a Dataset.
+    - orkgp:P33:      A value property that indicates a Contribution has a Model.
+    - orkgp:P34:      A value property that indicates a Contribution has a Benchmark.
+    - orkgp:P35:      A value property that indicates a Contribution has an Evaluation.
+    - orkgp:P36:      A value property that indicates a Contribution has a Score.
+    - orkgp:P37:      A value property that indicates a Contribution has a Model.
+    - orkgc:Contribution:      The class of a Contribution.
+    - orkgp:P31:      A type property that indicates a Contribution is a Paper.
+    - orkgp:P32:      A type property that indicates a Contribution is a Dataset.
+    - orkgp:P33:      A value property that indicates a Contribution has a Model.
+    - orkgp:P34:      A value property that indicates a Contribution has a Benchmark.
+    - orkgp:P35:      A value property that indicates a Contribution has an Evaluation.
+    - orkgp:P36:      A value property that indicates a Contribution has a Score.
+    - orkgp:P37:      A value property that indicates a Contribution has a Model.
+    - orkgc:Contribution:      The class of a Contribution. 
+    - orkgp:P31:      A type property that indicates a Contribution is a Paper.
+    - orkgp:P32:      A type property that indicates a Contribution is a Dataset.
+    - orkgp:P33:

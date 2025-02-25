@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasDataset ?dataset.
+  ?dataset orkg:hasBenchmark orkg:SST-5.
+  ?result orkg:hasMetric ?metric.
+  ?metric orkg:hasMetricName "Accuracy".
+  ?metric orkg:hasMetricValue ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

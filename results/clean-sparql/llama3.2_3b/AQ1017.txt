@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX vocab: <http://www.w3.org/2004/02/skos/core#>
+PREFIX bucc: <http://example.org/bucc#>
+PREFIX pqr: <http://example.org/pqr#>
+SELECT ?metric ?metricLabel
+WHERE {
+  ?metric bucc:hasMetricFor ?dataset.
+  ?dataset pqr:hasDataset "BUCC Russian-to-English"@en.
+  ?metric pqr:hasMetric ?metricLabel.
+}
+ORDER BY DESC(?metricLabel)
+LIMIT 10
+```

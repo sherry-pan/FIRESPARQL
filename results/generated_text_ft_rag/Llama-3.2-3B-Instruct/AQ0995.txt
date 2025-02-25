@@ -1,0 +1,31 @@
+Question:
+What are the metrics of evaluation over the PubMed 20k RCT dataset?
+
+Generated SPARQL:
+ SELECT?eval,?metric
+     WHERE {
+       orkgp:R76243       orkgp:eval      ?eval.
+       orkgp:eval         orkgp:compare   ?compare.
+      ?compare           orkgp:metric     ?metric.
+       orkgp:metric       orkgp:dataset    ?dataset.
+      ?dataset           orkgp:dataset    ?dataset;
+                           rdfs:label        ?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "PubMed 20k RCT"))
+      ?dataset_lbl       rdfs:label      ?eval_lbl.
+       FILTER(REGEX(STR(?eval_lbl), "evaluation"))
+      ?eval_lbl         rdfs:label      ?eval.
+      ?eval           orkgp:compare   ?compare2.
+      ?compare2         orkgp:metric     ?metric2.
+      ?metric2         rdfs:label      ?metric_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "metrics"))
+      ?metric_lbl       orkgp:dataset    ?dataset2.
+      ?dataset2         orkgp:dataset    ?dataset3.
+      ?dataset3         rdfs:label      ?eval_lbl2.
+       FILTER(REGEX(STR(?eval_lbl2), "20k"))
+      ?eval_lbl2         orkgp:compare   ?compare3.
+      ?compare3         orkgp:metric     ?metric3.
+      ?metric3         rdfs:label      ?metric_lbl2.
+       FILTER(REGEX(STR(?metric_lbl2), "RCT"))
+       ORDER BY DESC(?eval)
+       LIMIT 5
+    ```<|eot_id|>

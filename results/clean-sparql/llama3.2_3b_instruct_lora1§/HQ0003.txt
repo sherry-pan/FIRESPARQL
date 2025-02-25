@@ -1,0 +1,14 @@
+```sparql
+SELECT ?method (COUNT(?contribution) AS ?contribCount)
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "Knowledge representation method", "i"))
+
+  ?contribution orkgp:HAS_PAPER ?paper;
+                orkgp:P31 ?method.
+}
+GROUP BY ?method
+ORDER BY DESC(?contribCount)
+LIMIT 1
+```

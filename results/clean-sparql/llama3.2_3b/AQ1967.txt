@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?title ?codeLink
+WHERE {
+    ?paper a orkg:Paper;
+           orkg:utilized ?flairTdmModel;
+           rdfs:label ?title.
+    ?flairTdmModel rdfs:label "Flair-TDM".
+    OPTIONAL {
+        ?flairTdmModel rdfs:seeAlso ?codeLink.
+    }
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper wdt:P31 wd:Q13442814;  # Papers
+         rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(?label), "T-ConvS2S")).
+  ?paper wdt:P123456 ?code.  # Assuming P123456 is the property for code links
+}
+LIMIT 10
+```

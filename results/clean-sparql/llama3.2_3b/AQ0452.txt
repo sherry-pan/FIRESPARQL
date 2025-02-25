@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?paperId ?title
+WHERE {
+  ?paper wdt:P275 ?dataset.
+  ?dataset wdt:P1541 "PubMedQA dataset".
+  ?paper wdt:P1467 ?title.
+  FILTER(LANG(?title) = "en")
+}
+ORDER BY DESC(?paperId)
+LIMIT 10
+```

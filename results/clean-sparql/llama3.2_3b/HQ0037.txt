@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?person (COUNT(?article) AS ?articleCount)
+WHERE {
+  ?article orkg:hasContributedTo ?person ;
+           dbo:subject ?subject .
+  ?subject schema:name "coronavirus"^^xsd:string .
+  ?person foaf:name ?name .
+}
+GROUP BY ?person
+ORDER BY DESC(?articleCount)
+LIMIT 1
+```

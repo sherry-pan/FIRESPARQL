@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX wot: <http://www.wot.org/ontology/wot/>
+PREFIX rdfs: <http://www.wot.org/ontology/rdfs/>
+PREFIX owl: <http://www.wot.org/ontology/owl/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model wot:hasBenchmark ?benchmark.
+  ?benchmark schema:hasPart ?benchmarkInstance.
+  ?benchmarkInstance schema:hasName "Ball in cup, catch (DMControl100k)".
+  ?model schema:hasModelScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

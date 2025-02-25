@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:about <http://research.nyu.edu/courses/fall13/courses/multimodal-learning-and-computer-vision/datasets/cub-200-2011>.
+  ?paper orkg:hasPaperID ?id.
+  ?paper orkg:title ?title.
+  FILTER (CONTAINS(STR(?benchmark), "CUB-200-2011"))
+}
+LIMIT 1000
+```

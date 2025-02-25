@@ -1,0 +1,20 @@
+Question:
+Can you list the models that have been evaluated on the BUCC French-to-English dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BUCC French-to-English")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?paper         orkgp:P31               ?eval,
+                orkgp:HAS_BENCHMARK     ?benchmark.
+ ?model        orkgp:P32               ?paper;
+                rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?model_lbl)
+``` 
+    Note: This query is designed to retrieve models that have been evaluated on the specified dataset. It uses the `orkgp:HAS_DATASET` and `orkgp:HAS_EVALUATION` properties to link models to their respective datasets and evaluations. The `FILTER` clause ensures that only the "BUCC French-to-English" dataset is considered. The `SELECT` clause retrieves the model labels, and the `ORDER BY` clause sorts the results in descending order based on the model labels.<|eot_id|>

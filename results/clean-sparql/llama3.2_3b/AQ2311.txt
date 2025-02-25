@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?code_link
+WHERE {
+  ?paper schema:hasPart ?paper_benchmark.
+  ?paper_benchmark schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasModel ?model.
+  ?model rdfs:label "POP3D"@en.
+  ?paper schema:hasCode ?code_link.
+  FILTER (STRSTARTS(STR(?code_link), "https://doi.org/") ||
+          STRSTARTS(STR(?code_link), "https://github.com/") ||
+          STRSTARTS(STR(?code_link), "https://gitlab.com/") ||
+          STRSTARTS(STR(?code_link), "https://bitbucket.org/"))
+}
+```

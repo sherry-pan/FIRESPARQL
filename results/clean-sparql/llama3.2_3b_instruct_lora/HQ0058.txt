@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?precision ?recall ?f1
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "naive bayes")
+  ?model orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?precision;
+        orkgp:P33 ?recall;
+        orkgp:P34 ?f1.
+  ?dataset orkgp:HAS_MODEL ?model;
+           orkgp:HAS_DATASET ?benchmark.
+  ?benchmark rdfs:label "machine learning feature bag of words to classify user feedback as feature request".
+}
+ORDER BY DESC(?precision)
+```

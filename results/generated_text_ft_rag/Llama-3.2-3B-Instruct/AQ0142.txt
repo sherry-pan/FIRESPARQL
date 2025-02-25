@@ -1,0 +1,22 @@
+Question:
+Can you list the models that have been evaluated on the MultiNLI dataset?
+
+Generated SPARQL:
+ SELECT?model
+     WHERE {
+      ?model orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P31?cont.
+      ?cont rdfs:label?cont_lbl.
+       FILTER(REGEX(?cont_lbl, "MultiNLI"))
+      ?cont orkgp:P2?dataset.
+      ?dataset orkgp:P31?ven.
+      ?ven rdfs:label?ven_lbl.
+       FILTER(REGEX(?ven_lbl, "dataset"))
+      ?cont orkgp:P3?model.
+       FILTER(REGEX(?model_lbl, "model"))
+     }  
+     ORDER BY DESC(?cont_lbl)
+     LIMIT 5
+```
+
+    This SPARQL query first finds models that have been evaluated on the MultiNLI dataset. It does this by finding contributions that have been evaluated on a dataset that mentions "MultiNLI" and then filtering the results to only include models. The results are then ordered by relevance and limited to the top 5.<|eot_id|>

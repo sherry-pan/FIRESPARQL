@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:has_score ?score.
+  ?score orkg:has_dataset ?dataset.
+  ?dataset schema:datasetName "CoNLL04".
+  ?score orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:benchmarkName "RE+ Micro F1".
+  ?score orkg:hasValue ?scoreValue.
+}
+ORDER BY DESC(?scoreValue)
+LIMIT 1
+```

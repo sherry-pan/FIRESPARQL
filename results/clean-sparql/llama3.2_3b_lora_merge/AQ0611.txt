@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Asterix")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:P31 ?cont;
+         orkgp:P32 ?benchmark;
+         rdfs:label ?paper_lbl.
+}
+```

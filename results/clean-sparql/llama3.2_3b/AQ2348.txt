@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper schema:description ?description.
+    ?paper dbpedia:hasCode ?code.
+    ?paper schema:about <http://dbpedia.org/resource/KB_LSTMreg>.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasModel ?benchmarkModel.
+    ?benchmarkModel schema:description ?benchmarkDescription.
+}
+```

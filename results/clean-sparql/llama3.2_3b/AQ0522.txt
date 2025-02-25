@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?paper ?paperTitle
+WHERE {
+  ?paper wdt:P2250 ?benchmarkModel.
+  ?benchmarkModel wdt:P1627 wd:Q310.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+    ?paper rdfs:label ?paperTitle.
+  }
+}
+LIMIT 1000
+```

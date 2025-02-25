@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?dataset
+WHERE {
+  ?dataset schema:about <http://orkg.org/resource/RPR_Common_Sense_Reasoning> .
+  ?dataset <http://orkg.org/resource/benchmarked> ?benchmark .
+  FILTER (xsd:integer(?benchmark) > 0)
+}
+ORDER BY DESC(xsd:integer(?benchmark))
+LIMIT 1
+```

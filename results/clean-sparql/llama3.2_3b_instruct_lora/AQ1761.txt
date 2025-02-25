@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label "Accuracy".
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_BENCHMARK orkg:r82662. # Assuming r82662 is the ID for the Amazon benchmark dataset
+    ?benchmark orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+    ?model orkgp:P32 ?cont.
+    ?cont orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_METRIC ?metric;
+          orkgp:P31 ?eval_metric.
+    FILTER NOT EXISTS {
+        ?other_metric a orkgc:Metric;
+                      rdfs:label "Accuracy".
+        ?eval orkgp:P31 ?other_eval_metric.
+        FILTER(?other_eval_metric > ?eval_metric)
+    }
+}
+LIMIT 1
+```

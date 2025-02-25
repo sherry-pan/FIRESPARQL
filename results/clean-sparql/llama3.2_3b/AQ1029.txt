@@ -1,0 +1,14 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://example.org/orkg/>
+
+SELECT ?metric ?label
+WHERE {
+  ?metric a orkg:Metric.
+  ?metric orkg:label ?label.
+  FILTER (CONTAINS(LCASE(STR(?metric)), "docred") && CONTAINS(LCASE(STR(?metric)), "human-annotated"))
+}
+```

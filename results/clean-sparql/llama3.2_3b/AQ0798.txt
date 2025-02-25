@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?label.
+  ?metric orkg:isBenchmarkedBy <http://orkg.org/ontology/MultiRC>.
+  FILTER (LANG(?label) = 'en').
+  FILTER (STR(?label) = 'accuracy' OR STR(?label) = 'F1 score' OR STR(?label) = 'ROUGE score' OR STR(?label) = 'EM')
+}
+```

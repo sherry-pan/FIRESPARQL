@@ -1,0 +1,19 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score) 
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "IMDb-B")
+    
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?eval orkgp:HAS_VALUE ?value.
+    
+    ?metric orkgp:P31 ?cont;
+            rdfs:label ?metric_lbl.
+    ?metric orkgp:HAS_EVAL ?eval.
+} 
+GROUP BY ?metric ?metric_lbl 
+ORDER BY DESC(MAX(?value))
+LIMIT 1
+```

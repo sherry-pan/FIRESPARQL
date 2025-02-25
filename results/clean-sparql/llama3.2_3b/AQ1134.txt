@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/OWL#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dbpedia_labs: <http://dbpedia-labs.org/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?metric ?score 
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset dbpedia_labs:datasetName ?datasetName.
+    FILTER contains(str(?datasetName), "Hendrycks Test").
+    
+    ?benchmark a orkg:Benchmark.
+    ?benchmark dbpedia_labs:benchmarkName ?benchmarkName.
+    FILTER contains(str(?benchmarkName), "Hendrycks Test").
+    
+    ?benchmark orkg:hasMetric ?metric.
+    ?metric orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

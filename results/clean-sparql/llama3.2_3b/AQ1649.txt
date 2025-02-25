@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/> 
+SELECT ?model ?score 
+WHERE { 
+  ?model orkg:hasModelResult ?result. 
+  ?result orkg:hasDataset ?dataset. 
+  ?dataset orkg:hasBenchmark ?benchmark. 
+  ?benchmark orkg:hasBenchmarkStd ?benchmarkStd. 
+  ?benchmarkStd orkg:hasName "Habitat 2020 Object Nav test-std". 
+  ?result orkg:hasScore ?score. 
+} 
+ORDER BY DESC(?score) 
+LIMIT 1
+```

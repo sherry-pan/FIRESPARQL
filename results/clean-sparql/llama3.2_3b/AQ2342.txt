@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dnn: <http://dnnmodels.org/resource/model/> 
+PREFIX orkg: <http://orkg.org/resource/> 
+
+SELECT ?paper ?codeReference 
+WHERE {
+  ?paper a dbo:Paper.
+  ?paper dnn:usesModel dnn:DQNMMCe+SR.
+  ?paper orkg:hasCodeReference ?codeReference.
+  ?paper orkg:hasBenchmark ?dataset.
+  FILTER (str(?dataset) = 'Benchmarking').
+}
+LIMIT 1
+```

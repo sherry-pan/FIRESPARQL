@@ -1,0 +1,86 @@
+Question:
+Provide a list of papers that have utilized the Table-Sequence model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+SELECT?code
+WHERE {
+ ?model    a            orkgc:Model;
+            rdfs:label   ?model_lbl.
+  FILTER (str(?model_lbl) = "Table-Sequence")
+ ?paper      orkgp:P31   ?model.
+ ?cont       orkgp:P31   ?paper.
+ ?cont       rdfs:label   ?cont_lbl.
+ ?cont       orkgp:P32   ?code.
+}
+```
+
+
+    Please note that the query provided above assumes that the Table-Sequence model has been explicitly labeled as such in the ORKG. If this is not the case, the query would need to be modified to retrieve all papers that use the Table-Sequence model, regardless of the model's label. 
+
+    Also, the query uses the `str(?model_lbl) = "Table-Sequence"` filter to check if the model's label is exactly "Table-Sequence". If you want to check for any label that contains "Table-Sequence", you can use the `str(?model_lbl) LIKE "%Table-Sequence%"` filter instead. 
+
+    Finally, the query retrieves the `?code` variable, which represents the code link for each paper. However, the context provided does not contain any code links, so the query will not return any results. 
+
+    To retrieve the top 5 similar entities based on the terms "paper" and "model", you can use the `ORKG Similarity` function, but it requires additional setup and configuration in the ORKG. 
+
+    If you want to retrieve the top 5 similar entities based on the relevance of their titles to the query terms, you can use the `similarity` function in the ORKG. However, it requires additional setup and configuration in the ORKG. 
+
+    Here is an example of how you can use the `similarity` function to retrieve the top 5 similar entities:
+    ```sparql
+SELECT?uri,?cont_lbl, similarity(?cont_lbl, "Table-Sequence model")
+WHERE {
+ ?cont      orkgp:P31   ?paper.
+ ?paper     rdfs:label   ?cont_lbl.
+ ?cont      rdfs:label   ?cont_lbl.
+ ?model     orkgp:P32   ?code.
+  FILTER (str(?cont_lbl) = "Table-Sequence model")
+}
+ORDER BY DESC(?similarity)
+LIMIT 5
+```
+    Note that the `similarity` function is not a built-in function in the ORKG, but rather a custom function that requires additional setup and configuration. 
+
+    To use the `similarity` function, you need to create a new module in the ORKG and define the `similarity` function in that module. Then, you need to load the module in the query and use the `similarity` function in the query. 
+
+    Here is an example of how you can create a new module and define the `similarity` function:
+    ```python
+from orkg import similarity
+
+def similarity_function(cont_lbl, query):
+    # Calculate the similarity between the cont_lbl and the query
+    #...
+    return similarity
+```
+    Then, you can load the module in the query and use the `similarity` function:
+    ```sparql
+MODULE orkgc:Similarity
+DEFINITION orkgc:Similarity = orkg:Similarity
+END DEFINITION
+SELECT?uri,?cont_lbl, orkgc:Similarity(?cont_lbl, "Table-Sequence model")
+WHERE {
+ ?cont      orkgp:P31   ?paper.
+ ?paper     rdfs:label   ?cont_lbl.
+ ?cont      rdfs:label   ?cont_lbl.
+ ?model     orkgp:P32   ?code.
+  FILTER (str(?cont_lbl) = "Table-Sequence model")
+}
+ORDER BY DESC(orkgc:Similarity(?cont_lbl, "Table-Sequence model"))
+LIMIT 5
+```
+    Note that the `similarity` function is a custom function and requires additional setup and configuration in the ORKG. 
+
+    Also, the `similarity` function is not a built-in function in the ORKG, but rather a custom function that requires additional setup and configuration. 
+
+    To use the `similarity` function, you need to create a new module in the ORKG and define the `similarity` function in that module. Then, you need to load the module in the query and use the `similarity` function in the query. 
+
+    Here is an example of how you can create a new module and define the `similarity` function:
+    ```python
+from orkg import similarity
+
+def similarity_function(cont_lbl, query):
+    # Calculate the similarity between the cont_lbl and the query
+    #...
+    return similarity
+```
+    Then, you can load the module in the query and use the `similarity` function

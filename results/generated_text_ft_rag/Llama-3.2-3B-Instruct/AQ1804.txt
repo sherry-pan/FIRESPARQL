@@ -1,0 +1,23 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?cont      a            orkgc:Contribution;
+                 rdfs:label  ?cont_lbl.
+       FILTER (str(?cont_lbl) = "BioBERT achieved the highest F1 scores")
+      ?cont      orkgp:P31   ?model.
+      ?model     rdfs:label  ?model_lbl.
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset    rdfs:label              ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "VTAB-1k")
+      ?cont      orkgp:P32               ?eval.
+      ?eval       rdfs:label              ?eval_lbl.
+       FILTER (str(?eval_lbl) = "Params score")
+      ?cont      orkgp:P33               ?score.
+      ?score      rdfs:label              ?score_lbl.
+       ORDER BY DESC(?score_lbl)
+       LIMIT 5
+    ```
+    Please note that this SPARQL query is not guaranteed to return the correct answer, but it is the best possible query given the information and data provided.<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikibase.org/schema/jsonLD>
+SELECT ?paper ?code
+WHERE {
+  ?paper wdt:P1624 ?paperTitle.
+  ?paper wdt:P1629 ?paperCode.
+  ?paper wdt:P1630 ?paperModel.
+  FILTER (CONTAINS(LCASE(?paperDescription), "xlnet") && CONTAINS(LCASE(?paperModel), "base"))
+}
+LIMIT 10
+```

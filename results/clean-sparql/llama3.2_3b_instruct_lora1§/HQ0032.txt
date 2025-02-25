@@ -1,0 +1,16 @@
+```sparql
+SELECT ?common
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "common lead", "i"))
+
+  ?paper orkgp:P10027 ?class.
+  ?class rdfs:label ?common.
+
+  ?compound orkgp:P10026 ?class.
+  ?compound rdfs:label ?compound_lbl.
+}
+ORDER BY DESC(COUNT(?common))
+LIMIT 1
+```

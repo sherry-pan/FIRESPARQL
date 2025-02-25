@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:hasModelBenchmark ?benchmark.
+  ?benchmark orkg:hasBenchmarkDataset ?dataset.
+  ?dataset orkg:hasBenchmarkDatasetValue "Story Cloze Test".
+  ?benchmark orkg:hasBenchmarkDatasetMetric ?metric.
+  ?metric orkg:hasMetricName "Accuracy".
+  ?benchmark orkg:hasBenchmarkDatasetValue ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

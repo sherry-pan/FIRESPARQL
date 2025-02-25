@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper wdt:P31 orkg:ResearchPaper.
+  ?paper wdt:P281 "DCN model".
+  ?paper wdt:P162 "Benchmarking".
+  ?paper wdt:P162 ?benchmark.
+  ?benchmark wdt:P162 ?codeReference.
+  
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

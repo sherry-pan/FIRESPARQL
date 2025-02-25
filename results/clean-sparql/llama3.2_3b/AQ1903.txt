@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset
+WHERE {
+   ?dataset orkg:researchProblem "Fine-Grained Image Classification".
+   ?dataset orkg:benchmarkedFor ?benchmark.
+   ?benchmark rdfs:label ?label.
+   FILTER (lang(?label) = "en")
+}
+GROUP BY ?dataset
+ORDER BY DESC(COUNT(?benchmark))
+LIMIT 10
+```

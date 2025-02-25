@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wmt: <http://wmt.org/ontology/>
+
+SELECT ?model ?metric ?metricValue
+WHERE {
+  ?model wmt:benchmarked ?benchmark.
+  ?benchmark wmt:dataset ?dataset.
+  ?dataset wmt:datasetName "WMT2016 DE-EN".
+  ?benchmark wmt:metric ?metric.
+  ?metric wmt:metricName "BLEU".
+  ?benchmark wmt:score ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

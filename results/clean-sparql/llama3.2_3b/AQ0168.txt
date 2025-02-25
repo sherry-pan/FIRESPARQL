@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdfs: <http://www.wot-ontologies.org/wot/rdfs/>
+PREFIX schema: <http://schema.org/>
+PREFIX wot: <http://www.wot-ontologies.org/wot/>
+
+SELECT ?model ?metric
+WHERE {
+  ?model a orkg:Model.
+  ?model wot:hasMetric ?metric.
+  ?model schema:description ?description.
+  FILTER (CONTAINS(LCASE(?description), "sts benchmark")).
+}
+ORDER BY ?model
+LIMIT 1000
+```

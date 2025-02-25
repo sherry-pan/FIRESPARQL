@@ -1,0 +1,18 @@
+Question:
+List the metrics that are used to evaluate models on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Penn Treebank benchmark dataset")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_METRIC        ?metric;
+                       orkgp:HAS_VALUE         ?metric_val.
+      ?metric         rdfs:label              ?metric_lbl.
+     }
+     ORDER BY DESC(?metric_val)
+     LIMIT 5
+```<|eot_id|>

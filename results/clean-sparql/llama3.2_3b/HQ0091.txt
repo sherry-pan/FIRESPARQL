@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?label ?description
+WHERE {
+  ?s rdfs:label ?label.
+  ?s schema:description ?description.
+  FILTER (CONTAINS(LCASE(?label), "raman") && CONTAINS(LCASE(?description), "spectroscopy"))
+}
+LIMIT 1
+```

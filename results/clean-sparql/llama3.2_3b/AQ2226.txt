@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://orkg.io/ontology/> 
+SELECT ?paper ?link 
+WHERE {
+  ?paper orkg:hasCode ?code. 
+  ?code orkg:codeUsedIn ?benchmarkPaper. 
+  ?benchmarkPaper orkg:hasBenchmark ?benchmark. 
+  ?benchmark orkg:hasBenchmarkModel ?model. 
+  ?model orkg:modelName "XLNet-Large". 
+  ?publication orkg:hasPublicationLink ?link. 
+  FILTER (STRLEN(?link) > 0) 
+} 
+ORDER BY DESC(STRLEN(?link)) 
+LIMIT 10
+```

@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label ?metric_lbl.
+    FILTER (str(?metric_lbl) = "Score")
+    
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?cont orkgp:P31 ?model.
+    ?cont orkgp:HAS_METRIC ?metric.
+    ?cont orkgp:P32 ?eval.
+    ?eval orkgp:HAS_VALUE ?eval_value.
+    ?model rdfs:label ?model_lbl.
+
+    # The dataset is specifically for Atari 2600 Asteroids
+    FILTER (str(?dataset) = "Atari 2600 Asteroids")
+}
+ORDER BY DESC(?eval_value)
+LIMIT 1
+```

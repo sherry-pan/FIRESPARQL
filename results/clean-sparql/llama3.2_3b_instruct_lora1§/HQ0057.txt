@@ -1,0 +1,18 @@
+```sparql
+SELECT ?data
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Comparing machine learning algorithms on the IMDB dataset".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:P31 ?cont;
+         orkgp:P32 ?benchmark.
+  ?source orkgp:P27 ?paper;
+          rdfs:label ?source_lbl.
+  FILTER (str(?source_lbl) = "Comparing machine learning algorithms on the IMDB dataset")
+  ?data orkgp:HAS_SOURCE ?source.
+  ?data rdfs:label ?data_lbl.
+  ?data orkgp:HAS_DATASET ?dataset.
+}
+LIMIT 10
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl 
+WHERE {
+  ?dataset a orkgc:Dataset; 
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ESC-50")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?cont;
+        orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+```

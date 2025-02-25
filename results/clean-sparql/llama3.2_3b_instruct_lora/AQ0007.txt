@@ -1,0 +1,16 @@
+```sparql
+SELECT ?dataset ?dataset_lbl (GROUP_CONCAT(?model_lbl; SEPARATOR = "\n") AS ?model_names) 
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACL Anthology")
+  
+  ?dataset orkgp:HAS_DATASET ?cont.
+  ?cont orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+} 
+GROUP BY ?dataset ?dataset_lbl
+ORDER BY DESC(?dataset_lbl)
+LIMIT 1
+```

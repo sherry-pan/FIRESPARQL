@@ -1,0 +1,18 @@
+```sparql
+PREFIX wmt: <http://wmt2021.org/wmt20/wmt2021/wmt20-2021/>
+PREFIX wmt2016: <http://wmt2016.org/wmt2016/>
+PREFIX wikibase: <http://wikibase.org/>
+PREFIX orkg: <http://orkg.org/>
+
+SELECT ?paper ?title
+WHERE {
+  ?paper wmt:hasBenchmarkedModel ?model.
+  ?model wmt2016:hasBenchmarkedDataset ?dataset.
+  ?dataset wmt2016:hasDataset ?datasetLabel.
+  ?paper orkg:hasTitle ?title.
+  FILTER (STRLEN(?title) > 0)
+  FILTER (?datasetLabel = "WMT2016 English-Romanian")
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

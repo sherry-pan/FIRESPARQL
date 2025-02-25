@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX model: <http://www.openresearch.org/orkg/model/>
+PREFIX code: <http://www.openresearch.org/orkg/code/>
+
+SELECT ?paper ?title ?link ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:utilizes ?model.
+  ?model a model:RainbowSEER.
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:hasLink ?link.
+  ?paper rdfs:label ?title.
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

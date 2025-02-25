@@ -1,0 +1,19 @@
+Question:
+List the code links in papers that use the A3C FF (1 day) hs model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    SELECT DISTINCT?code_link
+    WHERE {
+     ?paper      a            orkgc:Paper;
+                 rdfs:label  ?paper_label.
+      FILTER (str(?paper_label) = "A3C FF (1 day) hs")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?paper      rkgp:P31               ?cont;
+                 rkgp:P32               ?paper.
+     ?cont      rkgp:HAS_CODE_LINK     ?code_link.
+    }
+    ``` 
+    The final answer is the provided SPARQL query.<|eot_id|>

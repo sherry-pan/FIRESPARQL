@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+SELECT ?dataset ?frequency
+WHERE {
+    ?dataset orkg:isResearchField orkg:JointEntityRelationExtraction.
+    SERVICE orkg:sparqlService {
+        SELECT ?dataset ?frequency
+        WHERE {
+            ?dataset orkg:hasBenchmarkDataset ?benchmarkDataset.
+            ?benchmarkDataset a orkg:BenchmarkDataset.
+            ?benchmarkDataset orkg:isMostCommonBenchmarkDatasetFor ?dataset.
+            ?benchmarkDataset orkg:hasFrequency ?frequency.
+            FILTER (?frequency > 0)
+        }
+        ORDER BY DESC(?frequency)
+        LIMIT 10
+    }
+}
+```

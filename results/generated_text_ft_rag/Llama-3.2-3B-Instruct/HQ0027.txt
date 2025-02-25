@@ -1,0 +1,71 @@
+Question:
+For which country of study overall prevalence of epilepsy is the highest?
+
+Generated SPARQL:
+ ```
+SELECT?country?country_lbl (MAX(?prevalence) AS?prevalence_lbl)
+WHERE {
+ ?epilepsy         a            orkgc:Epilepsy;
+                   rdfs:label      ?epil_lbl.
+  FILTER (str(?epil_lbl) = "epilepsy")
+ ?dataset           orkgp:HAS_DATASET      ?epilepsy;
+                     orkgp:HAS_EVALUATION    ?eval.
+ ?paper            orkgp:HAS_DATASET      ?eval,
+                   orkgp:HAS_EVALUATION    ?eval.
+ ?cont           orkgp:HAS_PAPER        ?paper;
+                 orkgp:P32               ?dataset.
+ ?contrib      rdfs:label              ?cont;
+               orkgp:P31               ?paper.
+  OPTIONAL {?contrib      orkgp:P32               ?dataset.
+          ?dataset           orkgp:HAS_DATASET      ?dataset.
+          ?dataset           rdfs:label              ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "country of study")
+          ?country           orkgp:HAS_DATASET      ?dataset.
+          ?country           rdfs:label              ?country_lbl.}
+ ?cont           rdfs:label              ?cont_lbl.
+  FILTER (str(?cont_lbl) = "country of study")
+ ?country      orkgp:P32               ?cont;
+                rdfs:label              ?country_lbl.
+ ?eval         orkgp:P31               ?contrib;
+                orkgp:HAS_DATASET      ?dataset;
+                orkgp:HAS_EVALUATION    ?eval.
+  BIND(xsd:float(?eval          . orkgp:GET_EVALUATION     ?eval)
+      AS?eval_value)
+ ?prevalence    orkgp:HAS_EVALUATION    ?eval;
+                 orkgp:P32               ?contrib.
+  BIND(xsd:float(?prevalence. orkgp:GET_EVALUATION     ?eval)
+      AS?prevalence_value)
+ ?prevalence    rdfs:label              ?prevalence_lbl.
+  BIND(xsd:float(?prevalence_value) AS?prevalence_lbl)
+}
+GROUP BY?country?country_lbl
+HAVING (MAX(?prevalence_lbl) > 0.5)
+```    end of code block. 
+
+    Note that the code block is not meant to be executed as is. It is a part of the original code, which is not provided here. The code block is used to generate the correct SPARQL query based on the given input question. 
+
+    In the context of the original code, the SPARQL query is executed to retrieve the desired information from the ORKG RDF data dump. The query is designed to filter the results based on the given question and return the top country with the highest overall prevalence of epilepsy. 
+
+    The code block is used to generate the correct SPARQL query based on the given input question, and the query is designed to retrieve the desired information from the ORKG RDF data dump. 
+
+    The SPARQL query is designed to filter the results based on the given question and return the top country with the highest overall prevalence of epilepsy. 
+
+    The query uses the `FILTER` function to filter out irrelevant data, and the `GROUP BY` and `HAVING` clauses to group the results by country and filter out countries with a prevalence below 0.5. 
+
+    The `MAX` function is used to calculate the overall prevalence for each country, and the `AS` keyword is used to assign the calculated value to a new variable. 
+
+    The `BIND` function is used to convert the `xsd:float` values to `xsd:string` values, which can be used as labels. 
+
+    The `GROUP BY` clause is used to group the results by country and country label, and the `HAVING` clause is used to filter out countries with a prevalence below 0.5. 
+
+    The final result is a list of countries with the highest overall prevalence of epilepsy, along with their labels. 
+
+    The SPARQL query is designed to retrieve the desired information from the ORKG RDF data dump and return the top country with the highest overall prevalence of epilepsy. 
+
+    The query uses the `FILTER` function to filter out irrelevant data, and the `GROUP BY` and `HAVING` clauses to group the results by country and filter out countries with a prevalence below 0.5. 
+
+    The `MAX` function is used to calculate the overall prevalence for each country, and the `AS` keyword is used to assign the calculated value to a new variable. 
+
+    The `BIND` function is used to convert the `xsd:float` values to `xsd:string` values, which can be used as labels. 
+
+    The final result is a list of countries with the highest overall prevalence of epilepsy, along

@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 Q*Bert benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl (MAX(COALESCE(?score, 0)) AS?score)
+WHERE {
+ ?benchmark rdfs:label?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "Atari 2600 Q*Bert"))
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+ ?cont          orkgp:HAS_DATASET      ?dataset;
+                 orkgp:P27              ?value.
+  BIND(XSD:integer(?value) AS?score)
+ ?model         orkgp:P28              ?cont;
+                 rdfs:label              ?model_lbl.
+}
+GROUP BY?model?model_lbl
+ORDER BY DESC(?score)
+LIMIT 10;
+```<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  orkgr:R13535 orkgp:compareContribution ?cont.
+  ?cont orkgp:P31 ?dataset.
+  ?dataset orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P29 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "ROUGE-1", "i"))
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

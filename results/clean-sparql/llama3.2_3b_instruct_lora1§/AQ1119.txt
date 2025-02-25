@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?top_score)
+WHERE {
+  orkgp:R12941 orkgp:compareContribution ?contrib .
+  ?contrib orkgp:P30 ?eval .
+  ?eval orkgp:P31 ?metric .
+  ?metric rdfs:label ?metric_lbl .
+  ?contrib orkgp:HAS_DATASET orkgp:HAS_DATASET_00004 .
+  ?contrib orkgp:P35 ?value .
+  FILTER(REGEX(?metric_lbl, "score", "i"))  
+}
+GROUP BY ?metric ?metric_lbl
+```

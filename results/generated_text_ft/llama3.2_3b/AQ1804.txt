@@ -1,0 +1,79 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://www.openresearch.org/ork/>
+     PREFIX vtab: <http://www.openresearch.org/ork/vtab/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?modelParamsScore?dataset 
+     WHERE {
+     ?model a ork:Model ;
+      rdfs:label?modelLabel ;
+      ork:benchmarkedOn?benchmarking .
+     ?benchmarking a vtab:Benchmarking ;
+      schema:dataset?dataset ;
+      schema:score?modelParamsScore ;
+      schema:score?modelParamsScore.
+      FILTER (STR(?modelParamsScore) = "Params") ;
+      FILTER (STR(?dataset) = "VTAB-1k") ;
+     ?benchmarking ork:ranked?rankedModel 
+      FILTER (STR(?rankedModel) = "top")
+    } GROUP BY?model?modelParamsScore?dataset 
+    HAVING (SUM(?rankedModel) = 1)
+    } ORDER BY DESC(?modelParamsScore) 
+    LIMIT 1
+    ) 
+    ```python
+import pandas as pd
+import numpy as np
+from pyspark.sql import SparkSession
+
+# Create a SparkSession
+spark = SparkSession.builder.appName("ORKG SPARQL Query Generator").getOrCreate()
+
+# Define the input question
+input_question = "What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?"
+
+# Split the input question into keywords
+keywords = input_question.split()
+
+# Define the SPARQL query
+sparql_query = """
+PREFIX ork: <http://www.openresearch.org/ork/>
+PREFIX vtab: <http://www.openresearch.org/ork/vtab/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?modelParamsScore?dataset 
+WHERE {
+ ?model a ork:Model ;
+  rdfs:label?modelLabel ;
+  ork:benchmarkedOn?benchmarking .
+ ?benchmarking a vtab:Benchmarking ;
+  schema:dataset?dataset ;
+  schema:score?modelParamsScore ;
+  schema:score?modelParamsScore.
+  FILTER (STR(?modelParamsScore) = "Params") ;
+  FILTER (STR(?dataset) = "VTAB-1k") ;
+ ?benchmarking ork:ranked?rankedModel 
+  FILTER (STR(?rankedModel) = "top")
+}
+
+GROUP BY?model?modelParamsScore?dataset 
+HAVING (SUM(?rankedModel) = 1)
+ORDER BY DESC(?modelParamsScore) 
+LIMIT 1
+"""
+
+# Execute the SPARQL query
+results = spark.sql(sparql_query)
+
+# Print the results
+for result in results.collect():
+    print(result)```python
+Note: This code is not intended to be run as is, but rather to provide an example of how the SPARQL query could be generated based on the input question. The actual implementation would require more complex natural language processing and SPARQL query generation techniques.<|eot_id|>

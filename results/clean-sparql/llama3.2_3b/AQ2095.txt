@@ -1,0 +1,17 @@
+```sparql
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperLabel ?codeUrl ?citationText
+WHERE {
+  ?paper wdt:P921 wd:Q116454197;
+         rdfs:label ?paperLabel;
+         schema:description ?citationText;
+         schema:codeRepository ?codeUrl.
+  FILTER(CONTAINS(LCASE(?paperLabel), "fine-grained gating"))
+}
+ORDER BY DESC(COUNT(DISTINCT ?codeUrl))
+LIMIT 10
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearch.org/ontologies/orcg#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?metric rdf:type orkg:EvaluationMetric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (contains(STR(?metricLabel), "SciGEN") &&
+          contains(STR(?metricLabel), "benchmarking") &&
+          (strstarts(STR(?metricLabel), "accuracy") ||
+           strstarts(STR(?metricLabel), "f1")))
+}
+```

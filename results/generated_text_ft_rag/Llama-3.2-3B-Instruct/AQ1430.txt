@@ -1,0 +1,29 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl?dataset?dataset_lbl?metric?metric_lbl
+WHERE {
+ ?metric rdfs:label?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "BLEU"))
+ ?dataset       a            orkgc:Dataset;
+                  rdfs:label  ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "WMT2014 English-German"))
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?eval           orkgp:HAS_METRIC        ?metric;
+                  rdfs:label              ?metric_lbl.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                 rdfs:label              ?model_lbl.
+ ?model        rdfs:label                ?model_lbl.
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 10;
+```    Note that this query is not optimized for performance. It is written as a direct translation of the provided text into a SPARQL query. It may not be the most efficient query, especially for large datasets. In a real-world scenario, you would likely want to optimize the query to reduce the number of triples scanned and to improve performance. 
+
+Also, the query uses the `FILTER(REGEX(?metric_lbl, "BLEU"))` and `FILTER(REGEX(?dataset_lbl, "WMT2014 English-German"))` to match the specific metric and dataset. These filters are case-sensitive and may not work as expected if the dataset labels are not in the expected format. You may need to adjust the regular expressions to match the actual format of the dataset labels. 
+
+Finally, the `LIMIT 10` clause at the end of the query is used to limit the number of results returned. You may need to adjust this value depending on the size of your dataset and the desired number of results. 
+
+Please note that the provided query is a direct translation of the provided text and may not be the most efficient or optimized query. You may need to adjust it to fit your specific use case.<|eot_id|>

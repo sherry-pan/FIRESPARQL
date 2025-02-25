@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX wdt: <http://www.wikidata.org/property/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+SELECT ?model ?metricValue
+WHERE {
+  ?model wdt:P281 wd:Q15611142.
+  ?model wdt:P314 ?metricValue.
+  ?model rdfs:label ?modelLabel.
+  FILTER (lang(?modelLabel) = 'en')
+  FILTER (REGEX(LCASE(?modelLabel), '.*model.*') || 
+          REGEX(LCASE(?modelLabel), '.*crf.*') || 
+          REGEX(LCASE(?modelLabel), '.*perceptron.*') || 
+          REGEX(LCASE(?modelLabel), '.*svm.*') || 
+          REGEX(LCASE(?modelLabel), '.*logistic.*'))
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

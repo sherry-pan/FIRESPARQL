@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label "SemExp".
+  
+  { 
+    ?dataset a orkgc:Dataset;
+             rdfs:label "SemExp".
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:HAS_SOURCE_CODE ?code.
+    ?code rdfs:label "code reference".
+  }
+  UNION
+  {
+    ?cont orkgp:HAS_SOURCE_CODE ?code.
+    ?code rdfs:label "code reference".
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label "SemExp".
+  }
+}
+```

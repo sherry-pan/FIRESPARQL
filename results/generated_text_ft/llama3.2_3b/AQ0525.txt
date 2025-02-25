@@ -1,0 +1,76 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the NCBI-disease dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX wot: <http://example.org/wot/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?title?id 
+     WHERE {
+       ?paper a orkg:ResearchPaper.
+        rdfs:label?label.
+        dbpedia:dataset?dataset.
+        schema:description?description.
+        FILTER (STRLIKE (?label, "NCBI-disease")).
+       ?paper wot:benchmarkedModel?model.
+       ?model schema:dataset?dataset.
+       ?dataset wot:datasetFor?benchmark.
+       ?benchmark schema:dataset?dataset.
+       ?benchmark wot:benchmarkedBy?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmarkModel wot:benchmarkedOn?benchmarkModelOn.
+       ?benchmarkModelOn wot:datasetFor?dataset.
+       ?benchmarkModelOn wot:benchmarkedModel?benchmarkModel.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedOn?benchmarkModelOn.
+       ?benchmarkModelOn wot:datasetFor?dataset.
+       ?paper orkg:paperID?id.
+       ?benchmark wot:benchmarkedBy?benchmarkModel.
+       ?benchmark wot:benchmarkedModelFor?benchmarkModel.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmarkModel wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmarkModel wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paperID?id.
+       ?paper wot:benchmarkedModel?benchmarkModel.
+       ?benchmarkModel wot:benchmarkedModelFor?benchmark.
+       ?benchmark wot:benchmarkedBy?benchmark.
+       ?benchmark wot:benchmarkedOn?benchmarkModelOn.
+       ?paper orkg:paper

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperID ?title 
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper schema:hasPart ?benchmark.
+  ?benchmark schema:hasTopic ?benchmarkTopic.
+  ?benchmarkTopic schema:hasTopic ?dataset.
+  ?dataset schema:datasetName "SciREX"^^xsd:string.
+  ?paper orkg:paperID ?paperID.
+  ?paper schema:hasTitle ?title.
+}
+ORDER BY DESC(?paperID) 
+LIMIT 10
+```

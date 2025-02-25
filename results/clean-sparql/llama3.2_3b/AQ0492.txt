@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX wikibase: <http://wikibase.org/wikibase/wf/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?id ?paperTitle
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper wikibase:label ?paperLabel.
+    ?paper rdfs:label ?paperTitle.
+    ?paper orkg:hasBenchmarkedModel ?benchmarkedModel.
+    ?benchmarkedModel orkg:hasDataset ?benchmarkedDataset.
+    ?benchmarkedDataset wikibase:label ?benchmarkedDatasetLabel.
+    FILTER (str(?benchmarkedDatasetLabel) = "enwik8")
+}
+```

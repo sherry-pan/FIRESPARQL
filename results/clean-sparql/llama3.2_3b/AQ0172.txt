@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?model
+WHERE {
+  ?model wdt:P162 ?score.
+  ?model wdt:P131 wd:Q12345678.
+  FILTER(?score > 0)
+}
+GROUP BY ?model
+HAVING SUM(?score) > 10 
+ORDER BY DESC(SUM(?score))
+LIMIT 10
+```

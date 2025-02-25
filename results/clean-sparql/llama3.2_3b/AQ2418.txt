@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperTitle ?url
+WHERE {
+  ?paper wdt:P31 wd:Q13442814;  # Assume Q13442814 is the item for academic papers
+         wdt:P921 wd:Q12345678; # Q12345678 is a placeholder for ResNet-152 (SAM)
+         wdt:P106 wd:Q12345678; # Placeholder for the link to code
+         rdfs:label ?paperTitle.
+  ?paper wdt:P953 ?url.         # Property for full work available at URL
+  FILTER(LANG(?paperTitle) = "en")
+}
+```
+
+Note: Replace `wd:Q12345678` with the actual Wikidata item ID for "ResNet-152 (SAM)" and link to the relevant code entity. Adjust the properties used (`wdt:P31`, `wdt:P921`, `wdt:P953`) based on the actual structure in Wikidata.

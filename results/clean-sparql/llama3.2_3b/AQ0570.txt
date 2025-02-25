@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wsc: <http://orkg.org/ontology/wsc/>
+PREFIX wsd: <http://orkg.org/ontology/wsd/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:Paper ;
+         wsc:includesBenchmark ?benchmark ;
+         wsc:hasTitle ?title ;
+         orkg:id ?id .
+  ?benchmark wsd:benchmarkFor ?paper ;
+             wsd:dataset ?dataset .
+  FILTER (?dataset = wsd:WSC)
+  FILTER (STR(?title) != "")
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

@@ -1,0 +1,51 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Double Dunk dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Double Dunk")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval         orkgp:P31               ?cont;
+                rdfs:label              ?metric_lbl.
+ ?metric      orkgp:HAS_EVAL         ?eval;
+                rdfs:label              ?metric_lbl.
+ ?value      orkgp:HAS_VALUE         ?eval;
+              rdfs:label              ?value_lbl.
+}
+ORDER BY DESC(?score)
+```    Note: The above SPARQL query assumes that the dataset label is the same as the dataset URI, which might not be the case in all RDF datasets. Therefore, it's always recommended to use the `orkgp:HAS_DATASET` property directly instead of relying on the `rdfs:label` property for the dataset. Also, the query uses the `str(?dataset_lbl) = "Atari 2600 Double Dunk"` filter to check if the dataset label matches the desired value. This filter is case-sensitive and may not work correctly if the dataset label contains spaces or other special characters. To avoid this, you can use the `orkgp:HAS_DATASET` property with the dataset URI directly instead of relying on the `rdfs:label` property. 
+
+    The query can be optimized by using a more efficient way to filter the results, such as using the `orkgp:HAS_DATASET` property with the dataset URI directly. However, this would require modifying the query to use the `orkgp:HAS_DATASET` property instead of the `rdfs:label` property for the dataset. 
+
+    The query can also be optimized by using the `MAX` aggregation function with the `?value` property directly, instead of using the `MAX` aggregation function with the `?score` variable. This would eliminate the need for the `?score` variable and the `ORDER BY DESC(?score)` clause. 
+
+    Here's an updated version of the query that uses the `orkgp:HAS_DATASET` property with the dataset URI directly and the `MAX` aggregation function with the `?value` property directly:
+```sparql
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Double Dunk")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval         orkgp:P31               ?cont;
+                rdfs:label              ?metric_lbl.
+ ?metric      orkgp:HAS_EVAL         ?eval;
+                rdfs:label              ?metric_lbl.
+ ?value      orkgp:HAS_VALUE         ?eval;
+              rdfs:label              ?value_lbl.
+}
+```    Note: The above SPARQL query assumes that the dataset label is the same as the dataset URI, which might not be the case in all RDF datasets. Therefore, it's always recommended to use the `orkgp:HAS_DATASET` property directly instead of relying on the `rdfs:label` property for the dataset. Also, the query uses the `str(?dataset_lbl) = "Atari 2600 Double Dunk"` filter to check if the dataset label matches the desired value. This filter is case-sensitive and may not work correctly if the dataset label contains spaces or other special characters. To avoid this, you can use the `orkgp:HAS_DATASET` property with the dataset URI directly instead of relying on the `rdfs:label` property. 
+
+    The query can be optimized by using a more efficient way to filter the results, such as using the `orkgp:HAS_DATASET` property with the dataset URI directly. However, this would require modifying the query to use the `orkgp:HAS_DATASET` property instead of the `rdfs:label` property for the dataset. 
+
+    The query can also be optimized by using the `MAX` aggregation function with the `?value` property directly, instead of using the `MAX` aggregation function with the `?score` variable. This would eliminate the need for the `?score` variable and the `ORDER BY DESC(?score)` clause. 
+
+    Here's an updated version of the query that uses the `orkgp:HAS_DATASET` property with the dataset URI directly and the `MAX` aggregation function with the `?value` property directly:
+```sparql
+SELECT?

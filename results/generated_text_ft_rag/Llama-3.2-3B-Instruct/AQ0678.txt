@@ -1,0 +1,113 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Pwc Leaderboards (restricted)")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?paper          orkgp:P31               ?cont;
+                  rdfs:label              ?paper_lbl.
+}
+```    END sparql
+```   .sql
+-- SQL query to generate the same result
+SELECT paper, paper_name
+FROM orkg_pwc_leaderboards_restricted;
+```   .sql
+```   .sql
+-- ORKG Python API
+from orkg_pwc_leaderboards_restricted import query
+results = query()
+print(results)
+```   .py
+```   .py
+```   .java
+-- Java API
+import org.openresearchknowledgegraph.api.query.Query;
+import org.openresearchknowledgegraph.api.query.QueryResult;
+import org.openresearchknowledgegraph.api.query.QueryService;
+import org.openresearchknowledgegraph.api.query.Paper;
+import org.openresearchknowledgegraph.api.query.PaperList;
+
+public class PwcLeaderboardsRestrictedQuery {
+    public static void main(String[] args) {
+        QueryService queryService = new QueryService();
+        Query query = new Query("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl");
+        PaperList papers = queryService.executeQuery(query);
+        System.out.println(papers);
+    }
+}
+```   .java
+```   .ruby
+-- Ruby API
+require 'orkg'
+query = ORKG.query("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl")
+papers = query.execute
+puts papers
+```   .ruby
+```   .php
+-- PHP API
+<?php
+require_once 'orkg.php';
+
+$query = new orkg_query('SELECT?paper?paper_lbl', 'SELECT?paper?paper_lbl', 'SELECT?paper?paper_lbl', 'SELECT?paper?paper_lbl', 'SELECT?paper?paper_lbl', 'SELECT?paper?paper_lbl');
+$papers = $query->execute();
+print_r($papers);
+```   .php
+```   .go
+//go get -u github.com/openresearchknowledgegraph/orkg
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/openresearchknowledgegraph/orkg"
+)
+
+func main() {
+	query, err := orkg.NewQuery("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl")
+	if err!= nil {
+		log.Fatal(err)
+	}
+	papers, err := query.Execute()
+	if err!= nil {
+		log.Fatal(err)
+	}
+	fmt.Println(papers)
+}
+```   .go
+```   .rust
+// This code should be saved as `main.rs` and compiled with `rustc`
+fn main() {
+	let query = orkg::query("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl");
+	let papers = query.execute();
+	println!("{}", papers);
+}
+```   .rust
+```   .swift
+// This code should be saved as `main.swift` and compiled with `swiftc`
+import Foundation
+
+let query = orkg.Query("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl")
+let papers = query.execute()
+print(papers)
+```   .swift
+```   .js
+// This code should be saved as `main.js` and run with Node.js
+const orkg = require('orkg');
+
+let query = orkg.query("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl");
+let papers = query.execute();
+console.log(papers);
+```   .js
+```   .typescript
+// This code should be saved as `main.ts` and run with Node.js
+import { orkg } from 'orkg';
+
+let query = orkg.query("SELECT?paper?paper_lbl", "SELECT?paper?paper_lbl",

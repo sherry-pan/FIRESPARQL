@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+SELECT ?metric ?dataset
+WHERE {
+  ?metric orkg:isUsedFor ?dataset.
+  ?dataset orkg:datasetName "Atari 2600 Zaxxon".
+  ?metric orkg:metricName ?m.
+  FILTER (str(?m) = "accuracy" || str(?m) = "precision" || str(?m) = "recall" || str(?m) = "F1" || str(?m) = "AUC")
+}
+LIMIT 10
+```

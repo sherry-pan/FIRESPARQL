@@ -1,0 +1,14 @@
+```sparql
+SELECT ?paper ?code ?code_lbl
+WHERE {
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:P34 ?model.
+    ?model rdfs:label "CL-Titles-Parser".
+    ?model orkgp:P35 ?code.
+    ?code a orkgc:Code.
+    ?code rdfs:label ?code_lbl.
+    FILTER(REGEX(?code_lbl, "https?://"))
+}
+ORDER BY DESC(?code)
+LIMIT 10
+```

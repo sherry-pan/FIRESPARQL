@@ -1,0 +1,84 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the TempEval-3 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "TempEval-3")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         orkgp:HAS_SOURCE        ?source.
+      ?source      rdfs:label              ?source_lbl.
+       FILTER (str(?source_lbl) = "Evaluation")
+     } 
+     ORDER BY DESC(?metric_lbl) 
+     LIMIT 10. 
+```sql
+SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TempEval-3")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                 orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+          ?metric          rdfs:label              ?metric_lbl.}
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont         orkgp:HAS_SOURCE        ?source.
+ ?source      rdfs:label              ?source_lbl.
+  FILTER (str(?source_lbl) = "Evaluation")
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 10.
+``` 
+Note: The output of the SPARQL query is not provided as it is not a programming language. The output is a SQL-like query that can be executed on a SPARQL endpoint. 
+
+To execute this query on a SPARQL endpoint, you would use a tool like `sparqlcut` or `blinky`. You would also need to replace the `?dataset_lbl` filter with a more specific value if you want to retrieve only the dataset with the exact label "TempEval-3". 
+
+Please note that the `LIMIT 10` clause in the query may not return the correct results if the dataset has less than 10 evaluations. You may need to adjust the query or use a more sophisticated method to retrieve the top N evaluations. 
+
+Also, the query uses the `rdfs:label` property to retrieve the labels of the dataset and the source. This may not work if the labels are not in English. You may need to use a more specific property or add a language filter to the query. 
+
+Finally, the query uses the `DESC` function to order the results in descending order. This may not work on all SPARQL endpoints. You may need to use a different ordering function or adjust the query to retrieve the results in a different order. 
+
+Please test the query on a SPARQL endpoint before using it in a production environment. 
+
+Here is an example of how you can execute the query using `sparqlcut`:
+```bash
+sparqlcut -s <sparql_endpoint> -q "SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TempEval-3")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                 orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+          ?metric          rdfs:label              ?metric_lbl.}
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont         orkgp:HAS_SOURCE        ?source.
+ ?source      rdfs:label              ?source_lbl.
+  FILTER (str(?source_lbl) = "Evaluation")
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 10."
+``` 
+Please replace `<sparql_endpoint>` with the actual URL of the SPARQL endpoint you want to query. 
+
+Here is an example of how you can execute the query using `blinky`:
+```bash
+blinky -s <sparql_endpoint> -q "SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TempEval-3")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                 orkgp:HAS_EVALUATION   ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+          ?metric          rdfs:label              ?metric_lbl.}
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont         orkgp:

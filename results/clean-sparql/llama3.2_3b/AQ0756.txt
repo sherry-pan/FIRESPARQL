@@ -1,0 +1,17 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX vocab: <http://purl.org/vocab/ontologies/sio/1.0/> 
+PREFIX agnews: <http://purl.org/agnews/ontology/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+
+SELECT ?metric 
+WHERE { 
+  ?metric agnews:isEvaluationMetricFor ?dataset.
+  ?dataset agnews:datasetName "AG News".
+  ?metric rdfs:label ?label.
+  FILTER (lang(?label) = "en") 
+} 
+ORDER BY DESC (length(?label)) 
+LIMIT 3
+```

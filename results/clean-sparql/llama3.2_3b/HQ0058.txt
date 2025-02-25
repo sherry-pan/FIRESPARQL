@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX schema: <http://schema.org/>
+SELECT ?s ?precision ?recall ?f1
+WHERE {
+  ?s orkg:hasMethod ?method.
+  ?method orkg:isUsedWith ?feature.
+  ?feature schema:featureType "bag of words".
+  ?s orkg:isUsedFor ?classification.
+  ?classification schema:targetClass "Feature Request".
+  ?s orkg:uses ?algorithm.
+  ?algorithm schema:classificationScheme "Naive Bayes".
+  ?s orkg:hasMetric ?metric1.
+  ?metric1 schema:metricType "precision".
+  ?metric1 orkg:hasValue ?precision.
+  ?s orkg:hasMetric ?metric2.
+  ?metric2 schema:metricType "recall".
+  ?metric2 orkg:hasValue ?recall.
+  ?s orkg:hasMetric ?metric3.
+  ?metric3 schema:metricType "f1".
+  ?metric3 orkg:hasValue ?f1.
+}
+```

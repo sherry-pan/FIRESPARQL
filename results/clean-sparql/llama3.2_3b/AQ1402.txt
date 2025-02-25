@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://org.openresearch.net/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?modelName WHERE {
+    ?model orkg:hasDataset <http://example.org/dataset/NYT-single> .
+    ?model orkg:hasPerformanceMetric ?metric .
+    ?metric orkg:hasF1Score ?f1Score .
+    ?model rdfs:label ?modelName .
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

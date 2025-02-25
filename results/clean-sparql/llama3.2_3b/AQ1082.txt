@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark schema:description "Benchmark on NYT29".
+  ?benchmark orkg:dataset "NYT29".
+  ?benchmark orkg:bestResult ?result.
+  ?result schema:value ?value.
+  ?result schema:metric ?metric.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX ork: <http://www.openresearch.org/ontology/ork/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model
+WHERE {
+  ?paper a ork:Paper.
+  ?paper ork:hasModel ?model.
+  ?model ork:hasMetric ?metric.
+  ?metric ork:hasMetricName "Macro Precision".
+  ?metric ork:hasBenchmark ?benchmark.
+  ?benchmark ork:hasDataset "NLP-TDMS (Exp, arXiv only)".
+  ?metric ork:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

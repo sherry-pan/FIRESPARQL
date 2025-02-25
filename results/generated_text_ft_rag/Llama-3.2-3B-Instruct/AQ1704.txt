@@ -1,0 +1,34 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 River Raid benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl (MAX(?score) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 River Raid")
+         }
+     UNION
+     {
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         rdfs:label              ?cont_lbl.
+      ?cont         orkgp:P32               ?model.
+      ?model      rdfs:label               ?model_lbl.
+      ?model      orkgp:HAS_EVALUATION     ?eval.
+      ?eval       orkgp:P31               ?eval_lbl.
+      ?eval       rdfs:label              ?eval_lbl.
+      ?eval       orkgp:HAS_VALUE          ?value.
+      ?value      rdfs:label              ?score_lbl.
+      ?value      orkgp:HAS_MODEL         ?model.
+      ?model      orkgp:P32               ?model.
+       FILTER (str(?cont_lbl) = "Team 2 Subtask 1 English")
+       FILTER (str(?score_lbl) = "Score")
+      ?score      rdfs:label              ?score_lbl.
+       BIND(xsd:float(?score_lbl) AS?score)
+     }
+     GROUP BY?model?model_lbl
+     HAVING (MAX(?score)  0.9) 
+     ORDER BY DESC(?score) LIMIT 1;
+```
+    Note: The SPARQL query is case-sensitive and assumes that the data is stored in the ORKG repository. The `orkgc` and `orgkp` prefixes are assumed to be defined in the ORKG repository. The `xsd` prefix is used to define the `float` data type. The `FILTER` conditions are used to select only the relevant data. The `GROUP BY` and `HAVING` clauses are used to aggregate the data and filter the results. The `ORDER BY` clause is used to sort the results in descending order, and the `LIMIT` clause is used to return only the top result.<|eot_id|>

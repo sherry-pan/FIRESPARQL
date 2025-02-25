@@ -1,0 +1,21 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the MLDoc Zero-Shot English-to-French dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a            orkgc:Dataset;
+                      rdfs:label   ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "MLDoc Zero-Shot English-to-French")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont          orkgp:HAS_EVALUATION   ?eval;
+                      orkgp:HAS_MODEL         ?model.
+       OPTIONAL {?model      rdfs:label              ?model_lbl.}
+      ?model      rdfs:label              ?model_lbl.
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1
+```     Note: The above SPARQL query is based on the provided context and the input question. It is designed to retrieve the top performing model in terms of Accuracy score when benchmarked on the MLDoc Zero-Shot English-to-French dataset. The query uses the ORKG RDF data dump and filters the results based on the specified dataset and evaluation metrics. The output of the query is a list of dictionaries containing the URI, label, and score of the top performing model.<|eot_id|>

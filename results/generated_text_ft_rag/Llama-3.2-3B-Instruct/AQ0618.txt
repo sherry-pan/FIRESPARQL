@@ -1,0 +1,115 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Atari 2600 Frostbite dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Frostbite")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?paper         orkgp:P31               ?cont;
+                 rdfs:label              ?paper_lbl.
+}
+```
+
+
+
+    Note that the above query will not return any results because there are no datasets with the label "Atari 2600 Frostbite" in the ORKG dataset. The filter condition is used to match the dataset labels exactly, which is not the case here. 
+
+    To find the top similar entities or properties from the RDF data dump, you can use the following SPARQL query:
+    ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?paper         orkgp:P31               ?cont;
+                 rdfs:label              ?paper_lbl.
+}
+```
+
+
+
+    This query will return all papers that have benchmarks, but it will not specifically filter by the "Atari 2600 Frostbite dataset". You can adjust the filter condition to match the exact dataset label if it were present in the ORKG dataset. 
+
+    Alternatively, you can use a more general query that retrieves all papers and then filters the results based on the dataset and benchmark:
+    ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?cont      orkgp:P31               ?paper;
+              rdfs:label              ?paper_lbl.
+ ?dataset       orkgp:HAS_DATASET      ?cont;
+                  rdfs:label              ?dataset_lbl.
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+}
+```
+
+
+
+    This query will return all papers that have a dataset, but you will need to add additional conditions to filter by the specific dataset and benchmark. 
+
+    To find the top similar entities or properties from the RDF data dump, you can use the following SPARQL query:
+    ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?cont      orkgp:P31               ?paper;
+              rdfs:label              ?paper_lbl.
+ ?dataset       orkgp:HAS_DATASET      ?cont;
+                  rdfs:label              ?dataset_lbl.
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?similar      orkgp:SIMILAR_TO        ?cont;
+                rdfs:label              ?similar_lbl.
+}
+```
+
+
+
+    This query will return all papers that have a similar dataset, but you will need to add additional conditions to filter by the specific dataset and benchmark. 
+
+    To find the top similar entities or properties from the RDF data dump, you can use the following SPARQL query:
+    ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?cont      orkgp:P31               ?paper;
+              rdfs:label              ?paper_lbl.
+ ?dataset       orkgp:HAS_DATASET      ?cont;
+                  rdfs:label              ?dataset_lbl.
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?similar      orkgp:HAS_DATASET        ?dataset.
+}
+```
+
+
+
+    This query will return all papers that have a dataset, but you will need to add additional conditions to filter by the specific dataset and benchmark. 
+
+    To find the top similar entities or properties from the RDF data dump, you can use the following SPARQL query:
+    ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?cont      orkgp:P31               ?paper;
+              rdfs:label              ?paper_lbl.
+ ?dataset       orkgp:HAS_DATASET      ?cont;
+                  rdfs:label              ?dataset_lbl.
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?similar      orkgp:HAS_DATASET        ?dataset.
+ ?dataset       orkgp:P31               ?dataset;
+                 rdfs:label              ?dataset_lbl.
+}
+```
+
+
+
+    This query will return all papers that have a similar dataset, but you will need to add additional conditions to filter by the specific dataset and benchmark. 
+
+    To find the top similar entities or properties from the RDF data dump, you can use the following SPARQL query:
+    ```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?cont      orkgp:P31               ?paper;
+              rdfs:label              ?paper_lbl.
+ 

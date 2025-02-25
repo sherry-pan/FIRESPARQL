@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://purl.org/orwg/sparql/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX oboInOar: <http://purl.obolibrary.org/obo/in/oar/>
+
+SELECT ?datasetLabel ?datasetURI
+WHERE {
+    ?dataset a orkg:BenchmarkedDataset.
+    ?dataset orkg:isRelatedTo ?researchArea.
+    ?researchArea a orkg:ResearchArea.
+    ?researchArea schema:name "Sentence Classification".
+    ?dataset schema:name ?datasetLabel.
+    ?dataset schema:comment ?datasetURI.
+}
+LIMIT 20
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+SELECT ?model ?name
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark "TriviaQA".
+  ?model orkg:score ?score.
+  ?score schema:accuracy ?accuracy.
+  FILTER (?accuracy = 0.913).
+  ?model schema:name ?name.
+}
+LIMIT 1
+```

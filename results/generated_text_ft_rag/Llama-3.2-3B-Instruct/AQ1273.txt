@@ -1,0 +1,25 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Centipede dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?metric_lbl (COUNT(?eval) AS?score)
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Centipede")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval         orkgp:P31               ?cont;
+                rdfs:label              ?eval_lbl.
+  OPTIONAL {?eval      orkgp:HAS_METRIC         ?metric.
+          ?metric      rdfs:label              ?metric_lbl.}
+}
+GROUP BY?metric?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 5;
+```     end of sparql query
+    end of code block
+    end of file
+```
+    The above code block is the solution to the given problem. It is a SPARQL query that retrieves the top 5 similar entities related to benchmarks and evaluations, based on cosine similarity. The query is designed to answer the question about the top benchmark score and its metric on the Atari 2600 Centipede dataset, given the provided context. The query first filters the data to include only the Atari 2600 Centipede dataset, then retrieves the related benchmarks and evaluations. Finally, it groups the results by metric and labels, and orders them by the score in descending order, limiting the output to the top 5 similar entities. The output is a list of entities with their respective labels and scores, which can be used to answer the question or further analyze the data.<|eot_id|>

@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX wkm: <http://www.w3.org/2012/owlim/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?topModelName ?topScore
+WHERE {
+  ?model wkm:hasBenchmark ?benchmark.
+  ?benchmark wkm:hasDataset ?dataset.
+  ?dataset rdfs:label "Atari 2600 Enduro"^^<http://www.w3.org/2001/XMLSchema#string>.
+
+  ?topModel wkm:hasScore ?topScore.
+  ?topModel rdfs:label ?topModelName.
+
+  FILTER(NOT EXISTS {
+    ?anotherModel wkm:hasBenchmark/wkm:hasScore ?anotherScore.
+    FILTER(?anotherScore > ?topScore)
+  })
+}
+LIMIT 1
+```

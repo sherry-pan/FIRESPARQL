@@ -1,0 +1,22 @@
+```sparql
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?test
+WHERE {
+  {
+    ?model a ork:Model.
+    ?model ork:hasTest ?test.
+    ?test rdfs:label ?testLabel.
+    FILTER (STR(?testLabel) = "Reuters RCV1/RCV2 English-to-German benchmark dataset")
+  }
+  UNION
+  {
+    ?test a ork:Test.
+    ?test ork:hasModel ?model.
+    ?test ork:hasDataset ?dataset.
+    ?dataset rdfs:label ?datasetLabel.
+    FILTER (STR(?datasetLabel) = "Reuters RCV1/RCV2 English-to-German benchmark dataset")
+  }
+}
+```

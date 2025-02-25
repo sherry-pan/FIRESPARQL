@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dcase: <http://purl.org/dcase/>
+
+SELECT ?paper ?paperID ?title
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark a dcase:benchmarkFor.
+  ?benchmark dcase:dataset "DCASE".
+  ?paper orkg:title ?title.
+  ?paper orkg:ID ?paperID.
+  FILTER (lang(?title) = "en")
+}
+LIMIT 10
+```

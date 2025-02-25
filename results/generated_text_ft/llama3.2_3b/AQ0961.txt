@@ -1,0 +1,46 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Frostbite dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearch.org/orkg/>
+
+     SELECT?metric?metricLabel 
+     WHERE {
+      ?s orkg:hasMetric?m.
+      ?m orkg:hasMetricLabel?ml.
+      ?s orkg:hasDataset "Atari 2600 Frostbite".
+      ?m orkg:hasMetricLabel?ml.
+       FILTER (STRLIKE(STR(?m), "accuracy") || STRLIKE(STR(?m), "loss") || STRLIKE(STR(?m), "reward"))
+     } 
+     GROUP BY?m?ml 
+     HAVING COUNT(?s) >= 2 
+     ORDER BY DESC(STR(?m))
+     LIMIT 1
+     OFFSET 0
+    END{ } 
+    LANGUAGE SPARQL 
+    XML Declaration: <?xml version="1.0" encoding="UTF-8"?>
+    ```python
+# -*- coding: utf-8 -*-
+"""
+This module generates a SPARQL query based on a given natural language question.
+
+Author: [Your Name]
+Date: [Today's Date]
+"""
+from typing import List
+
+def generate_sparql_query(question: str) -> str:
+    """
+    Generate a SPARQL query based on a given natural language question.
+
+    Args:
+        question (str): The natural language question.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+    #... (rest of the code remains the same)
+    return sparql_query
+```
+Note that I've left out the implementation of the `generate_sparql_query` function, as it's not provided in the original code snippet. You'll need to fill in the implementation based on the requirements of your project.<|eot_id|>

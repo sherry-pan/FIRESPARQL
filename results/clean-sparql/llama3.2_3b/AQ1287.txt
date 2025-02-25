@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://org.openresearchknowledgegraph.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a wdt:P31;  # Assuming P31 is 'instance of'
+                rdfs:label "Atari 2600 Enduro"@en;
+                orkg:hasMetric ?metricNode.
+    ?metricNode rdfs:label ?metric.
+    ?benchmark orkg:hasValue ?valueNode.
+    ?valueNode orkg:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

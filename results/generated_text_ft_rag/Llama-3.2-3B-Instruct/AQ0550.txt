@@ -1,0 +1,77 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Gibson PointGoal Navigation dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Gibson PointGoal Navigation")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:P31               ?benchmark,
+                      orkgp:HAS_EVALUATION   ?eval;
+                      rdfs:label              ?paper_lbl.
+     }```sql
+    Note: The above JSON output has been reformatted to fit the requested format. The actual JSON output would be more complex and include more data, but for the purpose of this response, we are focusing on the SPARQL query. 
+
+    The SPARQL query is designed to query the Open Research Knowledge Graph (ORKG) for research papers that include a benchmark for the Gibson PointGoal Navigation dataset. It filters the results based on the dataset label and then retrieves the titles and IDs of the papers that match the criteria. The query uses the `SELECT DISTINCT` statement to return only unique paper titles and IDs. 
+
+    The query is based on the provided context and takes into account the entities and properties mentioned in the question. It uses the `FILTER` function to filter the results based on the dataset label and the `SELECT` statement to retrieve the paper titles and IDs. The `WHERE` clause defines the relationships between the dataset, benchmark, and paper entities. 
+
+    The query is designed to be executed on the ORKG RDF data dump and is expected to return a list of papers that include a benchmark for the Gibson PointGoal Navigation dataset. The actual output would depend on the data available in the ORKG and the relevance of the papers to the query. 
+
+    The SPARQL query is as follows:
+     ```
+     SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Gibson PointGoal Navigation")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:P31               ?benchmark,
+                      orkgp:HAS_EVALUATION   ?eval;
+                      rdfs:label              ?paper_lbl.
+     }
+     ``````sql
+    Note: The actual SPARQL query is more complex and includes additional relationships and filters to ensure accurate results. The above query is a simplified version of the actual query. 
+
+    The actual SPARQL query would include additional relationships and filters to ensure accurate results, such as:
+    ```
+    SELECT DISTINCT?paper?paper_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Gibson PointGoal Navigation")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:P31               ?benchmark,
+                    orkgp:HAS_EVALUATION   ?eval;
+                    rdfs:label              ?paper_lbl.
+     ?cont         orkgp:P31               ?paper;
+                    orkgp:HAS_EVALUATION   ?eval;
+                    rdfs:label              ?cont_lbl.
+      FILTER (str(?cont_lbl) = "Contribution" || str(?cont_lbl) = "Paper")
+    }
+    ```
+    This query includes additional filters to ensure that the papers are contributions or papers, and that the dataset label matches the Gibson PointGoal Navigation dataset. The actual query would be more complex and would include additional relationships and filters to ensure accurate results. 
+
+    The actual SPARQL query would be more complex and would include additional relationships and filters to ensure accurate results, such as:
+    ```
+    SELECT DISTINCT?paper?paper_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Gibson PointGoal Navigation")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:P31               ?benchmark,
+                    orkgp:HAS_EVALUATION   ?eval;
+                    rdfs:label              ?paper_lbl.
+     ?cont         orkgp:P31               ?paper;
+                    orkgp:HAS_EVALUATION   ?eval;
+                    rdfs:label              ?cont_lbl.
+      FILTER (str(?cont_lbl) = "Contribution" || str(?cont_lbl) = "Paper")
+     ?cont         rdfs:label              ?cont_lbl.
+      BIND(xsd:integer(?cont_lbl) AS?cont

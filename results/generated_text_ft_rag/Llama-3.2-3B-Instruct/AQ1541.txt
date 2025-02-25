@@ -1,0 +1,33 @@
+Question:
+Indicate the model that performed best in terms of Pearson Correlation metric on the MedSTS benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    SELECT?model?model_lbl (MAX(?metric_value) AS score)
+    WHERE {
+      orkgp:Dataset        orkgp:HAS_DATASET      ?dataset.
+      FILTER (str(?dataset) = "MedSTS")
+     ?dataset       orkgp:P31              ?cont.
+     ?cont           orkgp:P31              ?model.
+     ?model         rdfs:label              ?model_lbl.
+     ?cont         orkgp:P33              ?metric.
+     ?metric       rdfs:label              ?metric_lbl.
+     ?cont         orkgp:P34              ?value.
+      BIND(xsd:decimal(?value) AS?metric_value)
+     ?model      orkgp:P34              ?cont_metric.
+      BIND(xsd:decimal(?cont_metric) AS?metric_value)
+      FILTER (?metric_lbl = "Pearson Correlation")
+    }
+    ``` 
+    Please note that you have to run this query with the ORKG data and it will return the best model that performed with the Pearson Correlation metric on the MedSTS dataset. The best model is the one with the highest value of the metric, which in this case is the model that has the highest value of the metric in the filter.
+    If you want to get the best model with the highest value of the metric, you should change the filter line to:
+    ```sparql
+      FILTER (MAX(?metric_value) =?metric_value)
+    ``` 
+    This will return the model that has the highest value of the metric. 
+
+    Also, please note that the dataset is not explicitly mentioned in the query, but it is assumed to be the one that has the MedSTS benchmark. If the dataset is not the one you are looking for, you should change the filter line to:
+    ```sparql
+      FILTER (str(?dataset) = "your_dataset_name")
+    ``` 
+    where "your_dataset_name" is the name of the dataset you are looking for.<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper schema:hasPart ?benchmark.
+  ?benchmark schema:hasTarget ?target.
+  ?target dbo:dataset <http://dbpedia.org/ontology/Dataset#Gibson_PointGoal_Navigation>.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasId ?id.
+}
+```

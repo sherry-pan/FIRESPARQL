@@ -1,0 +1,12 @@
+```sparql
+SELECT ?examined
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?exams.
+  ?exams rdfs:label ?exams_label.
+  ?exams orkgp:P33 ?exam.
+  ?exam orkgp:P34 ?examined.
+  FILTER(REGEX(STR(?exams_label), "children|child"))
+}
+```

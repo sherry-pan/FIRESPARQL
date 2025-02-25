@@ -1,0 +1,160 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX wmt: <http://wmt2020.org/schema/ontology/WMT2016>
+     PREFIX wikibase: <http://wikibase.org/schema/ontology/WIKIBASE>
+     PREFIX wikibase: <http://wikibaeschema.org/schema/Wikibase>
+     SELECT?model?score
+     WHERE {
+       ?model wikibase:label?label.
+       ?label wikibase:translate?romanianLabel.
+       ?romanianLabel wikibase:transliterate?romanianTransliterate.
+       ?romanianTransliterate wikibase:label?romanianTransliterateLabel.
+       ?romanianTransliterateLabel wikibase:transliterate?englishTransliterate.
+       ?englishTransliterate wikibase:label?englishTransliterateLabel.
+       ?englishTransliterateLabel wikibase:transliterate?score.
+       ?model wmt:benchmark "WMT2016-Romanian-English".
+       ?model wikibase:rank?rank.
+        FILTER (?rank = max(?rank ) )
+        SERVICE wikibase:label {?score wikibase:label?scoreLabel. }
+       ?scoreLabel wikibase:transliterate?scoreTransliterate.
+        FILTER ( REGEX (?scoreTransliterate, "BLEU score", "i" ) )
+        BIND ( STRDT(?scoreTransliterate, "float") AS?score )
+      } 
+    END {} 
+    WITH NAMESPACE wikibase: <http://wikibaeschema.org/schema/Wikibase> 
+    RETURNING?model?score. 
+    LIMIT 1; 
+    ORDER BY DESC; 
+    BIND (STRDT(?score, "float")) AS?score. 
+    FILTER ( REGEX (?score, "highest", "i" ) ) 
+    RETURN 1; 
+    END {}; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END; 
+    END;

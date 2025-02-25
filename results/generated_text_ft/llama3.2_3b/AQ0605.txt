@@ -1,0 +1,69 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Atari 2600 Skiing dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?title?id 
+     WHERE {
+        ?paper?paperId. 
+         <http://www.openresearchknowledgegraph.org/ontology/#benchmarkedOn>?benchmarkingRel. 
+        ?benchmarkingRel?benchmarkingTarget. 
+         <http://www.openresearchknowledgegraph.org/ontology/#targetDataset>?benchmarkingTarget. 
+         <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?benchmarkingTarget. 
+         <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?datasetName. 
+         <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?datasetName1. 
+         <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?datasetName2. 
+        ?datasetName1 <skos:prefLabel> "Atari 2600 Skiing"@en. 
+        ?datasetName2 <skos:prefLabel> "Atari 2600 Skiing"@en. 
+        ?benchmarkingTarget <skos:prefLabel> "Atari 2600 Skiing"@en. 
+        ?paper orkg:title?title. 
+        ?paper orkg:id?id
+     } GROUP BY?title?id
+    Note: 
+     - The ORKG has the following properties:
+     - `orkg:paper`: represents a research paper
+     - `orkg:paperId`: a unique identifier for a research paper
+     - `orkg:title`: the title of a research paper
+     - `orkg:id`: the unique identifier of a research paper
+     - `orkg:benchmarkedOn`: a relation between a research paper and a benchmarking target
+     - `orkg:targetDataset`: a relation between a research paper and a benchmarking target
+     - `orkg:datasetName`: a relation between a benchmarking target and a dataset name
+     - `skos:prefLabel`: the preferred label of a resource
+     - `skos:broader`: a relation between a resource and a broader term
+    - The ORKG has the following dataset:
+    - `Atari 2600 Skiing` is a benchmarking target
+    - `Atari 2600 Skiing` is a dataset name
+    - `Atari 2600 Skiing` is a resource that has the preferred label "Atari 2600 Skiing"@en
+
+    ```python
+def get_orkg_query(question):
+    # Your code here
+    pass
+```
+    You can use the following code to generate the SPARQL query:
+    ```python
+def get_orkg_query(question):
+    # Tokenize the question
+    tokens = question.split()
+
+    # Get the main topic (e.g., "research paper")
+    main_topic = tokens[0]
+
+    # Get the specific topic (e.g., "Atari 2600 Skiing")
+    specific_topic = tokens[2]
+
+    # Define the SPARQL query
+    sparql_query = (
+        "PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>"
+        "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>"
+        "SELECT?title?id "
+        "WHERE {?paper?paperId."
+        " <http://www.openresearchknowledgegraph.org/ontology/#benchmarkedOn>?benchmarkingRel."
+        "?benchmarkingRel?benchmarkingTarget."
+        " <http://www.openresearchknowledgegraph.org/ontology/#targetDataset>?benchmarkingTarget."
+        " <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?benchmarkingTarget."
+        " <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?datasetName."
+        " <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?datasetName1."
+        " <http://www.openresearchknowledgegraph.org/ontology/#datasetName>?datasetName2."
+        "?datasetName1 <skos:prefLabel

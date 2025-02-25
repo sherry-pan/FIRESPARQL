@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper schema:hasPart ?codeReference.
+  ?paper schema:hasTopic ?topic.
+  FILTER (CONTAINS(LCASE(STR(?topic)), 'mpad-path') && CONTAINS(LCASE(STR(?paper)), 'benchmarking'))
+}
+LIMIT 10
+```

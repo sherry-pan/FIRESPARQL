@@ -1,0 +1,40 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset DocRED (Human-annotated)?
+
+Generated SPARQL:
+ SELECT?metric,?value
+     WHERE {
+      ?dataset       a            orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "DocRED (Human-annotated)")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:P31               ?cont;
+                      orkgp:P32               ?benchmark;
+                      rdfs:label              ?metric.
+      ?cont          orkgp:P31               ?cont;
+                      orkgp:P32               ?benchmark;
+                      rkgp:HAS_EVALUATION     ?eval.
+      ?eval          rkgp:HAS_VALUE          ?value.
+     } ORDER BY DESC(?value) LIMIT 1.```python
+```
+    Given the provided input question and context, the corresponding SPARQL query is:
+
+    SELECT?metric,?value
+    WHERE {
+     ?dataset       a            orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "DocRED (Human-annotated)")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval          orkgp:P31               ?cont;
+                    orkgp:P32               ?benchmark;
+                    rdfs:label              ?metric.
+     ?cont          orkgp:P31               ?cont;
+                    orkgp:P32               ?benchmark;
+                    rkgp:HAS_EVALUATION     ?eval.
+     ?eval          rkgp:HAS_VALUE          ?value.
+    } ORDER BY DESC(?value) LIMIT 1.
+```python
+```
+    This SPARQL query will retrieve the top benchmark result (metric and value) over the dataset DocRED (Human-annotated) from the ORKG. The query filters the results to only include the dataset with the specified label, then retrieves the metric and value associated with the top-scoring benchmark result. The results are ordered by the value in descending order and limited to the top 1.<|eot_id|>

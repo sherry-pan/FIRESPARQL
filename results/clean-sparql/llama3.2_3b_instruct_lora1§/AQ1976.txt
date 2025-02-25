@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper rdfs:label ?paperLabel.
+  FILTER (CONTAINS(LCASE(?paperLabel), "benchmark"))
+  ?paper orkgp:P32 ?model.
+  ?model rdfs:label ?modelLabel.
+  FILTER (str(?modelLabel) = "SEE")
+  ?model orkgp:P33 ?code.
+}
+ORDER BY DESC(?code)
+LIMIT 10
+```

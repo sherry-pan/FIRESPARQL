@@ -1,0 +1,24 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Params")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "VTAB-1k")
+      ?benchmark orkgp:HAS_DATASET ?dataset.
+      ?cont orkgp:HAS_BENCHMARK ?benchmark.
+      ?eval orkgp:HAS_VALUE ?cont ?value.
+      ?metric orkgp:HAS_EVALUATION ?eval ?metric ?value.
+      ?model orkgp:HAS_MODEL ?cont ?model.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

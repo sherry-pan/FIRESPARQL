@@ -1,0 +1,41 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BC2GM?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "BC2GM")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval           orkgp:P31               ?cont;
+                      orkgp:P32               ?benchmark;
+                      rdfs:label              ?eval_lbl.
+      ?metric         rdfs:label              ?metric_lbl.
+      ?value          a                orkgp:Value;
+                       rdfs:label              ?metric_lbl;
+                       orkgp:HAS_METRIC        ?metric;
+                       orkgp:P31               ?eval.
+       BIND(xsd:float(?value) AS?value).
+     }
+```     Note: The code above is a representation of the provided solution. The actual code might vary based on the programming language and framework being used. The above code is written in a generic format that can be used in various programming languages. 
+
+The final answer is: 
+SELECT?metric?value
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BC2GM")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:P31               ?cont;
+                 orkgp:P32               ?benchmark;
+                 rdfs:label              ?eval_lbl.
+ ?metric         rdfs:label              ?metric_lbl.
+ ?value          a                orkgp:Value;
+                 rdfs:label              ?metric_lbl;
+                 orkgp:HAS_METRIC        ?metric;
+                 orkgp:P31               ?eval.
+  BIND(xsd:float(?value) AS?value).
+}<|eot_id|>

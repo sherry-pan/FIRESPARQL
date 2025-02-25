@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?precision_lbl ?recall_lbl ?f1_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  ?dataset orkgp:HAS_MODEL ?model.
+  ?model orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?prec;
+        orkgp:P33 ?recall;
+        orkgp:P34 ?f1.
+  ?prec rdfs:label ?precision_lbl.
+  ?recall rdfs:label ?recall_lbl.
+  ?f1 rdfs:label ?f1_lbl.
+  FILTER (str(?model_lbl) = "naive bayes" && regex(?model_lbl, "machine learning feature bag of words", "i"))
+}
+ORDER BY DESC(?precision_lbl)
+LIMIT 1
+```

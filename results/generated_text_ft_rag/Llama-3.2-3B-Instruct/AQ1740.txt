@@ -1,0 +1,62 @@
+Question:
+Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?benchmark       a            orkgc:Benchmark;
+                       rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Sequential MNIST")
+      ?dataset         orkgp:HAS_DATASET      ?benchmark;
+                        orkgp:HAS_DATASET_VALUE  ?dataset_lbl.
+      ?cont           orkgp:HAS_DATASET      ?dataset;
+                       orkgp:P57100          ?eval.
+       OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+                ?model      rdfs:label              ?model_lbl.}
+      ?model         rdfs:label              ?model_lbl.
+     }
+     ORDER BY DESC(?eval) 
+     LIMIT 1
+```
+
+This query will return the model with the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset. If there are multiple models with the same highest score, this query will only return one of them. If you want to return all models with the highest score, you can remove the `LIMIT 1` clause. 
+
+Please note that this query assumes that the `P57100` property represents the Permuted Accuracy score, and that the `HAS_MODEL` property is used to link the dataset to the model. If these assumptions are incorrect, you may need to adjust the query accordingly. 
+
+Also, note that the `str(?benchmark_lbl) = "Sequential MNIST"` filter is used to ensure that only the Sequential MNIST benchmark is considered. If you want to consider other benchmarks as well, you can remove or modify this filter. 
+
+Finally, the `ORDER BY DESC(?eval)` clause is used to sort the results by the Permuted Accuracy score in descending order. If you want to sort the results in ascending order, you can replace `DESC` with `ASC`. 
+
+Please test the query in your environment and adjust it according to your specific requirements. 
+
+Note: The query is based on the provided context and may not work as-is in other environments. The `ORKG` namespace and the properties used in the query are specific to the `ORKG` knowledge graph and may not be applicable to other knowledge graphs. 
+
+Note: The query uses the `RDF/XML` syntax, which is specific to the `ORKG` knowledge graph. If you are using a different syntax, you may need to adjust the query accordingly. 
+
+Note: The query assumes that the `Permuted Accuracy` score is represented by the `P57100` property. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `HAS_MODEL` property to link the dataset to the model. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `HAS_DATASET_VALUE` property to get the value of the `Permuted Accuracy` score. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `HAS_DATASET` property to get the dataset. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `HAS_EVAL` property to get the `Permuted Accuracy` score. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `RDFS_LABEL` property to get the label of the model. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `RDFS_LABEL` property to get the label of the benchmark. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `OPTIONAL` clause to handle cases where a dataset does not have a model. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `FILTER` clause to ensure that only the Sequential MNIST benchmark is considered. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `ORDER BY` clause to sort the results by the `Permuted Accuracy` score. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `LIMIT` clause to return only one model with the highest score. If you want to return all models with the highest score, you can remove the `LIMIT 1` clause. 
+
+Note: The query assumes that the `Permuted Accuracy` score is represented by the `P57100` property. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `HAS_MODEL` property to link the dataset to the model. If this is not the case, you may need to adjust the query accordingly. 
+
+Note: The query uses the `HAS_DATASET_VALUE` property to get the value of the `Permuted Accuracy

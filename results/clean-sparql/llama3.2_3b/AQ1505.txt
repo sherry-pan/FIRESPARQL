@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orwg/ontology/>
+PREFIX wot: <http://www.openresearch.org/orwg/ontology/#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX wiki: <http://www.mediawiki.org/wiki/Schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX pqa: <http://pqa.stanford.edu/>
+
+SELECT ?model ?senseval2metric ?supervisedbenchmark
+WHERE {
+  ?model wot:hasModelResult ?result.
+  ?result wot:hasMetric ?metric.
+  ?metric wot:hasMetric ?senseval2metric.
+  ?result wot:hasBenchmark ?benchmark.
+  ?benchmark wot:hasBenchmark ?supervisedbenchmark.
+  FILTER (STR(?senseval2metric) = "Senseval 2")
+  FILTER (STR(?supervisedbenchmark) = "Supervised: benchmark dataset")
+}
+ORDER BY DESC(?senseval2metric)
+LIMIT 1
+```

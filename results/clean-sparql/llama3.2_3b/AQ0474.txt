@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper orkg:hasDataset ?dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasBenchmarkOn ?benchmarkOn.
+  ?benchmarkOn owl:equivalentClass <http://www.openresearchknowledgegraph.org/dataset/RotoWireRelationGeneration>.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:id ?id.
+}
+LIMIT 10
+```

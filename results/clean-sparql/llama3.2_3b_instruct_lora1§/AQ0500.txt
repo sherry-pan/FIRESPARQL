@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "Penn Treebank \\(Character Level\\)"))
+  
+  ?contrib orkgp:P31 ?dataset.
+  ?paper orkgp:compareContribution ?contrib.
+  ?paper rdfs:label ?paper_lbl.
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasName "Supervised".
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

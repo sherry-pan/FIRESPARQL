@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/> 
+PREFIX schema: <http://schema.org/> 
+
+SELECT ?paper ?paperId 
+WHERE { 
+    ?paper schema:name ?name ;
+           schema:about orkg:BC5CDR-disease ;
+           schema:about orkg:BenchmarkedModel ;
+           schema:hasPart ?part .
+    ?part schema:identifier ?paperId .
+    FILTER(LANG(?name) = "en") 
+} 
+ORDER BY ?paper ?paperId
+```

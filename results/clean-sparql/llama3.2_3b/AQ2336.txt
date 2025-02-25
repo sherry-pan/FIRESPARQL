@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+SELECT ?paper ?code
+WHERE {
+  ?paper wdt:P31 wd:Q13442814 .  # Identifier for a "paper"
+  ?paper wdt:P921 wd:Q12345678 . # Replace with the correct identifier for "DQN-PixelCNN"
+  ?paper wdt:P1324 ?code .       # Assuming P1324 is the property for code link, replace with actual property
+}
+FILTER(CONTAINS(?code, "github.com"))
+ORDER BY DESC(?paper)  # Assuming some kind of ordering by paper creation or update date
+LIMIT 10
+OFFSET 0
+```
+
+Note: Replace `wd:Q12345678` with the actual Wikidata identifier for "DQN-PixelCNN" and ensure `wdt:P1324` is the correct property for linking to code repositories. Adjust as necessary based on actual properties used in the data.

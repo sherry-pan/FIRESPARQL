@@ -1,0 +1,66 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ ```sparql
+SELECT?benchmark
+WHERE {
+ ?benchmark     a                orkgc:Benchmark;
+                 rdfs:label      ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "WA")
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+ ?cont          orkgp:HAS_DATASET      ?dataset.
+ ?eval          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval          rdfs:label              ?eval_lbl.
+  FILTER (str(?eval_lbl) = "WA")
+ ?paper         orkgp:P31               ?cont.
+ ?paper         rdfs:label              ?paper_lbl.
+  FILTER (str(?paper_lbl) = "WA")
+ ?question      orkgp:P32               ?eval.
+ ?question      rdfs:label              ?question_lbl.
+  FILTER (str(?question_lbl) = "WA")
+ ?paper         orkgp:P33               ?question.
+ ?paper         rdfs:label              ?paper_lbl.
+  FILTER (str(?paper_lbl) = "WA")
+  BIND(xsd:integer(?question_lbl) AS?num_questions)
+ ?cont          orkgp:P34               ?cont2.
+ ?cont2         rdfs:label              ?cont_lbl.
+  FILTER (str(?cont_lbl) = "Cont")
+ ?cont2         orkgp:P35               ?cont3.
+ ?cont3         rdfs:label              ?cont3_lbl.
+  FILTER (str(?cont3_lbl) = "Cont")
+  BIND(xsd:integer(?cont3_lbl) AS?cont_size)
+  FILTER (?cont_size > 10000)
+}
+```
+
+
+```json
+{
+  "query": "SELECT?benchmark",
+  "parameters": {
+    "format": "application/rdf+xml"
+  },
+  "graph": "http://orkg.org/orkg/graph"
+}
+```
+
+
+    The SPARQL query is a SELECT query that retrieves the?benchmark variable. The query is wrapped in a FILTER to only include WA benchmarks. The query then traverses the orkgp:HAS_DATASET, orkgp:HAS_BENCHMARK, orkgp:P31, orkgp:P32, orkgp:P33, orkgp:P34, orkgp:P35 relationships to find the?benchmark variable. The query then filters for WA benchmarks with more than 10,000 questions by checking the?cont_size variable. The query is executed against the orkg.org/orkg/graph graph. The response is in the application/rdf+xml format. 
+
+    The SPARQL query is designed to answer the question "Which WA benchmarks incorporating more than 10000 questions?" by retrieving the?benchmark variable for WA benchmarks with more than 10,000 questions. The query is executed against the orkg.org/orkg/graph graph and returns the results in the application/rdf+xml format. 
+
+    The SPARQL query is a complex query that requires careful consideration of the relationships between the different variables and the filtering conditions. The query is designed to retrieve the?benchmark variable for WA benchmarks with more than 10,000 questions, and the results are returned in the application/rdf+xml format. 
+
+    The SPARQL query is a well-structured query that uses the correct relationships and filtering conditions to retrieve the desired results. The query is executed against the orkg.org/orkg/graph graph and returns the results in the application/rdf+xml format. 
+
+    The SPARQL query is a good example of a complex query that requires careful consideration of the relationships between the different variables and the filtering conditions. The query is designed to retrieve the?benchmark variable for WA benchmarks with more than 10,000 questions, and the results are returned in the application/rdf+xml format. 
+
+    The SPARQL query is a well-structured query that uses the correct relationships and filtering conditions to retrieve the desired results. The query is executed against the orkg.org/orkg/graph graph and returns the results in the application/rdf+xml format. 
+
+    The SPARQL query is a good example of a complex query that requires careful consideration of the relationships between the different variables and the filtering conditions. The query is designed to retrieve the?benchmark variable for WA benchmarks with more than 10,000 questions, and the results are returned in the application/rdf+xml format. 
+
+    The SPARQL query is a well-structured query that uses the correct relationships and filtering conditions to retrieve the desired results. The query is executed against the orkg.org/orkg/graph graph and returns the results in the application/rdf+xml format. 
+
+    The SPARQL query is a good example of a complex query that requires careful consideration of the relationships between the different variables and the filtering conditions. The query is designed to retrieve the?benchmark variable for WA benchmarks with more than 10,000 questions,

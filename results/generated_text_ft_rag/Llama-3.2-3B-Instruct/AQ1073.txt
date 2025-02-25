@@ -1,0 +1,27 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Pubmed dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Pubmed")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+          ?eval         orkgp:HAS_EVALUATION     ?eval.
+          ?eval         rdfs:label              ?eval_lbl.
+           FILTER (str(?eval_lbl) = "F1")
+          ?eval         orkgp:P31               ?cont.
+          ?cont         rdfs:label              ?cont_lbl.
+           FILTER (str(?cont_lbl) = "74.37% F1 for Prot-Mod. extraction by BioSEM")
+          ?cont         orkgp:HAS_METRIC        ?metric.
+          ?metric       rdfs:label              ?metric_lbl.
+           FILTER (str(?metric_lbl) = "F1")
+          ?metric       orkgp:P32               ?score.
+          ?score       rdfs:label              ?score_lbl.
+           FILTER (str(?score_lbl) = "74.37")
+       }
+     ORDER BY DESC(?score)
+     LIMIT 1
+```<|eot_id|>

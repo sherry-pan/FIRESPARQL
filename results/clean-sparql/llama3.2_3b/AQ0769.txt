@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ontology/>
+PREFIX wmt: <http://wmt.org/schema/wmt2014/>
+SELECT ?metric
+WHERE {
+  ?paper ?metric. 
+  FILTER (
+    regex(str(?metric), "WMT2014|english-german", "i") ||
+    regex(str(?metric), "WMT14|english-german", "i") || 
+    regex(str(?metric), "WMT2014|english-german|en-de", "i") || 
+    regex(str(?metric), "WMT14|english-german|en-de", "i")
+  )
+}
+```

@@ -1,0 +1,23 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "BC5CDR-disease")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+       BIND(xsd:float(?value) AS?value)
+      ?eval           orkgp:HAS_METRIC        ?metric.
+      ?cont         orkgp:HAS_EVALUATION     ?eval.
+      ?cont         rdfs:label               ?cont_lbl.
+      ?cont         orkgp:HAS_MODEL         ?model.
+      ?model      rdfs:label                ?model_lbl.
+      } ORDER BY DESC(?value)
+```
+    Note: This query is based on the context provided and might not be the only possible query. The query is designed to retrieve the model with the highest F1 score for the BC5CDR-disease dataset. The query uses the `FILTER` function to match the dataset label and the `BIND` function to convert the value to a float. The query then uses the `ORDER BY` clause to sort the results in descending order based on the value. The `?model?model_lbl` part of the query retrieves the model and its label.<|eot_id|>

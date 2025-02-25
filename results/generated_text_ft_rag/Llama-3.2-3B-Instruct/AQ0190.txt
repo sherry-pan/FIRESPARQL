@@ -1,0 +1,22 @@
+Question:
+Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a            orkgc:Dataset;
+                  rdfs:label   ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth corpus")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?paper         rdfs:label              ?model_lbl.
+  OPTIONAL {?eval           orkgp:HAS_MODEL        ?model.
+          ?model          rdfs:label              ?model_lbl.}
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                orkgp:HAS_PAPER         ?paper.
+  OPTIONAL {?cont      orkgp:HAS_CONTRIBUTION   ?contrib.
+          ?contrib    rdfs:label              ?model_lbl.}
+}
+``` 
+    Note that the output of the SPARQL query will be a list of models that have been evaluated on the ShARe/CLEF eHealth corpus dataset, with their labels. The output of the query will be similar to the JSON response provided earlier.<|eot_id|>

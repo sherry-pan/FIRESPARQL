@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric_lbl ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Birdsnap".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_VALUE ?value.
+  OPTIONAL { ?cont orkgp:HAS_METRIC ?metric. }
+  ?metric rdfs:label ?metric_lbl.
+  BIND(xsd:decimal(?value) AS ?decimal_value)
+}
+ORDER BY DESC(?decimal_value)
+LIMIT 1
+```

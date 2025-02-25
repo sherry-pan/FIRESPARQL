@@ -1,0 +1,36 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SNLI dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?paper?paper_lbl (SELECT?score FROM?cont WHERE?cont P:P28??paper;?paper P:P31?paper_lbl) 
+WHERE {
+   ?dataset       a                orkgc:Dataset;
+                   rdfs:label      ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "SNLI")
+   ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                   orkgp:HAS_EVALUATION   ?eval.
+   ?paper         orkgp:P31              ?benchmark;
+                  rdfs:label              ?paper_lbl.
+   ?cont         orkgp:P28               ?paper;
+                 rdfs:label              ?score_lbl.
+    BIND(xsd:float(?score_lbl) AS?score)
+}
+```sparql
+```
+
+The final answer is not a number but a SPARQL query. However, I will provide it in the requested format with the query wrapped in a box. 
+
+$\boxed{SELECT DISTINCT?paper?paper_lbl (SELECT?score FROM?cont WHERE?cont P:P28??paper;?paper P:P31?paper_lbl) 
+WHERE {
+   ?dataset       a                orkgc:Dataset;
+                   rdfs:label      ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "SNLI")
+   ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                   orkgp:HAS_EVALUATION   ?eval.
+   ?paper         orkgp:P31              ?benchmark;
+                  rdfs:label              ?paper_lbl.
+   ?cont         orkgp:P28               ?paper;
+                 rdfs:label              ?score_lbl.
+    BIND(xsd:float(?score_lbl) AS?score)
+}}$<|eot_id|>

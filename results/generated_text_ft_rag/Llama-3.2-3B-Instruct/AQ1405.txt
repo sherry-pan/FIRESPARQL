@@ -1,0 +1,19 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+ SELECT?entity,?label,?score
+     WHERE {
+        ?entity      a            orkgc:Entity;
+                     rdfs:label  ?label.
+         FILTER (str(?label) = "Named Entity Recognition in Tweets: An Experimental Study")
+        ?entity      orkgp:HAS_DATASET      ?dataset.
+        ?dataset     rdfs:label              ?dataset_label.
+         FILTER (str(?dataset_label) = "SciERC")
+        ?entity      orkgp:HAS_EVALUATION    ?eval.
+        ?eval        orkgp:P31               ?model.
+         BIND(xsd:float(?eval(?model,?eval, "f1_score")) AS?score)
+     }
+     ORDER BY DESC(?score)
+     LIMIT 5
+```<|eot_id|>

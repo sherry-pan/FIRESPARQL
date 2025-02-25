@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?m orkg:hasBenchmark "Atari 2600 Tennis".
+  ?m orkg:hasMetric "Score".
+  ?m orkg:hasBestResult ?b.
+  ?b skos:bestResult ?model.
+  ?b dbpedia:score ?score.
+}
+LIMIT 1
+```

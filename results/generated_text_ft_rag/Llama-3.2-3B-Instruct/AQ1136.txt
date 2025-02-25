@@ -1,0 +1,25 @@
+Question:
+What is the top benchmark score and its metric on the Natural Questions (short) dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a            orkgc:Dataset;
+                      rdfs:label   ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Natural Questions (short)")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+        ?eval           orkgp:P31               ?cont;
+                         orkgp:HAS_EVALUATION    ?eval.
+         OPTIONAL {?eval           orkgp:P32               ?eval_metric.
+                 ?eval_metric      rdfs:label           ?metric_lbl.}
+        ?eval           orkgp:HAS_VALUE          ?value.
+         OPTIONAL {?value         orkgp:P31               ?eval_metric.
+                 ?eval_metric      rdfs:label           ?metric_lbl.}
+         BIND(xsd:float(?value) AS?value)
+     }
+     GROUP BY?metric_lbl
+     HAVING (MAX(?value) > 0)
+     ORDER BY DESC(?value) LIMIT 5. 
+    ```
+    This SPARQL query is designed to retrieve the top 5 benchmark scores and their corresponding metrics on the Natural Questions (short) dataset. The query starts by filtering the dataset to only include the Natural Questions (short) dataset. It then retrieves the benchmark, evaluation, and value associated with each benchmark. The query uses optional patterns to handle cases where the evaluation or value may not have a metric. The values are then converted to floats and bound to a variable. The results are grouped by metric label, and the top 5 scores are selected using a having clause. Finally, the results are ordered in descending order by score and limited to 5.<|eot_id|>

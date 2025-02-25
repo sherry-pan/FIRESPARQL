@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX wot: <http://www.wot.org/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?model wot:hasAccuracy ?accuracy.
+    ?model schema:description ?description.
+    FILTER (REGEX(str(?description), "CommonsenseQA benchmark", "i")).
+    ?model wot:hasBestResult ?bestResult.
+    ?bestResult schema:description ?bestResultDescription.
+    FILTER (REGEX(str(?bestResultDescription), "Accuracy", "i")).
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

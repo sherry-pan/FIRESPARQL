@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WikiText-2".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?model orkgp:HAS_EVALUATION ?eval;
+         rdfs:label ?model_lbl;
+         orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label "perplexity";
+          orkgp:HAS_RANGE ?range.
+  ?range rdfs:label "Test".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

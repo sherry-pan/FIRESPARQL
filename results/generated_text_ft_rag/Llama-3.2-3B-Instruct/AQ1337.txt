@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?score
+WHERE {
+  orkgp:Paper rdfs:label?paper_label.
+  FILTER (str(?paper_label) = "Paper Field dataset")
+  orkgp:Paper orkgp:P31?dataset.
+ ?dataset orkgp:P27?cont.
+ ?cont orkgp:P28?metric.
+ ?cont orkgp:P29?score.
+  BIND(xsd:float(?score) AS?score)
+}
+ORDER BY DESC(?score)
+LIMIT 10;
+```<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX yelp: <http://dbpedia.org/2014/dataset/yelp>
+
+SELECT ?metric ?value
+WHERE {
+  ?yelp14Benchmark a orkg:Benchmark;
+                    orkg:benchmarkOn ?dataset;
+                    orkg:hasMetric ?metric;
+                    orkg:hasValue ?value.
+  ?dataset a yelp:Yelp14.
+  FILTER (STR(?metric) IN ("Accuracy", "F1 score", "Precision", "Recall", "ROC-AUC", "AP"))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wmt: <http://orkg.org/ontology/wmt/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?title ?id
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper schema:about <http://example.org/wmt2014-german-english>.
+    ?paper wmt:hasBenchmark ?benchmark.
+    ?benchmark schema:dataset <http://example.org/wmt2014-german-english>.
+    ?benchmark rdfs:label ?label.
+    FILTER (str(?label) = "WMT2014 German-English").
+    ?paper wmt:hasID ?id.
+    ?paper orkg:hasTitle ?title.
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

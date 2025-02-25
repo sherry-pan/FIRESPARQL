@@ -1,0 +1,23 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+ ```
+    SELECT?metric,?score,?benchmark
+    WHERE {
+      orkgp:Dataset       orkgp:R76020;
+        rdfs:label       "Scholarly entity usage detection dataset".
+      }
+      FILTER(REGEX(STR(?benchmark), "dataset"))
+     ?dataset       a                orkgp:Dataset;
+                    orkgp:P31      ?cont.
+     ?cont.           orkgp:HAS_DATASET      ?dataset;
+                      orkgp:P32              ?benchmark.
+     ?benchmark      orkgp:HAS_METRIC      ?metric;
+                    orkgp:HAS_SCORE      ?score.
+    } ORDER BY DESC(?score) LIMIT 5
+    ```
+```
+
+
+    Note: The output format is a SPARQL query. The query is designed to retrieve the highest benchmark result, including the metric and score, for the specified dataset from the ORKG RDF data dump. The query uses the `FILTER(REGEX(STR(?benchmark), "dataset"))` clause to match the dataset name, and the `ORDER BY DESC(?score)` clause to sort the results in descending order of score. The `LIMIT 5` clause restricts the output to the top 5 results. The query is designed to be executed on the ORKG RDF data dump.<|eot_id|>

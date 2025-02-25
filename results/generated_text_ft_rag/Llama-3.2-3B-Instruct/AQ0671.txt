@@ -1,0 +1,56 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl (rdfs:label AS?paper_lbl)
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                         rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "BUCC German-to-English")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_EVALUATION   ?eval.
+        ?eval           rdfs:label              ?eval_lbl.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                       orkgp:P31               ?paper.
+        ?paper      rdfs:label                ?paper_lbl.
+     }
+     ORDER BY DESC(?eval_lbl)
+     LIMIT 5;```
+    Please see below for the Python code to execute the above SPARQL query using the `rdflib` library.
+    ```python
+    import rdflib
+    from rdflib import Graph
+
+    # Create a Graph object
+    g = Graph()
+
+    # Add the RDF data to the Graph
+    # Assuming the RDF data is loaded from a file
+    g.parse('data.ttl')
+
+    # Execute the SPARQL query
+    results = g.query(
+        """
+        SELECT?paper?paper_lbl (rdfs:label AS?paper_lbl)
+        WHERE {
+          ?dataset       a                orkgc:Dataset;
+                           rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "BUCC German-to-English")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                           orkgp:HAS_EVALUATION   ?eval.
+          ?eval           rdfs:label              ?eval_lbl.
+          ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                         orkgp:P31               ?paper.
+          ?paper      rdfs:label                ?paper_lbl.
+        }
+        ORDER BY DESC(?eval_lbl)
+        LIMIT 5;
+        """,
+        initBindings={}
+    )
+
+    # Print the results
+    for result in results:
+        print(result)
+````
+    The Python code executes the SPARQL query on the loaded RDF data and prints the results. The results are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset, as specified in the input question.<|eot_id|>

@@ -1,0 +1,79 @@
+Question:
+What is the best performing model benchmarking the 200k Short Texts for Humor Detection dataset in terms of F1-score metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "200k Short Texts for Humor Detection")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+       BIND(xsd:float(?value) AS?value_float)
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_MODEL         ?model.
+       OPTIONAL {?model      orkgp:HAS_LABEL        ?label.
+               ?label        rdfs:label              ?model_lbl.}
+       BIND(xsd:float(?value_float) AS?value)
+      ?cont         rdfs:label              ?cont_lbl.
+       FILTER (str(?cont_lbl) = "F1-score")
+      ?cont         orkgp:HAS_EVALUATION   ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+       FILTER (str(?eval_lbl) = "metric")
+      ?cont         orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value_float)
+      ?cont         orkgp:HAS_METRIC        ?metric.
+       BIND(xsd:float(?value_float) AS?value)
+      ?model      a                orkgc:Model.
+      ?model      orkgp:P30010      ?cont.
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset      rdfs:label              ?dataset_lbl.
+      ?dataset      orkgp:HAS_EVALUATION   ?eval.
+      ?eval      orkgp:HAS_VALUE        ?value.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+      ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model      orkgp:P30013      ?model_lbl.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:P30010      ?cont.
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset      rdfs:label              ?dataset_lbl.
+      ?dataset      orkgp:HAS_EVALUATION   ?eval.
+      ?eval      orkgp:HAS_VALUE        ?value.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+       BIND(xsd:float(?value) AS?value_float)
+      ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model      orkgp:P30013      ?model_lbl.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:P30010      ?cont.
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset      rdfs:label              ?dataset_lbl.
+      ?dataset      orkgp:HAS_EVALUATION   ?eval.
+      ?eval      orkgp:HAS_VALUE        ?value.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+       BIND(xsd:float(?value) AS?value_float)
+      ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model      orkgp:P30010      ?cont.
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset      rdfs:label              ?dataset_lbl.
+      ?dataset      orkgp:HAS_EVALUATION   ?eval.
+      ?eval      orkgp:HAS_VALUE        ?value.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+       BIND(xsd:float(?value) AS?value_float)
+      ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model      orkgp:P30013      ?model_lbl.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:P30010      ?cont.
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset      rdfs:label              ?dataset_lbl.
+

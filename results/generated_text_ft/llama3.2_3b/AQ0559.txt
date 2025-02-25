@@ -1,0 +1,70 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the AAPD dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/1.1/orkg#>
+     PREFIX wdt: <http://www.wikidata.org/property/p569/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     SELECT?paper?title?id 
+     WHERE {
+       ?paper wdt:P1624 wd:Q10376841.  # AAPD dataset
+       ?paper wdt:P1625?benchmark.  # benchmark
+       ?benchmark wdt:P1627?paper.  # paper
+       ?benchmark wdt:P1626?title.  # title
+       ?benchmark wdt:P1628?id.  # id
+       ?paper wdt:P1625?benchmark1.  # same benchmark
+       ?paper wdt:P1626?title1.  # same title
+       ?paper wdt:P1628?id1.  # same id
+       ?benchmark1 wdt:P1627?paper1.  # same paper
+       ?benchmark1 wdt:P1626?title2.  # same title
+       ?benchmark1 wdk:P1626?title1.  # same title
+       ?benchmark1 wdt:P1628?id2.  # same id
+       ?paper1 wdt:P1627?paper.  # same paper
+       ?benchmark1 wdt:P1628?id.  # same id
+        BIND(str(?id) AS?id) 
+        BIND(str(?title) AS?title) 
+    } 
+    LIMIT 10. 
+    END; 
+    SELECT?paper?title?id 
+    WHERE {
+       ?paper wdt:P1624 wd:Q10376841.  # AAPD dataset
+       ?paper wdt:P1625?benchmark.  # benchmark
+       ?benchmark wdt:P1627?paper.  # paper
+       ?benchmark wdt:P1626?title.  # title
+       ?benchmark wdt:P1628?id.  # id
+       ?paper wdt:P1625?benchmark1.  # same benchmark
+       ?paper wdt:P1626?title1.  # same title
+       ?paper wdt:P1628?id1.  # same id
+       ?benchmark1 wdt:P1627?paper1.  # same paper
+       ?benchmark1 wdt:P1626?title2.  # same title
+       ?benchmark1 wdk:P1626?title1.  # same title
+       ?benchmark1 wdt:P1628?id2.  # same id
+       ?paper1 wdt:P1627?paper.  # same paper
+       ?benchmark1 wdt:P1628?id.  # same id
+        BIND(str(?id) AS?id) 
+        BIND(str(?title) AS?title) 
+    } 
+    UNION 
+    SELECT?paper?title?id 
+    WHERE {
+       ?paper wdt:P1624 wd:Q10376841.  # AAPD dataset
+       ?paper wdt:P1625?benchmark.  # benchmark
+       ?benchmark wdt:P1627?paper.  # paper
+       ?benchmark wdt:P1626?title.  # title
+       ?benchmark wdt:P1628?id.  # id
+       ?paper wdt:P1625?benchmark2.  # different benchmark
+       ?paper wdt:P1626?title2.  # different title
+       ?paper wdt:P1628?id2.  # different id
+       ?benchmark2 wdt:P1627?paper2.  # different paper
+       ?benchmark2 wdt:P1626?title3.  # different title
+       ?benchmark2 wdt:P1628?id3.  # different id
+       ?paper wdt:P1627?paper.  # same paper
+       ?benchmark2 wdt:P1628?id.  # same id
+        BIND(str(?id) AS?id) 
+        BIND(str(?title) AS?title) 
+    } 
+    UNION 
+    SELECT?paper?title?id 
+    WHERE {
+       ?paper wdt:P1624 wd:

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wot: <http://www.wot-ontology.org/>
+
+SELECT ?paper ?title ?paperId
+WHERE {
+  ?paper wot:includesBenchmark ?benchmark.
+  ?benchmark wot:benchmarkFor ?dataset.
+  ?dataset wot:datasetName "TempEval-3".
+  ?paper wot:hasTitle ?title.
+  ?paper orkg:paperId ?paperId.
+  FILTER (STRSTARTS(?paperId, "P"))
+} 
+ORDER BY ?paperId
+LIMIT 10
+```

@@ -1,0 +1,72 @@
+Question:
+Indicate the model that performed best in terms of 1-of-100 Accuracy metric on the PolyAI Reddit benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wot: <http://www.wot-ontologies.org/>
+     PREFIX owl: <http://www.w3.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?model 
+     WHERE {
+     ?model a orkg:Model.
+     ?model rdfs:label?label.
+     ?label rdfs:label?modelLabel.
+     ?model orkg:benchmark "PolyAI Reddit".
+     ?model orkg:accuracyMetric "1-of-100".
+     ?model orkg:bestResult?bestResult.
+     ?bestResult schema:numeric?numericBestResult.
+     ?numericBestResult owl:equivalentTo?numericBestResult.
+     ?model orkg:benchmark?benchmark.
+     ?benchmark rdfs:label?benchmarkLabel.
+     ?benchmarkLabel skos:prefLabel?benchmarkLabel.
+      filter (STRONGEQL (?numericBestResult, "100")) 
+    } LIMIT 1. 
+    ```
+
+
+## Step 1: Identify the required knowledge graph predicates and classes.
+The problem requires us to use the following predicates and classes from the Open Research Knowledge Graph (ORKG):
+- `orgk:Model`: The class representing models in the ORKG.
+- `orgk:benchmark`: The predicate representing benchmarks in the ORKG.
+- `orgk:accuracyMetric`: The predicate representing accuracy metrics in the ORKG.
+- `orgk:bestResult`: The predicate representing the best result in the ORKG.
+- `schema:numeric`: The predicate representing numeric values in the schema.org vocabulary.
+- `owl:equivalentTo`: The predicate representing equivalence between values in the OWL vocabulary.
+
+## Step 2: Identify the required vocabulary prefixes.
+The problem requires us to use the following vocabulary prefixes:
+- `orgk`: The prefix for the Open Research Knowledge Graph (ORKG).
+- `wot`: The prefix for the Web of Things (WOT) ontology.
+- `owl`: The prefix for the OWL vocabulary.
+- `rdfs`: The prefix for the RDF Schema vocabulary.
+- `skos`: The prefix for the Simple Knowledge Organization System (SKOS) vocabulary.
+- `rdf`: The prefix for the RDF vocabulary.
+- `foaf`: The prefix for the Friend of a Friend (FOAF) vocabulary.
+- `schema`: The prefix for the schema.org vocabulary.
+- `dbpedia`: The prefix for the DBpedia ontology.
+
+## Step 3: Construct the SPARQL query.
+We need to construct a SPARQL query that queries the ORKG for the model that performed best in terms of 1-of-100 Accuracy metric on the PolyAI Reddit benchmark dataset. The query should use the `orgk:Model`, `orgk:benchmark`, `orgk:accuracyMetric`, `orgk:bestResult`, `schema:numeric`, and `owl:equivalentTo` predicates.
+
+## Step 4: Write the SPARQL query.
+Here is the constructed SPARQL query:
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wot: <http://www.wot-ontologies.org/>
+PREFIX owl: <http://www.w3.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT?model 
+WHERE {
+ ?model

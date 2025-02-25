@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?metric ?metricLabel
+WHERE {
+  ?metric rdfs:label ?metricLabel.
+  ?benchmark orkg:hasDataset ?benchmarkDataset.
+  FILTER (CONTAINS(LCASE(STR(?benchmarkDataset)), "atari 2600 up and down")).
+
+  ?benchmark orkg:hasMetric ?metric.
+  ?metric orkg:hasMetricType ?metricType.
+  ?metricType rdfs:label ?metricTypeLabel.
+
+  FILTER (CONTAINS(LCASE(STR(?metricTypeLabel)), "accuracy") ||
+          CONTAINS(LCASE(STR(?metricTypeLabel)), "f1 score") ||
+          CONTAINS(LCASE(STR(?metricTypeLabel)), "mean squared error") ||
+          CONTAINS(LCASE(STR(?metricTypeLabel)), "mean absolute error") ||
+          CONTAINS(LCASE(STR(?metricTypeLabel)), "auc"))
+}
+LIMIT 10
+```

@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "DRI Corpus".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?cont;
+        orkgp:P31 ?eval.
+  ?eval rdfs:label ?metric_lbl.
+  ?eval orkgp:P32 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+LIMIT 100
+```

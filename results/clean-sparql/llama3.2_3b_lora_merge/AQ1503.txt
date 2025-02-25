@@ -1,0 +1,33 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Supervised:")
+
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               rdfs:label ?benchmark_lbl.
+    FILTER (str(?benchmark_lbl) = "SemEval 2013")
+
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          rdfs:label ?cont_lbl;
+          orkgp:HAS_METRIC ?metric.
+
+    ?metric rdfs:label ?metric_lbl;
+            orkgp:HAS_VALUE ?value.
+    
+    ?eval orkgp:HAS_EVALUATION ?cont;
+          orkgp:P32 ?eval_value.
+
+    BIND(xsd:float(?value) AS ?value_float)
+
+    ?model orkgp:P31 ?eval;
+           rdfs:label ?model_lbl.
+
+    ?model_benchmark orkgp:HAS_EVALUATION ?cont.
+
+    ?best_model orkgp:HAS_MODEL ?model_benchmark.
+}
+
+ORDER BY DESC(?value_float)
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX wmt: <http://wmt2020.org/wmt2016/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT ?model
+WHERE {
+  ?evaluation dbo:evaluationOf ?model.
+  ?evaluation wmt:dataset "WMT2016 English-German".
+}
+```
+
+The query has been cleaned up to focus on retrieving the models evaluated on WMT2016 English-German dataset. Unnecessary components like the `GROUP BY`, `ORDER BY`, `FILTER`, and `HAVING` clauses that were not relevant or optimally used were removed. The new query utilizes `DISTINCT` to ensure each model is listed only once. Note that prefixes and specific predicates will need to be verified against your data source, as "wmt:" and certain predicates like `dbo:evaluationOf` are assumed identifiers and may differ in your implementation.

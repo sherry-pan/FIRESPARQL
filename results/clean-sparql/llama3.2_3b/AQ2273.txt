@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX vocab: <http://www.openresearchknowledgegraph.org/vocab/>
+
+SELECT ?paper ?title ?code 
+WHERE {
+  ?paper vocab:hasCode ?code.
+  ?paper vocab:utilizedModel vocab:AcrE.
+  ?paper vocab:hasLink ?link.
+  ?link schema:url ?url.
+  ?paper vocab:hasTitle ?title.
+  FILTER (lang(?title) = 'en' OR lang(?title) = 'en-GB')
+}
+ORDER BY ?paper 
+LIMIT 10
+```

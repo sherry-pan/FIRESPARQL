@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dbpedia-labs: <http://dbpedia-labs.org/benchmark/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper orkg:usesFqf true.
+  ?paper dbpedia-labs:benchmark ?benchmark.
+  ?benchmark owl:sameAs ?benchmarkEquivalent.
+  ?benchmarkEquivalent rdfs:label ?benchmarkLabel.
+  FILTER (lang(?benchmarkLabel) = "en" || lang(?benchmarkLabel) = "en-US")
+  ?paper orkg:hasCode ?code.
+}
+LIMIT 10
+```

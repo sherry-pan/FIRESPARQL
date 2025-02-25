@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:hasModelResult ?result.
+  ?result orkg:resultType orkg:ModelResultType.
+  ?result orkg:benchmark orkg:SequentialMNISTBenchmark.
+  ?result orkg:resultMetric orkg:PermutedAccuracy.
+  ?result orkg:resultValue ?accuracy.
+  FILTER (REGEX(STR(?model), "DNN") || REGEX(STR(?model), "MLP") || REGEX(STR(?model), "CNN"))
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

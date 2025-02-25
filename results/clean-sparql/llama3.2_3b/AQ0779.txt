@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://purl.org/orcg/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?metric orkg:evaluatedOn <http://purl.org/orcg/dataset/fashion-mnist#dataset>.
+  FILTER(?metric != orkg:accuracy &&
+         ?metric != orkg:f1_score &&
+         ?metric != orkg:precision &&
+         ?metric != orkg:recall &&
+         ?metric != orkg:rocauc &&
+         ?metric != orkg:roc-auc &&
+         ?metric != orkg:f1_measure &&
+         ?metric != orkg:ap &&
+         ?metric != orkg:mean_squared_error &&
+         ?metric != orkg:mean_absolute_error &&
+         ?metric != orkg:mean_squared_log_error)
+  FILTER(LANG(?metric) = 'en')
+}
+LIMIT 10
+```

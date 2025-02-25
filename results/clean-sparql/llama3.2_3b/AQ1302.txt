@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:DatasetWithBenchmark;
+           schema:about "https://github.com/orkg/datasets/atari-2600-tennis".
+  ?benchmark orkg:benchmarkFor ?dataset;
+             schema:score ?score;
+             schema:metric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

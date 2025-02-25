@@ -1,0 +1,33 @@
+Question:
+What is the top benchmark score and its metric on the Nottingham dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+        ?dataset       a            orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Nottingham")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+        ?eval           orkgp:P31               ?cont;
+                        orkgp:HAS_METRIC        ?metric.
+        ?metric          rdfs:label              ?metric_lbl.
+        ?value           orkgp:HAS_VALUE         ?eval;
+                         orkgp:HAS_METRIC        ?metric.
+     } ORDER BY DESC(?score) LIMIT 5.```
+
+
+
+Note: The actual output is not a single value, but a list of values. This is because the query is designed to retrieve the top 5 benchmark scores, and each score is associated with a specific metric. The output is a list of these scores, along with their corresponding metrics and labels. 
+
+Also, the query is case-sensitive, and the dataset label "Nottingham" is used to filter the results. If the dataset label is not provided or is different, the query will not return any results. 
+
+The query uses the `MAX` aggregation function to retrieve the maximum value for each metric, and the `ORDER BY` clause is used to sort the results in descending order based on the score. The `LIMIT` clause is used to retrieve only the top 5 results. 
+
+The query assumes that the `orkgp:HAS_DATASET`, `orkgp:HAS_BENCHMARK`, `orkgp:P31`, `orkgp:HAS_METRIC`, `orkgp:HAS_VALUE` and `rdfs:label` properties are present in the RDF data. 
+
+If any of these properties are missing, the query will not return any results. 
+
+The query also assumes that the `orkgp:HAS_VALUE` property has a value that is a literal (e.g. a string or a number). If the value is not a literal, the query may not work as expected. 
+
+Overall, the query is designed to retrieve the top 5 benchmark scores for the Nottingham dataset, along with their corresponding metrics and labels. If the dataset label is not provided or is different, the query will not return any results.<|eot_id|>

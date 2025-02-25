@@ -1,0 +1,29 @@
+Question:
+Could you provide a list of models that have been tested on the Reuters RCV1/RCV2 English-to-German benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Reuters RCV1/RCV2 English-to-German")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      orkgp:P31               ?model.
+                ?model      rdfs:label              ?model_lbl.}
+     } UNION
+     SELECT?model?model_lbl
+     WHERE {
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:P31               ?cont.
+      ?cont       orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+       FILTER (str(?dataset_lbl) = "Reuters RCV1/RCV2 English-to-German")
+      ?benchmark      orkgp:HAS_BENCHMARK     ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper         rdfs:label              ?cont_lbl.
+      ?cont_lbl      rdfs:label              ?model_lbl.}
+     ORDER BY DESC(?model_lbl)
+```
+    The generated SPARQL query can be used to query the ORKG to get the list of models that have been tested on the Reuters RCV1/RCV2 dataset. The query is designed to handle both cases where the dataset is explicitly mentioned in the query and when it is not. The UNION operator is used to combine the two possible query paths. The ORDER BY clause is used to sort the results by the model labels in descending order.<|eot_id|>

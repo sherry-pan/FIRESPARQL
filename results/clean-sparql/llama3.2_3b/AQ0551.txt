@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wot: <http://www.wot-ontology.org/ontology/>
+PREFIX bio2vec: <http://bio2vec.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper rdf:type orkg:Paper.
+  ?paper wot:hasBenchmark ?benchmark.
+  ?benchmark wot:hasDataset ?dataset.
+  ?dataset rdfs:label "Dmlab-30".
+  ?paper orkg:id ?id.
+  ?paper rdfs:label ?title.
+}
+ORDER BY DESC(?id)
+LIMIT 10
+```

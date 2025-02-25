@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://dbpedia.org/ontology/>
+
+SELECT ?score ?metric
+WHERE {
+  ?score orkg:scoreValue ?scoreValue.
+  ?metric rdfs:label ?metricLabel.
+  ?score orkg:dataset ?dataset.
+  ?dataset orkg:datasetName "Automatically labeled Medline abstracts corpus dataset".
+  
+  FILTER (STR(?metricLabel) = "metric")
+}
+ORDER BY DESC(?scoreValue)
+LIMIT 1
+```

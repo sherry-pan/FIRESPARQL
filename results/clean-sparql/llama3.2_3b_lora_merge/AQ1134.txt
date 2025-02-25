@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl MAX(?score) AS ?score
+WHERE {
+  orkgr:R16433 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15423 ?eval.
+  ?eval orkgp:P15424 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P15425 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "Hendrycks Test"))
+  BIND(XSD:integer(?eval) AS ?score)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (STR(?metricLabel) = "Precision")
+  ?metric orkg:benchmarkDataset "RotoWire (Relation Generation)".
+  ?metric orkg:metricValue ?metricValue.
+} 
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

@@ -1,0 +1,21 @@
+Question:
+Could you provide a list of models that have been tested on the BUCC Russian-to-English benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BUCC Russian-to-English")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?paper         orkgp:P31               ?eval,
+                orkgp:HAS_BENCHMARK     ?benchmark.
+  OPTIONAL {?paper      orkgp:P32               ?model.
+           ?model      rdfs:label              ?model_lbl.}
+}
+ORDER BY ( DESC(?model_lbl).)
+LIMIT 5;
+``` 
+    Please note that the provided SPARQL query is a generated query based on the given input question and context. It may need to be adjusted or refined to work with the actual ORKG RDF data. The query is designed to retrieve models that have been tested on the specified dataset, but the connection to the dataset isn't explicitly mentioned in the provided data. The query relies on the inference of relevance based on the model's labels and the presence of the dataset in the RDF data. The query might not return accurate results if the dataset is not present or if the model's labels do not accurately represent the models being queried.<|eot_id|>

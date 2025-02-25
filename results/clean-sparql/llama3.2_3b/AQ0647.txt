@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX wos: <http://www.openresearchknowledgegraph.org/ontology/wos/>
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark wos:dataset ?dataset.
+  ?dataset wos:id ?datasetId.
+  ?paper orkg:title ?title.
+  ?paper orkg:id ?id.
+  FILTER (?datasetId = "WOS:46985").
+}
+```

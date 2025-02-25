@@ -1,0 +1,81 @@
+Question:
+Can you provide links to code used in papers that benchmark the Temporal Convolutional Network model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/>
+     PREFIX w3c: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://schema.org/Person>
+     PREFIX org: <http://schema.org/Organization>
+     PREFIX oai: <http://openaccess.org/oa/oa1#>
+     PREFIX cta: <http://openresearchknowledgegraph.org/ctas/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dc: <http://purl.org/dc/terms/>
+     PREFIX xsi: <http://www.w3.org/2001/XMLSchema-instance>
+     PREFIX dcat: <http://www.w3.org/ns/dcat#>
+
+     SELECT?paper?code?link
+     WHERE {
+       ?paper a orkg:Paper.
+       ?paper schema:description?description.
+       ?description schema:contains?code.
+       ?paper schema:author?author.
+       ?author schema:affiliation?affiliation.
+       ?affiliation schema:organization?org.
+       ?org schema:identifier?identifier.
+       ?identifier schema:identifierType "http://purl.org/oa/identifier".
+       ?paper schema:related?related.
+       ?related schema:identifier?identifier.
+       ?identifier schema:identifierType "http://purl.org/oa/identifier".
+       ?related schema:identifier?link.
+       ?link schema:contentURL?content.
+       ?content schema:description?linkDesc.
+       ?linkDesc schema:description?linkDescValue.
+       ?linkDescValue schema:description "Code used in this paper".
+        FILTER (STRLEN(?linkDescValue) > 0)
+        FILTER (STRLEN(?linkDescValue) < 50)
+        FILTER (STRLEN(?linkDescValue) > 1)
+        FILTER (STRLEN(?linkDescValue) < 100)
+        FILTER (STRLEN(?linkDescValue) > 2)
+    } 
+    END ; 
+    SELECT?paper?code?link
+    WHERE {
+       ?paper a orkg:Paper.
+       ?paper schema:description?description.
+       ?description schema:contains?code.
+       ?paper schema:author?author.
+       ?author schema:affiliation?affiliation.
+       ?affiliation schema:organization?org.
+       ?org schema:identifier?identifier.
+       ?identifier schema:identifierType "http://purl.org/oa/identifier".
+       ?paper schema:related?related.
+       ?related schema:identifier?identifier.
+       ?identifier schema:identifierType "http://purl.org/oa/identifier".
+       ?related schema:identifier?link.
+       ?link schema:contentURL?content.
+       ?content schema:description?linkDesc.
+       ?linkDesc schema:description?linkDescValue.
+       ?linkDescValue schema:description "Code used in this paper".
+        FILTER (STRLEN(?linkDescValue) > 0)
+        FILTER (STRLEN(?linkDescValue) < 50)
+        FILTER (STRLEN(?linkDescValue) > 1)
+        FILTER (STRLEN(?linkDescValue) < 100)
+       ?link a schema:Link.
+       ?link schema:resource?linkResource.
+       ?linkResource schema:description?linkDescValue.
+       ?linkDescValue schema:description?linkDesc.
+       ?link a schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:contentURL?link.
+       ?link schema:content

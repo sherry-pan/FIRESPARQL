@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orgSemanticScholar.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label "AAPD".
+  ?dataset orkg:benchmark ?benchmark.
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

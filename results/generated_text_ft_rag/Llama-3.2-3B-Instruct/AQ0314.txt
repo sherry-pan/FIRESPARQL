@@ -1,0 +1,18 @@
+Question:
+Can you list the models that have been evaluated on the VTAB-1k dataset?
+
+Generated SPARQL:
+ ```
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?model        orkgp:P31               ?cont;
+                rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?model_lbl)
+LIMIT 10
+```<|eot_id|>

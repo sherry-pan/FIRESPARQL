@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+
+SELECT ?score ?metric 
+WHERE { 
+  ?s orkg:hasScore ?score.
+  ?s orkg:hasMetric ?metric.
+  ?s orkg:hasDataset ?dataset.
+  FILTER (str(?dataset) = "Stanford Dogs").
+  ?s orkg:hasBenchmark ?benchmark.
+  FILTER (str(?benchmark) = "top").
+} 
+ORDER BY DESC(?score) 
+LIMIT 1
+```

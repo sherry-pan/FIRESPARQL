@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?result)
+WHERE {
+    orkgr:R10332 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P34 ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "REDDIT-B"))
+    ?contrib orkgp:P33 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?eval orkgp:P35 ?value.
+}
+ORDER BY DESC(?result)
+LIMIT 1
+```

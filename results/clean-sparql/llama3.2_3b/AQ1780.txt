@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dbpediaowl: <http://dbpedia.org/ontology/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemLabel 
+WHERE {
+  ?item a orkg:ScholarlyContribution.
+  ?item dbpediaowl:benchmark "Oxford-IIIT Pets".
+  ?item dbpediaowl:top1ErrorRate ?top1ErrorRate.
+  ?top1ErrorRate schema:bestOf ?bestModel.
+  ?bestModel schema:maxScore ?maxScore.
+  ?maxScore schema:scoreType "Top-1 Error Rate".
+  ?bestModel orkg:name ?itemLabel.
+  FILTER (STR(?itemLabel) != "")
+} 
+ORDER BY DESC(?maxScore)
+LIMIT 1
+```

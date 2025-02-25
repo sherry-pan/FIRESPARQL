@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX sparql: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?model ?accuracy
+WHERE {
+    ?model orkg:benchmark ?benchmark.
+    ?benchmark orkg:dataset "Kuzushiji-MNIST".
+    ?model orkg:metric "Accuracy".
+    ?model orkg:performance ?performance.
+    ?performance sparql:label ?accuracy.
+    ?model orkg:rank ?rank.
+    FILTER(?rank = "1")
+}
+```

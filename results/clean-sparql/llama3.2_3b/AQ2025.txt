@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+    ?paper a orkg:Papers ;
+           rdfs:label ?paperTitle ;
+           schema:about ?model ;
+           orkg:hasCode ?code .
+    ?model schema:name "Rfa-Gate-arccos" .
+    ?code schema:code ?codeLink .
+    ?paper orkg:usesBenchmark ?benchmark .
+    ?benchmark rdfs:label ?benchmarkLabel .
+
+    FILTER (CONTAINS(LCASE(?benchmarkLabel), "benchmark") || CONTAINS(LCASE(?benchmarkLabel), "test"))
+}
+ORDER BY ?paperTitle
+LIMIT 10
+```

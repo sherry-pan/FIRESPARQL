@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rkg: <http://example.org/ontology#>
+
+SELECT ?model
+WHERE {
+  ?model a orkg:Model .
+  ?model rkg:has_dataset ?dataset .
+  ?dataset rkg:dataset_name "Assault" .
+  ?model rkg:has_evaluation ?evaluation .
+  ?evaluation rkg:evaluation_type "Evaluation on Atari 2600 Assault" .
+}
+ORDER BY DESC(?evaluation)
+LIMIT 1000
+```

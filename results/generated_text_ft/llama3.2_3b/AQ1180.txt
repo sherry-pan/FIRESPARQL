@@ -1,0 +1,94 @@
+Question:
+What is the top benchmark score and its metric on the Hutter Prize dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology#>
+     PREFIX d2rq: <http://orq.org/ontology/d2rq#>
+     SELECT?metric?score
+     WHERE {
+      ?dataset a orkg:Dataset.
+      ?dataset orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasMetric?metric.
+      ?benchmark orkg:hasScore?score.
+      ?benchmark orkg:hasDataset?benchmarkDataset.
+      ?benchmarkDataset orkg:hasBenchmark?benchmark.
+      ?benchmarkDataset orkg:hasDataset?benchmarkDataset.
+       FILTER (str(?benchmark) = "Hutter Prize")
+       ORDER BY DESC(?score)
+       LIMIT 1
+     } 
+    Note: The SPARQL query above is a hypothetical example, it might not be the actual query in the ORKG.
+    This prompt is based on the paper "Generating SPARQL Queries from Natural Language Questions" (https://arxiv.org/abs/2206.09393) 
+    and the Open Research Knowledge Graph (https://orq.org/ontology/) 
+    Please let me know if I should make any changes.
+    I can also provide the dataset or ontology files if needed.
+    Thank you. 
+
+    ```python
+import pandas as pd
+import numpy as np
+from transformers import pipeline
+
+# Load the dataset and ontology
+dataset = pd.read_csv("hutter_prize_dataset.csv")
+ontology = pd.read_csv("orq_ontology.csv")
+
+# Define the question
+question = "What is the top benchmark score and its metric on the Hutter Prize dataset?"
+
+# Generate the SPARQL query
+def generate_sparql_query(question):
+    # Tokenize the question
+    inputs = question.split()
+    tokens = []
+    for token in inputs:
+        tokens.append(token)
+    
+    # Get the entities and relations
+    entities = []
+    relations = []
+    for token in tokens:
+        if token in ontology.columns:
+            entities.append(token)
+        elif token in ontology["entity_type"].unique():
+            entities.append(token)
+        elif token in ontology["relation_type"].unique():
+            relations.append(token)
+    
+    # Generate the SPARQL query
+    sparql_query = "PREFIX orkg: <http://orkg.org/ontology#>\n"
+    sparql_query += "PREFIX d2rq: <http://orq.org/ontology/d2rq#>\n"
+    sparql_query += "SELECT?metric?score\n"
+    sparql_query += "WHERE {\n"
+    sparql_query += " ?dataset a orkg:Dataset.\n"
+    sparql_query += " ?dataset orkg:hasBenchmark?benchmark.\n"
+    sparql_query += " ?benchmark orkg:hasMetric?metric.\n"
+    sparql_query += " ?benchmark orkg:hasScore?score.\n"
+    sparql_query += " ?benchmark orkg:hasDataset?benchmarkDataset.\n"
+    sparql_query += " ?benchmarkDataset orkg:hasBenchmark?benchmark.\n"
+    sparql_query += " ?benchmarkDataset orkg:hasDataset?benchmarkDataset.\n"
+    sparql_query += "  FILTER (str(?benchmark) = \"Hutter Prize\")\n"
+    sparql_query += "  ORDER BY DESC(?score)\n"
+    sparql_query += "  LIMIT 1\n"
+    sparql_query += "}\n"
+    
+    return sparql_query
+
+# Execute the SPARQL query
+def execute_sparql_query(sparql_query):
+    # Initialize the HTTP client
+    client = requests.Session()
+    
+    # Set the user agent
+    client.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    
+    # Send the HTTP request
+    response = client.get("http://example.com/sparql", params={"query": sparql_query})
+    
+    # Check if the response was successful
+    if response.status_code == 200:
+        # Get the JSON response
+        json_response = response.json()
+        
+        # Extract the results
+        results = json_response

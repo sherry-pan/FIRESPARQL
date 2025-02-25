@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocab#>
+PREFIX schemaorg: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?codeReference
+WHERE {
+  ?paper schemaorg:name ?paperTitle;
+         schemaorg:about ?description.
+  ?description schemaorg:mentions ?mmvModel.
+  ?paper schemaorg:hasPart ?codeReference.
+  ?codeReference schemaorg:isPartOf ?benchmarkingPurpose.
+  FILTER CONTAINS(LCASE(STR(?mmvModel)), "mmv model")
+  FILTER CONTAINS(LCASE(STR(?benchmarkingPurpose)), "benchmark")
+}
+```

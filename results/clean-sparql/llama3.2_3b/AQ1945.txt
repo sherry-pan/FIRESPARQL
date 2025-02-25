@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:usesBenchmark ?benchmark.
+  ?benchmark schema:hasBenchmarkModel ?benchmarkModel.
+  ?benchmarkModel schema:isEquivalentTo ?hNliModel.
+  FILTER (str(?hNliModel) = "H-NLI")
+}
+LIMIT 10
+```

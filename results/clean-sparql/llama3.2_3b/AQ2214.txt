@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology#>
+PREFIX wot: <http://www.wot-ontology.org/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCitation ?citation.
+  ?citation schema:hasPart ?codeReference.
+  ?citation wot:hasModel ?model.
+  ?model schema:description ?description.
+  ?paper wot:hasBenchmark ?benchmark.
+  ?benchmark schema:hasPart ?benchmarkCode.
+  ?benchmarkCode wot:hasModel ?allatten18Model.
+  FILTER (str(?description) = "All-attention network - 18 layers")
+}
+LIMIT 10
+```

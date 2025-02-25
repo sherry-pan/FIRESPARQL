@@ -1,0 +1,24 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?code a orkgc:Code.
+  ?code orkgp:HAS_DATASET ?dataset.
+  ?code rdfs:label ?codeLabel.
+  FILTER(REGEX(?codeLabel, "WS-DAN"))
+
+  ?dataset orkgp:P31 ?datasetType.
+  ?datasetType rdfs:label ?datasetLabel.
+  FILTER(REGEX(?datasetLabel, "benchmark"))
+
+  ?cont a orkgc:Content.
+  ?cont rdfs:label ?contLabel.
+  FILTER(REGEX(?contLabel, "ImageNet + iNat"))
+
+  ?model a orkgc:Model.
+  ?model rdfs:label ?modelLabel.
+  FILTER(REGEX(?modelLabel, "model"))
+  
+  ?code orkgp:HAS_CONTENT ?cont.
+  ?code orkgp:ASSOCIATED_WITH ?model.
+}
+```

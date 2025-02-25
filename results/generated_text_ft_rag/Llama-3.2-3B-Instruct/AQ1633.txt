@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest Score score on the Reacher, easy (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?benchmark       a            orkgc:Benchmark;
+                       rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Reacher, easy (DMControl500k)")
+      ?dataset         orkgp:P30      ?benchmark;
+                        rdfs:label      ?dataset_lbl.
+      ?cont           orkgp:P31      ?dataset;
+                       orkgp:P32      ?model.
+      ?model         rdfs:label      ?model_lbl.
+     }
+     ORDER BY DESC(?model_lbl)
+     LIMIT 1
+```<|eot_id|>

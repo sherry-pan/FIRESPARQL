@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?dataset a orkg:Dataset;
+           rdfs:label "ModelNet40".
+  ?benchmark orkg:hasBenchmarkScore ?score;
+             orkg:hasMetric ?metric;
+             orkg:hasBenchmark ?dataset.
+  FILTER (STRLEN(STR(?metric)) = 10)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,63 @@
+Question:
+What is the highest benchmark result achieved on the Cartpole, swingup (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?metric_lbl (COUNT(?eval) AS?eval_cnt)
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Cartpole, swingup (DMControl500k)")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval          orkgp:P31               ?cont;
+                 rdfs:label              ?eval_lbl.
+  OPTIONAL {?eval      orkgp:HAS_METRIC        ?metric.
+          ?metric      rdfs:label              ?metric_lbl.}
+}
+GROUP BY?metric?metric_lbl
+ORDER BY DESC(?eval_cnt)
+LIMIT 1;
+```    Note: The output SPARQL query is slightly modified to only retrieve the top 1 result, as per the original question. The original query would have returned all results, but the question specifically asks for the "highest benchmark result". 
+
+    If you want to generate a query that returns all results, you can simply remove the `LIMIT 1` clause. 
+
+    If you want to generate a query that returns the top N results, you can replace the `LIMIT 1` clause with `LIMIT?n`, where `?n` is the number of results you want to return. 
+
+    You can also modify the `ORDER BY` clause to sort the results in a different way, for example `ORDER BY DESC(?eval_cnt) DESC?metric?metric_lbl`. 
+
+    Keep in mind that the `SELECT` clause of the SPARQL query should always be `SELECT?metric?metric_lbl (COUNT(?eval) AS?eval_cnt)`, and the `WHERE` clause should always be `WHERE {...}`. The `ORDER BY` clause should be used to sort the results, and the `LIMIT` clause should be used to limit the number of results returned. 
+
+    You can also add additional clauses to the `WHERE` clause to filter the results further, for example `FILTER (str(?dataset_lbl) = "Cartpole, swingup (DMControl500k)")`. 
+
+    You can also use the `GROUP BY` clause to group the results by different properties, for example `GROUP BY?dataset?dataset_lbl`. 
+
+    You can also use the `OPTIONAL` clause to make the query more flexible, for example `OPTIONAL {?eval      orkgp:HAS_METRIC        ?metric.}`. 
+
+    You can also use the `UNION` clause to combine the results of multiple queries, for example `UNION {... } UNION {... }`. 
+
+    You can also use the `EXISTS` clause to check if a certain condition is true, for example `EXISTS {?cont orkgp:P31?eval.}`. 
+
+    You can also use the `FILTER` clause to filter the results based on a certain condition, for example `FILTER (str(?dataset_lbl) = "Cartpole, swingup (DMControl500k)")`. 
+
+    You can also use the `BOUND` clause to bind a variable to a certain value, for example `BOUND(?eval_lbl) BY?eval_lbl.`
+
+    You can also use the `CONCAT` clause to concatenate two or more strings, for example `CONCAT(str(?dataset_lbl), " ", str(?eval_lbl)).`
+
+    You can also use the `REPLACE` clause to replace a certain substring with another substring, for example `REPLACE(str(?dataset_lbl), " ", "_")`.
+
+    You can also use the `STARTS` clause to check if a certain string starts with another string, for example `STARTS(?dataset_lbl, "Cartpole, swingup (DMControl500k)")`. 
+
+    You can also use the `ENDS` clause to check if a certain string ends with another string, for example `ENDS(?dataset_lbl, "DMControl500k")`. 
+
+    You can also use the `CONTAINS` clause to check if a certain string contains another string, for example `CONTAINS(?dataset_lbl, "Cartpole")`. 
+
+    You can also use the `STRLEN` clause to get the length of a string, for example `STRLEN(str(?dataset_lbl))`.
+
+    You can also use the `SUBSTR` clause to get a substring of a string, for example `SUBSTR(str(?dataset_lbl), 0, 10)`. 
+
+    You can also use the `REGEX` clause to search for a pattern in a string, for example `REGEX(str(?dataset_lbl), "Cartpole, swingup (DMControl500k)")`. 
+
+    You can also use the `IRI` clause to check if a certain string is an IRI, for example `IRI(?dataset_lbl)`. 
+
+    You can also use the `BAG` clause to create

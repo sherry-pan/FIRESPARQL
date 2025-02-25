@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "EfficientNetV2-L")
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_PAPER ?paper.
+
+  {
+    ?cont rdfs:label ?code.
+  }
+  UNION
+  {
+    ?cont orkgp:HAS_SOURCE_CODE ?source_code.
+    ?source_code rdfs:label ?code.
+  }
+  UNION
+  {
+    ?cont orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?code.
+  }
+}
+```

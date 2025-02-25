@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (LCASE(STR(?dataset_lbl)) = "mazea")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P31 ?cont;
+        orkgp:HAS_VALUE ?value.
+  ?metric orkgp:P32 ?eval;
+          rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

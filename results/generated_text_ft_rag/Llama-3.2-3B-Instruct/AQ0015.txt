@@ -1,0 +1,27 @@
+Question:
+What models are being evaluated on the Softcite dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Softcite")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      rdfs:label              ?paper_lbl.}
+      ?model        rdfs:label              ?model_lbl.
+      ?model        orkgp:P31               ?model.
+      ?model        rdfs:cont           ?cont.
+      ?cont         orkgp:HAS_PAPER        ?paper.
+      ?cont         orkgp:P31               ?cont.
+      ?cont         rdfs:label              ?cont_lbl.
+       FILTER (str(?cont_lbl) = "model")
+      ?model      orkgp:P31               ?model.
+     }
+     ORDER BY DESC(?model_lbl)
+     LIMIT 10;     
+
+
+    Note: The above SPARQL query was generated based on the provided context and input question. The actual query may need to be adjusted to fit the specific requirements of the ORKG.<|eot_id|>

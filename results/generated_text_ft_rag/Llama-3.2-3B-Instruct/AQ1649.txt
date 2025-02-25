@@ -1,0 +1,43 @@
+Question:
+Which model has achieved the highest SUCCESS score on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Habitat 2020 Object Nav test-std")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?eval           orkgp:HAS_VALUE        ?value;
+                  orkgp:HAS_METRIC        ?metric.
+  BIND(xsd:float(?value) AS?value)
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                orkgp:HAS_MODEL          ?model.
+ ?model       rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?value)
+```     ```sparql
+```
+Note that this query will return all models and their SUCCESS scores on the Habitat 2020 Object Nav test-std benchmark dataset. To get only the model with the highest SUCCESS score, you can add a `LIMIT 1` clause at the end of the query. 
+
+```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Habitat 2020 Object Nav test-std")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION   ?eval.
+ ?eval           orkgp:HAS_VALUE        ?value;
+                  orkgp:HAS_METRIC        ?metric.
+  BIND(xsd:float(?value) AS?value)
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                orkgp:HAS_MODEL          ?model.
+ ?model       rdfs:label              ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```      ```sparql
+```     ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```      ```
