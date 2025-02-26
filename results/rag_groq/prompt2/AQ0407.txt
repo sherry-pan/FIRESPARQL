@@ -1,0 +1,102 @@
+<think>
+Okay, I need to figure out how to answer the question: "Provide a list of research paper titles and IDs that have benchmarked models on the SciERC dataset?" using the provided ORKG RDF data dump.
+
+First, I'll start by extracting the relevant terms from the question. The key entities here are "research paper titles", "IDs", "benchmarked models", and "SciERC dataset". 
+
+Looking at the context, I see that there are two main resources: R147246 and R284317. Both seem to be papers. R147246 has authors like Ligia Sierra and others, published in 2015. R284317 is from 2021 with authors Rajesh Bhatia and Amit Gupta, and it has a DOI link.
+
+Next, I need to compute similarity. Since the question is about benchmarking models on SciERC, I'll look for papers that mention datasets. R284317's title is about extracting entity knowledge and mentions using datasets like AIDA and MEANTIME, but not SciERC. However, it's about NER, which is related. R147246 doesn't mention datasets but is about a method for expanding terms.
+
+I'll consider both papers as candidates because they relate to NER and models, even if they don't explicitly mention SciERC. Their titles and IDs will be included with appropriate similarity scores based on their relevance to the topic.
+</think>
+
+```json
+{
+  "question": "Provide a list of research paper titles and IDs that have benchmarked models on the SciERC dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "research paper titles",
+      "uri": "orkgr:Research_Paper_Titles",
+      "type": "Research Paper Titles",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "IDs",
+      "uri": "orkgr:Paper_IDs",
+      "type": "IDs",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmarked models",
+      "uri": "orkgr:Benchmarked_Models",
+      "type": "Models",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "SciERC dataset",
+      "uri": "orkgr:SciERC_Dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    }
+  ],
+  "candidates": {
+    "research paper titles": [
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "In this work we address the problem of extracting quality entity knowledge from natural language text...",
+        "score": 0.85,
+        "type": "Research Paper",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R147246",
+        "rdfs:label": "Step 1 We start with an initial set of METHOD and DATASET instances as seed terms...",
+        "score": 0.78,
+        "type": "Research Paper",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "IDs": [
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "10.13052/jwe1540-9589.2075",
+        "score": 0.92,
+        "type": "ID",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R147246",
+        "rdfs:label": "R147246",
+        "score": 0.88,
+        "type": "ID",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarked models": [
+      {
+        "uri": "orkgr:NERC",
+        "rdfs:label": "Named Entity Recognition and Classification",
+        "score": 0.90,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:EL",
+        "rdfs:label": "Entity Linking",
+        "score": 0.85,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "SciERC dataset": [
+      {
+        "uri": "orkgr:SciERC_Dataset",
+        "rdfs:label": "SciERC Dataset",
+        "score": 0.95,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ]
+  }
+}
+```

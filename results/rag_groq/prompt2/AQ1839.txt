@@ -1,0 +1,81 @@
+<think>
+Okay, I need to figure out how to answer the question: "Name the datasets that have been used for benchmarking in the Image Classification research problem?" using the provided ORKG RDF data dump.
+
+First, I'll extract the relevant terms from the question. The main entities here are "datasets" and "Image Classification". The property is "used for benchmarking".
+
+Looking through the context, I see mentions of datasets like "MNIST" and "ACL Anthology dataset". However, MNIST is specifically for Image Classification, so that's a good candidate. There's also "ACL Anthology Corpus" which might be related but not directly to Image Classification. Another dataset mentioned is "NLP Benchmark Dataset", but that's more NLP focused.
+
+I also notice "Image Classification" is mentioned in the context as a research problem, so that's a key term. The properties like "evaluated on" and "benchmarking" relate to how datasets are used.
+
+Now, I'll compute similarity scores. MNIST is directly related to Image Classification, so it gets a high score. ACL Anthology is less relevant but still a dataset, so a lower score. NLP Benchmark is even less relevant, so the lowest score. Since the question is about benchmarking, I'll include "benchmarking" as a property with high relevance.
+
+I'll structure the JSON output with the extracted terms and the top candidates, ensuring correct URIs and types. I'll make sure to use the right prefixes and include rdfs:label and rdf:type for each entry.
+</think>
+
+```json
+{
+  "question": "Name the datasets that have been used for benchmarking in the Image Classification research problem?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "datasets",
+      "uri": "orkgr:datasets",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "Image Classification",
+      "uri": "orkgr:Image_Classification",
+      "type": "Research Problem",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "used for benchmarking",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "datasets": [
+      {
+        "uri": "orkgr:MNIST",
+        "rdfs:label": "MNIST",
+        "score": 0.95,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:ACL_Anthology_dataset",
+        "rdfs:label": "ACL Anthology Corpus",
+        "score": 0.85,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:NLP_Benchmark",
+        "rdfs:label": "NLP Benchmark Dataset",
+        "score": 0.75,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "Image Classification": [
+      {
+        "uri": "orkgr:Image_Classification",
+        "rdfs:label": "Image Classification",
+        "score": 0.92,
+        "type": "Research Problem",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "used for benchmarking": [
+      {
+        "uri": "orkgp:benchmarking",
+        "rdfs:label": "benchmarking",
+        "score": 0.90,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,89 @@
+<think>
+Alright, I need to figure out how to answer the question: "Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?" using the provided ORKG RDF data dump.
+
+First, I'll follow the steps outlined. The first step is to extract relevant terms from the question. The question is asking about models and the dataset they've been evaluated on. So, the key entities here are "models" and "ShARe/CLEF eHealth corpus dataset". The property connecting them is "evaluated on".
+
+Next, I need to compute the similarity between these terms and the entities in the RDF data. Looking at the context, I see that there are several resources and predicates. For example, R147244 has a value of 93.9, which might indicate some performance metric. R284316 talks about a journal article related to entity knowledge extraction, which might involve models like jPark, Stanford NER, DBpedia Spotlight, Flair NER, and End-to-End neural EL.
+
+I should list the models mentioned in the context. From R284316, the models used are Stanford NER, DBpedia Spotlight, Flair NER, and End-to-End neural EL. These are the models evaluated on various datasets, including the ShARe/CLEF eHealth corpus.
+
+Now, I need to structure the answer in the specified JSON format. The extracted terms will include "models" and "ShARe/CLEF eHealth corpus dataset", along with the property "evaluated on". The candidates for "models" will be the ones mentioned, each with a high similarity score since they are directly related.
+
+I should assign appropriate URIs using the orkgr prefix for resources and orkgr: for the dataset. Each model will have a URI like orkgr:Stanford_NER and so on. The scores are set to 0.95 for each as they are all relevant.
+
+Finally, I'll make sure the JSON structure is correct, grouping the results under each extracted term and including the necessary details like URI, label, score, type, and RDF type.
+</think>
+
+```json
+{
+  "question": "Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "models",
+      "type": "Model",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "ShARe/CLEF eHealth corpus dataset",
+      "uri": "orkgr:ShARe_CLEF_eHealth_corpus_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "evaluated on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "models": [
+      {
+        "uri": "orkgr:Stanford_NER",
+        "rdfs:label": "Stanford NER",
+        "score": 0.95,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgr:DBpedia_Spotlight",
+        "rdfs:label": "DBpedia Spotlight",
+        "score": 0.95,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgr:Flair_NER",
+        "rdfs:label": "Flair NER",
+        "score": 0.95,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgr:End-to-End_neural_EL",
+        "rdfs:label": "End-to-End neural EL",
+        "score": 0.95,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      }
+    ],
+    "ShARe/CLEF eHealth corpus dataset": [
+      {
+        "uri": "orkgr:ShARe_CLEF_eHealth_corpus_dataset",
+        "rdfs:label": "ShARe/CLEF eHealth corpus dataset",
+        "score": 0.95,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "evaluated on": [
+      {
+        "uri": "orkgp:Evaluation_Method",
+        "rdfs:label": "Evaluation Method",
+        "score": 0.90,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

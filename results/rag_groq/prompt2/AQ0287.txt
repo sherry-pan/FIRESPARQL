@@ -1,0 +1,98 @@
+<think>
+Okay, I need to figure out how to answer the question "What models are being evaluated on the Atari 2600 Chopper Command dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "models" and "Atari 2600 Chopper Command dataset." The property is "evaluated on." So, I have two key terms to focus on: models and the dataset.
+
+Next, I need to compute the similarity between these terms and the entities in the RDF data. Looking at the context, I see mentions of SVM and MNIST in the first file. SVM is a model, and MNIST is a dataset. The similarity between "models" and SVM is high because they're both related to machine learning models. Similarly, "Atari 2600 Chopper Command dataset" is similar to "MNIST" as both are datasets, even though they're different in content.
+
+I also notice that the context includes information about NER approaches and CRF algorithms, which are related to models. So, NER and CRF are potential candidates for models. The dataset mentions "training data," which is another relevant term, though not as specific as MNIST.
+
+For the property "evaluated on," the context talks about applying NER approaches and using CRF algorithms. This suggests that "applied" and "using" could be relevant properties, indicating how models are evaluated on datasets.
+
+Now, I'll select the top candidates. For "models," SVM, NER, and CRF are the top matches. For the dataset, MNIST and training data are the closest. For the property, "applied" and "using" fit well as they describe the evaluation process.
+
+I need to structure this into JSON, ensuring the correct URIs and types are used. Each candidate should have a URI, label, score, type, and RDF type. I'll assign scores based on how closely each term matches the extracted terms from the question.
+
+Finally, I'll make sure the JSON follows the specified format, grouping the results under each extracted term and including all necessary details like URIs and types.
+</think>
+
+```json
+{
+  "question": "What models are being evaluated on the Atari 2600 Chopper Command dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "models",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "Atari 2600 Chopper Command dataset",
+      "uri": "orkgr:Atari_2600_Chopper_Command_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "evaluated on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "models": [
+      {
+        "uri": "orkgc:SVM",
+        "rdfs:label": "SVM",
+        "score": 0.85,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgc:NER",
+        "rdfs:label": "NER",
+        "score": 0.82,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgc:CRF",
+        "rdfs:label": "CRF",
+        "score": 0.79,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "Atari 2600 Chopper Command dataset": [
+      {
+        "uri": "orkgr:MNIST",
+        "rdfs:label": "MNIST",
+        "score": 0.88,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:training_data",
+        "rdfs:label": "training data",
+        "score": 0.84,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "evaluated on": [
+      {
+        "uri": "orkgp:applied",
+        "rdfs:label": "applied",
+        "score": 0.86,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:using",
+        "rdfs:label": "using",
+        "score": 0.83,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

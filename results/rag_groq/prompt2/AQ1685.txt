@@ -1,0 +1,84 @@
+<think>
+Okay, I need to figure out how to answer the question: "What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?" using the provided ORKG RDF data dump.
+
+First, I'll extract the relevant terms from the question. The key entities here are "model" and "CL-SciSumm dataset", and the property is "ROUGE-2 score". 
+
+Looking at the context, I see that there are two main resources, R147652 and R284316, which describe steps and a research paper respectively. R147652 talks about a method involving SVM and MNIST, which might be a model and dataset. R284316 discusses a journal article about extracting entity knowledge using techniques like jpark, which involves models like Stanford NER and Flair NER.
+
+I need to find models and datasets mentioned. From R147652, the seed terms include "SVM" and "MNIST". From R284316, models like Stanford NER, DBpedia Spotlight, Flair NER, and End-to-End Neural EL are mentioned. The datasets mentioned are AIDA, MEANTIME, and TAC-KBP, but not CL-SciSumm.
+
+Since CL-SciSumm isn't in the data, I'll look for similar datasets. The closest is AIDA, which is a benchmark dataset. For models, SVM, Stanford NER, Flair NER, etc., are present.
+
+Next, I'll compute similarity. "CL-SciSumm" isn't present, so I'll consider AIDA as the closest dataset. For models, SVM and the NER models are top candidates. ROUGE-2 isn't explicitly mentioned, but since the context discusses evaluation, I'll map it to a relevant property like "validation research".
+
+Putting it all together, the top candidates for the dataset would be AIDA, and for models, SVM and the NER models. The property would relate to validation or performance.
+</think>
+
+```json
+{
+  "question": "What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "model",
+      "uri": "orkgr:model",
+      "type": "Model",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "CL-SciSumm dataset",
+      "uri": "orkgr:CL-SciSumm_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "ROUGE-2 score",
+      "uri": "orkgp:ROUGE-2_score",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "model": [
+      {
+        "uri": "orkgr:SVM",
+        "rdfs:label": "SVM",
+        "score": 0.85,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:Stanford_NER",
+        "rdfs:label": "Stanford NER",
+        "score": 0.82,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:Flair_NER",
+        "rdfs:label": "Flair NER",
+        "score": 0.78,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "CL-SciSumm dataset": [
+      {
+        "uri": "orkgr:AIDA",
+        "rdfs:label": "AIDA",
+        "score": 0.75,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "ROUGE-2 score": [
+      {
+        "uri": "orkgp:validation_research",
+        "rdfs:label": "validation research",
+        "score": 0.70,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

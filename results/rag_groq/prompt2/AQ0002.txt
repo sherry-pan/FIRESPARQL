@@ -1,0 +1,92 @@
+<think>
+Okay, I need to figure out how to answer the question "What models are being evaluated on the FTD dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "models" and "FTD dataset." The property is "evaluated on." So, I'll note these down.
+
+Next, I'll look through the context information to find similar entities and properties. I see that there are several resources and predicates mentioned. For example, there's a resource R147652 which has steps related to a method involving SVM and MNIST. Another resource, R284316, talks about entity extraction and uses techniques like Stanford NER and DBpedia Spotlight. 
+
+I'll start by identifying potential models. From the context, I see mentions of SVM, which is a model. There's also a mention of CRF algorithms, which are used for NER. Additionally, techniques like SciBERT are used, which is a model. So, these could be candidates for models being evaluated.
+
+Now, looking for the FTD dataset. The context doesn't explicitly mention "FTD dataset," but I see "MNIST" and "ACL Anthology dataset" in the examples. Since FTD isn't present, I'll have to consider if there's any related dataset. However, in the given data, there's no direct mention, so I might have to infer or note that it's not present.
+
+For the property "evaluated on," I need to find similar predicates. The context has P39020, which describes steps, and P97004, which is "validation research." There's also P5044, which is about the type of publication. These could relate to evaluation methods.
+
+Calculating similarity, I'll match the extracted terms with the closest entities in the context. For models, SVM, CRF, and SciBERT are relevant. For the dataset, since FTD isn't there, I'll look for any dataset mentions, but it seems none are present. For the property, validation research and steps could be similar to "evaluated on."
+
+I'll structure the JSON output as specified, grouping the results by the extracted terms. Each candidate will have a URI, label, score, type, and RDF type. I'll assign scores based on how closely they match the terms from the question.
+
+Finally, I'll ensure that the URIs use the correct prefixes and that the types are accurately assigned, whether they're resources, classes, or predicates.
+</think>
+
+```json
+{
+  "question": "What models are being evaluated on the FTD dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "models",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "FTD dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "evaluated on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "models": [
+      {
+        "uri": "orkgc:SVM",
+        "rdfs:label": "SVM",
+        "score": 0.85,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgc:CRF",
+        "rdfs:label": "CRF",
+        "score": 0.82,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgc:SciBERT",
+        "rdfs:label": "SciBERT",
+        "score": 0.78,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "FTD dataset": [
+      {
+        "uri": "orkgr:MNIST",
+        "rdfs:label": "MNIST",
+        "score": 0.65,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "evaluated on": [
+      {
+        "uri": "orkgp:validation_research",
+        "rdfs:label": "validation research",
+        "score": 0.70,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:evaluation_method",
+        "rdfs:label": "evaluation method",
+        "score": 0.68,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

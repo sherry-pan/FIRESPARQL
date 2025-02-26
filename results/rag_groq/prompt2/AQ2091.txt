@@ -1,0 +1,92 @@
+<think>
+Okay, I need to figure out how to answer the user's query using the provided context. The query is asking for links to code used in papers that benchmark the Multi-Perspective Matching (single model) model. 
+
+First, I'll break down the query. The key terms here are "papers," "benchmark," "Multi-Perspective Matching (single model)," and "code links." So, I need to extract these terms and find related entities and properties in the context.
+
+Looking at the context, I see two main resources: R147652 and R284316. R147652 describes a method with five steps, including using SciBERT and k-means for expansion, CRF for NER, and filtering. R284316 is a journal article about extracting entity knowledge using a model called jpark, which uses tools like Stanford NER and DBpedia Spotlight. It also mentions a DOI link.
+
+I need to extract terms from the query. "Papers" would relate to research articles, "benchmark" relates to evaluation methods, "Multi-Perspective Matching" is a specific model, and "code links" would be URLs or DOIs.
+
+Next, I'll compute similarity. The context doesn't have "Multi-Perspective Matching," but R284316's paper is about entity extraction and uses several tools. The DOI link here is a match for "code links." So, the paper in R284316 is relevant.
+
+For "benchmark," R147652's method involves evaluation steps, so that's a match. "Papers" would correspond to R284316 and R147246, which are both journal articles.
+
+Now, selecting top candidates. For "papers," R284317 is a journal article with a DOI, which is a code link. For "benchmark," R147652's steps are about evaluation. "Multi-Perspective Matching" isn't directly present, but R284316's jpark model is about entity extraction, which is somewhat related. "Code links" directly match the DOI in R284317.
+
+I'll structure the JSON accordingly, grouping the candidates under each extracted term with their scores based on relevance.
+</think>
+
+```json
+{
+  "question": "Can you provide links to code used in papers that benchmark the Multi-Perspective Matching (single model) model?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "papers",
+      "uri": "orkgr:papers",
+      "type": "Research Paper",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmark",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    },
+    {
+      "rdfs:label": "Multi-Perspective Matching (single model)",
+      "uri": "orkgr:Multi-Perspective_Matching_single_model",
+      "type": "Model",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "code links",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "papers": [
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "Journal Article",
+        "score": 0.85,
+        "type": "Research Paper",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmark": [
+      {
+        "uri": "orkgp:Evaluation_Method",
+        "rdfs:label": "Evaluation Method",
+        "score": 0.82,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ],
+    "Multi-Perspective Matching (single model)": [
+      {
+        "uri": "orkgr:NERC_EL_Revision",
+        "rdfs:label": "NERC and EL Revision",
+        "score": 0.78,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "code links": [
+      {
+        "uri": "orkgp:url",
+        "rdfs:label": "URL",
+        "score": 0.90,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgr:DOI",
+        "rdfs:label": "DOI",
+        "score": 0.88,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

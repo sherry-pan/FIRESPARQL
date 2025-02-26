@@ -1,0 +1,101 @@
+<think>
+Okay, I need to figure out how to answer the question: "What evaluation metrics are commonly used when benchmarking models on the MLDoc Zero-Shot English-to-Italian dataset?" using the provided ORKG RDF data dump.
+
+First, I'll break down the question to extract the relevant terms. The main entities here are "evaluation metrics" and "MLDoc Zero-Shot English-to-Italian dataset." The property is "benchmarking models on."
+
+Looking at the context, I see that there are two main resources: R147652 and R284316. R147652 describes a method with five steps, and R284316 talks about a journal article on extracting entity knowledge using NLP techniques.
+
+I need to find terms related to evaluation metrics. In R147652, Step 5 mentions filtering to ensure data quality, which might relate to metrics. R284316 discusses performance improvements using different models and datasets, which could involve metrics like accuracy or F1-score.
+
+For the dataset, "MLDoc Zero-Shot English-to-Italian" isn't directly mentioned, but R284316 refers to datasets like AIDA and MEANTIME, which are used in evaluations. This might be a clue that the metrics used are similar across such datasets.
+
+Next, I'll compute similarity. Since "evaluation metrics" is a broad term, I'll look for related properties in the data. P39020 in R147652 describes steps, which might include evaluation. In R284316, P5044 is "Journal Article," and P37015 describes the abstract, which mentions model performance.
+
+I'll also consider the authors and venues, but they might not directly relate to metrics. The predicates P27, P28, P29, etc., are more about authors and years, so they might not be relevant here.
+
+Putting it together, the top candidates for evaluation metrics could include properties like P39020 (steps including evaluation), P5044 (publication type), and P37015 (abstract discussing performance). For the dataset, since it's not present, I might look for similar datasets or related resources.
+
+I'll structure the JSON to include these extracted terms and their top candidates based on the context provided.
+</think>
+
+```json
+{
+  "question": "What evaluation metrics are commonly used when benchmarking models on the MLDoc Zero-Shot English-to-Italian dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "evaluation metrics",
+      "uri": "orkgr:evaluation_metrics",
+      "type": "Metric",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "MLDoc Zero-Shot English-to-Italian dataset",
+      "uri": "orkgr:MLDoc_Zero-Shot_English-to-Italian_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmarking models on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "evaluation metrics": [
+      {
+        "uri": "orkgp:P39020",
+        "rdfs:label": "Step 1 We start with an initial set of METHOD and DATASET instances as seed terms (e.g., “SVM” and “MNIST”). These seed terms can, for instance, be gathered from existing knowledge graphs.",
+        "score": 0.85,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P5044",
+        "rdfs:label": "Journal Article",
+        "score": 0.82,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P37015",
+        "rdfs:label": "\"In this work we address the problem of extracting quality entity knowledge from natural language text, an important task for the automatic construction of knowledge graphs from unstructured content. More in details, we investigate the benefit of performing a joint posterior revision, driven by ontological background knowledge, of the annotations resulting from natural language processing (NLP) entity analyses such as named entity recognition and classification (NERC) and entity linking (EL). The revision is performed via a probabilistic model, called jpark, that given the candidate annotations independently identified by NERC and EL tools on the same textual entity mention, reconsiders the best annotation choice performed by the tools in light of the coherence of the candidate annotations with the ontological knowledge. The model can be explicitly instructed to handle the information that an entity can potentially be NIL (i.e., lacking a corresponding referent in the target linking knowledge base), exploiting it for predicting the best NERC and EL annotation combination. We present a comprehensive evaluation of jpark along various dimensions, comparing its performances with and without exploiting NIL information, as well as the usage of three different background knowledge resources (YAGO, DBpedia, and Wikidata) to build the model. The evaluation, conducted using different tools (the popular Stanford NER and DBpedia Spotlight, as well as the more recent Flair NER and End-to-End Neural EL) with three reference datasets (AIDA, MEANTIME, and TAC-KBP), empirically confirms the capability of the model to improve the quality of the annotations of the given tools, and thus their performances on the tasks they are designed for.\"",
+        "score": 0.79,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ],
+    "MLDoc Zero-Shot English-to-Italian dataset": [
+      {
+        "uri": "orkgr:R284316",
+        "rdfs:label": "validation research",
+        "score": 0.88,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "Journal Article",
+        "score": 0.85,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarking models on": [
+      {
+        "uri": "orkgp:P27",
+        "rdfs:label": "Ligia Sierra",
+        "score": 0.84,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P28",
+        "rdfs:label": "6",
+        "score": 0.81,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,71 @@
+<think>
+Okay, I need to figure out how to answer the question "What are the metrics of evaluation over the OntoNotes dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The question is asking about "metrics of evaluation" and mentions the "OntoNotes dataset." So, the key entities here are "metrics of evaluation" and "OntoNotes dataset." 
+
+Looking at the context data, I see that there are several resources and predicates. For example, in the first file, there's a resource R147652 which describes a method involving steps like NER and using CRF algorithms. The second file has R284316, which talks about entity recognition and linking, and mentions metrics like F1-score and accuracy.
+
+I need to identify which parts of the context relate to evaluation metrics. In the second file, there's a mention of "validation research" and "technique" as predicates. Also, the resource R284316 has a detailed description that includes evaluation using F1-score and accuracy. This seems relevant because the question is about evaluation metrics over a dataset.
+
+Next, I should compute the similarity between the extracted terms and the entities in the context. The term "metrics of evaluation" would be similar to predicates or resources that describe evaluation methods or metrics. "OntoNotes dataset" would be similar to any dataset mentioned, but in the context, I don't see OntoNotes explicitly. However, R284316 does talk about datasets like AIDA and MEANTIME, which are similar in nature to OntoNotes as they are used in NLP tasks.
+
+Since the context doesn't have OntoNotes, I'll have to consider other datasets as proxies. The resource R284316 is about evaluation techniques and uses datasets, so it's a good candidate. The predicates P97004 ("validation research") and P97005 ("technique") are also relevant as they relate to evaluation methods.
+
+Now, I'll structure the JSON output. The extracted terms will be "metrics of evaluation" and "OntoNotes dataset." For each, I'll find the top candidates from the context. For "metrics of evaluation," the candidates could be the evaluation techniques and methods described. For "OntoNotes dataset," since it's not present, I'll look for similar datasets or resources that are used in evaluation, like R284316.
+
+I'll assign similarity scores based on how closely each context entry matches the extracted terms. For example, R284316 is very relevant to evaluation, so it gets a high score. The predicates related to validation and techniques also get high scores.
+
+Finally, I'll format the JSON, ensuring that URIs use the correct prefixes and that each entry includes the necessary details like rdfs:label, uri, score, type, and rdf:type.
+</think>
+
+```json
+{
+  "question": "What are the metrics of evaluation over the OntoNotes dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "metrics of evaluation",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    },
+    {
+      "rdfs:label": "OntoNotes dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    }
+  ],
+  "candidates": {
+    "metrics of evaluation": [
+      {
+        "uri": "orkgp:P97004",
+        "rdfs:label": "validation research",
+        "score": 0.88,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P97005",
+        "rdfs:label": "technique",
+        "score": 0.85,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgr:R284316",
+        "rdfs:label": "validation research",
+        "score": 0.82,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "OntoNotes dataset": [
+      {
+        "uri": "orkgr:R284316",
+        "rdfs:label": "validation research",
+        "score": 0.78,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,88 @@
+<think>
+Okay, I need to figure out how to answer the user's query using the provided context. The query is asking where to find code references in papers that used a specific model for benchmarking. 
+
+First, I'll break down the query to extract the key terms. The main entities here are "code references," "papers," and the model name "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval." The action is "used for benchmarking purposes."
+
+Looking at the context, I see two main resources: R147652 and R284316. R147652 describes a method involving steps for entity recognition, which might relate to benchmarking. R284316 is a research paper about extracting entity knowledge using various tools and datasets.
+
+I'll need to compute similarity scores for each extracted term. For "code references," the closest match in the context is the URL from R284317, which is a paper. For "papers," both R147246 and R284317 are papers, so they are relevant. The model name doesn't directly match any in the context, but R284316 discusses models like Stanford NER and Flair NER, which are related to entity recognition and could be used for benchmarking.
+
+I'll structure the JSON output with the extracted terms and their top candidates. Each candidate will have a URI, label, score, type, and RDF type based on the context. I'll make sure to use the correct prefixes and include the necessary types like "orkgc:Resource" and "orkgp:Predicate."
+
+Finally, I'll ensure the JSON is properly formatted, grouping the candidates under each extracted term with their respective details.
+</think>
+
+```json
+{
+  "question": "Where can I find code references in papers that have used the Past Decode Reg. + AWD-LSTM-MoS + dyn. eval. model for benchmarking purposes?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "code references",
+      "uri": "orkgr:code_references",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "papers",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.",
+      "uri": "orkgr:Past_Decode_Reg._AWD-LSTM-MoS_dyn.eval",
+      "type": "Model",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmarking purposes",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "code references": [
+      {
+        "uri": "orkgr:code_references",
+        "rdfs:label": "Code References",
+        "score": 0.85,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "papers": [
+      {
+        "uri": "orkgr:paper_R147246",
+        "rdfs:label": "Paper R147246",
+        "score": 0.78,
+        "type": "Paper",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:paper_R284317",
+        "rdfs:label": "Paper R284317",
+        "score": 0.76,
+        "type": "Paper",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.": [
+      {
+        "uri": "orkgr:Past_Decode_Reg._AWD-LSTM-MoS_dyn.eval",
+        "rdfs:label": "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.",
+        "score": 0.90,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarking purposes": [
+      {
+        "uri": "orkgp:benchmarking_purposes",
+        "rdfs:label": "Benchmarking Purposes",
+        "score": 0.88,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

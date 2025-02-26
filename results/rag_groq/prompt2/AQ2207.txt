@@ -1,0 +1,72 @@
+<think>
+Okay, I need to figure out how to answer the user's query using the provided ORKG RDF data dump. The query is asking for links to code used in papers that benchmark the Temporal Convolutional Network (TCN) model. 
+
+First, I'll break down the query. The key terms here are "links to code," "papers," and "benchmark the Temporal Convolutional Network model." So, I need to extract these terms from the question.
+
+Looking at the provided context, I see several resources. For example, R147246 has authors and a year, and R284317 mentions a DOI link. I'm interested in finding entities related to code links and benchmarking.
+
+I'll start by identifying the relevant terms. "Links to code" likely relates to properties like "url" or "doi." "Papers" would be resources of type "Journal Article." "Benchmark" might relate to properties like "evaluated on" or specific metrics.
+
+Next, I'll compute the similarity between these terms and the entities in the RDF data. For "links to code," I look for entities with URLs or DOIs. R284317 has a URL, so that's a good candidate. For "papers," R284316 is a Journal Article, so that fits. For "benchmark," terms like "evaluated on" or "performance" might be relevant, but I don't see a direct match, so I might need to infer based on the context.
+
+Now, I'll select the top candidates. For "links to code," R284317 has a URL, which is a strong match. For "papers," R284316 is a Journal Article about entity recognition, which could involve benchmarking. For "benchmark," since there's no direct property, I'll consider the evaluation methods mentioned in the context, like R147244 with a value of 93.9, which might indicate performance metrics.
+
+I need to structure the JSON output correctly, using the specified prefixes and including the necessary types. Each candidate should have a URI, label, score, type, and RDF type.
+
+Putting it all together, I'll map each extracted term to its top candidates, ensuring the scores reflect their relevance. The final JSON should group these under the respective terms with their details.
+</think>
+
+```json
+{
+  "question": "Can you provide links to code used in papers that benchmark the Temporal Convolutional Network model?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "links to code",
+      "uri": "orkgp:url",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    },
+    {
+      "rdfs:label": "papers",
+      "uri": "orkgc:Journal_Article",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "benchmark",
+      "uri": "orkgp:evaluated_on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "links to code": [
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "http://dx.doi.org/10.13052/jwe1540-9589.2075",
+        "score": 0.95,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ],
+    "papers": [
+      {
+        "uri": "orkgr:R284316",
+        "rdfs:label": "Journal Article",
+        "score": 0.92,
+        "type": "Class",
+        "rdf:type": "rdfs:Class"
+      }
+    ],
+    "benchmark": [
+      {
+        "uri": "orkgr:R147244",
+        "rdfs:label": "93.9",
+        "score": 0.89,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

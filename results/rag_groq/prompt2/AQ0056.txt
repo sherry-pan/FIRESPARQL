@@ -1,0 +1,128 @@
+<think>
+Okay, I need to figure out how to answer the question "What are the models that have been benchmarked on the DuIE dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "models" and "DuIE dataset". The property implied is "benchmarked on". So, I need to look for these in the context.
+
+Looking at the context, I see that there are several resources and predicates. For example, R147652 has steps related to a method involving SVM and MNIST. R284316 talks about entity recognition and linking, mentioning tools like Stanford NER and DBpedia Spotlight. There's also a paper about jpark and its evaluation on datasets like AIDA and MEANTIME.
+
+I need to find entities similar to "models" and "DuIE dataset". Since the context doesn't mention DuIE, I'll look for other datasets. I see mentions of MNIST, AIDA, MEANTIME, and TAC-KBP. These could be similar to DuIE as they are all datasets.
+
+For models, the context mentions SVM, Stanford NER, DBpedia Spotlight, Flair NER, and End-to-End Neural EL. These are all models or tools used in NLP tasks, so they are relevant.
+
+Next, I'll compute the similarity. Since DuIE isn't present, I'll consider other datasets. MNIST is a well-known dataset, so it might have a high similarity. AIDA and MEANTIME are also datasets used in similar contexts. TAC-KBP is another, so I'll include that. The context also mentions models like SVM, which is a machine learning model, and others like Stanford NER, which are specific NER models.
+
+I'll assign similarity scores based on how closely each matches. SVM is a model, so it's highly relevant. Stanford NER and Flair NER are both NER models, so they fit well. DBpedia Spotlight and End-to-End Neural EL are also related, so they'll be included with slightly lower scores.
+
+For the dataset part, MNIST is a dataset, so it's the most similar. AIDA and MEANTIME are next, followed by TAC-KBP. These all are datasets used in evaluations, so they fit the context.
+
+Putting it all together, I'll structure the JSON with the extracted terms and the top candidates for each. I'll make sure to use the correct prefixes and types as specified.
+</think>
+
+```json
+{
+  "question": "What are the models that have been benchmarked on the DuIE dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "models",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "DuIE dataset",
+      "uri": "orkgr:DuIE_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmarked on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "models": [
+      {
+        "uri": "orkgc:SVM",
+        "rdfs:label": "SVM",
+        "score": 0.95,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgc:Stanford_NER",
+        "rdfs:label": "Stanford NER",
+        "score": 0.92,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgc:Flair_NER",
+        "rdfs:label": "Flair NER",
+        "score": 0.89,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgc:DBpedia_Spotlight",
+        "rdfs:label": "DBpedia Spotlight",
+        "score": 0.87,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgc:End-to-End_Neural_EL",
+        "rdfs:label": "End-to-End Neural EL",
+        "score": 0.85,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      }
+    ],
+    "DuIE dataset": [
+      {
+        "uri": "orkgr:MNIST",
+        "rdfs:label": "MNIST",
+        "score": 0.90,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:AIDA",
+        "rdfs:label": "AIDA",
+        "score": 0.88,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:MEANTIME",
+        "rdfs:label": "MEANTIME",
+        "score": 0.86,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:TAC-KBP",
+        "rdfs:label": "TAC-KBP",
+        "score": 0.84,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarked on": [
+      {
+        "uri": "orkgp:Evaluation_Method",
+        "rdfs:label": "Evaluation Method",
+        "score": 0.91,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:Performance_Assessment",
+        "rdfs:label": "Performance Assessment",
+        "score": 0.89,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

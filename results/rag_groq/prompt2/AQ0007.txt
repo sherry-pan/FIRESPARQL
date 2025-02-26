@@ -1,0 +1,73 @@
+<think>
+Okay, I need to figure out how to answer the question "What models are being evaluated on the ACL Anthology dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "models" and "ACL Anthology dataset," and the property is "evaluated on." So, I have two entities and one property to focus on.
+
+Next, I need to compute the similarity between these terms and the entities in the RDF data. Looking at the context, I see mentions of SVM, MNIST, CRF, SciBERT, and other models. The ACL Anthology dataset isn't directly mentioned, but there are datasets like MNIST. For the property "evaluated on," I can look for similar terms like "applied to" or "used with."
+
+Now, I'll go through each part of the context to find matches. For "models," SVM, CRF, and SciBERT are mentioned. These seem relevant. For "ACL Anthology dataset," since it's not present, I'll look for similar datasets like MNIST. For "evaluated on," terms like "applied to" or "used with" could be close matches.
+
+I'll assign similarity scores based on how closely each term matches. SVM and CRF have higher scores because they're directly mentioned as models. MNIST is a dataset, so it gets a high score for the dataset part. For the property, "applied to" seems the closest match.
+
+Finally, I'll structure the JSON output with the extracted terms and the top candidates, making sure to use the correct RDF prefixes and include all necessary details like URIs, labels, types, and scores.
+</think>
+
+```json
+{
+  "question": "What models are being evaluated on the ACL Anthology dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "models",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "ACL Anthology dataset",
+      "uri": "orkgr:ACL_Anthology_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "evaluated on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "models": [
+      {
+        "uri": "orkgc:SVM",
+        "rdfs:label": "SVM",
+        "score": 0.85,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      },
+      {
+        "uri": "orkgc:CRF",
+        "rdfs:label": "CRF",
+        "score": 0.82,
+        "type": "Model",
+        "rdf:type": "rdfs:Class"
+      }
+    ],
+    "ACL Anthology dataset": [
+      {
+        "uri": "orkgr:MNIST",
+        "rdfs:label": "MNIST",
+        "score": 0.78,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "evaluated on": [
+      {
+        "uri": "orkgp:applied_to",
+        "rdfs:label": "applied to",
+        "score": 0.75,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,79 @@
+<think>
+Okay, I need to figure out how to answer the question: "Can you provide links to code used in papers that benchmark the XLNet-Large model?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "papers" and "XLNet-Large model." The action is about providing "links to code" that benchmark this model. So, the extracted terms should include "papers," "XLNet-Large model," and "links to code."
+
+Next, I need to compute the similarity between these terms and the entities in the RDF data. Looking at the context, I see mentions of papers like R147246 and R284317, which have URLs and DOIs. For the model, I'm looking for something related to XLNet-Large, but in the context, I see mentions of models like SVM and possibly others in the steps, but not XLNet specifically. However, R284316 talks about NER and models like Stanford NER and Flair NER, which might be related.
+
+For "links to code," I should look for properties that indicate URLs or DOIs. In the context, I see predicates like "url" and "P26" which seems to be a DOI. So, these would be the properties related to providing links.
+
+Now, I'll match each extracted term to the most similar entities or properties in the RDF data. For "papers," the closest matches are the resources with URLs and DOIs, like R284317. For "XLNet-Large model," since it's not directly mentioned, I'll look for related models or NER tools. "Links to code" would correspond to the URL and DOI properties.
+
+I'll structure the JSON output as specified, grouping the results by each extracted term and listing the top candidates with their URIs, labels, scores, types, and RDF types. I'll make sure to use the correct prefixes for URIs and include the necessary types like "orkgc:Resource" for specific resources and "orkgp:Predicate" for properties.
+
+I need to ensure that the similarity scores are reasonable, even if the exact model isn't present. For example, R284317 has a URL, so it's a good candidate for "papers." The properties "url" and "P26" are relevant for "links to code." For the model, I'll include resources that are related to NER or models, even if they aren't XLNet-Large.
+
+Finally, I'll format everything correctly, replacing 'label' with 'rdfs:label' and ensuring all URIs use the appropriate prefixes. I'll also make sure the JSON structure is correct with "extracted_terms" and "candidates" sections.
+</think>
+
+```json
+{
+  "question": "Can you provide links to code used in papers that benchmark the XLNet-Large model?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "papers",
+      "uri": "orkgr:papers",
+      "type": "Research Paper",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "XLNet-Large model",
+      "uri": "orkgr:XLNet-Large_model",
+      "type": "Model",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "links to code",
+      "uri": "orkgp:links_to_code",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "papers": [
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "Journal Article",
+        "score": 0.85,
+        "type": "Research Paper",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "XLNet-Large model": [
+      {
+        "uri": "orkgr:NERC",
+        "rdfs:label": "Named Entity Recognition and Classification",
+        "score": 0.78,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "links to code": [
+      {
+        "uri": "orkgp:url",
+        "rdfs:label": "url",
+        "score": 0.92,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P26",
+        "rdfs:label": "DOI",
+        "score": 0.89,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

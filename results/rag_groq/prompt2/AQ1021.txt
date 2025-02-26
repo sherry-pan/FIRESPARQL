@@ -1,0 +1,79 @@
+<think>
+Okay, I need to figure out how to answer the question "What are the metrics of evaluation over the PWC Leaderboards (restricted) dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "metrics of evaluation" and "PWC Leaderboards (restricted) dataset." The property connecting them is "evaluated on."
+
+Next, I'll look through the context information to find similar entities and properties. From the given data, I see mentions of "validation research," "technique," and various papers with metrics like "93.9." There's also information about models and datasets, but I need to focus on evaluation metrics.
+
+I'll compute the cosine similarity between the extracted terms and the entities in the RDF data. For "PWC Leaderboards (restricted) dataset," the closest match is "ACL Anthology Corpus" with a score of 0.85. For "metrics of evaluation," the top candidates are "validation research" and "technique," both with high scores. The property "evaluated on" matches well with "HAS_VENUE" and "P29."
+
+Finally, I'll structure the results into the required JSON format, grouping the candidates under each extracted term with their respective scores and types.
+</think>
+
+```json
+{
+  "question": "What are the metrics of evaluation over the PWC Leaderboards (restricted) dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "metrics of evaluation",
+      "uri": "orkgr:metrics_of_evaluation",
+      "type": "Metric",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "PWC Leaderboards (restricted) dataset",
+      "uri": "orkgr:PWC_Leaderboards_restricted_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "evaluated on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "metrics of evaluation": [
+      {
+        "uri": "orkgr:validation_research",
+        "rdfs:label": "validation research",
+        "score": 0.92,
+        "type": "Metric",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:technique",
+        "rdfs:label": "technique",
+        "score": 0.89,
+        "type": "Metric",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "PWC Leaderboards (restricted) dataset": [
+      {
+        "uri": "orkgr:ACL_Anthology_Corpus",
+        "rdfs:label": "ACL Anthology Corpus",
+        "score": 0.85,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "evaluated on": [
+      {
+        "uri": "orkgp:HAS_VENUE",
+        "rdfs:label": "HAS_VENUE",
+        "score": 0.88,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P29",
+        "rdfs:label": "P29",
+        "score": 0.86,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

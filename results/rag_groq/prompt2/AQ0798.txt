@@ -1,0 +1,79 @@
+<think>
+Okay, I need to figure out how to answer the question: "What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?" using the provided ORKG RDF data dump.
+
+First, I'll extract the relevant terms from the question. The key entities here are "evaluation metrics" and "MultiRC dataset". The property is "benchmarking models on".
+
+Next, I'll look through the RDF data to find similar entities and properties. From the context, I see mentions of "validation research" and "technique" which might relate to evaluation. There's also a resource about "Journal Article" which could be a type. The predicates like P97004 and P97005 might be relevant for properties.
+
+I'll compute the cosine similarity for each extracted term against the RDF entries. For "evaluation metrics", terms like "validation research" and "technique" seem similar. For "MultiRC dataset", I'll look for datasets mentioned, but since it's not directly there, I'll consider related resources. For "benchmarking models on", predicates like P97004 and P97005 might be close.
+
+Finally, I'll select the top 5 candidates for each term, ensuring they have the highest similarity scores and fit the types correctly. I'll structure the JSON output as specified, using the correct prefixes and including all necessary details like URIs, labels, scores, and types.
+</think>
+
+```json
+{
+  "question": "What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "evaluation metrics",
+      "uri": "orkgr:evaluation_metrics",
+      "type": "Metric",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "MultiRC dataset",
+      "uri": "orkgr:MultiRC_dataset",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmarking models on",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "evaluation metrics": [
+      {
+        "uri": "orkgr:validation_research",
+        "rdfs:label": "validation research",
+        "score": 0.85,
+        "type": "Metric",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:technique",
+        "rdfs:label": "technique",
+        "score": 0.82,
+        "type": "Metric",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "MultiRC dataset": [
+      {
+        "uri": "orkgr:Journal_Article",
+        "rdfs:label": "Journal Article",
+        "score": 0.78,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarking models on": [
+      {
+        "uri": "orkgp:P97004",
+        "rdfs:label": "validation research",
+        "score": 0.88,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P97005",
+        "rdfs:label": "technique",
+        "score": 0.85,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

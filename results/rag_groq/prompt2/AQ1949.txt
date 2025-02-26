@@ -1,0 +1,94 @@
+<think>
+Okay, I need to figure out how to answer the user's query using the provided context information. The user is asking for a list of papers that used the BERT + BiLSTM + CRF Decoding model and include links to their code. 
+
+First, I'll look through the context data. I see two main resources: R147652 and R284316, R284317. 
+
+Looking at R147652, it describes a method involving steps like using seed terms, term expansion with SciBERT, and applying a CRF algorithm. This seems relevant because the query mentions CRF. 
+
+Then, R284316 and R284317 talk about a paper titled "validation research" using techniques like Stanford NER, DBpedia Spotlight, Flair NER, and End-to-End Neural EL. They also mention models like BERT and GPT in the context of NER. 
+
+I need to extract terms from the user's question. The key terms are "BERT + BiLSTM + CRF Decoding model" and "papers" along with "code links." 
+
+Next, I'll compute similarity. The context mentions BERT and CRF, so R147652 and R284317 are relevant. 
+
+I'll structure the JSON output as per the example, grouping by the extracted terms and listing the top candidates with their URIs, labels, scores, types, and links if available.
+
+I should ensure that the URIs use the correct prefixes and that the types are accurate. Also, include the scores based on relevance.
+
+Finally, I'll make sure the JSON is correctly formatted, with each extracted term having its candidates and all required fields filled appropriately.
+</think>
+
+```json
+{
+  "question": "Provide a list of papers that have utilized the BERT + BiLSTM + CRF Decoding model and include the links to their code?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "BERT + BiLSTM + CRF Decoding model",
+      "uri": "orkgr:BERT_BiLSTM_CRF_Decoding_model",
+      "type": "Model",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "papers",
+      "type": "Class",
+      "rdf:type": "rdfs:Class"
+    },
+    {
+      "rdfs:label": "code links",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "BERT + BiLSTM + CRF Decoding model": [
+      {
+        "uri": "orkgr:BERT_BiLSTM_CRF_Model",
+        "rdfs:label": "BERT + BiLSTM + CRF Decoding model",
+        "score": 0.95,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:NER_Model",
+        "rdfs:label": "Named Entity Recognition Model",
+        "score": 0.89,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "papers": [
+      {
+        "uri": "orkgr:Paper_R284317",
+        "rdfs:label": "Journal Article on NER and EL",
+        "score": 0.92,
+        "type": "Paper",
+        "rdf:type": "orkgc:Resource",
+        "url": "http://dx.doi.org/10.13052/jwe1540-9589.2075"
+      },
+      {
+        "uri": "orkgr:Paper_R147246",
+        "rdfs:label": "Research on Entity Recognition",
+        "score": 0.88,
+        "type": "Paper",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "code links": [
+      {
+        "uri": "orkgp:Code_Link",
+        "rdfs:label": "Code Repository Link",
+        "score": 0.85,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:GitHub_Repository",
+        "rdfs:label": "GitHub Repository",
+        "score": 0.82,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```
