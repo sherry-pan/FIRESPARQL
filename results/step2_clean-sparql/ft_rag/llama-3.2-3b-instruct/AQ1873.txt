@@ -1,0 +1,14 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?cont a orkgc:Contribution;
+        rdfs:label ?cont_lbl.
+  ?paper orkgp:P30 ?cont;
+         rdfs:label ?cont_lbl.
+  ?dataset orkgp:P31 ?paper;
+           rdfs:label ?dataset_lbl.
+  FILTER(CONTAINS(LCASE(?cont_lbl), "audio classification"))
+}
+ORDER BY ASC(?dataset_lbl)
+LIMIT 5
+```

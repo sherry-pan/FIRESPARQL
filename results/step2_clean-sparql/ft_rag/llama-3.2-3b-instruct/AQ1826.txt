@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark rdfs:label "NLP-TDMS (Exp, arXiv only)".
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METRIC ?metric;
+        orkgp:HAS_VALUE ?value;
+        orkgp:HAS_MODEL ?model.
+  ?metric rdfs:label "Macro Precision".
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

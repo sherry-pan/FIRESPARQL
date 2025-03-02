@@ -1,0 +1,26 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  ?study a orkgc:Study;
+         orkgp:P30 ?paper;
+         orkgp:P31 ?cont.
+  ?paper orkgp:P31 ?cont.
+
+  ?cont rkgp:HAS_FEATURE_REQUEST ?feature_request;
+        rkgp:HAS_MODEL ?model.
+
+  ?model rkgp:HAS_DATASET ?dataset;
+         rkgp:HAS_ALGORITHM ?alg.
+
+  ?alg rdfs:label "Naive Bayes".
+
+  ?dataset rdfs:label "Bag of Words".
+  
+  ?feature_request rdfs:label "classify user feedback as feature request".
+
+  ?study orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_PRECISION ?precision;
+        orkgp:HAS_RECALL ?recall;
+        orkgp:HAS_F1 ?f1.
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "ShARe/CLEF eHealth corpus benchmark dataset".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METRIC orkgc:F1;
+        orkgp:HAS_VALUE ?f1_value.
+  ?model orkgp:HAS_PERFORMANCE ?eval;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?f1_value)
+LIMIT 1
+```

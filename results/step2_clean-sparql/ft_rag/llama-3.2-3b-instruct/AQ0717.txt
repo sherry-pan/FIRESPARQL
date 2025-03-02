@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  ?benchmark orkgp:P31 ?cont;
+             rdfs:label ?cont_lbl.
+  FILTER (str(?cont_lbl) = "ART/CoreSC benchmark dataset")
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:P31 ?metric;
+        rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 5
+```

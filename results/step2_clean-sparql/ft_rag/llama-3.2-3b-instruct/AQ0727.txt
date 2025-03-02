@@ -1,0 +1,22 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  {
+    ?benchmark a orkgc:Benchmark;
+               rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(STR(?benchmark_lbl), "FSNS-Test", "i"))
+    ?benchmark orkgp:P31 ?cont.
+  }
+  UNION 
+  {
+    ?dataset orkgp:P31 ?cont.
+    FILTER(REGEX(STR(?cont_lbl), "FSNS-Test", "i"))
+    ?dataset rdfs:label ?cont_lbl.
+  }
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(STR(?metric_lbl))
+LIMIT 5
+```

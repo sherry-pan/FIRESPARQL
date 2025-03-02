@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl (MAX(?metric_value) AS ?score)
+WHERE {
+  ?dataset orkgp:HAS_DATASET "MedSTS" .
+  ?dataset orkgp:P31 ?cont .
+  ?cont orkgp:P31 ?model .
+  ?model rdfs:label ?model_lbl .
+  ?cont orkgp:P33 ?metric .
+  ?metric rdfs:label ?metric_lbl .
+  ?cont orkgp:P34 ?value .
+  BIND(xsd:decimal(?value) AS ?metric_value)
+  FILTER (?metric_lbl = "Pearson Correlation")
+}
+GROUP BY ?model ?model_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

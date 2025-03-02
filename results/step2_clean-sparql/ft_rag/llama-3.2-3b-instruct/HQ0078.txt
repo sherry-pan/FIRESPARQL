@@ -1,0 +1,17 @@
+```sparql
+SELECT ?location
+WHERE {
+  ?study a orkgc:Contribution;
+         rdfs:label ?study_label;
+         orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_GEOGRAPHIC_SCALE ?scale.
+  {
+    SELECT (MAX(?scale) AS ?maxScale)
+    WHERE {
+      ?dataset orkgp:HAS_GEOGRAPHIC_SCALE ?scale.
+    }
+  }
+  ?dataset orkgp:HAS_GEOGRAPHIC_SCALE ?maxScale;
+            orkgp:HAS_LOCATION ?location.
+}
+```

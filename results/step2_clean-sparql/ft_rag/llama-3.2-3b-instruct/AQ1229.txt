@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric_lbl ?score_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Cart Pole (OpenAI Gym").
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_METRIC ?metric;
+             orkgp:HAS_SCORE ?score.
+  ?metric rdfs:label ?metric_lbl.
+  ?score rdfs:label ?score_lbl.
+}
+ORDER BY DESC(?score_lbl)
+LIMIT 1
+```

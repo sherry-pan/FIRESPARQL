@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?score) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "ModelNet40".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P31 ?cont;
+        orkgp:HAS_METRIC ?metric.
+  OPTIONAL { ?eval orkgp:HAS_LABEL ?metric_lbl. }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

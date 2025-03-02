@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(*) AS ?num_evaluations) 
+WHERE {
+  ?cont a orkgc:Contrib;
+        rdfs:label ?cont_lbl;
+        orkgp:P30 ?eval.
+  ?dataset orkgp:P14 ?cont;
+           orkgp:P32 ?eval;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?cont_lbl) = "evaluation metrics" && str(?dataset_lbl) = "Fashion-MNIST")
+  ?eval orkgp:P31 ?metric.
+  OPTIONAL {?metric rdfs:label ?metric_lbl.}
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?num_evaluations)
+LIMIT 5
+```

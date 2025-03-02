@@ -2,9 +2,6 @@ import os
 import re
 import sys
 import pandas as pd
-# pip install nltk scikit-learn rouge-score
-from rouge import Rouge
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from openai import OpenAI 
 from dotenv import load_dotenv
 
@@ -46,30 +43,11 @@ def get_completion(prompt):
 
     return completion.choices[0].message.content
 
-def calculate_bleu(reference, hypothesis):
-    """
-    Calculate BLEU score between reference and hypothesis.
-    """
-    smooth = SmoothingFunction().method1
-    # BLEU score with 4-gram smoothing: BLEU-4
-    return sentence_bleu([reference.split()], hypothesis.split(), smoothing_function=smooth, weights=(0.25, 0.25, 0.25, 0.25))
 
-def calculate_rouge(reference, hypothesis):
+def clean_sparql(generated_text_path, sparql_folder):
     """
-    Calculate ROUGE scores (ROUGE-1, ROUGE-2, ROUGE-L).
+    Clean the generated SPARQL queries.
     """
-    rouge = Rouge()
-    scores = rouge.get_scores(hypothesis, reference, avg=True)
-    return scores
-
-
-def clean_sparql(generated_text_path, sparql_folder, ground_truth_csv_file='xueli_data/test_questions.csv'):
-    """
-    Clean the generated SPARQL queries and calculate BLEU and ROUGE scores.
-    """
-    # Load the CSV file with the test questions
-    df = pd.read_csv(ground_truth_csv_file)
-
     # create a folder to save the cleaned sparql if it does not exist
     os.makedirs(sparql_folder, exist_ok=True)
 
@@ -83,55 +61,8 @@ def clean_sparql(generated_text_path, sparql_folder, ground_truth_csv_file='xuel
             new_file_path = os.path.join(sparql_folder, f"{file}")
             with open(new_file_path, 'w') as new_file:
                 new_file.write(sparql_query)
-
-
-    bleu_score_list = []
-    rouge_1_score_list = []
-    rouge_2_score_list = []
-    rouge_l_score_list = []
-
-    # Loop through each file in the clean_sparql folder
-    sparql_list = get_files_in_folder(sparql_folder)
-
-    # Attension: not all the file in the test_questions.csv are in the clean_sparql folder
-    for file in sparql_list:
-        # Load the content of the text file
-        with open(os.path.join(sparql_folder, file), 'r') as f:
-            # remove the ```sparql and ``` from the generated sparql
-            generated_sparql = f.read().replace('```sparql', ' ').replace('```', ' ').strip()
-            # remove the prefix namespace if it exists
-            generated_sparql = re.sub(r'PREFIX.*\n', '', generated_sparql)
-            # print(f'generated_sparql: {generated_sparql}')
-            question_id = file.split('.')[0]
-            # print(f'generated_sparql: {generated_sparql}')
-        # Get the ground truth SPARQL query
-        sparql = df[df['id'] == question_id]['query'].values[0]
-
-        # Calculate BLEU and ROUGE scores
-        bleu_score = calculate_bleu(sparql, generated_sparql)
-        rouge_scores = calculate_rouge(sparql, generated_sparql)
-        rouge_1 = rouge_scores['rouge-1']['f']
-        rouge_2 = rouge_scores['rouge-2']['f']
-        rouge_l = rouge_scores['rouge-l']['f']
-
-        # Append the scores to the lists
-        bleu_score_list.append(bleu_score)
-        rouge_1_score_list.append(rouge_1)
-        rouge_2_score_list.append(rouge_2)
-        rouge_l_score_list.append(rouge_l)
-
-    # calculate the average scores
-    avg_bleu_score = sum(bleu_score_list) / len(bleu_score_list)
-    avg_rouge_1_score = sum(rouge_1_score_list) / len(rouge_1_score_list)
-    avg_rouge_2_score = sum(rouge_2_score_list) / len(rouge_2_score_list)
-    avg_rouge_l_score = sum(rouge_l_score_list) / len(rouge_l_score_list)
-
-    print(f"Average BLEU4 Score: {avg_bleu_score:.2f}")
-    print(f"Average ROUGE-1 Score: {avg_rouge_1_score:.2f}")
-    print(f"Average ROUGE-2 Score: {avg_rouge_2_score:.2f}")
-    print(f"Average ROUGE-L Score: {avg_rouge_l_score:.2f}")
-
-    return avg_bleu_score, avg_rouge_1_score, avg_rouge_2_score, avg_rouge_l_score
+            print(f"Cleaned SPARQL query saved to {new_file_path}")
+    return None
 
 
 if __name__ == '__main__':

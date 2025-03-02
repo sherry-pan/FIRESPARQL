@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://orkg.org/orkg/prefix/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?code
+WHERE {
+  ?code rdfs:label ?code_label.
+  ?code orkgp:P31 ?cont.
+  ?cont orkgp:P27 ?paper.
+  ?paper orkgp:P2 ?model.
+  ?model rdfs:label ?model_label.
+  FILTER(REGEX(?model_label, "Multi-Perspective Matching \\(ensemble\\)", "i"))
+}
+ORDER BY DESC(COUNT(?code))
+LIMIT 5
+```

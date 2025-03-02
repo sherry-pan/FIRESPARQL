@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?code
+WHERE {
+  ?paper orkg:P31 ?contrib .
+  ?contrib orkg:P31 ?model .
+  ?model orkg:P32 ?benchmark .
+  ?benchmark orkg:P14 ?code .
+  FILTER(REGEX(?model, "PEGASUS", "i"))
+}
+```

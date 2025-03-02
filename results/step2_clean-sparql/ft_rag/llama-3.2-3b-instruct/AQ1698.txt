@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Centipede")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  
+  ?paper orkgp:P31 ?benchmark.
+  ?cont orkgp:P32 ?paper;
+        rdfs:label ?model_lbl.
+  
+  ?model orkgp:P31 ?cont.
+
+  ?eval orkgp:P27 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  
+  ?model orkgp:P28 ?metric;
+         orkgp:VALUES ?values.
+  
+  ?value rdfs:label ?values_lbl.
+  ?best orkgp:P29 ?values.
+  
+  ?cont orkgp:P34 ?best.
+}
+ORDER BY DESC(?best)
+LIMIT 1
+```

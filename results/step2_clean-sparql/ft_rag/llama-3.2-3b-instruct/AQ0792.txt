@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  ?metric orkgp:HAS_METRIC ?eval_metric.
+  ?eval_metric orkgp:HAS_VALUE ?eval_value.
+  ?eval_value orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "Quasart-T"))
+  ?eval_metric orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "similarity|distance|cosine"))
+}
+```

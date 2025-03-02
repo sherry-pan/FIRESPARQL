@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Reuters En-De".
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?evaluation.
+  
+  ?evaluation orkgp:HAS_METRIC orkgc:Accuracy;
+              orkgv:score ?score.
+  
+  ?paper orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_CONTRIBUTION ?contribution.
+  
+  ?contribution rdfs:label ?model_lbl;
+                orkgp:MODELS ?model.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

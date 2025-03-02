@@ -1,0 +1,13 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:P31 ?score_entity;
+         rdfs:label ?model_lbl.
+  ?score_entity orkgp:P31 orkgp:Q123456. # This should represent the Story Cloze Test
+  ?score_entity orkgp:P3009 ?score_property.
+  ?score_property rdfs:label "Accuracy".
+  ?score_entity orkgp:P3009 ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

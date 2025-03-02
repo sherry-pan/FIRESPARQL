@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?cont a orkgc:Contribution;
+        rdfs:label ?cont_lbl.
+  FILTER (str(?cont_lbl) = "Hutter Prize dataset")
+  ?cont orkgp:P32 ?eval.
+  ?eval rdfs:label ?metric_lbl;
+        orkgp:P33 ?metric.
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 5
+```

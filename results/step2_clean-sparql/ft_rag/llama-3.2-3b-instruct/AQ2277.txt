@@ -1,0 +1,11 @@
+```sparql
+SELECT ?entity ?entity_lbl ?contcode
+WHERE {
+  ?entity a orkgc:Resource;
+          rdfs:label ?entity_lbl.
+  FILTER(REGEX(?entity_lbl, "T-ConvS2S", "i"))
+  ?cont orkgp:P31 ?entity;
+        orkgp:P50 ?benchmark.
+  ?benchmark orkgp:P52 ?contcode.
+}
+```

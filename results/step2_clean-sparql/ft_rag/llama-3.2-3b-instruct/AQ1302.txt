@@ -1,0 +1,14 @@
+```sparql
+SELECT ?score ?metric
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Atari 2600 Tennis".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?value rdfs:label ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

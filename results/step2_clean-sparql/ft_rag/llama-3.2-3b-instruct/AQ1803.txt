@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "VTAB-1k".
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+             
+  ?eval orkgp:HAS_SCORE ?eval_score.
+  
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?model orkgp:HAS_CONTRIBUTION ?cont;
+         rdfs:label ?model_lbl.
+  
+} ORDER BY DESC(?eval_score)
+LIMIT 1
+```

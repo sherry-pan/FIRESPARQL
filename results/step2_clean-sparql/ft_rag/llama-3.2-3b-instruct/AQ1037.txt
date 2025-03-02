@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?score ?benchmark
+WHERE {
+  ?dataset a orkgp:Dataset;
+           rdfs:label "Scholarly entity usage detection dataset".
+  ?dataset orkgp:P31 ?cont.
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_METRIC ?metric;
+             orkgp:HAS_SCORE ?score.
+} 
+ORDER BY DESC(?score) 
+LIMIT 1
+```

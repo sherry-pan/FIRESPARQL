@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?eval) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Hutter Prize")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P31 ?cont.
+  
+  ?metric orkgp:P32 ?eval;
+          rdfs:label ?metric_lbl.
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+```

@@ -1,0 +1,19 @@
+```sparql
+SELECT ?metric ?dataset ?score
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "evaluation")
+  
+  ?metric orkgp:P31 ?cont;
+          orkgp:P32 ?eval.
+  
+  ?eval rdfs:label ?dataset_lbl.
+  ?cont orkgp:P31 ?dataset.
+  
+  BIND(XSD:float(?score) AS ?score)
+}
+GROUP BY ?metric ?dataset ?score
+ORDER BY DESC(?score)
+LIMIT 5
+```

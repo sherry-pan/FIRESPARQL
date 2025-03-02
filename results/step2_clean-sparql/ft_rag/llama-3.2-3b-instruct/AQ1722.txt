@@ -1,0 +1,14 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?eval.
+  ?eval rdfs:label ?eval_lbl.
+  FILTER(REGEX(?eval_lbl, "Atari 2600 Tutankham", "i"))
+  ?contrib orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+  ?eval orkgp:Score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

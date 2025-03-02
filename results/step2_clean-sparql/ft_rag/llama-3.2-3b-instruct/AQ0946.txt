@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric_label
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_label.
+  FILTER(CONTAINS(LCASE(STR(?dataset_label)), "atari 2600 fishing derby"))
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:P32 ?metric.
+
+  ?metric rdfs:label ?metric_label.
+}
+ORDER BY ?metric_label
+```

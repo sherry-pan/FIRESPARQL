@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgp:R134742 orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label "seel.cse.lsu.edu/data/re17.zip".
+    ?eval orkgp:HAS_VALUE ?value.
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    BIND(xsd:float(?value) AS ?value)
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Stanford Dogs".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P31 ?cont.
+  ?result orkgp:HAS_EVALUATION ?eval;
+          orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:HAS_METRIC ?metric.
+  BIND(xsd:integer(?value) AS ?value)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

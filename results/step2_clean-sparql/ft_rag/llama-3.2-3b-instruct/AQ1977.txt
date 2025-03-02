@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/resource/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?code
+WHERE {
+  ?paper orkgp:P28 ?model.
+  ?model rdf:type orkg:Model.
+  ?benchmark orkgp:P31 ?paper;
+             orkgp:P29 ?code.
+  FILTER(REGEX(?model, "STREET", "i"))
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  ?paper rdfs:label ?paper_label.
+  FILTER (str(?paper_label) = "Paper Field dataset")
+  ?paper orkgp:P31 ?dataset.
+  ?dataset orkgp:P27 ?cont.
+  ?cont orkgp:P28 ?metric.
+  ?cont orkgp:P29 ?score.
+  BIND(xsd:float(?score) AS ?score)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

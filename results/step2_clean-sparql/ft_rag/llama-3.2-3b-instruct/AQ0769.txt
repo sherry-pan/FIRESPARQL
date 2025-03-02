@@ -1,0 +1,27 @@
+```sparql
+SELECT ?metric ?metric_lbl ?score
+WHERE {
+  ?cont a orkgc:Contrib;
+        rdfs:label ?cont_lbl;
+        orkgp:P31 ?venue.
+  FILTER (str(?cont_lbl) = "BioBERT achieved the highest F1 scores")
+  
+  ?venue rdfs:label ?venue_lbl.
+  FILTER (str(?venue_lbl) = "Proceedings of the 2007 conference on Digital libraries - JCDL '07")
+  
+  ?cont orkgp:P32 ?eval_metric.
+  ?eval_metric rdfs:label ?metric_lbl.
+  
+  ?eval rdfs:label ?metric;
+        orkgp:P31 ?cont;
+        orkgp:P33 ?model.
+  
+  ?model rdfs:label ?model_lbl;
+         orkgp:P34 ?benchmark.
+  FILTER (str(?benchmark_lbl) = "WMT2014 English-German dataset")
+  
+  ?benchmark rdfs:label ?benchmark_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 5
+```

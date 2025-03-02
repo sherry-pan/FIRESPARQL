@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl ?f1_metric
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "CoNLL++".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?model orkgp:P31 ?cont;
+         rdfs:label ?model_lbl.
+  ?eval orkgp:HAS_MODEL ?model.
+  ?metric orkgp:HAS_EVALUATION ?eval;
+          rdfs:label "F1".
+  ?eval_metric orkgp:HAS_METRIC ?metric;
+               orkgp:VALUE ?f1_metric.
+}
+ORDER BY DESC(?f1_metric)
+LIMIT 1
+```

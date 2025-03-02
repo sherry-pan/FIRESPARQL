@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_METRIC ?metric;
+        orkgp:HAS_VALUE ?value;
+        rdfs:label ?cont_lbl.
+  FILTER (str(?cont_lbl) = "PubMed 20k RCT")
+  
+  ?cont orkgp:P31 ?subclass.
+  ?model a orkgp:Model;
+         rdfs:label ?model_lbl;
+         orkgp:P31 ?subclass;
+         orkgp:HAS_SUBCLASS ?subclass.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

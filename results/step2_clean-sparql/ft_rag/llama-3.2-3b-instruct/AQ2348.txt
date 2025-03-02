@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp#>
+PREFIX orkgc: <http://example.org/orkgc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?code
+WHERE {
+  {
+    ?model a orkgc:Model;
+           rdfs:label "KD-Lasmreg".
+    ?cont orkgp:P31 ?model;
+          orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:HAS_SOURCE_CODE ?code.
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+  }
+  UNION
+  {
+    ?cont orkgp:P31 ?model;
+          orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:HAS_SOURCE_CODE ?code.
+    ?model rdfs:label "KD-Lasmreg".
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+  }
+}
+ORDER BY DESC(?cont)
+LIMIT 5
+```

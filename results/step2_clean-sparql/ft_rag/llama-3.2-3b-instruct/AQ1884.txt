@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset ?dataset_label
+WHERE {
+  ?paper orkgp:P30 orkgc:TextSummarization .
+  ?paper orkgp:P32 ?dataset .
+  ?dataset rdfs:label ?dataset_label .
+}
+GROUP BY ?dataset ?dataset_label
+ORDER BY DESC(COUNT(?paper))
+```

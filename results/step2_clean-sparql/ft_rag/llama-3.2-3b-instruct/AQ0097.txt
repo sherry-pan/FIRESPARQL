@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Multimodal PISA")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P31 ?cont.
+  
+  ?model orkgp:P31 ?eval;
+         rdfs:label ?model_lbl.
+}
+```

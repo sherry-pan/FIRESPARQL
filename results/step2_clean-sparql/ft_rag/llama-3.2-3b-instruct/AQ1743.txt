@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?model_lbl ?dataset ?dataset_lbl ?metric ?metric_lbl ?score
+WHERE {
+  ?model orkg:P31 ?cont;
+         rdfs:label ?model_lbl.
+  ?cont orkg:P32 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?cont orkg:P32 ?eval.
+  ?eval orkg:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkg:P35 ?score.
+  FILTER(REGEX(STR(?metric_lbl), "F1", "i"))
+}
+ORDER BY DESC(?score)
+LIMIT 10
+```

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+    ?paper orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:P31 ?cont.
+    ?cont orkgp:HAS_SOURCE ?source.
+    ?source orkgp:P31 ?code.
+    ?code rdfs:label ?label.
+    FILTER(REGEX(?label, "BiDAF|Self|Attention|ELMo"))
+}
+GROUP BY ?code
+ORDER BY (COUNT(?code) DESC)
+LIMIT 5
+```

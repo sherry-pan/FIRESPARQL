@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "Sequential MNIST")
+  
+  ?dataset orkgp:HAS_DATASET ?benchmark;
+           orkgp:HAS_DATASET_VALUE ?dataset_lbl.
+  
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:P57100 ?eval.
+  
+  OPTIONAL {
+    ?cont orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+  }
+}
+ORDER BY DESC(?eval)
+LIMIT 1
+```

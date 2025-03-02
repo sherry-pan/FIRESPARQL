@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?ontology a orkgc:Ontology;
+            rdfs:label ?ontology_lbl.
+  FILTER (str(?ontology_lbl) = "Semantic Role Labeling")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        rdfs:label ?cont_lbl.
+  FILTER (str(?cont_lbl) = "validation research")
+  ?eval orkgp:HAS_EVALUATION ?eval;
+        rdfs:label ?eval_lbl.
+  BIND(xsd:integer(?eval_lbl) AS ?eval_value)
+  ?dataset rdfs:label ?dataset_lbl.
+}
+ORDER BY DESC(?eval_value)
+```

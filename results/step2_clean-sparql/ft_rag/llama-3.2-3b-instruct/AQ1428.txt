@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl ?metric ?metric_lbl
+WHERE {
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "BLEU"))
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "WMT2016 German-English".
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METRIC ?metric.
+  ?eval orkgp:P31 ?cont.
+  ?cont orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 10
+```

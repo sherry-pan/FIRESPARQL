@@ -1,0 +1,18 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label "Benchmark RotoWire (Relation Generation)".
+  
+  ?eval_set orkgp:HAS_BENCHMARK ?benchmark;
+            orkgp:HAS_EVALUATION ?eval.
+
+  ?eval orkgp:HAS_EVALUATION_VALUE ?eval_value.
+
+  ?eval_value a orkgp:Evaluation;
+              orkgp:HAS_VALUE ?value;
+              orkgp:HAS_METRIC ?metric.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

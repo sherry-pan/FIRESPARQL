@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "Reacher, easy (DMControl500k)")
+  
+  ?dataset orkgp:P30 ?benchmark;
+           rdfs:label ?dataset_lbl.
+  
+  ?cont orkgp:P31 ?dataset;
+        orkgp:P32 ?model;
+        orkgp:P33 ?score.  # Assuming P33 corresponds to the score
+  
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?score)  # Order by score, not model label
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+```sparql
+SELECT ?metric_lbl ?value_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             orkgp:P32 ?metric;
+             orkgp:P31 ?cont.
+  
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  
+  ?cont orkgp:P33 ?dataset.
+  
+  ?dataset rdfs:label ?dataset_lbl.
+  
+  FILTER (str(?dataset_lbl) = "SQuAD2.0")
+}
+ORDER BY DESC(?value_lbl)
+LIMIT 1
+```

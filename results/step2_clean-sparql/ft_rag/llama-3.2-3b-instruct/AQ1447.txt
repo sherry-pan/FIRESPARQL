@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl ?dataset ?dataset_lbl ?benchmark ?benchmark_lbl ?metric ?metric_lbl
+WHERE {
+  orkgp:R1 orkgp:relation_of ?model;
+          rdfs:label ?model_lbl.
+  ?model orkgp:P31 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?model orkgp:P32 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  ?model orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(CONTAINS(?benchmark_lbl, "HMDB51"))
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

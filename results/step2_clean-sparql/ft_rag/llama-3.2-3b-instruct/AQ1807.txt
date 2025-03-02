@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label "Accuracy".
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:P31 ?class;
+          orkgp:P32 ?method;
+          orkgp:HAS_MODEL ?model;
+          orkgp:HAS_EVALUATION ?eval;
+          orkgp:P30010 ?value;
+          orkgp:HAS_DATASET ?cont_dataset.
+    ?class rdfs:label "Evaluation".
+    ?dataset rdfs:label "Kuzushiji-MNIST".
+    ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

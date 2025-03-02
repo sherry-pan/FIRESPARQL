@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACE 2005")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  
+  ?paper orkgp:P31 ?benchmark.
+
+  ?contribution orkgp:P31 ?paper.
+  
+  ?model orkgp:P31 ?contribution;
+         rdfs:label ?model_lbl.
+}
+```

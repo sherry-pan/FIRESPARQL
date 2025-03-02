@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl 
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P8 ?cont_lbl.
+  FILTER(REGEX(STR(?cont_lbl), "CoNLL 2012"))
+  
+  ?paper orkgp:P5 ?model.
+  ?model orkgp:P6 ?f1.
+  ?model rdfs:label ?model_lbl.
+  
+  ?paper orkgp:P2 ?paper_lbl.
+  FILTER(REGEX(STR(?paper_lbl), "Named Entity Recognition"))
+  
+} 
+ORDER BY DESC(?f1)
+LIMIT 1
+```

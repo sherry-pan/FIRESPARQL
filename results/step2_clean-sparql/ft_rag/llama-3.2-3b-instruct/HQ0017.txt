@@ -1,0 +1,12 @@
+```sparql
+SELECT ?label (COUNT(?papers) AS ?count)
+WHERE {
+  ?papers orkgp:P31 ?contributions.
+  ?contributions orkgp:P32 ?venues.
+  ?venues rdfs:label ?label.
+  FILTER(REGEX(?label, "location"))
+}
+GROUP BY ?label
+ORDER BY DESC(?count)
+LIMIT 1
+```

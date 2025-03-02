@@ -1,0 +1,25 @@
+```sparql
+SELECT ?country ?country_lbl (MAX(?prevalence_value) AS ?max_prevalence_value)
+WHERE {
+  ?epilepsy a orkgc:Epilepsy;
+            rdfs:label ?epil_lbl.
+  FILTER (str(?epil_lbl) = "epilepsy")
+
+  ?dataset orkgp:HAS_DATASET ?epilepsy;
+           orkgp:HAS_EVALUATION ?eval.
+
+  ?paper orkgp:HAS_DATASET ?dataset;
+         orkgp:HAS_EVALUATION ?eval.
+
+  ?country orkgp:P32 ?dataset;
+           rdfs:label ?country_lbl.
+
+  ?prevalence orkgp:HAS_EVALUATION ?eval;
+              rdfs:label ?prevalence_lbl.
+
+  BIND(xsd:float(?prevalence_lbl) AS ?prevalence_value)
+}
+GROUP BY ?country ?country_lbl
+ORDER BY DESC(MAX(?prevalence_value))
+LIMIT 1
+```

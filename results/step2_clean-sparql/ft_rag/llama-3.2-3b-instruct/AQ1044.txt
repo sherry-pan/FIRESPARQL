@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  ?dataset       rdfs:label     ?dataset_label.
+  FILTER (str(?dataset_label) = "Softcite")
+  ?cont          orkgp:P31      ?dataset;
+                 orkgp:P32      ?eval.
+  ?eval          orkgp:P29      ?metric;
+                 orkgp:P30      ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+```sparql
+SELECT ?code ?code_lbl
+WHERE {
+  ?paper a orkgp:Paper .
+  ?paper orkgp:HAS_DATASET ?dataset .
+  ?dataset orkgp:P31 ?cont .
+  ?cont orkgp:P31_2 ?model .
+  ?model rdfs:label ?model_lbl .
+  FILTER(REGEX(?model_lbl, "Multi-Perspective Matching"))
+  ?paper orkgp:P31_3 ?benchmark .
+  ?benchmark orkgp:P31_4 ?similarity .
+  ?similarity rdfs:label ?similarity_lbl .
+  FILTER(REGEX(?similarity_lbl, "cosine|euclidean"))
+  ?benchmark orkgp:P31_5 ?cont2 .
+  ?cont2 orkgp:P31_6 ?code .
+  ?code rdfs:label ?code_lbl .
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?evalu) AS ?score)
+WHERE {
+  ?benchmark a orkgc:Benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "CoQA", "i"))
+  ?cont orkgp:P30 ?benchmark.
+  ?eval orkgp:P31 ?cont.
+  ?eval orkgp:P32 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value rdfs:label ?evalu_lbl.
+  BIND(xsd:float(?evalu_lbl) AS ?evalu) 
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

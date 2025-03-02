@@ -1,0 +1,15 @@
+```sparql
+SELECT ?benchmark
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl.
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_DATASET ?dataset.
+  ?question orkgp:P32 ?eval.
+  ?question rdfs:label ?num_questions_lbl.
+  BIND(xsd:integer(?num_questions_lbl) AS ?num_questions)
+  FILTER (?num_questions > 10000)
+}
+```

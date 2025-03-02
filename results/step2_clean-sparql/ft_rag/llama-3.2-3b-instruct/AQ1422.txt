@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?cont a orkgc:Contribution;
+        rdfs:label ?cont_lbl;
+        orkgp:P36029 ?metric;
+        orkgp:P36030 ?dataset;
+        orkgp:P27 ?model.
+
+  ?metric rdfs:label ?metric_lbl.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?model rdfs:label ?model_lbl.
+  
+  FILTER (str(?metric_lbl) = "BLEU score")
+  FILTER (str(?dataset_lbl) = "IWSLT2014 German-English benchmark dataset")
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

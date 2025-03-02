@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?cont a orkgc:Contribution;
+        orkgp:HAS_DATASET ?dataset;
+        orkgp:P31 ?model;
+        orkgp:P32 ?eval;
+        orkgp:P33 ?score.
+  ?model rdfs:label ?model_lbl.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?eval rdfs:label ?eval_lbl.
+  ?score rdfs:label ?score_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k")
+  FILTER (str(?eval_lbl) = "Params score")
+}
+ORDER BY DESC(?score_lbl)
+LIMIT 1
+```

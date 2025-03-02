@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P597 ?eval.
+  ?eval orkgp:P748 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "Params"))
+  ?benchmark rdfs:label "Benchmark ImageNet ReaL".
+}
+```

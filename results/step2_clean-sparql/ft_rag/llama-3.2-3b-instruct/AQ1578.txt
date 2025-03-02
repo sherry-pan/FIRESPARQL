@@ -1,0 +1,13 @@
+```sparql
+SELECT ?model ?model_lbl (MAX(?score) AS ?score)
+WHERE {
+  ?model orkgp:BENCHMARKS_DATASET orkgr:R163845;
+         orkgp:HAS_SCORE ?scoreEntity.
+  ?scoreEntity orkgp:HAS_METRIC orkgm:ROUGE2;
+               orkgp:HAS_VALUE ?score.
+  ?model rdfs:label ?model_lbl.
+}
+GROUP BY ?model ?model_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Atari 2600 Boxing".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:P31 ?eval.
+  ?contribution orkgp:P32 ?paper;
+                rdfs:label ?model_lbl.
+  ?model orkgp:P31 ?contribution;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?model_lbl)
+LIMIT 5
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT ?dataset_lbl (COUNT(?r) AS ?freq)
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.
+  FILTER(REGEX(STR(?problem_lbl), "Common Sense Reasoning"))
+
+  ?cont orkgp:HAS_PROBLEM ?problem;
+        orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_BENCHMARK ?benchmark.
+
+  ?dataset a orkgp:Dataset;
+           rdfs:label ?dataset_lbl.
+}
+GROUP BY ?dataset_lbl
+```

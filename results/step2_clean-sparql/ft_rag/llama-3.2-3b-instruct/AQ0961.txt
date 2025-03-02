@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(?eval) AS ?eval_count) 
+WHERE {
+  ?resource orkgp:HAS_DATASET ?dataset.
+  FILTER (?resource IN (orkgp:R118402, orkgp:R118403))
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "Atari 2600 Frostbite", "i"))
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {?eval orkgp:HAS_METRIC ?metric.}
+  ?metric rdfs:label ?metric_lbl.
+}
+GROUP BY ?metric ?metric_lbl
+```

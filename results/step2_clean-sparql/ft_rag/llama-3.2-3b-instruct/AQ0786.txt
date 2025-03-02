@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?evaluator
+WHERE {
+  orkgp:R134744 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31032 ?metric.
+  ?eval orkgp:P31033 ?evaluator.
+  FILTER(REGEX(STR(?evaluator), "UCF101"))
+}
+ORDER BY DESC(?evaluator)
+LIMIT 5
+```

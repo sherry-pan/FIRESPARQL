@@ -1,0 +1,23 @@
+```sparql
+SELECT ?model ?model_lbl (MAX(?evalcontscore) AS ?score)
+WHERE {
+  ?contributionsubj rdfs:label ?contributions_lbl.
+  FILTER(REGEX(?contributions_lbl, "Contribution.*"))
+  ?contributionsubj p:P31 ?evaluationsubj.
+  ?evaluationsubj rdfs:label ?evaluatorscore_lbl.
+  ?evaluationsubj p:P32 ?benchmarksubj.
+  ?benchmarksubj rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "ImageNet.*64x64"))
+  ?evaluationsubj orkgp:HAS_DATASET ?datasetsubj.
+  ?datasetsubj rdfs:label ?dataset_lbl.
+  ?datasetsubj orkgp:HAS_EVALUATION ?evalcontsubj.
+  ?evalcontsubj orkgp:P31 _:bnode_evalcont.
+  _:bnode_evalcont rdfs:label ?evalcont_lbl.
+  FILTER(REGEX(?evalcont_lbl, "Bits per dim"))
+  ?evalcontsubj orkgp:HAS_MODEL ?modelsubj.
+  BIND(xsd:float(?evalcont_lbl) AS ?evalcontscore)
+  ?modelsubj rdfs:label ?model_lbl.
+}
+GROUP BY ?model ?model_lbl
+ORDER BY DESC(?score)
+```

@@ -1,0 +1,21 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkgc:Benchmark ;
+             orkgp:HAS_DATASET ?dataset ;
+             orkgp:HAS_EVALUATION ?eval ;
+             orkgp:HAS_BENCHMARK_VALUE ?bv .
+
+  ?dataset rdfs:label ?dataset_lbl .
+  FILTER(REGEX(?dataset_lbl, "Supervised:"))
+
+  ?eval orkgp:P32 ?metric .
+
+  BIND(xsd:float(?bv) AS ?value)
+
+  ?metric rdfs:label ?metric_lbl .
+}
+
+ORDER BY DESC(?value)
+LIMIT 1
+```

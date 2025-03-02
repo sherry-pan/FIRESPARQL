@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?model orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?cont.
+  ?cont rdfs:label ?cont_lbl.
+  FILTER(CONTAINS(LCASE(?cont_lbl), "multinli"))
+  ?cont orkgp:P2 ?dataset.
+  ?dataset orkgp:P31 ?ven.
+  ?ven rdfs:label ?ven_lbl.
+  FILTER(CONTAINS(LCASE(?ven_lbl), "dataset"))
+}
+ORDER BY DESC(?cont_lbl)
+LIMIT 5
+```

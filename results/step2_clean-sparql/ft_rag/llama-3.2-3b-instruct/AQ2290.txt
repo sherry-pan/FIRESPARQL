@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code ?code_lbl
+WHERE {
+    orkgp:R76244 orkgp:HAS_CODE ?code.
+    ?code rdfs:label ?code_lbl.
+    FILTER(REGEX(?code_lbl, "GCN Hybrid"))
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:P27 ?benchmark.
+    ?benchmark orkgp:P28 ?model.
+    FILTER(REGEX(?model, "GCN Hybrid"))
+}
+ORDER BY DESC(?cont)
+LIMIT 5
+```

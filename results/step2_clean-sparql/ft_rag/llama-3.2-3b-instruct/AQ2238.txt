@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P5000 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "MPAD-path", "i"))
+  ?cont orkgp:P5001 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "benchmarking", "i"))
+  ?model orkgp:P5002 ?code.
+}
+GROUP BY ?code
+HAVING COUNT(?code) > 1
+```

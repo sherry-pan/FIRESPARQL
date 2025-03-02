@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?model_lbl
+WHERE {
+  ?benchmark orkg:P31 ?cont. 
+  ?cont orkg:P36 ?model. 
+  ?model rdfs:label ?model_lbl. 
+  ?cont orkg:P32 ?eval. 
+  ?eval orkg:P34 ?metric. 
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(STR(?model_lbl), "MLDoc Zero-Shot English-to-German", "i")).
+  FILTER(REGEX(STR(?metric_lbl), "Accuracy", "i")).
+}
+ORDER BY DESC(?metric_lbl) 
+LIMIT 1
+```

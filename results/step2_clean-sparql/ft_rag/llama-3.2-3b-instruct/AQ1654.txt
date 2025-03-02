@@ -1,0 +1,27 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "PARAMS")
+  
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_BENCHMARK ?bench.
+  
+  ?bench rdfs:label ?bench_lbl.
+  FILTER (str(?bench_lbl) = "FGVC Aircraft")
+  
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:HAS_METRIC ?metric;
+        orkgp:HAS_VALUE ?value.
+  
+  ?value rdfs:label ?value_lbl.
+  BIND(xsd:float(?value_lbl) AS ?value_num)
+  
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value_num)
+LIMIT 1
+```

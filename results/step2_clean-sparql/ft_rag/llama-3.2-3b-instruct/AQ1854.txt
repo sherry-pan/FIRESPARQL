@@ -1,0 +1,14 @@
+```sparql
+SELECT ?entity ?entity_lbl (COUNT(*) AS ?num_similar)
+WHERE {
+  ?entity orkgp:P29 ?cont. 
+  ?cont orkgp:P30 ?dataset.
+  FILTER(REGEX(STR(?dataset), "benchmark datasets"))
+  ?entity orkgp:P31 ?field.
+  FILTER(REGEX(STR(?field), "Joint Entity and Relation Extraction"))
+  ?entity orkgp:P32 ?entity_lbl.
+}
+GROUP BY ?entity ?entity_lbl
+ORDER BY DESC(?num_similar)
+LIMIT 5
+```

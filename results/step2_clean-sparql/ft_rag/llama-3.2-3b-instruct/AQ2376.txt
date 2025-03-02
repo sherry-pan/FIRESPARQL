@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?paper ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER CONTAINS(LCASE(?model_lbl), "anode")
+  
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
+  
+  ?paper orkgp:HAS_CONTRIBUTION ?cont;
+         rdfs:label ?paper_lbl.
+}
+ORDER BY ?paper_lbl
+```

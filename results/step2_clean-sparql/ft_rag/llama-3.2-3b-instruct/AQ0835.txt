@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metricLabel WHERE {
+    ?dataset a orkgp:Dataset ;
+             rdfs:label "enwik8" .
+  
+    ?benchmark orkgp:HAS_DATASET ?dataset .
+    ?cont orkgp:HAS_BENCHMARK ?benchmark .
+    ?cont orkgp:P31 ?model .
+    ?model orkgp:HAS_EVALUATION ?eval .
+    ?eval orkgp:HAS_METRIC ?metric .
+    ?metric rdfs:label ?metricLabel .
+
+    FILTER (?metricLabel IN ("BLEU", "ROUGE", "Accuracy", "F1-score", "Cosine similarity"))
+} LIMIT 5
+```

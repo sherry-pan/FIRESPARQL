@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_label.
+  FILTER (str(?dataset_label) = "NYT-single")
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?metric.
+  ?eval orkgp:P32 ?eval_value.
+  BIND(xsd:float(?eval_value) AS ?value).
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

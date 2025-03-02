@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "ACL Anthology".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:P31 ?eval;
+         orkgp:HAS_BENCHMARK ?benchmark.
+  ?contrib orkgp:P31 ?paper;
+           rdfs:label ?contrib_lbl.
+  ?model rdfs:label ?contrib_lbl.
+}
+```

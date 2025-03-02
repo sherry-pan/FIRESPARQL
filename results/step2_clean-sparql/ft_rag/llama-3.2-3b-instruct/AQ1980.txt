@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?papers orkgp:P30 ?contributions.
+  ?contributions orkgp:P31 ?papers.
+  ?papers orkgp:P32 ?code.
+  ?code rdfs:label ?code_labels.
+  FILTER(REGEX(STR(?code_labels), "TCN model"))
+  ?papers orkgp:P33 ?benchmarking.
+  ?benchmarking rdfs:label ?benchmarking_labels.
+  FILTER(REGEX(STR(?benchmarking_labels), "benchmarking"))
+  ?contributions rdfs:label ?contributions_labels.
+  FILTER(REGEX(STR(?contributions_labels), "code references"))
+} 
+```

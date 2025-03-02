@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:P31 ?modelType.
+  ?modelType rdfs:label ?modelType_lbl.
+  FILTER (str(?modelType_lbl) = "Model")
+  
+  ?benchmark orkgp:P31 ?benchmarkType.
+  ?benchmarkType rdfs:label ?benchmarkType_lbl.
+  FILTER (str(?benchmarkType_lbl) = "Dataset")
+  
+  ?benchmark orkgp:P31 ?datasetType.
+  ?datasetType rdfs:label ?datasetType_lbl.
+  FILTER (str(?datasetType_lbl) = "Natural Questions (short)")
+  
+  ?model orkgp:P39 ?benchmark.
+  ?model rdfs:label ?model_lbl.
+}
+```

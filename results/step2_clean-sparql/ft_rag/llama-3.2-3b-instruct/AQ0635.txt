@@ -1,0 +1,13 @@
+```sparql
+SELECT ?title ?title_lbl ?cont_id ?cont_lbl
+WHERE {
+  ?cont a orkgc:Contrib;
+        rdfs:label ?cont_lbl.
+  FILTER(REGEX(STR(?cont_lbl), "DBpedia"))
+  ?cont orkgp:P30 ?paper.
+  ?paper rdfs:label ?title_lbl.
+  ?paper orkgp:P31 ?dataset.
+  ?dataset rdfs:label ?title.
+  ?cont orkgp:P43 ?cont_id.
+}
+```

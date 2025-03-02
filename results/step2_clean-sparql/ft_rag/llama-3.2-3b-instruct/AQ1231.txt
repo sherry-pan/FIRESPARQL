@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX orkgc: <http://orkg.org/orkgc/>
+PREFIX orkgp: <http://orkg.org/orkgp/>
+
+SELECT ?metric ?metric_lbl (COUNT(?eval) AS ?score)
+WHERE {
+  orkgc:R135033 orkgp:P30 ?eval.
+  ?eval orkgp:P31 ?metric.
+  ?metric orkgp:P32 ?metric_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "Accuracy"))
+}
+GROUP BY ?metric ?metric_lbl
+HAVING (COUNT(?eval) > 1)
+ORDER BY DESC(?score)
+LIMIT 1
+```

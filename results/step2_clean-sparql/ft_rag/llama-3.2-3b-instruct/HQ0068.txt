@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?sector_label (COUNT(?sector) AS ?frequency)
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "Energy(theory)")
+
+  ?cont orkgp:HAS_MODEL ?model;
+        rdfs:label ?sector_label.
+
+  ?cont orkgp:HAS_SECTOR ?sector.
+}
+GROUP BY ?sector_label
+```

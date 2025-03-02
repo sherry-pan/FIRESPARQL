@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "BUCC Chinese-to-English")
+    
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    
+    ?eval orkgp:HAS_VALUE ?value;
+          orkgp:HAS_METRIC ?metric.
+
+    ?metric rdfs:label ?metric_lbl.
+    BIND(xsd:float(?value) AS ?value_float)
+    
+    ?cont orkgp:HAS_EVALUATION ?eval;
+          orkgp:HAS_MODEL ?model.
+
+    ?model rdfs:label ?model_lbl.
+
+    ?model a orkgp:Model;
+           rdfs:label ?model_lbl.
+
+    ?benchmark orkgp:HAS_MODEL ?model.
+
+    FILTER (?metric_lbl = "F1 score")
+}
+ORDER BY DESC(?value_float)
+LIMIT 1
+```

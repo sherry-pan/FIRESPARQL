@@ -1,0 +1,14 @@
+```sparql
+SELECT ?nanocarriers ?therapeutic_effects
+WHERE {
+  ?nanocarriers a orkgc:Contribution;
+                rdfs:label ?nanocarriers_labels.
+  FILTER(REGEX(?nanocarriers_labels, "nanocarriers"))
+
+  ?contrib a orkgc:Contribution;
+           rdfs:label ?contrib_labels;
+           orkgp:HAS_THERAPEUTIC_EFFECT ?therapeutic_effects.
+  FILTER(REGEX(?contrib_labels, "therapeutic"))
+}
+LIMIT 5
+```

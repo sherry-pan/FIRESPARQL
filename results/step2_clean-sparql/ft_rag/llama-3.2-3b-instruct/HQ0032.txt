@@ -1,0 +1,14 @@
+```sparql
+SELECT ?resource ?resource_lbl (COUNT(?score) AS ?score_count)
+WHERE {
+  ?resource orkgp:P31 ?class.
+  ?resource rdfs:label ?resource_lbl.
+  FILTER(CONTAINS(LCASE(STR(?resource_lbl)), "compound"))
+  OPTIONAL {
+    ?score orkgp:P312 ?resource.
+  }
+}
+GROUP BY ?resource ?resource_lbl
+ORDER BY DESC(?score_count)
+LIMIT 5
+```

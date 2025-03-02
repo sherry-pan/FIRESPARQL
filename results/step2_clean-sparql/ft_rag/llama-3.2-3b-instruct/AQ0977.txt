@@ -1,0 +1,19 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(?eval) AS ?eval_cnt)
+WHERE {
+   ?eval a orkgc:Evaluation;
+         rdfs:label ?eval_lbl.
+   FILTER (str(?eval_lbl) = "Evaluation")
+   ?eval orkgp:HAS_EVALUATION ?eval_eval.
+   ?eval_eval orkgp:P31 ?cont.
+   ?cont orkgp:P31 ?contrib.
+   ?contrib orkgp:P31 ?model.
+   ?model rdfs:label "Amazon-2".
+   ?eval orkgp:P32 ?metric.
+   ?metric rdfs:label ?metric_lbl.
+}
+GROUP BY ?metric ?metric_lbl
+HAVING (COUNT(?eval) > 1)
+ORDER BY DESC(?eval_cnt)
+LIMIT 5
+```

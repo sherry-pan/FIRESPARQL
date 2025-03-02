@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?model_lbl
+WHERE {
+  ?cont orkg:P30691 ?metric ;
+        orkg:P30692 ?dataset ;
+        orkg:P30693 ?model ;
+        orkg:P30694 ?bleu .
+        
+  ?metric rdfs:label "BLEU" .
+  ?dataset rdfs:label ?dataset_lbl .
+  FILTER(REGEX(?dataset_lbl, "WMT2016"))
+  
+  ?model rdfs:label ?model_lbl .
+  
+  ?cont orkg:P30695 ?bleu_value .
+}
+ORDER BY DESC(?bleu_value)
+LIMIT 1
+```

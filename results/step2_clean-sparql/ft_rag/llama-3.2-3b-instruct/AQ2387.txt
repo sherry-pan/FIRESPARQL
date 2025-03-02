@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "papers that benchmark the BiT-M (ResNet) model")
+  ?benchmark orkgp:HAS_BENCHMARK ?paper;
+             orkgp:P31 ?cont.
+  ?cont orkgp:HAS_CODE ?code.
+}
+ORDER BY DESC(?cont)
+LIMIT 10
+```

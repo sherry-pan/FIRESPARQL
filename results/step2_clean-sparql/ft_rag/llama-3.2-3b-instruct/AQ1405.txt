@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?label ?score
+WHERE {
+  ?entity a orkgc:Entity;
+          rdfs:label ?label;
+          orkgp:HAS_DATASET ?dataset;
+          orkgp:HAS_EVALUATION ?eval.
+  ?dataset rdfs:label "SciERC".
+  ?eval orkgp:P31 ?model;
+        orkgp:HAS_METRIC_RESULT ?metricResult.
+  ?metricResult orkgp:METRIC_TYPE orkgp:entity_f1;
+                orkgp:METRIC_VALUE ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

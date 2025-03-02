@@ -1,0 +1,20 @@
+```sparql
+SELECT ?paper ?paper_lbl (COUNT(?code) AS ?code_cnt) WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (STR(?model_lbl) = "Flair-TDM")
+  
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
+        
+  OPTIONAL { ?code rdfs:label ?code_lbl. }
+  
+  ?paper orkgp:HAS_CONT ?cont.
+  
+  OPTIONAL { ?paper rdfs:label ?paper_lbl. }
+} 
+GROUP BY ?paper ?paper_lbl
+HAVING (COUNT(?code) > 0)
+ORDER BY DESC(?code_cnt)
+LIMIT 10
+```

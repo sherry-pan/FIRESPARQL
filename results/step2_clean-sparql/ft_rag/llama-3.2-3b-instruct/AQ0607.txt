@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paper_lbl
+WHERE {
+    ?dataset a orkg:Dataset;
+             rdfs:label "Atari 2600 Bank Heist".
+    ?benchmark orkg:HAS_DATASET ?dataset;
+               orkg:HAS_EVALUATION ?eval.
+    ?paper orkg:P31 ?benchmark;
+           orkg:P32 ?eval;
+           rdfs:label ?paper_lbl.
+}
+```

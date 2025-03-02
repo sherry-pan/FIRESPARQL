@@ -1,0 +1,17 @@
+```sparql
+SELECT ?code_references
+WHERE {
+  ?paper orkgp:P31 ?paperType .
+  ?paperType rdfs:label ?paperTypeLabel .
+  FILTER (STR(?paperTypeLabel) = "Paper")
+  
+  ?paper orkgp:P34 ?code_references .
+  ?code_references orkgp:P31 ?codeReferenceType .
+  ?codeReferenceType rdfs:label ?codeReferenceLabel .
+  FILTER (STR(?codeReferenceLabel) = "DeiT-Ti")
+  
+  ?paper orkgp:P31 ?benchmarkingType .
+  ?benchmarkingType rdfs:label ?benchmarkLabel .
+  FILTER(STR(?benchmarkLabel) = "Benchmarking")
+}
+```

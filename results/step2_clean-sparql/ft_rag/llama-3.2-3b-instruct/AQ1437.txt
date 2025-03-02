@@ -1,0 +1,13 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval rdfs:label ?eval_lbl.
+  FILTER(REGEX(STR(?eval_lbl), "BLEU score_(\\d+(?:\\.\\d+)?)", "i"))
+  ?eval orkgp:P2755 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 1
+```

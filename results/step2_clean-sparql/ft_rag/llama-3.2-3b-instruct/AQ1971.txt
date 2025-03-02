@@ -1,0 +1,15 @@
+```sparql
+SELECT ?paper ?code 
+WHERE {
+  ?paper a orkgp:Paper ;
+         orkgp:usesMethod ?method ;
+         orkgp:hasResource ?resource .
+         
+  ?method rdfs:label ?method_label .
+  FILTER(LANG(?method_label) = "" || LANGMATCHES(LANG(?method_label), "en"))
+  FILTER(CONTAINS(LCASE(?method_label), "crf with sentence expansion"))
+
+  ?resource a orkgp:Repository ;
+            orkgp:codeLink ?code .
+}
+```
