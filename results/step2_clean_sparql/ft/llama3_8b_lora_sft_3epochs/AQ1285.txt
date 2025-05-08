@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?instance orkgp:P31 ?dataset;
+            orkgp:P32 [
+              orkgp:HAS_VALUE ?value;
+              orkgp:HAS_METRIC ?metric
+            ].
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Freeway").
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?score)
+```

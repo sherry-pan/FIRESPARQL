@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average_value)
+WHERE {
+    orkgr:R155635 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?cont.
+    ?cont orkgp:P15027 ?algorithm.
+    ?algorithm rdfs:label ?algorithm_lbl.
+    FILTER(REGEX(STR(?algorithm_lbl), "naive bayes"^^xsd:string))
+    ?cont orkgp:P15028 ?x.
+    ?x rdfs:label ?metric_lbl.
+    ?contrib orkgp:P15029 ?value.
+    FILTER(?metric_lbl = "precision"^^xsd:string || ?metric_lbl = "recall"^^xsd:string || ?metric_lbl = "f1"^^xsd:string)
+    BIND(xsd:float(?value) AS ?value)
+}
+```

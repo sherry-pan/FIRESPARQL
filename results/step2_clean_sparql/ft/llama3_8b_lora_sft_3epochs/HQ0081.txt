@@ -1,0 +1,34 @@
+```sparql
+SELECT ?amount
+WHERE {
+  ?or a orkgc:Resource;
+      rdfs:label ?name.
+  FILTER(REGEX(STR(?name), "Elorza crater", "i"))
+  ?cont orkgp:P31 ?or.
+  ?cont orkgp:P32 orkgc:IronOxide.
+  ?cont orkgp:P32 ?unit.
+  BIND(xsd:float(?value) AS ?value_float)
+  BIND(
+    IF(?unit = orkgc:Gram, ?value_float,
+      IF(?unit = orkgc:Kilogram, ?value_float * 1000,
+        IF(?unit = orkgc:Tonne, ?value_float * 1000000,
+          IF(?unit = orkgc:Mole, ?value_float,
+            IF(?unit = orkgc:Millimole, ?value_float / 1000,
+              IF(?unit = orkgc:CubicCentimeter, ?value_float / 1000000,
+                IF(?unit = orkgc:CubicMeter, ?value_float / 1000000000,
+                  IF(?unit = orkgc:MillimolePerLiter, ?value_float / 1000000,
+                    IF(?unit = orkgc:GramPerCubicCentimeter, ?value_float,
+                      ?value_float
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+  ?cont orkgp:P32 orkgc:Gram.
+}
+```

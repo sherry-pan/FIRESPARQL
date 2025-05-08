@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R153780 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P4319 ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?eval orkgp:P4317 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    FILTER(REGEX(?dataset_lbl, "Cheetah, run (DMControl500k)"))
+    BIND(xsd:float(?eval) AS ?value)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

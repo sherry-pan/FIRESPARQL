@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+    ?paper rdf:type orkgc:Paper.
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:P30 ?model.
+    ?model rdfs:label ?model_lbl.
+    FILTER(REGEX(?model_lbl, "Concept Mention Extraction"))
+    ?benchmark orkgp:P32 ?cont.
+    ?cont orkgp:P5005 ?code.
+}
+```

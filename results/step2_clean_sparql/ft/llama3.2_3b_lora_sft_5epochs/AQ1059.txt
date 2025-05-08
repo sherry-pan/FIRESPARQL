@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R155830 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P43130 ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "MAZEA"))
+    ?contrib orkgp:P43131 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P43132 ?value.  # Assuming this is where the value is declared
+}
+```

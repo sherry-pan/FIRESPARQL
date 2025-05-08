@@ -1,0 +1,17 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Piezoresistive material")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    ?paper orkgp:HAS_BENCHMARK ?benchmark.
+    ?material orkgp:P31 ?paper;
+              rdfs:label ?material_lbl.
+    ?eval orkgp:HAS_VALUE ?value.
+    BIND(xsd:float(?value) AS ?f_value)
+}
+ORDER BY ASC(?f_value)
+LIMIT 1
+```

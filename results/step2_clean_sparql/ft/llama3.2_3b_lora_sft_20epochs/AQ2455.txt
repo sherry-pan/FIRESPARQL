@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         orkgp:P31 ?work;
+         orkgp:P32 ?used_model.
+  ?used_model rdfs:label ?model_labels.
+  ?paper orkgp:P5348 ?code.
+  FILTER(REGEX(STR(?model_labels), "XLNet \\(base\\)"))
+}
+```

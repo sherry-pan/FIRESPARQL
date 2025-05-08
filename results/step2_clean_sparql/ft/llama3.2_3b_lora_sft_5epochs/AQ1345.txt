@@ -1,0 +1,33 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    {
+        SELECT ?metric ?metric_lbl ?value
+        WHERE {
+            orkgr:R153183 orkgp:compareContribution ?contrib.
+            ?contrib orkgp:P43135 ?eval.
+            ?eval orkgp:HAS_DATASET ?dataset.
+            ?dataset rdfs:label "ImageNet V2".
+            ?contrib orkgp:P43136 ?metric.
+            ?metric rdfs:label ?metric_lbl.
+            ?eval orkgp:P43138 ?value.
+            BIND(xsd:float(?value) AS ?value)
+        }
+    } UNION {
+        SELECT ?metric ?metric_lbl ?value
+        WHERE {
+            orkgr:R153183 orkgp:compareContribution ?contrib.
+            ?contrib orkgp:P43137 ?eval.
+            ?eval orkgp:HAS_DATASET ?dataset.
+            ?dataset rdfs:label "ImageNet V2".
+            ?contrib orkgp:P43136 ?metric.
+            ?metric rdfs:label ?metric_lbl.
+            ?eval orkgp:P43139 ?value.
+            BIND(xsd:float(?value) AS ?value)
+        }
+    }
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R8368 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "Atari 2600 Freeway")).
+  ?contrib orkgp:P3004 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P3005 ?value.
+}
+ORDER BY DESC(?score)
+```

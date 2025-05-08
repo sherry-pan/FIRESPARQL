@@ -1,0 +1,16 @@
+```sparql
+SELECT ?uses_cosine
+WHERE {
+  ?paper orkgp:P31 ?cont;
+         rdfs:label ?title.
+  FILTER (STR(?title) = "Disambiguating authors in citations on the web and authorship correlations")
+  ?cont orkgp:P3005 ?sim.
+  ?sim rdfs:label ?sim_lbl;
+       orkgp:P3754 ?uses_sim.
+  ?uses_sim rdfs:label ?uses_cosine.
+  BIND(
+    IF(?sim_lbl = "Cosine"^^xsd:string, "T", "F")
+    AS ?uses_cosine
+  )
+}
+```

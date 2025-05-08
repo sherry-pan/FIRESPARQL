@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?variable (COUNT(?variable) AS ?frequency)
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_label.
+  FILTER (str(?problem_label) = "atmosphere models")
+
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_label.
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_PROBLEM ?problem.
+  ?benchmark orkgp:P32 ?model.
+  ?model orkgp:HAS_VARIABLE ?variable.
+}
+GROUP BY ?variable
+ORDER BY DESC(?frequency)
+LIMIT 3
+```

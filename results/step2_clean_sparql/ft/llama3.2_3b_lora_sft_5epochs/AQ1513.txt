@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ANLI test")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval;
+             orkgp:HAS_MODEL ?model.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        rdfs:label ?eval_lbl.
+  
+  BIND(xsd:float(?value) AS ?value_float)
+  
+  ?model rdfs:label ?model_lbl.
+  
+  FILTER(REGEX(?eval_lbl, "A2"))
+}
+ORDER BY DESC(?value_float)
+LIMIT 1
+```

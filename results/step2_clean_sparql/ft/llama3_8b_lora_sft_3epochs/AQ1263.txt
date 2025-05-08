@@ -1,0 +1,27 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?metric orkgp:P31 [
+    rdfs:label ?metric_lbl;
+    orkgp:P32 [
+      rdfs:label "Seaquest";
+      orkgp:P5006 [
+        orkgp:P5007 [
+          rdfs:label ?dataset
+        ]
+      ]
+    ]
+  ];
+  orkgp:P33 [
+    rdfs:label ?model
+  ];
+  orkgp:P34 [
+    rdfs:label ?cont
+  ];
+  orkgp:P36 [
+    rdfs:label ?value
+  ]
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+```

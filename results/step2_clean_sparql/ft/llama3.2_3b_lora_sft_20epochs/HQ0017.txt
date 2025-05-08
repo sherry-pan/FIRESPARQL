@@ -1,0 +1,17 @@
+```sparql
+SELECT ?location ?location_labels
+WHERE {
+  {
+    SELECT ?location (COUNT(?location) AS ?counter)
+    WHERE {
+      ?papers rdf:type orkgc:Study.
+      ?papers orkgp:P31 ?contrib.
+      ?contrib orkgp:P37586 ?location.
+    }
+    GROUP BY ?location
+    ORDER BY DESC(?counter)
+    LIMIT 1
+  }
+  ?location rdfs:label ?location_labels.
+}
+```

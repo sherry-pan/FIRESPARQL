@@ -1,0 +1,12 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper rdf:type orkgc:Paper.
+  ?paper orkgp:P30 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "AxCell"))
+  ?benchmark orkgp:HAS_BENCHMARK ?cont.
+  ?cont orkgp:HAS_SOURCE_CODE ?code.
+  ?code rdfs:label ?code.
+}
+```

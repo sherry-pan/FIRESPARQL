@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?work orkgp:R8342 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P36778 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ModelNet40")
+  ?contrib orkgp:P7049 ?value.
+  OPTIONAL {?contrib orkgp:P7048 ?metric. ?metric rdfs:label ?metric_lbl.}
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  orkgr:R6898 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43156 ?algorithm.
+  ?algorithm rdfs:label ?algorithm_lbl.
+  ?algorithm orkgp:P43157 ?eval.
+  ?eval orkgp:P43155 ?precision.
+  ?eval orkgp:P43156 ?recall.
+  ?eval orkgp:P43157 ?f1.
+  ?contrib orkgp:P43158 ?xsdic.
+  ?xsdic rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "feature request"))
+  FILTER(?algorithm_lbl = "naive bayes"^^xsd:string)
+}
+```

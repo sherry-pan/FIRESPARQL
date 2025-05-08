@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?float_value) AS ?score)
+WHERE {
+  ?contrib orkgp:P31 ?contribType.
+  ?contrib orkgp:P32 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CINIC-10")
+  ?contrib orkgp:P2008 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P2010 ?value.
+  BIND(xsd:float(?value) AS ?float_value)
+}
+ORDER BY DESC(?score)
+```

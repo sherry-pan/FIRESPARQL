@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU" 
+          || str(?metric_lbl) = "ROUGE-Ngram" 
+          || str(?metric_lbl) = "ROUGE-UF5")
+  ?dataset a orkgc:Dataset;
+            rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "RotoWire (Content Ordering)" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (RoBERTa)" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (ALBERT)" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (DistilBERT)" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (BERT)" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (RoBERTa (with early stopping))" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (ALBERT (with early stopping))" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (DistilBERT (with early stopping))" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (BERT (with early stopping))" 
+          || str(?dataset_lbl) = "RotoWire (Content Ordering) (RoBERTa (with early stopping and finetuning))")
+  ?dataset orkgc:hasModel ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric_lbl)
+LIMIT 1
+```

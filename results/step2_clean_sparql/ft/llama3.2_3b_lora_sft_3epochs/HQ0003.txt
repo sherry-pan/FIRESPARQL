@@ -1,0 +1,15 @@
+```sparql
+SELECT ?method ?method_label
+WHERE {
+  ?papers rdfs:label ?title.
+  FILTER(REGEX(?title, "Knowledge representation"))
+  ?papers orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P32 ?cont.
+  ?cont orkgp:P31 ?paper.
+  ?paper orkgp:P27 ?method.
+  ?method rdfs:label ?method_label.
+}
+GROUP BY ?method ?method_label
+ORDER BY DESC(COUNT(?paper))
+LIMIT 1
+```

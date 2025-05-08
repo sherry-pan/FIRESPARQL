@@ -1,0 +1,13 @@
+```sparql
+SELECT ?location
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P30 ?scale.
+  ?scale rdfs:label ?scale_label.
+  BIND(xsd:float(?scale_label) AS ?scale_value)
+  ?papers orkgp:P31 ?location.
+  FILTER(REGEX(STR(?location), "China|India|USA|Brazil|Russia|Japan|Germany|France|Canada"))
+}
+ORDER BY DESC(?scale_value)
+LIMIT 1
+```

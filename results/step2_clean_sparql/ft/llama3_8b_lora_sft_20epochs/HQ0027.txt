@@ -1,0 +1,14 @@
+```sparql
+SELECT ?country ?country_label
+WHERE {
+  orkgr:R44980 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15051 ?epi.
+  ?epi rdfs:label ?epi_label.
+  FILTER(REGEX(?epi_label, "prevalence of epilepsy"))
+  ?contrib orkgp:P37629 ?country.
+  ?country rdfs:label ?country_label.
+  ?epi orkgp:PXXXX ?value.  # Assuming ?value is connected this way; replace PXXXX with the correct property
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

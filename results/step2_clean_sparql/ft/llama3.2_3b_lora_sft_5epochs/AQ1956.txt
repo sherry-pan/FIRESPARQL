@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper rdf:type orkgc:Paper.
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "CATTS-XSUM"))
+  ?paper orkgp:P15 ?implementation.
+  ?implementation rdfs:label ?implementation_lbl.
+  ?implementation orkgp:P31 ?cont.
+  ?cont orkgp:P35 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(?code_lbl, "source"))
+}
+ORDER BY ASC(?code_lbl)
+LIMIT 10
+```

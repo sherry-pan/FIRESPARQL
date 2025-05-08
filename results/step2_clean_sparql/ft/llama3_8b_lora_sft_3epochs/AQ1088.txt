@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?work orkgp:R8342 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P16227 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACE 2005")
+  ?contrib orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:MEASURE ?metric.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_float)
+  BIND(
+    IF(?metric = orkgp:P16228, "F1", 
+        IF(?metric = orkgp:P16229, "PER", 
+            IF(?metric = orkgp:P16230, "REC", 
+                IF(?metric = orkgp:P16231, "F2", "OTHER")
+            )
+        )
+    ) AS ?metric_lbl
+  )
+}
+ORDER BY DESC(?score)
+```

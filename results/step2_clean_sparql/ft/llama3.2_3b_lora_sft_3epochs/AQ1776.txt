@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label "Number of params".
+    ?dataset a orkgc:Dataset;
+             rdfs:label "ImageNet".
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_VALUE ?value;
+          orkgp:HAS_METRIC ?metric.
+    BIND(xsd:integer(?value) AS ?value_num)
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value_num)
+LIMIT 10
+```

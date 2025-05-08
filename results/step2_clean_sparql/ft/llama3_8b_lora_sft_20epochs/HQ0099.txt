@@ -1,0 +1,19 @@
+```sparql
+SELECT ?material ?material_labels
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_labels.
+  FILTER (str(?metric_labels) = "Response time")
+  {
+    SELECT ?material ?material_labels
+    WHERE {
+      ?cont orkgp:HAS_VALUE ?value;
+            orkgp:HAS_METRIC ?metric;
+            orkgp:HAS_MATERIAL ?material.
+      ?material rdfs:label ?material_labels.
+    }
+    ORDER BY ASC(?value)
+    LIMIT 1
+  }
+}
+```

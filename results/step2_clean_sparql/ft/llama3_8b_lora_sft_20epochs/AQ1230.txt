@@ -1,0 +1,10 @@
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R154371 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "Ball in cup, catch \\(DMControl100k\\)"))
+  ?contrib orkgp:P2506 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P2505 ?value.
+}

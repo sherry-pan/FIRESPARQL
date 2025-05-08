@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper rdf:type orkgc:Paper.
+  ?paper rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "MPAD-path") && REGEX(STR(?title), "benchmarking"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+  OPTIONAL { ?code rdfs:label ?code_label. }
+  BIND(IF(BOUND(?code_label), STR(?code_label), STR(?code)) AS ?code)
+}
+```

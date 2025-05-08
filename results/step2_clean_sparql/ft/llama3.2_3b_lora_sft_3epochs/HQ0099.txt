@@ -1,0 +1,23 @@
+```sparql
+SELECT ?material ?material_lbl WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "response time".
+  {
+    SELECT ?material ?material_lbl WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "piezoresistive material".
+      ?benchmark orkgp:HAS_DATASET ?dataset;
+                 orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:HAS_VALUE ?value;
+            orkgp:HAS_METRIC ?metric.
+      ?cont orkgp:HAS_BENCHMARK ?benchmark;
+            orkgp:HAS_SOURCE ?source.
+      ?source rdfs:label ?source_lbl.
+      ?cont orkgp:HAS_MATERIAL ?material.
+      ?material rdfs:label ?material_lbl.
+    }
+    ORDER BY ?value
+    LIMIT 1
+  }
+}
+```

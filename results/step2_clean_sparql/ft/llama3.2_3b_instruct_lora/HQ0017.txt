@@ -1,11 +1,11 @@
 ```sparql
-SELECT ?location
+SELECT ?location ?location_labels
 WHERE {
-  ?location a orkgc:Location;
-            rdfs:label ?location_lbl.
-  ?cont orkgp:HAS_LOCATION ?location.
-} 
-GROUP BY ?location
-ORDER BY DESC(COUNT(?cont))
+  orkgr:R110551 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P5114 ?location.
+  ?location rdfs:label ?location_labels.
+}
+GROUP BY ?location ?location_labels
+ORDER BY DESC(COUNT(?location))
 LIMIT 1
 ```

@@ -7,7 +7,11 @@ from transformers import AutoModelForCausalLM, AutoTokenizer # type: ignore
 
 def load_model(local_model_path):
     tokenizer = AutoTokenizer.from_pretrained(local_model_path)
+    # Add pad token if it does not exist
+    if tokenizer.pad_token is None:
+        tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     model = AutoModelForCausalLM.from_pretrained(local_model_path)
+    model.resize_token_embeddings(len(tokenizer))
     print("Model loaded")
     return model, tokenizer
 
@@ -53,16 +57,13 @@ def generate_sparql(question, question_id, context, model,tokenizer, output_dir)
     attention_mask = inputs['attention_mask']
     model.generation_config.pad_token_id = tokenizer.pad_token_id
 
-    # Generate text
-    print("Generating SPARQL query...")
+    # Generate text using the model
     gen_tokens = model.generate(inputs["input_ids"], attention_mask=attention_mask, max_new_tokens=1024)
     # generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     # see this reference for not include the input text in the generated text: https://github.com/huggingface/transformers/issues/17117
     generated_text = tokenizer.batch_decode(gen_tokens[:, inputs["input_ids"].shape[1]:])[0]
-    print("SPARQL query generated successfully")
 
-    #save the question and generated text to a file
-    # Ensure the directory exists
+    #save the question and generated text to a file， ensure the directory exists
     os.makedirs(output_dir, exist_ok=True)
 
     # Define the output file path
@@ -78,7 +79,7 @@ def generate_sparql(question, question_id, context, model,tokenizer, output_dir)
 def main():
     print("Starting...............................")
     if len(sys.argv) != 5:
-        print("Usage: python ft_rag_generate_sparql.py <local_model_path> <input_file> <context_file> <output_dir>")
+        print("Usage: python ft_rag_generate_sparql.py <local_model_path> <input_file for the questions> <context_file from the rag> <output_dir>")
         sys.exit(1)
 
     local_model_path = sys.argv[1]
@@ -91,25 +92,28 @@ def main():
     print(f"Loading questions from {input_file}")
     data = pd.read_csv(input_file)
     begin = time.time()
-    print("Generating SPARQL queries...")
     for i in range(len(data)):
         start = time.time()
         # Load the context file in txt format as a string 
         print(f"Loading context from {context_file}")
         with open(f"{context_file}/{data['id'][i]}.txt", 'r') as f:
             context = f.read()
+        print(f"Generating SPARQL query for question {i+1}-{data['id'][i]}\n")
         generate_sparql(data['question'][i], data['id'][i], context, model, tokenizer, output_dir)
         print(f"Question {i+1}-{data['id'][i]} done")
         end = time.time()
         print(f"Time taken: {end-start} seconds")
         print("------------------------------------------------")
     end = time.time()
-    print(f"Time taken: {end-begin}")
+    # change the time to hours, minutes and seconds
+    hours, rem = divmod(end-begin, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print("------------------------------------------------)")
+    print(f"Total time taken: {hours:.0f} hours, {minutes:.0f} minutes and {seconds:.0f} seconds")
 
 
 if __name__ == "__main__":
     main()
-
 
 
 # Run the script

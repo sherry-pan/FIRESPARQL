@@ -1,0 +1,13 @@
+```sparql
+SELECT ?person
+WHERE {
+  orkg:R155150 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P29 ?papers.
+  ?papers orkgp:P3755 ?coronavirus.
+  ?contrib orkgp:P29 ?articles.
+  ?articles orkgp:P3756 ?person.
+  FILTER(?person != "https://www.orKG.org/person/15441")
+}
+ORDER BY DESC(xsd:int(?papers))
+LIMIT 1
+```

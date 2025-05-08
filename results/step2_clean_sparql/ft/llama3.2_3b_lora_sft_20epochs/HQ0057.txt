@@ -1,0 +1,17 @@
+```sparql
+SELECT ?repository
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Comparison of machine learning algorithms")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  OPTIONAL {
+    ?paper orkgp:HAS_REPOSITORY ?repository.
+  }
+  ?eval orkgp:P32 ?source.
+  ?source rdfs:label ?source_lbl.
+  FILTER (str(?source_lbl) = "Compare to the state-of-the-art in deep learning")
+}
+```

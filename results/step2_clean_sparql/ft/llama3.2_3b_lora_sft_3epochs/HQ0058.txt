@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (SUM(?value) AS ?score)
+WHERE {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+        ?paper rdf:type orkgc:Paper.
+        ?paper rdfs:label ?title.
+        ?paper orkgp:P30 ?algorithm.
+        ?algorithm rdfs:label ?algorithm_lbl.
+        ?paper orkgp:P31 ?feature.
+        ?feature rdfs:label ?feature_lbl.
+        ?feature orkgp:P32 ?eval.
+        ?eval rdfs:label ?eval_lbl.
+        ?eval orkgp:P33 ?metric.
+        BIND(xsd:float(?value) AS ?value)
+        FILTER(REGEX(STR(?title), "feature request")
+            && str(?algorithm_lbl) = "naive bayes"
+            && str(?feature_lbl) = "bag of words"
+            && (str(?metric_lbl) = "precision"
+                || str(?metric_lbl) = "recall"
+                || str(?metric_lbl) = "f1"))
+    }
+    ORDER BY DESC(?value)
+}
+```

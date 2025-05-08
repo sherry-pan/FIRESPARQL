@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Precision")
+  ?eval orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_MODEL ?model.
+  ?dataset orkgp:HAS_BENCHMARK orkgp:RotoWire.
+  ?model rdfs:label ?model_lbl.
+  ?cont orkgp:HAS_MODEL ?model;
+         orkgc:HAS_VALUE ?cont_value;
+         orkgp:MEASURES ?metric.
+}
+ORDER BY DESC(?cont_value)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+    ?paper orkgp:P30 ?benchmark.
+    ?benchmark orkgp:HAS_BENCHMARK ?benchmark_labels.
+    ?benchmark_labels rdfs:label ?title.
+    FILTER(REGEX(?title, "STREET"))
+    ?paper orkgp:P31 ?code.
+    ?code rdfs:label ?code.
+}
+ORDER BY DESC(?code)
+LIMIT 10
+```

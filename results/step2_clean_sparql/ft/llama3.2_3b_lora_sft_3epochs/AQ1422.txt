@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "BLEU".
+  ?evaluation a orkgc:Evaluation;
+              orkgc:hasMetric ?metric;
+              orkgc:hasValue ?value.
+  ?model a orkgc:Model;
+         orkgc:hasEvaluation ?evaluation;
+         rdfs:label ?model_lbl.
+  ?dataset a orkgc:Dataset;
+           rdfs:label "IWSLT2014 German-English".
+  ?evaluation orkgc:hasDataset ?dataset.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

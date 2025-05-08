@@ -1,0 +1,13 @@
+```
+SELECT ?country ?country_labels
+WHERE {
+  ?model a ?model_labels.
+  FILTER(REGEX(?model_labels, "Epilepsy"))
+  ?model orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P32 ?study.
+  ?study orkgp:P31 ?country.
+  BIND(xsd:integer(?country::getLabels()) AS ?country_labels)
+}
+ORDER BY DESC(xsd:integer(?country_labels))
+LIMIT 1
+```

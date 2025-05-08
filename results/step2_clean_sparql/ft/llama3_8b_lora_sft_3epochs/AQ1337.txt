@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?contrib orkgp:P31 ?paper;
+           orkgp:P32 ?benchmark;
+           orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?value a orkgp:Value;
+         orkgp:HAS_VALUE ?value_val.
+  BIND(xsd:float(?value_val) AS ?value)
+  ?cont orkgp:P32 ?benchmark;
+        orkgp:P33 ?metric.
+  ?cont_benchmark rdfs:label ?cont_benchmark_lbl.
+  FILTER(REGEX(STR(?cont_benchmark_lbl), "Paper Field"))
+}
+```

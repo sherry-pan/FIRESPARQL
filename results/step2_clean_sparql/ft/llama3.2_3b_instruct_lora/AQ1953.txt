@@ -1,14 +1,11 @@
 ```sparql
-SELECT ?paper ?code ?code_lbl
+SELECT DISTINCT ?code
 WHERE {
-    ?paper orkgp:P31 ?cont.
-    ?cont orkgp:P34 ?model.
-    ?model rdfs:label "CL-Titles-Parser".
-    ?model orkgp:P35 ?code.
-    ?code a orkgc:Code.
-    ?code rdfs:label ?code_lbl.
-    FILTER(REGEX(?code_lbl, "https?://"))
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "CL-Titles-Parser")
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
 }
-ORDER BY DESC(?code)
-LIMIT 10
 ```
