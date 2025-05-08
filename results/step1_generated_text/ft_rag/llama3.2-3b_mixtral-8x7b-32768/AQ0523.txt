@@ -1,0 +1,66 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Yelp Binary classification dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?title?title_lbl
+     WHERE {
+       orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+       FILTER (str(?dataset rdfs:label) = "Yelp Binary classification dataset")
+      ?dataset orkgp:HAS_MODEL?model.
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_DATASET?cont.
+      ?cont orkgp:HAS_MODEL?model.
+      ?model rdfs:label?title_lbl.
+      ?cont orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_MODEL?model.
+      ?model orkgp:HAS_DATASET?cont.
+      ?cont rdfs:label?title.
+       BIND(xsd:string(?title) AS?title_lbl)
+      ?cont orkgp:HAS_MODEL?model.
+      ?model rdfs:label?title_lbl.
+       BIND(xsd:string(?title_lbl) AS?title_lbl)
+    }   
+
+
+    ```
+python
+def generate_sparql_query(context):
+    # Initialize the query
+    query = """
+    SELECT DISTINCT?title?title_lbl
+    WHERE {
+      orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+      FILTER (str(?dataset rdfs:label) = "Yelp Binary classification dataset")
+     ?dataset orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_DATASET?cont.
+     ?cont orkgp:HAS_MODEL?model.
+     ?model rdfs:label?title_lbl.
+     ?cont orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_DATASET?cont.
+     ?cont rdfs:label?title.
+      BIND(xsd:string(?title) AS?title_lbl)
+     ?cont orkgp:HAS_MODEL?model.
+     ?model rdfs:label?title_lbl.
+      BIND(xsd:string(?title_lbl) AS?title_lbl)
+    }
+    """
+
+    # Return the query
+    return query
+
+# Example usage:
+context = {
+    "question": "Provide a list of research paper titles and IDs that have benchmarked models on the Yelp Binary classification dataset?",
+    "extracted_terms": {
+        "research paper titles and IDs",
+        "benchmarked models",
+        "Yelp Binary classification dataset"
+    },
+    "candidates": {
+        "research paper titles and IDs": [
+            {
+                "uri": "orkgr:R36054",
+                "rdfs:label": "Contribution 1",
+                "

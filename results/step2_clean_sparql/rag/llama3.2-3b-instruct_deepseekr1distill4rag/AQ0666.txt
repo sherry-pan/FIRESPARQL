@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkgc:Research_Paper;
+         orkgr:hasDescription ?description;
+         orkgr:hasDataset ?dataset;
+         orkgr:hasID ?id;
+         orkgr:hasTitle ?title.
+  FILTER (CONTAINS(LCASE(STR(?description)), "benchmark")).
+  FILTER (CONTAINS(LCASE(STR(?dataset)), "objectnet")).
+}
+```

@@ -1,0 +1,24 @@
+Question:
+List the datasets benchmarked under the Fine-Grained Image Classification research problem?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?dataset?label?score?type?typeLabel
+WHERE {
+ ?dataset orkgc:relatedTo?researchProblem.
+ ?researchProblem orkgc:researchProblem?researchProblemLabel.
+ ?researchProblem orkgc:researchProblemFineGrainedImageClassification?fineGrainedImageClassification.
+ ?dataset a orkgc:Resource.
+ ?dataset orkgp:benchmark?benchmark.
+ ?benchmark a orkgp:Predicate.
+ ?dataset orkgc:label?label.
+ ?dataset orkgc:score?score.
+ ?dataset orkgc:type?type.
+ ?type orkgc:label?typeLabel.
+  FILTER (STRLIKE(STR(?label), "MNIST") OR STRLIKE(STR(?label), "AIDA") OR STRLIKE(STR(?label), "MEANTIME") OR STRLIKE(STR(?label), "TAC-KBP") OR STRLIKE(STR(?label), "SVM"))
+}
+```    Note: The above SPARQL query uses the prefixes defined in the provided context. The actual SPARQL query might need to be adjusted based on the actual RDF data and the prefixes used in the RDF data dump.<|eot_id|>

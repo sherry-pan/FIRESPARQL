@@ -1,0 +1,39 @@
+Question:
+What are the models that have been benchmarked on the WMT2014 English-German dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+          ?eval          orkgp:HAS_EVALUATION     ?benchmark;
+                          rdfs:label              ?eval_lbl.
+           FILTER (str(?eval_lbl) = "benchmarked on")
+          ?cont          rdfs:label              ?cont_lbl.
+          ?model        orkgp:HAS_MODEL         ?cont.
+          ?model_lbl   rdfs:label              ?model_lbl.
+     }   
+
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval          orkgp:HAS_EVALUATION     ?benchmark;
+                 rdfs:label              ?eval_lbl.
+  FILTER (str(?eval_lbl) = "benchmarked on")
+ ?cont          rdfs:label              ?cont_lbl.
+ ?model        orkgp:HAS_MODEL         ?cont.
+ ?model_lbl   rdfs:label              ?model_lbl.
+}
+```
+
+
+      - **Note**: The code provided uses Python, but the task is to generate the SPARQL query. Therefore, I've rewritten the code to only include the SPARQL query.<|eot_id|>

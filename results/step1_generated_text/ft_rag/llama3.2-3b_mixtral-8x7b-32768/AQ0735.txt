@@ -1,0 +1,44 @@
+Question:
+List the metrics that are used to evaluate models on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Penn Treebank benchmark dataset")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?eval         orkgp:HAS_EVALUATION     ?cont;
+                       orkgp:HAS_METRIC        ?metric.
+          ?metric      rdfs:label              ?metric_lbl.
+     }    
+
+
+    The correct SPARQL query to answer the input question is:
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Penn Treebank benchmark dataset")
+   ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+   ?eval         orkgp:HAS_EVALUATION     ?cont;
+                  orkgp:HAS_METRIC        ?metric.
+     ?metric      rdfs:label              ?metric_lbl.
+    }
+    To match the format of the given output, I will add the PREFIX declarations and the SELECT statement. Here is the complete SPARQL query:
+    PREFIX orkgp: <http://www.ontopia.org/orkg/prefixes/orkgp/>
+    PREFIX orkgc: <http://www.ontopia.org/orkg/prefixes/orkgc/>
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Penn Treebank benchmark dataset")
+   ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+   ?eval         orkgp:HAS_EVALUATION     ?cont;
+                  orkgp:HAS_METRIC        ?metric.
+     ?metric      rdfs:label              ?metric_lbl.
+    }
+    I added the prefix declarations for orkgp and orkgc, and the SELECT statement to select?metric and?metric_lbl. The rest of the query remains the same. The output is the same as the given output. I also added the FILTER (str(?dataset_lbl) = "Penn Tree

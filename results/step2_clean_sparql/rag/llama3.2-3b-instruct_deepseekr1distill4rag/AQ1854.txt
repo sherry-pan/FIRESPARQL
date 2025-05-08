@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?dataset ?label
+WHERE {
+  ?dataset a orkc:Dataset.
+  ?dataset orkg:hasApplication ?application.
+  ?application orkg:hasField ?field.
+  ?field a orkc:ResearchField.
+  ?field rdfs:label ?label.
+  FILTER (STR(?label) = "Joint Entity and Relation Extraction" OR
+          STR(?label) = "Entity Recognition" OR
+          STR(?label) = "Relation Extraction" OR
+          STR(?label) = "Natural Language Processing" OR
+          STR(?label) = "Information Extraction" OR
+          STR(?label) = "Knowledge Graph Construction")
+}
+```

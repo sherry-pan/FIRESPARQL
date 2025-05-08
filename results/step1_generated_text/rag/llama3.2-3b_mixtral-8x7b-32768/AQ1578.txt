@@ -1,0 +1,72 @@
+Question:
+What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?
+
+Generated SPARQL:
+ SELECT?model?metric?score
+    FROM <https://example.org/orkg/>
+    WHERE {
+   ?model ortkgc:HAS_MODEL?best_model.
+   ?best_model ortkgc:HAS_DATASET?dataset.
+   ?dataset ortkgc:HAS_EVALUATION_METRIC?metric.
+   ?metric ortkgc:HAS_ROUGE_2?score.
+    FILTER (STR(?score) > "0").
+    }
+    ORDER BY DESC(?score)
+    LIMIT 1
+
+    Note: The provided SPARQL query does not necessarily represent the actual query that would be executed on the ORKG. The actual query may vary depending on the specifics of the ORKG's schema and the query execution engine. 
+
+    To generate the SPARQL query, you can use the following Python code:
+
+    ```python
+import pandas as pd
+import re
+from SPARQLWrapper import SPARQLWrapper, JSON
+
+# Load the context
+context = pd.read_json('context.json')
+
+# Define the SPARQL query
+sparql_query = """
+    SELECT?model?metric?score
+    FROM <https://example.org/orkg/>
+    WHERE {
+   ?model ortkgc:HAS_MODEL?best_model.
+   ?best_model ortkgc:HAS_DATASET?dataset.
+   ?dataset ortkgc:HAS_EVALUATION_METRIC?metric.
+   ?metric ortkgc:HAS_ROUGE_2?score.
+    FILTER (STR(?score) > "0").
+    }
+    ORDER BY DESC(?score)
+    LIMIT 1
+"""
+
+# Define a function to generate the SPARQL query
+def generate_sparql_query(context, question):
+    # Define the SPARQL query
+    sparql_query = """
+        SELECT?model?metric?score
+        FROM <https://example.org/orkg/>
+        WHERE {
+       ?model ortkgc:HAS_MODEL?best_model.
+       ?best_model ortkgc:HAS_DATASET?dataset.
+       ?dataset ortkgc:HAS_EVALUATION_METRIC?metric.
+       ?metric ortkgc:HAS_ROUGE_2?score.
+        FILTER (STR(?score) > "0").
+        }
+        ORDER BY DESC(?score)
+        LIMIT 1
+    """
+
+    # Define the entities and properties mentioned in the question
+    entities = context["extracted_terms"]
+    properties = context["candidates"]
+
+    # Generate the SPARQL query
+    query = sparql_query
+    for entity, values in entities.items():
+        for value in values:
+            query = query.replace(f"?{entity}", f"?{value['uri']}")
+    for property, values in properties.items():
+        for value in values:
+            query = query.replace(f"?{property}", f"?{value['uri']}

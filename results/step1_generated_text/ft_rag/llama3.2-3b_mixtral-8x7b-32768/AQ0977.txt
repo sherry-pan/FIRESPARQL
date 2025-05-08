@@ -1,0 +1,54 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Amazon-2 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgp:R1 orkgp:P2?eval;
+       orkgp:R1 orkgp:P3?model.
+      ?eval orkgp:HAS_METRIC?metric;
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "Amazon-2"))
+     }   
+
+    Explanation:
+    The question asks for evaluation metrics used in benchmarking models on the Amazon-2 dataset.
+    In the context provided, the candidates for the Amazon-2 dataset are orkgp:R122690, orkgp:HAS_METRIC, and orkgp:HAS_EVALUATION.
+    We use the filter condition to match only metrics that have "Amazon-2" in the labels.
+    The SPARQL query selects all the metrics and their corresponding labels. 
+    The SELECT statement uses the aliases of the properties to make the query more readable.
+    The WHERE clause consists of four parts: 
+    1. Selecting the relevant triple pattern.
+    2. Filtering the results to include only the Amazon-2 dataset.
+    3. Using the filter condition to select metrics with "Amazon-2" in their labels.
+    4. Selecting the metric labels. 
+    The use of regex in the filter function allows us to match the labels in a case-sensitive manner. 
+    We could have also used the filter condition to match the labels in a case-insensitive manner by using the i flag, i.e., FILTER(REGEX(STR(?metric_lbl), "Amazon-2", "i")).
+
+    The final answer to the question is: The SPARQL query is provided above.
+    Note that the final answer is not a number but a query that can be executed to get the correct answer. 
+
+    ```python
+def get_evaluation_metrics_on_amazon2_dataset():
+    orkgp = orkgp  # assuming orkgp is the correct namespace
+    query = """
+    SELECT?metric?metric_lbl
+    WHERE {
+       orkgp:R1 orkgp:P2?eval;
+       orkgp:R1 orkgp:P3?model.
+      ?eval orkgp:HAS_METRIC?metric;
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "Amazon-2"))
+     }
+    """
+    return query
+
+# execute the function to get the final answer
+final_answer = get_evaluation_metrics_on_amazon2_dataset()
+print("The final answer is", final_answer)
+``` 
+    The final answer is: SELECT?metric?metric_lbl
+     WHERE {
+       orkgp:R1 orkgp:P2?eval;
+       orkgp:R1 orkgp:P3?model.
+      ?eval orkgp:HAS_METRIC?metric

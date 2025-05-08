@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp#>
+PREFIX orkgr: <http://example.org/orkgr#>
+PREFIX orkgc: <http://example.org/orkgc#>
+
+SELECT ?metric ?score
+WHERE {
+    ?dataset orkgr:label "Ball in cup, catch (DMControl100k)"@en.
+    ?dataset orkgp:HAS_RESULT ?result.
+    ?result orkgp:HAS_METRIC ?metric.
+    ?result orkgp:HAS_SCORE ?score.
+    ?result orkgp:HAS_BEST_RESULT true.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

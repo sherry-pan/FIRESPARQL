@@ -1,0 +1,32 @@
+Question:
+Which model has achieved the highest Score score on the Ball in cup, catch (DMControl100k) benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkc: <http://orkc.org/ontology/>
+PREFIX orkgp: <http://orkg.org/predicate/>
+PREFIX orkge: <http://orkg.org/edge/>
+
+SELECT?model?score
+WHERE {
+ ?model orkgp:has_model?m.
+ ?m orkgp:has_score?score.
+ ?model orkge:has_benchmark?benchmark.
+ ?benchmark orkgc:Benchmark. 
+    Filter (contains(URI(?benchmark), "Ball in cup, catch (DMControl100k)")).
+ ?score orkgp:has_score?m.
+ ?m orkge:has_dataset?dataset.
+ ?dataset orkgc:Dataset.
+  Filter (contains(URI(?dataset), "DMControl100k")).
+}
+``` 
+    Note: The SPARQL query output is a table with two columns,?model and?score. The table contains the model and its corresponding score. The query only returns the model and score of the benchmark with the highest score. 
+
+    You can use the following information to generate the SPARQL query:
+    - The context provides the terms mentioned in the question, which are Ball in cup, catch (DMControl100k) benchmark dataset, model, achieved the highest Score score.
+    - The context also provides the candidates that can be linked to the entities and properties mentioned in the question, which include the URIs of the Ball in cup, catch (DMControl100k) benchmark dataset, model, and achieved the highest Score score.
+
+    Based on the provided context, the SPARQL query should filter the models to only those that have achieved the highest Score score on the Ball in cup, catch (DMControl100k) benchmark dataset. 
+
+    Note that the SPARQL query assumes that the model has a benchmark, the benchmark has a dataset, and the model has a score. Also

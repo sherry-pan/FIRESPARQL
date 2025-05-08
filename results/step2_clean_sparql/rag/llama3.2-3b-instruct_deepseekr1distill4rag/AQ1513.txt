@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgp: <http://www.ontotext.com/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?A2score
+WHERE {
+  ?benchmark orkgp:hasDataset ?dataset.
+  ?dataset rdfs:label "ANLI test dataset".
+  
+  ?benchmark orkgp:hasPerformanceMetric ?metric.
+  ?metric orkgp:hasType "A2 score".
+  ?metric orkgp:hasValue ?A2score.
+  
+  ?model orkgp:hasBenchmark ?benchmark.
+} 
+ORDER BY DESC(?A2score)
+LIMIT 1
+```

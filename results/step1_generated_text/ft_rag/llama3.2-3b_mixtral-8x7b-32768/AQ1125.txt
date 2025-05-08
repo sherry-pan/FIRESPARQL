@@ -1,0 +1,68 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Kinetics-600 dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+         orkgp:R1 orkgp:HAS_DATASET,
+         orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_BENCHMARK_RESULT,
+        ?benchmark orkgp:HAS_METRIC,
+        ?metric orkgp:HAS_SCORE,
+        ?score.
+        ?benchmark orkgp:HAS_DATASET,
+        ?dataset orkgp:HAS_DATASET,
+         FILTER(REGEX(STR(?dataset), "Kinetics-600", "i"))
+        ?metric rdfs:label?metric_lbl.
+        ?score rdfs:label?score_lbl.
+         BIND(XSD:integer(?metric_lbl) AS?metric)
+         BIND(XSD:integer(?score_lbl) AS?score)
+         ORDER BY DESC(?score)
+         LIMIT 1
+     }    
+
+
+```python
+def generate_sparql_query(context):
+    """
+    This function generates a SPARQL query based on the provided context.
+
+    Parameters:
+    context (str): A JSON string containing the context information.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    import json
+    # Load the context from the JSON string
+    context_data = json.loads(context)
+    
+    # Extract the terms, candidates, and query
+    terms = context_data['extracted_terms']
+    candidates = context_data['candidates']
+    query = context_data['question']
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?score"
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+    
+    # Add the datasets and benchmark results
+    sparql_query += " orkgp:R1 orkgp:HAS_DATASET,"
+    sparql_query += " orkgp:HAS_DATASET?dataset."
+    
+    # Filter for the Kinetics-600 dataset
+    sparql_query += "?dataset orkgp:HAS_BENCHMARK_RESULT,"
+    sparql_query += "?benchmark orkgp:HAS_METRIC,"
+    sparql_query += "?metric orkgp:HAS_SCORE,"
+    sparql_query += "?score."
+    
+    # Filter for the Kinetics-600 dataset
+    sparql_query += "?benchmark orkgp:HAS_DATASET,"
+    sparql_query += "?dataset orkgp:HAS_DATASET,"
+    sparql_query += " FILTER(REGEX(STR(?dataset), \"Kinetics-600\", \"i\"))"
+    
+    # Add the labels for the metric and score
+    sparql_query += "?metric rdfs:label?metric_lbl."
+    sparql_query +=

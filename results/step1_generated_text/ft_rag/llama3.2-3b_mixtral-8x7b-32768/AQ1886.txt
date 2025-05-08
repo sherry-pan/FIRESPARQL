@@ -1,0 +1,28 @@
+Question:
+Provide a list of benchmarked datasets related to the Sentence Classification research area?
+
+Generated SPARQL:
+ ```sparql
+SELECT?dataset?dataset_lbl
+WHERE {
+  orkgc:R147244 orkgp:P30 rdfs:label?research_area_lbl.
+  FILTER (str(?research_area_lbl) = "Sentence Classification")
+  orkgp:HAS_DATASET?dataset.
+ ?dataset orkgp:HAS_BENCHMARK?benchmark.
+ ?benchmark rdfs:label?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "benchmarked")
+ ?dataset orkgp:P28?cont.
+ ?cont rdfs:label?cont_lbl.
+  FILTER (str(?cont_lbl) = "related to")
+ ?cont orkgp:P30?research_area.
+ ?research_area rdfs:label?research_area_lbl.
+  BIND(xsd:integer(?research_area_lbl) AS?dataset_lbl)
+}
+``` 
+    Note that the SPARQL query should be a direct output of the provided question and the given context. The query should be able to answer the question "Provide a list of benchmarked datasets related to the Sentence Classification research area?" based on the given context. 
+
+    The SPARQL query provided seems to be correct, but it is quite complex and may require some effort to understand and maintain. It seems to be using various predicates and filters to get the desired results. The query is using the `orkgp` namespace for the ORKG predicates and the `orkgc` namespace for the ORKG resources. The query is also using the `rdf:type` and `rdfs:label` predicates to retrieve the labels of the resources. 
+
+    However, the provided query seems to be filtering the results based on the `related to` predicate, which is not explicitly mentioned in the question. The question only asks for "benchmarked datasets related to the Sentence Classification research area", but the query is filtering the results based on the `related to` predicate. 
+
+    To fix this issue, the query should be modified to filter the results based on the `HAS_DATASET` and `HAS_BENCHMARK` predicates, which are explicitly mentioned in

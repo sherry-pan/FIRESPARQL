@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?metric ?metricLabel 
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkp:hasBenchmarkScore ?score.
+  ?score orkp:hasMetric ?metric.
+  ?metric orkp:hasMetricLabel ?metricLabel.
+  ?dataset rdfs:label "Atari 2600 Breakout dataset"@en.
+  FILTER (STR(?metricLabel) = "top")
+}
+```

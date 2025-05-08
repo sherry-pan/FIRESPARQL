@@ -1,0 +1,24 @@
+Question:
+What is the top benchmark score and its metric on the Cheetah, run (DMControl500k) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153780 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P4319?eval.
+          ?eval orkgp:HAS_DATASET?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?contrib orkgp:P4318?cont.
+          ?cont orkgp:P4319?eval.
+          ?eval orkgp:P4317?metric.
+          ?metric rdfs:label?metric_lbl.
+           FILTER(REGEX(?dataset_lbl, "Cheetah, run (DMControl500k)")
+          ?contrib orkgp:P4319?eval.
+          ?eval orkgp:P4317?metric.
+          ?metric rdfs:label?metric_lbl.
+           BIND(xsd:float(?eval) AS?value)
+         }
+         ORDER BY DESC(?value)
+         LIMIT 1;
+    <|eot_id|>

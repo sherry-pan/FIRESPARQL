@@ -1,0 +1,47 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Stanford Cars dataset?
+
+Generated SPARQL:
+ ```
+SELECT?title?id WHERE {
+ ?p a ora:ResearchPaper.
+ ?p ora:hasTitle?title.
+ ?p ora:hasId?id.
+ ?p ora:hasDataset?dataset.
+ ?dataset ora:datasetName?datasetName.
+ ?p ora:hasBenchmark?benchmark.
+ ?benchmark ora:evaluation?evaluation.
+ ?dataset ora:datasetURI?datasetURI.
+ ?benchmark ora:benchmarkURI?benchmarkURI.
+ ?dataset a ora:Dataset.
+ ?p ora:hasPublication?publication.
+ ?publication a ora:Publication.
+ ?benchmark ora:benchmarkURI?benchmarkURI.
+ ?dataset a ora:datasetName?datasetName.
+ ?publication a ora:hasTitle?title.
+ ?publication ora:hasId?id.
+ ?dataset ora:datasetURI?datasetURI.
+  FILTER (regex(str(?datasetURI), "https://ai.stanford.edu/cars/")i)
+  FILTER (regex(str(?benchmarkURI), "https://ai.stanford.edu/cars/")i)
+  FILTER (regex(str(?datasetURI), "https://ai.stanford.edu/cars/")i)
+  FILTER (regex(str(?benchmarkURI), "https://ai.stanford.edu/cars/")i)
+} ``` 
+    The final answer is:
+    ```
+    SELECT?title?id WHERE {
+     ?p a ora:ResearchPaper.
+     ?p ora:hasTitle?title.
+     ?p ora:hasId?id.
+     ?p ora:hasDataset?dataset.
+     ?dataset ora:datasetName?datasetName.
+     ?p ora:hasBenchmark?benchmark.
+     ?benchmark ora:evaluation?evaluation.
+     ?dataset ora:datasetURI?datasetURI.
+     ?benchmark ora:benchmarkURI?benchmarkURI.
+     ?dataset a ora:Dataset.
+     ?p ora:hasPublication?publication.
+     ?publication a ora:Publication.
+     ?benchmark ora:benchmarkURI?benchmarkURI.
+     ?dataset a ora:datasetName?datasetName.
+     ?publication a ora:hasTitle?title.
+     ?publication ora

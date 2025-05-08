@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?score
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasBenchmark ?benchmark.
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER CONTAINS(?datasetLabel, "200k Short Texts for Humor Detection").
+  
+  ?benchmark ora:hasMetric ?metric.
+  ?benchmark ora:hasModel ?model.
+  ?benchmark ora:hasScore ?score.
+  ?metric rdfs:label ?metricLabel.
+  FILTER CONTAINS(?metricLabel, "F1-score").
+  
+  ?model rdfs:label ?modelLabel.
+  FILTER (CONTAINS(?modelLabel, "BERT") || CONTAINS(?modelLabel, "GPT")).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

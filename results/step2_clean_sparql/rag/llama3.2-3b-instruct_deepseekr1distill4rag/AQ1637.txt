@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX orkc: <http://www.openresearch.org/orkc/>
+PREFIX orkp: <http://www.openresearch.org/orkp/>
+
+SELECT ?model
+WHERE {
+  ?model orkc:relatedTo ?dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER(CONTAINS(LCASE(?datasetLabel), "cart pole (openai gym) dataset")).
+
+  ?model orkc:relatedTo ?property.
+  ?property rdfs:label ?propertyLabel.
+  FILTER(CONTAINS(LCASE(?propertyLabel), "score score")).
+
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

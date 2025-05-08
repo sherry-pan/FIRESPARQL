@@ -1,0 +1,78 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+         orkgp:R147244 orkgp:HAS_METRIC?metric.
+         FILTER (str(?metric) = "metric")
+        ?metric orkgp:HAS_VALUE?value.
+         FILTER (str(?value) = "value")
+     }
+     ORDER BY DESC(?value) 
+     LIMIT 1. 
+    ```python
+def generate_sparql_query(question, context):
+    # Extract the extracted_terms and candidates from the context
+    extracted_terms = context['extracted_terms']
+    candidates = context['candidates']
+
+    # Get the URIs of the top benchmark result, metric, and value
+    top_benchmark_result_uri = None
+    metric_uri = None
+    value_uri = None
+
+    # Check each candidate to see if it matches any of the extracted terms
+    for term, term_candidates in candidates.items():
+        for candidate in term_candidates:
+            if term in extracted_terms:
+                if 'HAS_BENCHMARK_RESULT' in candidate['uri']:
+                    top_benchmark_result_uri = candidate['uri']
+                if 'HAS_METRIC' in candidate['uri']:
+                    metric_uri = candidate['uri']
+                if 'HAS_VALUE' in candidate['uri']:
+                    value_uri = candidate['uri']
+
+    # Generate the SPARQL query
+    sparql_query = f"""
+        SELECT?metric?value
+        WHERE {{
+            {top_benchmark_result_uri} orkgp:HAS_METRIC?metric.
+            FILTER (str(?metric) = "metric")
+           ?metric orkgp:HAS_VALUE?value.
+            FILTER (str(?value) = "value")
+        }}
+        ORDER BY DESC(?value) 
+        LIMIT 1.
+    """
+
+    return sparql_query
+
+# Test the function
+question = "What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?"
+context = {
+    "question": question,
+    "extracted_terms": {
+        "WMT2016 Czech-English",
+        "top benchmark result",
+        "metric",
+        "value"
+    },
+    "candidates": {
+        "WMT2016 Czech-English": [
+            {
+                "uri": "orkgr:R147244",
+                "rdfs:label": "93.9",
+                "rdf:type": "orkgc:Resource"
+            }
+        ],
+        "top benchmark result": [
+            {
+                "uri": "orkgp:HAS_BENCHMARK_RESULT",
+                "rdfs:label": "Benchmark result",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "metric": [
+            {
+               

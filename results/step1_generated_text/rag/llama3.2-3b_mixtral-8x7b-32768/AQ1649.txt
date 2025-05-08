@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest SUCCESS score on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/resource/>
+    PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/resource/benchmark/>
+    PREFIX orkfp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+
+    SELECT?model?score
+    WHERE {
+       ?model orkfp:HAS_BENCHMARK?benchmark.
+       ?benchmark orkfp:HAS_DATASET?dataset.
+       ?dataset orkgr:label?datasetLabel.
+       ?dataset?hasScore?score.
+       ?score or

@@ -1,0 +1,65 @@
+Question:
+What is the best performing model benchmarking the ANLI test dataset in terms of A3 metric?
+
+Generated SPARQL:
+ SELECT?model?metric?value
+     WHERE {
+    ?model orkgr:R122689 ortk:HAS\_DATASET?dataset.
+    ?model ortk:HAS\_MODEL?model.
+    ?dataset ortk:HAS\_METRIC?metric.
+    ?model ortk:HAS\_METRIC?metric.
+    ?metric ortk:HAS\_VALUE?value.
+     FILTER (REGEX(STR(?model), "best performing") || REGEX(STR(?model), "model") || REGEX(STR(?metric), "A3"))
+     }
+    Note: You can use the given candidates, terms and context to generate the SPARQL query. You can't use any external knowledge or information not provided in the context. 
+    Also, note that the query should be able to handle cases where there are multiple models that have the best performance on the ANLI test dataset in terms of A3 metric. 
+    Therefore, the query should return all the models and their corresponding A3 metric values. 
+
+```python
+import re
+
+def generate_sparql_query(context):
+    # Define the query template
+    query_template = """
+    SELECT?model?metric?value
+    WHERE {
+   ?model orkgr:R122689 ortk:HAS_DATASET?dataset.
+   ?model ortk:HAS_MODEL?model.
+   ?dataset ortk:HAS_METRIC?metric.
+   ?model ortk:HAS_METRIC?metric.
+   ?metric ortk:HAS_VALUE?value.
+    FILTER (REGEX(STR(?model), "best performing") || REGEX(STR(?model), "model") || REGEX(STR(?metric), "A3"))
+    }
+    """
+
+    # Extract terms and candidates from context
+    terms = context["extracted_terms"]
+    candidates = context["candidates"]
+
+    # Define the subqueries for each term
+    subqueries = []
+    for term, term_candidates in terms.items():
+        subquery = ""
+        for candidate in term_candidates:
+            subquery += f"OR {candidate['uri']} {candidate['rdfs:label']}?{term}."
+        subqueries.append(subquery)
+
+    # Combine the subqueries into the query template
+    query = query_template
+    for subquery in subqueries:
+        query += subquery
+
+    return query
+
+# Generate the SPARQL query
+context = {
+    "extracted_terms": {
+        "best performing model": [],
+        "ANLI test dataset": [],
+        "A3 metric": []
+    },
+    "candidates": {
+        "best performing model": [],
+        "ANLI test dataset": [
+            {
+                "uri

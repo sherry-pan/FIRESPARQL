@@ -1,0 +1,27 @@
+Question:
+Indicate the model that performed best in terms of Pre-Training Dataset metric on the HMDB51 benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "Pre-Training Dataset")
+              && str(?metric_lbl      = "metric")
+              && str(?metric_lbl      = "value"))
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl = "HMDB51")
+              && str(?dataset_lbl = "benchmark"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+       BIND(xsd:float(?value) AS?value)
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:HAS_MODEL         ?model.
+       BIND(xsd:float(?model      ) AS?model)
+       ORDER BY DESC(?value)
+       LIMIT 1
+      ?model       rdfs:label      ?model_lbl.
+      }<|eot_id|>

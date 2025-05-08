@@ -1,0 +1,14 @@
+```sparql
+SELECT ?m ?d
+WHERE {
+  ?m rdfs:label ?mLabel.
+  ?d rdfs:label ?dLabel.
+  FILTER (REGEX(STR(?mLabel), "metrics", "i") OR REGEX(STR(?dLabel), "Barabasi-Albert", "i")).
+  ?m a ?mType.
+  ?d a ?dType.
+  ?m ?property ?value.
+  FILTER (REGEX(STR(?value), "accuracy|f1-score|precision|recall|auc-roc", "i")).
+  ?property rdfs:label ?propertyLabel.
+  ?d ?property ?value.
+}
+```

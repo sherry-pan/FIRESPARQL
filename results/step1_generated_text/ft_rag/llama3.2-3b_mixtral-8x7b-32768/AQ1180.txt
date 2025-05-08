@@ -1,0 +1,48 @@
+Question:
+What is the top benchmark score and its metric on the Hutter Prize dataset?
+
+Generated SPARQL:
+ SELECT?score,?metric
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       "Hutter Prize dataset";
+                      orkgp:HAS_DATASET  ?has_dataset.
+        ?has_dataset   a                orkgp:Predicate;
+                        rdfs:label       "Has Dataset";
+                        orkgp:P30          ?has_contest_eval.
+        ?contest_eval  a                orkgc:ContestEvaluation;
+                        rdfs:label       "MPQA";
+                        orkgp:P32          ?evaluator_contest.
+        ?evaluator_contest   orkgp:P31      ?evaluator;
+                            rdfs:label      ?evaluator_lbl.
+         FILTER(REGEX(?evaluator_lbl, "Hutter Prize"))
+        ?evaluator      orkgp:P33      ?evaluator_eval.
+        ?evaluator_eval orkgp:P34      ?evaluator_eval_value.
+        ?evaluator_eval_value       orkgp:HAS_EVALUATION     ?eval.
+        ?eval      orkgp:HAS_EVALUATION     ?eval;
+                    rdfs:label      ?eval_lbl.
+        ?eval      orkgp:P35      ?cont.
+        ?cont      orkgp:P36      ?cont_eval.
+        ?cont_eval      orkgp:P37      ?score.
+         BIND(xsd:decimal(?score) AS?score)
+        ?score      rdfs:label      ?score_lbl.
+         BIND(xsd:decimal(?score_lbl) AS?score)
+         SELECT?metric
+         WHERE {
+          ?dataset       a                orkgc:Dataset;
+                      rdfs:label       "Hutter Prize dataset";
+                      orkgp:HAS_DATASET  ?has_dataset.
+        ?has_dataset   orkgp:P30          ?has_contest_eval.
+        ?contest_eval  orkgp:P32          ?evaluator_contest.
+        ?evaluator_contest   orkgp:P31      ?evaluator;
+                            rdfs:label      ?evaluator_lbl.
+         FILTER(REGEX(?evaluator_lbl, "Hutter Prize"))
+        ?evaluator      orkgp:P33      ?evaluator_eval.
+        ?evaluator_eval orkgp:P34      ?evaluator_eval_value.
+        ?evaluator_eval_value       orkgp:HAS_EVALUATION     ?eval.
+        ?eval      orkgp:HAS_EVALUATION     ?eval;
+                    rdfs:label      ?eval_lbl.
+        ?eval      orkgp:P35      ?cont.
+        ?cont      orkgp:P36      ?cont_eval.
+        ?cont_eval      orkgp:P37      ?metric.
+         BIND(xsd:decimal(?metric

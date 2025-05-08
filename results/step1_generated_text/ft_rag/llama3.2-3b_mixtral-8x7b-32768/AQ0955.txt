@@ -1,0 +1,60 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ SELECT?evaluatable,?eval
+     WHERE {
+       orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_DATASET?evaluatable;
+              orkgp:HAS_EVALUATION?eval.
+      ?evaluatable rdfs:label?eval.
+     }
+     ORDER BY DESC?eval.
+     LIMIT 1
+   .      ```python
+def get_sparql_query(question, context):
+    # Parse the question and extract relevant terms and entities
+    question_terms = question.split()
+    extracted_terms = context['extracted_terms']
+    question_terms = [term for term in extracted_terms if term in question_terms]
+    
+    # Get the candidates for the extracted terms
+    candidates = context['candidates']
+    
+    # Generate the SPARQL query
+    if not question_terms:
+        return None
+    
+    # Determine the properties and entities to use in the query
+    # In this case, we know the question is about a dataset and a metric of evaluation
+    # So we use the HAS_DATASET and HAS_METRIC/HAS_EVALUATION predicates
+    orkgp_prefix = 'orkgp'
+    has_dataset_pred = orkgp_prefix + ':HAS_DATASET'
+    has_metric_eval_pred = orkgp_prefix + ':HAS_METRIC'
+    has_eval_pred = orkgp_prefix + ':HAS_EVALUATION'
+    
+    # Generate the SELECT clause
+    select_clause = 'SELECT?evaluatable,?eval'
+    
+    # Generate the WHERE clause
+    where_clause = 'WHERE {'
+    where_clause +='' + has_dataset_pred +'orkgp:R1 '
+    where_clause += 'orkgp:HAS_DATASET orkgp:HAS_DATASET?evaluatable;'
+    where_clause +='' + has_eval_pred + '?eval. '
+    where_clause += '?evaluatable rdfs:label?eval. '
+    where_clause += '}'
+    
+    # Generate the ORDER BY and LIMIT clauses
+    order_by_clause = 'ORDER BY DESC?eval.'
+    limit_clause = 'LIMIT 1'
+    
+    # Combine the clauses to form the full query
+    query = select_clause +'' + where_clause +'' + order_by_clause +'' + limit_clause + '.'
+    
+    return query
+```
+## Step 1: Parse the question and extract relevant terms and entities
+The input question is "What are the metrics of evaluation over the Atari 2600 Defender dataset?" The extracted terms are "Atari 2600 Defender dataset" and "metrics of evaluation".
+
+## Step 2: Get the candidates for the extracted terms
+The candidates for the extracted terms are:
+- Atari 2600 Defender dataset

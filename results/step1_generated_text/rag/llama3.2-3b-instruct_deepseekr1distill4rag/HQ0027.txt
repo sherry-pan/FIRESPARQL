@@ -1,0 +1,43 @@
+Question:
+For which country of study overall prevalence of epilepsy is the highest?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkgp/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?country?epilepsyPrevalence
+     WHERE {
+    ?country a orkg:Country.
+    ?country a orkg:StudyCountry.
+    ?epilepsyPrevalence a orkg:EpilepsyPrevalence.
+    ?country orkg:hasEpilepsyPrevalence?epilepsyPrevalence.
+     SERVICE orkg:SearchService {
+     FILTER (str(?epilepsyPrevalence) = "highest")
+     }
+     }
+     Note: The above query is just a template and may need adjustments to match the actual structure of your RDF data.
+    ```python
+def generate_sparql_query():
+    # Define the prefix and RDF types
+    prefix = "PREFIX orkg: <http://example.org/orkgp/>"
+    rdfs_prefix = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
+    
+    # Define the SELECT clause
+    select_clause = "SELECT?country?epilepsyPrevalence"
+    
+    # Define the WHERE clause
+    where_clause = "WHERE {"
+    where_clause += "?country a orkg:Country."
+    where_clause += "?country a orkg:StudyCountry."
+    where_clause += "?epilepsyPrevalence a orkg:EpilepsyPrevalence."
+    where_clause += "?country orkg:hasEpilepsyPrevalence?epilepsyPrevalence."
+    where_clause += " SERVICE orkg:SearchService {"
+    where_clause += " FILTER (str(?epilepsyPrevalence) = \"highest\")"
+    where_clause += " }"
+    
+    # Combine the prefix, select clause, and where clause
+    sparql_query = prefix + "\n" + rdfs_prefix + "\n" + select_clause + "\n" + where_clause + "\n"
+    
+    return sparql_query
+
+print(generate_sparql_query())
+```<|eot_id|>

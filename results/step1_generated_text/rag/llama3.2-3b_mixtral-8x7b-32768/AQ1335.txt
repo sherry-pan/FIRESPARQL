@@ -1,0 +1,25 @@
+Question:
+What is the highest benchmark result achieved on the Yelp-14 dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+    SELECT?metric?value
+    WHERE {
+       ?dataset orkg:RDF_TYPE orkg:Dataset.
+       ?dataset orkggp:HAS_DATASET?dataset1.
+       ?dataset1 orkggp:HAS_BENCHMARK_RESULT?benchmark.
+       ?benchmark orkggp:HAS_METRIC?metric.
+       ?benchmark orkggp:HAS_BEST_RESULT?benchmarkResult.
+       ?benchmarkResult orkggp:HAS_VALUE?value.
+        FILTER (STR(?benchmarkResult) = "highest')
+        FILTER (STR(?metric) = "best')
+    }
+    ```sparql
+```
+
+    Note that this response is based on the provided context and the task's requirements. The generated SPARQL query is the result of a logical deduction process based on the given input question and context. However, please note that the actual correctness and accuracy of the generated query may depend on the actual structure and content of the ORKG.<|eot_id|>

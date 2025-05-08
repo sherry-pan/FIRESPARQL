@@ -1,0 +1,50 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the NYT-single dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "MPQA")
+     ?benchmark      orkgp:P30     ?dataset.
+     ?evaluation     orkgp:HAS_EVALUATION     ?benchmark.
+     ?cont           orkgp:P31     ?evaluation.
+      OPTIONAL {?cont      rdfs:label      ?cont_lbl.}
+     ?model         orkgp:P32     ?cont.
+      OPTIONAL {?model      rdfs:label      ?model_lbl.}
+     ?model_lbl      a                orkgp:Model;
+                      rdfs:label      ?model_lbl.
+      ORDER BY DESC(?cont_lbl)
+     ?cont_lbl       orkgp:VALUE      ?value.
+      BIND(xsd:float(?value) AS?cont_lbl_value)
+      FILTER (?cont_lbl_value >= 0.5)
+     ?cont       orkgp:P33     ?metric.
+     ?metric      rdfs:label      ?metric_lbl.
+     ?cont       orkgp:P34     ?metric_lbl.
+     ?metric      orkgp:P35     ?cont.
+     ?cont      orkgp:P36     ?cont_lbl.
+     ?cont      orkgp:P37     ?cont_lbl_value.
+     ?cont      orkgp:P38     ?cont_lbl.
+     ?cont      orkgp:P39     ?cont_lbl.
+     ?cont      orkgp:P40     ?cont_lbl.
+     ?cont      orkgp:P41     ?cont_lbl.
+     ?cont      orkgp:P42     ?cont_lbl.
+     ?cont      orkgp:P43     ?cont_lbl.
+     ?cont      orkgp:P44     ?cont_lbl.
+     ?cont      orkgp:P45     ?cont_lbl.
+     ?cont      orkgp:P46     ?cont_lbl.
+     ?cont      orkgp:P47     ?cont_lbl.
+     ?cont      orkgp:P48     ?cont_lbl.
+     ?cont      orkgp:P49     ?cont_lbl.
+     ?cont      orkgp:P50     ?cont_lbl.
+     ?cont      orkgp:P51     ?cont_lbl.
+     ?cont      orkgp:P52     ?cont_lbl.
+     ?cont      orkgp:P53     ?cont_lbl.
+     ?cont      orkgp:P54     ?cont_lbl.
+     ?cont      orkgp:P55     ?cont_lbl.
+     ?cont      orkgp:P56     ?cont_lbl.
+     ?cont      orkgp:P57     ?cont_lbl.
+     ?cont      orkgp:P58     ?cont_lbl.
+     ?cont      orkgp:P59     ?cont_lbl.
+     ?cont      orkg

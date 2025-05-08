@@ -1,0 +1,14 @@
+```sparql
+    PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/orkgr/>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp/>
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+    SELECT ?model ?f1Score
+    WHERE {
+       ?model orkgp:HAS_MODEL ?modelUri.
+       ?modelUri orkgp:HAS_F1_SCORE ?f1Score.
+       ?f1Score orkgr:R44252 ?benchmark.
+       ?benchmark orkgr:R122689 orkgc:bucc_chinese_to_english.
+    }
+    ORDER BY DESC(?f1Score)
+    LIMIT 1
+```

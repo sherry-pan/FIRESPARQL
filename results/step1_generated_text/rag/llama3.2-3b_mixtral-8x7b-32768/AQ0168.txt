@@ -1,0 +1,39 @@
+Question:
+Can you list the models that have been evaluated on the STS Benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgr: <http://www.ontology.org/2009/09/orkgr#>
+    PREFIX orkgc: <http://www.ontology.org/2009/09/orkgc#>
+    PREFIX orkgp: <http://www.ontology.org/2009/09/orkgp#>
+
+    SELECT?model?dataset
+    WHERE {
+     ?model orkgp:HAS_MODEL?modelModel.
+     ?dataset orkgr:RDFS_LABEL?benchmarkSTS.
+     ?model orkgp:HAS_EVALUATION?evaluationOn.
+     ?evaluationOn orkgr:RDFS_LABEL?benchmarkSTS.
+     ?model orkgp:HAS_BENCHMARK?benchmark.
+     ?benchmark orkgr:RDFS_LABEL?benchmarkSTS.
+      FILTER (str(?benchmarkSTS) = "Benchmark STS")
+      }
+    ```
+```
+    Note: The above SPARQL query is generated based on the provided context and question. It is assumed that the correct entities and properties have been correctly linked to the input question. However, the correctness of the query cannot be guaranteed without further validation. 
+
+    The query first selects the models that have a model associated with it. Then it filters the results to get the models that have been evaluated on the Benchmark STS dataset. The `str(?benchmarkSTS)` function is used to convert the label of the dataset to lowercase, which is the expected format of the Benchmark STS dataset. 
+
+    The query assumes that the correct entities and properties have been correctly linked to the input question. However, the correctness of the query cannot be guaranteed without further validation. 
+
+    This is a challenging task, and the generated query may not be the only correct query. There may be other valid queries that can retrieve the same results. 
+
+    The SPARQL query is generated based on the provided context and question, but it is not a guarantee that the query will return the correct results without further validation. 
+
+    The context provided includes the entities and properties mentioned in the question, as well as candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question. 
+
+    The query uses the following predicates and properties:
+    * `orkgp:HAS_MODEL` - The model associated with the model.
+    * `orkgr:RDFS_LABEL` - The label of the dataset.
+    * `orkgp:HAS_EVALUATION` - The evaluation associated with the model.
+    * `orkgp:HAS_BENCHMARK` - The benchmark associated with the model.
+    * `orkgr:RDFS_LABEL` - The label of the dataset

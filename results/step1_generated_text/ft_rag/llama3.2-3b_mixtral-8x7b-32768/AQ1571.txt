@@ -1,0 +1,27 @@
+Question:
+What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "NCBI Disease dataset")
+ ?benchmark      orkgp:P31      ?dataset;
+                  orkgp:HAS_EVALUATION      ?eval.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+  OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+           ?model      rdfs:label              ?model_lbl.}
+ ?eval         rdfs:label              ?eval_lbl;
+                orkgp:P32              ?cont.
+ ?cont         orkgp:P31              ?model;
+                orkgp:HAS_MODEL         ?model.
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 1
+```
+
+
+
+Note that the model name is in the label of the model itself. The query first filters the datasets to only include the "NCBI Disease dataset". It then iterates over the benchmarking evaluations for each of those datasets, and the models that were used for those evaluations. The model name is the label of the model, and we use an optional pattern to make sure we're not missing any models that were not assigned a label. The results are ordered by the F1 entity level score, and we limit the output to only the top performing model.<|eot_id|>

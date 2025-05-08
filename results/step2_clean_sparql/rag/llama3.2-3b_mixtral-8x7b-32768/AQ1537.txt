@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orgr: <http://example.org/orgr/>
+
+SELECT ?model ?score ?dataset
+WHERE {
+  ?model orkgc:HAS_MODEL ?modelName.
+  ?model orkgc:HAS_SCORE ?score.
+  ?model orkgc:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_dataset ?dataset.
+  FILTER (str(?dataset) = "Penn Treebank (Character Level) Dataset"^^xsd:string).
+  FILTER (str(?score) = "Number of params"^^xsd:string).
+}
+```

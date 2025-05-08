@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model ?metric ?score
+WHERE {
+  ?dataset a orkgc:Dataset;
+           orkggp:HAS_DATASET ?dataset1.
+  ?dataset1 a orkgc:Dataset;
+            orkgr:RDF_TYPE orkgc:Dataset.
+  ?model orkgr:BENCHMARK ?dataset1;
+         orkgr:HAS_METRIC ?metricResult.
+  ?metricResult orkgr:METRIC_NAME "RE+ Micro F1";
+                orkgr:METRIC_VALUE ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest Score score on the Ball in cup, catch (DMControl100k) benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkc: <http://orkc.org/ontology/>
+
+SELECT?model?dataset?score
+WHERE {
+ ?model orkp:hasModel?modelModel.
+ ?modelModel orkp:hasDataset?dataset.
+ ?dataset orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasScore?score.
+  FILTER (STR(?dataset) = "Ball in cup, catch (DMControl100k)"@en)
+  FILTER (?score >= 0.93)
+}
+``` 
+    The SPARQL query retrieves the model with the highest score on the Ball in cup, catch (DMControl100k) benchmark dataset. The query uses the `orkg` and `orkp` prefixes to access the ORKG and ORKP ontologies, respectively. The `SELECT` clause specifies the variables to be retrieved, and the `WHERE` clause filters the results based on the extracted terms and candidates. The `FILTER` clause checks for the presence of the benchmark dataset and the score of 0.93 or higher.<|eot_id|>

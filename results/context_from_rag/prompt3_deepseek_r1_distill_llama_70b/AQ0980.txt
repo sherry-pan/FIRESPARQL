@@ -1,0 +1,70 @@
+<think>
+Okay, I need to figure out how to answer the question: "List the metrics that are used to evaluate models on the Yelp-5 benchmark dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The main entities here are "metrics" and "Yelp-5 benchmark dataset". The property mentioned is "evaluate models on". So, I'm looking for metrics related to evaluating models on the Yelp-5 dataset.
+
+Next, I need to find similar entities or properties in the RDF data. Looking through the context, I see that there are resources related to evaluation, such as "HAS_VALUE" and "P5044" which is "Journal Article". There are also mentions of "method", "solution proposal", and "entity extraction". 
+
+I notice that the RDF data includes entities like "R147652" which has steps involving evaluation using a CRF algorithm and filtering entity candidates. There's also "R283709" which talks about keyphrase extraction, named entity recognition, and graph analytics. These seem related to evaluation methods.
+
+Since the question is about metrics, I should look for terms that relate to evaluation. In the context, "HAS_VALUE" is associated with a value "93.9", which might be a metric. Also, "P5044" is "Journal Article", which could be a source where metrics are discussed.
+
+I also see that "R283709" has a predicate "P3000" with keywords like "Graph analytics" and "Named entity recognition", which are methods that might use specific metrics. 
+
+Now, I'll map these findings to the required JSON structure. For "metrics", the candidates would include "HAS_VALUE" and "P5044". For "Yelp-5 benchmark dataset", since it's not explicitly mentioned, I'll look for similar datasets like "MPQA benchmark dataset" as in the example, but in the context, I don't see Yelp-5, so I might have to infer or find related datasets. However, in the provided data, there's no direct mention of Yelp-5, so I'll have to consider that it's not present and perhaps return an empty list or find the closest match.
+
+Wait, in the context, there's "R147652" which has steps about evaluation, so maybe that's a candidate for the dataset. Also, "R283709" is about methods and solutions, which might be related to the dataset.
+
+For the property "evaluate models on", the candidates would be predicates like "P5044" and "HAS_VALUE" since they relate to evaluation and metrics.
+
+Putting it all together, I'll structure the JSON with the extracted terms and their candidates, making sure to use the correct prefixes and include types where applicable.
+</think>
+
+```json
+{
+  "question": "List the metrics that are used to evaluate models on the Yelp-5 benchmark dataset?",
+  "extracted_terms": {
+    "metrics": "metrics",
+    "Yelp-5 benchmark dataset": "Yelp-5 benchmark dataset",
+    "evaluate models on": "evaluate models on"
+  },
+  "candidates": {
+    "metrics": [
+      {
+        "uri": "orkgp:HAS_VALUE",
+        "rdfs:label": "HAS_VALUE",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P5044",
+        "rdfs:label": "Journal Article",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "Yelp-5 benchmark dataset": [
+      {
+        "uri": "orkgr:R147652",
+        "rdfs:label": "Step 1 We start with an initial set of METHOD and DATASET instances as seed terms (e.g., “SVM” and “MNIST”). These seed terms can, for instance, be gathered from existing knowledge graphs.",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R283709",
+        "rdfs:label": "method",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "evaluate models on": [
+      {
+        "uri": "orkgp:P5044",
+        "rdfs:label": "Journal Article",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:HAS_VALUE",
+        "rdfs:label": "HAS_VALUE",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

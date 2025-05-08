@@ -1,0 +1,26 @@
+Question:
+What are the models that have been benchmarked on the WMT2014 English-German dataset?
+
+Generated SPARQL:
+ SELECT?model?dataset 
+    WHERE {
+       ?dataset a ora:Dataset.
+       ?dataset ora:hasDataset?model.
+       ?dataset wmtc2014:benchmarkOn?benchmarking.
+       ?benchmarking wmtc2014:benchmarkedOn?model.
+        FILTER (STR(?model) = "models" || STR(?model) = "WMT2014 English-German" || STR(?benchmarking) = "WMT2014 English-German")
+    } 
+
+    Note: The ORKG is a knowledge graph and the data is not stored in a relational database. The SPARQL query should be designed to query the ORKG data. 
+
+    Here is the correct solution:
+    SELECT?model?dataset 
+    WHERE {
+       ?dataset a ora:Dataset.
+       ?dataset wmtc2014:benchmarkOn?benchmarking.
+       ?benchmarking wmtc2014:benchmarkedOn?model.
+       ?model wmtc2014:hasModel?dataset.
+        FILTER (STR(?dataset) = "WMT2014 English-German")
+    } 
+
+    The final answer is the correct SPARQL query.<|eot_id|>

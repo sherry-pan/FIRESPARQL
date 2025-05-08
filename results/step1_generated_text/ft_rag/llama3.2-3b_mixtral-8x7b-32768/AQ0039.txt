@@ -1,0 +1,43 @@
+Question:
+Could you provide a list of models that have been tested on the seel.cse.lsu.edu/data/refsq17.zip benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgp:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "seel.cse.lsu.edu/data/refsq17.zip")
+     ?benchmark      orkgp:P31       ?dataset;
+                      orkgp:RSHD      ?eval.
+     ?eval           orkgp:HAS_EVALUATION      ?eval_eval.
+     ?eval_eval      rdfs:label              ?eval_eval_lbl.
+     ?eval_eval      orkgp:P31               ?eval_eval_lbl.
+     ?eval_eval      orkgp:HAS_MODEL         ?model.
+     ?model         rdfs:label              ?model_lbl.
+     ?model         orkgp:P32               ?cont.
+     ?cont          orkgp:P31               ?cont_lbl.
+     ?cont_lbl      rdfs:label              ?cont_lbl.
+     ?cont_lbl      orkgp:P32               ?cont.
+     ?cont          orkgp:HAS_DATASET      ?cont_eval.
+     ?cont_eval     orkgp:P31               ?cont_eval_lbl.
+     ?cont_eval     rdfs:label              ?cont_eval_lbl.
+     ?cont_eval     orkgp:HAS_MODEL         ?cont_model.
+     ?cont_model    rdfs:label              ?cont_model_lbl.
+     ?cont_model    orkgp:P32               ?cont.
+    }
+    ```
+
+
+    The provided SPARQL query is designed to retrieve the models that have been tested on the seel.cse.lsu.edu/data/refsq17.zip dataset. The query first filters the datasets to only include the one with the label "seel.cse.lsu.edu/data/refsq17.zip". It then retrieves the evaluations that have been performed on this dataset. For each evaluation, it retrieves the models that have been tested on this evaluation. Finally, it retrieves the labels of these models.
+
+
+    The query uses the following predicates and properties from the ORKG:
+    - orkgp:HAS_MODEL: indicates that a model has been used.
+    - orkgp:P31: indicates that a dataset or evaluation is a subclass of a class.
+    - orkgp:RSHD: indicates that a dataset has a reference source.
+    - orkgp:HAS_EVALUATION: indicates that an evaluation has been performed.
+    - orkgp:P32: indicates that a dataset or evaluation is a subclass of a class.
+
+
+    The query can be further optimized by adding additional filters to the dataset and evaluation selections. For example, it could filter the evaluations to only include those that have a specific evaluation metric or threshold. Additionally, it could filter the models to only include those that have a specific number of parameters or training time.<|eot_id|>

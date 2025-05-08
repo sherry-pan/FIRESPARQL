@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkgc: <http://orkg.org/ontology/class/>
+PREFIX orkgp: <http://orkg.org/ontology/predicate/>
+
+SELECT ?metric ?score
+WHERE {
+    ?score orkgp:hasScore ?metric .
+    ?score orkgp:scoredOn ?dataset .
+    ?dataset a orkg:Dataset ;
+             a orkg:HendrycksTestDataset .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

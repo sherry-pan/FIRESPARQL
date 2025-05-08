@@ -1,0 +1,18 @@
+Question:
+List the metrics that are used to evaluate models on the CoQA benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/resource/>
+
+SELECT?metric?metricLabel 
+WHERE {
+ ?metric orkgc:hasMetric?metricLabel.
+ ?metric orkgr:associatedWith?dataset.
+ ?dataset orkgr:datasetFor?benchmark.
+ ?benchmark orkgc:benchmarkFor?evaluationMetric.
+ ?evaluationMetric orkgc:hasEvaluationMetric?metric.
+  FILTER (str(?metricLabel) = "Accuracy" OR str(?metricLabel) = "F1-score" OR str(?metricLabel) = "Precision" OR str(?metricLabel) = "Recall")
+}
+```<|eot_id|>

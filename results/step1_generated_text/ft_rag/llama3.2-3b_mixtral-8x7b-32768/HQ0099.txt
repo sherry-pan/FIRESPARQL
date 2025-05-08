@@ -1,0 +1,45 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ SELECT?material?material_lbl
+     WHERE {
+      ?cont      orkgp:HAS_PIEZORESISTIVE_MATERIAL      ?material.
+      ?cont      orkgp:P32                           ?resp.
+      ?cont      orkgp:HAS_RESPONSE_TIME           ?resp_time.
+      ?resp_time orkgp:HAS_VALUE                  ?value.
+      ?value      rdfs:label                         ?value_lbl.
+      ?cont      a                              orkgc:Contrib.
+      ?cont      orkgp:P31                           ?cont_lbl.
+      ?cont_lbl  rdfs:label                        ?material_lbl.
+      ?material      orkgp:HAS_PIEZORESISTIVE_MATERIAL      ?material.
+       FILTER(REGEX(STR(?value_lbl), "piezoresistive material", "i"))
+      ?material      orkgp:P31                           ?cont_lbl.
+      ?cont_lbl      rdfs:label                        ?material_lbl.
+      ?cont      orkgp:P32                           ?resp.
+      ?cont      orkgp:HAS_RESPONSE_TIME           ?resp_time.
+      ?resp_time      orkgp:HAS_VALUE                  ?value.
+      ?value      orkgp:HAS_VALUE                  ?value.
+      ?cont      orkgp:HAS_RESPONSE_TIME           ?resp_time.
+      ?cont      orkgp:P32                           ?resp.
+      ?cont      orkgp:HAS_RESPONSE_TIME           ?resp_time.
+       SELECT?cont?cont_lbl
+       WHERE {
+        ?cont      orkgp:HAS_PIEZORESISTIVE_MATERIAL      ?material.
+        ?cont      orkgp:P32                           ?resp.
+        ?cont      orkgp:HAS_RESPONSE_TIME           ?resp_time.
+        ?resp_time      orkgp:HAS_VALUE                  ?value.
+        ?value      rdfs:label                         ?value_lbl.
+        ?cont      a                              orkgc:Contrib.
+        ?cont      orkgp:P31                           ?cont_lbl.
+        ?cont_lbl      rdfs:label                        ?material_lbl.
+         FILTER(REGEX(STR(?value_lbl), "piezoresistive material", "i"))
+        ?cont      orkgp:P31                           ?cont_lbl.
+        ?cont_lbl      rdfs:label                        ?material_lbl.
+       }
+       ORDER BY DESC(?value_lbl)
+       LIMIT 1
+       } 
+       SELECT?cont?cont_lbl
+       WHERE {
+        ?cont      orkgp:HAS_PIEZORESISTIVE_MATERIAL      ?material

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://www.openresearch.org/ontologies/orkgp#>
+PREFIX orkgc: <http://www.openresearch.org/ontologies/orkgc#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?dataset orkgp:hasMetric ?metric.
+  ?dataset orkgc:hasModel ?model.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (str(?metricLabel) = "BLEU score" 
+          && str(?dataset) = "WMT2016 English-German benchmark")
+}
+ORDER BY DESC(?metricLabel)
+LIMIT 1
+```

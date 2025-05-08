@@ -1,0 +1,14 @@
+```sparql
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a ora:ResearchPaper.
+  ?paper wosid :WOS-46985.
+  ?paper ora:hasTitle ?title.
+  ?paper ora:hasID ?id.
+  ?benchmark ora:hasProperty ?property.
+  ?benchmark ora:hasValue ?value.
+  ?property ora:hasTarget ?target.
+  ?target ora:hasLabel ?label.
+  FILTER (STRLIKE(?label, "benchmark") || STRLIKE(?label, "performance"))
+}
+```

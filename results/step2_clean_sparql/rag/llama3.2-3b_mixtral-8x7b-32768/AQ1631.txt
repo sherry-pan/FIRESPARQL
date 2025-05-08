@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model ?score
+WHERE {
+  ?benchmarking orkgp:hasModel ?model ;
+                orkgr:hasDataset ?dataset ;
+                orkgr:hasMetric ?metric ;
+                orkgr:hasScore ?score .
+  
+  FILTER (?dataset = "Reacher, easy (DMControl100k) dataset"@en)
+  FILTER (?metric = "Score"@en)
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,58 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset
+     WHERE {
+       orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_INCORPORATION?incorporation.
+      ?incorporation orkgp:HAS_QUESTION?question.
+      ?question orkgp:HAS_VALUE?value.
+       FILTER (str(?value) = "more than 10000")
+      ?cont orkgp:P39?dataset.
+      ?cont orkgp:P40?incorporation.
+      ?incorporation orkgp:P41?question.
+      ?question orkgp:P42?value.
+       FILTER (str(?value) = "more than 10000")
+     }
+     UNION
+     SELECT DISTINCT?dataset
+     WHERE {
+       orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P45?cont.
+      ?cont orkgp:P40?incorporating.
+      ?incorporating orkgp:HAS_QUESTION?question.
+      ?question orkgp:HAS_VALUE?value.
+       FILTER (str(?value) = "more than 10000")
+     }
+     UNION
+     SELECT DISTINCT?dataset
+     WHERE {
+       orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P45?cont.
+      ?cont orkgp:P41?question.
+      ?question orkgp:HAS_VALUE?value.
+      ?value orkgp:HAS_QUESTION?question.
+      ?question orkgp:HAS_VALUE?value.
+       FILTER (str(?value) = "more than 10000")
+     }
+     UNION
+     SELECT DISTINCT?dataset
+     WHERE {
+       orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P45?cont.
+      ?cont orkgp:P42?value.
+      ?value orkgp:HAS_VALUE?value.
+      ?value orkgp:HAS_QUESTION?question.
+      ?question orkgp:HAS_VALUE?value.
+       FILTER (str(?value) = "more than 10000")
+     }
+     UNION
+     SELECT DISTINCT?dataset
+     WHERE {
+       orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg

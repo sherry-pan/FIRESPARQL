@@ -1,0 +1,13 @@
+```sparql
+PREFIX ora: <http://example.org/ontology/>
+
+SELECT ?model
+WHERE {
+  ?model a ora:Model.
+  ?dataset a ora:Dataset.
+  ?metric a ora:Evaluation_Metric.
+  ?dataset ora:associatedWith ?model.
+  ?model ora:bestPerformance ?metric.
+  FILTER (STR(?dataset) = "FSNS - Test" && STR(?metric) = "Sequence error metric")
+}
+```

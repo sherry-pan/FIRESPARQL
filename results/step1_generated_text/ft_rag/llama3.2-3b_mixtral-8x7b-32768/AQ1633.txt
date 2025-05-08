@@ -1,0 +1,62 @@
+Question:
+Which model has achieved the highest Score score on the Reacher, easy (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Reacher, easy (DMControl500k) benchmark dataset")
+          ?benchmark      orkgp:HAS_BENCHMARK      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+          ?model        orkgp:HAS_MODEL          ?cont.
+          ?model      orkgp:HAS_MODEL          ?model.
+          ?model      rdfs:label              ?model_lbl.
+           ORDER BY DESC(?model_lbl)
+     }
+     LIMIT 1
+   .```python
+import orkgp
+
+def get_sparql_query(question, context):
+    # Your code here
+    pass
+
+# Test the function
+question = "Which model has achieved the highest Score score on the Reacher, easy (DMControl500k) benchmark dataset?"
+context = {
+    "question": question,
+    "extracted_terms": {
+        "model",
+        "highest Score score",
+        "Reacher, easy (DMControl500k) benchmark dataset"
+    },
+    "candidates": {
+        "model": [
+            {
+                "uri": "orkgp:HAS_MODEL",
+                "rdfs:label": "Model",
+                "rdf:type": "orkgc:Resource"
+            },
+            {
+                "uri": "orkgp:HAS_MODEL",
+                "rdfs:label": "Model",
+                "rdf:type": "orkgc:Model"
+            }
+        ],
+        "highest Score score": [
+            {
+                "uri": "orkgp:HAS_SCORE",
+                "rdfs:label": "Score",
+                "rdf:type": "orkgc:Property"
+            }
+        ],
+        "Reacher, easy (DMControl500k) benchmark dataset": [
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "Reacher, easy (DMControl500k) benchmark dataset",
+                "rdf:type": "orkgc:Resource"
+            },
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label

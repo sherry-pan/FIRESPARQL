@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkc:Model.
+  ?model orkp:hasScore ?score.
+  ?benchmarkOn orkp:hasDataset ?dataset.
+  ?benchmarkOn orkp:hasModel ?model.
+  FILTER CONTAINS(STR(?dataset), "Atari 2600 Enduro").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

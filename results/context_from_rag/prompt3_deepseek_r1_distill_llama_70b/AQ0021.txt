@@ -1,0 +1,72 @@
+<think>
+Okay, so I need to figure out how to answer the question "What models are being evaluated on the TDMSci dataset?" using the provided ORKG RDF data dump. Let me break this down step by step.
+
+First, I'll start by understanding the structure of the data. The context information includes several RDF triples from two different files. Each triple has a subject, predicate, and object. The subjects are resources like R147652, R147244, etc., and the predicates are things like P39020, HAS_VALUE, P31, etc. The objects can be literals or other resources.
+
+Looking at the first file, I see that R147652 has several P39020 predicates with string values that describe steps. These steps outline a method involving seed terms, expansion, annotation, NER approach, and filtering. This seems like a method or process, possibly related to named entity recognition or something similar.
+
+Then there are other resources like R147244, which has a HAS_VALUE of "93.9". This could be a metric like accuracy or F1 score. R147246 is connected to several P27 predicates, which are names of people, likely authors. It also has P29 as "2015" and P28 as "6", which might be the year and volume of a publication. R147246 is linked to R147247 via HAS_VENUE, which is probably the conference or journal where the paper was published.
+
+Moving to the second file, R283709 is described as a "Journal Article" with various predicates like P5044, P41924, etc. It has keywords like "Graph analytics", "Horizon 2020", "Keyphrase extraction", etc. This suggests it's a paper that uses these methods. R283710 is another resource with P27 predicates for authors and P29 as "2021", indicating it's a 2021 publication.
+
+Now, the task is to answer the question about models evaluated on the TDMSci dataset. The example provided shows how to extract terms and find similar entities or properties. So, I need to extract relevant terms from the question. The question mentions "models" and "TDMSci dataset" and the action is "evaluated on".
+
+Looking through the context data, I need to find entities related to "TDMSci dataset" and "models". However, in the provided data, I don't see any mention of "TDMSci". The datasets mentioned are "MNIST" in the steps, and the papers are about methods like keyphrase extraction and named entity recognition.
+
+Wait, maybe I'm missing something. The context includes R147652 which talks about seed terms like "SVM" and "MNIST". SVM is a model, and MNIST is a dataset. So perhaps "SVM" is a model evaluated on "MNIST". But the question is about "TDMSci", which isn't present here.
+
+Since the context doesn't have "TDMSci", I might have to infer or see if there's a related dataset. Alternatively, maybe the method described in R147652 is a model that's been evaluated on some dataset, but without "TDMSci" being present, it's tricky.
+
+Looking at the example, the expected output includes candidates for each extracted term. So for "models", the example lists "SVM" as a candidate. In our case, since "TDMSci" isn't present, perhaps the closest is "MNIST" as a dataset, and "SVM" as a model.
+
+But the question is specifically about "TDMSci", which isn't in the data. So maybe the answer would have empty candidates or suggest that there's no data available for "TDMSci".
+
+Alternatively, perhaps the method steps in R147652 imply that the models (like SVM) are being evaluated on datasets like MNIST, so maybe that's a connection.
+
+Wait, in the first file, R147652's steps mention using seed terms like SVM and MNIST. Step 4 says they apply a NER approach using a CRF algorithm. So perhaps the models are SVM and CRF, evaluated on MNIST.
+
+But the question is about TDMSci, which isn't there. So maybe the answer is that there are no models evaluated on TDMSci in the provided data.
+
+Alternatively, perhaps the paper R283709, which is about keyphrase extraction and named entity recognition, uses models that could be evaluated on TDMSci, but without explicit data, it's speculative.
+
+I think the correct approach is to extract the terms "models", "TDMSci dataset", and "evaluated on". Then, look for entities in the RDF data that match these terms. Since "TDMSci" isn't present, the candidates for it would be empty or not found. For "models", the candidates could be SVM, CRF, etc., if they are present.
+
+Wait, in the context, R147652's steps mention "SVM" and "MNIST" as seed terms. So "SVM" is a model, and "MNIST" is a dataset. So perhaps in the candidates, "models" would include SVM, and "TDMSci dataset" would have no matches.
+
+But the example includes "tested on" as a property, which in the context is P39020, which describes the steps. So maybe the property for "evaluated on" is P39020 or another predicate.
+
+Wait, in the example, "tested on" maps to "orkgp:HAS_EVALUATION". So in our case, "evaluated on" would also map to that predicate.
+
+Putting it all together, the extracted terms are "models", "TDMSci dataset", and "evaluated on". The candidates for "models" would be the ones mentioned, like SVM, and for "TDMSci dataset", there are none. The property "evaluated on" would map to the appropriate predicate.
+
+So the JSON output would have "models" with candidates like SVM, and "TDMSci dataset" with no matches, and "evaluated on" with the HAS_EVALUATION predicate.
+
+But since the context doesn't have TDMSci, the candidates for it would be empty. So the final answer would reflect that.
+</think>
+
+```json
+{
+  "question": "What models are being evaluated on the TDMSci dataset?",
+  "extracted_terms": {
+    "models": "models",
+    "TDMSci dataset": "TDMSci dataset",
+    "evaluated on": "evaluated on"
+  },
+  "candidates": {
+    "models": [
+      {
+        "uri": "orkgr:SVM",
+        "rdfs:label": "SVM",
+        "rdf:type": "orkgc:Model"
+      }
+    ],
+    "TDMSci dataset": [],
+    "evaluated on": [
+      {
+        "uri": "orkgp:HAS_EVALUATION",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

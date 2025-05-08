@@ -1,0 +1,27 @@
+Question:
+What is the highest benchmark result achieved on the BC5CDR-chemical dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://www.openresearch.org/orkgr/>
+     PREFIX orkgc: <http://www.openresearch.org/orkgc/>
+     PREFIX orkgp: <http://www.openresearch.org/orkgp/>
+
+     SELECT?metric?value
+     WHERE {
+       ?dataset orkgc:hasBenchmarkResult?result.
+       ?result orkgp:hasMetric?metric.
+       ?result orkgp:hasValue?value.
+       ?dataset orkgc:hasDataset?dataset1.
+       ?dataset1 orkgp:hasDataset?dataset2.
+        FILTER (?dataset =?dataset2).
+       ?dataset orkgc:hasBenchmarkResult?result.
+       ?result orkgp:hasMetric?metric.
+       ?result orkgp:hasValue?value.
+       ?dataset orkgc:hasDataset?dataset3.
+       ?dataset3 orkgc:hasDataset?dataset2.
+        FILTER (?dataset =?dataset3).
+    }
+    ```sparql
+
+    The final answer is the provided SPARQL query.<|eot_id|>

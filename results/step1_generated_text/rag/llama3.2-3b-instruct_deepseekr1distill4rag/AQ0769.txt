@@ -1,0 +1,18 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the WMT2014 English-German dataset?
+
+Generated SPARQL:
+ PREFIX orkgr: <http://example.org/orkgr/>
+     PREFIX orkgp: <http://example.org/orkgp/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+     SELECT?metric?property?dataset 
+     WHERE {
+      ?metric orkgp:benchmarkingModels?property.
+      ?property orkgr:dataset?dataset.
+       FILTER (strContains(STR(?metric), "F1-score") OR strContains(STR(?metric), "precision") OR strContains(STR(?metric), "recall") OR strContains(STR(?metric), "accuracy"))
+       FILTER (strContains(STR(?dataset), "WMT2014 English-German"))
+     }
+     ORDER BY DESC(?metricScore)
+```
+    Note: The outputted SPARQL query is based on the provided input and context. The actual query may need to be adjusted based on the actual data in the ORKG RDF data dump.<|eot_id|>

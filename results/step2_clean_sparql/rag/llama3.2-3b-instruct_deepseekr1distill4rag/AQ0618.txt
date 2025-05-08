@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX orkc: <http://orkc.org/orkc/>
+PREFIX orkp: <http://orkp.org/orkp/>
+
+SELECT ?paper ?paperId 
+WHERE {
+  ?paper orkc:hasDataset ?dataset.
+  ?dataset orkc:hasDataset ?dataset2.
+  ?dataset2 orkg:label "Atari 2600 Frostbite dataset"@en.
+  ?paper orkp:hasBenchmark ?benchmark.
+  ?benchmark orkp:hasDataset ?dataset3.
+  ?dataset3 orkg:label "Atari 2600 Frostbite dataset"@en.
+  ?paper orkg:label ?paperId.
+}
+```

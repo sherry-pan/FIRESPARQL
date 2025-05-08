@@ -1,0 +1,47 @@
+Question:
+What are the metrics of evaluation over the CommitmentBank dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT?p?o 
+WHERE {
+ ?p orkgp:propertyOf?o.
+  FILTER (REGEX(STR(?o), "F1-score|accuracy", "i")).
+  BIND (STR(?p) AS?metric).
+}
+```
+    Please note that you should replace the prefixes `orkgp:` and `orkgr:` with the actual prefixes used in the ORKG RDF data dump. Also, note that the actual SPARQL query may need to be adjusted based on the specific structure of the ORKG data. 
+
+    This query is a simple example and may not cover all possible cases. The actual query may need to be more complex to handle the nuances of the ORKG data. 
+
+    The `REGEX(STR(?o), "F1-score|accuracy", "i")` part is a simple regular expression that matches the strings "F1-score" or "accuracy" in any case. This may not be sufficient to cover all possible cases, and you may need to adjust the regular expression to better match the actual data. 
+
+    Also, the `BIND (STR(?p) AS?metric)` part binds the matched predicate to the variable `?metric`. This may not be the best way to represent the metric, and you may need to adjust the binding to better match the actual data. 
+
+    In general, it's recommended to consult the documentation of the ORKG RDF data dump and the SPARQL query language to get a better understanding of how to construct a correct and efficient SPARQL query. 
+
+    In this case, I assume that the `?p` variable represents the predicate, and the `?o` variable represents the object of the predicate. The `FILTER` clause is used to filter the results based on the regular expression. 
+
+    Please note that the actual query may need to be adjusted based on the specific structure of the ORKG data. 
+
+    Also, note that the `REGEX` function is used to perform a case-insensitive regular expression match. If you want to perform a case-sensitive match, you can remove the `"i"` flag. 
+
+    Finally, note that the `BIND` function is used to bind the matched predicate to the variable `?metric`. If you want to bind the matched object to the variable `?metric`, you can replace `?p` with `?o` in the `BIND` clause. 
+
+    I hope this helps! Let me know if you have any further questions. 
+
+    Output SPARQL Query:
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT?p?o 
+WHERE {
+ ?p orkgp:propertyOf?o.
+  FILTER (REGEX(STR(?o), "F1-score|accuracy", "i")).
+  BIND (STR(?p) AS?metric).
+}
+```<|eot_id|>

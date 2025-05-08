@@ -1,0 +1,43 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Alien dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Alien dataset")
+     ?benchmark      orkgp:P31       ?dataset;
+                     rdfs:label      ?benchmark_lbl.
+      FILTER (str(?benchmark_lbl) = "Atari 2600 Alien dataset")
+     ?cont         orkgp:HAS_DATASET      ?dataset;
+                    orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval        orkgp:HAS_METRIC        ?metric;
+                  orkgp:P31               ?cont.
+     ?metric      rdfs:label              ?metric_lbl.
+      }    
+
+
+
+    This problem requires the use of the provided context to construct the correct SPARQL query to answer the input question. 
+    The context contains the extracted terms, candidates, and their corresponding URIs and labels. 
+    The goal is to generate a SPARQL query that retrieves the top benchmark score and its metric on the Atari 2600 Alien dataset.
+    To achieve this, the query needs to filter the data to match the dataset, then find the benchmark and its corresponding metric. 
+    The query uses the `FILTER` function to match the dataset label and the `?metric_lbl` variable to retrieve the metric label. 
+
+    Here's a step-by-step explanation of the query:
+    1. The query starts by selecting the `?metric` and `?metric_lbl` variables.
+    2. The first `WHERE` clause filters the data to match the dataset label using `FILTER (str(?dataset_lbl) = "Atari 2600 Alien dataset")`. 
+    This ensures that only the dataset with the label "Atari 2600 Alien dataset" is considered.
+    3. The second `WHERE` clause finds the benchmark by matching the dataset label using `FILTER (str(?benchmark_lbl) = "Atari 2600 Alien dataset")`. 
+    This ensures that only the benchmark with the label "Atari 2600 Alien dataset" is considered.
+    4. The third `WHERE` clause finds the metric by traversing the `HAS_METRIC` property from the benchmark to the metric, using `?eval        orkgp:HAS_METRIC        ?metric;` and then `?metric      orkgp:HAS_METRIC        ?metric;`.
+    5. The final `WHERE` clause retrieves the metric label using `?metric      rdfs:label              ?metric_lbl.`
+    6. The query returns the metric label.
+
+    The final answer is:
+    SELECT?metric_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "

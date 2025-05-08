@@ -1,0 +1,62 @@
+Question:
+Could you provide a list of models that have been tested on the RTE benchmark dataset?
+
+Generated SPARQL:
+ ```
+```python
+sparql_query = """
+SELECT?model
+WHERE {
+ ?model orcgp:HAS_MODEL.
+ ?model orcgp:HAS_EVALUATION.
+ ?model orcgp:HAS_DATASET?dataset.
+ ?dataset orcgp:HAS_BENCHMARK?benchmark.
+ ?benchmark rdfs:label "RTE".
+}
+"""
+print(sparql_query)
+```
+    Note that the actual output might vary based on the data in the Open Research Knowledge Graph (ORKG). The provided SPARQL query is just an example based on the given context. 
+
+    If you need to generate the SPARQL query programmatically, you can use the following Python code:
+
+    ```python
+import pandas as pd
+
+def generate_sparql_query(context):
+    question_terms = context['extracted_terms']
+    candidates = context['candidates']
+    
+    sparql_query = """
+    SELECT?model
+    WHERE {
+     ?model orcgp:HAS_MODEL.
+     ?model orcgp:HAS_EVALUATION.
+     ?model orcgp:HAS_DATASET?dataset.
+     ?dataset orcgp:HAS_BENCHMARK?benchmark.
+     ?benchmark rdfs:label "RTE".
+    }
+    """
+    
+    # Add conditions for each question term
+    for term in question_terms:
+        if'models' in candidates[term]:
+            sparql_query += "  FILTER(?model orcgp:HAS_MODEL IN ("
+            for model in candidates[term]['models']:
+                sparql_query += model['uri'] + " "
+            sparql_query = sparql_query.rstrip() + ")). "
+        elif 'evaluated on' in candidates[term]:
+            sparql_query += "  FILTER(?model orcgp:HAS_EVALUATION IN ("
+            for evaluation in candidates[term]['evaluated on']:
+                sparql_query += evaluation['uri'] + " "
+            sparql_query = sparql_query.rstrip() + ")). "
+        elif 'tested on' in candidates[term]:
+            sparql_query += "  FILTER(?model orcgp:HAS_EVALUATION IN ("
+            for evaluation in candidates[term]['tested on']:
+                sparql_query += evaluation['uri'] + " "
+            sparql_query = sparql_query.rstrip() + ")). "
+        elif 'RTE benchmark dataset' in candidates[term]:
+            sparql_query += " ?dataset orcgp:HAS_BENCHMARK?benchmark. "
+            sparql_query += " ?benchmark rdfs:label " + term + ". "
+    
+

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?title ?id WHERE {
+  ?paper a ora:ResearchPaper.
+  ?paper ora:includes_benchmark ?benchmark.
+  ?benchmark ora:includes_dataset ?dataset.
+  ?dataset a ora:Dataset;
+           ora:label ?datasetLabel.
+  ?paper ora:uri ?id;
+         rdfs:label ?title.
+  FILTER (str(?datasetLabel) = "BUCC German-to-English dataset").
+}
+```

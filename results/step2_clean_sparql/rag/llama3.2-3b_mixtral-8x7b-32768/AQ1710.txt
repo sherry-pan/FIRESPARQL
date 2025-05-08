@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://orkgp.org/schema/orkgp#>
+PREFIX orkgr: <http://orkgr.org/schema/orkgr#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model_model orkgp:HAS_MODEL ?model.
+  ?model_model orkgr:HAS_BENCHMARK orkgr:R131168.
+  ?model_model orkgr:HAS_DATASET orkgr:R131168.
+  ?model_model orkgp:HAS_METRIC ?score_metric.
+  ?score_metric rdfs:label ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

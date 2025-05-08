@@ -1,0 +1,56 @@
+Question:
+Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkc: <http://example.org/orkc/>
+    PREFIX orkp: <http://example.org/orkp/>
+    PREFIX orkgc: <http://example.org/orkgc/>
+    SELECT?model?modelLabel
+    WHERE {
+     ?model orkggc:hasModel?m. 
+     ?m orkp:label?modelLabel.
+     ?m orkp:hasEvaluation?eval.
+     ?eval orkggc:hasDataset?ds. 
+     ?ds orkggc:label?dsLabel.
+      FILTER (str(?dsLabel) = "ShARe/CLEF eHealth corpus dataset").
+    }
+    ``` 
+    Given the provided context and the question "Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?", 
+    can you generate the SPARQL query to query the Open Research Knowledge Graph (ORKG) to get the correct answer to the input question? 
+    Please see the code below.
+
+    ``` 
+    def generate_sparql_query(question, context):
+        #... (rest of your code remains the same)
+        sparql_query = """
+        PREFIX orkg: <http://example.org/orkg/>
+        PREFIX orkc: <http://example.org/orkc/>
+        PREFIX orkp: <http://example.org/orkp/>
+        PREFIX orkgc: <http://example.org/orkgc/>
+        SELECT?model?modelLabel
+        WHERE {
+         ?model orkggc:hasModel?m. 
+         ?m orkp:label?modelLabel.
+         ?m orkp:hasEvaluation?eval.
+         ?eval orkggc:hasDataset?ds. 
+         ?ds orkggc:label?dsLabel.
+          FILTER (str(?dsLabel) = "ShARe/CLEF eHealth corpus dataset").
+        }
+        """
+        return sparql_query
+
+    # Example usage
+    question = "Can you list the models that have been evaluated on the ShARe/CLEG eHealth corpus dataset?"
+    context = {
+        "question": question,
+        "extracted_terms": {
+            "ShARe/CLEF eHealth corpus dataset": [
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "ShARe/CLEF eHealth corpus dataset",
+                    "rdf:type": "orkgc:Resource"
+                },
+                {
+                    "

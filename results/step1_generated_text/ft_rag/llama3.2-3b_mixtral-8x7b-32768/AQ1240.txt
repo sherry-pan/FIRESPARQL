@@ -1,0 +1,47 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset Oxford-IIIT Pets?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+     orkgp:R1 orkgp:r15115
+     orkgp:HAS\_BEST\_RESULT
+    ?best\_result.
+    ?best\_result orkgp:HAS\_METRIC
+    ?metric.
+    ?metric orkgp:HAS\_VALUE
+    ?value.
+     FILTER(REGEX(
+    ?value, "Oxford-IIIT Pets",
+     "i"))
+     }
+    Note: The above SPARQL query is just a sample query and may need to be adjusted based on the actual data in the ORKG.
+    ```python
+import pandas as pd
+
+# Load the data from the ORKG
+df = pd.read_csv("orkgr://R122690")
+
+# Filter the data to only include rows where the value contains "Oxford-IIIT Pets"
+df_filtered = df[df['value'].str.contains("Oxford-IIIT Pets")]
+
+# Calculate the top benchmark result
+top_result = df_filtered.loc[df_filtered['metric'].idxmax()]
+
+# Print the top benchmark result
+print(top_result)
+```
+
+    The code provided is a Python script that loads data from the ORKG, filters it to include only rows where the value contains "Oxford-IIIT Pets", and then calculates the top benchmark result by finding the row with the maximum value. The script then prints the top benchmark result. 
+
+    The ORKG is a semantic knowledge graph designed to represent, compare, and retrieve scholarly contributions. It provides a standardized way of annotating and comparing datasets, and it includes a wide range of datasets and metrics. The script is designed to work with the ORKG, and it uses the `orkgr://R122690` notation to specify the dataset.
+
+    The code can be used to analyze the top benchmark result for the dataset "Oxford-IIIT Pets". The script can be modified to work with different datasets and metrics by changing the `orkgr://R122690` notation and the filtering criteria. 
+
+    The script assumes that the data is stored in a CSV file, and it uses the `pandas` library to read and manipulate the data. The script also uses the `REGEX` filter to match the value containing "Oxford-IIIT Pets". 
+
+    The script prints the top benchmark result, which includes the metric and value. The result can be used for further analysis or visualization. 
+
+    The script is a simple example of how to use the ORKG to analyze the top benchmark result for a dataset. It can be modified and extended to work with different datasets and metrics. 
+
+    The script assumes that the data is stored in a CSV file, and it

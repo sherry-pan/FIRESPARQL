@@ -1,0 +1,27 @@
+Question:
+Can you list the metrics used to evaluate models on the Barabasi-Albert dataset?
+
+Generated SPARQL:
+ SELECT?metric
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Barabasi-Albert")
+         ?benchmark      orkgp:HAS_DATASET      ?dataset.
+         ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+         ?cont          a                  orkgc:Container;
+                         rdfs:label          ?cont_lbl.
+          FILTER (str(?cont_lbl) = "Barabasi-Albert")
+         ?eval         orkgp:EVALUATED_ON     ?benchmark      ?cont.
+         ?metric       orkgp:HAS_METRIC       ?eval.
+         ?metric       rdfs:label              ?metric_lbl.
+          FILTER (str(?metric_lbl) = "metrics")
+      }
+      ORDER BY DESC(?metric_lbl)
+      LIMIT 1
+    END
+    {
+      "answer": "SELECT?metric\nWHERE {\n ?dataset       a                orkgc:Dataset;\n                      rdfs:label      ?dataset_lbl.\n          FILTER (str(?dataset_lbl) = \"Barabasi-Albert\")\n        ?benchmark      orkgp:HAS_DATASET      ?dataset.\n        ?cont          orkgp:HAS_BENCHMARK     ?benchmark.\n        ?cont          a                  orkgc:Container;\n                        rdfs:label          ?cont_lbl.\n         FILTER (str(?cont_lbl) = \"Barabasi-Albert\")\n        ?eval         orkgp:EVALUATED_ON     ?benchmark      ?cont.\n        ?metric       orkgp:HAS_METRIC       ?eval.\n        ?metric       rdfs:label              ?metric_lbl.\n         FILTER (str(?metric_lbl) = \"metrics\")\n      }\n      ORDER BY DESC(?metric_lbl)\n      LIMIT 1"
+    }  
+    {
+      "answer": "SELECT?metric\nWHERE {\n ?dataset       a                orkgc:Dataset;\n                      rdfs:label      ?dataset_lbl.\n          FILTER (str(?dataset_lbl) = \"Barabasi-Albert\")\n        ?benchmark      orkgp:HAS_DATASET      ?dataset.\n        ?cont          orkgp:HAS_BENCHMARK     ?benchmark.\n        ?cont          a                  orkgc:Container;\n                        rdfs:label          ?cont_lbl.\n         FILTER (str(?cont_lbl) = \"Barabasi-Albert\")\n        ?eval         orkgp:EVALUATED_ON     ?benchmark      ?cont.\

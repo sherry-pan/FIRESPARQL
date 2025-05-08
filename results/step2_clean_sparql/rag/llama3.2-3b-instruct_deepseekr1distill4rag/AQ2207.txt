@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/class/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/resource/>
+
+SELECT ?uri ?link ?score ?type ?typeLabel
+WHERE {
+  ?uri orkgp:url ?link.
+  ?uri orkgp:hasBenchmark ?benchmark.
+  ?benchmark orkgp:evaluatedOn ?evaluation.
+  ?evaluation orkgp:hasValue ?evaluationValue.
+  BIND(STR(?evaluationValue) AS ?score).
+  BIND(orkgc:Journal_Article AS ?type).
+  BIND("Journal Article" AS ?typeLabel).
+  FILTER(?evaluationValue > 0).
+}
+```

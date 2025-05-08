@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+SELECT ?metric ?value
+WHERE {
+  ?s orkgr:R122690 orkgp:HAS_DATASET ?d.
+  ?d orkgp:HAS_BENCHMARK_RESULT ?r.
+  ?r orkgp:HAS_TOP_RESULT ?tr.
+  ?tr orkgp:HAS_METRIC ?metric.
+  ?tr orkgp:HAS_VALUE ?value.
+  FILTER (?metric = "F1"^^<http://www.w3.org/2001/XMLSchema#string>)
+  FILTER (?value = 0.99)
+}
+```

@@ -1,0 +1,40 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the OntoNotes benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "OntoNotes")
+          ?benchmark      orkgp:HAS_BENCHMARK     ?dataset;
+                           orkgp:HAS_DATASET        ?dataset.
+          ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+          ?model       orkgp:HAS_MODEL         ?cont.
+          ?model      rdfs:label              ?model_lbl.
+     }  
+
+    Note: The model label is the value of the model's label property, which is assumed to be the correct answer. The model label is obtained by binding the model variable to its corresponding label property. In this query,?model_lbl is used to represent the model label.
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "OntoNotes")
+     ?benchmark      orkgp:HAS_BENCHMARK     ?dataset;
+                    orkgp:HAS_DATASET        ?dataset.
+     ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?model       orkgp:HAS_MODEL         ?cont.
+     ?model      rdfs:label              ?model_lbl.
+    }
+    The final answer to the user's question is the value of?model_lbl. The value of?model_lbl is the model that performed best on the OntoNotes dataset. 
+
+    This SPARQL query uses the following predicates:
+    - orkgp:HAS_MODEL
+    - orkgp:HAS_BENCHMARK
+    - orkgp:HAS_DATASET
+    - rdfs:label
+    The query first filters the datasets to only include the OntoNotes dataset. It then queries for the benchmarks that have the OntoNotes dataset. For each of these benchmarks, it queries for the models that have been benchmarked. For each of these models, it queries for the model's label. The final answer is the value of the model label. 
+
+    This SPARQL query can be executed using a SPARQL query engine to retrieve the correct answer. 
+
+

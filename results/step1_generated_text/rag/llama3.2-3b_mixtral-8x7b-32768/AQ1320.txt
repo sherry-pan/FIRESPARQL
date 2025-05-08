@@ -1,0 +1,50 @@
+Question:
+What is the highest benchmark result achieved on the Amazon-2 dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkgr.org/ontology/>
+    PREFIX orkgc: <http://orkgc.org/ontology/>
+    PREFIX orkgp: <http://orkgp.org/ontology/>
+
+    SELECT?metric?value
+    WHERE {
+       ?r orkgc:isDataset "Amazon-2".
+       ?r orkgp:HAS_DATASET?dataset.
+       ?dataset orkgp:HAS_BENCHMARK_RESULT?br.
+       ?br orkgp:HAS_METRIC?metric.
+       ?br orkgp:HAS_VALUE?value.
+       ?br orkgp:hasResult "max".
+       ?metric a orkgp:Metric.
+       ?value a orkgp:Value.
+        FILTER (?br orkgc:isBenchmarkResult)
+    }
+    ```
+
+
+
+## Step 1: Define the prefixes for the ORKG ontologies.
+We start by defining the prefixes for the three ORKG ontologies: orkg, orkgc, and orkgp. These prefixes will be used to construct the SPARQL query.
+
+## Step 2: Select the variables for the query.
+We select the variables?metric and?value to store the metric and value of the highest benchmark result.
+
+## Step 3: Filter the dataset to find the Amazon-2 dataset.
+We filter the dataset to find the Amazon-2 dataset using the predicate orkgc:isDataset.
+
+## Step 4: Get the benchmark result for the Amazon-2 dataset.
+We get the benchmark result for the Amazon-2 dataset using the predicate orkgp:HAS_DATASET.
+
+## Step 5: Filter the benchmark result to find the highest benchmark result.
+We filter the benchmark result to find the highest benchmark result using the predicate orkgp:hasResult with the value "max".
+
+## Step 6: Get the metric and value of the highest benchmark result.
+We get the metric and value of the highest benchmark result using the predicates orkgp:HAS_METRIC and orkgp:HAS_VALUE.
+
+## Step 7: Filter the metric and value to ensure they are instances of orkgp:Metric and orkgp:Value.
+We filter the metric and value to ensure they are instances of orkgp:Metric and orkgp:Value.
+
+## Step 8: Filter the results to ensure they are benchmark results.
+We filter the results to ensure they are benchmark results using the predicate orkgc:isBenchmarkResult.
+
+The final answer is: ```spar

@@ -1,0 +1,27 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the TempEval-3 dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?paper?paper_lbl
+WHERE {
+  orkgp:HAS_DATASET       a            orkgc:Resource;
+                        rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TempEval-3")
+ ?dataset orkgp:P31               orkgp:HAS_DATASET;
+            orkgp:HAS_DATASET      ?paper.
+ ?paper orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK      ?benchmark.
+  OPTIONAL {
+   ?benchmark rdfs:label          ?benchmark_lbl.
+   ?paper orkgp:HAS_TITLE         orkgp:HAS_TITLE          ?title.
+   ?title rdfs:label              ?paper_lbl.
+  }
+}
+```     END sparql
+
+
+    To generate the SPARQL query, the system should use the following steps:
+    1.  **Parse the input question**: The system should parse the input question to extract the entities and properties mentioned in the question. In this case, the entities are "TempEval-3 dataset", "research papers", "titles", "IDs", and "benchmark". The properties are "benchmark", "HAS_DATASET", "HAS_PAPER", "HAS_TITLE", and "HAS_ID".
+    2.  **Link the entities and properties to the ORKG**: The system should use the provided context to link the extracted entities and properties to the correct entities and properties in the ORKG. In this case, the system should link "TempEval-3 dataset" to "orkgr:R122690", "research papers" to "orkgp:HAS_PAPER", "titles" to "orkgp:HAS_TITLE", "IDs" to "orkgp:HAS_ID", and "benchmark" to "orkgp:HAS_BENCHMARK".
+    3.  **Construct the SPARQL query**: The system should use the linked entities and properties to construct the SPARQL query. The query should filter the dataset labeled "TempEval-3", then iterate over the papers that have a benchmark, and for each paper, get the title and ID.
+    4.  **Refine the query using the OPTIONAL clause**: The system should use the OPTIONAL clause to refine the query by only getting the title and ID of papers that have a benchmark. If

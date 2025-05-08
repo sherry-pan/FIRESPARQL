@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metricLabel WHERE {
+  ?dataset a orkgc:Dataset;
+           orkgr:R122689;
+           orkgp:HAS_DATASET ?m.
+  ?dataset orkgc:hasModel ?model.
+  ?model orkgp:HAS_MODEL ?m.
+  ?m orkgp:HAS_EVALUATION_METRIC ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (?metricLabel IN ("Poisson NLL", "Accuracy", "F1 score"))
+  FILTER (EXISTS {
+    ?m rdfs:label ?modelLabel.
+    FILTER (?modelLabel IN ("DQN", "Policy Gradient"))
+  })
+}
+```

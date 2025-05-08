@@ -1,0 +1,13 @@
+```sparql
+SELECT ?title ?id WHERE {
+    ?paper orkgp:HAS_PUBLICATION ?pub .
+    ?paper orkgp:HAS_CONTRIBUTION ?contribution .
+    ?contribution orkgp:CONTAINS ?benchmark .
+    ?benchmark orkgp:HAS_DATASET ?dataset .
+    ?dataset orkgr:RMatch "DBpedia" .
+    ?paper orkgp:HAS_ID ?id .
+    ?paper orkgp:HAS_TITLE ?title .
+}
+FILTER (REGEX(STR(?title), ".*DBpedia.*"))
+FILTER (REGEX(STR(?id), ".*\\d+.*"))
+```

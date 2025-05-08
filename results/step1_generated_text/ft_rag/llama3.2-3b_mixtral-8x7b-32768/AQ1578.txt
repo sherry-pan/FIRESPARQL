@@ -1,0 +1,51 @@
+Question:
+What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?evaluator_value) AS?metric)
+     WHERE {
+    ?dataset       a                orkgc:Dataset;
+     rdfs:label      ?dataset_lbl.
+     FILTER(REGEX(STR(?dataset_lbl), "X-Sum", "i"))
+    ?benchmark      orkgp:HAS_DATASET      ?dataset;
+    ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+    ?eval          orkgp:HAS_EVALUATION_METRIC?eval.
+    ?eval          rdfs:label              ?eval_lbl.
+    ?eval          orkgp:HAS_VALUE          ?eval_value;
+    ?value         rdfs:label              ?value_lbl.
+    ?eval_value    rdfs:label              ?eval_lbl.
+    ?cont          orkgp:HAS_MODEL         ?model;
+    ?model         rdfs:label              ?model_lbl.
+    ?cont          orkgp:P31               ?cont_lbl.
+     FILTER(REGEX(STR(?cont_lbl), "best performing", "i"))
+     }
+     ORDER BY DESC(?metric)
+     LIMIT 1
+    SELECT?model?model_lbl (MAX(?evaluator_value) AS?metric)
+    WHERE {
+   ?dataset       a                orkgc:Dataset;
+    rdfs:label      ?dataset_lbl.
+    FILTER(REGEX(STR(?dataset_lbl), "X-Sum", "i"))
+   ?benchmark      orkgp:HAS_DATASET      ?dataset;
+   ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+   ?eval          orkgp:HAS_EVALUATION_METRIC?eval.
+   ?eval          rdfs:label              ?eval_lbl.
+   ?eval          orkgp:HAS_VALUE          ?eval_value;
+   ?value         rdfs:label              ?value_lbl.
+   ?eval_value    rdfs:label              ?eval_lbl.
+   ?cont          orkgp:HAS_MODEL         ?model;
+   ?model         rdfs:label              ?model_lbl.
+   ?cont          orkgp:P31               ?cont_lbl.
+    FILTER(REGEX(STR(?cont_lbl), "best performing", "i"))
+    }
+    ORDER BY DESC(?metric)
+    LIMIT 1
+    UNION
+    SELECT?model?model_lbl (MAX(?evaluator_value) AS?metric)
+    WHERE {
+   ?dataset       a                orkgc:Dataset;
+    rdfs:label      ?dataset_lbl.
+    FILTER(REGEX(STR(?dataset_lbl), "X-Sum", "i"))
+   ?benchmark      orkgp:HAS_DATASET      ?dataset;
+   ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+   ?eval          orkgp:HAS_EVALUATION_METRIC?eval

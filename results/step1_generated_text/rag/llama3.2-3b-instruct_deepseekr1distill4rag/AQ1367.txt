@@ -1,0 +1,24 @@
+Question:
+What is the highest benchmark result achieved on the REDDIT-B dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?metric?value
+WHERE {
+ ?dataset a orkgc:Resource.
+ ?dataset orkgr:REDDIT_B_dataset.
+ ?dataset orkgp:HAS_BENCHMARK_RESULT?result.
+ ?result orkgp:HAS_VALUE?value.
+ ?result orkgp:HAS_METRIC?metric.
+  FILTER (STR(?metric) = "F1-score" OR STR(?metric) = "accuracy")
+  FILTER (STR(?value) = "93.9")
+}
+``` 
+    Note: The SPARQL query is a simplified version and might not be the most efficient or optimal query. It is based on the provided context and input question. The actual query may need to be adjusted based on the actual RDF data and the specific requirements of the application. 
+
+    The SPARQL query is designed to find the highest benchmark result for the REDDIT-B dataset, including the metric and its value. It filters the results to only include benchmark results with F1-score or accuracy as the metric and a value of 93.9. The query uses the `orkgp:HAS_BENCHMARK_RESULT` and `orkgp:HAS_VALUE` properties to link the dataset to the benchmark result, and the `orkgp:HAS_METRIC` property to link the benchmark result to the metric. The `FILTER` clauses are used to narrow down the results based on the extracted terms and the context. 
+
+    Please note that the actual RDF data and the specific requirements of the application may require adjustments to the query.<|eot_id|>

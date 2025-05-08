@@ -1,0 +1,15 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the NYT24 dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?title?id WHERE {
+ ?paper a ora:ResearchPaper.
+ ?paper ora:hasBenchmark?benchmark.
+ ?benchmark ora:hasDataset?dataset.
+ ?dataset ora:label "NYT24 dataset"@en.
+ ?paper ora:label?title.
+ ?paper ora:id?id.
+  FILTER (STR(?dataset) = "NYT24 dataset")
+}
+```    Note: The SPARQL query uses the prefixes defined in the RDF data, which are not explicitly mentioned in the provided context. These prefixes are assumed to be defined elsewhere in the RDF data or the context. The `ora` prefix is used for the `ResearchPaper` and `hasBenchmark` predicates, while the `orkgp` prefix is used for the `Predicate` and `hasDataset` predicates. The `orkgr` prefix is used for the `Resource` and `id` properties. The `NYT24 dataset` label is used to filter the results to only include papers that have a benchmark over the NYT24 dataset.<|eot_id|>

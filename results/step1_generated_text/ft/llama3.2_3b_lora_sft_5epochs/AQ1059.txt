@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the MAZEA dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R155830 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P43130?eval.
+        ?eval orkgp:HAS_DATASET?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "MAZEA"))
+        ?contrib orkgp:P43131?metric.
+        ?metric rdfs:label?metric_lbl.
+         BIND(xsd:int(?value) AS?value)
+     }<|eot_id|>

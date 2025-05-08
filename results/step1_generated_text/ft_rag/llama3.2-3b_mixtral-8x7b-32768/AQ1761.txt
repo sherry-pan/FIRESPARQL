@@ -1,0 +1,30 @@
+Question:
+Indicate the model that performed best in terms of Accuracy metric on the Amazon benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+         orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+         FILTER(REGEX(STR(?dataset), "Amazon"))
+        ?dataset orkgp:HAS_MODEL?model.
+        ?model orkgp:MODEL_PERFORMANCE?metric.
+         FILTER(REGEX(STR(?metric), "Accuracy"))
+        ?metric orkgp:METRIC?metric_lbl.
+        ?metric_lbl rdfs:label?model_lbl.
+        ?model orkgp:MODEL_EVALUATION orkgp:MODEL_EVALUATION?eval.
+        ?eval orkgp:HAS_VALUE orkgp:HAS_VALUE?value.
+        ?value orkgp:HAS_METRIC orkgp:HAS_METRIC?cont.
+        ?cont orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+         FILTER(REGEX(STR(?dataset), "Amazon"))
+        ?cont orkgp:P32 orkgp:P32?cont_lbl.
+        ?cont_lbl rdfs:label?model_lbl.
+        ?model orkgp:MODEL_EVALUATION orkgp:MODEL_EVALUATION?eval.
+        ?eval orkgp:HAS_VALUE orkgp:HAS_VALUE?value.
+        ?value orkgp:HAS_METRIC orkgp:HAS_METRIC?cont.
+         FILTER(REGEX(STR(?cont), "Model performance"))
+        ?cont orkgp:P31 orkgp:P31?cont_lbl.
+        ?cont_lbl rdfs:label?model_lbl.
+         }
+     ORDER BY DESC(?metric_lbl)
+     LIMIT 1
+    ](https://www.w3.org/2001/03/02/rdf-syntax-ns#equivalent)    [https://www.w3.org/2000/01/rdf-schema#label]    [https://www.w3.org/2000/01/rdf-schema#equivalent]    [https://www.w3.org/2001/03/02/rdf-syntax-ns#equivalent)    [https://www.w3.org/2001/03/02/rdf-syntax-ns#type

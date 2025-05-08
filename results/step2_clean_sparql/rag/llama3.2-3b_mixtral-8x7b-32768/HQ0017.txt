@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgp: <http://example.org/orkgp/>
+SELECT ?location
+WHERE {
+  ?location a orkg:Location.
+  ?location orkp:has_study ?study.
+  ?study orkp:has_contribution ?contribution.
+  ?contribution orkgp:has_location ?location.
+}
+GROUP BY ?location
+ORDER BY DESC(COUNT(?contribution))
+LIMIT 1
+```

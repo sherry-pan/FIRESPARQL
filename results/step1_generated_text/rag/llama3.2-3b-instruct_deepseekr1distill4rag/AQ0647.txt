@@ -1,0 +1,20 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WOS-46985 dataset?
+
+Generated SPARQL:
+ ```
+SELECT?paper?title?id
+WHERE {
+ ?paper a ora:ResearchPaper.
+ ?paper wosid :WOS-46985.
+ ?paper ora:hasTitle?title.
+ ?paper ora:hasID?id.
+ ?benchmark ora:hasProperty?property.
+ ?benchmark ora:hasValue?value.
+ ?property ora:hasTarget?target.
+ ?target ora:hasLabel?label.
+  FILTER (STRLIKE(?label, "benchmark") || STRLIKE(?label, "performance"))
+  BIND (CONCAT(?paper, " ",?title) AS?title)
+  BIND (CONCAT(?paper, " ",?id) AS?id)
+}
+```    END OF OUTPUT.<|eot_id|>

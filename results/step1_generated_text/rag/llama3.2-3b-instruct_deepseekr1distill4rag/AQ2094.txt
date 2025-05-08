@@ -1,0 +1,25 @@
+Question:
+List the code links in papers that use the OTF spelling+lemma (single) model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkd: <http://example.org/orkd/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkhp: <http://example.org/orkhp/>
+PREFIX orkhp1: <http://example.org/orkhp1/>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper orkgc:usesModel orkgr:OTF_spelling_lemma_single_model.
+ ?paper orkgc:hasCodeLink?code_link.
+ ?code_link orkhp:isBenchmark?benchmark.
+ ?benchmark orkhp:hasDataset?dataset.
+  FILTER (STR(?paper) = "R284317" OR STR(?dataset) = "MNIST")
+}
+```    Note: The actual URIs used in the SPARQL query should be replaced with the actual URIs present in the RDF data. The example provided here is just a placeholder.<|eot_id|>

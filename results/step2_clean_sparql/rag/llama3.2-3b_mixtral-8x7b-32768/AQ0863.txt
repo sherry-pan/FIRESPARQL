@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?evaluationMetric ?benchmarkModel ?dataset
+WHERE {
+  ?evaluationMetric a orkgp:Resource.
+  ?evaluationMetric orkgp:HAS_METRIC ?metricValue.
+  ?benchmarkModel a orkgp:Resource.
+  ?benchmarkModel orkgp:HAS_MODEL ?modelValue.
+  ?dataset a orkgr:Dataset.
+  ?dataset orkgp:HAS_DATASET ?datasetValue.
+  FILTER (
+    str.contains(str(?metricValue), "Accuracy") ||
+    str.contains(str(?metricValue), "F1 Score") ||
+    str.contains(str(?metricValue), "Precision") ||
+    str.contains(str(?metricValue), "Recall") ||
+    str.contains(str(?metricValue), "AUC-ROC")
+  )
+}
+```

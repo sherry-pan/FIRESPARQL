@@ -1,0 +1,1610 @@
+id,question,query,status,message,gt_message
+AQ1689,What is the best performing model benchmarking the Atari 2600 Seaquest dataset in terms of Score metric?,"SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric     a       orkgc:Metric;
+              rdfs:label  ?metric_lbl.
+  FILTER (str(?metric_lbl) = ""Score"")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""Atari 2600 Seaquest"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value;
+                      orkgp:HAS_METRIC         ?metric.
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark;
+                    orkgp:HAS_MODEL          ?model.
+      ?model      rdfs:label               ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}",SUCCESS,"?model	?model_lbl
+<http://orkg.org/orkg/resource/R124922>	""Prior+Duel noop""^^<http://www.w3.org/2001/XMLSchema#string>
+","?model	?model_lbl
+<http://orkg.org/orkg/resource/R124922>	""Prior+Duel noop""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0816,List the metrics that are used to evaluate models on the Rotowire (Content Selection) benchmark dataset?,"SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Rotowire (Content Selection)"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+           ?metric          rdfs:label               ?metric_lbl.}
+}",SUCCESS,"?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R116363>	""Precision""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116364>	""Recall""^^<http://www.w3.org/2001/XMLSchema#string>
+","?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R116363>	""Precision""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116364>	""Recall""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1860,Provide a list of benchmarked datasets related to the Reading Comprehension research area?,"SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?problem       a                orkgc:Problem;
+                 rdfs:label       ?problem_lbl.  
+  FILTER (str(?problem_lbl) = ""Reading Comprehension"")
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark;
+                  orkgp:P32                ?problem.
+}",SUCCESS,"?dataset	?dataset_lbl
+<http://orkg.org/orkg/resource/R114616>	""IMDb""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116370>	""Amazon-5""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116787>	""AG News""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R119130>	""RACE""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R120850>	""WNLI""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R122670>	""Yelp Fine-grained classification""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R122706>	""Yelp Binary classification""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123632>	""ClueWeb09-B""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125894>	""Amazon-2""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125897>	""DBpedia""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125913>	""Yelp-2""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125919>	""Yelp-5""^^<http://www.w3.org/2001/XMLSchema#string>
+","?dataset	?dataset_lbl
+<http://orkg.org/orkg/resource/R114616>	""IMDb""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116370>	""Amazon-5""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116787>	""AG News""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R119130>	""RACE""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R120850>	""WNLI""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R122670>	""Yelp Fine-grained classification""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R122706>	""Yelp Binary classification""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123632>	""ClueWeb09-B""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125894>	""Amazon-2""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125897>	""DBpedia""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125913>	""Yelp-2""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R125919>	""Yelp-5""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ2246,Provide a list of papers that have utilized the SAC model and include the links to their code?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""SAC"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/ac-93/soft-actor-critic""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/cindycia/Atari-SAC-Discrete""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ku2482/rljax""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ku2482/rltorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ku2482/sac-discrete.pytorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ToolManChang/DRLseminar_code_challenge""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/ac-93/soft-actor-critic""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/cindycia/Atari-SAC-Discrete""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ku2482/rljax""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ku2482/rltorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ku2482/sac-discrete.pytorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ToolManChang/DRLseminar_code_challenge""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0525,Provide a list of research paper titles and IDs that have benchmarked models on the NCBI-disease dataset?,"SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""NCBI-disease"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129411>	""SciBERT: A Pretrained Language Model for Scientific Text""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129411>	""SciBERT: A Pretrained Language Model for Scientific Text""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ2008,List the code links in papers that use the DocRED-BiLSTM model in any benchmark?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""DocRED-BiLSTM"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code_link
+""https://github.com/thunlp/DocRED""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/thunlp/DocRED""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0547,"What are the titles and IDs of research papers that include a benchmark for the Walker, walk (DMControl500k) dataset?","SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Walker, walk (DMControl500k)"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R131170>	""CURL: Contrastive Unsupervised Representations for Reinforcement Learning""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R131170>	""CURL: Contrastive Unsupervised Representations for Reinforcement Learning""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0443,Provide a list of research paper titles and IDs that have benchmarked models on the UCF101 (finetuned) dataset?,"SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""UCF101 (finetuned)"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129958>	""Self-Supervised MultiModal Versatile Networks""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R129977>	""Self-Supervised Learning by Cross-Modal Audio-Video Clustering""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R130082>	""Audio-Visual Instance Discrimination with Cross-Modal Agreement""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R130118>	""Cooperative Learning of Audio and Video Models from Self-Supervised Synchronization""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129958>	""Self-Supervised MultiModal Versatile Networks""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R129977>	""Self-Supervised Learning by Cross-Modal Audio-Video Clustering""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R130082>	""Audio-Visual Instance Discrimination with Cross-Modal Agreement""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R130118>	""Cooperative Learning of Audio and Video Models from Self-Supervised Synchronization""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ2164,Can you provide links to code used in papers that benchmark the AWD-LSTM model?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""AWD-LSTM"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/ahmetumutdurmus/awd-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/alexandra-chron/ntua-slp-wassa-iest2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/alexandra-chron/wassa-2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ari-holtzman/genlm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/arvieFrydenlund/awd-lstm-lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Asteur/RERITES-AvgWeightDescentLSTM-PoetryGeneration""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/AtheMathmo/AggMo""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/AtheMathmo/lookahead-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BenjiKCF/AWD-LSTM-sentiment-classifier""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/castorini/Castor""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/castorini/hedwig""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chris-tng/semi-supervised-nlp""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/cstorm125/thai2fit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/dmlc/gluon-nlp""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/google-research/google-research/tree/master/enas_lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Han-JD/GRU-D""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/idiap/drill""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/iwangjian/ByteCup2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Janus-Shiau/awd-lstm-tensorflow""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/JessikaSmith/language_model""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/jhave/RERITES-AvgWeightDescentLSTM-PoetryGeneration""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/jkkummerfeld/emnlp20lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/liuruoruo/awd-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/llppff/ptb-lstmorqrnn-pytorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Machine-Learning-Tokyo/Poetry-GAN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/mamamot/Russian-ULMFit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/muellerzr/CodeFest_2019""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NightmareVoid/LSTM_for_EEG""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/nkcr/overlap-ml""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Noahs-ARK/groc""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/noise-field/Russian-ULMFit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/philippwirth/awd-lstm-test""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/philippwirth/treelangrnn""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/prajjwal1/language-modelling""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/rajs96/ULMFiT-Twitter-US-Airline-Sentiment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/S-Abdelnabi/awt""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/SachinIchake/KALM""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/salesforce/awd-lstm-lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/soyoung97/awd-lstm-gru""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/tdmeeste/SparseSeqModels""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/uchange/ulangel""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/uclanlp/NamedEntityLanguageModel""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/varshinireddyt/ULMFiT""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/vganesh46/awd-lstm-pytorch-implementation""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ahmetumutdurmus/awd-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/alexandra-chron/ntua-slp-wassa-iest2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/alexandra-chron/wassa-2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ari-holtzman/genlm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/arvieFrydenlund/awd-lstm-lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Asteur/RERITES-AvgWeightDescentLSTM-PoetryGeneration""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/AtheMathmo/AggMo""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/AtheMathmo/lookahead-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BenjiKCF/AWD-LSTM-sentiment-classifier""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/castorini/Castor""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/castorini/hedwig""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chris-tng/semi-supervised-nlp""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/cstorm125/thai2fit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/dmlc/gluon-nlp""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/google-research/google-research/tree/master/enas_lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Han-JD/GRU-D""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/idiap/drill""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/iwangjian/ByteCup2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Janus-Shiau/awd-lstm-tensorflow""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/JessikaSmith/language_model""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/jhave/RERITES-AvgWeightDescentLSTM-PoetryGeneration""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/jkkummerfeld/emnlp20lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/liuruoruo/awd-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/llppff/ptb-lstmorqrnn-pytorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Machine-Learning-Tokyo/Poetry-GAN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/mamamot/Russian-ULMFit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/muellerzr/CodeFest_2019""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NightmareVoid/LSTM_for_EEG""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/nkcr/overlap-ml""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Noahs-ARK/groc""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/noise-field/Russian-ULMFit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/philippwirth/awd-lstm-test""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/philippwirth/treelangrnn""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/prajjwal1/language-modelling""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/rajs96/ULMFiT-Twitter-US-Airline-Sentiment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/S-Abdelnabi/awt""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/SachinIchake/KALM""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/salesforce/awd-lstm-lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/soyoung97/awd-lstm-gru""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/tdmeeste/SparseSeqModels""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/uchange/ulangel""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/uclanlp/NamedEntityLanguageModel""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/varshinireddyt/ULMFiT""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/vganesh46/awd-lstm-pytorch-implementation""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/ahmetumutdurmus/awd-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/alexandra-chron/ntua-slp-wassa-iest2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/alexandra-chron/wassa-2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/ari-holtzman/genlm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/arvieFrydenlund/awd-lstm-lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Asteur/RERITES-AvgWeightDescentLSTM-PoetryGeneration""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/AtheMathmo/AggMo""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/AtheMathmo/lookahead-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BenjiKCF/AWD-LSTM-sentiment-classifier""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/castorini/Castor""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/castorini/hedwig""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chris-tng/semi-supervised-nlp""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/cstorm125/thai2fit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/dmlc/gluon-nlp""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/google-research/google-research/tree/master/enas_lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Han-JD/GRU-D""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/idiap/drill""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/iwangjian/ByteCup2018""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Janus-Shiau/awd-lstm-tensorflow""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/JessikaSmith/language_model""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/jhave/RERITES-AvgWeightDescentLSTM-PoetryGeneration""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/jkkummerfeld/emnlp20lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/liuruoruo/awd-lstm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/llppff/ptb-lstmorqrnn-pytorch""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Machine-Learning-Tokyo/Poetry-GAN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/mamamot/Russian-ULMFit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/muellerzr/CodeFest_2019""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NightmareVoid/LSTM_for_EEG""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/nkcr/overlap-ml""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Noahs-ARK/groc""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/noise-field/Russian-ULMFit""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/philippwirth/awd-lstm-test""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/philippwirth/treelangrnn""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/prajjwal1/language-modelling""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/rajs96/ULMFiT-Twitter-US-Airline-Sentiment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/S-Abdelnabi/awt""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/SachinIchake/KALM""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/salesforce/awd-lstm-lm""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/soyoung97/awd-lstm-gru""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/tdmeeste/SparseSeqModels""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/uchange/ulangel""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/uclanlp/NamedEntityLanguageModel""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/varshinireddyt/ULMFiT""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/vganesh46/awd-lstm-pytorch-implementation""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ2292,Provide a list of papers that have utilized the C51 noop model and include the links to their code?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""C51 noop"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/BY571/DQN-Atari-Agents""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/chainer/chainerrl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/eric-yim/fin_map""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/Horizon""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/facebookresearch/ReAgent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/guillaumeboniface/bananaland""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Kchu/DeepRL_CK""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/kochlisGit/autonomous-vehicles-agent""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/dist-rl-tf2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/marload/DistRL-TensorFlow2""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/NervanaSystems/coach""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/parilo/gym_bipedal_walker_v2_solution""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/PierreAlexSW/distributional_rl""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/pihey1995/DistributionalRL""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Remtasya/DDPG-Actor-Critic-Reinforcement-Learning-Reacher-Environment""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/shuli0808/DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+""https://github.com/Stable-Baselines-Team/stable-baselines3-contrib""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0536,"Provide a list of research paper titles and IDs that have benchmarked models on the Walker, walk (DMControl100k) dataset?","SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Walker, walk (DMControl100k)"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R131170>	""CURL: Contrastive Unsupervised Representations for Reinforcement Learning""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R131170>	""CURL: Contrastive Unsupervised Representations for Reinforcement Learning""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1971,Provide a list of papers that have utilized the CRF with sentence expansion model and include the links to their code?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""CRF with sentence expansion"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/mvallet91/SmartPub-TSENER""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/mvallet91/SmartPub-TSENER""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1578,What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?,"SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric     a       orkgc:Metric;
+              rdfs:label  ?metric_lbl.
+  FILTER (str(?metric_lbl) = ""ROUGE-2"")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""X-Sum"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value;
+                      orkgp:HAS_METRIC         ?metric.
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark;
+                    orkgp:HAS_MODEL          ?model.
+      ?model      rdfs:label               ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}",SUCCESS,"?model	?model_lbl
+<http://orkg.org/orkg/resource/R124731>	""PtGen""^^<http://www.w3.org/2001/XMLSchema#string>
+","?model	?model_lbl
+<http://orkg.org/orkg/resource/R124731>	""PtGen""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ2130,Provide a list of papers that have utilized the Large mLSTM model and include the links to their code?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""Large mLSTM"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/astakara48/python_project""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/astakara48/python_project""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0652,What are the titles and IDs of research papers that include a benchmark for the PubMed 20k RCT dataset?,"SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""PubMed 20k RCT"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129411>	""SciBERT: A Pretrained Language Model for Scientific Text""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129411>	""SciBERT: A Pretrained Language Model for Scientific Text""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1740,Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?,"SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric     a       orkgc:Metric;
+              rdfs:label  ?metric_lbl.
+  FILTER (str(?metric_lbl) = ""Permuted Accuracy"")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""Sequential MNIST"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value;
+                      orkgp:HAS_METRIC         ?metric.
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark;
+                    orkgp:HAS_MODEL          ?model.
+      ?model      rdfs:label               ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}",SUCCESS,"?model	?model_lbl
+<http://orkg.org/orkg/resource/R121039>	""Temporal Convolutional Network""^^<http://www.w3.org/2001/XMLSchema#string>
+","?model	?model_lbl
+<http://orkg.org/orkg/resource/R120964>	""R-Transformer""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0262,Can you list the models that have been evaluated on the Atari 2600 Skiing dataset?,"SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Atari 2600 Skiing"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  ?paper         orkgp:HAS_BENCHMARK      ?benchmark.
+  OPTIONAL {?paper      orkgp:HAS_MODEL          ?model.
+            ?model      rdfs:label               ?model_lbl.}
+}",SUCCESS,"?model	?model_lbl
+<http://orkg.org/orkg/resource/R124905>	""Recurrent Rational DQN Average""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124907>	""Rational DQN Average""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124932>	""FQF""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124952>	""Go-Explore""^^<http://www.w3.org/2001/XMLSchema#string>
+","?model	?model_lbl
+<http://orkg.org/orkg/resource/R124905>	""Recurrent Rational DQN Average""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124907>	""Rational DQN Average""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124932>	""FQF""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124952>	""Go-Explore""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0530,Provide a list of research paper titles and IDs that have benchmarked models on the BC5CDR-disease dataset?,"SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""BC5CDR-disease"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129608>	""Domain-Specific Language Model Pretraining for Biomedical Natural Language Processing""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R129632>	""Transfer Learning in Biomedical Natural Language Processing: An Evaluation of BERT and ELMo on Ten Benchmarking Datasets""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R129608>	""Domain-Specific Language Model Pretraining for Biomedical Natural Language Processing""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R129632>	""Transfer Learning in Biomedical Natural Language Processing: An Evaluation of BERT and ELMo on Ten Benchmarking Datasets""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1136,What is the top benchmark score and its metric on the Natural Questions (short) dataset?,"SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""Natural Questions (short)"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value.
+      OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+               ?metric          rdfs:label               ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark.
+      OPTIONAL {?cont      orkgp:HAS_MODEL          ?model.
+                ?model      rdfs:label               ?model_lbl.}
+    }
+    ORDER BY DESC(?value)
+  }
+}
+GROUP BY ?metric ?metric_lbl",SUCCESS,"?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R130242>	""Contribution  BERTwwm + SQuAD 2""^^<http://www.w3.org/2001/XMLSchema#string>	""57.2""^^<http://www.w3.org/2001/XMLSchema#string>
+","?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R114483>	""F1""^^<http://www.w3.org/2001/XMLSchema#string>	""57.2""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0605,Provide a list of research paper titles and IDs that have benchmarked models on the Atari 2600 Skiing dataset?,"SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset        a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Atari 2600 Skiing"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset.
+  ?cont          orkgp:HAS_BENCHMARK      ?benchmark.
+  ?paper         orkgp:P31                ?cont;
+                 rdfs:label               ?paper_lbl.
+}",SUCCESS,"?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R133307>	""Recurrent Rational Networks""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R134171>	""Fully Parameterized Quantile Function for Distributional Reinforcement Learning""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R134264>	""First return, then explore""^^<http://www.w3.org/2001/XMLSchema#string>
+","?paper	?paper_lbl
+<http://orkg.org/orkg/resource/R133307>	""Recurrent Rational Networks""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R134171>	""Fully Parameterized Quantile Function for Distributional Reinforcement Learning""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R134264>	""First return, then explore""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1144,What is the top benchmark result (metric and value) over the dataset CommonsenseQA?,"SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""CommonsenseQA"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value.
+      OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+               ?metric          rdfs:label               ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark.
+      OPTIONAL {?cont      orkgp:HAS_MODEL          ?model.
+                ?model      rdfs:label               ?model_lbl.}
+    }
+    ORDER BY DESC(?value)
+  }
+}
+GROUP BY ?metric ?metric_lbl",SUCCESS,"?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R130492>	""QA-GNN: Reasoning with Language Models and Knowledge Graphs for Question Answering""^^<http://www.w3.org/2001/XMLSchema#string>	<http://orkg.org/orkg/resource/R8607>
+","?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>	""76.1""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1000,List the metrics that are used to evaluate models on the VTAB-1k benchmark dataset?,"SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""VTAB-1k"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+           ?metric          rdfs:label               ?metric_lbl.}
+}",SUCCESS,"?metric
+<http://orkg.org/orkg/resource/R120928>
+<http://orkg.org/orkg/resource/R118364>
+","?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R118364>	""Top-1 Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R120928>	""Params""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0912,What evaluation metrics are commonly used when benchmarking models on the MLDoc Zero-Shot English-to-Italian dataset?,"SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""MLDoc Zero-Shot English-to-Italian"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+           ?metric          rdfs:label               ?metric_lbl.}
+}",SUCCESS,"?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+","?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0164,What models are being evaluated on the TempEval-3 dataset?,"SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""TempEval-3"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  ?paper         orkgp:HAS_BENCHMARK      ?benchmark.
+  OPTIONAL {?paper      orkgp:HAS_MODEL          ?model.
+            ?model      rdfs:label               ?model_lbl.}
+}",SUCCESS,"?model	?model_lbl
+<http://orkg.org/orkg/resource/R121392>	""Ning et al.""^^<http://www.w3.org/2001/XMLSchema#string>
+","?model	?model_lbl
+<http://orkg.org/orkg/resource/R121392>	""Ning et al.""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1967,Provide a list of papers that have utilized the Flair-TDM model and include the links to their code?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""Flair-TDM"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/davidjurgens/citation-function""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/davidjurgens/citation-function""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ2455,Provide a list of papers that have utilized the XLNet (base) model and include the links to their code?,"SELECT DISTINCT ?code
+WHERE {
+  ?model    a            orkgc:Model;
+            rdfs:label    ?model_lbl.
+  FILTER (str(?model_lbl) = ""XLNet (base)"")
+  ?benchmark      orkgp:HAS_DATASET        ?dataset.
+  ?cont           orkgp:HAS_BENCHMARK      ?benchmark.
+  ?cont           orkgp:HAS_MODEL          ?model;
+                  orkgp:HAS_SOURCE_CODE    ?code.
+}",SUCCESS,"?code
+""https://github.com/Kabongosalomon/task-dataset-metric-nli-extraction""^^<http://www.w3.org/2001/XMLSchema#string>
+","?code
+""https://github.com/Kabongosalomon/task-dataset-metric-nli-extraction""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1310,"What is the highest benchmark result achieved on the Atari 2600 Boxing dataset, including the metric and its value?","SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""Atari 2600 Boxing"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value.
+      OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+               ?metric          rdfs:label               ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark.
+      OPTIONAL {?cont      orkgp:HAS_MODEL          ?model.
+                ?model      rdfs:label               ?model_lbl.}
+    }
+    ORDER BY DESC(?value)
+  }
+}
+GROUP BY ?metric ?metric_lbl",SUCCESS,"?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R119875>	""Score""^^<http://www.w3.org/2001/XMLSchema#string>	""99.6""^^<http://www.w3.org/2001/XMLSchema#string>
+","?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R119875>	""Score""^^<http://www.w3.org/2001/XMLSchema#string>	""99.6""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0897,List the metrics that are used to evaluate models on the Oxford-IIIT Pets benchmark dataset?,"SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Oxford-IIIT Pets"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+           ?metric          rdfs:label               ?metric_lbl.}
+}",SUCCESS,"?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R123734>	""FLOPS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R115579>	""Accuracy (%)""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R115579>	""Accuracy (%)""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123734>	""FLOPS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R115579>	""Accuracy (%)""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123734>	""FLOPS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R115579>	""Accuracy (%)""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123734>	""FLOPS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116078>	""Top-1 Error Rate""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116078>	""Top-1 Error Rate""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116078>	""Top-1 Error Rate""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116078>	""Top-1 Error Rate""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+","?metric	?metric_lbl
+<http://orkg.org/orkg/resource/R111697>	""Accuracy""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R115579>	""Accuracy (%)""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116078>	""Top-1 Error Rate""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123734>	""FLOPS""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R123735>	""PARAMS""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ1087,What is the top benchmark result (metric and value) over the dataset ACE 2004?,"SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label       ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = ""ACE 2004"")
+      ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_VALUE         ?value.
+      OPTIONAL {?eval           orkgp:HAS_METRIC         ?metric.
+               ?metric          rdfs:label               ?metric_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark.
+      OPTIONAL {?cont      orkgp:HAS_MODEL          ?model.
+                ?model      rdfs:label               ?model_lbl.}
+    }
+    ORDER BY DESC(?value)
+  }
+}
+GROUP BY ?metric ?metric_lbl",SUCCESS,"?metric	?metric_lbl	?score
+		<http://orkg.org/orkg/resource/R8607>
+","?metric	?metric_lbl	?score
+<http://orkg.org/orkg/resource/R114483>	""F1""^^<http://www.w3.org/2001/XMLSchema#string>	""90.3""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116617>	""NER Micro F1""^^<http://www.w3.org/2001/XMLSchema#string>	""88.6""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116619>	""RE+ Micro F1""^^<http://www.w3.org/2001/XMLSchema#string>	""59.6""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R116628>	""RE Micro F1""^^<http://www.w3.org/2001/XMLSchema#string>	""63.3""^^<http://www.w3.org/2001/XMLSchema#string>
+"
+AQ0281,Can you list the models that have been evaluated on the Atari 2600 Boxing dataset?,"SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset       a                orkgc:Dataset;
+                  rdfs:label       ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = ""Atari 2600 Boxing"")
+  ?benchmark      orkgp:HAS_DATASET       ?dataset;
+                  orkgp:HAS_EVALUATION    ?eval.
+  ?paper         orkgp:HAS_BENCHMARK      ?benchmark.
+  OPTIONAL {?paper      orkgp:HAS_MODEL          ?model.
+            ?model      rdfs:label               ?model_lbl.}
+}",SUCCESS,"?model	?model_lbl
+<http://orkg.org/orkg/resource/R124931>	""Reactor 500M""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124920>	""ES FF (1 hour) noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124916>	""POP3D""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124915>	""DDRL A3C""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124921>	""A3C LSTM hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124914>	""A3C FF (1 day) hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124913>	""A3C FF hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124912>	""A2C + SIL""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124902>	""Bootstrapped DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124901>	""Gorila""^^<http://www.w3.org/2001/XMLSchema#string>
+","?model	?model_lbl
+<http://orkg.org/orkg/resource/R123293>	""CURL""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124890>	""C51 noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124891>	""Duel noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124892>	""Duel hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124894>	""Prior noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124895>	""Prior hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124897>	""DDQN (tuned) noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124898>	""DDQN (tuned) hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124900>	""DDQN+Pop-Art noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124901>	""Gorila""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124902>	""Bootstrapped DQN""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124908>	""DQN noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124911>	""DQN hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124912>	""A2C + SIL""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124913>	""A3C FF hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124914>	""A3C FF (1 day) hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124915>	""DDRL A3C""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124916>	""POP3D""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124919>	""Prior+Duel hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124920>	""ES FF (1 hour) noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124921>	""A3C LSTM hs""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124922>	""Prior+Duel noop""^^<http://www.w3.org/2001/XMLSchema#string>
+<http://orkg.org/orkg/resource/R124931>	""Reactor 500M""^^<http://www.w3.org/2001/XMLSchema#string>
+"

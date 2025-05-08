@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score ?method ?authors ?year ?venue
+WHERE {
+    ?dataset a orkg:Dataset;
+             orkg:hasDatasetUrl "http://seel.cse.lsu.edu/data/re17.zip".
+    ?result a orkg:BenchmarkResult;
+            orkg:hasDataset ?dataset;
+            orkg:hasMetric ?metric;
+            orkg:hasScore ?score;
+            orkg:hasMethod ?method;
+            orkg:hasAuthors ?authors;
+            orkg:hasYear ?year;
+            orkg:hasVenue ?venue.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

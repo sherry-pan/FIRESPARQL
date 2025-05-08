@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?scoreValue
+WHERE {
+  ?dataset rdfs:label "Atari 2600 Crazy Climber benchmark dataset".
+  ?dataset orkgc:hasProperty ?property.
+  ?property orkgc:hasValue ?scoreValue.
+  ?property rdfs:label "Score".
+  
+  ?model orkgc:hasProperty ?property.
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?scoreValue)
+LIMIT 1
+```

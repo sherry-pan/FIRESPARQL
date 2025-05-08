@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?model
+WHERE {
+  ?model orkgp:benchmarkedOn ?benchmark.
+  ?benchmark orkgr:dataset ?dataset;
+            orkgr:metric ?metric.
+  ?dataset orkgr:datasetName "WMT2016 German-English dataset"@en.
+  ?metric rdfs:label "BLEU score"@en;
+          orkgr:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

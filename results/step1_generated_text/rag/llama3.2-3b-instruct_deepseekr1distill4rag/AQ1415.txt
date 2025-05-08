@@ -1,0 +1,24 @@
+Question:
+What is the best performing model benchmarking the 200k Short Texts for Humor Detection dataset in terms of F1-score metric?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?metric?score
+WHERE {
+ ?dataset a ora:Dataset.
+ ?dataset ora:hasBenchmark?benchmark.
+ ?benchmark ora:hasMetric?metric.
+ ?benchmark ora:hasModel?model.
+ ?dataset rdfs:label?datasetLabel.
+ ?model rdfs:label?modelLabel.
+ ?metric rdfs:label?metricLabel.
+  FILTER (bc:contains(?datasetLabel, "200k Short Texts for Humor Detection") AND
+          bc:contains(?metricLabel, "F1-score")).
+ ?model ora:hasScore?score.
+  FILTER (bc:contains(?modelLabel, "BERT") OR bc:contains(?modelLabel, "GPT")).
+  RETURN?model?metric?score
+}
+```
+    Note: The `bc:contains` function is used to perform fuzzy matching on the labels. This is a common approach in natural language processing tasks to handle variations in the input text.
+
+    The provided SPARQL query is designed to retrieve the best performing model for the specified dataset and metric, based on the extracted terms and their top candidates. The query filters the results to only include models that have been benchmarked on the specified dataset and metric, and have a label that contains the specified keywords. The `bc:contains` function is used to perform fuzzy matching on the labels, allowing for variations in the input text. The query then returns the model, metric, and score for each matching result.<|eot_id|>

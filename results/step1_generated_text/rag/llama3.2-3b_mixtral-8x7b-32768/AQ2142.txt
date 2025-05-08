@@ -1,0 +1,22 @@
+Question:
+List the code links in papers that use the 12-layer Transformer-XL model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX orkgc: <http://www.openresearch.org/ontology/orkgc/>
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+
+SELECT?p?o
+WHERE {
+ ?o orkgc:hasContribution?c.
+ ?c orkgc:hasResource?r.
+ ?r orkg:label?label.
+  FILTER (STRLIKE (?label, "12-layer Transformer-XL model") OR STRLIKE (?label, "Transformer-XL model")).
+ ?o orkgp:HAS_CODE?code.
+ ?c orkgp:HAS_PAPER?p.
+ ?p orkgp:HAS_BENCHMARK?benchmark.
+  FILTER (STRLIKE (?benchmark, "any benchmark")).
+}
+``` 
+    Note: The provided SPARQL query is just a suggestion and may need to be adjusted based on the actual structure and data in the ORKG.<|eot_id|>

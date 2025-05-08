@@ -1,0 +1,11 @@
+```sparql
+SELECT ?model ?value
+WHERE {
+    ?model ortk:HAS_DATASET ?dataset.
+    ?dataset ortk:HAS_METRIC ?metric.
+    ?metric ortk:HAS_VALUE ?value.
+    FILTER (REGEX(STR(?dataset), "ANLI test dataset") && REGEX(STR(?metric), "A3"))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

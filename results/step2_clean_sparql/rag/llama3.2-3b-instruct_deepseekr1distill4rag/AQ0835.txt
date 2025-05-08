@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+PREFIX orkc: <http://www.openresearchknowledgegraph.org/ontology/resource/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/resource3/>
+
+SELECT ?m ?mLabel
+WHERE {
+  ?m a orkc:Metric;
+     orkgp:evaluatedOn ?e.
+  ?e a orkgr:Dataset;
+     orkc:label ?eLabel.
+  FILTER (CONTAINS(LCASE(STR(?eLabel)), "enwik8"))
+}
+```

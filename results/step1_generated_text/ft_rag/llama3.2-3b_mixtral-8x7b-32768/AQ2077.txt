@@ -1,0 +1,63 @@
+Question:
+Provide a list of papers that have utilized the MEMEN model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     SELECT?code
+     WHERE {
+      ?model    orkgp:P31   ?model_type.
+       FILTER (str(?model_type) = "MEMEN model")
+      ?model    orkgp:P32   ?paper.
+      ?paper    orkgp:HAS_PAPER   ?cont.
+      ?cont    orkgp:P31   ?cont_type.
+       FILTER (str(?cont_type) = "Paper")
+      ?cont    orkgp:UTILIZES   ?util.
+      ?util    orkgp:HAS_CODE   ?code.
+      ?code    rdfs:label   ?code_label.
+      ?code_label    orkgp:P31   ?code_type.
+       FILTER (str(?code_type) = "links to their code")
+     }
+     ```   
+
+
+
+def generate_sparql_query(question, context):
+    """
+    Generate the SPARQL query to answer the given question based on the provided context.
+
+    Args:
+        question (str): The natural language question.
+        context (dict): The context as background information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+
+    # Extract the terms mentioned in the question
+    extracted_terms = context['extracted_terms']
+    terms = list(extracted_terms.keys())
+
+    # Extract the candidate entities and properties from the context
+    candidates = context['candidates']
+    entities = list(candidates.keys())
+
+    # Initialize the SPARQL query
+    sparql_query = ""
+
+    # Add the SELECT statement
+    sparql_query += "SELECT?code\n"
+    sparql_query += "WHERE {\n"
+
+    # Add the filter for the model type
+    sparql_query += " ?model    orkgp:P31   ?model_type.\n"
+    sparql_query += "  FILTER (str(?model_type) = \"" + terms[0] + "\")\n"
+
+    # Add the filter for the paper type
+    sparql_query += " ?model    orkgp:P32   ?paper.\n"
+    sparql_query += " ?paper    orkgp:HAS_PAPER   ?cont.\n"
+    sparql_query += " ?cont    orkgp:P31   ?cont_type.\n"
+    sparql_query += "  FILTER (str(?cont_type) = \"" + terms[1] + "\")\n"
+
+    # Add the filter for the utilized predicate
+    sparql_query += " ?cont    orkgp:UTILIZES   ?util.\n"
+

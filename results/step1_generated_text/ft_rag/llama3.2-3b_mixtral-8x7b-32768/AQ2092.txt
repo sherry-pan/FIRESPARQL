@@ -1,0 +1,42 @@
+Question:
+List the code links in papers that use the Dynamic Coattention Networks (single model) model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model    orkgp:R55555    rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "Dynamic Coattention Networks (single model)")
+      ?benchmark      orkgp:P1306   ?cont         orkgp:P1305   ?model.
+      ?cont         orkgp:P1305   ?model      orkgp:R55555.
+      ?model      rdfs:label   ?model_lbl.
+      ?cont         orkgp:P1307   ?cont_lbl.
+       FILTER (str(?cont_lbl) = "benchmark")
+      ?cont         orkgp:P1305   ?model      orkgp:R55555.
+      ?cont         orkgp:P1308   ?cont      orkgp:R36054.
+      ?cont      orkgp:R36054    rdfs:label   ?code.
+       OR
+       {
+        ?cont      orkgp:P1308   ?cont      orkgp:P1308   ?cont_lbl.
+        ?cont      orkgp:P1308   ?cont      orkgp:R44252.
+        ?cont      orkgp:P1308   ?cont      orkgp:R44252.
+        ?cont      orkgp:P1308   ?cont      orkgp:R44252.
+        ?cont      orkgp:P1308   ?cont      orkgp:R44252.
+       }
+    }
+    SELECT?cont
+    WHERE {
+     ?model      orkgp:P1305   ?cont         orkgp:R55555.
+     ?cont      rdfs:label   ?cont_lbl.
+      FILTER (str(?cont_lbl) = "benchmark")
+    }
+    UNION
+    SELECT?cont
+    WHERE {
+     ?cont      orkgp:P1307   ?cont_lbl.
+     ?cont      rdfs:label   ?cont_lbl.
+      FILTER (str(?cont_lbl) = "benchmark")
+    }
+    UNION
+    SELECT?cont
+    WHERE {
+     ?

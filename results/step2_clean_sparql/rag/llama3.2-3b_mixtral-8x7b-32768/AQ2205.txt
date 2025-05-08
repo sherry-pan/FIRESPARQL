@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?paper ?link
+WHERE {
+  ?paper a orkg:Contribution.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasCode ?code.
+  ?code orkg:hasLink ?link.
+  FILTER CONTAINS(LCASE(STR(?benchmark)), "nascell")
+}
+```

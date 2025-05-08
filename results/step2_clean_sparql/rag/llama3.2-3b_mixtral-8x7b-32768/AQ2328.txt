@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+SELECT ?paper ?code_uri 
+WHERE {
+  ?paper orkg:relatedTo ?mfec_model.
+  ?paper orkg:relatedTo ?benchmark.
+  ?paper orkg:hasCode ?code.
+  ?code orkg:relatedTo ?code_uri.
+  ?mfec_model orkg:relatedTo ?mfec_model_uri.
+  FILTER regex(?mfec_model_uri, "MFEC", "i").
+}
+```

@@ -1,0 +1,31 @@
+Question:
+Name the datasets that have been used for benchmarking in the Image Classification research problem?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:ResearchProblem;
+                    rdfs:label      ?problem_lbl.  
+       FILTER (str(?problem_lbl) = "Image Classification")
+      ?problem       orkgp:HAS_RESEARCH_PROBLEM      ?rp.
+      ?rp           orkgp:HAS_DATASET              ?dataset.
+      ?dataset      rdfs:label                      ?dataset_lbl.
+     }    
+
+
+    Given the context provided, the query should be modified to match the entities and properties mentioned in the question. The query should only return the datasets that have been used for benchmarking in the Image Classification research problem. Therefore, the query should be modified to filter the results by the properties "has dataset" and "has benchmark" and the label of the research problem should be filtered to be equal to "Image Classification". 
+
+    The modified SPARQL query is as follows:
+    SELECT DISTINCT?dataset?dataset_lbl
+    WHERE {
+      ?problem       a                orkgc:ResearchProblem;
+                    rdfs:label      ?problem_lbl.  
+       FILTER (str(?problem_lbl) = "Image Classification")
+      ?problem       orkgp:HAS_RESEARCH_PROBLEM      ?rp.
+       FILTER (str(?rp_lbl) = "benchmark")
+      ?rp           orkgp:HAS_DATASET              ?dataset.
+      ?dataset      rdfs:label                      ?dataset_lbl.
+     } 
+
+
+    However, there is another property "has benchmark" in the candidates which is not present in the provided context. The property "has evaluation" is also present in the candidates which is not present in the context. The property "has evaluation" is not used in the provided context for filtering the results. Therefore, the query should be modified to only filter by the property "has benchmark" and the label of the research problem should be filtered to be

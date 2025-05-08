@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+
+SELECT ?paper ?code_reference
+WHERE {
+  ?paper orkp:has_code_reference ?code_reference.
+  ?paper orkp:has_model ?model.
+  ?model orkc:has_benchmarking ?benchmarking.
+  ?benchmarking orkc:has_type "benchmarking".
+  ?model orkc:has_name ?model_name.
+  FILTER(CONTAINS(?model_name, "DCN")).
+}
+```

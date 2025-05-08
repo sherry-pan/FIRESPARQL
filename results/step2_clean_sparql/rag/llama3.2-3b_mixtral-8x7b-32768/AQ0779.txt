@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?label
+WHERE {
+   ?dataset a orkgc:Dataset;
+            orkgr:R123456 "Fashion-MNIST";
+            orkgp:HAS_DATASET ?fashion_mnist.
+   ?fashion_mnist orkgp:HAS_METRIC ?metric.
+   ?metric rdfs:label ?label.
+   FILTER (lang(?label) = "en")
+}
+```

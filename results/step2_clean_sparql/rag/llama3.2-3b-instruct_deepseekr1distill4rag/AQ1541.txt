@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?evaluation a <http://example.org/Evaluation> ;
+              <http://example.org/hasModel> ?model ;
+              <http://example.org/hasMetric> ?metric ;
+              <http://example.org/hasDataset> <http://example.org/MedSTS> ;
+              <http://example.org/hasValue> ?value .
+              
+  ?metric rdfs:label "Pearson Correlation" .
+
+  FILTER NOT EXISTS {
+    ?otherEvaluation a <http://example.org/Evaluation> ;
+                     <http://example.org/hasModel> ?otherModel ;
+                     <http://example.org/hasMetric> ?metric ;
+                     <http://example.org/hasDataset> <http://example.org/MedSTS> ;
+                     <http://example.org/hasValue> ?otherValue .
+    FILTER (?otherValue > ?value)
+  }
+}
+```

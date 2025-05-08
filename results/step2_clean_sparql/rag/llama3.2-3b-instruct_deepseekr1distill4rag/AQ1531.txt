@@ -1,0 +1,12 @@
+```sparql
+SELECT ?model ?testPerplexity
+WHERE {
+  ?model rdfs:label ?label .
+  ?evaluation orkgp:hasMetric ?testPerplexity .
+  ?evaluation orkgp:hasDataset ?dataset .
+  ?dataset orkgc:hasName "WikiText-103" .
+  FILTER (?label = "BERT" || ?label = "RoBERTa" || ?label = "XLNet")
+}
+ORDER BY ASC(?testPerplexity)
+LIMIT 1
+```

@@ -1,0 +1,11 @@
+```sparql
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a <http://orkg.org/orkg/class/Contribution>.
+  ?paper <http://orkg.org/orkg/predicate/hasUse> ?use.
+  ?use a <http://orkg.org/orkg/class/Resource>;
+       rdfs:label ?label.
+  ?paper <http://orkg.org/orkg/predicate/hasCodeLink> ?codeLink.
+  FILTER (regex(str(?label), "POP3D", "i") && regex(str(?label), "benchmark", "i"))
+}
+```

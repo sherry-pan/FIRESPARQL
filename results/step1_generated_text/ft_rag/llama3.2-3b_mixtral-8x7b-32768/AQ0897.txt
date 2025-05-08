@@ -1,0 +1,45 @@
+Question:
+List the metrics that are used to evaluate models on the Oxford-IIIT Pets benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgp:R1 orkgp:HAS_DATASET orkggp:HAS_DATASET?dataset.
+       FILTER (str(?dataset rdfs:label) = "Oxford-IIIT Pets")
+      ?dataset orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_METRIC?metric_lbl.
+      ?metric orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:EVALUATED_WITH?model.
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_DATASET orkggp:HAS_DATASET?dataset.
+      ?metric orkgp:HAS_METRIC orkggp:HAS_METRIC?metric.
+      ?model orkgp:HAS_EVALUATION orkgp:HAS_EVALUATION?eval.
+       OR {
+        ?dataset orkgp:HAS_DATASET?dataset2.
+        ?dataset2 rdfs:label?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets")
+        ?dataset2 orkgp:HAS_DATASET?dataset3.
+        ?dataset3 orkgp:HAS_METRIC?metric2.
+        ?metric2 orkgp:HAS_METRIC?metric_lbl.
+       }
+      ?model orkgp:HAS_EVALUATION?eval2.
+      ?eval2 orkgp:EVALUATED_WITH?model2.
+      ?model2 orkgp:HAS_DATASET?dataset4.
+      ?dataset4 orkgp:HAS_DATASET orkggp:HAS_DATASET?dataset5.
+      ?dataset5 orkgp:HAS_METRIC?metric3.
+      ?metric3 orkgp:HAS_METRIC?metric_lbl.
+      ?model orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:EVALUATED_WITH?model.
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_DATASET orkggp:HAS_DATASET?dataset.
+      ?metric orkgp:HAS_METRIC orkggp:HAS_METRIC?metric.
+       OR {
+        ?dataset orkgp:HAS_DATASET?dataset6.
+        ?dataset6 rdfs:label?dataset_lbl6.
+         FILTER (str(?dataset_lbl6) = "Oxford-IIIT Pets")
+        ?dataset6 orkgp:HAS_DATASET?dataset7.
+        ?dataset7 orkgp:HAS_METRIC?metric6.
+        ?metric6 orkgp:HAS_METRIC?metric_lbl.
+       }
+       SELECT?metric_lbl
+

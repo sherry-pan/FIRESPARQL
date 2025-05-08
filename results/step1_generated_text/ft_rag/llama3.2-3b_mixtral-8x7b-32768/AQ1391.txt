@@ -1,0 +1,50 @@
+Question:
+What is the best performing model benchmarking the ACE 2004 dataset in terms of RE+ Micro F1 metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+    ?dataset       a                orkgc:Dataset;
+     rdfs:label      ?dataset_lbl.
+     FILTER (str(?dataset_lbl) = "ACE 2004")
+    ?benchmark      orkgp:HAS_DATASET      ?dataset;
+    ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+    ?cont           orkgp:HAS_MODEL          ?model;
+    ?model         rdfs:label                ?model_lbl.
+    ?benchmark      orkgp:HAS_METRIC        ?metric;
+    ?metric         rdfs:label                ?metric_lbl.
+     FILTER (str(?metric_lbl) = "RE+ Micro F1")
+    ?metric         orkgp:HAS_EVALUATION     ?eval.
+    ?eval           orkgp:HAS_METRIC          ?metric;
+    ?eval          rdfs:label                ?eval_lbl.
+     FILTER (str(?eval_lbl) = "best performing")
+     }
+     ORDER BY DESC(?eval_lbl)
+     LIMIT 1.    
+
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACE 2004")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont           orkgp:HAS_MODEL          ?model;
+ ?model         rdfs:label                ?model_lbl.
+ ?benchmark      orkgp:HAS_METRIC        ?metric;
+ ?metric         rdfs:label                ?metric_lbl.
+  FILTER (str(?metric_lbl) = "RE+ Micro F1")
+ ?metric         orkgp:HAS_EVALUATION     ?eval.
+ ?eval           orkgp:HAS_METRIC          ?metric;
+ ?eval          rdfs:label                ?eval_lbl.
+  FILTER (str(?eval_lbl) = "best performing")
+}
+ORDER BY DESC(?eval_lbl)
+LIMIT 1
+```
+
+Note: The SPARQL query is the same as the one provided in the context. I have just reformatted it to match the requested output format. 
+
+This code should be used to generate a SPARQL query for the given question. The SPARQL query is a program that can be executed by a SPARQL query engine to retrieve data from a knowledge graph. In this case, the knowledge graph is the Open Research Knowledge Graph (ORKG). The

@@ -1,0 +1,56 @@
+Question:
+List the metrics that are used to evaluate models on the DBpedia benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgp:R1 orkgp:P32?dataset.
+      ?dataset orkgp:P31?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "DBpedia benchmark dataset")
+      ?dataset orkgp:HAS_DATASET?dataset_has_dataset.
+      ?dataset_has_dataset orkgp:HAS_DATASET?dataset_has_dataset_value.
+      ?dataset_has_dataset_value orkgp:HAS_METRIC?dataset_has_metric.
+      ?dataset_has_metric rdfs:label?dataset_has_metric_lbl.
+      ?dataset_has_metric orkgp:HAS_METRIC?metric.
+      ?metric orkgp:P32?metric_lbl.
+      ?metric orkgp:HAS_EVALUATION?metric_eval.
+      ?metric_eval rdfs:label?metric_eval_lbl.
+       FILTER (str(?metric_eval_lbl) = "evaluate models")
+     }    
+
+
+
+    ```python
+    def generate_orkg_query(question, context):
+        # Initialize the SPARQL query
+        query = "SELECT?metric?metric_lbl"
+
+        # Add the WHERE clause to the query
+        query += " WHERE {"
+
+        # Get the dataset, benchmark, and metric entities from the context
+        dataset = context["extracted_terms"]["DBpedia benchmark dataset"]
+        metrics = context["extracted_terms"]["metrics"]
+        evaluate_models = context["extracted_terms"]["evaluate models"]
+
+        # Add the filter for the dataset
+        query += " orkgp:R1 orkgp:P32?dataset."
+        query += "?dataset orkgp:P31?benchmark."
+
+        # Add the filter for the benchmark
+        query += "?benchmark rdfs:label?benchmark_lbl."
+        query += " FILTER (str(?benchmark_lbl) = \"" + dataset + "\")"
+
+        # Add the filter for the metrics
+        query += "?dataset orkgp:HAS_DATASET?dataset_has_dataset."
+        query += "?dataset_has_dataset orkgp:HAS_DATASET?dataset_has_dataset_value."
+        query += "?dataset_has_dataset_value orkgp:HAS_METRIC?dataset_has_metric."
+        query += "?dataset_has_metric rdfs:label?dataset_has_metric_lbl."
+        query += "?dataset_has_metric orkgp:HAS_METRIC?metric."
+        query += "?metric orkgp:P32?metric_lbl."
+
+        # Add the filter for the evaluate models
+        query += "?metric orkgp:HAS_EVALUATION?metric_eval."
+        query += "?metric_eval rdfs:label?metric_eval_lbl."
+        query += " FILTER (str(?metric_eval_lbl) = \"" + evaluate_models + "\

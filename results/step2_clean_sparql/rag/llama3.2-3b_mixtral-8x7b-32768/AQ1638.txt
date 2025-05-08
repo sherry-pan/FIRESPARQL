@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkc: <http://orkc.org/ontology/>
+PREFIX orkgp: <http://orkg.org/predicate/>
+PREFIX orkge: <http://orkg.org/edge/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkgp:has_model ?m.
+  ?m orkge:has_benchmark ?benchmark.
+  ?benchmark a orkc:Benchmark;
+             orkgp:has_dataset ?dataset.
+  ?dataset a orkc:Dataset.
+  FILTER(CONTAINS(STR(?benchmark), "Ball in cup, catch (DMControl100k)")).
+  ?m orkgp:has_score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

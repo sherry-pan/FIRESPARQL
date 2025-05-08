@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model_name ?accuracy
+WHERE {
+  ?model orkp:hasProperty ?property.
+  ?property a orkp:Accuracy;
+            orkp:hasValue ?accuracy.
+  ?model orkp:hasProperty ?benchmark.
+  ?benchmark a orkp:Benchmarking;
+             orkp:hasValue ?dataset.
+  ?dataset rdfs:label "TriviaQA".
+  ?model rdfs:label ?model_name.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

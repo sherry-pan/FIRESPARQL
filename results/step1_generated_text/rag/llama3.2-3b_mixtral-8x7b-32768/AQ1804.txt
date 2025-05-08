@@ -1,0 +1,61 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgp: <http://example.org/orkgp/>
+    PREFIX orkgr: <http://example.org/orkgr/>
+    SELECT?model?score
+    WHERE {
+     ?model orkgp:HAS_MODEL?topModel.
+     ?topModel orkgp:HAS_SCORE?score.
+     ?score orkgp:HAS_EVALUATION?evaluation.
+     ?evaluation orkgp:HAS_RELEVANT_DATASET?dataset.
+     ?dataset orkgr:R131168.
+      FILTER (STRLIKE(STR(?model), "Top Performing Model") AND
+             STRLIKE(STR(?score), "Params Score") AND
+             STRLIKE(STR(?dataset), "VTAB-1k Dataset"))
+    }
+    ```sparql
+
+## Step 1: Identify the entities and properties mentioned in the question
+The entities and properties mentioned in the question are:
+- "top performing model"
+- "Params score"
+- "benchmarked on"
+- "VTAB-1k dataset"
+
+## Step 2: Match the entities and properties with the candidates provided in the context
+The candidates provided in the context are:
+- "top performing model": orkgp:HAS_MODEL
+- "Params score": orkgp:HAS_SCORE
+- "benchmarked on": orkgp:HAS_EVALUATION
+- "VTAB-1k dataset": orkgr:R131168
+
+## Step 3: Construct the SPARQL query to query the ORKG
+To construct the SPARQL query, we need to link the entities and properties mentioned in the question with the candidates provided in the context.
+
+The SPARQL query is:
+```sparql
+SELECT?model?score
+WHERE {
+ ?model orkgp:HAS_MODEL?topModel.
+ ?topModel orkgp:HAS_SCORE?score.
+ ?score orkgp:HAS_EVALUATION?evaluation.
+ ?evaluation orkgp:HAS_RELEVANT_DATASET?dataset.
+ ?dataset orkgr:R131168.
+  FILTER (STRLIKE(STR(?model), "Top Performing Model") AND
+         STRLIKE(STR(?score), "Params Score") AND
+         STRLIKE(STR(?dataset), "VTAB-1k Dataset"))
+}
+```
+
+The final answer is: 
+```sparql
+SELECT?model?score
+WHERE {
+ ?model orkgp:HAS_MODEL?topModel.
+ ?topModel orkgp:HAS_SCORE?score.
+ ?score orkgp:HAS_EVALUATION?evaluation.
+ ?evaluation orkgp:HAS_RELEVANT_DATASET?dataset.
+ 

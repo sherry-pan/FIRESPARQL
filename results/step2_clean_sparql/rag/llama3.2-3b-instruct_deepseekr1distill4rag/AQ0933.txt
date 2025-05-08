@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT DISTINCT ?metric ?label
+WHERE {
+  ?metric orkgp:evaluationMethod ?method.
+  ?method orkgp:performanceAssessment ?performance.
+  ?performance orkgp:validation ?validation.
+  ?validation orkgp:dataset ?dataset.
+  ?dataset orkg:label "Atari 2600 Zaxxon dataset"@en.
+  ?metric rdfs:label ?label.
+}
+```

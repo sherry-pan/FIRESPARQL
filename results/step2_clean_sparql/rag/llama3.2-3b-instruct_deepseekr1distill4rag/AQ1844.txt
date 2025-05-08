@@ -1,0 +1,11 @@
+```sparql
+SELECT ?s ?p ?o
+WHERE {
+  ?s a <http://www.w3.org/2004/02/skos/core#Concept>.
+  ?s rdfs:label ?l.
+  ?s ?p ?o.
+  FILTER (regex(str(?l), "MNIST|AIDA|MEANTIME|TAC-KBP", "i") || 
+          regex(str(?l), "NER|EL|Entity_Knowledge_Extraction", "i"))
+  FILTER (str(?l) != "")
+}
+```

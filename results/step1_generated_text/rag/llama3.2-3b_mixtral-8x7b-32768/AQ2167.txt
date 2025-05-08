@@ -1,0 +1,45 @@
+Question:
+List the code links in papers that use the LSTM (Bai et al., 2018) model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/core/>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicates/>
+
+    SELECT?paper?codeLink
+    WHERE {
+     ?paper orkggp:HAS_PAPER?p1.
+     ?p1 orkggp:USES?p2.
+     ?p2 orkggp:USES?p3.
+     ?p3 orkggp:EVALUATED_ON?p4.
+     ?p4 orkgp:HAS_CODE?codeLink.
+     ?paper orkg:RDF_TYPE orkgc:Resource.
+     ?codeLink orkg:RDF_TYPE orkggp:Resource.
+      FILTER (STR(?paper) = "LSTM (Bai et al., 2018)").
+      FILTER (STR(?codeLink) = "code link")
+    }
+    ``` Sparql Query:
+    ```sparql
+    ``` 
+
+To generate the SPARQL query from the given input question and context, we need to identify the entities and properties mentioned in the question and link them to the corresponding entities and properties in the ORKG. The entities and properties mentioned in the question are:
+
+* LSTM (Bai et al., 2018)
+* code links
+* papers
+* use
+* benchmark
+
+The context provides the following candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question:
+
+* LSTM (Bai et al., 2018): orkg:R147246
+* code links: orkgp:HAS_CODE
+* papers: orkgp:PUBLISHED_IN, orkgp:HAS_PAPER
+* use: orkgp:USES
+* benchmark: orkgp:EVALUATED_ON
+
+Based on the context, the SPARQL query can be generated as follows:
+
+1. First, we need to find the papers that use the LSTM (Bai et al., 2018) model. We can do this by filtering the papers that have the LSTM (Bai et al., 2018) as one of their RDF types.
+2. Next, we need to find the code links in these papers. We can do this by filtering the code links

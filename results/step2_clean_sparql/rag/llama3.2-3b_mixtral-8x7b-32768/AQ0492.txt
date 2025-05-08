@@ -1,0 +1,13 @@
+```sparql
+SELECT ?title ?id WHERE {
+  ?paper a ora:ResearchPaper.
+  ?paper ora:hasTitle ?title.
+  ?paper ora:hasID ?id.
+  ?paper ora:hasBenchmarkedModel ?model.
+  ?model ora:hasBenchmarkedOn ?dataset.
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasName ?datasetName.
+  FILTER (STR(?datasetName) = "enwik8").
+  FILTER (STR(?title) != "").
+}
+```

@@ -1,0 +1,53 @@
+Question:
+Can you list the metrics used to evaluate models on the BUCC Russian-to-English dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "BUCC Russian-to-English dataset")
+         ?benchmark      orkgp:P31           ?dataset;
+                            orkgp:HAS_DATASET     ?cont.
+         ?cont           orkgp:HAS_METRIC     ?metric;
+                          orkgp:P31           ?cont_pred.
+         ?cont_pred      rdfs:label          ?metric_lbl.
+         ?metric        orkgp:HAS_EVALUATION ?eval.
+         ?eval         orkgp:EVALUATED_ON   ?cont;
+                        orkgp:P31           ?cont_pred.
+         ?cont_pred      orkgp:P31           ?cont.
+     }
+     HAVING (str(?metric_lbl) = "Accuracy")
+     UNION
+     (SELECT?metric?metric_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "BUCC Russian-to-English dataset")
+         ?benchmark      orkgp:P31           ?dataset;
+                            orkgp:HAS_DATASET     ?cont.
+         ?cont           orkgp:HAS_METRIC     ?metric;
+                          orkgp:P31           ?cont_pred.
+         ?cont_pred      rdfs:label          ?metric_lbl.
+         ?metric        orkgp:HAS_EVALUATION ?eval.
+         ?eval         orkgp:EVALUATED_ON   ?cont;
+                        orkgp:P31           ?cont_pred.
+         ?cont_pred      orkgp:P31           ?cont.
+     }
+     )
+     GROUP BY?metric_lbl
+     ORDER BY (str(?metric_lbl) DESC)
+     LIMIT 10.     ```sql
+SELECT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BUCC Russian-to-English dataset")
+ ?benchmark      orkgp:P31           ?dataset;
+                 orkgp:HAS_DATASET     ?cont.
+ ?cont           orkgp:HAS_METRIC     ?metric;
+                 orkgp:P31           ?cont_pred.
+ ?cont_pred      rdfs:label          ?metric_lbl.
+ ?metric        orkgp:HAS_EVALUATION ?eval.
+ ?eval         orkgp:EVALUATED_ON   ?cont;
+                orkgp:P31           

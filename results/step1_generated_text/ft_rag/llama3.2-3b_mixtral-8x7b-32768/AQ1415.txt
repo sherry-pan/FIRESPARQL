@@ -1,0 +1,41 @@
+Question:
+What is the best performing model benchmarking the 200k Short Texts for Humor Detection dataset in terms of F1-score metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgp:R123456
+       orkgp:P31 orkgp:Q123456.
+      ?model orkgp:P31?model_lbl.
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31 orkgp:Q123456.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+       BIND(xsd:float(?value) AS?value)
+       FILTER(REGEX(STR(?value), "^[0-9.]+$"))
+       BIND(xsd:float(?value) AS?value)
+      ?cont orkgp:HAS_MODEL?model.
+      ?cont orkgp:P31 orkgp:Q123456.
+      ?model orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+       BIND(xsd:float(?value) AS?value)
+       FILTER(REGEX(STR(?value), "^[0-9.]+$"))
+      ?cont orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+       BIND(xsd:float(?value) AS?value)
+       FILTER(REGEX(STR(?value), "^[0-9.]+$"))
+      ?cont orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_DATASET?dataset.
+      ?cont orkgp:P31 orkgp:Q123456.
+      ?cont orkgp:P31 orkgp:Q567890.
+      ?cont orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P31 orkgp:Q567890.
+      ?cont orkgp:P31 orkgp:Q90123.
+      ?cont orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P31 orkgp:Q90123.
+      ?cont orkgp:P31 orkgp:Q11111.
+      ?cont orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp

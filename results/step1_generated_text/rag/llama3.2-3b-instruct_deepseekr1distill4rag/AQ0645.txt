@@ -1,0 +1,21 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the HoC dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.com/orkgr/>
+PREFIX orkgc: <http://example.com/orkgc/>
+PREFIX orkgp: <http://example.com/orkgp/>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper orkgc:hasBenchmark?benchmark.
+ ?benchmark orkgr:includes?dataset.
+ ?dataset orkgr:label?datasetLabel.
+ ?dataset orkgr:label "HoC Dataset"@en.
+ ?paper orkgc:hasId?id.
+ ?paper orkgc:hasTitle?title.
+  FILTER (STR(?datasetLabel) = "HoC Dataset"@en)
+}
+``` 
+    Note: The above SPARQL query assumes that the RDF data dump is stored in a local file or accessible via a URL. You may need to modify the `PREFIX` statements to match your actual RDF data location.<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?resource ?label
+WHERE {
+  ?resource orkgr:hasContribution ?c.
+  ?c orkgc:hasPaper ?p.
+  ?p orkgp:hasCodeReference ?cr.
+  ?cr orkgr:hasUsed ?model.
+  ?model orkgr:label ?label.
+  FILTER (str(?label) = "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.")
+}
+```

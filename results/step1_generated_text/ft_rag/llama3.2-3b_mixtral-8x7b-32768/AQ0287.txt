@@ -1,0 +1,43 @@
+Question:
+What models are being evaluated on the Atari 2600 Chopper Command dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgp:R1 orkgp:P5692?model.
+      ?model orkgp:P5708?eval.
+      ?eval orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P5707?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "Atari 2600 Chopper Command", "i"))
+      ?model rdfs:label?model_lbl.
+     }     
+
+
+    Note: The provided SPARQL query assumes the existence of specific URIs, labels, and predicates. The actual SPARQL query may need to be modified based on the actual structure of the data in the ORKG.
+
+    Assumption:
+    - The input question has one main question entity, and it is the first argument of the "evaluated on" predicate. 
+    - The input question has one main evaluation entity, and it is the second argument of the "evaluated on" predicate.
+    - The input question has one main dataset entity, and it is the first argument of the "has dataset" predicate.
+    - The input question has one main model entity, and it is the first argument of the "has model" predicate. 
+    - The model entity is also the second argument of the "evaluated on" predicate.
+
+    Assumption:
+    - The "evaluated on" predicate has only two arguments, which are the evaluation entity and the dataset entity.
+    - The "has dataset" predicate has only two arguments, which are the dataset entity and the dataset label entity.
+    - The "has model" predicate has only two arguments, which are the model entity and the model label entity.
+
+    Assumption:
+    - The "has evaluation" predicate is used to connect the model entity to the evaluation entity.
+    - The "has dataset" predicate is used to connect the dataset entity to the dataset label entity.
+
+    Assumption:
+    - The "has model" predicate is used to connect the model entity to the model label entity.
+
+    Assumption:
+    - The "evaluated on" predicate is used to connect the evaluation entity to the model entity and the dataset entity.
+
+    Based on the assumptions above, the SPARQL query is constructed as follows:
+    - The query first filters the dataset label entity to only include the "Atari 2600 Chopper Command" label.
+    - The query then selects the model entity and its label entity.
+    - The query then traverses the "evaluated on" predicate to find the evaluation entity and the model entity, and then uses the "has evaluation" predicate to connect the model entity to

@@ -1,0 +1,52 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the DRI Corpus dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "DRI Corpus")
+      ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+      ?dataset_has_dataset orkgp:HAS_DATASET      ?dataset_has_metric.
+      ?dataset_has_metric orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+     } 
+     UNION
+     SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "DRI Corpus")
+      ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+      ?dataset_has_dataset orkgp:HAS_DATASET      ?dataset_has_eval.
+      ?dataset_has_eval orkgp:HAS_EVALUATION    ?eval.
+      ?eval      rdfs:label              ?eval_lbl.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+     } 
+     UNION 
+     SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "DRI Corpus")
+      ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+      ?dataset_has_dataset orkgp:HAS_EVALUATION    ?eval.
+      ?eval      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+     } 
+
+```python
+def generate_sparql_query(input_question):
+    # Define the context
+    context = {
+        "extracted_terms": {
+            "DRI Corpus dataset": ["orkgr:R122689", "orkgc:Resource", "orkgc:Dataset"],
+            "evaluation metrics": ["orkgp:HAS_METRIC", "orkgp:HAS_EVALUATION"],
+            "benchmarking models": ["orkgp:HAS_MODEL"]
+        },
+        "candidates": {
+            "DRI Corpus dataset": ["orkgr:R122689", "orkgc:Dataset"],
+            "evaluation metrics": ["orkgp:HAS_METRIC", "orkgp:HAS_EVALUATION"],
+            "benchmarking models": ["

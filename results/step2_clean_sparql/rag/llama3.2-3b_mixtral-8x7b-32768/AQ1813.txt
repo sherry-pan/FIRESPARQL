@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkgp: <http://orkgp.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkgp:has_dataset ?dataset.
+  ?dataset a orkg:Dataset;
+           rdfs:label "iNaturalist 2018".
+  ?model orkp:has_accuracy ?accuracy.
+  ?accuracy orkp:has_metric ?metric;
+            orkp:has_value ?value.
+  ?metric rdfs:label "Top-1 Accuracy".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

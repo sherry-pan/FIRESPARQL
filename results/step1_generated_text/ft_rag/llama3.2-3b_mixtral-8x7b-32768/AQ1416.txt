@@ -1,0 +1,40 @@
+Question:
+What is the best performing model benchmarking the WMT2016 English-Russian dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?model      orkgp:HAS_MODEL      ?model_model.
+       FILTER (str(?model_model) = "WMT2016 English-Russian")
+      ?cont      orkgp:P32           ?model;
+                 orkgp:HAS_DATASET     ?dataset.
+       FILTER (str(?dataset) = "WMT2016 English-Russian")
+      ?cont      orkgp:HAS_EVALUATION ?eval.
+      ?eval      rdfs:label             ?eval_lbl.
+      ?eval      orkgp:P31            ?metric.
+      ?metric      orkgp:HAS_METRIC      ?metric_metric;
+                    orkgp:HAS_VALUE        ?value.
+      ?metric      rdfs:label             ?metric_lbl.
+      ?value      orkgp:HAS_VALUE        ?value.
+      ?cont      orkgp:HAS_METRIC      ?metric_metric;
+                 orkgp:HAS_VALUE        ?value.
+      ?cont      orkgp:HAS_EVALUATION ?eval.
+      ?cont      orkgp:P32           ?model;
+                 orkgp:HAS_DATASET     ?dataset.
+       FILTER (str(?model_model) = "WMT2016 English-Russian")
+      ?metric      orkgp:HAS_METRIC      ?metric_metric.
+      ?cont      orkgp:P31            ?metric.
+      ?cont      rdfs:label             ?cont_lbl.
+      ?cont      orkgp:HAS_EVALUATION ?eval.
+      ?cont      orkgp:HAS_DATASET     ?dataset.
+      ?cont      orkgp:HAS_MODEL      ?model_model.
+      ?cont      orkgp:P32           ?model;
+                 orkgp:HAS_DATASET     ?dataset.
+       FILTER (str(?cont_lbl) = "WMT2016 English-Russian")
+       ORDER BY DESC(?score)
+       LIMIT 1.
+      }    
+    NOTE: The SPARQL query is very long and not very readable. I will provide it as is.
+    ```python
+    orkgp:HAS_METRIC      ?metric_metric;
+              orkgp:HAS_VALUE        ?value

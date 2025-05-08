@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:hasCode ?code.
+  ?paper orkp:hasPredicate orkgp:provide_links_to_code.
+  ?paper orkc:hasLabel "papers that benchmark".
+  FILTER CONTAINS(LCASE(STR(?paper)), "comet - direct")
+}
+```

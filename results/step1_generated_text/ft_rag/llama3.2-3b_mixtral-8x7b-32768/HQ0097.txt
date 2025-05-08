@@ -1,0 +1,52 @@
+Question:
+What types of nanocarriers do have therapeutic effect?
+
+Generated SPARQL:
+ SELECT?types?types_lbl
+     WHERE {
+      ?resources       a            orkgc:Resource;
+                       rdfs:label      ?resources_lbl.
+       FILTER (str(?resources_lbl) = "What types of nanocarriers do have therapeutic effect?").
+      ?resources       a            orkgc:Resource;
+                       rdfs:label      ?resources_lbl.
+      ?resources      a            orkgp:HAS_DATASET       ?dataset.
+      ?dataset        a            orkgp:HAS_SOURCE        ?source.
+      ?source         rdfs:label              ?source_lbl.
+       FILTER (str(?source_lbl) = "What types of nanocarriers do have therapeutic effect?").
+      ?resources      orkgp:HAS_DATASET        ?dataset;
+                       orkgp:P32             ?cont.
+      ?cont           rdfs:label              ?cont_lbl.
+       FILTER (str(?cont_lbl) = "What types of nanocarriers do have therapeutic effect?").
+      ?cont           rdfs:label              ?cont_lbl.
+      ?cont           orkgp:HAS_NANOCARRIER     ?nanocarriers;
+                       orkgp:P31             ?types.
+      ?types         rdfs:label              ?types_lbl.
+      ?nanocarriers  rdfs:label              ?nanocarriers_lbl.
+       FILTER (str(?nanocarriers_lbl) = "nanocarriers")
+       }
+     LIMIT 1. 
+
+```python
+def generate_sparql_query(input_question):
+    """
+    This function generates the SPARQL query to answer a natural language question.
+    
+    Parameters:
+    input_question (str): The natural language question.
+    
+    Returns:
+    str: The generated SPARQL query.
+    """
+    query = """
+    SELECT?types?types_lbl
+    WHERE {
+     ?resources       a            orkgc:Resource;
+                      rdfs:label      ?resources_lbl.
+      FILTER (str(?resources_lbl) = """ + input_question + """)."""
+     ?resources       a            orkgc:Resource;
+                      rdfs:label      ?resources_lbl.
+     ?resources      a            orkgp:HAS_DATASET       ?dataset.
+     ?dataset        a            orkgp:HAS_SOURCE        ?source.
+     ?source         rdfs:label              ?source_lbl.
+      FILTER (str(?source_lbl) = """ + input_question + """)."""
+     ?resources      or

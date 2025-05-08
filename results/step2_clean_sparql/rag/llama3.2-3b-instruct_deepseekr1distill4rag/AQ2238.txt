@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?code_reference
+WHERE {
+  ?paper orkgc:has_code_reference ?code_reference.
+  ?paper orkgc:has_model ?model.
+  ?model orkgc:has_technique ?technique.
+  ?technique orkgc:has_benchmarking_purpose ?purpose.
+  FILTER(STRLIKE(?purpose, "MPAD-path"))
+}
+```

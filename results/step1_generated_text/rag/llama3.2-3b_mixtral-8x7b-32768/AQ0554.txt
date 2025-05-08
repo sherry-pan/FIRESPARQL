@@ -1,0 +1,33 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX orkp: <http://example.org/orkp#>
+PREFIX orkc: <http://example.org/orkc#>
+
+SELECT?title?id
+WHERE {
+ ?paper orkp:has_benchmark?benchmark.
+ ?benchmark orkp:includes?benchmark_included_by.
+ ?benchmark_included_by orkp:includes?benchmark_included_in.
+ ?benchmark_included_in orkp:includes?paper.
+ ?paper orkp:has_id?id.
+ ?paper orkp:has_title?title.
+  FILTER (bn:dataset == "orkgr:R987654")
+}
+```
+
+
+    Note that you will need to replace the PREFIX declarations with the actual URIs of the entities and properties in the ORKG. The `bn` prefix is used for the `Benchmark` class, but it is not explicitly mentioned in the context. The actual class URI should be replaced with the correct one. 
+
+    For the purpose of this task, assume that the actual class URI for the `Benchmark` class is `http://example.org/orkp#Benchmark`. 
+
+    Replace the `orkgr:R987654` in the FILTER clause with the actual URI of the Oxford-IIIT Pets dataset in the ORKG.
+
+    Replace the `orkgp:HAS_PAPER`, `orkgp:INCLUDES`, `orkgp:HAS_BENCHMARK` with the actual URIs of the corresponding predicates in the ORKG.
+
+    Replace the `orkgc:Resource` and `orkgc:Dataset` with the actual URIs of the corresponding classes in the ORKG.
+
+    Finally, replace the `orkp:has_benchmark`, `orkp:includes`, `orkp:has_id`, and `orkp:has_title` with the actual URIs of the corresponding properties

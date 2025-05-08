@@ -1,0 +1,61 @@
+Question:
+List the metrics that are used to evaluate models on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric
+    WHERE {
+   ?metric rdfs:label?metricLabel.
+   ?metric rdfs:label "metrics"@en.
+   ?resource orkgp:HAS_DATASET?dataset.
+   ?resource orkgp:EVALUATED_ON?evaluation.
+   ?dataset rdfs:label "Yelp-5"@en.
+   ?evaluation?hasMetric.
+   ?hasMetric rdfs:label "has metric"@en.
+    FILTER (STR(?metricLabel) = "AUC" OR STR(?metricLabel) = "Accuracy" OR STR(?metricLabel) = "F1 Score")
+    }
+   .END
+
+Note: The provided SPARQL query is just one possible solution. There may be other valid solutions.
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the provided question and context.
+
+    Args:
+        question (str): The natural language question in English.
+        context (dict): A dictionary containing the context information, including extracted terms, candidates, and background information.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+    
+    # Initialize the SPARQL query
+    sparql_query = ""
+    
+    # Add the SELECT clause
+    sparql_query += "SELECT?metric"
+    
+    # Add the WHERE clause
+    sparql_query += " WHERE {\n"
+    
+    # Add the query for metrics
+    sparql_query += " ?metric rdfs:label?metricLabel.\n"
+    sparql_query += " ?metric rdfs:label \"metrics\"@en.\n"
+    
+    # Add the query for the Yelp-5 benchmark dataset
+    sparql_query += " ?resource orkgp:HAS_DATASET?dataset.\n"
+    sparql_query += " ?dataset rdfs:label \"Yelp-5\"@en.\n"
+    
+    # Add the query for evaluating models
+    sparql_query += " ?resource orkgp:EVALUATED_ON?evaluation.\n"
+    
+    # Add the query for the has metric predicate
+    sparql_query += " ?evaluation?hasMetric.\n"
+    sparql_query += " ?hasMetric rdfs:label \"has metric\"@en.\n"
+    
+    # Add the filter clause for the metrics
+    sparql_query += "  FILTER (STR(?metricLabel) = \"AUC\" OR STR(?metricLabel) = \"Accuracy\" OR STR(?metricLabel) = \"F1 Score\")\n"
+    
+    # Close the WHERE

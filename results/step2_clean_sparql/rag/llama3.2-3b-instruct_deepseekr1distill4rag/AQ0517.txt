@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://orkg.org/orkg/resource/>
+PREFIX orkgc: <http://orkg.org/orkg/context/>
+PREFIX orkgp: <http://orkg.org/orkp/property/>
+SELECT ?title ?id WHERE {
+  ?paper orkgc:relatedTo ?benchmark.
+  ?benchmark orkgp:property ?benchmarkProperty.
+  ?benchmarkProperty orkgp:target ?benchmarkTarget.
+  ?benchmarkTarget orkgr:hasBenchmark ?benchmarkTargetBenchmark.
+  ?benchmarkTargetBenchmark orkgr:hasDataset ?dataset.
+  ?dataset rdfs:label "DCASE Dataset".
+  ?paper orkgc:hasTitle ?title.
+  ?paper orkgr:hasID ?id.
+}
+```

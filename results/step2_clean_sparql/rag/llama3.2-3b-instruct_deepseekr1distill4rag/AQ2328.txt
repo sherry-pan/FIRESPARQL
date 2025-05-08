@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkgr: <http://orkg.org/resource/>
+PREFIX orkgp: <http://orkg.org/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkgr:Papers;
+         orkgr:contains ?code;
+         orkgr:hasBenchmark ?benchmark.
+  ?benchmark orkgr:hasModel ?model.
+  ?model rdfs:label "MFEC model"@en.
+}
+```

@@ -1,0 +1,23 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset AESLC?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT?metric?value 
+WHERE {
+ ?benchmarkResult a orkgc:Resource.
+ ?benchmarkResult orkgr:hasBenchmarkResult?result.
+ ?result orkgr:hasMetric?metric.
+ ?result orkgr:hasValue?value.
+ ?result orkgr:dataset?dataset.
+  FILTER (str(?dataset) = "AESLC").
+ ?benchmarkResult orkgr:hasBenchmarkResult?topResult.
+ ?topResult orkgr:hasMetric?topMetric.
+ ?topResult orkgr:hasValue?topValue.
+  FILTER (str(?topMetric) = "validation research" AND str(?topValue) = "93.9").
+}
+```    Note: The URIs are placeholders and should be replaced with actual URIs from the ORKG RDF data dump. The actual URIs would depend on the structure of the RDF data, which is not shown here.<|eot_id|>

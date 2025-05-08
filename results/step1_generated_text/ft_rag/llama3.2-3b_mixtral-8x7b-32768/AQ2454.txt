@@ -1,0 +1,46 @@
+Question:
+List the code links in papers that use the GPT-2 (small) model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+SELECT?code
+WHERE {
+ ?model    orkgp:HAS_MODEL           ?model,
+            rdfs:label               ?model_label.
+  FILTER (str(?model_label) = "GPT-2 (small)")
+ ?benchmark      orkgp:HAS_BENCHMARK     ?benchmark,
+                  orkgp:HAS_MODEL           ?model.
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark,
+                orkgp:HAS_PAPER         ?paper,
+                orkgp:HAS_MODEL           ?model.
+ ?paper       orkgp:HAS_PAPER         ?paper,
+              rdfs:label               ?paper_label.
+ ?code       orkgp:HAS_CODE           ?code,
+              rdfs:label               ?code_label.
+ ?cont      rdfs:label               ?cont_label.
+  FILTER (str(?cont_label) = "papers")
+ ?benchmark      orkgp:HAS_BENCHMARK     ?benchmark,
+                  orkgp:HAS_MODEL           ?model.
+ ?model    orkgp:HAS_MODEL           ?model,
+            rdfs:label               ?model_label.
+  FILTER (str(?model_label) = "GPT-2 (small)")
+ ?cont         orkgp:HAS_BENCHMARK     ?benchmark,
+                orkgp:HAS_PAPER         ?paper,
+                orkgp:HAS_MODEL           ?model.
+ ?paper       orkgp:HAS_PAPER         ?paper,
+              rdfs:label               ?paper_label.
+ ?code       orkgp:HAS_CODE           ?code,
+              rdfs:label               ?code_label.
+}
+```sparql
+    The final answer to the question "List the code links in papers that use the GPT-2 (small) model in any benchmark?" is 
+    `?code` which corresponds to the value of the `HAS_CODE` property in the ORKG. This value is the code link of the papers that use the GPT-2 (small) model in any benchmark. 
+
+    Note that the query has some redundant parts. We will remove the redundant parts to make the query more efficient.
+    ```sparql
+SELECT?code
+WHERE {
+ ?model    orkgp:HAS_MODEL           ?model,
+            rdfs:label               ?model_label.
+  FILTER (str(?model_label) = "GPT-2 (small)")
+ ?cont        

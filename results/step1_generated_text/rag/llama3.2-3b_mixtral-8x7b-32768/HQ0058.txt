@@ -1,0 +1,29 @@
+Question:
+What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words to classfy user feedback as feature request? 
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgp: <http://www.openresearch.org/ontologies/orkgp#>
+PREFIX orkgr: <http://www.openresearch.org/ontologies/orkgr#>
+SELECT?study?precision?recall?f1score
+WHERE {
+ ?study orkgp:COMPARED_WITH?comparison.
+ ?study orkgr:hasAlgorithm?algorithm.
+ ?algorithm orkgr:hasFeature?feature.
+ ?feature orkgr:hasFeatureType orkgr:FeatureBagOfWords.
+ ?study orkgr:hasClassifies?classification.
+ ?classification orkgr:hasResource?resource.
+ ?resource orkgr:hasType orkgr:UserFeedback.
+ ?study orkgp:HAS_PRECISION?precision.
+ ?study orkgp:HAS_RECALL?recall.
+ ?study orkgp:HAS_F1_SCORE?f1score.
+  FILTER (STRWDL?precision = "precision" @EN).
+  FILTER (STRWDL?recall = "recall" @EN).
+  FILTER (STRWDL?f1score = "f1 values" @EN).
+}
+```sparql
+    If the query does not produce a result set, indicate that no results were found. No results found. 
+    If the query produces a result set, include the number of rows in the result set in the output. 
+    1 row(s) found. 
+
+    Please note that this task

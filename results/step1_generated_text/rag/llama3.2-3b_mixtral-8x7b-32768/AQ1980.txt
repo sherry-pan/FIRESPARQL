@@ -1,0 +1,43 @@
+Question:
+Where can I find code references in papers that have used the TCN model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?paper?code
+     WHERE {
+    ?paper orkg:has_paper?p.
+    ?p orkg:has_code_reference?code.
+    ?paper orkg:has_benchmark?bp.
+    ?bp orkg:has_model?tcn.
+    ?tcn orkg:label?tcn_label.
+     FILTER (bc:matches (?tcn_label, "TCN model")).
+     FILTER (bc:matches (?paper, "paper")).
+     FILTER (bc:matches (?code, "code reference")).
+     }
+    Note: The BC (BenchCode) match function is used to match strings. This function is not part of the standard SPARQL query syntax but is provided by some triple store implementations. It is assumed that this function is available in the system that will be used to execute the query. 
+    If the BC match function is not available, the query can be modified to use a different function, such as the standard SPARQL `matches` function with a regex pattern. 
+
+    Example use cases:
+    1. Finding papers that have used the ResNet model for training.
+    2. Finding code references in papers that have used the LeNet model for testing.
+    3. Finding papers that have used the VGG model for both training and testing.
+
+    Note: The provided context is just a sample and may not be sufficient to generate the correct SPARQL query for all possible input questions. The context should be adapted and extended to match the actual entities and properties in the ORKG. 
+
+    SPARQL Query Explanation:
+    1. The query starts by selecting two variables,?paper and?code.
+    2. The WHERE clause defines a pattern that matches the conditions specified in the question.
+    3. The pattern first matches papers that have used the TCN model for benchmarking purposes.
+    4. For each paper that matches this condition, it then matches code references that are associated with that paper.
+    5. The query uses the BC (BenchCode) match function to match strings, allowing for case-insensitive matching.
+    6. The query filters out results that do not match the conditions specified in the question.
+
+    Note: The query assumes that the ORKG has the required entities and properties to represent the relationships between papers, code references, and models. If the ORKG does not have these entities and properties, the query will not return any results. 
+
+    SPARQL Query Version 2:
+    SELECT?paper?code
+    WHERE {
+   ?paper orkg:has_paper?p.
+   ?p orkg:has_code_reference?code.
+   ?paper orkg:has_benchmark?bp.
+   ?bp orkg:has_model?tcn.
+   ?tcn orkg:label?tc

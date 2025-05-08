@@ -1,0 +1,21 @@
+```sparql
+PREFIX ork: <http://example.org/orkgr/>
+PREFIX orkg: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkgp/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasModel ?model.
+  ?model a orkg:Model.
+  ?model orkg:hasName "Funnel Transformer model".
+  ?model orkp:hasCode ?code.
+}
+GROUP BY ?paper
+HAVING COUNT(DISTINCT ?code) > 0
+ORDER BY ?paper
+LIMIT 100
+```

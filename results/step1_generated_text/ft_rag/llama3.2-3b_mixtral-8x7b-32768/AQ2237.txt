@@ -1,0 +1,46 @@
+Question:
+Provide a list of papers that have utilized the BCN+ELMo model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code?paper
+     WHERE {
+      ?model       orkgp:HAS_MODEL         orkgp:R43213;
+                  orkgp:P31              orkgp:P31.
+       FILTER (str(?model) = "BCN+ELMo model")
+      ?model       orkgp:HAS_DATASET        ?dataset.
+      ?dataset     orkgp:HAS_EVALUATION     ?eval.
+      ?eval         orkgp:P31                orkgp:P31;
+                    orkgp:HAS_DATASET        ?dataset.
+      ?dataset     orkgp:HAS_MODEL        ?model.
+      ?model       orkgp:HAS_UTILIZATION     ?util.
+      ?util         orkgp:P31                orkgp:P31;
+                    orkgp:HAS_DATASET        ?dataset;
+                    orkgp:HAS_MODEL        ?model;
+                    orkgp:HAS_CODE        ?code.
+       OPTIONAL {?model       orkgp:HAS_DATASET        ?dataset.}
+       OPTIONAL {?eval         orkgp:P31                orkgp:P31;
+                orkgp:HAS_DATASET        ?dataset.}
+       OPTIONAL {?util         orkgp:P31                orkgp:P31;
+                orkgp:HAS_DATASET        ?dataset;
+                orkgp:HAS_MODEL        ?model;}
+      ?paper       orkgp:HAS_EVALUATION     ?eval;
+                  orkgp:HAS_UTILIZATION     ?util.
+       OPTIONAL {?paper       orkgp:HAS_DATASET        ?dataset.}
+       OPTIONAL {?eval         orkgp:P31                orkgp:P31;
+                orkgp:HAS_DATASET        ?dataset.}
+       OPTIONAL {?util         orkgp:P31                orkgp:P31;
+                orkgp:HAS_DATASET        ?dataset;
+                orkgp:HAS_MODEL        ?model;}
+      ?paper       orkgp:HAS_MODEL        ?model;
+                  orkgp:HAS_UTILIZATION     ?util.
+       FILTER (str(?model) = "BCN+ELMo model")
+      ?code       orkgp:HAS_CODE        ?code.
+      ?paper      orkgp:P31                orkgp:P31.
+       FILTER (str(?code)!= "")
+       BIND (str(?code) AS?code)
+       BIND (str(?paper) AS?paper)
+    }   
+
+
+```python
+SELECT?code

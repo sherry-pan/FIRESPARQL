@@ -1,0 +1,23 @@
+Question:
+What are the metrics of evaluation over the Hutter Prize dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.com/orkg/>
+    PREFIX orkp: <http://example.com/orkp/>
+    PREFIX orkc: <http://example.com/orkc/>
+
+    SELECT?s?p?o
+    WHERE {
+     ?s orkp:hasValue?v.
+      FILTER (strContains(STR(?v), "F1-score") OR strContains(STR(?v), "accuracy") OR strContains(STR(?v), "validation research") OR strContains(STR(?v), "performance assessment") OR strContains(STR(?v), "evaluation method")).
+     ?s orkp:hasValue?v.
+      FILTER (strContains(STR(?v), "MNIST") OR strContains(STR(?v), "ACL_Anthology_dataset") OR strContains(STR(?v), "NLP_Benchmark") OR strContains(STR(?v), "AIDA") OR strContains(STR(?v), "MEANTIME")).
+     ?s orkp:hasValue?v.
+     ?s a orkp:Dataset.
+     ?s orkp:hasValue?v.
+     ?v a orkg:Metric.
+     ?v orkp:hasValue?o.
+     ?o a orkg:Property.
+    }
+    ```<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metricLabel
+WHERE {
+  ?model orkgp:used_to_evaluate ?dataset.
+  ?dataset rdfs:label "VTAB-1k benchmark dataset".
+  ?metric rdfs:label ?metricLabel.
+  FILTER (str(?metricLabel) =~ "accuracy" || 
+          str(?metricLabel) =~ "F1-score" || 
+          str(?metricLabel) =~ "precision" || 
+          str(?metricLabel) =~ "recall" || 
+          str(?metricLabel) =~ "AUC-ROC" || 
+          str(?metricLabel) =~ "AP" || 
+          str(?metricLabel) =~ "MCC")
+}
+```

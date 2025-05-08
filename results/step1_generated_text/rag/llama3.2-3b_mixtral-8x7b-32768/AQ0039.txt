@@ -1,0 +1,77 @@
+Question:
+Could you provide a list of models that have been tested on the seel.cse.lsu.edu/data/refsq17.zip benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?modelLabel?benchmark
+    WHERE {
+       ?model orkgp:HAS_MODEL?m. 
+       ?m orkgp:HAS_EVALUATION?b. 
+       ?b orkgp:HAS_BENCHMARK?benchmark. 
+       ?benchmark rdfs:label?benchmarkLabel. 
+       ?model rdfs:label?modelLabel. 
+        FILTER (STRLEN(?benchmarkLabel) > 0)
+        FILTER (STRLEN(?modelLabel) > 0)
+       ?model?m. 
+        SERVICE wikibase:label { bind(strips:strip(?benchmarkLabel). bind(strips:strip(?modelLabel)). ) }
+    }
+    END { }
+    }
+    ```python
+from rdflib import Graph, Literal, Namespace
+from rdflib.extras import parseQuery
+
+# Define the context
+context = {
+    "question": "Could you provide a list of models that have been tested on the seel.cse.lsu.edu/data/refsq17.zip benchmark dataset?",
+    "extracted_terms": {
+        "seel.cse.lsu.edu/data/refsq17.zip",
+        "models",
+        "tested on"
+    },
+    "candidates": {
+        "seel.cse.lsu.edu/data/refsq17.zip": [],
+        "models": [
+            {"uri": "orkgp:HAS_MODEL", "rdfs:label": "Has Model", "rdf:type": "orkgp:Predicate"}
+        ],
+        "tested on": [
+            {"uri": "orkgp:HAS_EVALUATION", "rdfs:label": "Has Evaluation", "rdf:type": "orkgp:Predicate"}
+        ]
+    }
+}
+
+# Define the prefixes
+PREFIX orkgp = "http://example.org/orkgp#"
+PREFIX wikibase = "http://example.org/wikibase#"
+
+# Define the query
+query = """
+    SELECT?model?modelLabel?benchmark
+    WHERE {
+       ?model orkgp:HAS_MODEL?m. 
+       ?m orkgp:HAS_EVALUATION?b. 
+       ?b orkgp:HAS_BENCHMARK?benchmark. 
+       ?benchmark rdfs:label?benchmarkLabel. 
+       ?model rdfs:label?modelLabel. 
+        FILTER (STRLEN(?benchmarkLabel) > 0)
+        FILTER (STRLEN(?modelLabel) > 0)
+       ?model?m. 
+        SERVICE wikibase:label { bind(strips:strip(?benchmarkLabel). bind(strips:strip(?modelLabel)). ) }
+    }
+    END { }
+"""
+
+# Parse the query
+parsed_query = parseQuery(query)
+
+# Print the query
+print(parsed_query)
+```python
+The final answer is:
+
+```
+SELECT?model?modelLabel?benchmark
+WHERE {
+   ?model orkgp:HAS_MODEL?m. 
+   ?m orkgp:HAS_EVALUATION?b. 
+   ?b orkgp:HAS_BENCHMARK?benchmark. 
+   ?benchmark rdfs

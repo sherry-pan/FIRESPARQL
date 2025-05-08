@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkgp: <http://orkgp.org/ontology/>
+PREFIX orkgc: <http://orkgc.org/ontology/>
+
+SELECT ?model ?modelLabel
+WHERE {
+    ?model orkgp:HAS_MODEL ?modelModel.
+    ?modelModel orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgc:Dataset ?datasetLabel.
+    ?evaluation orkgc:hasBenchmark "SciCite".
+    ?model orkgp:HAS_EVALUATION ?evaluation.
+    ?evaluation orkgc:hasEvaluationOn ?evaluationOn.
+    ?evaluationOn ?dataset.
+    
+    BIND(CONCAT(?datasetLabel, " evaluated through ", ?evaluationOn) AS ?modelLabel)
+}
+```

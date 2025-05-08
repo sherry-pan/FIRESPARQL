@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkgc#>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/orkgp#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value WHERE {
+  ?benchmark orkp:hasDataset orkg:R122690.
+  ?benchmark orkp:hasMetric ?metric.
+  ?benchmark orkp:hasValue ?value.
+  FILTER(xsd:float(?value) = ?highestValue)
+}
+
+ORDER BY DESC(?value)
+LIMIT 1
+```

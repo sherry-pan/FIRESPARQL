@@ -1,0 +1,43 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciCite dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "SciCite dataset")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+          ?paper         orkgp:HAS_BENCHMARK     ?benchmark;
+                          orkgp:P31              ?cont.
+          ?paper_lbl      orkgp:HAS_LABEL         ?label;
+                          orkgp:HAS_DATASET      ?dataset;
+                          orkgp:P31              ?cont.
+          ?label          rdfs:label              ?paper_lbl.
+      }     
+
+
+```python
+SELECT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SciCite dataset")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?paper         orkgp:HAS_BENCHMARK     ?benchmark;
+                 orkgp:P31              ?cont.
+ ?paper_lbl      orkgp:HAS_LABEL         ?label;
+                 orkgp:HAS_DATASET      ?dataset;
+                 orkgp:P31              ?cont.
+ ?label          rdfs:label              ?paper_lbl.
+}
+```python
+print("SELECT?paper?paper_lbl")
+print("WHERE {")
+print(" ?dataset       a                orkgc:Dataset;")
+print("  rdfs:label      ?dataset_lbl.")
+print("  FILTER (str(?dataset_lbl) = \"SciCite dataset\")")
+print(" ?benchmark      orkgp:HAS_DATASET      ?dataset.")
+print(" ?cont          orkgp:

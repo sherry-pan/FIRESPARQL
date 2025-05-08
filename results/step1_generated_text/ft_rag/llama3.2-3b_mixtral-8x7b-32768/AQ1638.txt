@@ -1,0 +1,28 @@
+Question:
+Which model has achieved the highest Score score on the Ball in cup, catch (DMControl100k) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?score) AS?score)
+     WHERE {
+    ?benchmark orkgp:HAS_BENCHMARK?cont; orkgp:P32?cont orkgp:HAS_DATASET?dataset.
+     FILTER(REGEX(STR(?dataset), "Ball in cup, catch (DMControl100k)", "i"))
+    ?cont orkgp:P31?cont orkgp:HAS_MODEL?model.
+    ?model orkgp:HAS_MODEL?model_lbl.
+    ?cont orkgp:HAS_SCORE?score.
+    ?score orkgp:HAS_VALUE?score_value.
+     BIND(xsd:float(?score_value) AS?score)
+     } 
+
+```
+
+## Step 1: Identify the entities and properties mentioned in the question.
+The entities mentioned are "model" and "Ball in cup, catch (DMControl100k) benchmark dataset". The properties mentioned are "achieved the highest Score score" and "has model", "has dataset", "has benchmark", "has score".
+
+## Step 2: Identify the candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question.
+From the context, the candidate entities are "Ball in cup, catch (DMControl100k) benchmark dataset", "model", and "achieved the highest Score score". The candidate properties are "has model", "has dataset", "has benchmark", and "has score".
+
+## Step 3: Determine the relationships between the entities and properties.
+The "Ball in cup, catch (DMControl100k) benchmark dataset" is a benchmark, and a model has a benchmark. The "model" has a model label. The "achieved the highest Score score" is a score, and a benchmark has a score.
+
+## Step 4: Construct the SPARQL query based on the relationships determined in step 3.
+The query should filter the benchmarks to only include the "Ball in cup, catch (DMControl100k)"

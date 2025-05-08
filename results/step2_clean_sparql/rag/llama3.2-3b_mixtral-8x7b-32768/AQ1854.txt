@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?dataset ?benchmark
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkp:hasBenchmark ?benchmark.
+  ?benchmark a orkc:Benchmark.
+  ?dataset orkgp:hasResearchField ?researchField.
+  ?researchField a orkg:ResearchField.
+  ?researchField orkgp:hasResearchField "Joint Entity and Relation Extraction".
+  FILTER (str(?benchmark) = "MPQA" || str(?benchmark) = "Benchmark MPQA")
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkgp:Model;
+         orkgp:has_score ?score.
+  ?score orkgp:has_accuracy_value ?accuracy;
+         orkgr:for_dataset ?dataset.
+  ?dataset orkgr:has_name "SST-5 Fine-grained classification".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

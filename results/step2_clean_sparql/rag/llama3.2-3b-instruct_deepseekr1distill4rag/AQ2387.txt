@@ -1,0 +1,13 @@
+```sparql
+SELECT ?uri ?label 
+WHERE {
+  ?uri a ora:Resource .
+  FILTER (
+    CONTAINS(LCASE(STR(?uri)), 'http://dx.doi.org/10.13052/jwe1540-9589.2075') || 
+    CONTAINS(LCASE(STR(?uri)), 'orkgr:R284317')
+  ) .
+  SERVICE orkgr:query { 
+    ?uri ora:label ?label .
+  }
+}
+```

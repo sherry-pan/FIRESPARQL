@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkgc:Model.
+  ?model orkgc:has_dataset ?dataset.
+  ?dataset orkgr:Sequential_CIFAR-10.
+  ?model orkgp:Unpermuted_Accuracy ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

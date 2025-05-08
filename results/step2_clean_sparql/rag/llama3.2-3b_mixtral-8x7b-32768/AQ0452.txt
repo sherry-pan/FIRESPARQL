@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/Resource/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/Property/>
+
+SELECT ?paper ?paperTitle ?paperId
+WHERE {
+  ?paper orkg:hasDataset orkgc:Resource ?dataset.
+  ?dataset orkgc:label "PubMedQA"@en.
+  ?paper orkgp:hasPaper ?paperEntity.
+  ?paperEntity orkgp:hasBenchmark ?benchmark.
+  ?benchmark orkgp:hasDataset ?datasetBenchmark.
+  ?datasetBenchmark orkgp:hasDataset ?dataset.
+  ?paper orkgp:hasTitle ?paperTitle.
+  ?paper orkgp:hasId ?paperId.
+}
+```

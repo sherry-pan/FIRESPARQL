@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?uri ?label ?dataset ?study
+WHERE {
+  ?uri orkgc:resource ?rdfs_label.
+  FILTER (STR(?rdfs_label) IN ("MNIST", "ACL Anthology Corpus", "Journal Article"))
+  
+  ?uri orkgr:data_sets ?dataset.
+  ?dataset a orkgc:Dataset.
+
+  ?relatedResource orkgc:resource ?relatedLabel.
+  FILTER (STR(?relatedLabel) IN ("R147246", "R284317"))
+
+  ?relatedResource orkgr:compared_studies ?study.
+  ?study a orkgc:ResearchPaper.
+}
+```

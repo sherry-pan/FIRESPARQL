@@ -1,0 +1,19 @@
+Question:
+List the code links in papers that use the POP3D model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT?code_link
+WHERE {
+ ?paper orkgr:R284317 orkgp:has_code_link?code_link.
+ ?paper orkgp:has_model?model.
+ ?model orkgr:POP3D_model?model.
+ ?paper orkgp:has_benchmark?benchmark.
+ ?benchmark orkgp:has_model?model.
+  FILTER (str(?model) = "POP3D")
+}
+```<|eot_id|>

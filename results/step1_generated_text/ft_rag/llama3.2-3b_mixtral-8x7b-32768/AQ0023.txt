@@ -1,0 +1,90 @@
+Question:
+Could you provide a list of models that have been tested on the SciCite benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgp:R134855 orkgp:P20?value.
+      ?value orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31?cont.
+      ?cont orkgp:P21?eval.
+      ?eval orkgp:HAS_EVALUATION?evalu.
+      ?eval orkgp:HAS_MODEL?model.
+      ?model rdfs:label?model_lbl.
+      }
+      ```python
+def get_orkg_query(context):
+    """
+    This function generates a SPARQL query based on the input context.
+    The generated query is designed to query the Open Research Knowledge Graph (ORKG) and answer the input question.
+    """
+    # Extract the question and context from the input
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+
+    # Define the SPARQL query
+    query = """
+    SELECT?model?model_lbl
+    WHERE {
+      orkgp:R134855 orkgp:P20?value.
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P31?cont.
+     ?cont orkgp:P21?eval.
+     ?eval orkgp:HAS_EVALUATION?evalu.
+     ?eval orkgp:HAS_MODEL?model.
+     ?model rdfs:label?model_lbl.
+    }
+    """
+
+    return query
+
+# Example usage
+context = {
+    "question": "Could you provide a list of models that have been tested on the SciCite benchmark dataset?",
+    "extracted_terms": {
+        "SciCite benchmark dataset",
+        "models",
+        "tested on"
+    },
+    "candidates": {
+        "SciCite benchmark dataset": [
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "SciCite",
+                "rdf:type": "orkgc:Resource"
+            },
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "SciCite",
+                "rdf:type": "orkgc:Dataset"
+            },
+            {
+                "uri": "orkgp:HAS_DATASET",
+            }
+        ],
+        "models": [
+            {
+                "uri": "orkgp:HAS_MODEL",
+            }
+        ],
+        "tested on": [
+            {
+                "uri": "orkgp:HAS_EVALUATION",
+            }
+        ]
+    }
+}
+
+query = get_orkg_query(context)
+print(query)
+```python
+def get_orkg_query(context):
+    """
+    This function generates a SPARQL query based on the input context.
+    The generated query is designed to query the Open Research Knowledge Graph (ORKG) and answer the input question.
+    """
+    # Extract the question and context from the input
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+

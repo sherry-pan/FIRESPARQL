@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper a orkgc:Paper.
+  ?paper orkgp:utilizes ?model.
+  ?model orkgr:label ?modelLabel.
+  ?model orkgr:uri ?modelUri.
+  ?model orkgr:hasCode ?code.
+  FILTER (STR(?modelLabel) = "Rainbow+SEER model")
+  FILTER (STR(?modelUri) = "https://example.org/Rainbow_SEER_model")
+}
+```

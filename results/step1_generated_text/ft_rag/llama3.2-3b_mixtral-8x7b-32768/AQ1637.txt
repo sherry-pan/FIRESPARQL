@@ -1,0 +1,25 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Cart Pole (OpenAI Gym) dataset")
+ ?benchmark      orkgp:P30      ?dataset;
+                  rdfs:label      ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "benchmark")
+ ?cont           orkgp:P31      ?benchmark;
+                  rdfs:label      ?cont_lbl.
+  FILTER (str(?cont_lbl) = "cont")
+ ?model         orkgp:HAS_MODEL  ?cont;
+                  rdfs:label      ?model_lbl.
+}
+ORDER BY DESC(?model_lbl)
+LIMIT 1;
+```sparql
+
+    The above code is already the correct SPARQL query to answer the input question. The query works as follows:
+    1. It

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkgc: <http://orkgr.org/resource/ontology/>
+PREFIX orkgp: <http://orkgr.org/predicate/ontology/>
+SELECT ?metric ?value WHERE {
+  ?dataset a orkgc:Dataset.
+  ?dataset orkgc:resourceURI "Atari 2600 Freeway".
+  ?benchmark_result a orkgp:BenchmarkResult.
+  ?benchmark_result orkgp:dataset ?dataset.
+  ?benchmark_result orkgp:metric ?metric.
+  ?benchmark_result orkgp:hasValue ?value.
+} ORDER BY DESC(?value) LIMIT 1
+```

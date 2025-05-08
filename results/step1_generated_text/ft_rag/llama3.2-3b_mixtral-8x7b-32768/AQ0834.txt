@@ -1,0 +1,59 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+    ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+     FILTER (str(?dataset_lbl) = "QNLI")
+    ?benchmark      orkgp:HAS_DATASET      ?dataset.
+    ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+    ?cont          a                    orkgp:Container;
+                    orkgp:HAS_EVALUATION     ?eval.
+    ?eval          orkgp:EVALUATED_ON     ?cont;
+                   orkgp:HAS_METRIC        ?metric.
+    ?metric       rdfs:label              ?metric_lbl.
+     }    
+
+
+```python
+SELECT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "QNLI")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont          a                    orkgp:Container;
+                 orkgp:HAS_EVALUATION     ?eval.
+ ?eval          orkgp:EVALUATED_ON     ?cont;
+                 orkgp:HAS_METRIC        ?metric.
+ ?metric       rdfs:label              ?metric_lbl.
+}
+``````python
+def generate_sparql_query(input_question, context):
+    # Get the extracted terms and candidates from the context
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+
+    # Get the terms and candidates for the input question
+    question_terms = extracted_terms.get(input_question, [])
+    question_candidates = candidates.get(input_question, [])
+
+    # Get the SPARQL query template
+    sparql_query_template = """
+      SELECT?metric?metric_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "{dataset_label}")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont          a                    orkgp:Container;
+                       orkgp:HAS_EVALUATION     ?eval.
+       ?eval          orkgp:EVALUATED_ON     ?cont;
+                       orkgp:HAS_METRIC        ?metric.
+       ?metric       rdfs:label              ?metric_lbl.
+      }
+   

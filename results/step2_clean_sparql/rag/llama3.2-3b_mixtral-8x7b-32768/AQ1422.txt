@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+   ?model orkgp:HAS_BEST_PERFORMANCE ?performance.
+   ?performance orkgp:HAS_METRIC ?metric.
+   ?performance orkgp:ON_DATASET ?dataset.
+   ?dataset rdfs:label ?datasetLabel.
+   FILTER (str(?metric) = "BLEU Score Metric" && str(?datasetLabel) = "IWSLT2014 German-English").
+}
+```

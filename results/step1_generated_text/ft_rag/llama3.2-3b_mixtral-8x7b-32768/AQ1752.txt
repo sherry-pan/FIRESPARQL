@@ -1,0 +1,35 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Montezuma's Revenge benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?benchmark      orkgp:HAS_BENCHMARK      ?cont.
+      ?cont           orkgc:HAS_DATASET        ?dataset.
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label            ?dataset_lbl.
+      ?benchmark      orkgp:HAS_METRIC        ?metric.
+      ?metric         orkgp:HAS_VALUE          ?value.
+      ?value         orkgp:HAS_DATASET        ?dataset;
+                      orkgp:HAS_METRIC        ?metric.
+      ?cont           orkgp:HAS_MODEL          ?model.
+      ?model         rdfs:label                ?model_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "Atari 2600 Montezuma's Revenge"))
+      ?cont           orkgp:HAS_BENCHMARK      ?cont.
+      ?cont           orkgp:HAS_MODEL          ?model;
+                      orkgp:HAS_BEST_PERFORMANCE ?best.
+      ?best         rdfs:label                ?best_lbl.
+       FILTER(REGEX(STR(?best_lbl), "performed best"))
+      ?model      orkgp:HAS_VALUE          ?value.
+      ?value      orkgp:HAS_METRIC        ?metric.
+       FILTER(REGEX(STR(?metric), "Score"))
+      ?model      rdfs:label                ?model_lbl.
+      ?model      orkgp:HAS_MODEL          ?model.
+      ?model      orkgp:HAS_BEST_PERFORMANCE ?best.
+      ?best      orkgp:HAS_VALUE          ?value.
+      ?value      rdfs:label                ?value_lbl.
+       FILTER(REGEX(STR(?value_lbl), "best"))
+      ?cont      orkgp:HAS_MODEL          ?model.
+      ?cont      orkgp:HAS_BENCHMARK      ?cont.
+      ?cont      orkgp:HAS_BEST_PERFORMANCE ?best.
+      ?cont      orkgp:HAS_VALUE          

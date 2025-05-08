@@ -1,0 +1,66 @@
+Question:
+Could you provide a list of models that have been tested on the SST-2 Binary classification benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "SST-2")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+          ?cont           orkgp:HAS_EVALUATION     ?eval.
+          ?eval           orkgp:P31               ?paper.
+          ?paper          orkgp:HAS_MODEL          ?model.
+          ?model         rdfs:label                ?model_lbl.
+     }
+     ```
+
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SST-2")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont           orkgp:HAS_EVALUATION     ?eval.
+ ?eval           orkgp:P31               ?paper.
+ ?paper          orkgp:HAS_MODEL          ?model.
+ ?model         rdfs:label                ?model_lbl.
+} ```
+
+
+    } ```python
+import pandas as pd
+from orkg import Graph
+
+def get_models_from_sst2_binary_dataset(graph):
+    query = """
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "SST-2")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont           orkgp:HAS_EVALUATION     ?eval.
+     ?eval           orkgp:P31               ?paper.
+     ?paper          orkgp:HAS_MODEL          ?model.
+     ?model         rdfs:label                ?model_lbl.
+    }
+    """
+    results = graph.query(query)
+    models = [(model, model_lbl) for model, model_lbl in results]
+    return models
+
+# Load the graph
+graph = Graph("http://example.org/orkg")
+
+# Get the models from the SST-2 Binary classification benchmark dataset
+models = get_models_from_sst2_binary_dataset(graph)
+
+# Print the models
+for model, model_lbl in models:
+    print(f"Model: {model_lbl}, Paper: {model}")
+```python
+    # If

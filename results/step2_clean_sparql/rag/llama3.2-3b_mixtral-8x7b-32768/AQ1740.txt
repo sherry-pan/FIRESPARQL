@@ -1,0 +1,14 @@
+```sparql
+SELECT ?m ?sc
+WHERE {
+  ?m a ora:Model.
+  ?m ora:hasModel ?m1.
+  ?m1 ora:hasScore ?sc.
+  ?m1 ora:hasDataset ?s.
+  ?s a ora:Dataset.
+  FILTER (str(?s) = "Sequential MNIST").
+  FILTER (str(?sc) = "Permuted Accuracy score").
+}
+ORDER BY DESC(?sc)
+LIMIT 1
+```

@@ -1,0 +1,48 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WebQuestions dataset?
+
+Generated SPARQL:
+ ```sparql
+     SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "MPQA")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                           orkgp:P31               ?model.
+          ?model         rdfs:label              ?model_lbl.
+          ?cont          rdfs:label              ?paper_lbl.
+          ?cont          orkgp:P32               ?model;
+                           orkgp:HAS_EVALUATION   ?eval.
+          ?eval          rdfs:label              ?eval_lbl.
+           FILTER (str(?eval_lbl) = "benchmarked on")
+          ?cont          orkgp:HAS_MODEL         ?model.
+          ?model         rdfs:label              ?paper_lbl.
+     }
+     ```
+
+
+## Step 1: Determine the relevant entities and properties from the context
+The context provides information about the entities and properties mentioned in the question. We need to identify the relevant entities and properties that can be used to generate the SPARQL query.
+
+## Step 2: Identify the entities and properties mentioned in the question
+The question mentions the following entities and properties:
+- Research paper titles and IDs
+- Benchmarked models
+- WebQuestions dataset
+
+## Step 3: Map the entities and properties to the ORKG
+From the context, we can map the entities and properties to the ORKG as follows:
+- Research paper titles and IDs: orkgc:Contribution
+- Benchmarked models: orkgp:HAS_MODEL
+- WebQuestions dataset: orkgc:Dataset
+
+## Step 4: Generate the SPARQL query
+Using the mapped entities and properties, we can generate the SPARQL query as follows:
+```sparql
+SELECT DISTINCT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?

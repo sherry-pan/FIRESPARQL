@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metric WHERE {
+    ?model rdf:type orkgr:Model ;
+           rdfs:label ?modelLabel ;
+           orkgp:has_model orkgp:best_performing_model .
+
+    ?metric rdf:type orkgr:Metric ;
+            rdfs:label ?metricLabel ;
+            orkgp:has_metric orkgr:BLEU_SCORE .
+
+    FILTER (?metricLabel = "BLEU score"^^xsd:string)
+    FILTER (?modelLabel = "best performing model"^^xsd:string)
+}
+```

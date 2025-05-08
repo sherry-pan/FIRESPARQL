@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkp:Benchmark.
+    ?benchmark orkgr:has_dataset_label "DocRED (Human-annotated)".
+    ?benchmark orkgr:has_metric ?metric.
+    ?benchmark orkgr:has_value ?value.
+    FILTER (lang(?metric) = "en" && lang(?value) = "en")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

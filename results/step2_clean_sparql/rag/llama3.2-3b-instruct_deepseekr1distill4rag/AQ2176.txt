@@ -1,0 +1,20 @@
+```sparql
+SELECT ?uri
+WHERE {
+  ?uri a ora:Resource.
+  ?uri ora:label ?label.
+  FILTER (REGEX(?label, "PAR Transformer Large model"))
+  
+  OPTIONAL {
+    ?uri ora:hasProperty ?property.
+    ?property ora:label ?propertyLabel.
+    FILTER (REGEX(?propertyLabel, "code references"))
+  }
+  
+  OPTIONAL {
+    ?uri ora:usedFor ?usage.
+    ?usage ora:label ?usageLabel.
+    FILTER (REGEX(?usageLabel, "benchmarking purposes"))
+  }
+}
+```

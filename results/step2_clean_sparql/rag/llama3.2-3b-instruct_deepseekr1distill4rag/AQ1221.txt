@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkcr: <http://example.org/orkcr/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkcr:has_benchmark_result ?result.
+  ?result orkcr:has_metric ?metric.
+  ?result orkcr:has_value ?value.
+  ?dataset orkgr:Ball_in_cup_catch_DMControl500k_dataset.
+}
+ORDER BY DESC(?value) 
+LIMIT 1
+```

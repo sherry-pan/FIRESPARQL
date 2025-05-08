@@ -1,0 +1,30 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset MLDoc Zero-Shot English-to-Spanish?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+         orkgp:R1 orkgp:P31 orkgp:R122689.
+         orkgp:R1 orkgc:HAS_DATASET orkgc:R122689.
+         orkgc:HAS_DATASET orkgp:HAS_BENCHMARK_RESULT.
+         orkgp:HAS_BENCHMARK_RESULT orkgp:R1.
+         orkgp:R1 orkgp:HAS_METRIC orkgp:HAS_VALUE.
+         orkgp:HAS_METRIC orkgp:R1.
+         orkgp:HAS_VALUE orkgp:R1.
+        ?metric orkgp:HAS_METRIC orkgp:HAS_METRIC. 
+        ?value orkgp:HAS_VALUE orkgp:HAS_VALUE.
+         orkgp:HAS_METRIC orkgp:HAS_METRIC orkgp:HAS_METRIC.
+         orkgp:HAS_VALUE orkgp:HAS_VALUE orkgp:HAS_VALUE.
+        ?metric orkgp:HAS_METRIC?metric.
+        ?value orkgp:HAS_VALUE?value.
+         orkgp:R1?metric?value.
+         FILTER(REGEX(STR(?metric), "accuracy|F1-score|ROC-AUC|AP", "i"))
+         FILTER(REGEX(STR(?value), "[0-9]+", "i"))
+     }
+     ORDER BY DESC(?value) 
+
+    Note that this query assumes that the top result is the one with the highest value. This may not always be the case, depending on the specific problem and the dataset being used. The query may need to be modified to correctly identify the top result. 
+
+    Also, note that the use of `FILTER` with `REGEX` may not be the most efficient way to filter the results, especially for large datasets. A more efficient approach would be to use a `WHERE` clause with a `FILTER` or a `BOUND` clause. However, this would require a more complex query structure and may not be feasible for this specific use case. 
+
+    Finally, note that the `ORDER BY DESC(?value)` clause is used to sort the results in descending order based on the value. This is a common convention in ORKG queries, but it may not be the best approach in all cases.

@@ -1,0 +1,58 @@
+Question:
+Can you list the models that have been evaluated on the enwiki8 dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Resource;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "enwiki8")
+          ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+          ?dataset_has_dataset     a                orkgp:HAS_DATASET;
+                                     rdfs:label      ?has_dataset_lbl.
+          ?cont         orkgp:HAS_DATASET      ?dataset_has_dataset.
+          ?cont         orkgp:P31           ?cont_has_model.
+          ?cont_has_model     rdfs:label      ?cont_lbl.
+          ?model         a                orkgp:HAS_MODEL;
+                           rdfs:label      ?cont_lbl.
+          ?model         rdfs:label              ?model_lbl.
+     }
+     ORDER BY?model_lbl ASC
+    LIMIT 1000.    
+
+
+    ```python
+    import pandas as pd
+    from orkgp import ORKG
+
+    # Create an ORKG object
+    orkgp = ORKG()
+
+    # Create a query
+    query = """
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Resource;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "enwiki8")
+     ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+     ?dataset_has_dataset     a                orkgp:HAS_DATASET;
+                               rdfs:label      ?has_dataset_lbl.
+     ?cont         orkgp:HAS_DATASET      ?dataset_has_dataset.
+     ?cont         orkgp:P31           ?cont_has_model.
+     ?cont_has_model     rdfs:label      ?cont_lbl.
+     ?model         a                orkgp:HAS_MODEL;
+                      rdfs:label      ?cont_lbl.
+     ?model         rdfs:label              ?model_lbl.
+    }
+    ORDER BY?model_lbl ASC
+    LIMIT 1000.
+    """
+
+    # Execute the query
+    results = orkgp.query(query)
+
+    # Print the results
+    print(results)
+    ```
+    The code is designed to query the ORKG database, which is a semantic knowledge graph designed to represent, compare, and retrieve scholarly contributions. The query is designed to retrieve models that have been evaluated on the enwiki8 dataset. The code uses the ORKG library to create an object, define a query, and execute it on the database. The results are then printed to the console. The query is designed to be efficient, with a limit of 1000 results and an ascending order by model label. The query is also designed to

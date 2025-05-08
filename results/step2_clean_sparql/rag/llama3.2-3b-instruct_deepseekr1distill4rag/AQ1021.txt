@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgr: <http://orkgr.org/ontology/>
+PREFIX orkgc: <http://orkgr.org/schema/ontology#>
+PREFIX orkgp: <http://orkgr.org/schema/predicate/>
+
+SELECT ?metric
+WHERE {
+  ?metric orkgc:hasMetric ?metric_value .
+  ?metric_value orkgc:hasEvaluationOn ?evaluation_on .
+  ?evaluation_on orkgr:hasDataset ?dataset .
+  FILTER (?dataset = orkgp:PWC_Leaderboards_restricted_dataset)
+}
+```

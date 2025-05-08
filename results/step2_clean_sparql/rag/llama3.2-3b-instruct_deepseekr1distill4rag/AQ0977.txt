@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkg/>
+PREFIX orkgp: <http://example.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?m ?p ?o 
+WHERE {
+  ?m rdfs:label ?mLabel.
+  ?m orkgc:type ?mType.
+  ?m ?p ?o.
+  FILTER (?mType = "Metric").
+  FILTER (?mLabel = "evaluation metrics" || ?mLabel = "performance" || ?mLabel = "accuracy").
+}
+LIMIT 10
+```

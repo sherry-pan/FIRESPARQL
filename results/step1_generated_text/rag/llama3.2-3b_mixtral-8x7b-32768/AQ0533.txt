@@ -1,0 +1,34 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/#>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?title?id
+WHERE {
+ ?paper orkg:hasResearchPaper?r.
+ ?r orkg:hasBenchmark?b.
+ ?b orkg:includes?dataset.
+ ?dataset orkg:uri?uri.
+  FILTER (?uri = <http://www.openresearchknowledgegraph.org/ontology/#ShARe/CLEF_eHealth_corpus_dataset>).
+ ?paper orkg:hasID?id.
+ ?paper rdfs:label?title.
+}
+```sparql
+    Note: The SPARQL query is in the format of the Open Research Knowledge Graph (ORKG). The prefix declarations are assumed to be defined elsewhere, and the query is written in a way that assumes the existence of certain entities, properties, and relationships in the ORKG. The query is designed to retrieve the titles and IDs of research papers that include a benchmark for the ShARe/CLEF eHealth corpus dataset. 
+
+    The query works as follows:
+
+    1. It starts by selecting the titles and IDs of research papers.
+    2. It then filters the results to only include papers that have a benchmark.
+    3. The benchmark is then filtered to only include those that are associated with the ShARe/CLEF eHealth corpus dataset.
+    4. Finally, it retrieves the titles and IDs of the research papers that match these conditions. 
+
+    Please note that the actual query may need to be modified based on the actual structure of the ORKG. 
+
+    Also, the SPARQL query assumes that the entities and properties mentioned in the question are correctly linked in the ORKG.

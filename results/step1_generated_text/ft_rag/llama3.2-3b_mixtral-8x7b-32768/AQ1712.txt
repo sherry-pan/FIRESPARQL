@@ -1,0 +1,46 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Enduro dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Enduro Dataset")
+      ?benchmark      orkgp:P30      ?dataset;
+                      orkgp:P31      ?eval.
+      ?cont         orkgp:HAS_EVALUATION      ?eval;
+                    orkgp:HAS_DATASET         ?dataset.
+      ?model       orkgp:HAS_MODEL          ?eval;
+                  orkgp:HAS_MODEL          ?cont.
+      ?model      rdfs:label              ?model_lbl.
+       ORDER BY DESC(?eval)
+      ?model      orkgp:HAS_MODEL          ?eval;
+                 orkgp:HAS_MODEL          ?cont.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:HAS_MODEL          ?eval.
+      ?model      rdfs:label              ?model_lbl.
+      ?model      orkgp:HAS_MODEL          ?eval.
+      ?model      rdfs:label              ?model_lbl.
+       }   
+
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Enduro Dataset")
+ ?benchmark      orkgp:P30      ?dataset;
+                 orkgp:P31      ?eval.
+ ?cont         orkgp:HAS_EVALUATION      ?eval;
+                orkgp:HAS_DATASET         ?dataset.
+ ?model       orkgp:HAS_MODEL          ?eval;
+                orkgp:HAS_MODEL          ?cont.
+ ?model      rdfs:label              ?model_lbl.
+  ORDER BY DESC(?eval)
+ ?model      orkgp:HAS_MODEL          ?eval;
+            orkgp:HAS_MODEL          ?cont.
+ ?model      rdfs:label              ?model_lbl.
+ ?model      orkgp:HAS_MODEL          ?eval.
+

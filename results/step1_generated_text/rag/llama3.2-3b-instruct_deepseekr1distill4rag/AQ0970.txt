@@ -1,0 +1,23 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 HERO benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+    PREFIX orkgc: <http://orkg.org/orkg/class/>
+    PREFIX orkgr: <http://orkg.org/orkg/resource/>
+
+    SELECT?m?p?o
+    WHERE {
+     ?m a orkgp:Predicate.
+     ?m rdfs:label?mLabel.
+     ?m orkgp:label?mLabel.
+     ?m orkgp:domain?p.
+     ?p a orkgc:Resource.
+     ?p rdfs:label?pLabel.
+     ?p orkgp:label?pLabel.
+     ?p orkgp:range?o.
+      FILTER (STRLIKE(?pLabel, "validation" AND STRLIKE(?oLabel, "accuracy" OR STRLIKE(?oLabel, "precision" OR STRLIKE(?oLabel, "recall" OR STRLIKE(?oLabel, "F1-score")))))
+    }
+```    Note: The provided JSON output is not used in this solution. It was included in the original prompt to provide context and clarify the task. The actual task is to generate the SPARQL query based on the provided prompt and the given RDF data. The SPARQL query is generated based on the steps described in the "think" section.<|eot_id|>

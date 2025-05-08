@@ -1,0 +1,48 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Ms. Pacman dataset?
+
+Generated SPARQL:
+ SELECT?m?mLabel 
+    WHERE {
+       ?m orkgp:HAS_MODEL. 
+       ?m orkgp:HAS_MODEL?model. 
+       ?m orkgp:HAS_EVALUATION?ev. 
+       ?ev orkgp:has dataset?d. 
+       ?d rdfs:label "Atari 2600 Ms. Pacman". 
+       ?m orkgp:HAS_MODEL?model. 
+       ?model orkgp:has dataset?d. 
+       ?d rdfs:label "Atari 2600 Ms. Pacman". 
+       ?m orkgp:HAS_MODEL?model. 
+       ?model orkgp:has evaluation?ev. 
+       ?ev orkgp:has dataset?d. 
+       ?d rdfs:label "Atari 2600 Ms. Pacman". 
+       ?m orkgp:HAS_MODEL?model. 
+       ?model orkgp:has evaluation?ev. 
+       ?ev rdfs:label?mLabel. 
+        FILTER (STR(?mLabel) = "models") 
+    } 
+
+    Note that the above SPARQL query is not the most efficient query to retrieve the models. It can be optimized by removing the repeated filters. 
+
+    Here is an optimized version of the SPARQL query:
+    SELECT?m?mLabel 
+    WHERE {
+       ?m orkgp:HAS_MODEL. 
+       ?m orkgp:HAS_MODEL?model. 
+       ?m orkgp:HAS_EVALUATION?ev. 
+       ?ev orkgp:has dataset?d. 
+       ?d rdfs:label "Atari 2600 Ms. Pacman". 
+       ?model orkgp:has dataset?d. 
+       ?ev orkgp:has evaluation?ev2. 
+       ?ev2 rdfs:label?mLabel. 
+       ?m orkgp:HAS_MODEL?model. 
+       ?model orkgp:has evaluation?ev2. 
+        FILTER (STR(?mLabel) = "models") 
+    } 
+
+    However, this query can be further optimized by reordering the variables and removing the repeated joins. Here is the final optimized version of the SPARQL query:
+    SELECT?m?mLabel 
+    WHERE {
+       ?m orkgp:HAS_MODEL?model. 
+       ?m orkgp:HAS_EVALUATION?ev. 
+       ?ev orkgp

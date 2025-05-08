@@ -1,0 +1,14 @@
+```sparql
+PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/p/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset orkp:hasMetric ?metric.
+  ?dataset orkp:hasScore ?score.
+  ?dataset ork:hasDataset "http://orkgr.org/ontology/IWSLT2015_German-English_dataset".
+  FILTER (STR(?metric) = "accuracy" OR STR(?metric) = "BLEU")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

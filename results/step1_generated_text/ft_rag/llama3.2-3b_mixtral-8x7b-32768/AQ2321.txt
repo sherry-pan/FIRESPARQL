@@ -1,0 +1,42 @@
+Question:
+List the code links in papers that use the FQF model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code_links
+     WHERE {
+      ?papers rdfs:label?papers_labels.
+       FILTER(REGEX(?papers_labels, "Contribution|Proceedings of the.*|BioBERT"))
+      ?papers orkgp:P32?benchmark.
+      ?benchmark rdfs:label?benchmark_labels.
+       FILTER(REGEX(?benchmark_labels, "BioBERT"))
+      ?benchmark orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_MODEL?model.
+      ?model rdfs:label?model_labels.
+       FILTER(REGEX(?model_labels, "FQF"))
+      ?model orkgp:HAS_SOURCE_CODE?code_links.
+     } 
+
+```
+
+## Step 1: Understand the problem and the context
+The problem requires generating a SPARQL query based on a given natural language question. The question is "List the code links in papers that use the FQF model in any benchmark." The context provided includes terms mentioned in the question, candidate entities and properties in the Open Research Knowledge Graph (ORKG), and the background information for linking the correct entities or properties.
+
+## Step 2: Identify the relevant terms and entities in the context
+The relevant terms and entities in the context are:
+- FQF model
+- Code links
+- Papers
+- Benchmark
+- Papers (with specific labels)
+- Benchmark (with specific labels)
+- Dataset
+- Model
+- Source code
+
+## Step 3: Determine the relationships between the terms and entities
+The relationships between the terms and entities are:
+- Papers have labels
+- Benchmark is related to papers and has labels
+- Dataset is related to benchmark
+-

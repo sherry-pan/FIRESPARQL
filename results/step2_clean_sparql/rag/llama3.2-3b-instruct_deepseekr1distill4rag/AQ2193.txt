@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkgc:has_code ?code.
+  ?paper orkgc:has_model ?model.
+  FILTER (CONTAINS(str(?model), 'Transformer-XL Base'))
+  FILTER (CONTAINS(str(?paper), 'benchmark'))
+}
+```

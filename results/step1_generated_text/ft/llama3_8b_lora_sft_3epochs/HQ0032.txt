@@ -1,0 +1,16 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ SELECT?compound,?compound_lbl
+     WHERE {
+       orkgr:R153801 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P37535?compound.
+      ?compound rdfs:label?compound_lbl.
+      ?contrib orkgp:P37536?cont.
+      ?cont orkgp:P37537?compound.
+      ?cont orkgp:P37538?compound.
+       FILTER(REGEX(?compound_lbl, ".*"^^xsd:string, "i"))
+     }
+     ORDER BY DESC(COUNT(?compound))
+     LIMIT 1<|eot_id|>

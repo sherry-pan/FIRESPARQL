@@ -1,0 +1,46 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgp: <http://example.org/orkgp/>
+    PREFIX orkgc: <http://example.org/orkgc/>
+    PREFIX orkgr: <http://example.org/orkgr/>
+
+    SELECT?p?o 
+    WHERE {
+       ?o orkgp:has_contribution?p.
+       ?o orkgc:Resource.
+       ?o orkgr:R147246.
+       ?p orkgp:has_count?o.
+        FILTER (STR(?p) = "largest number")
+        FILTER (STR(?o) = "coronavirus")
+        }
+    ``` 
+    Note: The URIs in the SPARQL query are placeholders and should be replaced with the actual URIs from the ORKG.
+
+    Given the provided context, the largest number of articles about coronavirus is likely contributed by a researcher or institution, and the number of articles is represented by the predicate "has count". The researcher or institution that contributed to the largest number of articles about coronavirus can be identified by finding the entity that has the largest number of publications about coronavirus. This can be done by querying the ORKG for entities that have the predicate "has contribution" and the subject of which is the entity that has the largest number of publications about coronavirus. The query can be represented as follows:
+```sparql
+    SELECT?o 
+    WHERE {
+       ?o orkgp:has_contribution?p.
+       ?p orkgc:Resource.
+       ?o orkgr:R147246.
+       ?o orkgp:has_count?count.
+        FILTER (STR(?count) = "largest number")
+        FILTER (STR(?p) = "has contribution")
+        }
+    ```
+    To answer the original question, we need to find the entity that has the largest number of publications about coronavirus. This can be done by querying the ORKG for entities that have the predicate "has contribution" and the subject of which is the entity that has the largest number of publications about coronavirus. The query can be represented as follows:
+```sparql
+    SELECT?o 
+    WHERE {
+       ?o orkgp:has_contribution?p.
+       ?p orkgc:Resource.
+       ?o orkgr:R147246.
+       ?o orkgp:has_count?count.
+        FILTER (STR(?count) = "largest number")
+        FILTER (STR(?p) = "has contribution")
+        }
+    ```
+    Since the entity that has the largest number of publications about coronavirus is the subject of the query, the variable?o in the query will contain the URI of the entity that has the largest number of publications about coronavirus. To get the name of the entity, we need to

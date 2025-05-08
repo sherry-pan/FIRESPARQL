@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?paper ?title ?id WHERE {
+  ?paper a orkgc:ResearchPaper.
+  ?paper orkgr:hasTitle ?title.
+  ?paper orkgr:hasId ?id.
+  ?paper orkgr:benchmarkedOn ?benchmark.
+  ?benchmark orkgr:benchmarks ?model.
+  ?model orkgr:models ?dataset.
+  ?dataset a orkgr:BC5CDR-disease_dataset.
+}
+```

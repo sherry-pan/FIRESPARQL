@@ -1,0 +1,31 @@
+Question:
+What is the best performing model benchmarking the CoNLL++ dataset in terms of F1 metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?evaluationscore) AS?score)
+     WHERE {
+         orkgp:R1 orkgp:P31 orkgp:R2.
+         orkgp:P31 orkgc:Resource rdfs:label?model_lbl.
+         orkgp:P31 orkgp:HAS_DATASET has_dataset.
+         orkgp:HAS_DATASET orkgp:HAS_MODEL has_model.
+         orkgp:HAS_MODEL orkgp:HAS_EVALUATION has_eval.
+         orkgp:HAS_EVALUATION orkgp:HAS_EVALUATION_METRIC evaluation_metric.
+         orkgp:HAS_EVALUATION_METRIC orkgp:HAS_F1_SCORE f1_score.
+         orkgp:HAS_F1_SCORE orkgp:HAS_VALUE value.
+         orkgp:HAS_VALUE orkgp:HAS_DATASET dataset.
+         orkgp:HAS_DATASET orkgp:HAS_EVALUATION eval.
+         orkgp:HAS_EVALUATION orkgp:HAS_DATASET dataset.
+         orkgp:HAS_EVALUATION orkgp:HAS_EVALUATION_METRIC evaluation_metric.
+         eval orkgp:HAS_DATASET dataset.
+         dataset orkgp:HAS_EVALUATION eval.
+         eval orkgp:HAS_EVALUATION_METRIC evaluation_metric.
+         evaluation_metric orkgp:P31 orkgp:HAS_EVALUATION has_eval.
+         has_eval orkgp:HAS_DATASET dataset.
+         has_eval orkgp:HAS_EVALUATION_METRIC evaluation_metric.
+         orkgp:HAS_DATASET orkgp:P31 orkgp:R2.
+         orkgp:HAS_DATASET orkgp:P31 orkgp:R1.
+         orkgp:HAS_EVALUATION_METRIC orkgp:P31 orkgp:R2.
+         orkgp:HAS_EVALUATION_METRIC orkgp:P31 orkgp:R1.
+         orkgp:HAS_EVALUATION orkgp:P31 orkgp:R2.
+         orkgp:HAS_EVALUATION orkgp:P31 orkgp:R1.
+         dataset orkgp:HAS_DATASET orkgp:HAS_EVALUATION eval

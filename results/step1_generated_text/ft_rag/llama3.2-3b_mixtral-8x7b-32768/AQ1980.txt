@@ -1,0 +1,80 @@
+Question:
+Where can I find code references in papers that have used the TCN model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper       orkgp:HAS_PAPER      ?papers;
+                  orkgp:HAS_CODE        ?code.
+       FILTER (str(?papers) = "TCN model")
+      ?papers           orkgp:HAS_BENCHMARK     ?benchmark.
+       FILTER (str(?benchmark) = "benchmarking purposes")
+      ?benchmark         rdfs:label               ?label.
+      ?code             rdfs:label               ?code.
+       FILTER (str(?code) = "code reference")
+     }
+     ```python
+def generate_sparql_query(context):
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    
+    # Initialize SPARQL query
+    sparql_query = "SELECT?code"
+    
+    # Define the patterns for the selected entities and properties
+    patterns = {
+        "papers": {
+            "predicate": "orkgp:HAS_PAPER",
+            "object_property": "str"
+        },
+        "code_references": {
+            "predicate": "orkgp:HAS_CODE",
+            "object_property": "str"
+        },
+        "benchmarking_purposes": {
+            "predicate": "orkgp:HAS_BENCHMARK",
+            "object_property": "str"
+        }
+    }
+    
+    # Iterate over the selected entities and properties
+    for entity, properties in patterns.items():
+        if entity in extracted_terms:
+            # Define the filter for the current entity and property
+            filter_string = "FILTER (" + properties["object_property"] + "(" + properties["predicate"] + "?" + entity + ") = \"" + entity + "\")"
+            sparql_query += "\n" + filter_string
+    
+    # Define the filter for the code references
+    sparql_query += "\nFILTER (str(?code) = \"code reference\")"
+    
+    # Return the generated SPARQL query
+    return sparql_query
+
+context = {
+    "question": "Where can I find code references in papers that have used the TCN model for benchmarking purposes?",
+    "extracted_terms": {
+        "TCN model",
+        "code references",
+        "papers",
+        "benchmarking purposes"
+    },
+    "candidates": {
+        "TCN model": [
+            {
+                "uri": "orkgr:R147244",
+                "rdfs:label": "TCN model",
+                "rdf:type": "orkgc:Resource"
+            }
+        ],
+        "code references": [
+            {
+                "uri": "orkgp:HAS_CODE",
+                "rdfs:label": "code reference",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "papers": [
+            {
+                "uri": "orkgp:HAS_PAPER",
+                "rdfs:label

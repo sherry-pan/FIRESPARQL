@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkgc: <http://example.org/orkgc#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?precision ?recall ?f1_value
+WHERE {
+  ?study orkgc:usesAlgorithm ?algorithm.
+  ?algorithm skos:prefLabel "Naive Bayes".
+  ?study orkgc:usesFeature ?feature.
+  ?feature skos:prefLabel "Bag of Words".
+  ?study orkgc:classifiesTask ?task.
+  ?task skos:prefLabel "classify user feedback as feature request".
+  
+  ?study orkgc:hasMetric ?precisionMetric.
+  ?precisionMetric skos:prefLabel "Precision".
+  ?precisionMetric orkgc:hasValue ?precision.
+  
+  ?study orkgc:hasMetric ?recallMetric.
+  ?recallMetric skos:prefLabel "Recall".
+  ?recallMetric orkgc:hasValue ?recall.
+  
+  ?study orkgc:hasMetric ?f1Metric.
+  ?f1Metric skos:prefLabel "F1".
+  ?f1Metric orkgc:hasValue ?f1_value. 
+}
+```

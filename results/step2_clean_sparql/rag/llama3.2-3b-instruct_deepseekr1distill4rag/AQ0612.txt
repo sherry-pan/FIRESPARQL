@@ -1,0 +1,15 @@
+```sparql
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a ora:ResearchPaper.
+  ?paper ora:includesBenchmark ?benchmark.
+  ?benchmark ora:benchmarkFor ?benchmarkFor.
+  ?benchmarkFor ora:dataset ?dataset.
+  ?dataset a ora:Dataset.
+  ?dataset ora:datasetURI ?datasetURI.
+  ?paper ora:title ?title.
+  ?paper ora:id ?id.
+  FILTER (?datasetURI = "http://dx.doi.org/10.13052/jwe1540-9589.2075").
+  FILTER (?benchmarkFor = "Atari 2600 Defender dataset").
+}
+```

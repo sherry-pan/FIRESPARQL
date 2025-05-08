@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:has_dataset_docred "Human-annotated".
+  ?benchmark_result a orkg:Result.
+  ?benchmark_result orkg:has_benchmark_result ?result.
+  ?result orkg:has_metric ?metric.
+  ?result orkg:has_value ?value.
+  FILTER (STR(?metric) = "F1-score" || STR(?metric) = "accuracy").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

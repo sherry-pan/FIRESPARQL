@@ -1,0 +1,30 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+     orkgp:R1 orkgp:P2?metric. 
+     FILTER(REGEX(STR(?metric), "HAS_[A-Z]+[0-9.]*"))
+    ?metric orkgp:P2?value.
+     FILTER(REGEX(STR(?value), "[0-9.]+"))
+    ?value orkgp:HAS_METRIC?metric.
+    ?metric orkgp:RDF_TYPE rdfs:label?metric_lbl.
+     }
+     LIMIT 1
+
+
+```python
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+WHERE {
+  orkgp:R1 orkgp:P2?metric. 
+  FILTER(REGEX(STR(?metric), "HAS_[A-Z]+[0-9.]*"))
+ ?metric orkgp:P2?value.
+  FILTER(REGEX(STR(?value), "[0-9.]+"))
+ ?value orkgp:HAS_METRIC?metric.
+ ?metric orkgp:RDF_TYPE rdfs:label?metric_lbl.
+}
+LIMIT 1
+```
+
+Note: The `SELECT` clause uses `?metric` and `?metric_lbl` as variables. The `WHERE` clause uses the `HAS_METRIC` predicate to link the `?metric` variable to the `HAS_METRIC` predicate, and the `HAS_METRIC` predicate to link the `?metric` variable to the `HAS_METRIC` and `RDF_TYPE` predicates. The `FILTER` functions are used to extract the relevant values from the strings. The `LIMIT 1` clause is used to limit the output to the top result.<|eot_id|>

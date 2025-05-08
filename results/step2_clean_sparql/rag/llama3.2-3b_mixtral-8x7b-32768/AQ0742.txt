@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+PREFIX orkgc: <http://www.openresearch.org/ontology/orkgc/>
+
+SELECT ?metric ?evaluationMetric
+WHERE {
+  ?dataset orkgc:hasDataset ?dataset2.
+  ?dataset2 orkgc:label ?label.
+  FILTER (CONTAINS(STR(?label), "DuIE") || CONTAINS(STR(?label), "duie")).
+  ?dataset2 orkgp:hasMetric ?metric.
+  ?metric orkgc:label ?evaluationMetric.
+}
+```

@@ -1,0 +1,51 @@
+Question:
+Can you list the models that have been evaluated on the VTAB-1k dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/citation/>
+     PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicates/>
+     SELECT?m?m\_rdfsLabel?vtab\_1k\_rdfsLabel WHERE {
+    ?m orkgp:HAS\_MODEL?m\_model.
+    ?m\_model orkgp:HAS\_DATASET?vtab\_1k.
+    ?m\_model orkgp:HAS\_EVALUATION?vtab\_1k\_eval.
+    ?vtab\_1k\_eval orkgp:HAS\_EVALUATION?vtab\_1k.
+     SERVICE orkgc:ResourceService {
+    ?m orkgc:Resource.
+     }
+     SERVICE orkgc:DatasetService {
+    ?vtab\_1k orkgc:Dataset.
+     }
+    } 
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate the SPARQL query based on the input question and context.
+
+    Args:
+    question (str): The natural language question.
+    context (dict): The context information, including extracted terms and candidates.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    # Initialize the SPARQL query
+    sparql_query = """
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/citation/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicates/>
+"""
+
+    # Add the SELECT clause
+    sparql_query += " SELECT?m?m_rdfsLabel?vtab_1k_rdfsLabel WHERE {"
+
+    # Add the filters for the extracted terms
+    extracted_terms = context["extracted_terms"]
+    for term in extracted_terms:
+        if "VTAB-1k dataset" in term:
+            sparql_query += "?m orkgp:HAS_MODEL?m_model.?m_model orkgp:HAS_DATASET?vtab_1k.?m_model orkgp:HAS_EVALUATION?vtab_1k_eval.?vtab_1k_eval orkgp:HAS_EVALUATION?vtab_1k."
+        elif "models" in term:
+            sparql_query += "?m orkgp:HAS_MODEL?m_model."
+        elif "evaluated on" in term:
+            spar

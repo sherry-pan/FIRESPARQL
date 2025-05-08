@@ -1,0 +1,15 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?title
+    WHERE {
+      orkgr:R155445 orkgp:compareContribution?cont.
+     ?cont orkgp:P7009?kcl.
+     ?kcl rdfs:label?title.
+     ?cont orkgp:P7008?method.
+     ?method rdfs:label?method_labels.
+      FILTER(REGEX(STR(?method_labels), "common"^^xsd:string))
+    }
+    ORDER BY DESC(COUNT(?method_labels))
+    LIMIT 1<|eot_id|>

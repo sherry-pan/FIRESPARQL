@@ -1,0 +1,31 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Atari 2600 Venture dataset?
+
+Generated SPARQL:
+ SELECT?p?o
+    WHERE {
+   ?o orkg:hasResource?r.
+   ?r orkg:hasDataset?d.
+   ?d orkg:hasDataset?d2.
+   ?d2 a orkg:Dataset.
+   ?o orkg:hasBenchmark?b.
+   ?b orkg:hasBenchmark?b2.
+   ?b2 a orkg:Benchmark.
+   ?o orkg:hasTitle?t.
+   ?t orkg:hasTitle?t2.
+   ?t2 a orkg:Title.
+   ?o orkg:hasID?id.
+   ?id orkg:hasID?id2.
+   ?id2 a orkg:ID.
+    FILTER (STRIDIFY(str(?id2)) = "R36054" OR STRIDIFY(str(?id2)) = "R36053" )
+    }
+    ```
+This SPARQL query is designed to retrieve a list of research papers that have performed benchmarks on the specified dataset. The query leverages the provided context to link the correct entities and properties in the Open Research Knowledge Graph (ORKG).
+
+Here's a breakdown of the query:
+
+1.  The `SELECT` clause specifies that we want to retrieve two columns: `?p` and `?o`. However, since we're not using the `?p` variable in the query, it's not necessary to include it in the `SELECT` clause. We can omit it.
+2.  The `WHERE` clause is where the magic happens. We're using a series of `?o orkg:has\*?x` patterns to link the research papers (`?o`) to the specified entities and properties.
+    *   `?o orkg:hasResource?r` links the research papers to the resources (`?r`) that have them.
+    *   `?r orkg:hasDataset?d` links the resources to the datasets (`?d`) they belong to.
+    *   `?d

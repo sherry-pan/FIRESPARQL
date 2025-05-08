@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://orkgp.org/schema/ontology/>
+PREFIX orkgr: <http://orkgr.org/schema/ontology/>
+
+SELECT ?model ?score ?dataset
+WHERE {
+  ?model orkgp:HAS_MODEL ?m.
+  ?m orkgp:HAS_SCORE ?score.
+  ?m orkgp:HAS_BENCHMARK ?b.
+  ?b orkgr:R122689 ?ds.
+  ?ds orkgp:HAS_DATASET ?dataset.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

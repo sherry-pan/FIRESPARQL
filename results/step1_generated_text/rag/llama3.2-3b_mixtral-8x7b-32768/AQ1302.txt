@@ -1,0 +1,52 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Tennis dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.com/orkg/>
+    PREFIX orkgc: <http://example.com/orkgc/>
+    PREFIX orkgp: <http://example.com/orkgp/>
+    SELECT?metric?score
+    WHERE {
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgr:hasDataset?orkgr:R122689.
+     ?dataset orkgr:hasBenchmark?benchmark.
+     ?benchmark orkgr:hasScore?score.
+     ?benchmark orkgp:hasMetric?metric.
+      FILTER (?metric = orkgp:metric-atari-2600-tennis)
+     ?benchmark orkgr:hasDataset?dataset.
+     ?dataset a orkgc:Resource.
+     ?benchmark rdfs:label?score.
+      FILTER (?score = "93.9")
+    }
+    ```
+
+
+
+## Step 1: Understand the Context
+The given context provides information about the question, extracted terms, and candidate entities and properties in the Open Research Knowledge Graph (ORKG). The question is "What is the top benchmark score and its metric on the Atari 2600 Tennis dataset?" The context includes the following information:
+- Extracted terms: "top benchmark score", "metric", and "Atari 2600 Tennis dataset".
+- Candidate entities and properties: "top benchmark score" is linked to "orkgr:R147244", "metric" is linked to "orkgp:HAS_METRIC", and "Atari 2600 Tennis dataset" is linked to "orkgr:R122689".
+
+## Step 2: Determine the SPARQL Query
+To generate the SPARQL query, we need to identify the relationships between the extracted terms and the candidate entities and properties in the ORKG. We can use the following steps:
+- Identify the subject (Atari 2600 Tennis dataset) and predicate (hasBenchmark) to get the benchmark score.
+- Filter the results to get the top benchmark score.
+- Identify the object (metric) and predicate (hasMetric) to get the metric.
+- Filter the results to get the metric that corresponds to the top benchmark score.
+
+## Step 3: Write the SPARQL Query
+Based on the identified relationships, we can write the following SPARQL query:
+```
+PREFIX orkg: <http://example.com/orkg/>
+PREFIX orkgc: <http://example.com/orkgc/>
+PREFIX orkgp: <http://example.com/orkgp/>
+
+SELECT?metric?score
+WHERE {
+ ?dataset a orkgc:Dataset.
+ ?dataset orkgr:hasDataset?orkgr:R122689.
+ ?dataset orkgr:hasBenchmark?benchmark.
+ ?benchmark orkgr:hasScore?score.
+ ?benchmark orkgp:hasMetric?metric.
+  FILTER (?metric = orkgp

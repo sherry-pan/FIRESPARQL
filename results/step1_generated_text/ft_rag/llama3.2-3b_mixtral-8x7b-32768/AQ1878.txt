@@ -1,0 +1,44 @@
+Question:
+Name the datasets that have been used for benchmarking in the Robot Navigation research problem?
+
+Generated SPARQL:
+ SELECT?dataset?dataset_lbl
+     WHERE {
+       orkgp:R147246 rdfs:label?cont.
+       FILTER (str(?cont) = "Robot Navigation")
+       orkgp:R147246 orkgp:HAS_RESEARCH_PROBLEM?problem.
+      ?problem orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+      }  
+      UNION  
+      SELECT?dataset?dataset_lbl
+      WHERE {
+       orkgp:HAS_BENCHMARK orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+      }    
+
+
+```python
+SELECT?dataset?dataset_lbl
+WHERE {
+  orkgp:R147246 rdfs:label?cont.
+  FILTER (str(?cont) = "Robot Navigation")
+  orkgp:R147246 orkgp:HAS_RESEARCH_PROBLEM?problem.
+ ?problem orkgp:HAS_DATASET?dataset.
+ ?dataset rdfs:label?dataset_lbl.
+}
+UNION
+SELECT?dataset?dataset_lbl
+WHERE {
+  orkgp:HAS_BENCHMARK orkgp:HAS_EVALUATION?eval.
+ ?eval orkgp:HAS_DATASET?dataset.
+ ?dataset rdfs:label?dataset_lbl.
+}
+```python
+print("SELECT?dataset?dataset_lbl")
+print("WHERE {")
+print("  orkgp:R147246 rdfs:label?cont.")
+print("  FILTER (str(?cont) = \"Robot Navigation\")")
+print("  orkgp:R147246 orkgp:HAS_RESEARCH_PROBLEM?problem.")
+print(" ?problem or

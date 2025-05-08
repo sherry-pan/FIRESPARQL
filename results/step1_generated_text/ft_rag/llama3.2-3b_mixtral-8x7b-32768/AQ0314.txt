@@ -1,0 +1,55 @@
+Question:
+Can you list the models that have been evaluated on the VTAB-1k dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "VTAB-1k")
+      ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+      ?cont         orkgp:HAS_DATASET      ?dataset_has_dataset;
+                    orkgp:P41               ?model.
+      ?model      rdfs:label              ?model_lbl.
+     } 
+
+```
+
+## Step 1: Understand the context provided
+The context includes the extracted terms (entities and properties) from the question and the candidates for linking these terms to the entities and properties in the ORKG.
+
+## Step 2: Identify the relevant entities and properties
+The question asks for models that have been evaluated on the VTAB-1k dataset. Therefore, the relevant entities are models and the dataset VTAB-1k, and the relevant properties are "evaluated on" and "has dataset".
+
+## Step 3: Construct the SPARQL query
+The query needs to filter the dataset to only include VTAB-1k, then find models that have been evaluated on this dataset.
+
+## Step 4: Write the SPARQL query
+The query is as follows:
+```
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k")
+ ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+ ?cont         orkgp:HAS_DATASET      ?dataset_has_dataset;
+               orkgp:P41               ?model.
+ ?model      rdfs:label              ?model_lbl.
+}
+```
+
+The final answer is: 
+```
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k")
+ ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+ ?cont         orkgp:HAS_DATASET      ?dataset_has_dataset;
+               orkgp:P41               ?model.
+ ?model      rdfs:label              ?model_lbl.
+}
+``` 
+Note: Since the question requires only the final SPARQL query, the output will be the query itself without any additional text or explanations.<|eot_id|>

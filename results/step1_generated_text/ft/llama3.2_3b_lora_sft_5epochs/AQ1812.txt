@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Percentage error score on the SVHN benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+         orkgr:R8349 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P43135?model.
+        ?model rdfs:label?model_lbl.
+        ?contrib orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P43134?percentage_error.
+         FILTER(REGEX(?percentage_error, "^\d+(?:\.\d+)?")
+               &&?percentage_error >= 0.0
+               &&?percentage_error <= 100.0)
+        ?model rdfs:label?model_lbl.
+         FILTER(REGEX(?model_lbl, "CNN|ResNet"))
+     }<|eot_id|>

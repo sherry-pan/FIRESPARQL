@@ -1,0 +1,20 @@
+Question:
+List the datasets benchmarked under the Common Sense Reasoning research problem?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.io/ontology/>
+    PREFIX orkc: <http://orkc.io/ontology/>
+    PREFIX orkp: <http://orkp.io/ontology/>
+    PREFIX orkpredicate: <http://orkp.io/predicate/>
+    SELECT?dataset (COUNT(?benchmark) AS?count)
+    WHERE {
+     ?dataset a orkc:Dataset.
+     ?dataset orkpredicate:benchmarked_under?benchmark.
+      FILTER (bnode(?benchmark) IS?benchmark)
+     ?benchmark orkpredicate:validationResearch?validationResearch.
+     ?validationResearch orkpredicate:technique?technique.
+     ?technique rdfs:label?label.
+      BIND (CONCAT(?dataset, " (",?count, ")") AS?result)
+    }
+    ```    Note: The above SPARQL query is a simplified version of what the actual query would be. It assumes that the RDF data is structured in a way that allows for the filtering and counting of datasets as described. The actual query may need to be adjusted based on the specific structure of the RDF data.<|eot_id|>

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?model ?dataset ?accuracy
+WHERE {
+  ?model rdfs:label ?model_label.
+  ?dataset rdfs:label ?dataset_label.
+  ?model orcgc:hasDataset ?dataset.
+  ?model orcgc:hasAccuracy ?accuracy.
+  ?accuracy orcgp:hasValue 93.9.
+  FILTER (str(?model_label) = "SVM" OR str(?model_label) = "Stanford NER" OR str(?model_label) = "Flair NER").
+  FILTER (str(?dataset_label) = "AIDA" OR str(?dataset_label) = "MEANTIME").
+}
+```

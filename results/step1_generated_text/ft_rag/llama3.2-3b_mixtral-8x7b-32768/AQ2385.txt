@@ -1,0 +1,34 @@
+Question:
+Where can I find code references in papers that have used the EfficientNetV2-L model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code_ref
+     WHERE {
+       orkgp:Model       orkgp:HAS_MODEL      ?model.
+       FILTER (str(?model) = "EfficientNetV2-L model")
+      ?model       orkgp:HAS_PAPER      ?paper.
+      ?paper       orkgp:HAS_EVALUATION  ?eval.
+      ?eval       rdfs:label              ?eval_label.
+       FILTER (str(?eval_label) = "benchmarking purposes")
+      ?paper       orkgp:HAS_CODE        ?code_ref.
+      ?code_ref   rdfs:label              ?code_ref_label.
+       FILTER (str(?code_ref_label) = "code references")
+      ?model       orkgp:HAS_BENCHMARK    ?benchmark.
+      ?benchmark   rdfs:label              ?benchmark_label.
+       FILTER (str(?benchmark_label) = "benchmarking purposes")
+      ?cont         orkgp:HAS_MODEL        ?model.
+      ?model       orkgp:HAS_PAPER        ?paper.
+      ?paper       rdfs:label              ?paper_label.
+       FILTER (str(?paper_label) = "Paper 1")
+      ?cont         orkgp:HAS_MODEL        ?model.
+      ?model       orkgp:HAS_PAPER        ?paper.
+      ?paper       orkgp:HAS_EVALUATION  ?eval.
+      ?eval       rdfs:label              ?eval_label.
+       FILTER (str(?eval_label) = "benchmarking purposes")
+      ?cont         orkgp:HAS_MODEL        ?model.
+      ?model       orkgp:HAS_PAPER        ?paper.
+      ?paper       orkgp:HAS_CODE        ?code_ref.
+      ?code_ref   rdfs:label              ?code_ref_label.
+       FILTER (str(?code_ref_label) = "code references")
+    }
+    Note that the SPARQL query

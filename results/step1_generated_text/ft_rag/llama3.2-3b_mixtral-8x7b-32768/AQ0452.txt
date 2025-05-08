@@ -1,0 +1,70 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?
+
+Generated SPARQL:
+ SELECT?title?paper_id
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "PubMedQA")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper         orkgp:HAS_PAPER         ?cont.
+      ?paper         rdfs:label              ?title.
+      ?paper         orkgp:HAS_ID           ?paper_id.
+     } 
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the provided question and context.
+
+    Args:
+        question (str): The natural language question.
+        context (dict): A dictionary containing the context information.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+
+    # Extract the candidates from the context
+    candidates = context["candidates"]
+
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?title?paper_id"
+
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+
+    # Add the dataset filter to the SPARQL query
+    sparql_query += "      ?dataset       a                orkgc:Dataset;"
+                    "                      rdfs:label      ?dataset_lbl."
+    sparql_query += "       FILTER (str(?dataset_lbl) = '" + extracted_terms["PubMedQA dataset"] + "')"
+
+    # Add the benchmark filter to the SPARQL query
+    sparql_query += "      ?benchmark      orkgp:HAS_DATASET      ?dataset."
+
+    # Add the paper filter to the SPARQL query
+    sparql_query += "      ?cont          orkgp:HAS_BENCHMARK     ?benchmark."
+    sparql_query += "      ?paper         orkgp:HAS_PAPER         ?cont."
+
+    # Add the paper title filter to the SPARQL query
+    sparql_query += "      ?paper         rdfs:label              ?title."
+    sparql_query += "      ?paper         orkgp:HAS_ID           ?paper_id."
+
+    # Close the WHERE clause
+    sparql_query += "     }"
+
+    return sparql_query
+
+# Example usage
+question = "What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?"
+context = {
+    "extracted_terms": {
+        "PubMedQA dataset": "PubMedQA dataset",
+        "research papers": "research papers",
+        "titles": "titles",
+        "IDs": "IDs",
+

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model
+WHERE {
+  ?model orkgr:HAS_MODEL ?model_with_precision .
+  ?model_with_precision orkgp:HAS_VALUE ?precision .
+  ?model_with_precision orkgp:HAS_LABEL "Precision"@en .
+  ?model orkgr:RDF_TYPE orkgr:model .
+  FILTER (?precision > 0.9)
+}
+ORDER BY DESC(?precision)
+LIMIT 1
+```

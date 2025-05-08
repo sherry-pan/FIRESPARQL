@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?accuracyScore
+WHERE {
+  ?model a ora:Model.
+  ?model ora:HasModel ?m.
+  ?m ora:HasDataset ?ds.
+  ?ds a ora:Dataset.
+  ?ds ora:Name "Yelp-5".
+  ?model ora:HasEvaluation ?e.
+  ?e ora:EvaluationType ora:Accuracy.
+  ?e ora:EvaluationValue ?accuracyScore.
+}
+ORDER BY DESC(?accuracyScore)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.io/ontology/>
+PREFIX orkp: <http://orkp.io/ontology/>
+PREFIX orkgp: <http://orkgp.io/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric 
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label "Atari 2600 Ice Hockey dataset"@en.
+  ?dataset orkg:HAS_SCORE ?scoreUri.
+  ?scoreUri a orkg:Score.
+  ?scoreUri orkg:HAS_VALUE ?score.
+  ?scoreUri orkp:HAS_METRIC ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

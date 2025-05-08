@@ -1,0 +1,23 @@
+Question:
+What is the best performing model benchmarking the ANLI test dataset in terms of A3 metric?
+
+Generated SPARQL:
+ ```
+    PREFIX orkgc: <http://example.com/orkgc/>
+    PREFIX orkgr: <http://example.com/orkgr/>
+    PREFIX orkgp: <http://example.com/orkgp/>
+
+    SELECT?model?dataset?metric?score
+    WHERE {
+     ?model orkgc:relatedTo?benchmark.
+     ?benchmark orkgr:dataset?dataset.
+     ?benchmark orkgp:property?metric.
+     ?dataset orkgr:dataset?dataset.
+     ?dataset orkgr:dataset?dataset2.
+      FILTER(?metric = "A3").
+     ?model orkgc:relatedTo?model2.
+      FILTER((?model2 = "SVM") OR (?model2 = "SVM")).
+      BIND(1 AS?score).
+    }
+    ```
+    Note: The actual SPARQL query might need to be adjusted according to the actual data structure and the exact requirements of the query. The provided query is a hypothetical example based on the given context and the extracted terms.<|eot_id|>

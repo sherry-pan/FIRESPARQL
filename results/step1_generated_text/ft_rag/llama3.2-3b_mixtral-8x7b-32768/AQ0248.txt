@@ -1,0 +1,47 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Assault dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Resource;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Assault")
+          ?dataset       orkgp:HAS_DATASET      ?has_dataset.
+          ?cont          orkgp:HAS_DATASET      ?has_dataset;
+                           orkgp:P32           ?eval.          ?eval         orkgp:HAS_EVALUATION      ?has_eval;
+                                           orkgp:HAS_EVALUATION      ?has_eval;
+                                                   orkgp:P31           ?model.          ?model      orkgp:HAS_MODEL      ?has_model;
+                                               orkgp:HAS_MODEL      ?has_model;
+                                                   rdfs:label          ?model_lbl.       }
+     ORDER BY DESC(?eval)
+     LIMIT 10
+    END
+    {SELECT?model?model_lbl
+      WHERE {
+       ?dataset       a                orkgc:Resource;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Assault")
+       ?dataset       orkgp:HAS_DATASET      ?has_dataset.
+       ?cont          orkgp:HAS_DATASET      ?has_dataset;
+                        orkgp:P32           ?eval.          ?eval         orkgp:HAS_EVALUATION      ?has_eval;
+                                        orkgp:HAS_EVALUATION      ?has_eval;
+                                    orkgp:P31           ?model.          ?model      orkgp:HAS_MODEL      ?has_model;
+                                orkgp:HAS_MODEL      ?has_model;
+                                    rdfs:label          ?model_lbl.       }
+      ORDER BY DESC(?eval)
+      LIMIT 10}
+    You can only use the entities and properties from the candidates provided in the context. You can only use the SELECT statement. You can only use the FILTER function. You cannot use any other types of queries (e.g. JOIN, UNION, etc.).
+    The query should return all the models that have been evaluated on the Atari 2600 Assault dataset. The query should return the model and its label.
+    The model labels should be in descending order of the evaluation scores.
+    The query should return the top 10 models with the highest evaluation scores.
+
+```python
+def generate_sparql_query():
+    query = """
+      SELECT?model?model_lbl
+      WHERE {
+       ?dataset       a                orkgc:Resource;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Assault")
+       ?

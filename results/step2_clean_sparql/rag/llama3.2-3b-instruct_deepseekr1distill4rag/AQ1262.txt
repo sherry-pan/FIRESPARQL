@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?metric ?value 
+WHERE {
+ ?benchmarkResult a orkgc:Resource.
+ ?benchmarkResult orkgr:hasBenchmarkResult ?result.
+ ?result orkgr:hasMetric ?metric.
+ ?result orkgr:hasValue ?value.
+ ?result orkgr:hasDataset ?dataset.
+ FILTER (str(?dataset) = "AESLC").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -20,7 +20,8 @@ def get_files_in_folder(folder_path):
     try:
         for entry in os.listdir(folder_path):
             entry_path = os.path.join(folder_path, entry)
-            if os.path.isfile(entry_path):
+            # Check if the entry is a file and check if it is a text file
+            if os.path.isfile(entry_path) and entry.endswith('.txt'):
                 files.append(entry)
     except FileNotFoundError:
         print(f"The folder '{folder_path}' does not exist.")
@@ -51,17 +52,21 @@ def clean_sparql(generated_text_path, sparql_folder):
     # create a folder to save the cleaned sparql if it does not exist
     os.makedirs(sparql_folder, exist_ok=True)
 
+    i = 0
     for file in get_files_in_folder(generated_text_path):
+        i += 1
+        print(f"Processing file {i} of {len(get_files_in_folder(generated_text_path))}: {file}")
         file_path = os.path.join(generated_text_path, file)
         with open(file_path, 'r') as f:
             question_sparql = f.read()
-            prompt = f"Given a question and its corresponding SPARQL query, there might be some error in the SPARQL query such as missing blank space between variable names, unnecessary repetition and so on. Please clean the SPARQL and give me the most correct SPARQL that you think it's correct. Only output the SPARQL, no other text.\n{question_sparql}"
+            prompt = f"Given a question and its corresponding SPARQL query, there might be some error in the SPARQL query such as missing blank space between variable names, unnecessary repetition and so on. Please clean the SPARQL and give me the cleaned SPARQL. Only output the SPARQL, no other text.\n{question_sparql}"
             sparql_query= get_completion(prompt)
             # print(f"genterated sparql: {sparql_query}")
             new_file_path = os.path.join(sparql_folder, f"{file}")
             with open(new_file_path, 'w') as new_file:
                 new_file.write(sparql_query)
             print(f"Cleaned SPARQL query saved to {new_file_path}")
+            
     return None
 
 
@@ -73,12 +78,8 @@ if __name__ == '__main__':
 
     # Path to the folder containing the generated SPARQL queries and the cleaned SPARQL queries
     generated_text_path = sys.argv[1]
-    sparql_folder = sys.argv[2]
-    clean_sparql(generated_text_path, sparql_folder)
-
-
-# Run the script
-# python sparql-cleaning-llm.py results/generated_text/llama3.2_3b_instruct_lora results/clean-sparql/llama3.2_3b_instruct_lora
+    clean_sparql_folder = sys.argv[2]
+    clean_sparql(generated_text_path, clean_sparql_folder)
     
 
 

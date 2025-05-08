@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest Accuracy score on the Reuters En-De benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?accuracy
+WHERE {
+ ?model orkgr:hasModel?modelModel.
+ ?modelModel orkgr:hasAccuracy?accuracy.
+ ?model orkgr:hasDataset?dataset.
+ ?dataset orkgr:hasAccuracy?datasetAccuracy.
+ ?datasetAccuracy orkgr:hasScore 0.93.
+ ?model orkgr:label "Model with CRF algorithm".
+  FILTER (STR(?model) = "Model with CRF algorithm")
+}
+```<|eot_id|>

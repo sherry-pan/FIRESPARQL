@@ -1,0 +1,44 @@
+Question:
+Provide a list of benchmarked datasets related to the Semantic Role Labeling research area?
+
+Generated SPARQL:
+ ```sparql
+SELECT?dataset?uri?label?score?type?typeLabel
+WHERE {
+ ?dataset a ora:Dataset.
+ ?dataset ora:relatedTo?relatedDataset.
+ ?relatedDataset a ora:Dataset.
+ ?relatedDataset ora:benchmark?benchmark.
+ ?benchmark a ora:Benchmark.
+ ?benchmark ora:topic?topic.
+ ?topic ora:topicOf?topicOf.
+ ?topicOf a ora:ResearchArea.
+ ?topicOf ora:label?topicLabel.
+ ?topicOf ora:uri?topicUri.
+ ?dataset ora:relatedTo?relatedDataset2.
+ ?relatedDataset2 ora:benchmark?benchmark2.
+ ?benchmark2 a ora:Benchmark.
+ ?benchmark2 ora:topic?topic2.
+ ?topic2 ora:topicOf?topicOf2.
+ ?topicOf2 a ora:ResearchArea.
+ ?topicOf2 ora:label?topicLabel2.
+ ?topicOf2 ora:uri?topicUri2.
+ ?dataset ora:relatedTo?relatedDataset3.
+ ?relatedDataset3 ora:benchmark?benchmark3.
+ ?benchmark3 a ora:Benchmark.
+ ?benchmark3 ora:topic?topic3.
+ ?topic3 ora:topicOf?topicOf3.
+ ?topicOf3 a ora:ResearchArea.
+ ?topicOf3 ora:label?topicLabel3.
+ ?topicOf3 ora:uri?topicUri3.
+  FILTER (?dataset = ora:benchmarked_datasets OR?dataset = ora:Semantic_Role_Labeling)
+  SERVICE orca:dataset {
+    BIND(iri(?dataset) AS?uri)
+    BIND(iri(?dataset) AS?label)
+    BIND(iri(?dataset) AS?score)
+    BIND(ora:Dataset AS?type)
+    BIND(ora:Dataset AS?typeLabel)
+  }
+}
+```sparql
+    Note: The actual SPARQL query may need to be adjusted to fit the actual structure of the ORKG RDF data. This query is based on the provided context and may not be exact.<|eot_id|>

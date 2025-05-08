@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+SELECT ?metric ?score
+WHERE {
+    ?dataset a orkgc:Dataset.
+    ?dataset orkgc:resource orkg:Gibson_PointGoal_Navigation_dataset.
+    ?result a orkgp:Result;
+        orkgc:resource ?dataset;
+        orkgp:metric ?metric;
+        orkgp:score ?score.
+    ?benchmark orkgp:dataset ?dataset;
+        orkgp:metric ?metric;
+        orkgp:score ?score.
+    FILTER (STR(?metric) IN ("accuracy", "f1-score", "f1-metric", "success-rate"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

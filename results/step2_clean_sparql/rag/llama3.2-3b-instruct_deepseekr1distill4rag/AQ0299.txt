@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg#>
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model orkgp:evaluatedOn ?dataset.
+  ?dataset rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(STR(?label)), "classic"))
+}
+```

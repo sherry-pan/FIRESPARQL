@@ -1,0 +1,16 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 Fishing Derby benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Fishing Derby")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper        orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      orkgp:HAS_METRIC        ?metric.
+                ?metric      rdfs:label              ?metric_lbl.}
+       ORDER BY DESC(?metric_lbl)
+     LIMIT 10<|eot_id|>

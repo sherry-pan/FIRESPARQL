@@ -1,0 +1,47 @@
+Question:
+Can you provide links to code used in papers that benchmark the T-ConvS2S model?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX orkgc: <http://example.org/orkgc#>
+PREFIX orkgp: <http://example.org/orkgp#>
+SELECT?paper?code?benchmark 
+WHERE {
+ ?paper orkg:hasPublication?pub.
+ ?pub orkgp:hasBenchmark?bench.
+ ?bench orkgp:hasModel?model.
+ ?model orkg:label "T-ConvS2S model"@en.
+ ?paper orkg:label "benchmarking"@en.
+ ?paper orkg:hasCode?code.
+ ?code orkgp:label "code"@en.
+ ?bench orkgp:label "benchmark"@en.
+  FILTER (regex(str(?paper), "T-ConvS2S model") @i)
+}
+```
+    Note that the provided SPARQL query may not be the optimal solution, but it is one possible solution based on the given context. The goal is to generate a SPARQL query that can be used to retrieve the correct answer to the input question.
+
+    Here is the code that generates the SPARQL query based on the context:
+    ```python
+import re
+
+def generate_sparql_query(context):
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+
+    # Define the prefixes
+    prefixes = {
+        "orkg": "http://example.org/orkg#",
+        "orkgc": "http://example.org/orkgc#",
+        "orkgp": "http://example.org/orkgp#"
+    }
+
+    # Define the query variables
+    query_variables = ["paper", "code", "benchmark"]
+
+    # Define the query pattern
+    query_pattern = {
+        "paper": lambda x: re.search(r"\b" + extracted_terms["paper"] + r"\b", x),
+        "code": lambda x: re.search(r"\b" + extracted_terms["code"] + r"\b", x),
+        "benchmark": lambda x: re.search(r"\b" + extracted_terms["

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model ?metric ?score
+WHERE {
+   ?model orkp:hasDataset ?dataset.
+   ?dataset orkp:hasMetric ?metric_entity.
+   ?metric_entity orkgc:hasValue ?score.
+   ?metric_entity orkgc:hasMetricName ?metric.
+   FILTER (str(?dataset) = "WMT2014 German-English" &&
+           str(?metric) = "BLEU")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

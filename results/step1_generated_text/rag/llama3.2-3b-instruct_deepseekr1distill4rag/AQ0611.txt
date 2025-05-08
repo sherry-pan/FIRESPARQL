@@ -1,0 +1,23 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Asterix dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX orkp: <http://www.openresearchknowledgegraph.org/predicate/>
+    PREFIX orkc: <http://www.openresearchknowledgegraph.org/class/>
+    SELECT?paper?title?id
+    WHERE {
+     ?paper a orkc:Research_Paper.
+     ?paper orkp:includes?benchmark.
+     ?benchmark orkp:includes?dataset.
+     ?benchmark orkp:includes?benchmark_type.
+     ?benchmark orkp:includes?benchmark_type.
+     ?dataset a orkg:Dataset.
+     ?dataset orkp:includes?dataset_type.
+     ?dataset rdfs:label "Atari 2600 Asterix Dataset"@en.
+     ?paper orkp:hasURI?id.
+     ?paper orkp:hasTitle?title.
+      FILTER (STR(?id) = "10.1007/s11229-021-00445-5"@en)
+    }
+    ```    This SPARQL query retrieves the titles and IDs of research papers that include a benchmark for the Atari 2600 Asterix dataset. It uses the provided context to link the correct entities and properties in the ORKG RDF data dump. The query first filters papers that include a benchmark, then filters those that include the Atari 2600 Asterix dataset, and finally retrieves the titles and IDs of the matching papers. The `FILTER (STR(?id) = "10.1007/s11229-021-00445-5"@en)` clause ensures that only the paper with DOI 10.1007/s11229-021-00445-5 is returned.<|eot_id|>

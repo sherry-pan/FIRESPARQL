@@ -1,0 +1,54 @@
+Question:
+Could you provide a list of models that have been tested on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgp:R16849 orkgp:R16850.
+      ?paper?paper_lbl
+      ?paper orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_MODEL?model.
+      ?model rdfs:label?model_lbl.
+     }
+     UNION
+     SELECT?model?model_lbl
+     WHERE {
+       orkgp:R16849 orkgp:R16850.
+      ?paper?paper_lbl
+      ?paper orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_MODEL?model.
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+      ?dataset orkgp:HAS_MODEL?model.
+      ?model rdfs:label?model_lbl.
+     } 
+     ORDER BY DESC(?eval)
+    ```
+The final answer is: 
+SELECT DISTINCT?model?model_lbl
+WHERE {
+  orkgp:R16849 orkgp:R16850.
+ ?paper?paper_lbl
+ ?paper orkgp:HAS_EVALUATION?eval.
+ ?eval orkgp:HAS_MODEL?model.
+ ?model rdfs:label?model_lbl.
+}
+UNION
+SELECT DISTINCT?model?model_lbl
+WHERE {
+  orkgp:R16849 orkgp:R16850.
+ ?paper?paper_lbl
+ ?paper orkgp:HAS_EVALUATION?eval.
+ ?eval orkgp:HAS_MODEL?model.
+ ?model orkgp:HAS_DATASET?dataset.
+ ?dataset rdfs:label?dataset_lbl.
+ ?dataset orkgp:HAS_MODEL?model.
+ ?model rdfs:label?model_lbl.
+}
+ORDER BY DESC(?eval) 
+```
+Note that I've kept the ORDER BY DESC(?eval) at the end of the query as it is present in the original query. If you want to remove it, you can simply remove the last line. 
+
+Also, please note that the output SPARQL query is a combination of two separate queries. The first query selects the models that have been tested on the NLP-TDMS (Exp, arXiv only) benchmark dataset. The second query is a fallback that checks if the dataset is specified for the model, and if not, it selects the model with the highest evaluation score. 
+
+You can adjust the query to fit your specific needs.<|eot_id|>

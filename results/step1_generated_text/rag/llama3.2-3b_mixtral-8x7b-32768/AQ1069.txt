@@ -1,0 +1,69 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ SELECT?result?metric?score 
+    WHERE {
+       ?result orkgr:relatedTo?dataset.
+       ?result orkgr:relatedTo?metric.
+       ?result orkgr:relatedTo?score.
+       ?dataset a orkgc:Dataset.
+       ?dataset orkgr:identifier "re17.zip".
+       ?result rdfs:label?resultLabel.
+       ?result rdfs:label?metricLabel.
+       ?result rdfs:label?scoreLabel.
+        FILTER (STRLIKE(?resultLabel, "highest benchmark result") && STRLIKE(?metricLabel, "metric") && STRLIKE(?scoreLabel, "score")).
+        BIND (str(?resultLabel) AS?result).
+        BIND (str(?metricLabel) AS?metric).
+        BIND (str(?scoreLabel) AS?score).
+    } END; 
+
+```python
+def generate_sparql_query(input_question):
+    # Define the context
+    context = {
+        "question": "Can you provide the highest benchmark result, including the metric and score, for the seel.cse.lsu.edu/data/re17.zip  dataset?",
+        "extracted_terms": {
+            "highest benchmark result",
+            "metric",
+            "score",
+            "seel.cse.lsu.edu/data/re17.zip"
+        },
+        "candidates": {
+            "highest benchmark result": [
+                {
+                    "uri": "orkgp:HASBestResult",
+                    "rdfs:label": "Highest benchmark result",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "metric": [
+                {
+                    "uri": "orkgp:HASMetric",
+                    "rdfs:label": "Metric",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "score": [
+                {
+                    "uri": "orkgp:HASScore",
+                    "rdfs:label": "Score",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "seel.cse.lsu.edu/data/re17.zip": [
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "re17.zip",
+                    "rdf:type": "orkgc:Resource"
+                },
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "re17.zip",
+                    "rdf:type": "orkgc:Dataset"
+                }
+            ]
+        }
+    }
+
+   

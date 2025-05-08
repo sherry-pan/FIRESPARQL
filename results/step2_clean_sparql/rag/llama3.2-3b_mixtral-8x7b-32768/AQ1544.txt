@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+   ?dataset orkgr:R122690 .
+   ?dataset orkgp:HAS_DATASET ?datasetModel .
+   ?datasetModel orkgp:HAS_MODEL ?model .
+   ?model orkgp:HAS_F1_METRIC ?metric .
+   ?metric orkgp:PERFORMED_BEST ?result .
+   FILTER (STR(?result) = "best")
+}
+```

@@ -1,0 +1,63 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Sequential MNIST dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+         orkgr:R122689 orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_BEST_RESULT?best_result.
+        ?best_result orkgp:HAS_METRIC?metric.
+        ?metric orkgp:HAS_SCORE?score.
+         BIND(xsd:float(?score) AS?score)
+     }
+
+
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the given question and context.
+
+    Args:
+        question (str): The natural language question in English.
+        context (dict): The context as background information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?score"
+
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+
+    # Iterate over the extracted terms
+    for term in extracted_terms:
+        # If the term is a candidate, add the corresponding predicate to the SPARQL query
+        if term in context["candidates"]:
+            # Get the candidates for the current term
+            candidates = context["candidates"][term]
+
+            # Iterate over the candidates
+            for candidate in candidates:
+                # Get the URI and label of the candidate
+                uri = candidate["uri"]
+                label = candidate["rdfs:label"]
+
+                # Add the predicate to the SPARQL query
+                sparql_query += f" {label}?{term}."
+
+            # Add the filter to the SPARQL query to only consider the best result
+            sparql_query += " FILTER(REGEX(STR(?best_result), 'best', 'i'))"
+
+    # Close the WHERE clause
+    sparql_query += "}"
+
+    # Add the filter to the SPARQL query to only consider the Sequential MNIST dataset
+    sparql_query += " FILTER(REGEX(STR(orkgr:R122689), 'MNIST', 'i'))"
+
+    # Add the filter to the SPARQL query to only consider the metric and

@@ -1,0 +1,70 @@
+Question:
+List the metrics that are used to evaluate models on the SQuAD1.1 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX orkc: <http://example.org/orkc/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?metric
+     WHERE {
+      ?dataset a orkg:Dataset.
+      ?dataset orkc:evaluatedOn?metric.
+       FILTER (STR(?metric) = "F1-score" OR STR(?metric) = "Accuracy")
+       UNION {
+        ?dataset a orkc:Dataset.
+        ?dataset orkg:relatedTo?dataset2.
+        ?dataset2 a orkg:Dataset.
+        ?dataset2 orkc:evaluatedOn?metric.
+         FILTER (STR(?metric) = "F1-score" OR STR(?metric) = "Accuracy")
+       }
+     } 
+     LIMIT 2
+    SPARQL Query END
+```
+
+
+## Step 1: Identify the key entities and properties from the input question.
+The key entities are "SQuAD1.1 dataset" and "metrics". The properties are "evaluated on" and "used to evaluate".
+
+## Step 2: Extract relevant terms from the context information.
+The relevant terms are "F1-score", "accuracy", "ACL Anthology dataset", and "NLP Benchmark Dataset".
+
+## Step 3: Compute similarity scores for the extracted terms.
+The similarity scores for "SQuAD1.1 dataset" are high for "ACL Anthology dataset" and "NLP Benchmark Dataset". The similarity scores for "metrics" are high for "F1-score", "accuracy", "precision", and "recall".
+
+## Step 4: Structure the JSON with the extracted terms and the top candidates.
+The JSON contains the extracted terms "SQuAD1.1 dataset" and "metrics", along with their top candidates and similarity scores.
+
+## Step 5: Construct the SPARQL query based on the extracted terms and top candidates.
+The SPARQL query uses the prefixes for the ORKG and ORKC vocabularies, and selects the "metric" variable. It filters for the presence of "F1-score" and "Accuracy" in the "metric" variable, and also considers the related datasets for "F1-score" and "Accuracy".
+
+## Step 6: Limit the query results to the top 2 candidates.
+The query results are limited to the top 2 candidates for each entity.
+
+## Step 7: Finalize the SPARQL query.
+The final SPARQL query is constructed using the extracted terms, top candidates, and similarity scores.
+
+The final answer is: 
+```
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT?metric
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkc:evaluatedOn?metric.
+  FILTER (STR(?metric) = "F1-score" OR STR(?metric) = "Accuracy")
+  UNION {
+   ?dataset a orkc:Dataset.
+   ?dataset orkg:relatedTo?dataset2.
+   ?dataset2 a orkg:Dataset.
+   ?dataset2 orkc:evaluatedOn?metric.
+    FILTER (STR(?metric) = "F1-score" OR STR(?metric) = "Accuracy")
+  }
+}
+LIMIT 2
+```<|eot_id|>

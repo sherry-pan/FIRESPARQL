@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkr: <http://example.org/orkr/>
+
+SELECT ?model
+WHERE {
+    ?result a orkg:Result ;
+            orkc:hasBenchmark orkg:SVHN ;
+            orkp:hasPercentageError ?error ;
+            orkc:achievedBy ?model .
+}
+ORDER BY DESC(?error)
+LIMIT 1
+```

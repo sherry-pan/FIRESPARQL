@@ -1,0 +1,20 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Gibson PointGoal Navigation dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX orkgc: <http://orkg.org/orkgc/>
+    PREFIX orkgr: <http://orkg.org/orkgr/>
+    PREFIX orkgp: <http://orkg.org/orkgp/>
+    SELECT?title?id
+    WHERE {
+     ?paper orkgc:hasSubject <http://orkg.org/orkg/resource/R284317>.
+     ?paper orkgc:hasTopic <http://orkg.org/orkg/resource/R284316>.
+     ?paper orkgp:hasPredicate?pred.
+     ?pred orkgp:hasSubject <http://orkg.org/orkg/resource/R284316>.
+     ?pred orkgp:hasObject <http://orkg.org/orkg/resource/R284317>.
+     ?paper orkgr:hasLabel?title.
+     ?paper orkgr:hasURI?id.
+    }
+    ```    Note: The above SPARQL query is generated based on the provided input question and context. It is designed to query the Open Research Knowledge Graph (ORKG) to retrieve the titles and IDs of research papers that include a benchmark for the Gibson PointGoal Navigation dataset. The query uses the RDF prefixes and types provided in the context to navigate the ORKG.<|eot_id|>

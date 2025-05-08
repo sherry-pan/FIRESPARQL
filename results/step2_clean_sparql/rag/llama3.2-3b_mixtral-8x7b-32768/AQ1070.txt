@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?benchmarkResult ?metric ?value
+WHERE {
+  ?benchmarkResult a orkp:BenchmarkResult.
+  ?benchmarkResult orkp:hasBenchmarkResult ?bestResult.
+  ?bestResult orkp:hasMetric ?metric.
+  ?bestResult orkp:hasValue ?value.
+  ?bestResult orkp:hasDataset ?dataset.
+  ?dataset a orkp:Dataset.
+  ?dataset orkp:hasLabel "FSNS - Test dataset".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?metric ?dataset
+WHERE {
+  ?metric orkp:relatedTo ?dataset.
+  ?metric orkp:label ?metricLabel.
+  ?dataset orkp:label ?datasetLabel.
+  FILTER (CONTAINS(LCASE(STR(?metricLabel)), "evaluation") && CONTAINS(LCASE(STR(?datasetLabel)), "sst-5"))
+}
+```

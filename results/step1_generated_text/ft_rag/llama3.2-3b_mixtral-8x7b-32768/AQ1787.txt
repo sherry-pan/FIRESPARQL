@@ -1,0 +1,43 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 Yars Revenge benchmark dataset?
+
+Generated SPARQL:
+ SELECT?score?model?dataset
+     WHERE {
+      ?model orkgp:HAS_MODEL?model_model.
+      ?model_model rdfs:label?model.
+      ?benchmark orkgp:HAS_BENCHMARK?benchmark_benchmark.
+      ?benchmark_benchmark rdfs:label?benchmark.
+      ?benchmark orkgp:P31?cont.
+      ?cont orkgp:HAS_DATASET?dataset_dataset.
+      ?dataset_dataset rdfs:label?dataset.
+       FILTER (str(?model) = "highest Score score")
+      ?benchmark orkgp:P32?cont2.
+      ?cont2 orkgp:HAS_MODEL?model2.
+      ?model2 rdfs:label?model.
+      ?benchmark orkgp:HAS_DATASET?dataset_dataset2.
+      ?dataset_dataset2 rdfs:label?dataset.
+       BIND(xsd:integer(?dataset_dataset2) AS?score)
+       SELECT?model?model?dataset
+       WHERE {
+        ?model orkgp:HAS_MODEL?model_model.
+        ?model_model rdfs:label?model.
+        ?benchmark orkgp:HAS_BENCHMARK?benchmark_benchmark.
+        ?benchmark_benchmark rdfs:label?benchmark.
+        ?benchmark orkgp:P31?cont.
+        ?cont orkgp:HAS_DATASET?dataset_dataset.
+        ?dataset_dataset rdfs:label?dataset.
+         FILTER (str(?model) = "highest Score score")
+        ?benchmark orkgp:P32?cont2.
+        ?cont2 orkgp:HAS_MODEL?model2.
+        ?model2 rdfs:label?model.
+        ?dataset_dataset2 rdfs:label?dataset.
+         BIND(xsd:integer(?dataset_dataset2) AS?score)
+       }
+     }
+     SELECT?score?model?dataset
+     WHERE {
+      ?model orkgp:HAS_MODEL?model_model.
+      ?model_model rdfs:label?model.
+      ?benchmark orkgp:HAS_BENCHMARK?benchmark_benchmark.
+      ?benchmark_benchmark r

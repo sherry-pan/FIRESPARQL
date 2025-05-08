@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?metric
+WHERE {
+  ?metric orkgp:evaluatedOn ?dataset.
+  ?dataset rdf:type orkgc:Dataset.
+  ?dataset orkgp:name "CommonsenseQA".
+  FILTER (?metric IN (orkgp:accuracy, orkgp:f1_score, orkgp:precision, orkgp:recall, orkgp:roc_auc))
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkgp: <http://orkg.org/predicate/>
+
+SELECT ?score ?metricLabel
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkp:HAS_NATURAL_QUESTIONS ?dataset2.
+  ?dataset2 orkg:label "Natural Questions (short)".
+  ?dataset2 orkp:HAS_METRIC ?metric.
+  ?metric orkgp:label ?metricLabel.
+  ?dataset2 orkp:HAS_TopBenchmarkScore ?score.
+}
+```

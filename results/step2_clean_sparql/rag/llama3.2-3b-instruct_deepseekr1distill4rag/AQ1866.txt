@@ -1,0 +1,14 @@
+```sparql
+SELECT ?r ?rLabel ?score WHERE {
+  ?r a ?type .
+  FILTER (REGEX(STR(?r), "orkgr:benchmark_datasets") || REGEX(STR(?r), "orkgr:Natural_Language_Inference")) .
+  ?r orkg:hasDataset ?ds .
+  ?ds rdfs:label ?dsLabel .
+  ?ds orkg:hasScore ?score .
+  FILTER (
+    (?dsLabel = "MNIST" || ?dsLabel = "ACL Anthology Corpus" || 
+     ?dsLabel = "R147652" || ?dsLabel = "R284316" || ?dsLabel = "R284317") 
+    && (?score > 0.75)
+  ) .
+}
+```

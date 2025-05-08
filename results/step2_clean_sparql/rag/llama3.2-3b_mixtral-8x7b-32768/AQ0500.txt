@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.com/orkg#>
+PREFIX orkp: <http://example.com/orkp#>
+PREFIX orkc: <http://example.com/orkc#>
+PREFIX orkd: <http://example.com/orkd#>
+PREFIX orkgp: <http://example.com/orkgp#>
+PREFIX orkgr: <http://example.com/orkgr#>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper orkp:hasIdentifier ?paperId.
+  ?paper orkgp:hasTitle ?paperTitle.
+  ?paper orkgp:hasBenchmark ?benchmarkModel.
+  ?benchmarkModel orkgr:hasBenchmark ?dataset.
+  ?dataset orkgr:hasTitle "Penn Treebank (Character Level)".
+}
+```

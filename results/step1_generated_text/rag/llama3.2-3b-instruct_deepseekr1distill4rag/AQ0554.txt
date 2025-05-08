@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?title?id WHERE {
+ ?paper a ora:ResearchPaper.
+ ?paper ora:includesBenchmark?benchmark.
+ ?benchmark ora:relatedTo?dataset.
+ ?dataset ora:label?datasetLabel.
+ ?dataset ora:uri?datasetUri.
+  FILTER (str(?datasetLabel) = "Oxford-IIIT Pets"^^xsd:string).
+  SERVICE ora:dataset {
+    GRAPH ora:dataset {?benchmark ora:relatedTo?dataset }.
+  }
+}
+```<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?value 
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasDataset ?birdsnap.
+  ?birdsnap ora:hasBenchmarkResult ?result.
+  ?result ora:hasMetric ?metric.
+  ?result ora:hasValue ?value.
+  FILTER (?metric IN ("accuracy", "f1-score", "f1"))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

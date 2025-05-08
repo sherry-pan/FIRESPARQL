@@ -1,0 +1,52 @@
+Question:
+What are the most commonly used benchmark datasets for the Natural Language Inference research field?
+
+Generated SPARQL:
+ SELECT DISTINCT?benchmark,?dataset
+     WHERE {
+      ?problem      a            orkgc:Problem;
+                   rdfs:label      ?problem_label.
+       FILTER (str(?problem_label) = "Natural Language Inference")
+      ?problem      orkgp:HAS_RESEARCH_FIELD          ?research_field.
+      ?cont         orkgp:HAS_PROBLEM               ?problem;
+                     orkgp:HAS_DATASET               ?dataset.
+      ?dataset      rdfs:label                       ?dataset_label.
+       FILTER (str(?dataset_label) = "benchmark datasets")
+      ?benchmark     rdfs:label                       ?benchmark_label.
+       FILTER (str(?benchmark_label) = "Benchmark MPQA")
+       BIND(xsd:integer(3) AS?rank)
+       SELECT?benchmark?dataset
+       WHERE {
+        ?dataset      orkgp:HAS_BENCHMARK      ?benchmark.
+        ?benchmark      rdfs:label               ?benchmark_label.
+         FILTER (str(?benchmark_label) = "Benchmark MPQA")
+         BIND(xsd:integer(3) AS?rank)
+        ?cont         orkgp:HAS_DATASET         ?dataset.
+        ?dataset      rdfs:label                ?dataset_label.
+         FILTER (str(?dataset_label) = "benchmark datasets")
+       }
+       ORDER BY DESC(?rank)
+       LIMIT 3.
+      }  
+      ```
+
+SELECT DISTINCT?benchmark,?dataset
+WHERE {
+ ?problem      a            orkgc:Problem;
+                rdfs:label      ?problem_label.
+  FILTER (str(?problem_label) = "Natural Language Inference")
+ ?problem      orkgp:HAS_RESEARCH_FIELD          ?research_field.
+ ?cont         orkgp:HAS_PROBLEM               ?problem;
+                orkgp:HAS_DATASET               ?dataset.
+ ?dataset      rdfs:label                       ?dataset_label.
+  FILTER (str(?dataset_label) = "benchmark datasets")
+ ?benchmark     rdfs:label                       ?benchmark_label.
+  FILTER (str(?benchmark_label) = "Benchmark MPQA")
+  BIND(xsd:integer(3) AS?rank)
+  SELECT?benchmark?dataset
+  WHERE {
+   ?dataset      orkgp:HAS_BENCHMARK      ?benchmark.
+   ?benchmark      rdfs:label               ?benchmark_label.
+    FILTER (str(?benchmark_label) = "Benchmark MPQA")
+    BIND(xsd:integer(3) AS?rank)
+   ?cont         or

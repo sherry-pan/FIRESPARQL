@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmarkResult orkp:metric ?metric.
+  ?benchmarkResult orkp:value ?value.
+  ?benchmarkResult orkc:relatedTo ?dataset.
+  FILTER (STR(?dataset) = "CoQA_dataset")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

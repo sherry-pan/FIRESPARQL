@@ -1,0 +1,52 @@
+Question:
+Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Sequential MNIST benchmark dataset")
+      ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+      ?has_dataset    orkgp:HAS_DATASET      ?dataset_has_dataset.
+      ?cont          orkgp:HAS_DATASET      ?has_dataset;
+                      orkgp:P31             ?dataset.
+      ?benchmark      orkgp:HAS_DATASET      ?cont;
+                      rdfs:label              ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Sequential MNIST benchmark dataset")
+      ?cont          rdfs:label              ?cont_lbl.
+      ?model         orkgp:HAS_MODEL         ?cont;
+                      orkgp:P31             ?cont.
+      ?cont         orkgp:HAS_MODEL         ?model.
+      ?model         rdfs:label              ?model_lbl.
+     } 
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Sequential MNIST benchmark dataset")
+ ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+ ?has_dataset    orkgp:HAS_DATASET      ?dataset_has_dataset.
+ ?cont          orkgp:HAS_DATASET      ?has_dataset;
+                 orkgp:P31             ?dataset.
+ ?benchmark      orkgp:HAS_DATASET      ?cont;
+                 rdfs:label              ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "Sequential MNIST benchmark dataset")
+ ?cont          rdfs:label              ?cont_lbl.
+ ?model         orkgp:HAS_MODEL         ?cont;
+                 orkgp:P31             ?cont.
+ ?cont         orkgp:HAS_MODEL         ?model.
+ ?model         rdfs:label              ?model_lbl.
+}
+```python
+print("SELECT?model?model_lbl")
+print("WHERE {")
+print(" ?dataset       a                orkgc:Dataset;")
+print("  FILTER (str(?dataset_lbl) = \"Sequential MNIST benchmark dataset\")")
+print(" ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.")
+print(" ?has_dataset    orkgp:HAS_DATASET      ?dataset_has_dataset.")
+print(" ?cont          orkgp:HAS_DATASET      ?has_dataset;")
+print("  orkgp:P31             ?cont.")
+print(" ?benchmark      orkgp:HAS

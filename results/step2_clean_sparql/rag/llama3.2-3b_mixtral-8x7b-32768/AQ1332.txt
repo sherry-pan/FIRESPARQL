@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?benchmarkResult ?metric ?value WHERE {
+  ?benchmarkResult orkgr:relatedTo ?dataset.
+  ?dataset orkgr:relatedTo ?metric.
+  ?metric orkgp:hasValue ?value.
+  FILTER (lang(?benchmarkResult) = 'en' 
+      AND CONTAINS(LCASE(?benchmarkResult), 'wos-5736') 
+      AND CONTAINS(LCASE(?benchmarkResult), 'benchmark') 
+      AND CONTAINS(LCASE(?benchmarkResult), 'highest')).
+  FILTER (lang(?metric) = 'en').
+  FILTER (lang(?value) = 'en').
+}
+```

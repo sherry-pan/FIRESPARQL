@@ -1,0 +1,94 @@
+Question:
+Can you provide links to code used in papers that benchmark the FABIR model?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:R147246 orkgp:HAS_PAPER?paper.
+      ?paper orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_CODE?code.
+     }    
+
+
+```python
+def generate_sparql_query(context):
+    # Extract the extracted_terms and candidates from the context
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+
+    # Extract the terms and candidates from the extracted_terms and candidates dictionaries
+    terms = list(extracted_terms.keys())
+    term_uris = []
+    for term in terms:
+        if term in candidates:
+            term_uris.append(candidates[term][0]["uri"])
+
+    # Generate the SPARQL query based on the terms and candidates
+    sparql_query = "SELECT?code"
+    where_clauses = []
+    for term in terms:
+        if term in candidates:
+            if len(candidates[term]) > 0:
+                uri = candidates[term][0]["uri"]
+                if uri not in term_uris:
+                    term_uris.append(uri)
+                where_clauses.append(f"{term} orkgp:HAS_{term.replace(' ', '_')}?{term}")
+    where_clause = "WHERE {"
+    for i, clause in enumerate(where_clauses):
+        where_clause += f" {clause}"
+        if i < len(where_clauses) - 1:
+            where_clause += " OR "
+    where_clause += "}"
+    sparql_query += " " + where_clause
+    sparql_query += "."
+
+    return sparql_query
+
+
+# Example usage:
+context = {
+    "question": "Can you provide links to code used in papers that benchmark the FABIR model?",
+    "extracted_terms": {
+        "FABIR model",
+        "papers",
+        "benchmark",
+        "code"
+    },
+    "candidates": {
+        "FABIR model": [
+            {
+                "uri": "orkgr:R147246",
+                "rdfs:label": "FABIR",
+                "rdf:type": "orkgc:Resource"
+            }
+        ],
+        "papers": [
+            {
+                "uri": "orkgp:HAS_PAPER",
+                "rdfs:label": "Paper",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "benchmark": [
+            {
+                "uri": "orkgp:HAS_BENCHMARK",
+                "rdfs:label": "Benchmark",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "code": [
+            {
+                "uri": "orkgp:HAS_CODE",
+                "rdfs:label": "Code",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ]
+    }
+}
+sparql_query = generate_sparql_query(context)
+print(sparql_query)
+```
+
+
+
+    ORKG

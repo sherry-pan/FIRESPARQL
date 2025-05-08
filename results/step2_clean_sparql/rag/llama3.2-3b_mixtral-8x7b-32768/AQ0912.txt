@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?evaluationMetrics
+WHERE {
+  ?dataset orkgc:hasResource ?resource.
+  ?resource orkgc:label "MLDoc".
+  ?dataset orkgc:label "Zero-Shot".
+  ?dataset orkgc:label "English-to-Italian".
+  ?benchmarkingModel orkgp:hasBenchmark ?benchmark.
+  ?benchmark orkgp:hasModel ?model.
+  ?model orkgp:hasEvaluation ?evaluation.
+  ?evaluation orkgp:hasEvaluationMetric ?evaluationMetrics.
+}
+```

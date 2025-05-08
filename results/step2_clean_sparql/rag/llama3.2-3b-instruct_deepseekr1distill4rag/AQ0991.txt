@@ -1,0 +1,14 @@
+```sparql
+SELECT ?p ?o
+WHERE {
+  ?o a ora:EvaluationMetric.
+  ?o rdfs:label ?label.
+  ?p ora:benchmarkingModelsOn ?o.
+  ?p ora:hasEvaluationMetric ?e.
+  ?e ora:hasLabel ?label.
+  BIND(iriToLabel(?p) AS ?pLabel).
+  BIND(iriToLabel(?o) AS ?oLabel).
+  FILTER (?pLabel = "Performance Assessment" || ?pLabel = "Evaluation Method").
+  FILTER (?oLabel = "Accuracy" || ?oLabel = "F1-score").
+}
+```

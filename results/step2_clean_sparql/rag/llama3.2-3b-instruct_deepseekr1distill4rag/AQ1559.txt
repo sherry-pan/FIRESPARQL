@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/gc/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/p/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?benchmark orkgc:is_type_of ?benchmarkType ;
+             rdfs:label "SST-5 Fine-grained classification benchmark dataset" .
+
+  ?model orkp:has_model_result ?result .
+  ?result orkp:has_accuracy ?accuracyObj .
+  ?accuracyObj orkp:has_value ?accuracy .
+
+  FILTER NOT EXISTS {
+    ?otherResult orkp:has_accuracy ?otherAccuracyObj .
+    ?otherAccuracyObj orkp:has_value ?otherAccuracy .
+    FILTER (?otherAccuracy > ?accuracy)
+  }
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model orkc:hasBenchmark ?benchmark.
+  ?benchmark orkp:hasDataset ?dataset;
+             orkp:hasMetric ?metric;
+             orkp:hasScore ?score.
+  FILTER (str(?dataset) = "ACE 2004 dataset" && str(?metric) = "RE+ Micro F1")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

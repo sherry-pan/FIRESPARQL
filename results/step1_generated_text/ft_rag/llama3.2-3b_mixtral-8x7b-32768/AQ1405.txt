@@ -1,0 +1,45 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?metric) AS?metric)
+     FROM?dataset?model
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "SciERC Benchmark Dataset")
+      ?dataset       orkgp:P31       ?cont.
+      ?cont          orkgp:HAS_DATASET      ?dataset.
+      ?cont          rdfs:label              ?cont_lbl.
+       FILTER (str(?cont_lbl) = "SciERC Benchmark Dataset")
+      ?cont      orkgp:P32               ?model.
+      ?model     orkgp:HAS_MODEL          ?mod.
+      ?mod       rdfs:label                ?model_lbl.
+      ?model     orkgp:HAS_METRIC         ?metric.
+      ?metric    orkgp:P31               ?eval.
+      ?eval      rdfs:label                ?eval_lbl.
+       FILTER (str(?eval_lbl) = "Entity F1 score")
+      ?eval      orkgp:HAS_VALUE          ?value.
+      ?value     rdfs:label                ?value_lbl.
+       FILTER (str(?value_lbl) = "highest")
+       BIND(xsd:float(?value_lbl) AS?value)
+      ?metric      orkgp:P33               ?cont.
+      ?cont      orkgp:P34               ?metric.
+      ?metric      orkgp:P35               ?cont.
+      ?cont      orkgp:P36               ?metric.
+      ?metric      orkgp:P37               ?cont.
+      ?cont      orkgp:P38               ?metric.
+      ?metric      orkgp:P39               ?cont.
+      ?cont      orkgp:P40               ?metric.
+      ?metric      orkgp:P41               ?cont.
+      ?cont      orkgp:P42               ?metric.
+      ?metric      orkgp:P43               ?cont.
+      ?cont      orkgp:P44               ?metric.
+      ?metric      orkgp:P45               ?cont.
+      ?cont      orkgp:P46               ?metric.
+      ?metric      orkgp:P47               ?cont.
+      ?cont      orkgp:P48               ?metric.
+      ?metric      orkgp:P49               ?cont.
+      ?cont      orkgp:P50               ?metric.
+      ?metric      orkgp:P51               ?cont.
+      ?cont      orkgp:P52

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicates/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metricLabel ?value
+WHERE {
+  ?dataset a orkg:Resource;
+           orkg:label "WMT2014 English-German dataset"@en;
+           orkg:hasBenchmarkResult ?result.
+  ?result orkgp:hasMetric ?metric;
+          orkgp:hasValue ?value.
+  ?metric rdfs:label ?metricLabel.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

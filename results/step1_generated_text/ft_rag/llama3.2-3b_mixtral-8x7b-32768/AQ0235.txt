@@ -1,0 +1,64 @@
+Question:
+What models are being evaluated on the Atari 2600 Name This Game dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Name This Game")
+          ?dataset       orkgp:HAS_DATASET      ?datasetcont.
+          ?cont           orkgp:HAS_EVALUATION     ?eval.
+          ?eval           rdfs:label               ?eval_lbl.
+           FILTER (str(?eval_lbl) = "evaluated on")
+          ?cont           orkgp:HAS_MODEL          ?model.
+          ?model         rdfs:label                ?model_lbl.
+     }    
+
+
+```python
+def generate_sparql_query(question, context):
+    """
+    This function generates a SPARQL query based on a given natural language question and context.
+    
+    Parameters:
+    question (str): The natural language question.
+    context (dict): The context containing extracted terms, candidates, and other information.
+    
+    Returns:
+    str: The generated SPARQL query.
+    """
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?model?model_lbl"
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+    
+    # Get the dataset mentioned in the question
+    dataset = context["extracted_terms"]["Atari 2600 Name This Game dataset"]
+    
+    # Add a filter to the SPARQL query to match the dataset
+    sparql_query += "      ?dataset       a                orkgc:Dataset;"
+                      "                      rdfs:label      ?dataset_lbl."
+    
+    # Add a filter to the SPARQL query to match the dataset name
+    sparql_query += "           FILTER (str(?dataset_lbl) = \"" + str(dataset) + "\")"
+    
+    # Add the rest of the conditions to the SPARQL query
+    sparql_query += "          ?dataset       orkgp:HAS_DATASET      ?datasetcont."
+    sparql_query += "          ?cont           orkgp:HAS_EVALUATION     ?eval."
+    sparql_query += "          ?eval           rdfs:label               ?eval_lbl."
+    sparql_query += "           FILTER (str(?eval_lbl) = \"evaluated on\")"
+    sparql_query += "          ?cont           orkgp:HAS_MODEL          ?model."
+    sparql_query += "          ?model         rdfs:label                ?model_lbl."
+    
+    # Close the WHERE clause
+    sparql_query += "     }"
+    
+    return sparql_query
+
+# Test the function
+question = "What models are being evaluated on the Atari 2600 Name This Game dataset?"
+context = {
+    "question":

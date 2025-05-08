@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+SELECT ?model ?label ?score ?type ?type_label
+WHERE {
+  ?model a orkc:Model;
+         orkc:label ?label;
+         orkc:score ?score;
+         orkc:type ?type.
+  ?type orkc:label ?type_label.
+  FILTER (STR(?model) IN ("SVM", "CRF", "Stanford_NER", "DBpedia_Spotlight", "Flair_NER"))
+}
+```

@@ -1,0 +1,40 @@
+Question:
+Where can I find code references in papers that have used the PNDec model for benchmarking purposes?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX orkc: <http://www.openresearchknowledgegraph.org/class/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/predicate/>
+PREFIX orkc: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT?uri?label?score?type?rdfType
+WHERE {
+ ?paper a orkc:JournalArticle.
+ ?paper orkp:P5044 "used for benchmarking purposes".
+ ?paper orkc:hasCodeReference?codeRef.
+ ?codeRef a orkc:Dataset.
+ ?codeRef orkp:hasURI?uri.
+ ?uri orkp:hasLabel?label.
+ ?paper orkp:P5044 "used for benchmarking purposes".
+ ?paper orkc:hasModel?model.
+ ?model a orkc:Model.
+ ?model orkp:hasLabel?modelLabel.
+ ?model orkp:hasURI?modelURI.
+  BIND(STR(?modelURI) AS?score).
+  FILTER(?score >= 0.85).
+  UNION
+ ?paper orkp:P5044 "used for benchmarking purposes".
+ ?paper orkc:hasCodeReference?codeRef.
+ ?codeRef a orkc:Dataset.
+ ?codeRef orkp:hasURI?uri.
+ ?uri orkp:hasLabel?label.
+ ?paper orkp:P5044 "used for benchmarking purposes".
+ ?paper orkc:hasModel?model.
+ ?model a orkc:Model.
+ ?model orkp:hasLabel?modelLabel.
+ ?model orkp:hasURI?modelURI.
+  BIND(STR(?modelURI) AS?score).
+  FILTER(?score >= 0.85).
+}
+```    Output SPARQL Query: END sparql ```    The final answer is not a number, but the provided output is a SPARQL query that can be executed to retrieve the desired information from the Open Research Knowledge Graph (ORKG).<|eot_id|>

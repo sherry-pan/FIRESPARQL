@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.orkgr.org/ontology/>
+PREFIX orkp: <http://www.orkgp.org/ontology/>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkp:hasModel ?model.
+  ?paper orkp:hasCode ?code.
+  FILTER (CONTAINS(LCASE(STR(?model)), LCASE("All-attention network - 18 layers")) &&
+          CONTAINS(LCASE(STR(?code)), LCASE("benchmarking purposes")))
+}
+```

@@ -1,0 +1,21 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://orkg.org/ontology/orkgc#>
+PREFIX orkgr: <http://orkg.org/ontology/orkgr#>
+PREFIX orkgp: <http://orkg.org/ontology/orkgp#>
+
+SELECT ?metric ?score
+WHERE {
+  ?datasetInstance orkgr:label "CartPole-v0".
+  ?datasetInstance orkgp:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult orkgp:hasMetric ?metric.
+  ?benchmarkResult orkgp:hasScore ?score.
+  
+  FILTER NOT EXISTS {
+    ?otherResult orkgp:hasMetric ?metric.
+    ?datasetInstance orkgp:hasBenchmarkResult ?otherResult.
+    ?otherResult orkgp:hasScore ?otherScore.
+    FILTER (?otherScore > ?score)
+  }
+}
+```

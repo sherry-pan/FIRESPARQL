@@ -1,0 +1,39 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://orkgr.org/resource/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkgc: <http://orkgc.org/resource/>
+PREFIX orkgc: <http://orkgc.org/ontology/>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper orkgc:hasDataset?dataset.
+ ?dataset orkgc:hasBenchmark?benchmark.
+ ?benchmark orkgp:includes?benchmark_for_bucc.
+  FILTER (strContains(STR(?benchmark_for_bucc), 'BUCC German-to-English dataset').
+ ?paper orkgp:hasContribution?contribution.
+ ?contribution orkgp:hasTitle?title.
+ ?contribution orkgp:hasID?id.
+}
+```
+
+
+## Step 1: Identify the entities and properties mentioned in the question.
+The entities and properties mentioned in the question are: BUCC German-to-English dataset, research papers, titles, IDs, include, and benchmark.
+
+## Step 2: Match the entities and properties with the candidates provided in the context.
+From the context, the following entities and properties can be matched:
+- BUCC German-to-English dataset: orkg:R122689
+- research papers: orkp:HAS_PAPER
+- titles: orkgp:HAS_TITLE
+- IDs: orkgp:HAS_ID
+- include: orkp:INCLUDES
+- benchmark: orkgp:HAS_BENCHMARK
+
+## Step 3: Construct the SPARQL query using the matched entities and properties.
+The SPARQL query should filter for papers that include a benchmark for the BUCC German-to-English dataset. It should also retrieve the titles and IDs of these papers.
+
+```spar

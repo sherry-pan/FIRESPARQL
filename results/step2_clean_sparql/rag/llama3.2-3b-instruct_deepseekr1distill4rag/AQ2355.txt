@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?p ?codeLink
+WHERE {
+ ?p a orkp:Predicate;
+    orkp:label ?labelPredicate.
+ FILTER (STRLIKE(LOWER(?labelPredicate), "provide links to code")).
+ 
+ ?o a orkc:Resource;
+    orkc:label ?labelModel.
+ FILTER (STRLIKE(LOWER(?labelModel), "bilstm-attention + elmo")).
+ 
+ ?o orkp:hasValue ?v.
+ ?v orkc:label ?labelPaper.
+ FILTER (STRLIKE(LOWER(?labelPaper), "paper")).
+ 
+ ?v orkp:codeLink ?codeLink.
+}
+```

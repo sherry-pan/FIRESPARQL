@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?metric
+WHERE {
+  ?e a orkgc:Metric.
+  ?e rdfs:label ?metric.
+  ?e orkp:evaluates ?evaluation.
+  ?evaluation orkg:R122689.
+  ?evaluation orkgc:Dataset ?dataset.
+  ?dataset orkp:HAS_METRIC ?e.
+  ?dataset orkp:HAS_MODEL ?model.
+  ?model orkgp:HAS_BENCHMARK orkg:R122689.
+}
+```

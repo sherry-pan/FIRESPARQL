@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://ontology.orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metricLabel ?value
+WHERE {
+  ?dataset a orkg:Resource ;
+           rdfs:label "Atari 2600 Freeway dataset" ;
+           orkg:hasBenchmarkResult ?benchmarkResult .
+           
+  ?benchmarkResult orkg:metric ?metric ;
+                   orkg:value ?value .
+                   
+  ?metric rdfs:label ?metricLabel .
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

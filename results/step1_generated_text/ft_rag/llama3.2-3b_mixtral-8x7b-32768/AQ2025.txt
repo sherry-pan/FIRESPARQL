@@ -1,0 +1,81 @@
+Question:
+List the code links in papers that use the Rfa-Gate-arccos model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:R147246 orkgp:HAS_CODE?code.
+      ?code rdfs:label?code_lbl.
+       FILTER(REGEX(?code_lbl, "Rfa-Gate-arccos"))
+      ?paper orkgp:P41?benchmark.
+      ?benchmark orkgp:HAS_BENCHMARK?cont.
+       FILTER(REGEX(?cont, "benchmark"))
+      ?cont orkgp:HAS_CODE?code.
+     } 
+    .      ```python
+def generate_sparql_query(input_question):
+    # Extract the extracted_terms and candidates from the context
+    context = {
+        "extracted_terms": {
+            "Rfa-Gate-arccos model": "code links",
+            "code links": "papers",
+            "papers": "benchmark",
+            "benchmark": "papers"
+        },
+        "candidates": {
+            "Rfa-Gate-arccos model": [
+                {
+                    "uri": "orkgr:R147246",
+                    "rdfs:label": "Rfa-Gate-arccos model",
+                    "rdf:type": "orkgc:Resource"
+                }
+            ],
+            "code links": [
+                {
+                    "uri": "orkgp:HAS_CODE",
+                    "rdfs:label": "code link",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "papers": [
+                {
+                    "uri": "orkgr:R147246",
+                    "rdfs:label": "paper",
+                    "rdf:type": "orkgc:Resource"
+                }
+            ],
+            "benchmark": [
+                {
+                    "uri": "orkgp:HAS_BENCHMARK",
+                    "rdfs:label": "benchmark",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ]
+        }
+    }
+
+    # Get the question and extracted_terms from the input question
+    question = input_question
+    extracted_terms = context["extracted_terms"]
+
+    # Get the candidates for each extracted term
+    candidates = context["candidates"]
+
+    # Initialize an empty list to store the sparql query
+    sparql_query = []
+
+    # Loop through each extracted term
+    for term, related_terms in extracted_terms.items():
+        # Get the candidates for the current term
+        term_candidates = candidates[term]
+
+        # Loop through each candidate
+        for candidate in term_candidates:
+            # Get the uri and label of the candidate
+            uri = candidate["uri"]
+            label = candidate["rdfs:label"]
+
+            # Add the following line to the sparql query for each candidate
+            sparql_query.append(f"SELECT?code")
+            sparql_query.append(f"WHERE {{")
+            sparql_query.append(f"  orkgp:{uri} orkg

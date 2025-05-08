@@ -1,0 +1,38 @@
+Question:
+What is the name of the top performing model in terms of A2 score when benchmarked on the ANLI test dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ANLI test dataset")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?model         orkgp:P31               ?cont.
+      ?model         rdfs:label              ?model_lbl.
+      ?model         orkgp:HAS_EVALUATION    ?eval.
+      ?eval          orkgp:P32               ?eval_value.
+      ?eval_value    orkgp:HAS_VALUE         ?value.
+      ?value         rdfs:label              ?value_lbl.
+      ?eval_value    orkgp:HAS_A2_VALUE     ?A2_value.
+      ?A2_value      rdfs:label              ?A2_lbl.
+      ?A2_value      a                        orkgp:Evaluation;
+                       orkgp:P31               ?eval_value.
+       ORDER BY DESC(?A2_lbl)
+      ?model      orkgp:P31               ?cont1.
+      ?cont1      rdfs:label              ?model_lbl.
+       }
+    Note that the output SPARQL query is the same as the one provided in the prompt.
+    We assume that the provided SPARQL query is correct and returns the desired results. The task is to generate the same SPARQL query.
+    The input question and context are provided to guide the generation of the correct SPARQL query.
+    The task is to generate the SPARQL query based on the input question and context.
+    The SPARQL query should be able to retrieve the top performing model in terms of A2 score when benchmarked on the ANLI test dataset.
+    The SPARQL query should return the name of the top performing model and its label.
+    The SPARQL query should be able to handle the provided context information.
+    The SPARQL query should be able to filter the results based on the provided context information.
+    The SPARQL query should be able to retrieve the correct results based on the provided input question and context.
+    The SPARQL query should be able to handle the ORKG knowledge graph structure.
+    The SPARQL query should be able to handle the provided entities and properties.
+    The SPARQL query should be able to handle the provided relationships between entities and properties.
+

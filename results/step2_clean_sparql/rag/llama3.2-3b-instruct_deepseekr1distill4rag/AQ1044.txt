@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasSoftcite ?softcite.
+  ?softcite orkg:hasBenchmarkResult ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

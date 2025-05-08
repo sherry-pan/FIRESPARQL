@@ -1,0 +1,44 @@
+Question:
+Provide a list of papers that have utilized the BiT-S (ResNet) model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:R149153 orkgp:HAS_MODEL orkgp:HAS_PAPER orkgp:UTILIZES orkgp:HAS_CODE?code.
+     } 
+     UNION 
+     SELECT?code
+     WHERE {
+       orkgp:R149153 orkgp:HAS_MODEL?model.
+      ?model orkgp:HAS_CODE?code.
+     } 
+     UNION 
+     SELECT?code
+     WHERE {
+       orkgp:R149153 orkgp:HAS_PAPER?paper.
+      ?paper orkgp:HAS_CODE?code.
+     } 
+
+```python
+def generate_sparql_query(input_question, context):
+    #... (rest of your code remains the same)
+    return sparql_query
+
+# Test the function
+input_question = "Provide a list of papers that have utilized the BiT-S (ResNet) model and include the links to their code?"
+context = {
+    "extracted_terms": {
+        "BiT-S (ResNet) model": ["captures the meaning of the correlation between words based on multi-head attention"],
+        "papers": ["Ligia Sierra, Betty L López, Flavio Forni, Maria Angela Vandelli, Michele Zoli, and Antonietta Vilella. 2015. Proceedings of the 2007 conference on Digital libraries - JCDL '07"],
+        "utilized": ["BioBERT achieved the highest F1 scores"],
+        "links to their code": ["BioBERT"]
+    },
+    "candidates": {
+        "BiT-S (ResNet) model": [
+            {
+                "uri": "orkgr:R44243",
+                "rdfs:label": "captures the meaning of the correlation between words based on multi-head attention",
+                "rdf:type": "orkgc:Resource"
+            },
+            {
+                "uri": "orkgr

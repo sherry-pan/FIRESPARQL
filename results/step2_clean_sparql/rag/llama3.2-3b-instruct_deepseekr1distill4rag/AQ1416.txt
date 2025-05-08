@@ -1,0 +1,19 @@
+```sparql
+PREFIX ora: <http://example.org/ora#>
+PREFIX bc: <http://example.org/bc#>
+
+SELECT ?model ?bleu_score
+WHERE {
+  ?dataset a ora:Dataset;
+           ora:benchmarkedBy ?model;
+           ora:dataset "WMT2016 English-Russian".
+
+  ?model a ora:Model;
+         ora:evaluatedBy ?metric.
+
+  ?metric ora:metricType "BLEU";
+          ora:score ?bleu_score.
+}
+ORDER BY DESC(?bleu_score)
+LIMIT 1
+```

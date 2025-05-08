@@ -1,0 +1,12 @@
+```sparql
+SELECT ?metric ?metricLabel
+WHERE {
+  ?evaluation a ora:Evaluation.
+  ?evaluation ora:evaluationMetricFor ?benchmark.
+  ?benchmark a ora:Benchmark.
+  ?benchmark ora:benchmarkName "SQuAD1.1"@en.
+  ?evaluation ora:usesMetric ?metric.
+  ?metric ora:metricLabel ?metricLabel.
+  FILTER (?metricLabel IN ("F1 score", "Exact match"))
+}
+```

@@ -1,0 +1,29 @@
+Question:
+Provide a list of papers that have utilized the CvT-21 (384 res) model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/orkg/>
+
+    SELECT?p?paper?code 
+    WHERE {
+       ?paper orkg:utilized?utilized.
+       ?utilized orkg:model?model.
+       ?model orkg:name?modelName.
+       ?model orkg:version?modelVersion.
+       ?model orkg:version?modelVersion.
+       ?model orkg:code?code.
+       ?paper orkg:link?paperLink.
+       ?paperLink orkg:url?paperUrl.
+        FILTER (str(?modelVersion) = "384 res").
+        BIND (CONCAT(?paperUrl,?paperLink) AS?paperLinkCode)
+        BIND (str(?paperUrl) || str(?paperLinkCode) AS?paperCode)
+        FILTER (str(?paperCode)!= "deleted")
+        FILTER (str(?paperUrl)!= "deleted")
+    }
+    ``` 
+    Note that the SPARQL query is generated based on the provided input question and context. The query is designed to retrieve papers that have utilized the CvT-21 (384 res) model and include the links to their code.
+
+    The SPARQL query uses the following predicates:
+    - orkg:utilized: The paper has utilized the model.
+    - orkg:model: The

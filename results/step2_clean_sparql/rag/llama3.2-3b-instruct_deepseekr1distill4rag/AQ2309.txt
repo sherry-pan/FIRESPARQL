@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX vocab: <http://purl.org/vocab/healthcare/v10/>
+
+SELECT ?paper ?code_link 
+WHERE {
+    ?paper schema:about <http://purl.org/healthcare/v10/CodeForBiomedicalResearch/CodeForBiomedicalResearch> .
+    ?paper schema:hasPart ?code_link .
+    ?paper vocab:hasMethod ?method .
+    ?method vocab:hasModel ?model .
+    ?model vocab:hasModelName ?model_name .
+    ?model_name rdfs:label "A3C FF (1 day) hs" .
+}
+```

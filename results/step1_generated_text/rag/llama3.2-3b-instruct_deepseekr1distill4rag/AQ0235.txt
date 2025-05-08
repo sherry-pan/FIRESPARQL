@@ -1,0 +1,18 @@
+Question:
+What models are being evaluated on the Atari 2600 Name This Game dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://orkgr.org/rdf/>
+PREFIX orkgc: <http://orkgr.org/rdf/ontology/gc/>
+PREFIX orkgp: <http://orkgr.org/rdf/ontology/gp/>
+SELECT?model?dataset
+WHERE {
+ ?model orkgp:P39020?dataset.
+  SERVICE orkgr:query {
+   ?model orkgc:rdfs:label?modelLabel.
+   ?dataset orkgc:rdfs:label?datasetLabel.
+    FILTER (STR(?modelLabel) = "CRF algorithm" OR STR(?datasetLabel) = "MNIST")
+  }
+}
+```    Note: The above SPARQL query is generated based on the provided context and the extracted terms. It is not guaranteed to be correct or optimal.<|eot_id|>

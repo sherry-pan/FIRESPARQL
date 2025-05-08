@@ -1,0 +1,44 @@
+Question:
+List the datasets benchmarked under the Common Sense Reasoning research problem?
+
+Generated SPARQL:
+ SELECT?dataset?dataset_lbl
+     WHERE {
+         orkgp:R147246 orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_BENCHMARK?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+        ?benchmark orkgp:HAS_DATASET?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+     }
+     ```
+This is a SPARQL query that retrieves the labels of the datasets that are benchmarked under the Common Sense Reasoning research problem. 
+
+Here is a breakdown of the query:
+
+- The `SELECT` clause specifies that we want to retrieve two values: `?dataset` and `?dataset_lbl`. However, since the query is asking for the dataset, we can only retrieve `?dataset` and we can use `?dataset_lbl` to get the label of the dataset.
+
+- The `WHERE` clause contains the main part of the query. We start by filtering the data to only include the research problems that are related to the Common Sense Reasoning problem. This is done by using the `orkgp:HAS_DATASET` predicate to filter the data that is related to the `orkgp:R147246` research problem.
+
+- The next line filters the data to only include the datasets that have been benchmarked. This is done by using the `orkgp:HAS_BENCHMARK` predicate to filter the data that has been benchmarked.
+
+- The next line filters the data to only include the datasets that are related to the benchmarked data. This is done by using the `orkgp:HAS_DATASET` predicate again to filter the data that is related to the benchmarked data.
+
+- The next line retrieves the label of the dataset using the `rdfs:label` property.
+
+- The last line binds the label of the dataset to a string value using the `xsd:string` function. This is necessary because the label of the dataset is not a string, but a variable, and we need to convert it to a string in order to retrieve its value.
+
+Overall, this query is designed to retrieve the labels of the datasets that are benchmarked under the Common Sense Reasoning research problem. 
+
+The final answer is: 
+```
+SELECT?dataset?dataset_lbl
+WHERE {
+         orkgp:R147246 orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_BENCHMARK?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+        ?benchmark orkgp:HAS_DATASET?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+}
+```<|eot_id|>

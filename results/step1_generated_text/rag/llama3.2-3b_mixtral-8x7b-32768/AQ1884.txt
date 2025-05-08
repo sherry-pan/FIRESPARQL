@@ -1,0 +1,59 @@
+Question:
+What are the most commonly used benchmark datasets for the Text Summarization research field?
+
+Generated SPARQL:
+ SELECT?dataset
+     WHERE {
+   ?researchField ork:is_related_to?researchField2.
+   ?researchField2 ork:has_benchmark?benchmark.
+   ?benchmark ork:has_dataset?dataset.
+    FILTER (STRContains(STR(?dataset), 'MPQA') OR STRContains(STR(?dataset), 'CNN/Daily Mail'))
+    }
+    GROUP BY?dataset
+    HAVING COUNT(?dataset) > 1
+    ORDER BY DESC( count(?dataset) )
+    LIMIT 5
+
+```
+This is a SPARQL query, which is used to query a knowledge graph. The query is designed to find the most commonly used benchmark datasets for the Text Summarization research field. Here's a breakdown of the query:
+
+**SELECT clause**:
+```
+?dataset
+```
+The query selects the `dataset` variable to retrieve the names of the benchmark datasets.
+
+**WHERE clause**:
+```
+?researchField ork:is_related_to?researchField2.
+?researchField2 ork:has_benchmark?benchmark.
+?benchmark ork:has_dataset?dataset.
+```
+The query uses the `ork:is_related_to` relation to find the research field that the input `Text Summarization` is related to. It then uses the `ork:has_benchmark` relation to find the benchmark datasets associated with this research field. Finally, it uses the `ork:has_dataset` relation to find the datasets associated with these benchmarks.
+
+**FILTER clause**:
+```
+FILTER (STRContains(STR(?dataset), 'MPQA') OR STRContains(STR(?dataset), 'CNN/Daily Mail'))
+```
+The query filters the results to only include datasets that contain the strings "MPQA" or "CNN/Daily Mail" in their names.
+
+**GROUP BY and HAVING clauses**:
+```
+GROUP BY?dataset
+HAVING COUNT(?dataset) > 1
+```
+The query groups the results by the `dataset` variable and only includes datasets that appear more than once in the results.
+
+**ORDER BY clause**:
+```
+ORDER BY DESC( count(?dataset) )
+```
+The query sorts the results in descending order by the count of each dataset.
+
+**LIMIT clause**:
+```
+LIMIT 5
+```
+The query limits the results to the top 5 most commonly used benchmark datasets.
+
+Overall, this query is designed to find the most commonly used benchmark datasets for the Text Summarization research field by

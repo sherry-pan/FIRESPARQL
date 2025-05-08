@@ -1,0 +1,67 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the DTD dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+       orkgp:R122690 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(STR(?dataset), "orkgr:R122690"))
+      ?dataset orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_SCORE?score.
+      ?score rdfs:label?score.
+       ORDER BY DESC(?score)
+       LIMIT 1
+     }
+
+
+
+```python
+def generate_sparql_query(question, context):
+    # Process the question to extract relevant terms and entities
+    question_terms = question.split()
+    question_entities = set()
+    for term in question_terms:
+        if term in context['extracted_terms']:
+            question_entities.add(term)
+
+    # Process the context to extract candidate entities and properties
+    candidates = context['candidates']
+    for entity, values in candidates.items():
+        if entity in question_entities:
+            for value in values:
+                yield {
+                    'entity': entity,
+                    'properties': [prop['uri'] for prop in value['properties']]
+                }
+
+    # Generate the SPARQL query
+    sparql_query = []
+    for entity, properties in candidates.items():
+        if entity in question_entities:
+            for prop in properties:
+                sparql_query.append({
+                    'entity': entity,
+                    'property': prop,
+                    'value': 'orkgp:HAS_BEST_RESULT'
+                })
+
+    # Filter out irrelevant properties
+    relevant_properties = set()
+    for query in sparql_query:
+        if query['value'] == 'orkgp:HAS_BEST_RESULT':
+            relevant_properties.add(query['property'])
+
+    # Generate the final SPARQL query
+    if relevant_properties:
+        query = 'SELECT?metric?score'
+        where_clauses = []
+        for prop in relevant_properties:
+            where_clauses.append(f'{prop}?value. FILTER(REGEX(STR(?value), "orkgp:R122690"))')
+        where_clause = 'WHERE {' +''.join(where_clauses) + '}'
+        query +='WHERE'+ where_clause
+        order_by = 'ORDER BY DESC(?score)'
+        limit = 'LIMIT 1'
+        query +='' + order_by +'' + limit
+        return query
+    else:
+        return

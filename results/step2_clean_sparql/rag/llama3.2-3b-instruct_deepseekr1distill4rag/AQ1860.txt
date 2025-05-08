@@ -1,0 +1,13 @@
+```sparql
+PREFIX ora: <http://example.org/ora#>
+
+SELECT ?dataset ?title
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:relatedTo ?researchArea.
+  ?researchArea ora:label ?title.
+  ?dataset ora:benchmarkedBy ?benchmark.
+  ?researchArea ora:label ?benchmarkLabel.
+  FILTER (CONTAINS(LCASE(?title), "reading comprehension") || CONTAINS(LCASE(?benchmarkLabel), "reading comprehension"))
+}
+```

@@ -1,0 +1,34 @@
+Question:
+What are the models that have been benchmarked on the MNIST dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "MNIST")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+  OPTIONAL {?cont           orkgp:HAS_MODEL        ?model.}
+ ?model         rdfs:label               ?model_lbl.
+}
+```
+
+    If the answer to the question is not explicitly stated in the dataset or in the code, it may be implied. For example, if a dataset has been used in multiple benchmarks, it is implied that the dataset has been benchmarked. In the above example, the answer to the question "What are the models that have been benchmarked on the MNIST dataset?" would be "IMAGEMAGICK", "MNISTM", "MNIST", "RESNET", "VGG16", and "XGBOOST". The answer is not explicitly stated in the code or the dataset, but it can be inferred that these models have been used in the benchmarks that have used the MNIST dataset. The answer is not explicitly stated in the dataset, but it can be inferred that the MNIST dataset has been used in the benchmarks that have used these models. The answer is not explicitly stated in the code, but it can be inferred that these models have been used in the benchmarks that have used the MNIST dataset. 
+
+    This problem can be approached by first identifying the entities and properties mentioned in the question and then using the provided context to link these entities and properties to the correct entities and properties in the ORKG. The correct answer can then be obtained by querying the ORKG using the identified entities and properties. 
+
+    We first identify the entities and properties mentioned in the question. The entities are "MNIST dataset" and "models", and the properties are "benchmarked on". We then use the provided context to link these entities and properties to the correct entities and properties in the ORKG. The context provides us with the following candidate entities and properties:
+    - MNIST dataset: orkg:R122690
+    - Models: orkgp:HAS_MODEL
+    - Benchmarked on: orkgp:HAS_EVALUATION
+
+    We can then use these linked entities and properties to construct the SPARQL query. The SPARQL query is as follows:
+    ```sparql
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "MNIST")
+ ?benchmark      orkgp:HAS

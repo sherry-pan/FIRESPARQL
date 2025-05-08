@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/orkgr/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper orkgp:EVALUATED_ON ?benchmark.
+  ?paper orkgr:R147652 ?code_node.
+  ?code_node orkgp:HAS_CODE ?code_link.
+  FILTER (LANG(?paper) = 'en' && LANG(?code_link) = 'en')
+}
+```

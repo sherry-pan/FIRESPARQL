@@ -1,0 +1,48 @@
+Question:
+What is the best performing model benchmarking the AESLC dataset in terms of ROUGE-1 metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?metric) AS?metric_lbl) 
+     WHERE {
+         orkgp:R168475 orkgp:HAS_DATASET      ?dataset.
+         FILTER (str(?dataset rdfs:label) = "AESLC")
+        ?dataset orkgp:HAS_METRIC        ?metric.
+        ?metric orkgp:HAS_MODEL          ?model.
+         ORDER BY DESC(?metric)
+        ?model rdfs:label                ?model_lbl.
+     }
+     LIMIT 1. 
+    If the question is "What is the best performing model in terms of ROUGE-1 metric?", the query is
+    SELECT?model?model_lbl (MAX(?metric) AS?metric_lbl) 
+    WHERE {
+         orkgp:R168475 orkgp:HAS_DATASET      ?dataset.
+         FILTER (str(?dataset rdfs:label) = "AESLC")
+        ?dataset orkgp:HAS_METRIC        ?metric.
+        ?metric orkgp:HAS_MODEL          ?model.
+         ORDER BY DESC(?metric)
+        ?model rdfs:label                ?model_lbl.
+     }
+     LIMIT 1. 
+
+    Please note that the above queries are the same because the 'best performing model' is a subjective 
+    interpretation of the data and the ordering of the results by the ROUGE-1 metric is not guaranteed.
+    The actual best performing model may be different from the model that is reported as the best performing 
+    model in the results of the query. 
+    If the question is "What is the ROUGE-1 metric used in the benchmarking of the AESLC dataset?", the query is
+    SELECT?metric?metric_lbl
+    WHERE {
+         orkgp:R168475 orkgp:HAS_DATASET      ?dataset.
+         FILTER (str(?dataset rdfs:label) = "AESLC")
+        ?dataset orkgp:HAS_METRIC        ?metric.
+        ?metric orkgp:HAS_METRIC          ?metric_lbl.
+     }
+    LIMIT 1.
+    Note that the above queries are the same because the 'ROUGE-1 metric' is a property, not a value. 
+    Therefore, the same query can be used to retrieve the ROUGE-1 metric and the value of the ROUGE-1 metric.
+    The actual ROUGE-1 metric used in the benchmarking of the AESLC dataset may be different from the value 
+    reported in the results of the query. 
+
+    Here is the correct SPARQL query for the given question: 
+    SELECT?model?model_lbl (MAX(?metric) AS?metric_lbl) 
+    WHERE {
+        

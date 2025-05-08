@@ -1,0 +1,42 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WebQuestions dataset?
+
+Generated SPARQL:
+ ```
+SELECT?paperTitle?paperId
+WHERE {
+ ?paper?paperId a ora:Paper.
+ ?paper ora:hasTitle?paperTitle.
+ ?paper mpqa:hasBenchmarkedModel?model.
+ ?model ora:hasBenchmarkedOn?dataset.
+ ?dataset ora:hasDataset?datasetId.
+ ?dataset mpqa:hasDataset?datasetId.
+ ?dataset mpqa:hasBenchmarkedOn?benchmark.
+ ?benchmark ora:hasBenchmarkedOn?benchmarkedModel.
+ ?benchmark mpqa:hasBenchmarkedModel?benchmarkedModel.
+ ?benchmark mpqa:hasDataset?dataset.
+  BIND(BOUND(?benchmarkedModel) AS?benchmarkedModelLabel).
+  FILTER(?benchmarkedModelLabel = "WebQuestions").
+  BIND(BOUND(?benchmarkedModel) AS?benchmarkedModelLabel).
+  FILTER(?benchmarkedModelLabel = "WebQuestions").
+ ?paper mpqa:hasBenchmarkedModel?model.
+ ?model ora:hasBenchmarkedOn?dataset.
+ ?dataset mpqa:hasDataset?datasetId.
+ ?dataset mpqa:hasBenchmarkedOn?benchmark.
+ ?benchmark mpqa:hasBenchmarkedModel?benchmarkedModel.
+ ?benchmark mpqa:hasDataset?dataset.
+  FILTER(?benchmarkedModel = "WebQuestions").
+}
+```
+
+    If you want to change the output format, please let me know. 
+
+Note: The original SPARQL query generated from the question is not provided, but I can provide the original query if you want it.
+
+    Please let me know if you need any further assistance. 
+
+    Here is the breakdown of the provided SPARQL query:
+
+    1.  The query starts by selecting the `paperTitle` and `paperId` of the papers that have been benchmarked on the `WebQuestions` dataset.
+    2.  It then filters the results to only include papers that have been benchmarked on the `WebQuestions` dataset.
+    3.  The query then joins the `paper` and `model` entities to find the

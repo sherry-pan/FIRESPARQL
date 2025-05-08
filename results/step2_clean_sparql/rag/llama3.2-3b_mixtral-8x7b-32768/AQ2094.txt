@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/predicates/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/resources/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkp:HAS_CODE ?code.
+  ?paper orkp:USES ?uses.
+  ?uses orkp:HAS_MODEL ?usesModel.
+  ?usesModel a orkg:Model;
+             orkg:label ?modelLabel.
+  FILTER (str(?modelLabel) = "OTF spelling+lemma (single) model")
+
+  ?paper orkp:HAS_BENCHMARK ?benchmark.
+}
+```

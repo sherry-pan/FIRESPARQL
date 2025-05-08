@@ -1,0 +1,12 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the WMT2014 German-English dataset?
+
+Generated SPARQL:
+ SELECT?p?title?id WHERE {?p orkgp:HAS_PAPER?paper.?paper orkgp:CONTAINS?benchmark.?benchmark orkgr:R122689.?paper orkgp:HAS_BENCHMARK?benchmark.?paper orkgp:HAS_ID?id.?paper orkgr:R122689. }
+     FILTER (regex(str(?paper), "WMT2014 German-English") || regex(str(?paper), "WMT2014 German-English dataset")).
+     SELECT?title?id WHERE {?paper orkgp:HAS_PAPER?paper.?paper orkgp:HAS_BENCHMARK?benchmark.?benchmark orkgr:R122689.?paper orkgp:HAS_ID?id.?paper orkgr:R122689. }
+     FILTER (regex(str(?paper), "WMT2014 German-English") || regex(str(?paper), "WMT2014 German-English dataset")).
+     FILTER (regex(str(?id), "WMT2014 German-English") || regex(str(?id), "WMT2014 German-English dataset")).
+
+    Note: The regex(str(?paper), "WMT2014 German-English") and regex(str(?id), "WMT2014 German-English") filters are added to ensure the papers and IDs associated with the WMT2014 German-English dataset are selected. 
+    The regex filter ensures the correct papers and IDs are selected based on the context

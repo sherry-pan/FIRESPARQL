@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgc: <http://example.com/orkgc/>
+PREFIX orkgr: <http://example.com/orkgr/>
+PREFIX orkgp: <http://example.com/orkgp/>
+
+SELECT ?model ?score
+WHERE {
+  ?benchmark orkgr:dataset ?dataset.
+  ?benchmark ?metricProperty ?score.
+  ?metricProperty orkgp:metricName "A3".
+  ?dataset orkgc:name "ANLI" .
+
+  ?model orkgc:relatedTo ?benchmark.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

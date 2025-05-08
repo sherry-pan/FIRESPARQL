@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://www.orkg.org/ontology/predicates/>
+PREFIX orkgc: <http://www.orkg.org/ontology/resource/>
+PREFIX orkgr: <http://www.orkg.org/ontology/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkgp:has_property ?metric.
+  ?metric orkgp:has_value "Best".
+  ?model orkgc:has_dataset ?dataset.
+  ?dataset orkgc:has_dataset "ShARe/CLEF eHealth corpus benchmark dataset".
+  FILTER(?model != orkgc:MNIST).
+  FILTER(?model IN (orkgc:SVM, orkgc:Stanford_NER, orkgc:DBpedia_Spotlight, orkgc:Flair_NER, orkgc:End-to-End_Neural_EL)).
+}
+```

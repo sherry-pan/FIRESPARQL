@@ -1,0 +1,46 @@
+Question:
+Can you list the models that have been evaluated on the SciTLDR dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+     ?dataset       a                orkgc:Resource;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "SciTLDR")
+     ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+     ?dataset_has_dataset       orkgp:HAS_DATASET      ?has_dataset_dataset.
+     ?has_dataset_dataset       rdfs:label              ?eval_lbl.
+      FILTER (str(?eval_lbl) = "evaluated on")
+     ?cont         orkgp:HAS_EVALUATION     ?has_eval.
+     ?cont         rdfs:label                ?cont_lbl.
+      FILTER (str(?cont_lbl) = "SciTLDR")
+     ?cont         orkgp:HAS_DATASET        ?cont_has_dataset.
+     ?cont_has_dataset       orkgp:HAS_DATASET      ?has_dataset_cont.
+     ?has_dataset_cont      ?dataset_has_dataset       orkgp:HAS_DATASET      ?has_dataset_dataset.
+     ?dataset_has_dataset       orkgp:HAS_DATASET      ?has_dataset_dataset       orkgp:HAS_DATASET      ?cont_has_dataset.
+     ?cont_has_dataset       rdfs:label              ?eval_lbl.
+      FILTER (str(?eval_lbl) = "evaluated on")
+     ?model      orkgp:HAS_MODEL         ?model_has_model.
+     ?model_has_model      rdfs:label             ?model_lbl.
+     ?model      orkgp:HAS_DATASET        ?model_has_dataset.
+     ?model_has_dataset      orkgp:HAS_DATASET      ?cont_has_dataset.
+     ?cont_has_dataset       orkgp:HAS_DATASET      ?has_dataset_cont.
+     ?has_dataset_cont       orkgp:HAS_DATASET      ?has_dataset_dataset.
+     ?dataset_has_dataset       orkgp:HAS_DATASET      ?has_dataset_dataset.
+     ?dataset       orkgp:HAS_DATASET        ?dataset_has_dataset.
+      OPTIONAL {
+       ?cont         rdfs:label                ?cont_lbl.
+      }
+      OPTIONAL {
+       ?model      rdfs:label                ?model_lbl.
+      }
+    } 
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Resource;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "SciTLDR")
+     ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+     ?dataset_has_dataset       orkgp:HAS_DATASET      ?has_dataset_dataset.
+     ?has_dataset_dataset       rdfs:label              ?eval_lbl.
+      FILTER (str(?eval_lbl) = "

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/> 
+PREFIX orkc: <http://example.org/orkc/> 
+
+SELECT ?paper ?title ?id 
+WHERE {
+  ?paper orkc:has_benchmark ?benchmark.
+  ?benchmark orkc:has_dataset ?dataset.
+  ?dataset orkc:uri ?uri.
+  FILTER (STR(?uri) = "https://example.org/SciCite_dataset").
+  ?paper orkc:has_title ?title.
+  ?paper orkc:has_id ?id.
+} 
+ORDER BY ?paper
+LIMIT 10
+OFFSET 0
+```

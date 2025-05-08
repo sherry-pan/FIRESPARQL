@@ -1,0 +1,21 @@
+Question:
+List the code links in papers that use the Dynamic Coattention Networks (single model) model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX orkc: <http://www.openresearchknowledgegraph.org/ontology/orkc/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/orkgr/>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkc:uses_model orkgc:Model?model.
+ ?model a orkc:Model.
+ ?model orkg:is_used_in orkgc:Benchmark?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:has_code_link?code_link.
+  FILTER (CONTAINS(str(?paper), "Dynamic Coattention Networks (single model)") || CONTAINS(str(?benchmark), "Dynamic Coattention Networks (single model)"))
+}
+```    Note: The SPARQL query is written in the standard SPARQL query language. The `PREFIX` statements define the prefixes for the URIs used in the query. The `SELECT` statement specifies the variables to be returned. The `WHERE` clause defines the conditions under which the query will return results. The `FILTER` statement is used to filter the results based on the presence of certain strings. The `CONTAINS` function checks if a string is a substring of another string.<|eot_id|>

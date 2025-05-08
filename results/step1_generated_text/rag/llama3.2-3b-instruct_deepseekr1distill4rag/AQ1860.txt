@@ -1,0 +1,16 @@
+Question:
+Provide a list of benchmarked datasets related to the Reading Comprehension research area?
+
+Generated SPARQL:
+ ```sparql
+SELECT?dataset?title
+WHERE {
+ ?dataset a ora:Dataset.
+ ?dataset ora:relatedTo?researchArea.
+ ?researchArea ora:label?title.
+ ?dataset ora:benchmarkedBy?benchmark.
+ ?benchmark ora:label?benchmarkLabel.
+  FILTER (STRLIKE(?title, "Reading Comprehension") OR STRLIKE(?benchmarkLabel, "Reading Comprehension"))
+}
+```
+    Note: The output SPARQL query assumes the RDF data is stored in a graph with prefixes `ora` and `orkgr`. The `ora` prefix is assumed to be the default prefix for the `Dataset` and `relatedTo` properties, while `orkgr` is assumed to be the default prefix for the `Research Area` and `benchmarkedBy` properties. The `ora:label` property is assumed to be the default label property for `Dataset` and `Research Area` resources. If these assumptions are not correct, the query will need to be modified accordingly.<|eot_id|>

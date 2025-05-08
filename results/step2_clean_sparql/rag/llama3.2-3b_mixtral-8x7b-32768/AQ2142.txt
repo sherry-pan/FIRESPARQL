@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX orkgc: <http://www.openresearch.org/ontology/orkgc/>
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+
+SELECT ?code
+WHERE {
+  ?p orkgc:hasContribution ?c.
+  ?c orkgc:hasResource ?r.
+  ?r orkg:label ?label.
+  FILTER (CONTAINS(?label, "12-layer Transformer-XL model")).
+  ?p orkgp:HAS_CODE ?code.
+  ?p orkgp:HAS_BENCHMARK ?benchmark. 
+}
+```

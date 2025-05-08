@@ -1,0 +1,46 @@
+Question:
+List the metrics that are used to evaluate models on the Gibson PointGoal Navigation benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?label 
+     WHERE {
+       ?gibsonNavigationBenchmarkDataset orkgp:hasMetric?metric.
+        {?metric orkgp:hasLabel?label. }
+        FILTER (?label IS NOT NULL )
+        }
+    LIMIT 5
+    ```python
+from SPARQLWrapper import SPARQLWrapper, JSON
+
+# Initialize SPARQLWrapper
+sparql = SPARQLWrapper("http://example.com/sparql")
+
+# Define the query
+query = """
+    SELECT?metric?label 
+    WHERE {
+       ?gibsonNavigationBenchmarkDataset orkgp:hasMetric?metric.
+        {?metric orkgp:hasLabel?label. }
+        FILTER (?label IS NOT NULL )
+        }
+    LIMIT 5
+"""
+
+# Set the query parameters
+sparql.setQuery(query)
+
+# Execute the query
+result = sparql.query()
+
+# Print the result
+print(result)
+```python
+    This code defines a SPARQL query that retrieves the metrics used to evaluate models on the Gibson PointGoal Navigation benchmark dataset. It uses the `SPARQLWrapper` library to connect to the ORKG and execute the query. The query first retrieves the metrics that are associated with the Gibson PointGoal Navigation benchmark dataset, and then filters the results to only include metrics that have a label. The `LIMIT 5` clause is used to limit the number of results returned. 
+
+    The `SPARQLWrapper` library is used to simplify the process of connecting to the ORKG and executing SPARQL queries. It provides a convenient interface for sending queries to the ORKG and retrieving the results.
+
+    The `JSON` parameter is set to `JSON` to specify that the results should be returned as JSON. However, in this case, the `result` variable is printed directly, so it's not necessary to do anything with the JSON data.
+
+    The `sparql.setQuery(query)` method is used to set the query to be executed. This method takes the query string as an argument and sets it as the query to be executed.
+
+    The `sparql.query()` method is used to execute the query and retrieve the results. This method returns a `JSON` object

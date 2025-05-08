@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?codeLink ?paper 
+WHERE {
+  ?paper orkg:usesModel orkg:ddqn-PC-model.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasCodeLink ?codeLink.
+  FILTER EXISTS { ?paper rdf:type orkg:Contribution }
+}
+```

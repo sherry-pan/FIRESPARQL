@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/rdf/>
+PREFIX orkp: <http://example.org/rdf property/>
+
+SELECT ?model
+WHERE {
+  ?model orkp:hasAccuracyHighScore ?score.
+  ?score orkp:hasBenchmark ?benchmark.
+  ?benchmark orkp:hasDataset ?dataset.
+  ?dataset orkp:hasName ?name.
+  FILTER (str(?name) = "RACE")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

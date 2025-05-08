@@ -1,0 +1,82 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the AAPD dataset?
+
+Generated SPARQL:
+ SELECT?papers?papers_lbl
+     WHERE {
+      ?papers orkgp:P34?papers_lbl
+       FILTER(REGEX(?papers_lbl, "AAPD"))
+      ?papers orkgp:HAS_BENCHMARK?benchmarks
+      ?benchmarks rdfs:label?cont
+       FILTER(REGEX(?cont, "dataset"))
+      ?cont orkgp:P33?papers
+     }
+     ```python
+def generate_sparql_query(input_question, context):
+    """
+    Generate the SPARQL query to answer the input question.
+    """
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?papers?papers_lbl"
+
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+    sparql_query += " ?papers orkgp:P34?papers_lbl"
+    sparql_query += "  FILTER(REGEX(?papers_lbl, 'AAPD'))"
+    sparql_query += " ?papers orkgp:HAS_BENCHMARK?benchmarks"
+    sparql_query += " ?benchmarks rdfs:label?cont"
+    sparql_query += "  FILTER(REGEX(?cont, 'dataset'))"
+    sparql_query += " ?cont orkgp:P33?papers"
+    sparql_query += "}"
+    
+    return sparql_query
+
+# Input question
+input_question = "Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the AAPD dataset?"
+
+# Context
+context = {
+    "extracted_terms": {
+        "research papers": [],
+        "titles": [],
+        "IDs": [],
+        "performed benchmarks": [],
+        "AAPD dataset": []
+    },
+    "candidates": {
+        "research papers": [
+            {
+                "uri": "orkgr:R36054",
+                "rdfs:label": "Contribution 1",
+                "rdf:type": "orkgc:Resource"
+            }
+        ],
+        "titles": [
+            {
+                "uri": "orkgp:HAS_TITLE",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "IDs": [
+            {
+                "uri": "orkgp:HAS_ID",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "performed benchmarks": [
+            {
+                "uri": "orkgp:HAS_BENCHMARK",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "AAPD dataset": [
+            {
+                "uri": "orkgr:R122690",
+                "rdfs:label": "AAPD",
+                "rdf:type": "orkgc:Resource"
+            }
+        ]
+    }
+}
+
+# Generate the SPARQL

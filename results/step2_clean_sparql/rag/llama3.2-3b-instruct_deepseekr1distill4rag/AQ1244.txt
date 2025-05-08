@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+PREFIX orkgc: <http://www.openresearch.org/ontology/orkgc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score ?result
+WHERE {
+  ?dataset a orkgc:Resource;
+           rdfs:label "DTD Dataset"@en;
+           orkgp:hasMetric ?metric;
+           orkgp:hasScore ?score.
+  ?result a orkgc:Resource;
+          orkgp:hasMetric ?metric;
+          orkgp:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

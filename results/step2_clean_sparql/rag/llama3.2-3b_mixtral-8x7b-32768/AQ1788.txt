@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:hasBestPerformance ?bestModel.
+  ?bestModel orkg:hasDataset ?dataset.
+  ?dataset orkg:hasMetric ?metric.
+  ?metric orkg:hasAverageReturn ?avgReturn.
+  ?avgReturn orkg:hasNoOp ?noOp.
+  FILTER (STR(?metric) = "Average Return (NoOp) metric").
+}
+```

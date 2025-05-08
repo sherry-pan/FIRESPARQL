@@ -1,0 +1,77 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+     orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+     FILTER (str(?dataset rdfs:label) = "MPQA")
+    ?dataset orkgp:HAS_METRIC?metric.
+    ?metric orkgp:HAS_VALUE?value.
+     ORDER BY DESC(?value)
+     LIMIT 1
+     }
+     ```python
+def generate_sparql_query(question, context):
+    """
+    Generate the SPARQL query to answer the given question based on the provided context.
+
+    Parameters:
+    question (str): The natural language question in English.
+    context (dict): The context information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+
+    # Initialize the SPARQL query with the SELECT clause
+    sparql_query = "SELECT?metric?value"
+
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+
+    # Filter the dataset to only include the one with label 'MPQA'
+    sparql_query += " orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset."
+    sparql_query += " FILTER (str(?dataset rdfs:label) = 'MPQA')"
+
+    # Get the metrics and values for the filtered dataset
+    sparql_query += "?dataset orkgp:HAS_METRIC?metric."
+    sparql_query += "?metric orkgp:HAS_VALUE?value."
+
+    # Order the results in descending order by value and limit to the top result
+    sparql_query += " ORDER BY DESC(?value)"
+    sparql_query += " LIMIT 1"
+
+    # Close the WHERE clause
+    sparql_query += " }"
+
+    return sparql_query
+
+# Example usage
+question = "What is the top benchmark result (metric and value) over the dataset NYT-single?"
+context = {
+    "extracted_terms": {
+        "top benchmark result",
+        "metric",
+        "value",
+        "dataset NYT-single"
+    },
+    "candidates": {
+        "top benchmark result": [
+            {
+                "uri": "orkgr:R44252",
+                "rdfs:label": "BioBERT achieved the highest F1 scores"
+            }
+        ],
+        "metric": [
+            {
+                "uri": "orkgp:HAS_METRIC",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "value": [
+            {
+                "uri": "orkgp:HAS

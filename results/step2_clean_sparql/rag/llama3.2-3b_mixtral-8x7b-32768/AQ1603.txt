@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp#>
+PREFIX orkgr: <http://example.org/orkgr#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model ?flops
+WHERE {
+   ?model orkgp:HAS_MODEL ?m.
+   ?m orkgr:HAS_BENCHMARK ?benchmark.
+   ?benchmark orkgr:HAS_DATASET ?dataset.
+   ?dataset rdfs:label "CIFAR-100".
+   ?m orkgr:HAS_FLOPS ?flops.
+}
+ORDER BY DESC(?flops)
+LIMIT 1
+```

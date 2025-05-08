@@ -1,0 +1,33 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Penn Treebank (Character Level) dataset")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         orkgp:TAKES_BENCHMARK     ?cont.
+        ?paper         rdfs:label              ?paper_lbl.
+     }
+     ```
+    The provided context and the question can be used to generate the correct SPARQL query. The query can be broken down into the following steps:
+
+    1.  **Get the dataset with the label "Penn Treebank (Character Level) dataset"**: We use the `FILTER` function with the `str(?dataset_lbl)` to match the label of the dataset. We then use the `?dataset       a                orkgc:Dataset;` to get the dataset.
+2.  **Get the benchmarking dataset**: We use the `?benchmark      orkgp:HAS_DATASET      ?dataset.` to get the dataset that is related to the dataset we obtained in the previous step.
+3.  **Get the contributions that are related to the benchmarking dataset**: We use the `?cont          orkgp:HAS_BENCHMARK     ?benchmark.` to get the contributions that are related to the benchmarking dataset.
+4.  **Get the papers that are related to the contributions**: We use the `?paper         orkgp:TAKES_BENCHMARK     ?cont.` to get the papers that are related to the contributions.
+5.  **Get the labels of the papers**: We use the `?paper         rdfs:label              ?paper_lbl.` to get the labels of the papers.
+
+    The final SPARQL query is the combination of the above steps, with the `SELECT DISTINCT?paper?paper_lbl` statement to get the distinct paper labels. The complete query is provided in the problem statement. The query is written in a way that it will return the list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset. 
+
+    The query can be executed on the ORKG to get the desired answer.
+
+    ```sparql
+    SELECT DISTINCT?paper?paper_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset

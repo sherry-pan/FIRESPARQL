@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/orkp/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+
+SELECT ?title ?id
+WHERE {
+  ?contribution a orkgc:Contribution.
+  ?contribution orkp:hasPaper ?paper.
+  ?paper orkp:hasTitle ?title.
+  ?paper orkp:hasID ?id.
+  ?contribution orkp:hasBenchmark ?benchmark.
+  ?benchmark orkp:hasDataset ?dataset.
+  ?dataset orkp:hasName ?datasetName.
+  FILTER (STR(?datasetName) = "Ohsumed")
+}
+```

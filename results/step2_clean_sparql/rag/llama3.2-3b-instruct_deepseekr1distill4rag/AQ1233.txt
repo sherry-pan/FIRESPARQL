@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Resource.
+  ?dataset orkgr:Walker_walk_dataset ?dataset_uri.
+  ?benchmark_result a orkgp:Predicate.
+  ?benchmark_result orkgr:benchmark_metric ?metric.
+  ?benchmark_result orkgr:benchmark_value ?value.
+  FILTER (?dataset_uri = <http://example.org/datasets/Walker_walk_DMControl500k>).
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

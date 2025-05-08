@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkgp:hasScore ?s .
+  ?s orkgr:maxValue ?score .
+  ?model orkgp:hasDataset ?dataset .
+  ?dataset orkgr:R122689 orkgr:hasBenchmark <http://example.org/benchmarks/Atari2600-QBert> .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,49 @@
+Question:
+What is the top benchmark score and its metric on the Words in Context dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/>
+    PREFIX orkgc: <http://orkgc.org/>
+    PREFIX orkgp: <http://orkgp.org/>
+
+    SELECT?metric?score
+    WHERE {
+   ?metric orkgp:HAS_METRIC?score.
+   ?score orkgc:resource?dataset.
+   ?dataset orkgp:HAS_DATASET orkg:R122689.
+    FILTER (STR(?score) =~ "^[0-9.]+$").
+    FILTER (STR(?score) > "0").
+    ORDER BY DESC(?score).
+    LIMIT 1.
+}
+    ``` 
+    If you need anything else please let me know. 
+
+## Step 1: Identify the entities and properties mentioned in the question.
+The question mentions "top benchmark score", "metric", and "Words in Context dataset". These are the entities and properties that need to be linked to the correct entities or properties in the ORKG.
+
+## Step 2: Identify the candidates for the entities and properties mentioned in the question.
+From the provided context, the candidates for the entities and properties mentioned in the question are:
+- "top benchmark score" with a URI of "orkg:R147244"
+- "metric" with a URI of "orkgp:HAS_METRIC"
+- "Words in Context dataset" with URIs of "orkgr:R122689" (both as a resource and a dataset) and "orkgp:HAS_DATASET"
+
+## Step 3: Determine the correct SPARQL query based on the identified entities, properties, and candidates.
+To find the top benchmark score and its metric on the Words in Context dataset, the SPARQL query should:
+- Use the "metric" property (orkgp:HAS_METRIC) to link to the "top benchmark score" (orkg:R147244)
+- Use the "Words in Context dataset" (orkgr:R122689) to filter the dataset
+- Filter the results to only include scores greater than 0
+- Order the results in descending order and limit to the top 1
+
+## Step 4: Construct the SPARQL query based on the determined entities, properties, and candidates.
+The SPARQL query should be:
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX orkgc: <http://orkgc.org/>
+PREFIX orkgp: <http://orkgp.org/>
+
+SELECT?metric?score
+WHERE {
+ ?metric orkgp:HAS_METRIC?score.
+ ?score orkgc:resource?dataset

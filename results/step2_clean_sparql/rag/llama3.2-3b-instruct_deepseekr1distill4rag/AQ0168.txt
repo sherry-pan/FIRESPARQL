@@ -1,0 +1,11 @@
+```sparql
+SELECT ?model ?modelLabel
+WHERE {
+  ?model wdt:P31 wd:Q18344162.   # Assuming model is an instance of some class, replace with correct one
+  ?model wdt:P1932 ?dataset.      # Assuming evaluatedOn is represented like this 
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER (LANG(?datasetLabel) = "en")
+  FILTER (CONTAINS(?datasetLabel, "STS Benchmark"))
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+```

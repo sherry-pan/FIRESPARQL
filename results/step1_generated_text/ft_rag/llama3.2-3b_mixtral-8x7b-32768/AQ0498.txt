@@ -1,0 +1,50 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WikiText-2 dataset?
+
+Generated SPARQL:
+ ```sparql
+      SELECT?paper?paper_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "WikiText-2 dataset")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                        orkgp:P32               ?model.
+       ?model         rdfs:label              ?model_lbl.
+        OPTIONAL {?cont      orkgp:HAS_MODEL         ?model;
+                  rdfs:label              ?model_lbl.}
+       ?paper        orkgp:P31               ?cont;
+                      orkgp:P32               ?model.
+       ?paper      rdfs:label              ?paper_lbl.
+      }
+    ```
+
+    If the input question is "What is the meaning of the term 'term1' in the context of 'context1'?", the response would be:
+    ```sparql
+    SELECT?def?def_lbl
+    WHERE {
+     ?cont      rdfs:label              ?cont_lbl.
+     ?cont      orkgp:P31               ?paper.
+     ?paper      orkgp:HAS_CONTEXT      ?cont;
+                  orkgp:P32               ?def.
+     ?def      rdfs:label              ?def_lbl.
+    }
+    ```
+    If the input question is "What are the entities or properties mentioned in the question?", the response would be:
+    ```sparql
+    SELECT?entity?entity_lbl
+   ?prop      rdfs:label              ?prop_lbl.
+    WHERE {
+     ?paper      rdfs:label              ?paper_lbl.
+     ?cont      orkgp:P31               ?paper.
+     ?cont      orkgp:P32               ?model.
+     ?model      rdfs:label              ?model_lbl.
+     ?cont      orkgp:HAS_MODEL         ?model.
+     ?cont      orkgp:HAS_DATASET       ?dataset.
+     ?dataset      rdfs:label              ?dataset_lbl.
+     ?dataset      orkgp:HAS_DATASET      ?benchmark.
+     ?benchmark      rdfs:label              ?benchmark_lbl.
+     ?benchmark      orkgp:HAS_BENCHMARK     ?cont.
+     ?cont      orkgp:HAS_CONTEXT        ?cont.
+     ?cont      rdfs

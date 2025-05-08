@@ -1,0 +1,40 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth corpus dataset")
+          ?benchmark      orkgp:HAS_BENCHMARK      ?cont.
+          ?cont           orkgp:INCLUDES           ?dataset.
+          ?dataset       orkgp:HAS_DATASET         ?dataset.
+          ?dataset       rdfs:label                ?dataset_lbl.
+           OPTIONAL {?dataset       orkgp:HAS_EVALUATION     ?eval.
+                   ?eval           orkgp:P31               ?eval_lbl.
+                   ?eval           rdfs:label              ?eval_lbl.}
+           OPTIONAL {?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+                   ?benchmark      rdfs:label              ?benchmark_lbl.}
+          ?paper        orkgp:HAS_PAPER          ?cont.
+          ?cont        orkgp:HAS_RESEARCH_PAPER  ?cont.
+           OPTIONAL {?cont      orkgp:HAS_ID           ?cont.
+                   ?cont      rdfs:label              ?cont_lbl.}
+           OPTIONAL {?cont      orkgp:HAS_RESEARCH_PAPER ?paper.
+                   ?paper      rdfs:label              ?paper_lbl.}
+          ?paper      orkgp:HAS_RESEARCH_PAPER  ?paper.
+          ?paper      rdfs:label                ?paper_lbl.
+      }   
+
+
+```python
+SELECT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth corpus dataset")
+ ?benchmark      orkgp:HAS_BENCHMARK      ?cont.
+ ?cont           orkgp:INCLUDES           ?dataset.
+ ?dataset       orkgp:HAS_DATASET         ?dataset.
+ ?dataset       rdfs:label                ?dataset_lbl.
+  OPTIONAL {?dataset       orkgp:HAS_EVALUATION     

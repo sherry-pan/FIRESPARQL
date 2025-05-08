@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the WOS-5736 dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R155371 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P34?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(REGEX(STR(?benchmark_lbl), "WOS-5736")
+      ?contrib orkgp:P6709?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?contrib orkgp:P6710?value.
+      ?value a orkgc:Value;
+              rdfs:label?value_lbl.
+       FILTER(REGEX(STR(?value_lbl), "^[0-9.]+$"))
+     }
+     ORDER BY DESC(?score)<|eot_id|>

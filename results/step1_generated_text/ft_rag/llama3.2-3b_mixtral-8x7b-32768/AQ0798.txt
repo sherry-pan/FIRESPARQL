@@ -1,0 +1,55 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "MultiRC")
+          ?dataset       orkgp:HAS_DATASET      ?dataset.
+          ?cont         orkgp:HAS_DATASET      ?dataset.
+          ?cont         orkgp:P31           ?model.
+          ?model       orkgp:HAS_EVALUATION   ?eval.
+          ?eval        orkgp:HAS_METRIC       ?metric.
+          ?metric      rdfs:label              ?metric_lbl.
+      }
+      ```python
+def get_sparql_query(context):
+    # Extract the terms, candidates, and context from the input
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    question = context["question"]
+
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?metric_lbl"
+
+    # Add the WHERE clause to the query
+    sparql_query += " WHERE {"
+    sparql_query += " ?dataset       a                orkgc:Dataset;"
+    sparql_query += "                 rdfs:label      ?dataset_lbl."
+    # Filter for the specific dataset
+    sparql_query += "           FILTER (str(?dataset_lbl) = \"" + extracted_terms["MultiRC dataset"] + "\")"
+    sparql_query += "          ?dataset       orkgp:HAS_DATASET      ?dataset."
+    sparql_query += "          ?cont         orkgp:HAS_DATASET      ?dataset."
+    sparql_query += "          ?cont         orkgp:P31           ?model."
+    sparql_query += "          ?model       orkgp:HAS_EVALUATION   ?eval."
+    sparql_query += "          ?eval        orkgp:HAS_METRIC       ?metric."
+    sparql_query += "          ?metric      rdfs:label              ?metric_lbl."
+    sparql_query += "      }"
+
+    return sparql_query
+```python
+context = {
+    "question": "What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?",
+    "extracted_terms": {
+        "MultiRC dataset": "MultiRC dataset",
+        "evaluation metrics": "evaluation metrics",
+        "benchmarking models": "benchmarking models"
+    },
+    "candidates": {
+        "MultiRC dataset": [
+            {
+                "uri": "orkgr:R122690",
+                "rdfs:label": "MultiRC",
+

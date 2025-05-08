@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkgr:R122689 orkgc:HAS_DATASET orkgp:RReutersEnDe .
+  ?score a orkgc:Resource; orkgr:R122689 orkgc:HAS_SCORE ?scoreValue .
+  ?model orkgr:R122689 orkgc:HAS_MODEL ?modelDescription .
+  ?scoreValue a orkgc:Resource; orkgr:R122689 orkgp:HAS_SCORE ?finalScore 
+  BIND(xsd:float(?finalScore) AS ?score)
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

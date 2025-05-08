@@ -1,0 +1,17 @@
+Question:
+What is the highest benchmark result achieved on the Walker, walk (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+SELECT?metric?value
+WHERE {
+ ?dataset a orkgc:Resource.
+ ?dataset orkgr:Walker_walk_dataset?dataset_uri.
+ ?benchmark_result a orkgp:Predicate.
+ ?benchmark_result orkgr:benchmark_result_93.9?metric?value.
+  FILTER (regex(str(?metric), "Accuracy") || regex(str(?metric), "Accuracy,") || regex(str(?metric), "accuracy,")).
+  FILTER (regex(str(?value), "93.9") || regex(str(?value), "93.9,") || regex(str(?value), "93.9.")).
+}
+``` 
+    Note: The SPARQL query uses the `regex` function to match the exact string values of the metric and value. This may not be the most efficient approach, but it's a simple way to achieve the desired result. In a real-world scenario, you might want to use more sophisticated matching techniques.<|eot_id|>

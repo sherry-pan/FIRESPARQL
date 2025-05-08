@@ -1,0 +1,51 @@
+Question:
+List the metrics that are used to evaluate models on the 200k Short Texts for Humor Detection benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "200k Short Texts for Humor Detection benchmark dataset")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont           orkgp:P32               ?eval.
+        ?eval           orkgp:HAS_EVALUATION     ?eval.
+        ?eval           rdfs:label               ?eval_lbl.
+         FILTER (str(?eval_lbl) = "has evaluation")
+        ?paper         orkgp:P31               ?cont.
+        ?paper         orkgp:P32               ?eval.
+        ?paper         rdfs:label               ?paper_lbl.
+         FILTER (str(?paper_lbl) = "has evaluation")
+        ?metric         orkgp:HAS_METRIC        ?eval.
+        ?metric         rdfs:label               ?metric_lbl.
+         }
+     } 
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?cont         orkgp:P31               ?paper.
+     ?paper         orkgp:P32               ?eval.
+     ?eval         orkgp:HAS_EVALUATION     ?eval.
+      FILTER (str(?eval_lbl) = "has evaluation")
+     ?eval         orkgp:HAS_METRIC        ?metric.
+     ?metric         rdfs:label               ?metric_lbl.
+      FILTER (str(?metric_lbl) = "metrics")
+     ?dataset       orkgp:HAS_DATASET      ?cont.
+     ?cont         rdfs:label               ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "200k Short Texts for Humor Detection benchmark dataset")
+    }
+    ```
+    Here is the corrected code:
+```
+SELECT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "200k Short Texts for Humor Detection benchmark dataset")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont           orkgp:P32               ?eval.
+ ?eval           orkgp:HAS_EVALUATION     ?eval.
+ ?eval           rdfs:label               ?eval_lbl.
+  FILTER (str(?eval_lbl) = "has evaluation")
+ ?paper         orkg

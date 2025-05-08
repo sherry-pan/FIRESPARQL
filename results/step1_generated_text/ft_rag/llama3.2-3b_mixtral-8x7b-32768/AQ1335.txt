@@ -1,0 +1,30 @@
+Question:
+What is the highest benchmark result achieved on the Yelp-14 dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+       orkgp:R122691 orkgp:HAS_DATASET rdfs:label?dataset.
+       FILTER (str(?dataset) = "Yelp-14")
+       orkgp:R122691 orkgp:HAS_BENCHMARK_RESULT rkgp:HAS_METRIC?metric.
+       ORKGP-REGEX(?metric, ".*\\{.*\\}.")
+       orkgp:R122691 orkgp:HAS_BENCHMARK_RESULT rkgp:HAS_EVALUATION_METRIC?evaluation_metric.
+       ORKGP-REGEX(?evaluation_metric, ".*\\{.*\\}.")
+       orkgp:R122691 orkgp:HAS_BENCHMARK_RESULT rkgp:HAS_VALUE?value.
+       ORKGP-REGEX(?value, ".*\\{.*\\}.")
+      ?dataset orkgp:HAS_DATASET orkgp:R122690.
+       ORKGP-REGEX(?dataset, "Yelp-14")
+       BIND(xsd:decimal(?value) AS?value)
+       BIND(xsd:decimal(?metric) AS?metric)
+       FILTER(?value >?metric)
+       ORDER BY DESC(?value)
+       LIMIT 1
+    } 
+    ```
+The provided SPARQL query retrieves the highest benchmark result for the Yelp-14 dataset, including the metric and its value. However, the query has several issues:
+
+1.  The query uses the `orkgp` prefix, but it should use the `orkgr` prefix for the `R` resources.
+2.  The query uses the `rkgp` prefix, but it should use the `rkgc` prefix for the `C` resources.
+3.  The query uses the `rdfs:label` property to filter the datasets, but it should use the `rdfs:label` property to filter the resources.
+4.  The query uses the `FILTER` function to filter the values and metrics, but it should use the `?value >?metric` condition in the `WHERE` clause.
+5.  The query uses the

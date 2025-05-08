@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+SELECT ?model ?metric ?dataset
+WHERE {
+  ?model orkgp:HAS_MODEL ?m.
+  ?m orkgp:HAS_PRE_TRAINING_DATASET_METRIC ?metric.
+  ?metric orkgr:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgr:HAS_DATASET ?dataset.
+  FILTER (?dataset = "HMDB51")
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

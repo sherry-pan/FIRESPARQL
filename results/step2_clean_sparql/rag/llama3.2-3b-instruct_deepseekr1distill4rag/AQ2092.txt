@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX orkc: <http://www.openresearchknowledgegraph.org/ontology/orkc/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkc:uses_model ?model.
+  ?model a orkc:Model.
+  ?model orkg:is_used_in ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:has_code_link ?code_link.
+  FILTER CONTAINS(str(?model), "Dynamic Coattention Networks (single model)")
+}
+```

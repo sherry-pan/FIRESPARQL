@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://www.openresearch.org/ontologies/orkgp#>
+PREFIX orkgr: <http://www.openresearch.org/ontologies/orkgr#>
+SELECT ?study ?precision ?recall ?f1score
+WHERE {
+  ?study orkgr:usesAlgorithm "naive bayes"@en.
+  ?study orkgr:hasAlgorithm ?algorithm.
+  ?algorithm orkgr:hasFeatureType orkgr:FeatureBagOfWords.
+  ?study orkgr:classifies ?classification.
+  ?classification orkgr:hasResourceType orkgr:UserFeedback.
+  ?study orkgp:HAS_PRECISION ?precision.
+  ?study orkgp:HAS_RECALL ?recall.
+  ?study orkgp:HAS_F1_SCORE ?f1score.
+}
+```

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/rdf/>
+PREFIX orkc: <http://orkc.org/rdf/>
+PREFIX orkp: <http://orkp.org/rdf/>
+PREFIX orgr: <http://orkr.org/rdf/>
+
+SELECT ?model ?score
+WHERE {
+  ?dataset a orkc:Dataset;
+           orgr:has_score ?score.
+  FILTER (str(?dataset) = "Atari_2600_Montezuma's_Revenge_benchmark_dataset").
+  
+  ?model a orkg:Model;
+         orkc:has_dataset ?dataset;
+         orkp:has_score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

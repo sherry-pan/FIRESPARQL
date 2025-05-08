@@ -1,0 +1,60 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.com/orkg#>
+    PREFIX orkp: <http://example.com/orkp#>
+    PREFIX orkc: <http://example.com/orkc#>
+    PREFIX orkd: <http://example.com/orkd#>
+    PREFIX orkgp: <http://example.com/orkgp#>
+    PREFIX orkgr: <http://example.com/orkgr#>
+
+    SELECT?paperTitle?paperId?benchmarkModel?dataset
+    WHERE {
+      { 
+       ?paper?paperId orkgp:hasPaper?p.
+       ?paper orkp:hasPaper?benchmarkModel.
+       ?benchmarkModel orkgr:hasBenchmark?dataset.
+       ?dataset orkgr:hasDataset?paper.
+        FILTER (?dataset orkgr:hasDataset?paper).
+      }
+      UNION
+      { 
+       ?paper?paperId orkp:hasPaper?p.
+       ?paper orkgp:hasPaper?benchmarkModel.
+       ?benchmarkModel orkgr:hasBenchmark?dataset.
+       ?dataset orkgr:hasDataset?paper.
+        FILTER (?dataset orkgr:hasDataset?paper).
+      }
+    }
+    ``` 
+    The final answer is: 
+    ```
+    PREFIX orkg: <http://example.com/orkg#>
+    PREFIX orkp: <http://example.com/orkp#>
+    PREFIX orkc: <http://example.com/orkc#>
+    PREFIX orkd: <http://example.com/orkd#>
+    PREFIX orkgp: <http://example.com/orkgp#>
+    PREFIX orkgr: <http://example.com/orkgr#>
+
+    SELECT?paperTitle?paperId?benchmarkModel?dataset
+    WHERE {
+      { 
+       ?paper?paperId orkp:hasPaper?benchmarkModel.
+       ?benchmarkModel orkgr:hasBenchmark?dataset.
+       ?paper orkgp:hasPaper?p.
+       ?paper orkgp:hasPaper?paperTitle.
+        FILTER (?dataset orkgr:hasDataset?paper).
+      }
+      UNION
+      { 
+       ?paper?paperId orkp:hasPaper?p.
+       ?paper orkgp:hasPaper?benchmarkModel.
+       ?benchmarkModel orkgr:hasBenchmark?dataset.
+       ?paper orkgp:hasPaper?paperTitle.
+        FILTER (?dataset orkgr:hasDataset?paper).
+      }
+    }
+    ``` 
+    This is the SPARQL

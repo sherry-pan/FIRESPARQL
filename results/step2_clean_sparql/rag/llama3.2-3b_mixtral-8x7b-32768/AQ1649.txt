@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/resource/benchmark/>
+PREFIX orkfp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+
+SELECT ?model ?score
+WHERE {
+    ?model orkfp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkfp:HAS_DATASET ?dataset.
+    ?dataset orkgr:label "Habitat 2020 Object Nav test-std".
+    ?dataset orkfp:HAS_SCORE ?score.
+    ?score orkgp:metric "SUCCESS".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

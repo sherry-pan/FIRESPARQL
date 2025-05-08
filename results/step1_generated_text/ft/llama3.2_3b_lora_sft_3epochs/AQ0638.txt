@@ -1,0 +1,14 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the TREC-6 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "TREC-6")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper        orkgp:P31               ?cont.
+        ?paper        rdfs:label              ?paper_lbl.
+     }<|eot_id|>

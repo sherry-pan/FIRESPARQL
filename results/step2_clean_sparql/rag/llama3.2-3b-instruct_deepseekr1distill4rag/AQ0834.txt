@@ -1,0 +1,18 @@
+```sparql
+SELECT ?uri ?label
+WHERE {
+  ?uri a ora:Resource.
+  SERVICE orkgp {
+    SELECT ?uri ?label
+    WHERE {
+      ?uri ora:label ?label.
+      ?uri ora:isDefinedBy ?definedBy.
+      FILTER (CONTAINS(STR(?definedBy), 'F1-score') 
+           OR CONTAINS(STR(?definedBy), 'Accuracy') 
+           OR CONTAINS(STR(?definedBy), 'Precision') 
+           OR CONTAINS(STR(?definedBy), 'Recall') 
+           OR CONTAINS(STR(?definedBy), 'Evaluation Method'))
+    }
+  }
+}
+```

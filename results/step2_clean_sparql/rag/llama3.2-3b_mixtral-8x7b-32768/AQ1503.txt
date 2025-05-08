@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkgp:hasBestModel ?bestModel.
+  ?bestModel orkgr:hasDataset ?dataset.
+  ?dataset orkgr:hasEvaluation ?evaluation.
+  ?evaluation orkgr:hasMetric ?metric.
+  ?metric rdfs:label "SemEval 2013".
+  ?dataset rdfs:label "Supervised: dataset".
+}
+```

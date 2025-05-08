@@ -1,0 +1,73 @@
+Question:
+List the metrics that are used to evaluate models on the Gibson PointGoal Navigation benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric (COUNT(?dataset) AS?count) 
+WHERE {
+ ?metric rdfs:label?metricLabel.
+ ?metric rdf:type [ rdfs:label "Metric" ].
+ ?metric orkgc:hasProperty?property.
+ ?property rdfs:label?propertyLabel.
+ ?property orkgp:property?predicate.
+ ?dataset orkgc:hasDataset?dataset.
+ ?dataset rdfs:label?datasetLabel.
+ ?dataset orkg:dataset?gibsonDataset.
+ ?gibsonDataset a orkg:Dataset.
+ ?gibsonDataset orkg:dataset?mnistDataset.
+ ?gibsonDataset a orkg:Gibson_PointGoal_Navigation_benchmark_Dataset.
+ ?gibsonDataset orkg:dataset?mnistDataset.
+ ?metric orkgp:property?predicate.
+ ?predicate orkgp:property?evaluateOn.
+ ?evaluateOn orkgp:property?step.
+ ?step a orkg:Step.
+ ?step orkg:step?evaluateOn.
+ ?evaluateOn orkg:dataset?gibsonDataset.
+  FILTER (STR(?metricLabel) = "validation research" OR STR(?metricLabel) = "technique" OR STR(?metricLabel) = "MNIST").
+}
+GROUP BY?metric
+```    .sparql
+```
+    Note: The SPARQL query is generated based on the provided context and extracted terms. It may not be the only possible query to answer the question. The query is designed to retrieve the correct answer to the input question. 
+
+    The query starts by selecting the metric labels and counting the number of datasets each metric is associated with. It then filters the results to only include metrics that are labeled as "validation research", "technique", or "MNIST". The query groups the results by metric and returns the count of associated datasets for each metric. 
+
+    The query uses the following predicates and properties:
+    - `orkgc:hasProperty` to retrieve the properties of a metric
+    - `orkgp:property` to retrieve the properties of a property
+    - `orkgp:property` to retrieve the properties of a step
+    - `orkgp:property` to retrieve the property of an evaluation
+    - `orkg:dataset` to retrieve the datasets of a metric
+    - `orkg:dataset` to retrieve the datasets of a step
+    - `orkg:dataset` to retrieve the Gibson PointGoal Navigation benchmark dataset
+    - `orkg:dataset` to retrieve the MNIST dataset
+    - `rdfs:label` to retrieve the labels of a metric, property, and dataset
+    - `rdf:type` to retrieve the types of a metric, property, and dataset
+    - `orkg:dataset` to retrieve the dataset of a metric
+    - `orkg:dataset` to retrieve the dataset of a step
+    - `orkg:property` to retrieve the property of a step
+    - `orkg:property` to retrieve the property of an evaluation
+    - `orkg:step` to retrieve the steps of a metric
+    - `orkg:step` to retrieve the steps of an evaluation
+    - `FILTER` to filter the results based on the metric labels
+    - `GROUP BY` to group the results by metric
+```sparql
+```sparql
+    Note: The provided context and extracted terms are used to generate the SPARQL query. The query is designed to answer the input question. 
+
+    The context and extracted terms are used to identify the relevant entities and properties in the ORKG RDF data dump. The query is designed to retrieve the correct answer to the input question. 
+
+    The query uses the following entities and properties:
+    - `metrics` and `Gibson PointGoal Navigation benchmark dataset` are the main entities in the question
+    - `evaluate models on` is the property that relates the metrics to the datasets
+    - `validation research` and `technique` are the types of metrics
+    - `MNIST` is a similar dataset to the Gibson PointGoal Navigation benchmark dataset
+    - `P39020` is a property that describes the steps of an evaluation
+    - `orkgp:property` and `orkgp:property` are used to retrieve the properties of a step and an evaluation
+    - `orkg:dataset` and `orkg:dataset` are used to retrieve the datasets of a metric and a step
+    - `rdfs:label` and `rdf:type` are used to retrieve the labels and types of a metric, property, and dataset
+    - `FILTER` is used to filter the results based on the metric labels
+    - `GROUP BY` is used to group the results by metric
+```sparql
+```sparql
+    The

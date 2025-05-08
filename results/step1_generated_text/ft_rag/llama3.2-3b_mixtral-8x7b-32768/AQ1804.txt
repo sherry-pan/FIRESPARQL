@@ -1,0 +1,52 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "VTAB-1k Dataset")
+     ?benchmark      orkgp:HAS_EVALUATION      ?eval;
+                      orkgp:HAS_DATASET          ?dataset.
+     ?cont         orkgp:HAS_BENCHMARK        ?benchmark.
+      OPTIONAL {?cont      orkgp:HAS_MODEL           ?model.
+              ?model      rdfs:label               ?model_lbl.}
+     ?eval      orkgp:HAS_SCORE            ?score.
+      OPTIONAL {?score      orkgp:HAS_VALUE          ?value.
+              ?value      rdfs:label               ?score_lbl.}
+      FILTER (str(?score_lbl) = "Params Score")
+     ?model      orkgp:HAS_MODEL           ?model.
+      OPTIONAL {?model      orkgp:HAS_MODEL          ?model.
+              ?model      rdfs:label               ?model_lbl.}
+     ?model      rdfs:label               ?model_lbl.
+      ORDER BY DESC(?value)
+      LIMIT 1.
+    }   
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k Dataset")
+ ?benchmark      orkgp:HAS_EVALUATION      ?eval;
+                  orkgp:HAS_DATASET          ?dataset.
+ ?cont         orkgp:HAS_BENCHMARK        ?benchmark.
+  OPTIONAL {?cont      orkgp:HAS_MODEL           ?model.
+          ?model      rdfs:label               ?model_lbl.}
+ ?eval      orkgp:HAS_SCORE            ?score.
+  OPTIONAL {?score      orkgp:HAS_VALUE          ?value.
+          ?value      rdfs:label               ?score_lbl.}
+  FILTER (str(?score_lbl) = "Params Score")
+ ?model      orkgp:HAS_MODEL           ?model.
+  OPTIONAL {?model      orkgp:HAS_MODEL          ?model.
+          ?model      rdfs:label               ?model_lbl.}
+ ?model      rdfs:label               ?model_lbl.
+  ORDER BY DESC(?value)
+  LIMIT 1.
+```
+
+Note: The `SELECT` statement is modified to only select the `?model` and `?model_lbl` variables. The `ORDER BY` and `LIMIT` clauses are also modified to only retrieve the top performing model. 
+
+Note: The `FILTER` clause is modified to only filter

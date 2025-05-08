@@ -1,0 +1,68 @@
+Question:
+Can you list the models that have been evaluated on the ClueWeb09-B dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "ClueWeb09-B")
+          ?dataset       orkgp:HAS_DATASET      ?model.
+          ?model        rdfs:label              ?model_lbl.
+     }  
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ClueWeb09-B")
+ ?dataset       orkgp:HAS_DATASET      ?model.
+ ?model        rdfs:label              ?model_lbl.
+}
+``````python
+def get_sparql_query(input_question, context):
+    """
+    This function generates a SPARQL query based on the given input question and context.
+    
+    Parameters:
+    input_question (str): The natural language question in English.
+    context (dict): The context information, including extracted terms, candidates, and background knowledge.
+    
+    Returns:
+    str: The generated SPARQL query.
+    """
+    
+    # Define the extracted terms from the input question
+    extracted_terms = context['extracted_terms']
+    
+    # Define the candidates for the entities and properties in the context
+    candidates = context['candidates']
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?model?model_lbl"
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+    
+    # Define the dataset and filter it to match the ClueWeb09-B dataset
+    sparql_query += " ?dataset       a                orkgc:Dataset;"
+                   "                 rdfs:label      ?dataset_lbl."
+    sparql_query += "  FILTER (str(?dataset_lbl) = '" + extracted_terms['ClueWeb09-B dataset'] + "')"
+    
+    # Define the relationship between the dataset and the model
+    sparql_query += " ?dataset       orkgp:HAS_DATASET      ?model."
+    
+    # Define the model and its label
+    sparql_query += " ?model        rdfs:label              ?model_lbl."
+    
+    # Close the WHERE clause
+    sparql_query += "}"
+    
+    return sparql_query
+
+input_question = "Can you list the models that have been evaluated on the ClueWeb09-B dataset?"
+context = {
+    "extracted_terms": {
+        "ClueWeb09-B dataset": "ClueWeb09-B",
+        "models": "

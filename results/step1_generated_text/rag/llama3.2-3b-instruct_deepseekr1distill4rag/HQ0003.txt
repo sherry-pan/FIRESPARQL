@@ -1,0 +1,83 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ ```sparql
+SELECT?s?p?o 
+WHERE {
+ ?s orkgp:has_method?m.
+ ?m orkgc:type?type.
+  FILTER (STR(?type) = "Method" AND?type = orkgc:Resource).
+ ?s orkgp:has_method?m.
+ ?m orkgp:has_label?label.
+  FILTER (STR(?label) = "Knowledge representation method").
+}
+```    End of SPARQL Query
+
+    The SPARQL query is designed to find all resources that have a method with label "Knowledge representation method". The query first filters resources that have a method with type "Method" and then filters those resources that have a label "Knowledge representation method". This will return the jpark model, NER, CRF, and TSE as the top candidates. The knowledge bases (YAGO, DBpedia, Wikidata) are not included in the results as they are not methods, but rather resources used in methods. The query is designed to work with the ORKG RDF data dump. 
+
+    The SPARQL query is as follows:
+    ```sparql
+SELECT?s?p?o 
+WHERE {
+ ?s orkgp:has_method?m.
+ ?m orkgc:type?type.
+  FILTER (STR(?type) = "Method" AND?type = orkgc:Resource).
+ ?s orkgp:has_method?m.
+ ?m orkgp:has_label?label.
+  FILTER (STR(?label) = "Knowledge representation method").
+}
+```
+    This query is designed to return the following results:
+    ```
+{
+  "question": "What is the most common Knowledge representation method?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "Knowledge representation method",
+      "uri": "orkgr:Knowledge_representation_method",
+      "type": "Method",
+      "rdf:type": "orkgc:Resource"
+    }
+  ],
+  "candidates": {
+    "Knowledge representation method": [
+      {
+        "uri": "orkgr:jpark_model",
+        "rdfs:label": "jpark model",
+        "score": 0.95,
+        "type": "Method",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:NER",
+        "rdfs:label": "Named Entity Recognition (NER)",
+        "score": 0.90,
+        "type": "Method",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:CRF",
+        "rdfs:label": "Conditional Random Fields (CRF)",
+        "score": 0.88,
+        "type": "Method",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:TSE",
+        "rdfs:label": "Term and Sentence Expansion (TSE)",
+        "score": 0.85,
+        "type": "Method",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:YAGO",
+        "rdfs:label": "YAGO",
+        "score": 0.82,
+        "type": "Knowledge Base",
+        "rdf:type": "orkgc:Resource"
+      }
+    ]
+  }
+}
+```<|eot_id|>

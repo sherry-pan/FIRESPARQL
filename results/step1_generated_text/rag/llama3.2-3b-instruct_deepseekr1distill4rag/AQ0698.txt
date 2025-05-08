@@ -1,0 +1,16 @@
+Question:
+Can you list the metrics used to evaluate models on the TDM Tagged Corpus dataset?
+
+Generated SPARQL:
+ ```
+SELECT?metric (rdfs:label?metricLabel)
+WHERE {
+ ?dataset a ora:Dataset.
+ ?dataset ora:hasMetric?metric.
+ ?metric ora:hasDataset?dataset.
+ ?dataset ora:hasTag?tag.
+ ?tag ora:label?tagLabel.
+  FILTER (?dataset = <http://orkgr.org/resource/orkgr:TDM_Tagged_Corpus_dataset>).
+  BIND(iri2label(?metric) AS?metricLabel).
+}
+```<|eot_id|>

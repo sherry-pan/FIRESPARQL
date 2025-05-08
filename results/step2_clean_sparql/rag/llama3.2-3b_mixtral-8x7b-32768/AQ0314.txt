@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/citation/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicates/>
+
+SELECT ?m ?m_label ?vtab_1k_label WHERE {
+    ?m orkgp:HAS_MODEL ?m_model.
+    ?m_model orkgp:HAS_DATASET ?vtab_1k.
+    ?m_model orkgp:HAS_EVALUATION ?vtab_1k_eval.
+    ?vtab_1k_eval orkgp:HAS_EVALUATION ?vtab_1k.
+
+    ?m rdfs:label ?m_label.
+    ?vtab_1k rdfs:label ?vtab_1k_label.
+}
+```

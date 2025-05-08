@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkgc#>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/orkp#>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp#>
+
+SELECT ?metric
+WHERE {
+  ?dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkp:evaluatedOn ?datasetResource.
+  ?datasetResource orkgp:hasMetric ?metric.
+  FILTER (REGEX(str(?metric), "accuracy|f1_score|precision|recall", "i")).
+}
+```

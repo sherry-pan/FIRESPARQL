@@ -1,0 +1,46 @@
+Question:
+What is the best performing model benchmarking the CIFAR-10 Image Classification dataset in terms of Percentage error metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      orkgp:R1 orkgp:HAS_DATASET?dataset.
+      FILTER (str(?dataset rdfs:label) = "CIFAR-10")
+     ?dataset orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      BIND(xsd:float(?value) AS?value)
+     ?model orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_LABEL?model_lbl.
+     ?model_lbl rdfs:label?model_lbl.
+      ORDER BY DESC(?value)
+      LIMIT 1
+} 
+
+```
+
+Note that the `PREFIX` declarations are not included in the final SPARQL query as they were in the original query. 
+
+## Step 1: Identify the key components of the input question.
+The key components are the dataset (CIFAR-10 Image Classification), the metric (Percentage error), and the task (benchmarking the model).
+
+## Step 2: Match the key components with the candidates provided in the context.
+The CIFAR-10 Image Classification dataset matches with the candidates for the dataset, the Percentage error metric matches with the candidates for the metric, and the task of benchmarking a model matches with the candidates for the model.
+
+## Step 3: Construct the SPARQL query based on the matched components and the provided context.
+The query should start by selecting the model and its label. Then, filter the results to only include datasets labeled as "CIFAR-10", and for each dataset, find the model, metric, value, and label. Since we are looking for the best performing model, we should order the results by the value in descending order and limit the results to the first one.
+
+## Step 4: Write the final SPARQL query.
+SELECT?model?model_lbl
+WHERE {
+  orkgp:R1 orkgp:HAS_DATASET?dataset.
+  FILTER (str(?dataset rdfs:label) = "CIFAR-10")
+ ?dataset orkgp:HAS_MODEL?model.
+ ?model orkgp:HAS_METRIC?metric.
+ ?metric orkgp:HAS_VALUE?value.
+

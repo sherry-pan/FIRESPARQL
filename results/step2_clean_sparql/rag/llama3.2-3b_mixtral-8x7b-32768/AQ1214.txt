@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?g orkgp:HAS_DATASET ?ds.
+    ?ds rdfs:label "CoNLL++" .
+    ?g orkgp:HAS_BEST_RESULT ?br.
+    ?br orkgr:R122690 ?br_metric.
+    ?br_metric orkgp:METRIC ?metric.
+    ?br_metric orkgp:VALUE ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

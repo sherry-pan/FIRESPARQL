@@ -1,0 +1,39 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WLPC dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgr: <http://orkgr.org/resource/>
+    PREFIX orkgc: <http://orkgc.org/resource/>
+    PREFIX orkgp: <http://orkgp.org/resource/>
+    SELECT?paperTitle?paperID?benchmarkedModel
+    WHERE {
+   ?paper?hasTitle?paperTitle.
+   ?paper?hasID?paperID.
+   ?paper?hasDataset?dataset.
+   ?dataset orkgr:R122689.
+   ?paper?hasModel?benchmarkedModel.
+   ?benchmarkedModel?hasBenchmark?benchmark.
+    FILTER (lang(?benchmark) = 'en').
+    }
+    ```sparql
+
+## Step 1: Determine the relevant entities and properties from the context.
+From the context, the relevant entities and properties are:
+- Research paper titles and IDs: orkgr:R122689, orkgp:HAS_TITLE, orkgp:HAS_ID
+- Benchmarked models: orkgp:HAS_MODEL, orkgp:HAS_BENCHMARK
+- WLPC dataset: orkgr:R122689, orkgp:HAS_DATASET
+
+## Step 2: Construct the SPARQL query based on the relevant entities and properties.
+The SPARQL query should retrieve research paper titles and IDs that have benchmarked models on the WLPC dataset. It should use the following predicates:
+- orkgp:HAS_TITLE to get the research paper title
+- orkgp:HAS_ID to get the research paper ID
+- orkgr:R122689 to link to the WLPC dataset
+- orkgp:HAS_MODEL to get the benchmarked models
+- orkgp:HAS_BENCHMARK to get the benchmark
+
+## Step 3: Write the SPARQL query.
+```sparql
+SELECT?paperTitle?paperID?benchmarkedModel
+WHERE {
+ ?paper?hasTitle

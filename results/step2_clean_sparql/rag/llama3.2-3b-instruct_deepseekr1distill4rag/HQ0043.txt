@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://orkgr.org/ontology/orkgc#>
+PREFIX orkgp: <http://orkgr.org/ontology/orkgp#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?variable (COUNT(?variable) AS ?count)
+WHERE {
+  ?model a orkgc:Model.
+  ?model orkgp:has_variable ?variable.
+}
+GROUP BY ?variable
+ORDER BY DESC(?count)
+LIMIT 3
+```

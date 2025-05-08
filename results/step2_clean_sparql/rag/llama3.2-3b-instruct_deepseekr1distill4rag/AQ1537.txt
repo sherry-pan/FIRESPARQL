@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?score 
+WHERE {
+  ?model rdfs:label ?modelLabel.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset orkg:datasetName "Penn Treebank (Character Level)".
+  ?benchmark orkg:score ?score.
+  ?model orkg:hasValue ?value.
+  ?value orkg:property ?property.
+  ?property orkg:propertyURI "http://example.org/numberOfParamsScore".
+  FILTER(regex(STR(?value), "top performing", "i")).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

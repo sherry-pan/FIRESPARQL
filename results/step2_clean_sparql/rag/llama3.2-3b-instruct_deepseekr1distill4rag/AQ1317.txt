@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/rdf/>
+PREFIX orkc: <http://orkc.org/rdf/>
+PREFIX orkp: <http://orkp.org/rdf/>
+PREFIX orkgc: <http://orkgc.org/rdf/>
+PREFIX orkpc: <http://orkpc.org/rdf/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           orkc:hasDataset "Atari 2600 Star Gunner";
+           orkc:hasBenchmarkResult ?result.
+  ?result orkgc:hasMetric ?metric;
+          orkp:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

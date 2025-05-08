@@ -1,0 +1,67 @@
+Question:
+Provide a list of papers that have utilized the HRLRE model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper      orkgp:HAS_PAPER      ?paperp.
+      ?paper      a                orkgc:Contribution.
+      ?paper      orkgp:PREDICATE   ?util.
+      ?util       orkgp:UTILIZES     ?model.
+      ?model      rdfs:label           ?model_lbl.
+       FILTER(REGEX(?model_lbl, "HRLRE model"))
+      ?model      orkgp:HAS_MODEL      ?modelp.
+      ?modelp     orkgp:HAS_CODE        ?code.
+      ?code       a                orkgp:Code.
+     }
+     ```
+def get_orkg_query(question):
+    # Define the context
+    context = {
+        "extracted_terms": {
+            "papers": ["papers"],
+            "HRLRE model": ["HRLRE model"],
+            "utilized": ["utilized"],
+            "links to their code": ["links to their code"]
+        },
+        "candidates": {
+            "papers": [
+                {
+                    "uri": "orkgr:R147246",
+                    "rdfs:label": "Contribution 1",
+                    "rdf:type": "orkgc:Contribution"
+                }
+            ],
+            "HRLRE model": [
+                {
+                    "uri": "orkgr:R44243",
+                    "rdfs:label": "captures the meaning of the correlation between words based on multi-head attention",
+                    "rdf:type": "orkgc:Resource"
+                }
+            ],
+            "utilized": [
+                {
+                    "uri": "orkgp:UTILIZES",
+                    "rdfs:label": "utilizes",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "links to their code": [
+                {
+                    "uri": "orkgp:HAS_CODE",
+                    "rdfs:label": "has code",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ]
+        }
+    }
+    
+    # Initialize the SPARQL query
+    query = """
+    SELECT?code
+    WHERE {
+     ?paper      orkgp:HAS_PAPER      ?paperp.
+     ?paper      a                orkgc:Contribution.
+     ?paper      orkgp:PREDICATE   ?util.
+     ?util       orkgp:UTILIZES     ?model.
+     ?model      rdfs:label           ?model_lbl

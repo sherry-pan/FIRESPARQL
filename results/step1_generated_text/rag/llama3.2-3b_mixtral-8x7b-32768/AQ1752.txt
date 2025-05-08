@@ -1,0 +1,46 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Montezuma's Revenge benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkc: <http://example.org/orkc/>
+    PREFIX orkp: <http://example.org/orkp/>
+    PREFIX orkw: <http://example.org/orkw/>
+
+    SELECT?model?metric 
+    WHERE {
+   ?b benchmark a orkc:Benchmark.
+   ?b orkg:hasBenchmark?m.
+   ?m orkp:hasBestPerformance?p.
+   ?m orkw:hasMetric?metric.
+   ?m orkg:hasName?name.
+   ?p orkg:hasMetric?metric.
+   ?m orkc:hasModel?model.
+    FILTER (CONTAINS(str(?name), "Atari 2600 Montezuma's Revenge")).
+    }
+    ```
+
+
+    Expected Output:
+    ```sparql
+    SELECT?model?metric 
+    WHERE {
+   ?m orkp:hasBestPerformance?p.
+   ?m orkw:hasMetric?metric.
+   ?m orkc:hasModel?model.
+    FILTER (CONTAINS(str(?metric), "Score")).
+    }
+    ```
+
+
+    Note: The provided SPARQL query is a solution to the problem. The solution is not the problem itself. The problem is to generate the SPARQL query based on the given input question and context. 
+
+    The expected output is the SPARQL query that corresponds to the correct answer to the input question. 
+
+    The provided context includes the extracted terms from the input question and the candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question. 
+
+    The solution is based on the following reasoning:
+    1. Identify the correct entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question.
+    2. Use the correct entities and properties to construct the SPARQL query.
+    3. Filter the results to include only the model that performed best in

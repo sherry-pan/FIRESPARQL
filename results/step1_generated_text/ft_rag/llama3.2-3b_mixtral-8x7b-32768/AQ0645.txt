@@ -1,0 +1,46 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the HoC dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "HoC")
+          ?benchmark      orkgp:HAS_BENCHMARK      ?paper.
+          ?cont          orkgp:INCLUDES           ?benchmark.
+          ?cont          rdfs:label                 ?cont_lbl.
+           FILTER (str(?cont_lbl) = "include")
+          ?cont          orkgp:HAS_DATASET         ?dataset.
+          ?dataset       rdfs:label                 ?dataset_lbl.
+          ?paper         rdfs:label                 ?paper_lbl.
+     }   
+
+
+```python
+print("SELECT?paper?paper_lbl")
+print("WHERE {")
+print(" ?dataset       a                orkgc:Dataset;")
+print("  rdfs:label      ?dataset_lbl.")
+print("  FILTER (str(?dataset_lbl) = \"HoC\")")
+print(" ?benchmark      orkgp:HAS_BENCHMARK      ?paper.")
+print(" ?cont          orkgp:INCLUDES           ?benchmark.")
+print(" ?cont          rdfs:label                 ?cont_lbl.")
+print("  FILTER (str(?cont_lbl) = \"include\")")
+print(" ?cont          orkgp:HAS_DATASET         ?dataset.")
+print(" ?dataset       rdfs:label                 ?dataset_lbl.")
+print(" ?paper         rdfs:label                 ?paper_lbl.")
+print("}")
+```
+
+Note that the actual code to generate the SPARQL query is not required. The code provided is just to print the SPARQL query as per the given format. 
+
+The final answer is:
+```
+SELECT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "HoC")
+ ?benchmark      orkgp:HAS_BENCHMARK      ?paper.
+

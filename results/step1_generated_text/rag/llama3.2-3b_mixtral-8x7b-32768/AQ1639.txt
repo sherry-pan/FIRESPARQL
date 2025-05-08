@@ -1,0 +1,41 @@
+Question:
+Which model has achieved the highest Score score on the Cheetah, run (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    SELECT?model?score 
+    WHERE {
+     ?model a orkgc:Model.
+     ?model orkgp:HAS_SCORE?score.
+     ?score orkgp:Score.
+     ?model orkg:has_run?run.
+     ?run orkg:has_benchmark?benchmark.
+     ?benchmark a orkg:Benchmark.
+     ?benchmark orkg:has_name "Cheetah, run (DMControl500k)".
+     ?model orkg:has_score?score.
+      FILTER (STR(?score) = "highest").
+      FILTER (STR(?benchmark) = "Proceedings of the 2007 conference on Digital libraries - JCDL '07").
+    }
+    ```
+
+
+## Step 1: Identify the entities and properties mentioned in the question.
+The entities and properties mentioned in the question are: "model", "Score score", "Cheetah, run (DMControl500k) benchmark dataset". The property "Score score" is a score, and "Cheetah, run (DMControl500k) benchmark dataset" is a benchmark.
+
+## Step 2: Match the entities and properties with the candidates provided in the context.
+The candidate entities and properties are: "model" with URI "orkgp:R147244", "highest Score score" with URI "orkgp:HAS_SCORE", and "Cheetah, run (DMControl500k) benchmark dataset" with URIs "orkgr:R147246" for the contribution, resource, and venue.
+
+## Step 3: Construct the SPARQL query to retrieve the correct answer to the input question.
+The SPARQL query should first identify the model with the highest score, then filter the results to only include the model that has run the specified benchmark. The query should also filter the results to only include the model that has achieved the highest score.
+
+## Step 4: Write the SPARQL query based on the constructed query plan.
+```sparql
+SELECT?model?score 
+WHERE {
+ ?model a orkgc:Model.
+ ?model orkgp:HAS_SCORE?score.
+ ?score orkgp:Score.
+ ?model orkg:has_run?run.
+ ?run orkg:has_benchmark?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:has_name "C

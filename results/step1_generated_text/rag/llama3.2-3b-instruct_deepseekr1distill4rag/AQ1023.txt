@@ -1,0 +1,21 @@
+Question:
+Can you list the metrics used to evaluate models on the MUTAG dataset?
+
+Generated SPARQL:
+ ```
+SELECT?s?p?o
+WHERE {
+ ?s a orkg:Resource.
+ ?s orkg:label?label.
+  FILTER (str(?label) = "Precision" OR str(?label) = "Recall" OR str(?label) = "F1-score").
+ ?s orkg:hasProperty?p.
+ ?p a orkg:Predicate.
+ ?p orkg:label?label.
+  FILTER (str(?label) = "Precision" OR str(?label) = "Recall" OR str(?label) = "F1-score").
+ ?s orkg:hasValue?o.
+ ?o a orkg:Resource.
+ ?o orkg:label?label.
+  FILTER (str(?label) = "Precision" OR str(?label) = "Recall" OR str(?label) = "F1-score").
+  BIND (CONCAT(?s, " ",?p, " ",?o) AS?answer).
+}
+```<|eot_id|>

@@ -1,0 +1,46 @@
+Question:
+Provide a list of papers that have utilized the Prior noop model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:R1 orkgp:PUBLISHED_IN?paper.
+      ?paper orkgp:HAS_PAPER?paperp.
+      ?paperp orkgp:UTILIZES?util.
+       FILTER(REGEX(STR(?util), "Prior noop model", "i"))
+      ?util orkgp:CITED_BY?cite.
+      ?cite orkgp:PREDICATE?pred.
+       FILTER(REGEX(STR(?pred), "utilized", "i"))
+      ?pred orkgp:HAS_CODE?code.
+      ?code rdfs:label?code_lbl.
+       FILTER(REGEX(STR(?code_lbl), "code", "i"))
+     }
+    ```
+This is a SPARQL query. It seems to be filtering papers that have utilized the Prior noop model. However, the query is not following the format specified in the prompt. The query is not selecting any specific variable and the SELECT statement is missing the?code variable. Here is a corrected version of the query:
+```
+SELECT?code
+WHERE {
+  orkgp:R1 orkgp:PUBLISHED_IN?paper.
+ ?paper orkgp:HAS_PAPER?paperp.
+ ?paperp orkgp:UTILIZES?util.
+  FILTER(REGEX(STR(?util), "Prior noop model", "i"))
+ ?util orkgp:CITED_BY?cite.
+ ?cite orkgp:PREDICATE?pred.
+  FILTER(REGEX(STR(?pred), "utilized", "i"))
+ ?pred orkgp:HAS_CODE?code.
+ ?code rdfs:label?code_lbl.
+  FILTER(REGEX(STR(?code_lbl), "code", "i"))
+}
+```
+However, the above query is still not correct. The issue is that the query is not selecting the?code variable. The correct query should be:
+```
+SELECT?code
+WHERE {
+  orkgp:R1 orkgp:PUBLISHED_IN?paper.
+ ?paper orkgp:HAS_PAPER?paperp.
+ ?paperp orkgp:UTILIZES?util.
+  FILTER(REGEX(STR(?util), "Prior noop model", "i"))
+ ?util orkgp:CITED_BY?cite.
+ ?cite orkgp:PREDICATE?pred.
+  FILTER(REGEX(STR(?pred), "utilized", "i"))
+ ?pred

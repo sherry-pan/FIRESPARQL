@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkgp/>
+
+SELECT ?benchmark_score ?metric WHERE {
+  ?dataset a orkg:Resource;
+           orkg:label "Atari 2600 Centipede dataset";
+           orkp:hasProperty ?metric_property.
+  
+  ?metric_property orkp:hasMetric ?metric;
+                   orkp:hasScore ?benchmark_score.
+
+  FILTER (?metric = "F1-score" || ?metric = "top benchmark score")
+}
+```

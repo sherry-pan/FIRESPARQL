@@ -1,0 +1,60 @@
+Question:
+Can you provide links to code used in papers that benchmark the Rational DQN Average model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    orkgp:HAS_MODEL         ?model;
+                rdfs:label           ?model_lbl.
+       FILTER (str(?model_lbl) = "Rational DQN Average")
+      ?model      orkgp:P31         ?contrib.
+      ?contrib    orkgp:HAS_EVALUATION     ?eval.
+      ?eval       orkgp:HAS_CODE         ?code.
+     }     
+    
+    ```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the input question and context.
+
+    Args:
+    question (str): The input natural language question.
+    context (dict): A dictionary containing the context information.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    # Extract terms from the question
+    extracted_terms = context["extracted_terms"]
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT DISTINCT?code\n"
+    sparql_query += "WHERE {\n"
+    
+    # Add the filter clause for the model
+    sparql_query += " ?model    orkgp:HAS_MODEL         ?model;\n"
+    sparql_query += "            rdfs:label           ?model_lbl.\n"
+    sparql_query += "  FILTER (str(?model_lbl) = \"" + extracted_terms["Rational DQN Average"] + "\")\n"
+    
+    # Add the inference steps for the contribution
+    sparql_query += " ?model      orkgp:P31         ?contrib.\n"
+    sparql_query += " ?contrib    orkgp:HAS_EVALUATION     ?eval.\n"
+    sparql_query += " ?eval       orkgp:HAS_CODE         ?code.\n"
+    sparql_query += "}\n"
+    
+    return sparql_query
+
+# Example usage:
+question = "Can you provide links to code used in papers that benchmark the Rational DQN Average model?"
+context = {
+    "question": question,
+    "extracted_terms": {
+        "Rational DQN Average model": "Rational DQN Average",
+        "papers": "papers",
+        "code used": "code used",
+        "benchmark": "benchmark"
+    },
+    "candidates": {
+        "Rational DQN Average model": [
+            {
+                "uri": "orkgr:R147244

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+
+SELECT ?m
+WHERE {
+  ?m orkp:relatedTo ?d .
+  ?d orkp:hasEvaluation ?e .
+  ?e orkp:hasScore ?s .
+  ?d orkp:hasBenchmark ?b .
+  FILTER (str(?b) = "Oxford-IIIT Pets dataset") .
+  FILTER (str(?e) = "Top-1 Error Rate score") .
+}
+ORDER BY ?s
+LIMIT 1
+```

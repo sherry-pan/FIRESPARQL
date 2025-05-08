@@ -1,0 +1,16 @@
+Question:
+Provide a list of benchmarked datasets related to the Scientific Results Extraction research area?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+        ?problem       a                orkgc:Problem;
+                    rdfs:label      ?problem_lbl.  
+         FILTER (str(?problem_lbl) = "Scientific Results Extraction")
+        ?dataset       a                orkgc:Dataset;
+                         rdfs:label      ?dataset_lbl.
+        ?dataset       orkgp:HAS_DATASET      ?problem.
+        ?cont          orkgp:HAS_DATASET      ?dataset.
+        ?paper         orkgp:P31               ?cont;
+                        rdfs:label              ?paper_lbl.
+     }<|eot_id|>

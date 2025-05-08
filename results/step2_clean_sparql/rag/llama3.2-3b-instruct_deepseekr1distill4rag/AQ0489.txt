@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://www.openresearch.org/ontology#>
+PREFIX orkgc: <http://www.openresearch.org/resource/>
+PREFIX orkgr: <http://www.openresearch.org/resource/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper orkgp:has_benchmark ?benchmark.
+  ?benchmark orkgp:has_dataset ?dataset.
+  ?dataset orkgr:has_title ?title.
+  ?paper orkgc:has_id ?id.
+  FILTER CONTAINS(LCASE(?title), "snli")
+}
+```

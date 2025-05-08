@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/orkp/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?contribution orkp:hasDataset ?dataset.
+  ?dataset orkp:hasTitle ?datasetTitle.
+  FILTER (regex(str(?datasetTitle), "BIOSSES", "i")).
+  ?paper orkg:hasContribution ?contribution;
+         orkp:hasTitle ?title;
+         orkg:hasID ?id.
+}
+```

@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?modelLabel ?datasetLabel ?metricLabel
+WHERE {
+    ?model a orkgc:Model.
+    ?model orkgp:HAS_DATASET ?dataset.
+    ?model orkgp:HAS_METRIC ?metricEntity.
+    
+    ?dataset a orkgr:R122689.
+    ?metricEntity a orkgc:Score.
+    ?metricEntity orkgp:HAS_VALUE ?metricValue.
+    
+    FILTER (str(?dataset) = "Atari 2600 Up and Down dataset").
+    
+    BIND (str(?model) AS ?modelLabel).
+    BIND (str(?dataset) AS ?datasetLabel).
+    BIND (str(?metricEntity) AS ?metricLabel).
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

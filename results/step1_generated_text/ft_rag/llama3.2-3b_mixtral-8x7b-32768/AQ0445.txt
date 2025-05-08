@@ -1,0 +1,40 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Reuters-21578 dataset?
+
+Generated SPARQL:
+ SELECT?contrib?contrib_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Reuters-21578")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+          ?contrib         orkgp:HAS_CONTRIBUTION     ?cont.
+          ?contrib_lbl      orkgp:HAS_CONTRIBUTION     ?contrib;
+                            rdfs:label              ?contrib_lbl.
+      }   
+
+
+```python
+SELECT?contrib?contrib_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Reuters-21578")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?contrib         orkgp:HAS_CONTRIBUTION     ?cont.
+ ?contrib_lbl      orkgp:HAS_CONTRIBUTION     ?contrib;
+                    rdfs:label              ?contrib_lbl.
+}
+```
+
+
+      - **Step 1**: Read the question and the context provided to understand what is being asked and what entities and properties are involved.
+      - **Step 2**: Identify the entities and properties mentioned in the question and the context. In this case, the entities are "research papers", "titles", and "IDs", and the properties are "has dataset", "has contribution", "has publication", "has title", and "has ID".
+      - **Step 3**: Use the identified entities and properties to construct the SPARQL query. The query should filter for datasets with the label "Reuters-21578", then find the contributions of those datasets, and finally find the labels of those contributions.
+      - **Step 4**: Execute the constructed SPARQL query on the ORKG to obtain the desired results.
+
+The final answer is: 
+SELECT?contrib?contrib_lbl
+WHERE

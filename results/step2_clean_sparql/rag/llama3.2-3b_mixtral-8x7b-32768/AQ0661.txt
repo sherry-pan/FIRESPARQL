@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://www.example.org/orkgc/>
+PREFIX orkgr: <http://www.example.org/orkgr/>
+PREFIX orkgp: <http://www.example.org/orkgp/>
+
+SELECT ?paperTitle ?paperId
+
+WHERE {
+  ?paper rdfs:label ?paperTitle;
+         orkgr:hasBenchmarkedModel ?benchmarkModel.
+  ?benchmarkModel orkgp:hasBenchmark ?benchmark.
+  ?dataset rdfs:label "ImageNet ReaL";
+           orkgp:hasBenchmark ?benchmark.
+  BIND(STR(?paper) AS ?paperId)
+}
+```

@@ -1,0 +1,45 @@
+Question:
+What is the best performing model benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?value) AS?metric_value)
+     WHERE {
+      orkgp:R128430 rdfs:label?model_lbl.
+      orkgp:R128430 orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      BIND(xsd:integer(?value) AS?value).
+     ?value rdfs:label?value_lbl.
+      FILTER(REGEX(?value_lbl, ".*\\d+.*"))
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_MODEL?model.
+      BIND(xsd:integer(?eval) AS?eval).
+     ?eval orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      FILTER(REGEX(?value, ".*\\d+.*"))
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      FILTER(REGEX(?value, ".*\\d+.*"))
+      BIND(xsd:float(?value) AS?value).
+     ?value rdfs:label?value_lbl.
+      FILTER(REGEX(?value_lbl, ".*\\d+.*"))
+      BIND(xsd:float(?value) AS?value).
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_MODEL?model.
+     ?model orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      BIND(xsd:float(?value) AS?value).
+     ?value orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_EVALUATI.     ?eval or

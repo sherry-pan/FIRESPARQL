@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgc: <http://orkgr.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?scoreValue
+WHERE {
+  ?model orkgc:relatedTo ?dataset.
+  ?model orkgp:hasPerformance ?performance.
+  ?dataset rdfs:label "Nottingham dataset".
+  ?performance a orkp:Performance_Assessment;
+               rdfs:label "NLL score";
+               orkgp:hasValue ?scoreValue.
+}
+ORDER BY ?scoreValue
+LIMIT 1
+```

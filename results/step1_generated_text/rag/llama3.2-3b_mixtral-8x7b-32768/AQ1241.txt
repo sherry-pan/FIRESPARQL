@@ -1,0 +1,40 @@
+Question:
+What is the top benchmark score and its metric on the CINIC-10 dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/orkgr#>
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc#>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp#>
+    SELECT?benchmarkScore?metric
+    WHERE {
+       ?benchmarkScore orkgc:relatedTo?dataset.
+       ?dataset orkgc:relatedTo?metric.
+       ?dataset orkgr:R122690.
+       ?benchmarkScore orkgp:HAS_BENCHMARK_SCORE.
+       ?metric orkgp:HAS_METRIC.
+        BIND((SELECT?metric FROM {?dataset orkgc:relatedTo?metric }) AS?metric).
+        BIND((SELECT?benchmarkScore FROM {?benchmarkScore orkgc:relatedTo?dataset }) AS?benchmarkScore).
+        FILTER(?benchmarkScore >?metric)
+        }
+    ```
+    Please see below for the solution.
+```
+    Solution:
+    The solution is a SPARQL query that retrieves the top benchmark score and its metric on the CINIC-10 dataset.
+```
+    I will follow the format to the letter as requested.
+    I will provide the final answer in the boxed notation as requested.
+    The final answer is: 
+```
+    SELECT?benchmarkScore?metric
+    WHERE {
+       ?benchmarkScore orkgc:relatedTo?dataset.
+       ?dataset orkgc:relatedTo?metric.
+       ?dataset orkgr:R122690.
+       ?benchmarkScore orkgp:HAS_BENCHMARK_SCORE.
+       ?metric orkgp:HAS_METRIC.
+        BIND((SELECT?metric FROM {?dataset orkgc:relatedTo?metric }) AS?metric).
+        BIND((SELECT?benchmarkScore FROM {?benchmarkScore orkgc:relatedTo?dataset }) AS?benchmarkScore).
+        FILTER(?benchmarkScore >?metric)
+    }```<|eot_id|>

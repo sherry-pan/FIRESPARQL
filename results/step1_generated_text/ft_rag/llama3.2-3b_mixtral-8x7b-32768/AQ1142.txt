@@ -1,0 +1,49 @@
+Question:
+What is the highest benchmark result achieved on the CoQA dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "CoQA")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK_RESULT?benchmark.
+     ?eval          orkgp:HAS_VALUE         ?value.
+     ?metric        orkgp:HAS_METRIC        ?metric.
+     ?cont          rdfs:label              ?cont_lbl.
+      FILTER (str(?cont_lbl) = "highest benchmark result")
+     ?cont          orkgp:HAS_METRIC        ?metric.
+     ?cont          orkgp:HAS_VALUE         ?value.
+     ?cont          rdfs:label              ?cont_lbl.
+      FILTER (str(?cont_lbl) = "CoQA dataset")
+     ?metric        rdfs:label              ?metric_lbl.
+     ?metric        orkgp:HAS_METRIC        ?metric.
+     ?cont          orkgp:HAS_VALUE         ?value.
+     ?cont          rdfs:label              ?cont_lbl.
+     ?cont          orkgp:HAS_METRIC        ?metric.
+     ?cont          orkgp:HAS_VALUE         ?value.
+     ?cont          rdfs:label              ?cont_lbl.
+      BIND(xsd:float(?value) AS?value)
+      BIND(xsd:float(?metric) AS?metric)
+      ORDER BY DESC(?value)
+      LIMIT 1
+      }
+      Note: The filter conditions in the WHERE clause are used to select the correct entities and properties. The BIND function is used to convert the value and metric to float data type to ensure the correct output. The ORDER BY and LIMIT clauses are used to get the highest benchmark result.
+```python
+import orkgp
+
+# Define the query
+query = """
+SELECT?metric?value
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoQA")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK_RESULT?benchmark.
+ ?eval          orkgp:HAS_VALUE         ?value.
+ ?metric        orkgp:HAS_METRIC        ?metric.
+ ?cont          rdfs:label              ?cont_lbl.
+  FILTER (str(?cont_lbl) = "highest benchmark result")
+

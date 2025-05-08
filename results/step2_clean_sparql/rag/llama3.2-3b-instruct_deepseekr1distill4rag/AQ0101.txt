@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkgc: <http://example.org/orkgc#>
+PREFIX orkgr: <http://example.org/orkgr#>
+PREFIX orkp: <http://example.org/orkp#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?label ?score 
+WHERE {
+  ?model orkgc:isA orkp:Model.
+  ?model orkgc:hasProperty ?property.
+  ?property orkp:hasValue ?value.
+  ?value orkp:hasDataset ?dataset.
+  ?dataset orkgr:label ?label.
+  ?model rdfs:label ?modelLabel.
+  ?model orkgc:testedOn orkp:HMDB51.
+  OPTIONAL {
+    SERVICE orkp:EntitySimilarity {
+      ?model orkgc:hasSimilarity ?similar.
+      ?similar orkp:score ?score.
+      FILTER(?score > 0.5).
+    }
+  }
+}
+```

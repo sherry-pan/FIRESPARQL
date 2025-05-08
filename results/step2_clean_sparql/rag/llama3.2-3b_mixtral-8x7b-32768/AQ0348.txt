@@ -1,0 +1,16 @@
+```sparql
+PREFIX ora: <http://example.org/ontologies/orkg-ontologies/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a ora:ResearchPaper.
+  ?paper ora:hasBenchmark ?benchmark.
+  ?benchmark ora:hasDataset ?dataset.
+  ?dataset rdfs:label "SciREX"@en.
+  ?paper dct:title ?title.
+  ?paper dct:identifier ?id.
+  FILTER (lang(?title) = "en" && lang(?id) = "en")
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?model ?modelLabel
+WHERE {
+  ?model orkgp:HAS_EVALUATION ?e.  # models have an evaluation
+  ?e orkgp:evaluationDataset ?evalDataset.  # evaluations have an evaluation dataset
+  ?evalDataset orkgp:label ?evalDatasetLabel.  # evaluations have a label
+  ?model orkgp:HAS_MODEL ?m.  # models have a model
+  ?m orkgp:label ?modelLabel.  # models have a label
+  FILTER (STR(?evalDatasetLabel) = "NLP-TDMS (Exp, arXiv only) benchmark dataset")
+}
+LIMIT 1000
+```

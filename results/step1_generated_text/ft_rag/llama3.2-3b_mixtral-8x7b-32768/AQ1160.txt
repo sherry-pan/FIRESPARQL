@@ -1,0 +1,78 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset RotoWire (Relation Generation)?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+      orkgc:R122689 orkgp:HAS_DATASET?dataset.
+      FILTER (str(?dataset) = "RotoWire")
+     ?dataset orkgp:HAS_BENCHMARK_RESULT?result.
+     ?result orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      ORDER BY DESC(?value)
+      LIMIT 1
+    } 
+
+```python
+def generate_sparql_query(input_question):
+    """
+    Generate a SPARQL query based on the input question.
+
+    Args:
+    input_question (str): A natural language question in English.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    # Define the context
+    context = {
+        "question": input_question,
+        "extracted_terms": {
+            "RotoWire": ["RotoWire", "Relation Generation", "top benchmark result", "metric", "value"],
+            "Relation Generation": ["Relation Generation"],
+            "top benchmark result": ["top benchmark result"],
+            "metric": ["metric"],
+            "value": ["value"]
+        },
+        "candidates": {
+            "RotoWire": [
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "RotoWire",
+                    "rdf:type": "orkgc:Resource"
+                },
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "RotoWire",
+                    "rdf:type": "orkgc:Dataset"
+                }
+            ],
+            "Relation Generation": [
+                {
+                    "uri": "orkgp:HAS_TASK",
+                    "rdfs:label": "Relation Generation",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "top benchmark result": [
+                {
+                    "uri": "orkgp:HAS_BENCHMARK_RESULT",
+                    "rdfs:label": "Top Benchmark Result",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "metric": [
+                {
+                    "uri": "orkgp:HAS_METRIC",
+                    "rdfs:label": "Metric",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ],
+            "value": [
+                {
+                    "uri": "orkgp:HAS_VALUE",
+                    "rdfs:label": "Value",
+                    "rdf:type": "orkgp:Predicate"
+                }
+            ]
+       

@@ -1,0 +1,43 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Error Rate score when benchmarked on the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets")
+          ?evaluation      orkgp:HAS_EVALUATION      ?dataset       ;
+                            orkgp:P31             ?cont.
+          ?cont           orkgp:HAS_MODEL         ?model      .
+          ?model        orkgp:HAS_SCORE         ?score     .
+          ?score      rdfs:label               ?score_lbl.
+          ?cont           orkgp:HAS_EVALUATION      ?evaluation      ;
+                            orkgp:P32             ?metric      .
+          ?metric      rdfs:label               ?metric_lbl.
+          ?evaluation      orkgp:HAS_VALUE         ?value      ;
+                            orkgp:P31             ?cont      .
+          ?value      rdfs:label               ?value_lbl.
+          ?cont           orkgp:HAS_EVALUATION      ?evaluation      ;
+                            orkgp:P33             ?cont     .
+          ?cont      orkgp:HAS_MODEL         ?model     .
+          ?score      orkgp:HAS_VALUE         ?value      ;
+                      orkgp:P32             ?metric     .
+          ?metric      rdfs:label               ?metric_lbl.
+          ?value      rdfs:label               ?value_lbl.
+          ?score      orkgp:HAS_VALUE         ?value      ;
+                      orkgp:P31             ?cont     .
+          ?cont      orkgp:HAS_MODEL         ?model     .
+          ?model      orkgp:HAS_VALUE         ?value      ;
+                      orkgp:P33             ?cont     .
+          ?cont      orkgp:HAS_EVALUATION      ?evaluation      ;
+                      orkgp:P31             ?cont     .
+          ?cont      rdfs:label               ?cont_lbl.
+          ?cont      orkgp:HAS_MODEL         ?model     .
+          ?model      rdfs:label               ?model_lbl.
+           FILTER (str(?cont_lbl) = "Top-1 Error Rate")
+          ?cont      orkgp:HAS_EVALUATION      ?evaluation      ;
+                      orkgp:P33             ?cont     .
+          ?cont      orkgp:HAS_MODEL         ?model     .
+          ?model      orkgp:HAS_VALUE         ?value      ;
+                     

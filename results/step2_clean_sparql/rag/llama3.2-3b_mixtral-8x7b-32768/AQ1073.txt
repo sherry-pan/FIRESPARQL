@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?metric ?score ?benchmark_result
+WHERE {
+  ?benchmark_result orkgp:has_best_result ?result.
+  ?result orkgp:has_metric ?metric.
+  ?result orkgp:has_score ?score.
+  FILTER (xsd:integer(?score) > 0).
+  ?benchmark_result orkgr:has_dataset orkgr:R122689.
+}
+ORDER BY DESC(xsd:integer(?score))
+LIMIT 1
+```

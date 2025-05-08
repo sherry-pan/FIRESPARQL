@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkw: <http://example.org/orkw/>
+
+SELECT ?model 
+WHERE {
+    ?b a orkc:Benchmark.
+    ?b orkg:hasBenchmark ?m.
+    ?m orkp:hasBestPerformance ?p.
+    ?m orkw:hasMetric ?metric.
+    ?p orkg:hasMetric ?metric.
+    ?m orkc:hasModel ?model.
+    FILTER (CONTAINS(str(?metric), "Score")).
+    FILTER (CONTAINS(str(?b), "Atari 2600 Montezuma's Revenge")).
+}
+```

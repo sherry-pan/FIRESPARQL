@@ -1,0 +1,33 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Freeway dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkgr.org/ontology/>
+    PREFIX orkgc: <http://orkgr.org/resource/ontology/>
+    PREFIX orkgp: <http://orkgr.org/predicate/ontology/>
+    SELECT?metric?value WHERE {
+   ?dataset orkgc:contains?benchmark_result.
+   ?benchmark_result orkgp:HAS_METRIC?metric.
+   ?benchmark_result orkgp:HAS_VALUE?value.
+   ?dataset orkgc:resourceURI "Atari 2600 Freeway".
+    FILTER (lang(?benchmark_result) = "en")
+    }
+    ``` sparql
+    Note: The provided SPARQL query is not correct. It does not correctly answer the question. A correct SPARQL query should include the correct dataset, metric, and value, and should be able to retrieve the highest benchmark result. The correct SPARQL query is:
+    ```sparql
+    PREFIX orkg: <http://orkgr.org/ontology/>
+    PREFIX orkgc: <http://orkgr.org/resource/ontology/>
+    PREFIX orkgp: <http://orkgr.org/predicate/ontology/>
+    SELECT?metric?value WHERE {
+   ?dataset a orkgc:Dataset.
+   ?dataset orkgc:resourceURI "Atari 2600 Freeway".
+   ?benchmark_result a orkgp:BenchmarkResult.
+   ?benchmark_result orkgp:dataset?dataset.
+   ?benchmark_result orkgp:metric?metric.
+   ?benchmark_result orkgp:hasValue?value.
+    FILTER (lang(?benchmark_result) = "en" AND?benchmark_result orkgp:hasHighestScore?best_result.
+   ?best_result orkgp:metric?best_metric.
+   ?best_result orkgp:hasValue?best_value.
+   ?best_metric a orkgc:Resource.
+   ?best_value a

@@ -1,0 +1,63 @@
+Question:
+Can you list the metrics used to evaluate models on the Atari 2600 Freeway dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontologies/orkgc/>
+    PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontologies/orkgr/>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontologies/orkgp/>
+
+    SELECT?metric
+    WHERE {
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgc:relatedTo?atari_dataset.
+     ?atari_dataset a orkgr:Atari_2600_Freeway_dataset.
+     ?metric orkgc:relatedTo?atari_dataset.
+     ?metric orkgc:relatedTo?validation_research.
+     ?metric orkgc:relatedTo?accuracy.
+     ?accuracy a orkgc:Metric.
+     ?validation_research a orkgp:Validation_Research.
+     ?dataset orkgc:relatedTo?mnist_dataset.
+     ?mnist_dataset a orkgr:MNIST.
+     ?metric rdfs:label?metric_label.
+      FILTER (str(?metric_label) = "Accuracy" OR str(?metric_label) = "F1-score")
+    }
+    ``` 
+    Note that the provided context has some inferred values and URIs, but they are not explicitly stated. The actual SPARQL query may need to be adjusted based on the actual RDF data available. 
+
+    The query is structured as follows:
+    1. It first selects the metric (?metric ) using the `SELECT` clause.
+    2. It then uses the `WHERE` clause to define the pattern for matching the metric.
+    3. The pattern consists of several steps:
+       a. It first checks if the dataset is of type `orkgc:Dataset` (line 1).
+       b. It then checks if the dataset is related to the `Atari_2600_Freeway_dataset` (line 2).
+       c. It then checks if the metric is related to the `Atari_2600_Freeway_dataset` (line 3).
+       d. It then checks if the metric is related to the `Validation_Research` (line 4).
+       e. It then checks if the metric is related to the `Accuracy` (line 5).
+       f. It then checks if the dataset is related to the `MNIST` (line 6).
+       g. It then filters the results to only include metrics with labels "Accuracy" or "F1-score" (line 7).
+    4. The query uses the `a` and `relatedTo` predicates to define the relationships between the entities.
+    5. The query uses the `rdfs:label` predicate to get the label of the metric.
+    6. The query uses the `FILTER` clause to filter the results based on the metric labels. 
+
+    Note that the actual query may need to be adjusted based on the actual RDF data available. 
+
+    The output of this query will be a list of metrics that are related to the `Atari_2600_Freeway_dataset` and have labels "Accuracy" or "F1-score". 
+
+    The SPARQL query is written in the standard SPARQL syntax, with the prefix definitions for the ORKG ontologies. The query uses the `SELECT`, `WHERE`, and `FILTER` clauses to define the pattern for matching the metric. 
+
+    The query is designed to work with the provided RDF data dump, but it may need to be adjusted based on the actual data available. 
+
+    The output of this query will be a list of metrics that are related to the `Atari_2600_Freeway_dataset` and have labels "Accuracy" or "F1-score". 
+
+    The SPARQL query is written in the standard SPARQL syntax, with the prefix definitions for the ORKG ontologies. The query uses the `SELECT`, `WHERE`, and `FILTER` clauses to define the pattern for matching the metric. 
+
+    The query is designed to work with the provided RDF data dump, but it may need to be adjusted based on the actual data available. 
+
+    The output of this query will be a list of metrics that are related to the `Atari_2600_Freeway_dataset` and have labels "Accuracy" or "F1-score". 
+
+    The SPARQL query is written in the standard SPARQL syntax, with the prefix definitions for the ORKG ontologies. The query uses the `SELECT`, `WHERE`, and `FILTER` clauses to define the pattern for matching the metric. 
+
+    The query is designed to work with the provided RDF data dump, but it may need to be adjusted based on the actual data available. 
+
+    The output of this query will be a list of metrics that are related to the `Atari_2600_Freeway_dataset` and have labels "Accuracy" or "F1

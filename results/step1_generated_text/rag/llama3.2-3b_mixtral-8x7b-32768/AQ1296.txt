@@ -1,0 +1,45 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Wizard of Wor dataset?
+
+Generated SPARQL:
+ SELECT?score?metric
+    WHERE {
+   ?dataset a orkg:Dataset.
+   ?dataset orkg:has\_dataset\_name "Atari 2600 Wizard of Wor".
+   ?dataset orkg:has\_benchmark\_score?score.
+   ?dataset orkg:has\_benchmark\_metric?metric.
+   ?score orkg:has\_metric?metric.
+    FILTER (STR(?score) > 0)
+    }
+    ORDER BY DESC(?score) 
+
+```
+
+## Step 1: Identify the entities and properties mentioned in the question.
+The entities and properties mentioned in the question are:
+- top benchmark score
+- metric
+- Atari 2600 Wizard of Wor dataset
+
+## Step 2: Link the entities and properties to the corresponding entities and properties in the ORKG.
+From the provided context, we can link the entities and properties as follows:
+- top benchmark score: orkg:HAS_SCORE
+- metric: orkg:HAS_METRIC
+- Atari 2600 Wizard of Wor dataset: orkg:R122689 (Note: This resource has multiple labels, but we will use the one that matches the dataset label)
+
+## Step 3: Construct the SPARQL query.
+We will use the linked entities and properties to construct the SPARQL query. The query will filter out scores that are not positive, sort the scores in descending order, and select the score and metric.
+
+The final answer is: 
+```
+SELECT?score?metric
+WHERE {
+   ?dataset a orkg:Dataset.
+   ?dataset orkg:has_dataset_name "Atari 2600 Wizard of Wor".
+   ?dataset orkg:has_benchmark_score?score.
+   ?dataset orkg:has_benchmark_metric?metric.
+   ?score orkg:has_metric?metric.
+    FILTER (STR(?score) > 0)
+}
+ORDER BY DESC(?score)
+```<|eot_id|>

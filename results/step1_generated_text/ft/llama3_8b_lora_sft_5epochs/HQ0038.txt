@@ -1,0 +1,36 @@
+Question:
+What is the mean capacity of a carbon-based fuel?
+
+Generated SPARQL:
+ SELECT (AVG(?capacity) AS?mean_capacity)
+     WHERE {
+     ?papers rdf:type orkgc:Paper.
+     ?papers rdfs:label?titles.
+      FILTER(REGEX(?titles, "carbon-based fuel"))
+     ?papers orkgp:P31?cont.
+     ?cont orkgp:P43135?batteries.
+     ?batteries orkgp:P43134?cells.
+     ?cells orkgp:P43133?electrolyte.
+     ?electrolyte orkgp:P43132?capacity.
+     ?capacity rdfs:label?capacity_labels.
+      BIND(xsd:float(?capacity_labels) AS?capacity_value)
+     ?papers orkgp:P43138?year.
+      BIND(xsd:int(?year) AS?year_value)
+     ?papers orkgp:P43137?authors.
+     ?authors rdfs:label?authors_labels.
+     ?papers rdfs:label?papers_labels.
+     ?papers orkgp:P43136?doi.
+     ?papers orkgp:P43139?url.
+     ?papers orkgp:P43140?publisher.
+     ?papers orkgp:P43141?volume.
+     ?papers orkgp:P43142?issue.
+     ?papers orkgp:P43143?pages.
+     ?papers orkgp:P43144?title.
+     ?papers orkgp:P43145?abstract.
+     ?papers orkgp:P43146?keywords.
+     ?papers orkgp:P43147?source_code.
+     ?papers orkgp:P43148?data.
+     ?papers orkgp:P43149?model.
+     ?papers orkgp:P43150?results.
+     ?papers orkgp:P43151?eval_metric.
+     ?papers orkgp:P431

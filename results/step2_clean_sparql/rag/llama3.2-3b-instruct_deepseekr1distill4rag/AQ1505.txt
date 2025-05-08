@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.ontology.org/orkg/>
+PREFIX orkp: <http://www.ontology.org/orkp/>
+
+SELECT ?model
+WHERE {
+  ?model orkp:relatedTo ?metric.
+  ?metric orkp:relatedTo ?dataset.
+  FILTER (CONTAINS(STR(?dataset), "Supervised: benchmark"))
+  FILTER (CONTAINS(STR(?metric), "Senseval 2"))
+}
+```

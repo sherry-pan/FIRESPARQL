@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkpg: <http://example.org/orkpg/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkgc:Resource;
+         orkp:hasTitle ?title;
+         orkp:hasID ?id;
+         orkgp:hasDataset ?dataset.
+  ?dataset a orkgc:Dataset;
+           orkp:hasEvaluation ?evaluation.
+  ?evaluation orkpg:hasBenchmarkOn ?benchmark.
+  ?benchmark a orkp:Benchmark;
+             orkp:hasDataset ?benchmarkDataset.
+  ?benchmarkDataset a orkgc:Resource;
+                    orkp:hasLabel "WMT2016 German-English dataset".
+}
+```

@@ -1,0 +1,78 @@
+Question:
+What models are being evaluated on the Atari 2600 Solaris dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      orkgp:R1 orkgp:HAS_EVALUATION orkgp:HAS_DATASET;
+      orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:P312 orkgp:HAS_DATASET?dataset;
+      orkgp:P312?model.
+     ?model orkgp:P312 orkgp:HAS_EVALUATION?eval.
+     ?eval rdfs:label?eval_lbl.
+     ?model orkgp:HAS_MODEL?model_lbl.
+      BIND(xsd:string(?model_lbl) AS?model_lbl)
+    }
+    Note: The ORKG prefixes are assumed to be defined in the ORKG. 
+    This answer is generated based on the provided context and the question. 
+    The answer may not be correct or up-to-date. 
+    Please verify the answer with the ORKG. 
+
+    ```python
+import orkg
+
+# Create an instance of the ORKG
+orkg = orkg.orkg_instance()
+
+# Get the question and context
+question = "What models are being evaluated on the Atari 2600 Solaris dataset?"
+context = {
+    "question": question,
+    "extracted_terms": {
+        "Atari 2600 Solaris dataset",
+        "models",
+        "evaluated on"
+    },
+    "candidates": {
+        "Atari 2600 Solaris dataset": [
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "Atari 2600 Solaris dataset",
+                "rdf:type": "orkgc:Resource"
+            },
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "Atari 2600 Solaris dataset",
+                "rdf:type": "orkgc:Dataset"
+            },
+            {
+                "uri": "orkgp:HAS_DATASET",
+                "rdfs:label": "has dataset",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "models": [
+            {
+                "uri": "orkgp:HAS_MODEL",
+                "rdfs:label": "has model",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "evaluated on": [
+            {
+                "uri": "orkgp:HAS_EVALUATION",
+                "rdfs:label": "has evaluation",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ]
+    }
+}
+
+# Generate the SPARQL query
+query = orkg.generate_sparql_query(question, context)
+
+# Print the query
+print(query)
+```
+
+   

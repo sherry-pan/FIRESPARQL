@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset;
+           orkp:hasDataset ?dataset2;
+           orkg:datasetName "IWSLT2015 German-English dataset"@en.
+  ?dataset2 orkp:hasMetric ?metric;
+            orkp:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

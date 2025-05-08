@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg#>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:topPerformingModel ?score.
+  ?score orkg:A2Score ?benchmark.
+  ?benchmark orkg:benchmarkedOn ?dataset.
+  FILTER (CONTAINS(STR(?dataset), "ANLI")).
+}
+```

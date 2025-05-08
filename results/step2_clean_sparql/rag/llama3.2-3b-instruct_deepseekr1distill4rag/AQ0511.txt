@@ -1,0 +1,13 @@
+```sparql
+SELECT ?paper ?title ?id WHERE {
+  ?paper a ora:ResearchPaper.
+  ?paper ora:hasBenchmark ?benchmark.
+  ?benchmark ora:hasDataset ?dataset.
+  ?dataset ora:label ?datasetLabel.
+  FILTER (str(?datasetLabel) = "STS Benchmark dataset").
+  SERVICE orkgr:repo {
+    ?paper ora:title ?title.
+    ?paper ora:id ?id.
+  }
+}
+```

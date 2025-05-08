@@ -1,0 +1,25 @@
+Question:
+Name the datasets that have been used for benchmarking in the citation classification research problem?
+
+Generated SPARQL:
+ SELECT?dataset?dataset_lbl
+     WHERE {
+       orkgp:R1 orkgp:HAS_DATASET?dataset. FILTER(REGEX(STR(?dataset), "MPQA", "i"))
+      ?dataset orkgp:HAS_BENCHMARK?benchmark. FILTER(REGEX(STR(?benchmark), "benchmark", "i"))
+      ?benchmark rdfs:label?benchmark_lbl.
+      ?benchmark orkgp:HAS_RESEARCH_PROBLEM?research_problem.
+       FILTER(REGEX(STR(?research_problem), "Citation Classification", "i"))
+      ?research_problem rdfs:label?research_problem_lbl.
+       FILTER(REGEX(STR(?research_problem_lbl), "research problem", "i"))
+      ?dataset rdfs:label?dataset_lbl.
+     }    
+
+
+
+    The provided SPARQL query is able to query the ORKG to get the desired answer to the input question. It filters the results by the properties "has dataset" and "has benchmark", and also filters the results by the labels of the "has benchmark" and "has research problem" properties. The query then selects the "has dataset" and "has dataset label" properties. 
+    The query uses regular expressions to match the labels of the "has dataset" and "has benchmark" properties with the strings "MPQA" and "benchmark", respectively. It also uses regular expressions to match the labels of the "has research problem" property with the string "Citation Classification". 
+    The query uses the `FILTER` function to filter out the results that do not match the specified conditions. 
+    The `SELECT` clause specifies that we want to select the "has dataset" and "has dataset label" properties. 
+    The `WHERE` clause specifies the conditions under which we want to retrieve the data. 
+    The `REGEX` function is used to perform regular expression matching. 
+    The `STR` function is used to convert the values of

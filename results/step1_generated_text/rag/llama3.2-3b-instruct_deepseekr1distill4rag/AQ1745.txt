@@ -1,0 +1,71 @@
+Question:
+Which model has achieved the highest F1 score score on the BUCC Chinese-to-English benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?model?f1score 
+WHERE {
+ ?model a orkgr:model.
+ ?model orkgr:relatedTo?dataset.
+ ?dataset a orkgr:BUCC_Chinese_to_English_benchmark_dataset.
+ ?model orkgr:scored?f1score.
+  FILTER (IS_BIGGER(?f1score,?f1score2)) 
+}
+``` 
+    Note: The IS_BIGGER function is not a standard SPARQL function, but it can be simulated using the MAX and less-than-or-equal-to operators. The query will not return any results because the dataset is not present in the provided context. 
+
+    The query is written in SPARQL 1.1 syntax. It uses the `orkgr` and `orkgp` prefixes to refer to the ontology. It selects the `model` and `f1score` variables, and the query filters for models that have a higher F1 score than any other model. The `relatedTo` property is used to link the model to the BUCC Chinese-to-English benchmark dataset, and the `scored` property is used to link the model to its F1 score. The `IS_BIGGER` function is used to compare the F1 scores, but since the dataset is not present in the context, the query will not return any results. 
+
+    Please note that the query is based on the provided context and may not be correct or efficient for the actual task. The actual task may require a different query or more context. 
+
+    If you want to simulate the IS_BIGGER function, you can use the following query:
+    ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?model?f1score 
+WHERE {
+ ?model a orkgr:model.
+ ?model orkgr:relatedTo?dataset.
+ ?dataset a orkgr:BUCC_Chinese_to_English_benchmark_dataset.
+ ?model orkgr:scored?f1score.
+ ?f1score2 :value?f1score.
+ ?f1score1 :value?f1score2.
+  FILTER (MAX(?f1score1) > MAX(?f1score2)) 
+}
+``` 
+    This query uses the `value` property to get the F1 score values, and then uses the `MAX` function to get the maximum F1 score for each model, and finally uses the `FILTER` clause to compare the maximum F1 scores. 
+
+    Please note that this query is not as efficient as the original query, and it may not return the correct results if the F1 score values are not stored in a way that allows for efficient comparison. 
+
+    Also, please note that the `IS_BIGGER` function is not a standard SPARQL function, and it's not possible to implement it using standard SPARQL syntax. The query above is just a simulation of the `IS_BIGGER` function. 
+
+    If you want to get the maximum F1 score for each model, you can use the following query:
+    ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?model?f1score 
+WHERE {
+ ?model a orkgr:model.
+ ?model orkgr:relatedTo?dataset.
+ ?dataset a orkgr:BUCC_Chinese_to_English_benchmark_dataset.
+ ?model orkgr:scored?f1score.
+ ?f1score2 :value?f1score.
+ ?f1score1 :value?f1score.
+ ?f1score1 =?f1score.
+  FILTER (MAX(?f1score1) > MAX(?f1score2)) 
+}
+``` 
+    This query uses the `value` property to get the F1 score values, and then uses the `MAX` function to get the maximum F1 score for each model. It then uses the `FILTER` clause to compare the maximum F1 scores. 
+
+    Please note that this query is not as efficient as the original query, and it may not return the correct results if the F1 score values are not stored in a way that allows for efficient comparison. 
+
+    Also, please note that the `IS_BIGGER` function is not a standard SPARQL function, and it's not possible to implement it using standard SPARQL syntax. The query above is just a simulation of the `IS_BIGGER` function. 
+
+    If you want to get the maximum F1 score for each model, you can use the following query:
+    ```sparql
+PREFIX

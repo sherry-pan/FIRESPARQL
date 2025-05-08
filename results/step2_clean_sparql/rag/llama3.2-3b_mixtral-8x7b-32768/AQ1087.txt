@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkc:Dataset;
+           orkgr:datasetName "ACE 2004";
+           orkgr:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult orkp:hasMetric ?metric;
+                   orkp:hasValue ?value.
+  FILTER (lang(?metric) = "en" AND lang(?value) = "en")
+}
+```

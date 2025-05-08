@@ -1,0 +1,34 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "BUCC German-to-English dataset")
+          ?benchmark      orkgp:HAS_BENCHMARK      ?paper.
+          ?cont          orkgp:HAS_CONTRIBUTION     ?paper;
+                          orkgp:P34              ?benchmark.
+          ?contrib       orkgp:HAS_DATASET         ?dataset;
+                          orkgp:P34              ?benchmark.
+          ?dataset      orkgp:HAS_DATASET         ?dataset;
+                      orkgp:P32              ?cont.
+          ?cont         orkgp:HAS_SOURCE         ?source.
+          ?source      rdfs:label                  ?source_lbl.
+           FILTER (str(?source_lbl) = "research papers")
+          ?paper      orkgp:HAS_SOURCE         ?source.
+          ?source      rkgp:P31               ?cont.
+          ?cont       orkgp:HAS_TITLE         ?title.
+          ?title      rkgp:P32               ?paper.
+          ?paper      orkgp:HAS_ID            ?ID.
+          ?ID         rkgp:P33               ?paper_lbl.
+          ?paper      rkgp:P31               ?cont.
+          ?cont      orkgp:P34              ?benchmark.
+          ?benchmark      orkgp:HAS_BENCHMARK      ?paper.
+      }
+    Note: You may assume that the dataset contains the correct entities and properties, and the SPARQL query will return the correct answer to the input question.
+    SELECT?paper?paper_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      

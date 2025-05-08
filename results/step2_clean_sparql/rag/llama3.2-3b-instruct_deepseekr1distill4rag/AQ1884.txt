@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+
+SELECT ?uri ?label ?score ?type ?rdfType 
+WHERE {
+  ?uri a orkc:Resource .
+  FILTER(STRCONTAINS(STR(?uri), "benchmark_datasets") || STRCONTAINS(STR(?uri), "Text_Summarization"))
+  BIND (rdfs:label(?uri) AS ?label)
+  BIND (xsd:integer(?score) AS ?score)
+  BIND (rdf:type(?uri) AS ?type)
+  BIND (rdf:type(?uri) AS ?rdfType)
+}
+```

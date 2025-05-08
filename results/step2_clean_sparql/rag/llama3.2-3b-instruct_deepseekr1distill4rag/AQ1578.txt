@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkg-class/>
+PREFIX orkgp: <http://example.org/orkg-property/>
+
+SELECT ?model ?metricValue WHERE {
+  ?model orkgp:benchmarking ?dataset.
+  ?model orkgp:metric ?metric.
+  ?metric orkgp:metricType "ROUGE-2".
+  ?metric orkgp:metricValue ?metricValue.
+  FILTER (REGEX(str(?dataset), "X-Sum", "i"))
+} 
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

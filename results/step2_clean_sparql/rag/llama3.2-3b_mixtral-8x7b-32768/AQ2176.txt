@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?codeReference
+WHERE {
+   ?paper orkp:HAS_PAPER ?codePaper.
+   ?codePaper orkp:HAS_CODE_REFERENCE ?codeReference.
+   ?paper orkgc:hasUsed ?model.
+   ?model orkgc:hasModelName "PAR Transformer Large".
+   ?model orkgc:hasUsedFor ?purpose.
+   ?purpose orkgc:hasLabel "benchmarking purposes".
+}
+```

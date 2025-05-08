@@ -1,0 +1,41 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Freeway dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+       orkgp:R128625 orkgc:HAS_DATASET {
+         orkgp:R128625 orkgc:HAS_DATASET?dataset.
+         FILTER(REGEX(STR(?dataset), "Atari 2600 Freeway", "i"))
+       }
+      ?dataset orkgp:HAS_BENCHMARK_RESULT?benchmark.
+       FILTER(REGEX(STR(?benchmark), "highest", "i"))
+      ?benchmark orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+      ?value rdfs:label?value_lbl.
+       FILTER(REGEX(STR(?value_lbl), "highest", "i"))
+      ?value orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "Freeway", "i"))
+      ?value orkgp:HAS_VALUE?value_lbl.
+       BIND(XSD:float(?value_lbl) AS?value)
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "score", "i"))
+       BIND(XSD:float(?metric_lbl) AS?metric)
+     } 
+
+    Note: The provided ORKG context contains the following entities and properties:
+    - orkgp:R128625
+    - orkgc:HAS_DATASET
+    - orkgp:R128625
+    - orkgp:HAS_BENCHMARK_RESULT
+    - orkgp:HAS_METRIC
+    - orkgp:HAS_VALUE
+    - orkgp:HAS_DATASET
+    - orkgp:HAS_VALUE
+    - orkgp:HAS_DATASET
+    - orkgp:HAS_VALUE
+    - orkgp:HAS_DATASET
+    - orkgp:HAS_VALUE
+    - orkgp:HAS_DATASET
+

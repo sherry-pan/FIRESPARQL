@@ -1,0 +1,43 @@
+Question:
+Can you list the models that have been evaluated on the WMT2016 English-German dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "WMT2016 English-German")
+         ?benchmark      orkgp:HAS_DATASET      ?dataset.
+         ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+         ?cont          orkgp:HAS_EVALUATION     ?eval.
+         ?eval          rdfs:label              ?eval_lbl.
+         ?cont          rdfs:label              ?model_lbl.
+         ?cont          orkgp:HAS_MODEL        ?model.
+         ?model      rdfs:label              ?model_lbl.
+      }```
+
+## Step 1: Understand the question and the context provided.
+The question is asking for a list of models that have been evaluated on the WMT2016 English-German dataset. The context provides information about the entities and properties mentioned in the question, including candidate entities and properties in the ORKG that can be linked to these entities and properties.
+
+## Step 2: Identify the relevant entities and properties in the context.
+From the context, the relevant entities are "WMT2016 English-German dataset" and "models". The relevant properties are "HAS_DATASET", "HAS_BENCHMARK", "HAS_EVALUATION", and "HAS_MODEL".
+
+## Step 3: Determine the relationships between the entities and properties.
+The "WMT2016 English-German dataset" has a relationship with the "HAS_DATASET" property, which points to the dataset. The "models" have a relationship with the "HAS_MODEL" property, which points to the models. The "HAS_EVALUATION" property points to the evaluations.
+
+## Step 4: Construct the SPARQL query based on the relationships identified.
+To get the list of models that have been evaluated on the WMT2016 English-German dataset, we need to filter the models that have a relationship with the dataset through the "HAS_DATASET" property.
+
+## Step 5: Write the SPARQL query.
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2016 English-German")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont          orkgp:HAS_EVALUATION     ?eval.
+ ?eval          rdfs:label              ?eval_lbl.
+ ?cont          rdfs:label              ?model_lbl.
+ ?cont          orkgp:HAS_MODEL        ?model.
+ ?model      rdfs:label

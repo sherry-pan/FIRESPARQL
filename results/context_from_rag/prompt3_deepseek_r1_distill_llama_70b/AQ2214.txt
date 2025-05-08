@@ -1,0 +1,67 @@
+<think>
+Okay, I need to figure out how to answer the question: "Where can I find code references in papers that have used the All-attention network - 18 layers model for benchmarking purposes?" using the provided ORKG RDF data dump.
+
+First, I'll break down the question to extract the relevant terms. The key entities and properties mentioned are "code references," "papers," "All-attention network - 18 layers model," and "benchmarking purposes." 
+
+Looking at the context, I see that there are resources related to papers, models, and benchmarking. For example, R147652 describes a method involving models and datasets, and R283709 and R283710 are about papers with specific authors and venues.
+
+Next, I need to find similar entities or properties in the RDF data. The model mentioned is "All-attention network - 18 layers," which might relate to resources like R147652 that discuss models and datasets. "Code references" could be linked to properties like HAS_VENUE or P27, which list authors or venues where code might be mentioned.
+
+For benchmarking, terms like "benchmarking purposes" could relate to resources that describe evaluations or datasets. In the context, R147652 has steps involving benchmarking with datasets, so that's a good candidate.
+
+I'll then select the top candidates for each extracted term. For "code references," I'll look for properties that indicate where code is mentioned, like HAS_VENUE or P27. For "papers," resources like R283709 and R283710 are relevant. The model "All-attention network - 18 layers" might not be directly present, but similar models like those in R147652 could be related. Benchmarking would tie back to evaluation steps in R147652.
+
+Finally, I'll structure the JSON output, grouping the results by each extracted term and including their URIs, labels, and types. I'll make sure to use the correct RDF prefixes and include the necessary types for each entity.
+</think>
+
+```json
+{
+  "question": "Where can I find code references in papers that have used the All-attention network - 18 layers model for benchmarking purposes?",
+  "extracted_terms": {
+    "code references",
+    "papers",
+    "All-attention network - 18 layers model",
+    "benchmarking purposes"
+  },
+  "candidates": {
+    "code references": [
+      {
+        "uri": "orkgp:HAS_VENUE",
+        "rdfs:label": "HAS_VENUE",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgp:P27",
+        "rdfs:label": "P27",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ],
+    "papers": [
+      {
+        "uri": "orkgr:R283709",
+        "rdfs:label": "Journal Article",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R283710",
+        "rdfs:label": "Journal Article",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "All-attention network - 18 layers model": [
+      {
+        "uri": "orkgr:R147652",
+        "rdfs:label": "Step 1 We start with an initial set of METHOD and DATASET instances as seed terms (e.g., “SVM” and “MNIST”). These seed terms can, for instance, be gathered from existing knowledge graphs.",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarking purposes": [
+      {
+        "uri": "orkgr:R147652",
+        "rdfs:label": "Step 4 Using the annotated training set, we apply our NER approach and thereby identify new entity candidates. We use a CRF algorithm to learn the patterns of the data.",
+        "rdf:type": "orkgc:Resource"
+      }
+    ]
+  }
+}
+```

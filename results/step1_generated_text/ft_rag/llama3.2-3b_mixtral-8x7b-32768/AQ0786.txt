@@ -1,0 +1,47 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the UCF101 (finetuned) dataset?
+
+Generated SPARQL:
+ SELECT?metric
+     WHERE {
+         orkgp:R1     orkgp:HAS_DATASET       orkgc:R122689.
+         orkgp:R1     orkgp:HAS_EVALUATION  ?eval.
+        ?eval       orkgp:HAS_METRIC      ?metric.
+         FILTER(REGEX(?metric, "Mean|Class|Accuracy|Intersection|Union"))
+     }
+    Note: The above SPARQL query is just a sample and may need to be adjusted based on the actual data in the ORKG. 
+
+    def orkg_to_spql(query):
+        #... (your code here)
+        return spql
+
+    orkg_to_spql("SELECT?metric WHERE { orkgp:R1 orkgp:HAS_DATASET orkgc:R122689. orkgp:R1 orkgp:HAS_EVALUATION?eval.?eval orkgp:HAS_METRIC?metric. FILTER(REGEX(?metric, \"Mean|Class|Accuracy|Intersection|Union\")) }") 
+    ```python
+def orkg_to_spql(query):
+    """
+    Convert the Open Research Knowledge Graph (ORKG) query to SPARQL query.
+    
+    Parameters:
+    query (str): The ORKG query.
+    
+    Returns:
+    str: The corresponding SPARQL query.
+    """
+    # Remove the "SELECT?metric" part
+    query = query.replace("SELECT?metric", "")
+    
+    # Remove the "WHERE" part
+    query = query.replace("WHERE", "")
+    
+    # Remove the "orkgp:R1" part
+    query = query.replace("orkgp:R1", "")
+    
+    # Add the SPARQL query prefix
+    query = "SELECT?metric\nWHERE {\n"
+    
+    # Add the filter part
+    query += "   ?eval       orkgp:HAS_METRIC      ?metric.\n"
+    query += "    FILTER(REGEX(?metric, \"Mean|Class|Accuracy|Intersection|Union\"))\n"
+    query += "}\n"
+    
+   

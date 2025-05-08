@@ -1,0 +1,45 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+      orkgp:R1 orkgp:HAS_METRIC?metric.
+      FILTER (str(?metric) = "value")
+      orkgp:R1 orkgp:HAS_SCORE?score.
+      FILTER (str(?score) = "value")
+      orkgp:R1 rdfs:label?cont.
+      FILTER (str(?cont) = "Atari 2600 Berzerk")
+      orkgp:R1 orkgp:HAS_DATASET?dataset.
+      FILTER (str(?dataset) = "Atari 2600 Berzerk")
+     ?dataset orkgp:HAS_BENCHMARK?benchmark.
+     ?benchmark orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_RESULT?cont.
+     ?cont orkgp:HAS_VALUE?value.
+     ?value orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?metric_value.
+      BIND(xsd:float(?metric_value) AS?metric)
+     ?value orkgp:HAS_SCORE?score.
+     ?score orkgp:HAS_VALUE?score_value.
+      BIND(xsd:float(?score_value) AS?score)
+    }   
+
+
+```python
+print("SELECT?metric?score")
+print("WHERE {")
+print("  orkgp:R1 orkgp:HAS_METRIC?metric.")
+print("  FILTER (str(?metric) = \"value\")")
+print("  orkgp:R1 orkgp:HAS_SCORE?score.")
+print("  FILTER (str(?score) = \"value\")")
+print("  orkgp:R1 rdfs:label?cont.")
+print("  FILTER (str(?cont) = \"Atari 2600 Berzerk\")")
+print("  orkgp:R1 orkgp:HAS_DATASET?dataset.")
+print("  FILTER (str(?dataset) = \"Atari 2600 Berzerk\")")
+print(" ?dataset orkgp:HAS_BENCHMARK?benchmark.")
+print(" ?benchmark orkgp:HAS_EVALUATION?eval.")
+print(" ?eval orkgp:HAS_RESULT?cont.")
+print(" ?cont orkgp:HAS_VALUE?value.")
+print(" ?value orkgp:HAS_METRIC?metric.")
+print(" ?metric orkgp:HAS_VALUE?metric_value.")
+print("  BIND(xsd:float

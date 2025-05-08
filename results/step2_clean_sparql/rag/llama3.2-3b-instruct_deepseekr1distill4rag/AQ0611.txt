@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkp: <http://www.openresearchknowledgegraph.org/predicate/>
+PREFIX orkc: <http://www.openresearchknowledgegraph.org/class/>
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkc:Research_Paper.
+  ?paper orkp:includesBenchmark ?benchmark.
+  ?benchmark orkp:includesDataset ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label "Atari 2600 Asterix Dataset"@en.
+  ?paper orkp:hasURI ?id.
+  ?paper orkp:hasTitle ?title.
+}
+```

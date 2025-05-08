@@ -1,0 +1,39 @@
+Question:
+What models are being evaluated on the WOS-11967 dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "WOS-11967")
+          ?dataset       orkgp:HAS_DATASET      ?cont.
+          ?cont           orkgp:HAS_EVALUATION     ?eval.
+          ?eval           rdfs:label               ?eval_lbl.
+           FILTER (str(?eval_lbl) = "evaluated on")
+          ?cont           orkgp:HAS_MODEL          ?model.
+          ?model         rdfs:label                ?model_lbl.
+     }
+    END OF OUTPUT. 
+
+    You should use the provided SPARQL query as is, and the provided context as background information for linking the correct entities or properties in the ORKG. The goal is to answer the input question. 
+
+    Please note that the provided context includes the exact labels for the dataset and the evaluation property. The exact labels are not provided in the question, so they are not included in the query. 
+    The query uses a filter to select only the dataset with the label "WOS-11967" and the evaluation property with the label "evaluated on". 
+    The query then selects the model and its label that are linked to the dataset and the evaluation property. 
+    The use of the `str(?dataset_lbl) = "WOS-11967"` and `str(?eval_lbl) = "evaluated on"` filters ensures that only the correct dataset and evaluation property are selected. 
+    The query uses the `FILTER` function to apply these filters to the data. 
+
+    You should return the model and its label, i.e., the selected model and its label. 
+
+    Please note that the `?model_lbl` variable is used to represent the label of the model. 
+    The `?model` variable is used to represent the model. 
+
+    The `?model` variable is used to represent the model, and the `?model_lbl` variable is used to represent the label of the model. 
+    The `?cont` variable is used to represent the container, and the `?eval` variable is used to represent the evaluation. 
+    The `?eval_lbl` variable is used to represent the label of the evaluation. 
+    The `?dataset_lbl` variable is used to represent the label of the dataset. 
+
+    The `orkgp:HAS_DATASET` and `orkgp:HAS_EVALUATION` properties are used to link the dataset and the evaluation to the container and the evaluation, respectively. 
+    The `orkgp:HAS_MODEL` property is used to link the model to the container. 
+   

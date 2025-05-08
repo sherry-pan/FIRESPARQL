@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper orkc:hasBenchmark ?benchmark.
+  ?benchmark orkgc:hasDataset ?dataset.
+  FILTER (?dataset = <http://example.org/orkgr/SciERC_dataset>).
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasId ?id.
+}
+```

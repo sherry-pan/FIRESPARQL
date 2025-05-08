@@ -1,0 +1,22 @@
+Question:
+List the metrics that are used to evaluate models on the VTAB-1k benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric
+WHERE {
+ ?model rdfs:label?modelLabel.
+ ?dataset rdfs:label "VTAB-1k benchmark dataset".
+ ?model orkgp:used_to_evaluate?dataset.
+ ?metric rdfs:label?metricLabel.
+  FILTER (str(?metricLabel) =~ "accuracy" || str(?metricLabel) =~ "F1-score" || str(?metricLabel) =~ "precision" || str(?metricLabel) =~ "recall" || str(?metricLabel) =~ "AUC-ROC" || str(?metricLabel) =~ "AUC-ROC" || str(?metricLabel) =~ "AP" || str(?metricLabel) =~ "AP" || str(?metricLabel) =~ "MCC")
+  }
+```    Note: The above SPARQL query is a direct translation of the provided JSON output into a SPARQL query. The query is designed to retrieve the metrics used to evaluate models on the VTAB-1k benchmark dataset. The query uses the `orkgp:used_to_evaluate` predicate to link models to the dataset, and then filters the results to include only metrics with labels that match common evaluation metrics (accuracy, F1-score, precision, recall, AUC-ROC, AUC-ROC, AP, AP). 
+
+    Please note that the filtering condition is a simple string match and might not cover all possible evaluation metrics. A more sophisticated filtering condition might be needed to capture all relevant metrics. 
+
+    Additionally, the query assumes that the `orkgp:used_to_evaluate` predicate is correctly linked to the `orkgp:Validation_Research` and `orkgp:Technique` predicates, which are mentioned in the provided context. 
+
+    Finally, the query uses the `str(?metricLabel)` function to convert the metric labels to strings, which is necessary to perform the string matching. 
+
+    The query can be executed on the ORKG to retrieve the metrics used to evaluate models on the VTAB-1k benchmark dataset.<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+SELECT ?model
+WHERE {
+   ?model orkgp:HAS_MODEL ?metric.
+   ?metric orkgr:HAS_TYPE "F1 metric";
+           orkgr:HAS_DATASET ?dataset;
+           orkgr:HAS_VALUE ?f1value.
+   FILTER (STR(?dataset) = "PubMed 20k RCT").
+}
+ORDER BY DESC(?f1value)
+LIMIT 1
+```

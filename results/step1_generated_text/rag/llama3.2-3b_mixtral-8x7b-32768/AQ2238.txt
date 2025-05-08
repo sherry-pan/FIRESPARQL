@@ -1,0 +1,37 @@
+Question:
+Where can I find code references in papers that have used the MPAD-path model for benchmarking purposes?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.org/orkgr#>
+PREFIX orkgp: <http://example.org/orkgp#>
+
+SELECT?paper?code
+WHERE {
+ ?paper orkg:has_model orkg:R122689.
+ ?paper orkg:has_code?code.
+  SERVICE orkg:search {
+    BIND(strcat("WHERE ", iri(?paper), " orkg:has_model orkg:R122689") AS?query).
+    BIND(strcat("  AND ", iri(?paper), " orkg:has_code?code") AS?query).
+    BIND(strcat("  AND?query") AS?query).
+   ?result orkg:search(?query).
+    BIND(strcat(" ?result", " orkg:has_model orkg:R122689") AS?query).
+    BIND(strcat(" ?result", " orkg:has_code?code") AS?query).
+  }
+}
+``` 
+    Note: The actual SPARQL query may require modifications based on the actual data in the ORKG. The above query is just a sample query based on the provided context and question. 
+
+    Note: The `iri` function is used to convert the string representation of the URI to a URI literal. The `strcat` function is used to concatenate strings. The `?paper` and `?code` variables are used to store the values of the `paper` and `code` variables in the query. 
+
+    Note: The `orkg:search` service is used to search for the papers that match the specified conditions. The `?result` variable is used to store the results of the search. 
+
+    Note: The `?paper` and `?code` variables are used to store the values of the `paper` and `code` variables in the query. 
+
+    Note: The `strcat` function is used to concatenate strings. The `?paper` and `?code` variables are used to store the values of the `paper` and `code` properties in the query. 
+
+    Note: The `?paper` and `?code` variables are used to store the values of the `paper` and `code` properties in the query. 
+
+    Note: The `?paper` and `?code` variables are used to store the values of the `paper` and `code` properties in the query. 
+
+    Note: The `?paper` and

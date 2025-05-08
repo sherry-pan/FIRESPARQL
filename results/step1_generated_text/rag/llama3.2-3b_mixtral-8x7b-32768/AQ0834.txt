@@ -1,0 +1,16 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkgc#>
+     PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/orkp#>
+     PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp#>
+     SELECT?metric?dataset 
+    WHERE {
+   ?dataset orkg:hasDataset?datasetResource.
+   ?datasetResource orkgp:hasMetric?metric.
+    FILTER (REGEX(str(?metric), "accuracy|f1_score|precision|recall", "i")).
+   ?dataset orkg:hasEvaluation?evaluation.
+   ?evaluation orkp:evaluatedOn?datasetResource.
+}
+    Note that the query only retrieves the dataset name, metric name, and the dataset it is evaluated on. It does not return the actual metric values.<|eot_id|>

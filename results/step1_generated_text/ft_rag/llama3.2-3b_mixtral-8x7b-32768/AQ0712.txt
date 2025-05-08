@@ -1,0 +1,58 @@
+Question:
+List the metrics that are used to evaluate models on the SciTLDR benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgp:R136657 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+       FILTER (str(?dataset) = "SciTLDR")
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_METRIC?metric.
+      ?metric orkgp:RDFS_LABEL?metric_lbl.
+       OPTIONAL {?eval orkgp:HAS_EVALUATION?eval2.}
+       FILTER (str(?eval2)!= "has evaluation")
+      ?metric_lbl rdfs:label?metric_lbl.
+     }     
+
+
+```python
+def generate_sparql_query(context):
+    """
+    This function generates a SPARQL query based on the input context.
+    
+    Args:
+        context (dict): A dictionary containing the question, extracted terms, and candidate entities and properties.
+        
+    Returns:
+        str: The generated SPARQL query.
+    """
+    
+    # Extract the question, extracted terms, and candidate entities and properties from the context
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?metric_lbl"
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+    
+    # Add the first part of the WHERE clause to the SPARQL query
+    sparql_query += " orkgp:R136657 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset."
+    
+    # Filter the results to only include the SciTLDR dataset
+    sparql_query += " FILTER (str(?dataset) = \"SciTLDR\")"
+    
+    # Add the second part of the WHERE clause to the SPARQL query
+    sparql_query += "?dataset orkgp:HAS_EVALUATION?eval."
+    
+    # Add the third part of the WHERE clause to the SPARQL query
+    sparql_query += "?eval orkgp:HAS_METRIC?metric."
+    
+    # Add the fourth part of the WHERE clause to the SPARQL query
+    sparql_query += "?metric orkgp:RDFS_LABEL?metric_lbl."
+    
+    # Add the OPTIONAL and FILTER clauses to the SPARQL query
+    sparql_query += " OPTIONAL {?eval orkgp:HAS_EVALUATION?eval2.}"
+    sparql

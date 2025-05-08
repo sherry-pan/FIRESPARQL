@@ -1,0 +1,17 @@
+```sparql
+PREFIX ora: <http://example.org/ontology#>
+PREFIX orkgr: <http://example.org/resource#>
+PREFIX orkgp: <http://example.org/property#>
+
+SELECT ?score ?metric
+WHERE {
+  ?scoreResource a ora:Score;
+      ora:hasScore ?score;
+      ora:hasMetric ?metricResource.
+  ?metricResource a ora:ValidationMetric;
+      ora:hasMetric ?metric.
+  ?dataset a ora:Dataset;
+      ora:hasName "Atari 2600 Wizard of Wor".
+  FILTER (?score = "93.9")
+}
+```

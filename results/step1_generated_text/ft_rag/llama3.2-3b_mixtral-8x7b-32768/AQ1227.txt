@@ -1,0 +1,40 @@
+Question:
+What is the highest benchmark result achieved on the Cartpole, swingup (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+      orkgc:R144430 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+      FILTER(REGEX(STR(?dataset), "Cartpole, swingup (DMControl500k)")
+     ?dataset orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value rdfs:label?value_lbl.
+      BIND(XSD:float(?value_lbl) AS?value)
+     ?benchmark orkgp:HAS_BENCHMARK_RESULT?result.
+     ?result orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_DATASET?cont.
+     ?cont orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value rdfs:label?value_lbl.
+      BIND(XSD:float(?value_lbl) AS?value)
+     ?cont orkgp:HAS_BENCHMARK_RESULT?cont_result.
+     ?cont_result orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value rdfs:label?value_lbl.
+      BIND(XSD:float(?value_lbl) AS?value)
+     ?cont orkgp:HAS_BENCHMARK_RESULT?cont_result.
+     ?cont_result orkgp:HAS_DATASET?cont_dataset.
+     ?cont_dataset orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value rdfs:label?value_lbl.
+      BIND(XSD:float(?value_lbl) AS?value)
+      BIND(MAX(?value) AS?max_value)
+     ?cont orkgp:HAS_BENCHMARK_RESULT?cont_result.
+     ?cont_result orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+     ?value rdfs:label?value_lbl.
+      BIND(XSD:float(?value_lbl) AS?value)
+      BIND(MAX(?value) AS?max_value)
+     ?cont orkgp:HAS_BENCHMARK_RESULT?cont_result.
+     ?cont_result orkgp:HAS_DATASET?cont_dataset.
+     ?cont_dataset orkgp:HAS_METRIC?

@@ -1,0 +1,22 @@
+Question:
+What is the highest benchmark result achieved on the WMT2014 English-German dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkc: <http://orkc.org/ontology/>
+
+SELECT?metric?value?dataset
+WHERE {
+ ?result orkp:hasBenchmarkResult?benchmark.
+ ?benchmark orkp:hasMetric?metric.
+ ?benchmark orkp:hasValue?value.
+ ?result orkc:isRelatedTo?benchmark.
+ ?result orkc:isRelatedTo?dataset.
+  FILTER (STR(?metric) = "accuracy")
+  FILTER (STR(?value) = "93.9")
+}
+```    Note: The SPARQL query assumes the RDF data dump is in the format of the provided JSON output. The actual query might need to be adjusted based on the actual RDF data dump structure.<|eot_id|>

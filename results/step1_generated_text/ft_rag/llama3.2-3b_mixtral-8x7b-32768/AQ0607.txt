@@ -1,0 +1,42 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Bank Heist dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Bank Heist dataset")
+          ?benchmark      orkgp:HAS_BENCHMARK      ?cont,
+                          orkgp:HAS_PART          ?paper.
+          ?paper          rdfs:label               ?paper_lbl.
+     }    
+
+
+
+```python
+SELECT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Bank Heist dataset")
+ ?benchmark      orkgp:HAS_BENCHMARK      ?cont,
+                 orkgp:HAS_PART          ?paper.
+ ?paper          rdfs:label               ?paper_lbl.
+}
+```````
+def get_sparql_query():
+    return """
+      SELECT?paper?paper_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Bank Heist dataset")
+       ?benchmark      orkgp:HAS_BENCHMARK      ?cont,
+                       orkgp:HAS_PART          ?paper.
+       ?paper          rdfs:label               ?paper_lbl.
+      }
+    """
+
+sparql_query = get_sparql_query()
+print(sparql_query)

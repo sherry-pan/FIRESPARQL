@@ -1,0 +1,60 @@
+Question:
+Indicate the model that performed best in terms of Senseval 2 metric on the Supervised: benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_BENCHMARK?benchmark.
+     ?benchmark orkgc:HAS_EVALUATION?eval.
+     ?eval orkgc:P32?model.
+     ?model rdfs:label?model_lbl.
+    }  
+```python
+SELECT?model?model_lbl
+WHERE {
+  orkgp:HAS_DATASET?dataset.
+ ?dataset orkgp:HAS_BENCHMARK?benchmark.
+ ?benchmark orkgc:HAS_EVALUATION?eval.
+ ?eval orkgc:P32?model.
+ ?model rdfs:label?model_lbl.
+}  
+```python
+def get_sparql_query(input_question):
+    """
+    Returns the SPARQL query corresponding to the input question.
+
+    Args:
+        input_question (str): The natural language question in English.
+
+    Returns:
+        str: The SPARQL query.
+    """
+
+    # Predefined context
+    context = {
+        "extracted_terms": {
+            "Senseval 2 metric": ["Senseval 2", "model", "Supervised: benchmark dataset"],
+            "model": ["Model"],
+            "Supervised: benchmark dataset": ["Benchmark Supervised", "Supervised", "Dataset"]
+        },
+        "candidates": {
+            "Senseval 2 metric": [
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "Senseval 2",
+                    "rdf:type": "orkgc:Resource"
+                },
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "Senseval 2",
+                    "rdf:type": "orkgc:Evaluation"
+                }
+            ],
+            "model": [
+                {
+                    "uri": "orkgp:HAS_MODEL",
+                    "rdfs:label": "Model",
+                    "rdf:type": "orkgp:Predicate"
+                }
+

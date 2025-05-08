@@ -1,0 +1,59 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 Fishing Derby benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Fishing Derby")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:P32             ?cont.
+          ?cont           orkgp:CONTAINS         ?benchmark;
+                     orkgp:HAS_METRIC       ?metric.
+     }     
+
+
+    If the input question is "List the authors of the paper with title 'Deep Learning for Time Series Forecasting'?", the output of the code will be:
+    
+    SELECT?paper?author
+    WHERE {
+     ?paper       a                orkgc:Paper;
+                 rdfs:label      ?paper_lbl.
+      FILTER (str(?paper_lbl) = "Deep Learning for Time Series Forecasting")
+     ?author      orkgp:P31          ?paper;
+                 rdfs:label      ?author_lbl.
+    }      
+    Note that the code assumes that the input question is in English. If the input question is not in English, the code may not work correctly. Also, the code does not handle the case where the input question is empty. In a real-world application, you would want to add error handling code to deal with these cases. 
+
+    The code uses the following libraries:
+    - orkgp: A library that provides a simple interface for accessing the Open Research Knowledge Graph (ORKG). 
+    - orkgc: A library that provides a simple interface for accessing the Open Research Knowledge Graph (ORKG) and is used for working with datasets, papers, and other orkgp resources. 
+
+    Here is the code:
+    ```python
+import orkgp
+import orkgc
+
+# Initialize the orkgp and orkgc libraries
+orkgp = orkgp.orkgp()
+orkgc = orkgc.orkgc()
+
+# Extract the input question from the context
+question = "List the metrics that are used to evaluate models on the Atari 2600 Fishing Derby benchmark dataset?"
+
+# Get the extracted terms from the context
+extracted_terms = orkgp.extracted_terms(question)
+
+# Get the candidates from the context
+candidates = orkgp.candidates(question)
+
+# Define the SPARQL query
+def get_sparql_query():
+    # Define the SELECT clause of the SPARQL query
+    select_clause = "SELECT?metric"
+    
+    # Define the WHERE clause of the SPARQL query
+    where_clause = """
+     ?dataset       a                orkgc:Dataset;
+                     r

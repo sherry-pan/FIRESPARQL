@@ -1,0 +1,52 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+       orkgp:R122689 orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(STR(?dataset), "Scholarly entity usage detection"))
+      ?dataset orkgp:HAS_DATASET?cont.
+      ?cont orkgp:HAS_METRIC?metric.
+      ?cont orkgp:HAS_SCORE?score.
+      ?metric orkgp:HAS_BEST_RESULT?best.
+      ?cont orkgp:HAS_BEST_RESULT?best.
+      ?best orkgp:HAS_VALUE?value.
+       BIND(XSD:float(?value) AS?score).
+       BIND(XSD:float(?value) AS?metric)
+     }     
+
+
+```python
+def generate_sparql_query(context):
+    """
+    Generate the SPARQL query to the input question.
+
+    Parameters:
+    context (dict): A dictionary containing the context information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    # Extract the extracted terms and candidates from the context
+    extracted_terms = context['extracted_terms']
+    candidates = context['candidates']
+
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?score\n"
+
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += "WHERE {\n"
+
+    # Filter the datasets to only include the Scholarly entity usage detection dataset
+    sparql_query += "  orkgp:R122689 orkgp:HAS_DATASET?dataset.\n"
+    sparql_query += "  FILTER(REGEX(STR(?dataset), \"" + extracted_terms['Scholarly entity usage detection'] + "\"))\n"
+
+    # Get the dataset containing the dataset
+    sparql_query += " ?dataset orkgp:HAS_DATASET?cont.\n"
+
+    # Get the metrics and scores for the dataset
+    sparql_query += " ?cont orkgp:HAS_METRIC?metric.\n"
+    sparql_query += " ?cont orkgp:HAS_SCORE?score.\n"
+
+    # Get the best results for the metrics and

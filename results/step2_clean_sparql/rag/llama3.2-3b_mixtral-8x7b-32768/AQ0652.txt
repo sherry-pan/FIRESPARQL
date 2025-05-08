@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology#>
+PREFIX orkgc: <http://orkgc.org/ontology#>
+PREFIX orkgp: <http://orkgp.org/ontology#>
+
+SELECT ?title ?id
+WHERE {
+  ?p1 a orkgc:ResearchPaper.
+  ?p1 orkgp:HAS_CONTRIBUTION ?c.
+  ?c orkgp:HAS_DATASET ?d.
+  ?p1 orkgp:HAS_WORK ?w.
+  ?w orkgp:HAS_TITLE ?title.
+  ?w orkgp:HAS_ID ?id.
+  ?p1 orkgp:HAS_BENCHMARK ?b.
+  ?b orkgp:HAS_DATASET ?d.
+  FILTER (str(?d) = "PubMed 20k RCT")
+}
+```

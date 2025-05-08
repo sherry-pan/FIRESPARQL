@@ -1,0 +1,44 @@
+Question:
+List the code links in papers that use the A3C-CTS model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper      orkgp:HAS_DATASET      ?dataset.
+      ?dataset    rdfs:label              ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "benchmark")
+      ?paper      orkgp:P31               ?cont.
+      ?cont        orkgp:HAS_MODEL         ?model.
+      ?model       rdfs:label              ?model_lbl.
+       FILTER (str(?model_lbl) = "A3C-CTS model")
+      ?paper      orkgp:HAS_SOURCE        ?source.
+      ?source     rdfs:label              ?source_lbl.
+       FILTER (str(?source_lbl) = "code links")
+      ?paper      orkgp:HAS_CODE           ?code.
+      ?code       rdfs:label              ?code_lbl.
+       FILTER (str(?code_lbl) = "code links")
+     }     
+
+
+```python
+def generate_sparql_query(input_question, context):
+    """
+    Generate the corresponding SPARQL query to the input question.
+
+    Args:
+    input_question (str): The natural language question in English.
+    context (dict): A dictionary containing the context as background information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    question_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    orkg_graph = "http://orkg.org/orkg/resource"
+    query = "SELECT?code"
+    where_clause = "WHERE {"
+    for term, values in question_terms.items():
+        where_clause += "\n" + "      " + term + "      " + orkg_graph + "HAS_" + term + "      ?" + term + "_lbl."
+        where_clause += "\n      FILTER (str(?" + term + "_lbl) = \"" + term + "\")"
+    where_clause += "\n     ?cont      orkgp:P31               ?cont."
+    where_clause += "\n     ?cont

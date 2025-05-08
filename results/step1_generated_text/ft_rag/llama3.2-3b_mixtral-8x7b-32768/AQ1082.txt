@@ -1,0 +1,77 @@
+Question:
+What is the highest benchmark result achieved on the NYT29 dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+      orkgr:R122689 orkgp:HAS_DATASET?dataset.
+      FILTER (str(?dataset) = "NYT29")
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_METRIC?metric.
+     ?metric rdfs:label?metric_lbl.
+     ?eval orkgp:HAS_VALUE?value.
+     ?value orkgp:HAS_METRIC?metric.
+      BIND((?value AS?score) FILTER (?score IS?metric_lbl))
+    }    
+   .   
+
+
+    Note: The actual SPARQL query will be generated based on the provided context and the input question. The output below is an example of a SPARQL query that could potentially match the input question.
+
+```python
+import pandas as pd
+from py2orcg import orkgp
+
+# Define the input question
+input_question = "What is the highest benchmark result achieved on the NYT29 dataset, including the metric and its value?"
+
+# Define the context
+context = {
+    "question": input_question,
+    "extracted_terms": {
+        "highest benchmark result": [],
+        "NYT29 dataset": [],
+        "metric": [],
+        "value": []
+    },
+    "candidates": {
+        "highest benchmark result": [],
+        "NYT29 dataset": [],
+        "metric": [],
+        "value": []
+    }
+}
+
+# Generate the SPARQL query
+sparql_query = """
+SELECT?metric?metric_lbl (MAX(?value) AS?score)
+WHERE {
+  orkgr:R122689 orkgp:HAS_DATASET?dataset.
+  FILTER (str(?dataset) = "NYT29")
+ ?dataset orkgp:HAS_EVALUATION?eval.
+ ?eval orkgp:HAS_METRIC?metric.
+ ?metric rdfs:label?metric_lbl.
+ ?eval orkgp:HAS_VALUE?value.
+ ?value orkgp:HAS_METRIC?metric.
+  BIND((?value AS?score) FILTER (?score IS?metric_lbl))
+}
+"""
+
+# Execute the SPARQL query
+results = orkgp.execute(sparql_query, context)
+
+# Print the results
+print(results)
+```
+
+
+    The output of the Python script will be a pandas DataFrame containing the results of the SPARQL query. The DataFrame will have columns for the metric, its label, and the highest benchmark result achieved on the NYT29 dataset, including the metric and its value. 
+
+    Example output:
+
+    ```
+     metric       metric_lbl  score
+    0    f1         f1      0.942
+    1  accuracy      accuracy      0.942
+    2      loss      loss      0.942
+    3      val_f1      val_f

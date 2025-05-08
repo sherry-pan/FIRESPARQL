@@ -1,0 +1,38 @@
+Question:
+List the metrics that are used to evaluate models on the CoQA benchmark dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX orkg: <http://orkgr.org/ontology/>
+    PREFIX orkgp: <http://orkgp.org/ontology/>
+    SELECT?metric
+    WHERE {
+   ?dataset orkg:hasBenchmark?benchmark.
+   ?benchmark a orkg:Benchmark.
+   ?benchmark orkg:hasDataset?dataset.
+   ?dataset a orkg:Dataset.
+   ?dataset orkg:hasMetric?metric.
+   ?metric a orkg:Metric.
+   ?metric orkg:hasEvaluationMetric?evaluationMetric.
+   ?dataset orkg:hasEvaluationMetric?evaluationMetric.
+   ?evaluationMetric orkg:hasF1Score?f1Score.
+   ?evaluationMetric orkg:hasAccuracy?accuracy.
+   ?evaluationMetric orkg:hasExactMatch?exactMatch.
+   ?evaluationMetric orkg:hasPartialMatch?partialMatch.
+   ?dataset orkg:hasEvaluation?evaluation.
+   ?evaluation orkg:evaluatedOn?models.
+   ?models orkg:hasEvaluation?evaluation.
+   ?evaluation orkg:evaluationMetric?evaluationMetric.
+   ?f1Score orkg:hasValue?f1Value.
+   ?accuracy orkg:hasValue?accuracyValue.
+   ?exactMatch orkg:hasValue?exactMatchValue.
+   ?partialMatch orkg:hasValue?partialMatchValue.
+    }
+    ```
+    Please provide the correct SPARQL query for the given question and context. 
+
+    Note that the SPARQL query should be able to retrieve the correct answer to the input question, which is "List the metrics that are used to evaluate models on the CoQA benchmark dataset?".
+    The provided SPARQL query is a starting point, and you may need to modify it to get the correct answer. 
+
+    The context provides information about the entities and properties mentioned in the question, as well as candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question

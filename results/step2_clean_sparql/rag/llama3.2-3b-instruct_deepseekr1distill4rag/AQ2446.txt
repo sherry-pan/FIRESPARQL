@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:usesModel ?model.
+  ?model schema:description ?modelDescription.
+  FILTER (CONTAINS(LCASE(?modelDescription), "shake-shake"))
+}
+```

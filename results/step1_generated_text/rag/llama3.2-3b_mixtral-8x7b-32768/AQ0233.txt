@@ -1,0 +1,38 @@
+Question:
+What models are being evaluated on the AESLC dataset?
+
+Generated SPARQL:
+ ```sparql
+    SELECT?m (GROUP BY?m) {
+     ?m a ora:Model.
+     ?m ora:hasDataset?d.
+     ?d ora:hasDataset?ds.
+     ?ds rdfs:label?dsLabel.
+     ?ds a ora:Dataset.
+     ?d ora:hasEvaluation?e.
+     ?e ora:hasDataset?de.
+     ?de a ora:Dataset.
+     ?e ora:hasModel?m2.
+     ?m2 ora:hasModel?m.
+      BIND((?m,?m2) AS?pair)
+    }
+    ```
+```
+
+The final answer is:
+
+```sparql
+SELECT?m (GROUP BY?m) {
+ ?m a ora:Model.
+ ?m ora:hasDataset?d.
+ ?d ora:hasDataset?ds.
+ ?ds rdfs:label?dsLabel.
+ ?ds a ora:Dataset.
+ ?d ora:hasEvaluation?e.
+ ?e ora:hasDataset?de.
+ ?de a ora:Dataset.
+ ?e ora:hasModel?m2.
+ ?m2 ora:hasModel?m.
+  BIND((?m,?m2) AS?pair)
+}
+```<|eot_id|>

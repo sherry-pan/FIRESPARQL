@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/orkgr#>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc#>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp#>
+
+SELECT ?benchmarkScore ?metric
+WHERE {
+    ?benchmarkScore orkgc:relatedTo orkgr:R122690;
+                    orkgp:HAS_BENCHMARK_SCORE ?scoreValue.
+    ?benchmarkScore orkgc:relatedTo ?metric.
+    ?metric orkgp:HAS_METRIC ?metricValue.
+}
+ORDER BY DESC(?scoreValue)
+LIMIT 1
+```

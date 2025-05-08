@@ -1,0 +1,11 @@
+```sparql
+SELECT ?paper ?paperCode
+WHERE {
+  ?paper a ora:Contribution.
+  ?paper ora:HAS_PAPER ?hasPaper.
+  ?hasPaper ora:UTILIZES ?utilizesModel.
+  ?utilizesModel ora:HAS_CODE ?paperCode.
+  FILTER (?utilizesModel = <http://example.org/FunnelTransformer>)
+  FILTER (regex(str(?paper), ".*papers.*", "i"))
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp#>
+PREFIX wikibase: <http://example.org/wikibase#>
+
+SELECT ?model ?modelLabel ?benchmark
+WHERE {
+   ?model orkgp:HAS_MODEL ?m. 
+   ?m orkgp:HAS_EVALUATION ?b. 
+   ?b orkgp:HAS_BENCHMARK ?benchmark. 
+   ?benchmark rdfs:label ?benchmarkLabel. 
+   ?model rdfs:label ?modelLabel. 
+   FILTER (STRLEN(?benchmarkLabel) > 0)
+   FILTER (STRLEN(?modelLabel) > 0)
+   SERVICE wikibase:label {
+     bd:serviceParam wikibase:language "en".
+   }
+}
+```

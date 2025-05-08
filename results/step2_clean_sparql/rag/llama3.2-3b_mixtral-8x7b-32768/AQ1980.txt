@@ -1,0 +1,10 @@
+```sparql
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:has_code_reference ?code.
+  ?paper orkg:has_benchmark ?bp.
+  ?bp orkg:has_model ?tcn.
+  ?tcn orkg:label ?tcn_label.
+  FILTER (CONTAINS(LCASE(STR(?tcn_label)), "tcn model")).
+}
+```

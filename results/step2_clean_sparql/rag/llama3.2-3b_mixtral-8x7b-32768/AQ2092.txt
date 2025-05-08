@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?c 
+WHERE {
+   ?o orkg:uses ?model.
+   ?o orkg:hasCode ?c.
+   ?o orkg:uses ?benchmark.
+   ?model rdfs:label ?d.
+   ?benchmark rdf:type orkg:Benchmark.
+   ?c rdf:type orkg:CodeLink.
+   FILTER (str(?d) = "Dynamic Coattention Networks (single model)").
+}
+```

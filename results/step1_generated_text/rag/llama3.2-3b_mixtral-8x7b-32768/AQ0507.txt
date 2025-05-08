@@ -1,0 +1,37 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the TempEval-3 dataset?
+
+Generated SPARQL:
+ SELECT?paper?title?id
+    WHERE {
+     ?paper a ora:Paper.
+     ?paper ora:hasBenchmark?benchmark.
+     ?benchmark ora:hasDataset?dataset.
+     ?dataset rdfs:label?datasetLabel.
+     ?dataset rdfs:label "TempEval-3"@en.
+     ?paper ora:hasTitle?title.
+     ?paper ora:hasID?id.
+    } 
+    SELECT?paper?id 
+    WHERE {
+     ?paper ora:hasPaper?paperPaper.
+     ?paperPaper ora:hasTitle?paperTitle.
+     ?paperPaper ora:hasID?paperId.
+     ?paperTitle rdfs:label?paperTitleLabel.
+     ?paperId rdfs:label?paperIdLabel.
+      FILTER (str(?paperTitleLabel) = "TempEval-3"@en)
+      FILTER (str(?paperIdLabel) = "TempEval-3"@en)
+     ?paper ora:hasPaper?paperPaper.
+    } 
+
+    Note: You can assume that the "TempEval-3" dataset is a resource that has a label "TempEval-3"@en. Similarly, assume that a research paper has a label that can be used to filter the results. Since the question mentions "a benchmark for the TempEval-3 dataset", it is assumed that the benchmark is for the TempEval-3 dataset. The question also asks for the "titles and IDs" of research papers. Therefore, it is assumed that a research paper has a title and ID. 
+
+    Note: The provided SPARQL query is the result of a multi-step reasoning process that involves several assumptions and inferences. It is the output of the system that generates the SPARQL query based on the input question and context. 
+
+    Note: The SPARQL query is not the only possible query that can retrieve the correct answer. There may be other possible queries that can also retrieve the correct answer. 
+
+    Note: The provided SPARQL query is for illustration purposes only and may not be the most efficient or optimal query. 
+
+    Note: The provided SPARQL query is the result of a system that generates the SPARQL query based on the input question and context. 
+
+    Note: The SPARQL query is not the only possible query that can retrieve the

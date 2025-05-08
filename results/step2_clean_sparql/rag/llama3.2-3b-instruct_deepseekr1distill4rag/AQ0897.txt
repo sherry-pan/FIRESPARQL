@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+SELECT ?metric
+WHERE {
+  ?metric orkgp:isEvaluatorFor ?dataset.
+  ?dataset orkgp:hasEvaluationMetric ?metric.
+  FILTER (lang(?metric) = 'en' && ?metric != <http://www.w3.org/2004/02/skos/core#BroaderConcept>)
+}
+LIMIT 10
+```

@@ -1,0 +1,52 @@
+Question:
+Which model has achieved the highest Accuracy score on the Reuters En-De benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkgp: <http://example.org/orkgp/>
+     PREFIX orkgc: <http://example.org/orkgc/>
+     PREFIX orkgr: <http://example.org/orkgr/>
+
+     SELECT?model?score
+     WHERE {
+      ?model orkgc:hasModel orkgp:HAS_MODEL?score.
+       FILTER (rdf:type(?score) = orkgc:Resource).
+      ?model orkgr:R122689 orkgc:HAS_DATASET?dataset.
+       FILTER (rdf:type(?dataset) = orkgc:Dataset).
+      ?score orkgr:R122689 orkgc:HAS_SCORE?score2.
+       FILTER (rdf:type(?score2) = orkgc:Resource).
+       BIND ((max(?score) as xsd:float) AS?score).
+       BIND ((max(?score2) as xsd:float) AS?score2).
+       BIND (CONCAT(?model, " achieved the highest Accuracy score on the Reuters En-De benchmark dataset") AS?description).
+      ?model orkgr:R122689 orkgc:HAS_MODEL?score3.
+       FILTER (rdf:type(?score3) = orkgc:Model).
+       BIND ((max(?score3) as xsd:float) AS?score3).
+       BIND (CONCAT(?model, " achieved the highest Accuracy score on the Reuters En-De benchmark dataset") AS?description3).
+       FILTER (max(?score3) > max(?score)).
+       SERVICE orkgr:R122689 {?score3 orkgr:R122689?score2. }
+     }
+```
+
+
+    Note: The SPARQL query is just one possible query that can be generated to answer the question. There may be other valid SPARQL queries that can also answer the question.
+
+
+    Here is the Python code that can generate this SPARQL query:
+
+    ```python
+def generate_sparql_query(question, context):
+    # Process the question and context to generate the SPARQL query
+    #...
+
+    # Define the prefixes for the ORKG
+    prefixes = {
+        "orkgp": "http://example.org/orkgp/",
+        "orkgc": "http://example.org/orkgc/",
+        "orkgr": "http://example.org/orkgr/"
+    }
+
+    # Define the SPARQL query
+    sparql_query = """
+    SELECT?model?score
+    WHERE {
+     

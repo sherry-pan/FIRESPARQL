@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/> 
+PREFIX orkgp: <http://example.org/orkgp/> 
+
+SELECT ?metric 
+WHERE {
+    ?evaluation orkgp:HAS_DATASET "SQuAD2.0".
+    ?model orkgp:HAS_EVALUATION ?evaluation.
+    ?metric orkgp:HAS_MODEL ?model.
+    ?metric orkgp:HAS_EVALUATION_METRIC ?metric_value.
+    FILTER (STR(?metric_value) = "F1 Score" OR STR(?metric_value) = "Accuracy")
+}
+```

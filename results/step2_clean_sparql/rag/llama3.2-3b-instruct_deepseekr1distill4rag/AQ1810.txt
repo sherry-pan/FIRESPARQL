@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model
+WHERE {
+  ?model orkgc:has_benchmark ?benchmark.
+  ?benchmark orkgp:has_dataset ?dataset.
+  ?benchmark orkgp:has_metric ?metric.
+  FILTER (STR(?metric) = "Params" AND STR(?dataset) = "ImageNet_ReaL_dataset")
+}
+LIMIT 1
+```

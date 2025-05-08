@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://www.orkgr.org/ontology#>
+PREFIX orkgp: <http://www.orkgp.org/ontology#>
+SELECT ?metric ?value
+WHERE {
+  ?dataset orkgr:relatedTo ?dataset2.
+  ?dataset2 orkgr:label "Cartpole, swingup (DMControl500k)".
+  ?dataset2 orkgr:relatedTo ?benchmark.
+  ?benchmark orkgr:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult orkgp:hasMetric ?metric.
+  ?benchmarkResult orkgp:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

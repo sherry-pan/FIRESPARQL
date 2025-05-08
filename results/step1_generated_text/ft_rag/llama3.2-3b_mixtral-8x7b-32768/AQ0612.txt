@@ -1,0 +1,36 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ ```sparql
+      SELECT?title?contrib_id
+      WHERE {
+        orkgc:Dataset       a                orkgp:Dataset;
+                          rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Defender dataset")
+       ?cont         orkgp:HAS_DATASET       orkgc:Dataset       ;
+                     orkgp:P31              orkgc:Contrib.
+        OPTIONAL {?cont      orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK       ;
+                 orkgp:P31              orkgp:HAS_BENCHMARK       ;
+                 orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK      }
+       ?cont         rdfs:label              ?contrib_lbl.
+        OPTIONAL {?cont      orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK       ;
+                 orkgp:P31              orkgp:HAS_BENCHMARK       ;
+                 orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK      }
+       ?contrib      orkgp:P31             ?cont;
+                    orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK       ;
+                    orkgp:HAS_BENCHMARK      orkgp:HAS_BENCHMARK      }
+      ``` 
+
+Note that the SPARQL query provided in the prompt is not the answer to the problem, but rather the query that would be used to answer the problem. The answer to the problem is the result of executing the query.
+
+To get the titles and IDs of the research papers that include a benchmark for the Atari 2600 Defender dataset, you would execute the following query:
+
+```sparql
+SELECT?title?contrib_id
+WHERE {
+  orkgc:Dataset       a                orkgp:Dataset;
+                    rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Defender dataset")
+ ?cont         orkgp:HAS_DATASET       orkgc:Dataset       ;
+               orkgp:P31              orkgc:Contrib

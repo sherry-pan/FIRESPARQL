@@ -1,0 +1,57 @@
+Question:
+What is the top benchmark score and its metric on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?score) AS?top_score)
+     WHERE {
+       orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_METRIC
+       FILTER(REGEX(STR(?metric_lbl), "top benchmark score", "i"))
+       orkgp:HAS_DATASET orkgp:HAS_METRIC
+       orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(STR(?dataset), "Automatically labeled Medline abstracts corpus dataset", "i"))
+      ?dataset orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+       BIND(XSD:float(?value) AS?score)
+      ?score orkgp:HAS_VALUE?value.
+      ?value orkgp:HAS_DATASET?dataset.
+       BIND(XSD:float(?dataset) AS?dataset_lbl)
+      ?dataset orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+      ?value orkgp:HAS_lbl?value_lbl.
+       FILTER(REGEX(STR(?value_lbl), "metric", "i"))
+      ?metric_lbl rdfs:label?value_lbl.
+       BIND(XSD:float(?value_lbl) AS?metric_lbl)
+       BIND(MAX(?score) AS?top_score)
+     }
+     ORDER BY DESC(?top_score)     
+
+
+
+```python
+def generate_sparql_query(question, context):
+    # Preprocess the question
+    question = question.lower()
+    question = question.replace("what is the top", "MAX")
+    question = question.replace("and its metric", "")
+
+    # Extract the entities and properties mentioned in the question
+    extracted_terms = context["extracted_terms"]
+    top_benchmark_score = extracted_terms["top benchmark score"]
+    metric = extracted_terms["metric"]
+    dataset = extracted_terms["Automatically labeled Medline abstracts corpus dataset"]
+
+    # Get the candidates
+    candidates = context["candidates"]
+    top_benchmark_score_candidates = candidates[top_benchmark_score]
+    metric_candidates = candidates[metric]
+    dataset_candidates = candidates[dataset]
+
+    # Generate the SPARQL query
+    sparql_query = """
+        SELECT?metric?metric_lbl (MAX(?score) AS?top_score)
+        WHERE {
+          orkgp:R1 orkgp:HAS_DATASET orkgp:HAS_METRIC
+          FILTER(REGEX(STR(?metric_lbl), "top benchmark score", "i"))
+          orkgp:HAS_DATASET orkgp:HAS_METRIC
+          or

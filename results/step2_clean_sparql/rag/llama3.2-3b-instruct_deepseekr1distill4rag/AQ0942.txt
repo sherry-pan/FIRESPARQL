@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontologies/orkgc/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontologies/orkgr/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontologies/orkgp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?atari_dataset a orkgr:Atari_2600_Freeway_dataset.
+  ?metric orkgc:relatedTo ?atari_dataset.
+  ?metric a orkgc:Metric.
+  ?metric rdfs:label ?metric_label.
+  FILTER (str(?metric_label) = "Accuracy" || str(?metric_label) = "F1-score")
+}
+```

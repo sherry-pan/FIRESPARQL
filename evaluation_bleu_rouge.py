@@ -22,7 +22,7 @@ def get_files_in_folder(folder_path):
     try:
         for entry in os.listdir(folder_path):
             entry_path = os.path.join(folder_path, entry)
-            if os.path.isfile(entry_path):
+            if os.path.isfile(entry_path) and entry.endswith('.txt'):
                 files.append(entry)
     except FileNotFoundError:
         print(f"The folder '{folder_path}' does not exist.")

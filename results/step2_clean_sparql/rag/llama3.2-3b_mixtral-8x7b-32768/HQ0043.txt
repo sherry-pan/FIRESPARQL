@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/orkgc/>
+
+SELECT ?v
+WHERE {
+  ?c orkg:hasVariable ?v.
+  FILTER (REGEX(?v, "atmosphere", "i") || REGEX(?v, "model", "i"))
+}
+GROUP BY ?v
+ORDER BY DESC(COUNT(?c))
+LIMIT 3
+```

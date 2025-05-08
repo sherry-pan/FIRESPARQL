@@ -1,0 +1,51 @@
+Question:
+Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth corpus dataset")
+          ?cont         orkgp:HAS_DATASET      ?dataset.
+          ?eval         orkgp:HAS_EVALUATION    ?cont.
+          ?model       orkgp:HAS_MODEL         ?eval;
+                      rdfs:label              ?model_lbl.
+     }
+     ORDER BY?model_lbl
+     LIMIT 10
+   .
+    Note that the provided SPARQL query is already optimized for the given question. The answer to the question is not included in this response. 
+    You are expected to provide the answer to the question in the format specified in the prompt, in addition to the SPARQL query. 
+    Note that the actual answer might be more than 10 models, but the query is limited to 10 models in this case. 
+
+    To get the answer to the question, execute the provided SPARQL query using the ORKG. 
+
+    Please note that the actual answer to the question is not included in this response. 
+    You are expected to provide the answer to the question in the format specified in the prompt. 
+
+    If you want to retrieve the answer to the question, you can use the following R code:
+    ```r
+library(orkgr)
+library(dplyr)
+results <- orkgp_query("SELECT?model?model_lbl
+                        WHERE {
+                         ?dataset       a                orkgc:Dataset;
+74375            rdfs:label      ?dataset_lbl.
+                               FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth corpus dataset")
+                              ?cont         orkgp:HAS_DATASET      ?dataset.
+                              ?eval         orkgp:HAS_EVALUATION    ?cont.
+                              ?model       orkgp:HAS_MODEL         ?eval;
+                                             rdfs:label              ?model_lbl.
+                          }
+                          ORDER BY?model_lbl
+                          LIMIT 10")
+results
+```
+    Please note that the provided SPARQL query is already optimized for the given question. 
+
+    Note that the actual answer to the question is not included in this response. 
+    You are expected to provide the answer to the question in the format specified in the prompt. 
+    Note that the actual answer might be more than 10 models, but the query is limited to 10 models in this case. 
+
+    To

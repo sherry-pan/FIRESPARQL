@@ -1,0 +1,53 @@
+Question:
+Can you list the models that have been evaluated on the PROTEINS dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "PROTEINS")
+          ?dataset       orkgp:HAS_DATASET      ?model.
+          ?model        rdfs:label              ?model_lbl.
+     } 
+     UNION
+     SELECT?model     ?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "PROTEINS")
+          ?dataset       orkgp:HAS_DATASET      ?cont.
+          ?cont         orkgp:HAS_EVALUATION   ?eval.
+          ?eval         rdfs:label              ?eval_lbl.
+          ?eval         orkgp:HAS_MODEL        ?model.
+          ?model        rdfs:label              ?model_lbl.
+     } 
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PROTEINS")
+ ?dataset       orkgp:HAS_DATASET      ?model.
+ ?model        rdfs:label              ?model_lbl.
+}
+UNION
+SELECT?model     ?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PROTEINS")
+ ?dataset       orkgp:HAS_DATASET      ?cont.
+ ?cont         orkgp:HAS_EVALUATION   ?eval.
+ ?eval         rdfs:label              ?eval_lbl.
+ ?eval         orkgp:HAS_MODEL        ?model.
+ ?model        rdfs:label              ?model_lbl.
+} 
+```
+
+Note that this code is not meant to be run as-is, but rather to generate the SPARQL query based on the provided input question and context. The actual SPARQL query should be modified to fit the specific structure of the ORKG dataset. 
+
+This code defines two separate SELECT statements, each using the ORKGR's `HAS_DATASET` and `HAS_EVALUATION` predicates to filter the results. The first SELECT statement is used to retrieve models that have been directly evaluated on the `PROTEINS` dataset. The second SELECT statement is used to retrieve models that have been evaluated on the `PROTEINS` dataset, but the evaluation is performed on a dataset that has been linked to the `PROTEINS` dataset. 
+
+Note that the actual SPARQL query may

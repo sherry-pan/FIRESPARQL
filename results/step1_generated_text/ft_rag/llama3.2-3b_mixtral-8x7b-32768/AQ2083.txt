@@ -1,0 +1,38 @@
+Question:
+Can you provide links to code used in papers that benchmark the MEMEN (single model) model?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model       a            orkgc:Model;
+                   rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "MEMEN (single model) model")
+      ?benchmark      orkgp:P31   ?eval;
+                       orkgp:P32   ?pred.
+      ?cont         orkgp:HAS_EVALUATION   ?eval.
+      ?cont         a                orkgc:Contribution.
+      ?cont         orkgp:HAS_CODE       ?code.
+      ?code         rdfs:label           ?code_lbl.
+       FILTER (str(?code_lbl) = "code")
+     }
+     ```python
+from orkg import get_query
+from orkg import get_query, load_graph
+
+# Get the query
+query = get_query("SELECT?code\nWHERE {?model       a            orkgc:Model;\n               rdfs:label   ?model_lbl. \n               FILTER (str(?model_lbl) = \"MEMEN (single model) model\")\n              ?benchmark      orkgp:P31   ?eval;\n                       orkgp:P32   ?pred. \n              ?cont         orkgp:HAS_EVALUATION   ?eval. \n              ?cont         a                orkgc:Contribution. \n              ?cont         orkgp:HAS_CODE       ?code. \n              ?code         rdfs:label           ?code_lbl. \n               FILTER (str(?code_lbl) = \"code\") }")
+
+# Load the graph
+graph = load_graph("data/orkg")
+
+# Execute the query
+results = graph.query(query)
+
+# Print the results
+for result in results:
+    print(result)
+```python
+    Note that this code is just a sample and may need to be adapted to your specific use case. You may need to modify the query, the graph loading, and the results printing. Also, the code assumes that the data is stored in a file named "data/orkg" which may need to be changed. 
+    The code is written in Python and uses the orkg library to interact with the Open Research Knowledge Graph (ORKG). The orkg library provides an interface to the ORKG, allowing you to query the graph and retrieve results.
+    The provided code snippet first gets the query using the get_query function from the orkg library, then loads the graph using the load_graph function. The query is then executed using the query method of the graph object, and the results are printed to the console. 
+    The query is a SPARQL query that retrieves the code used in papers that benchmark

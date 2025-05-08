@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+
+SELECT ?m ?v
+WHERE {
+  ?m orkp:hasBenchmarking ?d.
+  ?d orkp:hasMetric ?p.
+  ?p orkp:hasName "Accuracy".
+  ?p orkp:hasValue ?v.
+  ?d orkp:benchmarkedOn orkc:PIQA.
+}
+ORDER BY DESC(?v)
+LIMIT 1
+```

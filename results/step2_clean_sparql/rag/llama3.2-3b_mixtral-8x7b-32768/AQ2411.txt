@@ -1,0 +1,17 @@
+```sparql
+SELECT ?paper ?code ?link
+WHERE {
+  ?paper orkgc:hasBenchmark ?benchmark.
+  ?benchmark orkgp:hasEvaluation ?evaluation.
+  ?evaluation orkgp:hasCode ?code.
+  ?paper orkgc:hasResource ?resource.
+  ?resource rdfs:label ?label.
+  FILTER (CONTAINS(?label, "CAIT-XS-36"))
+  ?resource orkgc:hasLink ?link.
+  ?link rdfs:label ?linkLabel.
+  FILTER (REGEX(?linkLabel, "^https?://"))
+}
+GROUP BY ?paper ?code ?link
+ORDER BY DESC(COUNT(DISTINCT ?paper)) DESC(COUNT(DISTINCT ?code)) DESC(COUNT(DISTINCT ?link))
+LIMIT 10
+```

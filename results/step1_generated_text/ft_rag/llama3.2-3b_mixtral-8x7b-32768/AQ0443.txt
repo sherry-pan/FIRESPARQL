@@ -1,0 +1,43 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the UCF101 (finetuned) dataset?
+
+Generated SPARQL:
+ ```sparql
+    SELECT?title?title_lbl (group_by?contrib)
+    {
+      SELECT?contrib?contrib_lbl (group by?contrib)
+      {
+       ?model orkgp:P31?contrib.
+       ?contrib orkgp:HAS_DATASET?dataset.
+       ?dataset rdfs:label?dataset_lbl.
+       ?dataset orkgp:HAS_DATASET?has_dataset.
+       ?has_dataset orkgp:HAS_MODEL?model.
+       ?model rdfs:label?model_lbl.
+        FILTER (str(?model_lbl) = "UCF101 (finetuned)")
+       ?model orkgp:P32?paper.
+       ?paper orkgp:P31?contrib.
+       ?contrib rdfs:label?contrib_lbl.
+        BIND(xsd:string(?contrib_lbl) AS?title_lbl)
+      }
+      BIND(xsd:string(?model_lbl) AS?title)
+    }
+    ORDER BY?title_lbl
+    ``` 
+    Note: The final answer is the SPARQL query. Do not attempt to execute the query or provide a final answer in a specific format, as the task is to generate the SPARQL query based on the provided input question and context. 
+
+    To solve this problem, first, we need to understand the entities and relationships mentioned in the input question. We are looking for research papers that have benchmarked models on the UCF101 (finetuned) dataset. The entities involved are research papers, models, and datasets. The relationships between these entities are that models are benchmarked on datasets and research papers are related to models. We can use the following SPARQL query to retrieve the desired information:
+
+    ```sparql
+    SELECT?title?title_lbl (group_by?contrib)
+    {
+      SELECT?contrib?contrib_lbl (group by?contrib)
+      {
+       ?model orkgp:P31?contrib.
+       ?contrib orkgp:HAS_DATASET?dataset.
+       ?dataset rdfs:label?dataset_lbl.
+       ?dataset orkgp:HAS_DATASET?has_dataset.
+       ?has_dataset orkgp:HAS_MODEL?model.
+       ?model rdfs:label?model_lbl.
+        FILTER (str(?model_lbl) = "UCF101 (finetuned)")
+       ?model orkgp:P32?paper.
+       ?

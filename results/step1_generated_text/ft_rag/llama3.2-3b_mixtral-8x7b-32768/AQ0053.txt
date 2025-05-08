@@ -1,0 +1,72 @@
+Question:
+Could you provide a list of models that have been tested on the NYT29 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "NYT29")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+          ?eval         orkgp:HAS_EVALUATION     ?cont.
+          ?model       orkgp:HAS_MODEL         ?cont.
+          ?model      rdfs:label              ?model_lbl.
+     }   
+
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "NYT29")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval         orkgp:HAS_EVALUATION     ?cont.
+ ?model       orkgp:HAS_MODEL         ?cont.
+ ?model      rdfs:label              ?model_lbl.
+}
+```
+
+
+```python
+def generate_sparql_query(context):
+    """
+    Generate a SPARQL query based on the input question and context.
+
+    Args:
+    context (dict): A dictionary containing the context information, including the extracted terms, candidates,
+                   and the context itself.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    
+    # Filter the candidates based on the extracted terms
+    filtered_candidates = {}
+    for term, term_candidates in candidates.items():
+        if term in extracted_terms:
+            filtered_candidates[term] = term_candidates
+    
+    # Generate the SPARQL query
+    query = "SELECT?model?model_lbl"
+    where_clause = "WHERE {"
+    for term, term_candidates in filtered_candidates.items():
+        for candidate in term_candidates:
+            if "HAS_DATASET" in candidate:
+                where_clause += f"?dataset       a                orkgc:Dataset;"
+                                  f"               rdfs:label      ?dataset_lbl."
+                where_clause += f"               FILTER (str(?dataset_lbl) = \"{term}\")"
+            elif "HAS_BENCHMARK" in candidate:
+                where_clause += f"?benchmark      orkgp:HAS_DATASET      ?dataset."
+                where_clause += f"              ?cont          orkgp:HAS_BENCHMARK     ?benchmark."
+            elif "HAS_EVALUATION" in candidate:
+                where_clause += f"?eval         orkgp:HAS_EVALUATION     ?cont."
+                where_clause += f"              ?model       orkgp:HAS_MODEL         ?cont."
+                where_clause += f"              ?model      rdfs:label              ?model_lbl."
+            where_clause += "}"
+    query += where_clause
+   

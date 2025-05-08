@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper orkgp:HAS_PAPER ?researchPaper.
+  ?researchPaper orkgp:INCLUDES ?benchmark.
+  ?benchmark orkgp:HAS_BENCHMARK ?dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER (?datasetLabel = "CUB-200-2011"^^xsd:string).
+  ?paper orkgc:hasTitle ?title.
+  ?paper orkgc:hasID ?id.
+  FILTER (?title != "" && ?id != "")
+}
+```

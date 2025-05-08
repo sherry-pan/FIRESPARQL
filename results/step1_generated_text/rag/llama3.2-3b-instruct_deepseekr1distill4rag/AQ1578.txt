@@ -1,0 +1,14 @@
+Question:
+What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?
+
+Generated SPARQL:
+ PREFIX orkgr: <http://example.org/orkg/>
+     PREFIX orkgc: <http://example.org/orkg-class/>
+     PREFIX orkgp: <http://example.org/orkg-property/>
+     SELECT?model?dataset?metric WHERE {
+      ?model orkgp:benchmarking?dataset.
+      ?model orkgp:benchmarking?metric.
+       FILTER (REGEX(str(?dataset), "X-Sum", "i") && REGEX(str(?metric), "ROUGE-2", "i"))
+       ORDER BY (1 -?metric) DESC
+     } LIMIT 1
+``` Note: The prefix "http://example.org/orkg/" is just a placeholder, you should use the actual prefix from your RDF data dump. Also, the actual SPARQL query might need to be adjusted based on the actual RDF data structure and the specific requirements of your application.<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?metricLabel
+WHERE {
+  ?metric orkc:type orkc:Metric.
+  ?metric orkc:label ?metricLabel.
+  ?metric orkg:hasProperty ?property.
+  ?property orkp:label ?propertyLabel.
+  ?property orkp:type orkp:Predicate.
+  ?dataset orkc:label "STEM-ECR v1.0 dataset".
+  ?dataset orkc:type orkc:Dataset.
+  FILTER (STR(?propertyLabel) = "benchmarking models on").
+}
+```

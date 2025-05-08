@@ -1,0 +1,46 @@
+Question:
+Indicate the model that performed best in terms of Sequence error metric on the FSNS - Test benchmark dataset?
+
+Generated SPARQL:
+ ```
+     SELECT?model?model_lbl
+     WHERE {
+       orkgp:R122689 orkgc:rs123456 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_METRIC?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?metric orkgp:HAS_VALUE?value.
+       BIND(xsd:float(?value) AS?value).
+      ?value orkgp:HAS_MODEL?model.
+      ?model rdfs:label?model_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "Sequence error", "i"))
+       FILTER(REGEX(STR(?value), "[0-9]+(\.[0-9]+)?", "i"))
+     }
+     ```
+    If you want to get the best model, you need to add a FILTER to get the minimum value of the sequence error metric. You can do this by adding the following line:
+       FILTER(REGEX(STR(?metric_lbl), "Sequence error", "i"))
+       FILTER(REGEX(STR(?value), "[0-9]+(\.[0-9]+)?", "i"))
+       ORDER BY DESC(?value)
+       LIMIT 1```
+
+    This SPARQL query is designed to find the model that performed best in terms of the Sequence error metric on the FSNS - Test benchmark dataset. It first filters the evaluations to only include those with the Sequence error metric, and then filters the metrics to only include those with a numeric value. It then orders the results by the value of the sequence error metric in descending order, and finally limits the results to the top one. 
+
+    The SPARQL query is written in the ORKG query language and uses the provided context to link the correct entities and properties in the ORKG. 
+
+    The query first binds the value of the sequence error metric to a float, and then uses this value in the filtering and ordering steps. 
+
+    The query assumes that the model and metric labels are not needed for the final answer, and therefore only binds the model label to the variable?model_lbl. 
+
+    The query uses the `FILTER` function to apply the regular expression filters, and the `ORDER BY` and `LIMIT` clauses to order and limit the results. 
+
+    The `REGEX` function is used to match the sequence error metric label and the numeric value of the sequence error metric. 
+
+    The `STR` function is used to convert the labels and values to strings, which is necessary for the regular expression matching. 
+
+    The `xsd:float` data type is used to represent the numeric value of the sequence error metric. 
+
+    The `R122689` URI is used to identify the FSNS - Test benchmark dataset. 
+
+    The `HAS_DATASET` and `HAS_EVALUATION` properties are used to link the dataset and evaluation to the rest of the graph. 
+
+    The `HAS_METRIC` and `HAS

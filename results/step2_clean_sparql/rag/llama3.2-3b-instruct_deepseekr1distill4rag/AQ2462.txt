@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgr: <http://example.com/orkgr/>
+PREFIX orkgc: <http://example.com/orkgc/>
+PREFIX orkgp: <http://example.com/orkgp/>
+
+SELECT ?uri ?label ?score ?type ?rdfType 
+WHERE {
+  ?uri orkgr:label ?label.
+  ?uri orkgc:resource ?resource.
+  ?resource orkgp:has_type ?type.
+  ?resource orkgr:score ?score.
+  ?resource orkgc:rdfs:label ?rdfType.
+  FILTER((STR(?type) = "Problem" || STR(?type) = "Field") && 
+         (STR(?uri) = "benchmarked_problems" || STR(?uri) = "Artificial_Intelligence") &&
+         ?score > 0.85)
+}
+ORDER BY DESC(?score)
+```

@@ -1,0 +1,66 @@
+Question:
+What is the best performing model benchmarking the WMT2016 German-English dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ SELECT?model?dataset?metric
+    WHERE {
+   ?model orcgp:hasModel?m.
+   ?m orcgp:hasMetric?metric.
+   ?dataset orcgp:hasDataset?d.
+   ?d orcgp:hasDataset?dataset.
+   ?dataset orcgp:hasMetric?metric.
+   ?model orcgp:hasDataset?dataset.
+    FILTER (STR(?metric) = "BLEU score metric").
+    FILTER (STR(?dataset) = "WMT2016 German-English dataset").
+    }   
+
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the given question and context.
+
+    Args:
+        question (str): The natural language question in English.
+        context (dict): The context information, including extracted terms and candidate entities/properties.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+
+    # Extract relevant terms and create a list of filters
+    filters = []
+    for term, term_candidates in extracted_terms.items():
+        filters.append(f"STR(?{term}) = '{term}'")
+
+
+    # Create the SELECT clause
+    select_clause = "SELECT?model?dataset?metric"
+
+    # Create the WHERE clause
+    where_clause = "WHERE {"
+    for predicate, predicate_candidates in candidates.items():
+        for candidate in predicate_candidates:
+            where_clause += f"?{predicate}?{candidate['uri']}?{candidate['rdfs:label']}. "
+    for filter in filters:
+        where_clause += filter + ". "
+    where_clause = where_clause.strip() + "}"
+
+    # Combine the SELECT and WHERE clauses
+    sparql_query = f"{select_clause} {where_clause}"
+
+    return sparql_query
+
+
+# Example usage
+question = "What is the best performing model benchmarking the WMT2016 German-English dataset in terms of BLEU score metric?"
+context = {
+    "extracted_terms": {
+        "WMT2016 German-English dataset": [],
+        "best performing model": [],
+        "BLEU score metric": []
+    },
+    "candidates": {
+        "WMT2016 German-English dataset":

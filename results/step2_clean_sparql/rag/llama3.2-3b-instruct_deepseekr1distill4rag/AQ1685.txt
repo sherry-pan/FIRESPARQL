@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkpredicate: <http://example.org/orkpredicate/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkpredicate:ROUGE-2_score ?score.
+  ?model orkpredicate:validation_research ?dataset.
+  ?dataset orkpredicate:benchmarkedBy ?benchmark.
+  ?benchmark orkpredicate:dataset "CL-SciSumm".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

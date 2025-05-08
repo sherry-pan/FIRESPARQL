@@ -1,0 +1,26 @@
+Question:
+What quantity of iron oxide was discovered on Elorza crater?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkgc: <http://example.org/orkgc/>
+    PREFIX orkgp: <http://example.org/orkgp/>
+
+    SELECT?s?p?o
+    WHERE {
+     ?s orkg:label?sLabel.
+     ?s orkgc:Resource?resourceType.
+     ?s orkgp:Predicate?property.
+     ?s orkgp:object?object.
+      FILTER (REGEX (STR(?sLabel), "iron oxide") || 
+              REGEX (STR(?sLabel), "Elorza crater") || 
+              REGEX (STR(?property), "quantity") || 
+              REGEX (STR(?property), "was discovered"))
+     ?s orkg:label?o.
+      BIND (STR(?sLabel) AS?sLabel).
+      BIND (STR(?resourceType) AS?resourceType).
+      BIND (STR(?property) AS?property).
+      BIND (STR(?object) AS?object).
+    }
+``` Sparql query end.<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkgc: <http://orkgc.org/ontology/>
+PREFIX orkgp: <http://orkgp.org/ontology/>
+
+SELECT ?title ?id
+WHERE {
+  ?contribution orkg:hasPart ?model.
+  ?model orkgp:hasDataset ?dataset.
+  ?dataset a orkgc:Dataset.
+  ?dataset orkg:label ?datasetLabel.
+  ?contribution orkg:label ?title.
+  ?contribution orkg:uri ?id.
+  FILTER (STR(?datasetLabel) = "UCF101 (finetuned)").
+}
+```

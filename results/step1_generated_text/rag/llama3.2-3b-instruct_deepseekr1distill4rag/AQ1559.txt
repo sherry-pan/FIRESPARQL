@@ -1,0 +1,30 @@
+Question:
+Which model has achieved the highest Accuracy score on the SST-5 Fine-grained classification benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/gc/>
+    PREFIX orkgr: <http://www.openresearchknowledgegraph.org/ontology/gr/>
+    PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/p/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+    SELECT?m?d?s
+    WHERE {
+     ?m orkp:has_model?mModel.
+     ?mModel orkp:has_accuracy?accuracy.
+     ?d orkp:has_dataset?dDataset.
+     ?dDataset orkp:has_accuracy?dAccuracy.
+     ?m orkgc:is_type_of?mType.
+     ?mType rdfs:label "model".
+     ?d orkgc:is_type_of?dType.
+     ?dType rdfs:label "SST-5 Fine-grained classification benchmark dataset".
+     ?accuracy orkp:has_value "93.9".
+     ?dAccuracy orkp:has_value "93.9".
+     ?m orkgc:is_type_of?mModelType.
+     ?mModelType rdfs:label "SVM".
+     ?m orkgc:is_type_of?crfModelType.
+     ?crfModelType rdfs:label "CRF".
+    }
+    ``` 
+    Note: The above SPARQL query is just a suggestion and may need adjustments based on the actual structure of the ORKG RDF data dump.<|eot_id|>

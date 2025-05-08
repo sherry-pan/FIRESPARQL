@@ -1,0 +1,56 @@
+Question:
+List the metrics that are used to evaluate models on the enwik8 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metricLabel 
+     WHERE {
+     ?metric orkgp:hasMetric orkgp:hasMetric?metricLabel.
+     ?dataset orkgr:enwik8 orkgr:enwik8?metric.
+     ?dataset orkgp:hasDataset orkgr:enwik8 orkgr:enwik8?metric.
+      FILTER (STR(?metricLabel) = "BLEU" OR STR(?metricLabel) = "ROUGE" OR STR(?metricLabel) = "METEOR")
+    }
+    END
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate the SPARQL query based on the given question and context.
+
+    Args:
+    question (str): The natural language question.
+    context (dict): The context information, including extracted terms, candidates, and background information.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+
+    # Extract the extracted terms from the context
+    extracted_terms = context['extracted_terms']
+    
+    # Extract the candidates from the context
+    candidates = context['candidates']
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?metricLabel "
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += "WHERE {"
+    
+    # Iterate over the extracted terms
+    for term in extracted_terms:
+        # Check if the term is in the candidates
+        if term in candidates:
+            # Iterate over the candidates of the term
+            for candidate in candidates[term]:
+                # Check if the candidate has a 'has metric' property
+                if 'has metric' in candidate:
+                    # Add the 'has metric' property to the SPARQL query
+                    sparql_query += "?metric orkgp:hasMetric " + candidate['uri'] + "?metricLabel."
+                # Check if the candidate has a 'has dataset' property
+                elif 'has dataset' in candidate:
+                    # Add the 'has dataset' property to the SPARQL query
+                    sparql_query += "?dataset orkgr:" + term + " " + candidate['uri'] + "?metric."
+                    # Add the 'has dataset' property to the SPARQL query
+                    sparql_query += "?dataset orkgp:hasDataset " + candidate['uri'] + " " + candidate['uri'] + "?metric."
+            # Add a filter to the SPARQL query to get the correct metric labels
+            sparql_query += "FILTER (STR(?metricLabel) = 'BLEU' OR STR(?metricLabel) = 'ROUGE' OR STR(?metricLabel) = 'METEOR

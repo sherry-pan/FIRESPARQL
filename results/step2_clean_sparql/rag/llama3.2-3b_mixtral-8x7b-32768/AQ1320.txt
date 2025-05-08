@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkgc: <http://orkgc.org/ontology/>
+PREFIX orkgp: <http://orkgp.org/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+   ?r orkgp:HAS_DATASET ?dataset.
+   ?dataset orkgc:isDataset "Amazon-2".
+   ?dataset orkgp:HAS_BENCHMARK_RESULT ?br.
+   ?br orkgp:HAS_METRIC ?metric.
+   ?br orkgp:HAS_VALUE ?value.
+   ?br orkgc:isBenchmarkResult true .
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

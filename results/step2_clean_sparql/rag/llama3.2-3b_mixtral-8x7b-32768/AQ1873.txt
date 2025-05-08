@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkgc: <http://orkgc.org/ontology/>
+PREFIX orkgp: <http://orkgp.org/ontology/>
+
+SELECT ?dataset
+WHERE {
+  ?dataset a orkgc:Dataset.
+  ?dataset orkgp:HAS_RESEARCH_PROBLEM ?audioClassification.
+  ?audioClassification a orkgc:ResearchArea.
+  ?audioClassification orkgp:related_to orkgc:C123456. # assuming C123456 is Audio Classification
+  FILTER (regex(str(?dataset), "benchmarked", "i") || regex(str(?dataset), "dataset", "i"))
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score WHERE {
+  ?dataset a orkgc:Resource.
+  ?dataset orkgr:label "Sequential MNIST dataset"@en.
+  ?dataset orkgp:has_benchmark_result ?result.
+  ?result orkgp:metric ?metric.
+  ?result orkgp:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

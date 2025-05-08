@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?uri ?label ?score ?type
+WHERE {
+  ?paper a orkgr:papers.
+  ?paper orkgr:has_code_reference ?code_ref.
+  ?code_ref orkgr:has_model ?model.
+  ?model orkgr:has_label "All-attention network - 18 layers".
+  ?model orkgr:has_benchmarking_purpose ?purpose.
+  ?paper orkgr:has_DOI ?doi.
+  ?doi orkgr:has_uri ?uri.
+  FILTER (regex(str(?uri), "https?://doi\.org/.*") || regex(str(?uri), "https?://.*\\.pdf$"))
+  BIND (regex(str(?uri), "https?://doi\.org/.*") AS ?score)
+}
+```

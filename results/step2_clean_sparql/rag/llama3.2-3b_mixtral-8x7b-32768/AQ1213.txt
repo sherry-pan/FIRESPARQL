@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://example.org/orkgc#>
+PREFIX orkgp: <http://example.org/orkgp#>
+SELECT ?metric ?value WHERE {
+  ?dataset a orkgc:Dataset.
+  ?dataset orkgp:has_dataset orkgr:R122690.
+  ?benchmarkResult a orkgp:BenchmarkResult.
+  ?benchmarkResult orkgp:has_dataset ?dataset.
+  ?benchmarkResult orkgp:has_metric ?metric.
+  ?benchmarkResult orkgp:has_value ?value.
+  FILTER (str(?metric) = "top benchmark result").
+  FILTER (str(?value) = "BC2GM")
+}
+```

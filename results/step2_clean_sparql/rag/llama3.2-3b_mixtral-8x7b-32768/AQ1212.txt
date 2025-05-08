@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkgr/>
+PREFIX orkgc: <http://www.openresearch.org/orkgc/>
+PREFIX orkgp: <http://www.openresearch.org/orkgp/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset orkgc:hasBenchmarkResult ?result .
+  ?result orkgp:hasMetric ?metric .
+  ?result orkgp:hasValue ?value .
+  ?dataset orkgc:hasDataset ?ds .
+  ?ds orkgp:hasDataset ?dataset2 .
+  FILTER (?dataset2 = <http://www.openresearch.org/orkg/dataset/BC5CDR-chemical>) 
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?dataset
+WHERE {
+  ?researchField ork:is_related_to ?researchField2.
+  ?researchField2 ork:has_benchmark ?benchmark.
+  ?benchmark ork:has_dataset ?dataset.
+  FILTER (CONTAINS(STR(?dataset), 'MPQA') || CONTAINS(STR(?dataset), 'CNN/Daily Mail'))
+}
+GROUP BY ?dataset
+HAVING (COUNT(?dataset) > 1)
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 5
+```

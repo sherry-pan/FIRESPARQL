@@ -1,0 +1,49 @@
+Question:
+Can you provide links to code used in papers that benchmark the BiDAF + Self Attention + ELMo (single model) model?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model     orkgp:P35   ?model_labels;
+                 orkgp:P36   ?benchmark.
+       FILTER(REGEX(STR(?benchmark), "BiDAF + Self Attention + ELMo (single model)", "i"))
+      ?benchmark      orkgp:HAS_BENCHMARK      ?benchmark.
+      ?cont         orkgp:HAS_BENCHMARK      ?benchmark.
+      ?cont         orkgp:HAS_PAPER        ?paper.
+      ?paper        orkgp:HAS_CODE          ?code.
+      ?code        orkgp:RDFS_LABEL         ?code_labels;
+                    orkgp:P35               ?model.
+      ?model      orkgp:P36               ?benchmark.
+      ?model      rdfs:label              ?model_labels.
+      ?model_labels  rdfs:label              ?code.
+      ?code        rdfs:label              ?code_labels.
+      }  
+
+```python
+SELECT?code
+WHERE {
+ ?model     orkgp:P35   ?model_labels;
+            orkgp:P36   ?benchmark.
+  FILTER(REGEX(STR(?benchmark), "BiDAF + Self Attention + ELMo (single model)", "i"))
+ ?benchmark      orkgp:HAS_BENCHMARK      ?cont.
+ ?cont         orkgp:HAS_PAPER        ?paper.
+ ?paper        orkgp:HAS_CODE          ?code.
+ ?code        orkgp:RDFS_LABEL         ?code_labels;
+                orkgp:P35               ?model.
+ ?model      orkgp:P36               ?benchmark.
+ ?model      rdfs:label              ?model_labels.
+ ?model_labels  rdfs:label              ?code.
+ ?code_labels  rdfs:label              ?code.
+}  
+```python
+print("SELECT?code")
+print("WHERE {")
+print(" ?model     orkgp:P35   ?model_labels;")
+print("  orkgp:P36   ?benchmark.")
+print("  FILTER(REGEX(STR(?benchmark), \"BiDAF + Self Attention + ELMo (single model)\", \"i\"))")
+print(" ?benchmark      orkgp:HAS_BENCHMARK      ?cont.")
+print(" ?cont         orkgp:HAS_PAPER        ?paper.")
+print(" ?paper        orkgp:HAS_CODE          ?code.")
+print(" ?code        orkgp:RDFS_LABEL         ?code_labels;")
+print("  orkgp:P35               ?model.")
+print(" ?model      orkgp:P

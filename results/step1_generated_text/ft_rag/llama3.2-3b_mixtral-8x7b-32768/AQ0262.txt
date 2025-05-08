@@ -1,0 +1,47 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Skiing dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Skiing")
+          ?dataset       orkgp:HAS_DATASET      ?cont.
+          ?cont           orkgp:HAS_EVALUATION     ?eval.
+          ?eval           rdfs:label                ?eval_lbl.
+           FILTER (str(?eval_lbl) = "evaluated on")
+          ?cont           orkgp:HAS_MODEL          ?model.
+          ?model         rdfs:label                ?model_lbl.
+     }    
+
+    Note: The output SPARQL query is a single line. 
+
+    Expected output:
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Skiing")
+     ?dataset       orkgp:HAS_DATASET      ?cont.
+     ?cont           orkgp:HAS_EVALUATION     ?eval.
+     ?eval           rdfs:label                ?eval_lbl.
+      FILTER (str(?eval_lbl) = "evaluated on")
+     ?cont           orkgp:HAS_MODEL          ?model.
+     ?model         rdfs:label                ?model_lbl.
+    }    
+
+    Note: The output SPARQL query is a single line. 
+
+    This is a simple SPARQL query which uses a filter to get the desired output. The main difference between the expected output and the generated query is the use of `str(?dataset_lbl) = "Atari 2600 Skiing"` and `str(?eval_lbl) = "evaluated on"` filters, which are added to the expected output to ensure that the model has been evaluated on the correct dataset. However, the generated query does not contain these filters. Therefore, the generated query may return incorrect results. 
+
+    Note that the generated query may still return some results that are not correct due to the ORKG's data structure and relationships. The correct results may not be exhaustive or accurate. 
+
+    To get the correct results, you need to add the filters `str(?dataset_lbl) = "Atari 2600 Skiing"` and `str(?eval_lbl) = "evaluated on"` to the generated query. 
+
+    The correct SPARQL query should look like this:
+
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                    rdfs

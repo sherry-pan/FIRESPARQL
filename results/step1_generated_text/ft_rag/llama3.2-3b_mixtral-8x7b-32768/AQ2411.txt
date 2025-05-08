@@ -1,0 +1,37 @@
+Question:
+Can you provide links to code used in papers that benchmark the CAIT-XS-36 model?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model    orkgp:HAS_MODEL      orkgp:R147244.
+       FILTER(REGEX(?model, "CAIT-XS-36"))
+      ?benchmark       orkgp:HAS_EVALUATION     ?eval.
+      ?cont           orkgp:P31              ?eval.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?cont      orkgp:HAS_CODE         ?code.}
+      ?paper          orkgp:P31              ?cont.
+       OPTIONAL {?paper      orkgp:HAS_SOURCE_CODE ?code.}
+     } 
+
+    Note: The above SPARQL query is not necessarily the optimal query, but it should be a correct one. The optimal query may vary based on the specific requirements of the application. 
+
+    This problem can be solved by using the following approach:
+    1. Get the papers that contain the CAIT-XS-36 model.
+    2. Get the code from each of these papers.
+    3. Return the links to the code.
+
+    The SPARQL query above is a possible implementation of this approach.
+    The query first filters the papers that contain the CAIT-XS-36 model. Then, it gets the code from each of these papers. Finally, it returns the links to the code.
+    However, the query also returns the code from the papers that do not contain the CAIT-XS-36 model, because the `OPTIONAL` clause in the query allows this. Therefore, the query may not be optimal. 
+
+    To optimize the query, we can add a filter to exclude the papers that do not contain the CAIT-XS-36 model. We can do this by adding a filter to the `SELECT` clause. For example:
+    SELECT?code
+    WHERE {
+     ?model    orkgp:HAS_MODEL      orkgp:R147244.
+      FILTER(REGEX(?model, "CAIT-XS-36"))
+     ... (rest of the query remains the same)
+    }
+    This query is more efficient because it only returns the code from the papers that contain the CAIT-XS-36 model. 
+
+    However, this query still returns the code from the papers that do not contain the CAIT-XS-36 model, because the `OPTIONAL` clause in the query allows this. Therefore, we need to add another

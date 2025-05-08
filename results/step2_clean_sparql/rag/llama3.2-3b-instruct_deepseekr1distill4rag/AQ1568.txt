@@ -1,0 +1,14 @@
+```sparql
+SELECT ?model ?f1Score
+WHERE {
+  ?model a <http://example.org/Model>.
+  ?dataset a <http://example.org/Dataset>.
+  ?f1Score a <http://example.org/F1_score>.
+  ?model orkgc:hasModel ?f1Score.
+  ?f1Score orkgp:hasF1Score ?f1ScoreValue.
+  ?f1ScoreValue orkgp:F1_score ?f1Score.
+  FILTER (STR(?dataset) = "CoNLL 2003 (English) benchmark dataset").
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

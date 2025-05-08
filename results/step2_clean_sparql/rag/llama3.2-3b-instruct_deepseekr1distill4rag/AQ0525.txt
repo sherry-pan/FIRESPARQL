@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:has_title ?title.
+  ?paper orkg:has_id ?id.
+  ?paper orkc:uses_dataset <http://example.org/orkgr/NCBI-disease_dataset>.
+  ?model orkgr:benchmarks ?benchmark.
+  ?paper orkc:uses_model ?model.
+  FILTER EXISTS {
+    ?benchmark orkc:uses_dataset <http://example.org/orkgr/NCBI-disease_dataset>
+  }
+}
+```

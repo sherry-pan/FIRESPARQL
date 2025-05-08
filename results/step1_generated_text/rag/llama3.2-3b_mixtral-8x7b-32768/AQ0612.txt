@@ -1,0 +1,28 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/orkgc/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/orkgp/>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkgc:Contribution.
+ ?paper orkgp:HAS_BENCHMARK?benchmark.
+ ?benchmark orkgp:HAS_ATARI_2600_DEFENDER_DATASET?dataset.
+ ?dataset a orkgc:Resource.
+ ?paper orkgc:hasPaper?paperID.
+ ?paperID a orkgc:Paper.
+ ?paper orkgc:hasTitle?title.
+ ?title a orkgp:Predicate.
+ ?paper orkgc:hasID?id.
+ ?id a orkgp:Predicate.
+}
+``` 
+    Note: The SPARQL query is written in the standard format, with the `SELECT` clause, `WHERE` clause, and the `PREFIX` declarations. The `?paper` variable represents the research paper, `?title` represents the title of the research paper, and `?id` represents the ID of the research paper. The query uses the `orkg:`, `orkgc:`, and `orkgp:` prefixes to reference the entities and properties in the ORKG ontology. 
+
+    The `SELECT` clause specifies that we want to retrieve the `?paper`, `?title`, and `?id` variables. The `WHERE` clause defines the conditions under which we want to retrieve the data. In this case, we want to retrieve the research papers that have a benchmark, which includes the Atari 2600 Defender dataset, and have a title and ID. 
+
+    The `PREFIX` declarations define the URIs for the entities and properties in the ORKG ontology. The `orkg:`, `orkgc:`, and `orkgp:` prefixes are used to reference the entities and properties in the query.

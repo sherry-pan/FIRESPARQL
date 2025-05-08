@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX orkgp: <http://example.org/orkgp#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?model
+WHERE {
+  ?evaluation orkgp:hasDataset orkg:R122689.
+  ?evaluation orkgp:hasMetric ?metric.
+  ?evaluation orkgp:hasModel ?model.
+  FILTER (str(?metric) IN ("accuracy", "f1-score", "mean-precision", "mean-recall"))
+  FILTER (str(?model) IN ("deep-rl", "model-rl"))
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkg/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?p ?o
+WHERE {
+  ?p orkgp:has_value ?o.
+  FILTER (
+    REGEX(STR(?o), "6-layer QRNN model", "i") &&
+    REGEX(STR(?o), "benchmarking purposes", "i") &&
+    (REGEX(STR(?o), "doi", "i") || 
+     REGEX(STR(?o), "url", "i"))
+  )
+}
+```

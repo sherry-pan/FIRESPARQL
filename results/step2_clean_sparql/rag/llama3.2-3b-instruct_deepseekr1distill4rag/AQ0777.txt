@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric
+WHERE {
+  ?property a orkgp:Property;
+            rdfs:label ?sLabel.
+  FILTER (STR(?sLabel) = "metrics of evaluation").
+  ?property orkgp:hasResource ?predicate.
+  ?predicate a orkgp:Predicate;
+             orkgc:label ?oLabel.
+  FILTER (STR(?oLabel) = "evaluation method").
+  ?predicate orkgr:hasDataset ?dataset.
+  ?dataset orkgc:label ?datasetLabel.
+  FILTER (STR(?datasetLabel) = "Stanford Cars").
+  ?predicate orkgr:hasMethod ?metric.
+}
+```

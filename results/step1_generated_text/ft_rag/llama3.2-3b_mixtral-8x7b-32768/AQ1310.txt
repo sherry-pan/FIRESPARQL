@@ -1,0 +1,46 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Boxing dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+         orkgp:R122689 orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_EVALUATION?eval.
+        ?eval orkgp:HAS_VALUE?value.
+        ?eval orkgp:HAS_METRIC?metric.
+         BIND(XSD:REAL(?value) AS?value)
+         FILTER(REGEX(STR(?metric), "best|highest|top", "i"))
+        ?cont orkgp:HAS_BENCHMARK_RESULT?eval.
+        ?cont orkgp:HAS_DATASET?dataset.
+        ?cont orkgp:HAS_METRIC?metric.
+         BIND(XSD:REAL(?value) AS?value)
+     }
+    END {
+      SELECT?metric?value
+      WHERE {
+          orkgp:R122689 orkgp:HAS_DATASET?dataset.
+         ?dataset orkgp:HAS_EVALUATION?eval.
+         ?eval orkgp:HAS_VALUE?value.
+         ?eval orkgp:HAS_METRIC?metric.
+          BIND(XSD:REAL(?value) AS?value)
+          FILTER(REGEX(STR(?metric), "best|highest|top", "i"))
+         ?cont orkgp:HAS_BENCHMARK_RESULT?eval.
+         ?cont orkgp:HAS_DATASET?dataset.
+         ?cont orkgp:HAS_METRIC?metric.
+          BIND(XSD:REAL(?value) AS?value)
+      }
+      ORDER BY DESC(?value)
+    }
+    END {
+      SELECT?metric?value
+      WHERE {
+          orkgp:R122689 orkgp:HAS_DATASET?dataset.
+         ?dataset orkgp:HAS_EVALUATION?eval.
+         ?eval orkgp:HAS_VALUE?value.
+         ?eval orkgp:HAS_METRIC?metric.
+          BIND(XSD:REAL(?value) AS?value)
+          FILTER(REGEX(STR(?metric), "best|highest|top", "i"))
+         ?cont orkgp:HAS_BENCHMARK_RESULT?eval.
+         ?cont orkgp:HAS_DATASET?dataset.
+         ?cont orkgp:HAS_METRIC?metric.
+          BIND(XSD:REAL(?value)

@@ -1,0 +1,62 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 HERO benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?metric_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 HERO")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?cont           orkgp:EVALUATED_WITH     ?eval.
+ ?eval           orkgp:P31               ?model.
+ ?model         rdfs:label               ?model_lbl.
+ ?model         orkgp:P32               ?metric.
+ ?metric        rdfs:label               ?metric_lbl.
+}
+```
+
+
+      ORKG SPARQL Query:
+      ```sparql
+SELECT?metric?metric_lbl
+WHERE {
+  orkgp:HAS_DATASET      ?dataset       a                orkgc:Dataset;
+                          rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 HERO")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:EVALUATED_WITH     ?eval.
+ ?eval           orkgp:P31               ?model.
+ ?model         rdfs:label               ?model_lbl.
+ ?model         orkgp:P32               ?metric.
+ ?metric        rdfs:label               ?metric_lbl.
+}
+```
+
+
+      ORKG SPARQL Query (with?metric_lbl as a variable)
+      ```sparql
+SELECT?metric_lbl
+WHERE {
+  orkgp:HAS_DATASET      ?dataset       a                orkgc:Dataset;
+                          rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 HERO")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:EVALUATED_WITH     ?eval.
+ ?eval           orkgp:P31               ?model.
+ ?model         rdfs:label               ?model_lbl.
+ ?model         orkgp:P32               ?metric.
+ ?metric        rdfs:label               ?metric_lbl.
+}
+```
+
+
+      ORKG SPARQL Query (with?metric_lbl as a variable, and only the metric name)
+      ```sparql
+SELECT?metric_lbl
+WHERE {
+  orkgp:HAS_DATASET      ?dataset       a                orkgc

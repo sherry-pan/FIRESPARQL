@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?s ?p ?o 
+WHERE {
+  ?s orkgc:relatedTo ?o.
+  FILTER (
+    strstarts(STR(?o), "orkgc:F1-score") || 
+    strstarts(STR(?o), "orkgc:Accuracy") || 
+    strstarts(STR(?o), "orkgc:Precision") || 
+    strstarts(STR(?o), "orkgc:Recall") || 
+    strstarts(STR(?o), "orkgc:ROC-AUC")
+  ).
+  ?o orkgc:evaluatedOn ?s.
+  ?s orkgr:relatedTo ?d.
+  FILTER (
+    strstarts(STR(?d), "orkgr:AIDA") || 
+    strstarts(STR(?d), "orkgr:MEANTIME") || 
+    strstarts(STR(?d), "orkgr:TAC-KBP")
+  ).
+}
+```

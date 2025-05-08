@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?value 
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:supervisedBy ?supervised_dataset.
+  ?supervised_dataset ora:hasBenchmarkResult ?result.
+  ?result ora:hasMetric ?metric.
+  ?result ora:hasValue ?value.
+  FILTER (?supervised_dataset = <http://orkgr.org/Supervised_dataset>)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

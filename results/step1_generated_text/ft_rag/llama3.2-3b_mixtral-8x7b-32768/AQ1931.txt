@@ -1,0 +1,44 @@
+Question:
+Provide a list of papers that have utilized the Switch Transformer model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code?code_lbl
+     WHERE {
+      ?model     orkgp:P31       a            orkgp:Model;
+                  rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "Switch Transformer model")
+      ?model      orkgp:P32      ?cont.
+      ?cont       orkgp:HAS_CODE     ?code.
+      ?code      orkgp:HAS_UTILIZED     ?util.
+      ?util      rdfs:label              ?code_lbl.
+     }
+     SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+     WHERE {
+      ?cont       orkgp:P31       a            orkgp:Contribution;
+                  rdfs:label      ?cont_lbl.
+      ?cont      orkgp:P32      ?model      orkgp:Model.
+      ?model      orkgp:P31       a            orkgp:Model;
+                  rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "Switch Transformer model")
+      ?model      orkgp:HAS_CODE     ?code.
+      ?code      orkgp:HAS_UTILIZED     ?util.
+      ?util      rdfs:label              ?code_lbl.
+     }
+     UNION
+     SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+     WHERE {
+      ?cont       orkgp:P31       a            orkgp:Contribution;
+                  rdfs:label      ?cont_lbl.
+      ?cont      orkgp:P32      ?model      orkgp:Model.
+      ?model      orkgp:P31       a            orkgp:Model;
+                  rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "Switch Transformer model")
+      ?cont      orkgp:HAS_UTILIZED     ?util.
+      ?util      orkgp:HAS_CODE     ?code.
+      ?code      rdfs:label              ?code_lbl.
+     } 
+     UNION
+     SELECT?cont     ?cont_lbl     ?code     ?code_lbl
+     WHERE {
+      ?cont       orkgp:P31       a            orkgp:Contribution;
+                  rdfs

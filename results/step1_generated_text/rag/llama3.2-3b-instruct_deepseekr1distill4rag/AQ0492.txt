@@ -1,0 +1,25 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the enwik8 dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?title?id
+WHERE {
+ ?paper a ora:ResearchPaper.
+ ?paper ora:hasTitle?title.
+ ?paper ora:hasID?id.
+ ?paper ora:benchmarkedOn?dataset.
+ ?dataset a ora:Dataset.
+ ?dataset ora:hasName "enwik8".
+ ?paper ora:benchmarkedOn?model.
+ ?model a ora:Model.
+ ?model ora:hasName "SVM".
+ ?paper ora:benchmarkedOn?task.
+ ?task a ora:NLPTask.
+ ?task ora:hasName "NLP task".
+ ?paper ora:benchmarkedOn?paper.
+ ?paper ora:benchmarkedOn?paper.
+  BIND(URI(orkgr:R284316) AS?id).
+  BIND(URI(orkgr:R284316) AS?title).
+}
+```    Note: The SPARQL query is generated based on the provided input question, context, and RDF data. The query is not necessarily the most efficient or optimal query, but it is a valid query that should return the correct results based on the provided context.<|eot_id|>

@@ -1,0 +1,17 @@
+Question:
+Which sectors are modeled as energy sectors and how often?
+
+Generated SPARQL:
+ SELECT?sectors,?energy
+     WHERE {
+      ?data       a            orkgc:Data;
+                  rdfs:label      ?data_label.
+       FILTER (str(?data_label) = "Which sectors are modeled as energy sectors and how often?")
+      ?paper      orkgp:HAS_DATASET      ?data;
+                  orkgp:HAS_SOURCE      ?source.
+      ?source    orkgp:HAS_DATASET      ?data;
+                  rdfs:label              ?energy.
+      ?energy    orkgp:P31               ?sector;
+                  rdfs:label              ?sectors.
+      ?sectors   orkgp:P31               ?energy.
+     }<|eot_id|>

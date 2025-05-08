@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://example.com/orkg/>
+PREFIX orkp: <http://example.com/orkp/>
+PREFIX orkc: <http://example.com/orkc/>
+
+SELECT ?s ?p ?o
+WHERE {
+  ?s orkp:hasValue ?v.
+  FILTER (strContains(STR(?v), "F1-score") OR strContains(STR(?v), "accuracy") OR strContains(STR(?v), "validation research") OR strContains(STR(?v), "performance assessment") OR strContains(STR(?v), "evaluation method")).
+  ?s orkp:hasValue ?v_dataset.
+  FILTER (strContains(STR(?v_dataset), "Hutter Prize")).
+  ?s a orkp:Dataset.
+  ?v a orkg:Metric.
+  OPTIONAL {
+    ?v orkp:hasValue ?o.
+    ?o a orkg:Property.
+  }
+}
+```

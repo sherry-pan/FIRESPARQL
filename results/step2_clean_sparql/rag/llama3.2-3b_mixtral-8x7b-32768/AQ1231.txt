@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+PREFIX orkgr: <http://www.openresearch.org/ontology/orkgr/>
+PREFIX orkgc: <http://www.openresearch.org/ontology/orkgc/>
+
+SELECT ?score ?metric
+WHERE {
+  ?score orkgr:isScoreFor ?scoreValue.
+  ?scoreValue orkgr:hasMetric ?metric.
+  ?scoreValue orkgr:hasDataset ?dataset.
+  ?dataset orkgr:hasDatasetLabel "Cheetah, run (DMControl500k)".
+}
+ORDER BY DESC(?scoreValue)
+LIMIT 1
+```

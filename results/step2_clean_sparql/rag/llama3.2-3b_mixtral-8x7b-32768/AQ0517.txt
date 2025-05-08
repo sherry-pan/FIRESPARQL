@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/predicate/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/resource/>
+SELECT ?paper ?title ?id
+WHERE {
+   ?paper a orkgc:Paper.
+   ?paper orkgp:HAS_CONTRIBUTION ?contribution.
+   ?contribution orkgp:HAS_BENCHMARK ?benchmark.
+   ?benchmark orkgp:HAS_DATASET ?dataset.
+   ?dataset a orkgc:Dataset.
+   ?dataset orkgp:HAS_ID "R122689".
+   ?paper orkgp:HAS_ID ?id.
+   ?paper orkgp:HAS_TITLE ?title.
+   FILTER (str(?title) != "")
+   FILTER (str(?id) != "")
+}
+```

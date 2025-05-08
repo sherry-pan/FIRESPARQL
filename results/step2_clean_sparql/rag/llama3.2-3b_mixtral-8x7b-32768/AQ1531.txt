@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkgp: <http://orkgp.org/schema/2016/04/orkgp#>
+PREFIX orkgc: <http://orkgp.org/schema/2016/04/orkgc#>
+PREFIX orkr: <http://orkgp.org/schema/2016/04/orkr#>
+PREFIX orql: <http://orkgp.org/schema/2016/04/orql#>
+PREFIX orqw: <http://orkgp.org/schema/2016/04/orqw#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model ?testPerplexity
+WHERE {
+  ?model a orkgc:Contribution.
+  ?model orkgp:hasMetric ?metric.
+  ?metric rdf:type orkw:TestPerplexityMetric.
+  ?model orkgp:hasDataset ?dataset.
+  ?dataset rdfs:label "WikiText-103"@en.
+  ?metric orkgp:hasValue ?testPerplexity.
+}
+ORDER BY ASC(?testPerplexity)
+LIMIT 1
+```

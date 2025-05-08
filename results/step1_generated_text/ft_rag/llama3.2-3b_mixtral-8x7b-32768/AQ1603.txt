@@ -1,0 +1,47 @@
+Question:
+Indicate the model that performed best in terms of FLOPS metric on the CIFAR-100 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgp:R123456 orkgp:P30560?model.
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_METRIC?metric.
+      ?metric orkgp:HAS_VALUE?value.
+       BIND(xsd:float(?value) AS?value_lbl)
+      ?model orkgp:HAS_MODEL?model_lbl.
+       FILTER(REGEX(?model_lbl, ".*\\D"))
+       FILTER(REGEX(?value_lbl, ".*\\D"))
+     }
+    Note: R123456, P30560, etc. are placeholders for actual URIs in the graph.
+    You should replace these with the actual URIs of the entities and properties in the graph.
+    The actual URIs will be provided when you run the code.
+    The code is written in Python and uses the orkgp library to query the ORKG.
+    The orkgp library is not included in this code snippet, but it will be provided when you run the code. 
+    The code will query the ORKG, retrieve the model that performed best in terms of FLOPS metric on the CIFAR-100 benchmark dataset, and print the result.
+    The output will be the model that performed best in terms of FLOPS metric on the CIFAR-100 benchmark dataset. 
+    Please see below for the Python code that generates the SPARQL query: 
+    ```python
+import orkgp
+
+# Define the context
+context = {
+    "question": "Indicate the model that performed best in terms of FLOPS metric on the CIFAR-100 benchmark dataset?",
+    "extracted_terms": {
+        "model",
+        "performed best",
+        "FLOPS metric",
+        "CIFAR-100 benchmark dataset"
+    },
+    "candidates": {
+        "model": [
+            {
+                "uri": "orkgp:HAS_MODEL",
+                "rdfs:label": "Model",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "performed best": [
+            {
+                "uri": "orkgp:

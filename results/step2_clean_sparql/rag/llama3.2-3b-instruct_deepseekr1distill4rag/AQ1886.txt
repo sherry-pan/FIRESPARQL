@@ -1,0 +1,14 @@
+```sparql
+PREFIX ora: <http://example.org/ora#>
+PREFIX orkgr: <http://example.org/orkgr#>
+
+SELECT ?dataset ?datasetLabel WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:relatedTo ?researchArea.
+  ?researchArea ora:label "Sentence Classification"@en.
+  ?dataset ora:benchmark "True"^^xsd:boolean.
+  SERVICE orkgr:datasetSearch {
+    ?dataset rdfs:label ?datasetLabel.
+  }
+}
+```

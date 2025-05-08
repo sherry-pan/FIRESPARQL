@@ -1,0 +1,58 @@
+<think>
+Okay, I need to figure out how to answer the question: "What is the name of the model with the highest ROUGE-2 score when benchmarked on the CL-SciSumm dataset?" using the provided ORKG RDF data.
+
+First, I'll break down the question to extract the relevant terms. The key entities here are "model" and "CL-SciSumm dataset". The property mentioned is "ROUGE-2 score" and the action is "benchmark".
+
+Looking at the context data, I see several resources and predicates. For example, R147246 has multiple authors and is associated with a value of 93.9, which might be a score. R283709 and R283710 are about papers and have various predicates like P31, HAS_VENUE, P29, etc.
+
+I need to find entities related to models and datasets. The term "model" could correspond to resources like R147246 or R283710. The dataset "CL-SciSumm" isn't explicitly mentioned, but maybe it's related to some resource through predicates.
+
+Next, I'll look for properties that indicate benchmarking or evaluation. Predicates like P39020 describe steps, but I'm not sure if they relate to ROUGE-2. The HAS_VALUE predicate in R147244 has a value of 93.9, which might be a score.
+
+I'll check if any resources are linked to ROUGE-2. Since it's not directly mentioned, I might infer based on high scores. R147244 has a high value, so maybe that's the top model.
+
+I'll structure the JSON output with the extracted terms and the top candidates. For "model", I'll include R147246 and R283710. For "CL-SciSumm dataset", I'll look for any related resources, but since it's not present, I might leave it empty or note that it's not found. Similarly, for "ROUGE-2 score", I'll include the HAS_VALUE predicate.
+
+I need to ensure the URIs use the correct prefixes and include the rdf:type for each candidate. I'll make sure the JSON follows the specified format, grouping the results under each extracted term.
+</think>
+
+```json
+{
+  "question": "What is the name of the model with the highest ROUGE-2 score when benchmarked on the CL-SciSumm dataset?",
+  "extracted_terms": {
+    "model": "model",
+    "CL-SciSumm dataset": "CL-SciSumm dataset",
+    "ROUGE-2 score": "ROUGE-2 score",
+    "benchmark": "benchmark"
+  },
+  "candidates": {
+    "model": [
+      {
+        "uri": "orkgr:R147246",
+        "rdfs:label": "Ligia Sierra",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R283710",
+        "rdfs:label": "Yuanyuan Wu",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "CL-SciSumm dataset": [],
+    "ROUGE-2 score": [
+      {
+        "uri": "orkgp:HAS_VALUE",
+        "rdfs:label": "93.9",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmark": [
+      {
+        "uri": "orkgp:HAS_EVALUATION",
+        "rdfs:label": "benchmark",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,39 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the TREC-6 dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkgr.org/ontology/>
+    PREFIX orkgc: <http://orkgr.org/ontology#>
+    PREFIX orkgp: <http://orkgr.org/ontology#>
+    SELECT?paper?title
+    WHERE {
+     ?paper orkgc:hasDataset?dataset.
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgr:RDFType orkgc:Resource.
+     ?paper orkgp:hasBenchmark?benchmark.
+     ?benchmark a orkgp:Predicate.
+     ?benchmark orkgp:label "contain a benchmark"@en.
+     ?paper orkgp:hasVenue?venue.
+     ?venue orkgc:hasDataset?dataset.
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgr:RDFType orkgc:Resource.
+     ?paper orkgc:hasContribution?contribution.
+     ?contribution orkgc:hasDataset?dataset.
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgr:RDFType orkgc:Resource.
+     ?paper orkgp:label?title.
+      FILTER (str.contains(str(?paper), "TREC-6"))
+      }
+    ```
+``` 
+
+Note: The provided SPARQL query is already optimized for the given context. However, please note that the query might not work as expected if the actual data in the ORKG does not match the provided context. 
+
+The query works by first selecting papers that contain a benchmark, then filtering those papers to only include those that have the TREC-6 dataset. The query then selects the title of each paper. 
+
+However, please note that the query might not work as expected if the actual data in the ORKG does not match the provided context. 
+
+The query assumes that the dataset and contribution are linked to the paper, and that the paper has a title and a venue. 
+
+Also, note that the filter (str.contains(str(?paper), "TREC-6")) may not work as expected if the paper titles

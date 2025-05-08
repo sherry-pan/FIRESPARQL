@@ -1,0 +1,17 @@
+```sparql
+SELECT ?o ?t2 ?id2
+WHERE {
+  ?o orkg:hasResource ?r.
+  ?r orkg:hasDataset ?d.
+  ?d orkg:hasDataset ?d2.
+  ?d2 a orkg:Dataset.
+  ?o orkg:hasBenchmark ?b.
+  ?b orkg:hasBenchmark ?b2.
+  ?b2 a orkg:Benchmark.
+  ?o orkg:hasTitle ?t.
+  ?t orkg:hasTitle ?t2.
+  ?o orkg:hasID ?id.
+  ?id orkg:hasID ?id2.
+  FILTER (STRIDIFY(str(?d2)) = "R36054" OR STRIDIFY(str(?d2)) = "R36053")
+}
+```

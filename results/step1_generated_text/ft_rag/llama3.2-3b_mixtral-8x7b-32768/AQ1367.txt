@@ -1,0 +1,58 @@
+Question:
+What is the highest benchmark result achieved on the REDDIT-B dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "REDDIT-B")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK_RESULT?benchmark.
+     ?eval          orkgp:HAS_METRIC        ?metric.
+     ?cont          a                    orkgp:Evaluation;
+                     orkgp:HAS_VALUE        ?value.
+     ?cont          orkgp:HAS_METRIC        ?metric.
+      }
+      }
+
+
+    Note that the question is asking for the highest benchmark result, so we want to find the maximum value of the metric. We can do this by grouping the evaluations by the dataset and then finding the maximum value of the metric for each group. We can use the `max` function to achieve this. The `group_by` function is not available in the standard SPARQL 1.1, but it is available in the SPARQL 1.2, so we need to use the `group_by` function from the `SPARQL 1.2` extension.
+
+
+    The SPARQL query can be optimized by removing the redundant `?metric?cont` lines. The final query is:
+    SELECT?metric?value
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "REDDIT-B")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK_RESULT?benchmark.
+     ?cont          orkgp:HAS_METRIC        ?metric.
+     ?cont          orkgp:HAS_VALUE        ?value.
+      GROUP BY?metric
+      ORDER BY DESC(?value)
+      LIMIT 1
+      }
+      }
+
+
+      SELECT?metric?value
+      WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "REDDIT-B")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK_RESULT?benchmark.
+     ?cont          orkgp:HAS_METRIC        ?metric.
+     ?cont          orkgp:HAS_VALUE        ?value.
+      }
+      FILTER (max(?value) =?value)
+      }
+
+
+
+      SELECT?metric?value
+      WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      

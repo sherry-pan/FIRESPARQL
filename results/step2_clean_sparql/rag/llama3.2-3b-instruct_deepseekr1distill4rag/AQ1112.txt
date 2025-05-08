@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkc: <http://orkc.org/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?result orkp:hasBenchmarkResult ?benchmark.
+  ?benchmark orkp:hasMetric ?metric.
+  ?benchmark orkp:hasValue ?value.
+  ?result orkc:isRelatedTo ?dataset.
+  ?dataset rdfs:label "WMT2014 English-German"^^xsd:string.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+Question:
+Can you provide links to code used in papers that benchmark the BERTwwm + SQuAD 2 model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+        ?model    a            orkgc:Model;
+                  rdfs:label   ?model_lbl.
+         FILTER (str(?model_lbl) = "BERTwwm + SQuAD 2")
+        ?benchmark      orkgp:HAS_DATASET       ?dataset.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont         orkgp:HAS_MODEL         ?model;
+                        orkgp:HAS_SOURCE_CODE   ?code.
+         OPTIONAL {?cont         orkgp:HASRepository     ?repo.}
+         OPTIONAL {?cont         orkgp:HAS_MODEL_VERSION   ?model_lbl
+                  orkgp:HAS_SOURCE_CODE     ?code.}
+         FILTER(REGEX(?model_lbl, "BERTwwm + SQuAD 2"))
+     }<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/rdf/ontology/>
+PREFIX orkp: <http://orkp.org/rdf/ontology/>
+PREFIX orkc: <http://orkc.org/rdf/ontology/>
+
+SELECT ?paper ?code_reference
+WHERE {
+  ?paper a orkc:Resource.
+  ?paper orkp:has_benchmarked ?benchmarking_purpose.
+  ?benchmarking_purpose a orkp:Evaluation_Method.
+  ?paper orkp:has_code_reference ?code_reference.
+  FILTER (STR(?paper) = "http://orkgr.org/rdf/data/papers/PEGASUS_model_paper")
+}
+```

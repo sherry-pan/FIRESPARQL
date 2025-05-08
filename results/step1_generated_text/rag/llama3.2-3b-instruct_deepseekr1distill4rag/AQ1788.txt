@@ -1,0 +1,105 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Montezuma's Revenge dataset in terms of Average Return (NoOp) metric?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?dataset?metric
+WHERE {
+ ?model rdfs:label "SVM"@en.
+ ?dataset rdfs:label "MNIST"@en.
+ ?metric rdfs:label "93.9"@en.
+ ?model rdfs:label "SVM"@en.
+ ?model rdfs:label "SVM"@en.
+ ?dataset rdfs:label "MNIST"@en.
+ ?dataset rdfs:label "MNIST"@en.
+ ?metric rdfs:label "93.9"@en.
+ ?metric rdfs:label "93.9"@en.
+ ?model orkggc:has_benchmark?benchmark.
+ ?benchmark orkggc:has_dataset?dataset.
+ ?benchmark orkggc:has_metric?metric.
+ ?benchmark orkggc:has_model?model.
+ ?benchmark orkggc:has_metric?metric.
+  FILTER (str(?metric) = "NoOp"@en).
+}
+``` 
+    end
+    If the output SPARQL query is empty, output "No matching results found."
+    If the output SPARQL query is not empty, output the query.
+    Output:
+    ```sparql
+SELECT?model?dataset?metric
+WHERE {
+ ?model rdfs:label "SVM"@en.
+ ?dataset rdfs:label "MNIST"@en.
+ ?metric rdfs:label "93.9"@en.
+ ?model orkggc:has_benchmark?benchmark.
+ ?benchmark orkggc:has_dataset?dataset.
+ ?benchmark orkggc:has_metric?metric.
+ ?benchmark orkggc:has_model?model.
+  FILTER (str(?metric) = "NoOp"@en).
+}
+``` 
+    end
+    If the output SPARQL query is empty, output "No matching results found."
+    Output:
+    ```sparql
+SELECT?model?dataset?metric
+WHERE {
+ ?model rdfs:label "SVM"@en.
+ ?dataset rdfs:label "MNIST"@en.
+ ?metric rdfs:label "93.9"@en.
+ ?model orkggc:has_benchmark?benchmark.
+ ?benchmark orkggc:has_dataset?dataset.
+ ?benchmark orkggc:has_metric?metric.
+ ?benchmark orkggc:has_model?model.
+  FILTER (str(?metric) = "NoOp"@en).
+}
+``` 
+    end
+```python
+def generate_sparql_query(question, context):
+    # Extract terms from the question
+    extracted_terms = extract_terms(question)
+
+    # Look for similar entities in the context
+    candidates = look_for_similar_entities(extracted_terms, context)
+
+    # Generate SPARQL query
+    sparql_query = generate_sparql_query_from_candidates(candidates)
+
+    return sparql_query
+
+def extract_terms(question):
+    # Extract terms from the question
+    # For simplicity, assume the question is already parsed and the terms are extracted
+    terms = [
+        {"rdfs:label": "model", "type": "Class", "rdf:type": "rdfs:Class"},
+        {"rdfs:label": "Atari 2600 Montezuma's Revenge dataset", "uri": "orkgr:Atari_2600_Montezuma's_Revenge_dataset", "type": "Dataset", "rdf:type": "orkgc:Resource"},
+        {"rdfs:label": "Average Return (NoOp) metric", "type": "Property", "rdf:type": "orkgp:Predicate"}
+    ]
+
+    return terms
+
+def look_for_similar_entities(extracted_terms, context):
+    # Look for similar entities in the context
+    # For simplicity, assume the context is already parsed and the similar entities are found
+    candidates = {
+        "model": [
+            {"uri": "orkgc:SVM", "rdfs:label": "SVM", "score": 0.85, "type": "Model", "rdf:type": "orkgc:Resource"}
+        ],
+        "Atari 2600 Montezuma's Revenge dataset": [
+            {"uri": "orkgr:MNIST", "rdfs:label": "MNIST", "score": 0.70, "type": "Dataset", "rdf:type": "orkgc:Resource"}
+        ],
+        "Average Return (NoOp) metric": [
+            {"uri": "orkgp:HAS_VALUE", "rdfs:label": "HAS_VALUE", "score": 0.65, "type": "Property", "rdf:type": "orkgp:Predicate"}
+        ]
+    }
+
+    return candidates
+
+def generate_sparql_query_from_candidates(candidates):
+    # Generate SPARQL query from the candidates
+    sparql_query = """
+    SELECT?model?dataset?metric
+    WHERE {
+     ?model rdfs

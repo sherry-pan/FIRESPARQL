@@ -1,0 +1,60 @@
+Question:
+Which model has achieved the highest F1 score on the CoNLL 2003 (English) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CoNLL 2003 (English) benchmark dataset")
+      ?benchmark      orkgp:HAS_BENCHMARK     ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P32             ?model.
+      ?model        orkgp:HAS_MODEL         ?model;
+                    rdfs:label              ?model_lbl.
+     }    
+
+
+```python
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL 2003 (English) benchmark dataset")
+ ?benchmark      orkgp:HAS_BENCHMARK     ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                orkgp:P32             ?model.
+ ?model        orkgp:HAS_MODEL         ?model;
+                rdfs:label              ?model_lbl.
+}
+```
+
+
+import orkgp
+
+# Define the query
+query = """
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL 2003 (English) benchmark dataset")
+ ?benchmark      orkgp:HAS_BENCHMARK     ?dataset.
+ ?cont          orkgp:HAS_BENCHMARK     ?benchmark;
+                orkgp:P32             ?model.
+ ?model        orkgp:HAS_MODEL         ?model;
+                rdfs:label              ?model_lbl.
+}
+"""
+
+# Execute the query
+result = orkgp.sparql_query(query)
+
+# Print the result
+for row in result:
+    print(row)```
+
+
+Please note that you will need to install the `orkgp` library by running `pip install orkgp` to use this code. 
+
+This code defines a SP

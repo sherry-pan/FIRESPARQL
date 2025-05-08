@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX orkgc: <http://orkgc.org/>
+PREFIX orkgp: <http://orkgp.org/>
+
+SELECT ?metric ?score
+WHERE {
+    ?dataset orkgp:HAS_DATASET orkg:R122689.
+    ?result orkgp:HAS_METRIC ?metric;
+            orkgc:HAS_SCORE ?score;
+            orkgc:resource ?dataset.
+    FILTER (STR(?score) =~ "^[0-9.]+$").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

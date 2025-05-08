@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+ ?dataset a vocab:Dataset;
+          vocab:datasetName "IMDb-B".
+ ?benchmark a vocab:Benchmark;
+            vocab:dataset ?dataset;
+            vocab:metric ?metric;
+            vocab:value ?value.
+ FILTER (str(?metric) = "accuracy" || str(?metric) = "f1-score" || str(?metric) = "roc-auc" || str(?metric) = "ap")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

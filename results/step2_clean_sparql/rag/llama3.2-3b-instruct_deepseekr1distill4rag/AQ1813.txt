@@ -1,0 +1,28 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkp:hasProperty ?benchmark.
+  ?benchmark orkp:hasValue orkg:iNaturalist_2018_dataset.
+  ?benchmark orkp:hasProperty ?metric.
+  ?metric rdfs:label "Top-1 Accuracy".
+  ?metric orkp:hasValue ?metricValue.
+
+  {
+    SELECT ?model (MAX(?metricValue) AS ?score)
+    WHERE {
+      ?model orkp:hasProperty ?benchmark.
+      ?benchmark orkp:hasValue orkg:iNaturalist_2018_dataset.
+      ?benchmark orkp:hasProperty ?metric.
+      ?metric rdfs:label "Top-1 Accuracy".
+      ?metric orkp:hasValue ?metricValue.
+    }
+    GROUP BY ?model
+  }
+}
+```

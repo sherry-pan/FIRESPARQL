@@ -1,0 +1,43 @@
+Question:
+List the metrics that are used to evaluate models on the Quasart-T benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://purl.org/linked-data/orkgp/>
+PREFIX orkgc: <http://purl.org/linked-data/orkgc/>
+
+SELECT?metric
+WHERE {
+ ?dataset orkgp:HAS_DATASET?dataset2.
+ ?dataset2 orkgc:label?datasetLabel.
+ ?dataset2 a orkgc:Dataset.
+ ?dataset orkgp:HAS_METRIC?metric.
+ ?metric rdfs:label?metricLabel.
+ ?metric orkgp:label?metricLabel.
+  FILTER (STR(?metricLabel) = "F1")
+  UNION
+ ?dataset orkgp:HAS_METRIC?metric.
+ ?metric orkgc:label?metricLabel.
+ ?metric orkgp:label?metricLabel.
+  FILTER (STR(?metricLabel) = "AUC-ROC")
+  UNION
+ ?dataset orkgp:HAS_METRIC?metric.
+ ?metric orkgc:label?metricLabel.
+ ?metric orkgp:label?metricLabel.
+  FILTER (STR(?metricLabel) = "Accuracy")
+}
+``` 
+    Note that the answer is based on the provided context and might not be the only possible answer. The answer might also depend on the specific data stored in the ORKG. 
+
+    The provided SPARQL query is based on the assumption that the Quasart-T benchmark dataset is a resource in the ORKG, and the metrics used to evaluate models on this dataset are "F1", "AUC-ROC", and "Accuracy". The query is designed to filter the results to only include these three metrics. 
+
+    If the actual metrics used to evaluate models on the Quasart-T benchmark dataset are different, the SPARQL query will need to be modified accordingly. 
+
+    The query also assumes that the "F1", "AUC-ROC", and "Accuracy" metrics have labels "F1", "AUC-ROC", and "Accuracy" respectively. If the actual labels are different, the query will need to be modified accordingly. 
+
+    The query is also designed to handle the case where the "Quasart-T" dataset is not the only dataset in the ORKG that uses these metrics. If the actual dataset is different, the query will need to be modified accordingly. 
+
+    Please note that the query is not optimized for performance and may not be suitable for large datasets. 
+
+    The query is also not designed to handle the case where the metrics are not explicitly labeled in the ORKG. In such cases, the query

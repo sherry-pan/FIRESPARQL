@@ -1,0 +1,44 @@
+Question:
+List the metrics that are used to evaluate models on the Oxford-IIIT Pets benchmark dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkgr: <http://example.org/orkgr/>
+    PREFIX orkgp: <http://example.org/orkgp/>
+    SELECT?metric?metricLabel 
+    WHERE {
+     ?dataset a orkgc:Dataset.
+     ?dataset orkgr:R122690.
+     ?dataset orkgp:HAS_DATASET?datasetHasDataset.
+     ?dataset?hasMetric.
+     ?hasMetric a orkgp:Predicate.
+     ?hasMetric orkgp:HAS_METRIC?metric.
+     ?metric?metricLabel.
+     ?dataset orkgp:EVALUATED_WITH?evaluatedWith.
+     ?evaluatedWith?modelEvaluation.
+     ?modelEvaluation?metric.
+      BIND(replaceSTR(?metricLabel, " ", "_") AS?metricLabel) 
+    }
+    ``` 
+
+## Step 1: Identify the entities and properties mentioned in the question and context
+The question mentions the "Oxford-IIIT Pets benchmark dataset", "metrics", and "evaluate models". The context provides candidate entities and properties in the ORKG that can be linked to these entities and properties.
+
+## Step 2: Determine the relationships between the entities and properties mentioned in the question and context
+From the context, we can see that the "Oxford-IIIT Pets benchmark dataset" is a resource (entity) in the ORKG, and it has a property called "has dataset" (has dataset) that links it to other datasets. The "metrics" are properties in the ORKG, and they have a predicate called "has metric" that links them to the datasets. The "evaluate models" is a predicate in the ORKG that links datasets to models.
+
+## Step 3: Generate the SPARQL query based on the relationships identified
+We need to query the ORKG to get the metrics used to evaluate models on the Oxford-IIIT Pets benchmark dataset. We can start by querying the dataset and its related properties. We can then use the "has metric" predicate to get the metrics and their labels. Finally, we can use the "evaluated with" predicate to link the metrics to the models.
+
+## Step 4: Write the SPARQL query
+The SPARQL query can be written as follows:
+```
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+SELECT?metric?metricLabel 
+WHERE {
+ ?dataset a orkgc:Dataset.
+ ?dataset orkgr:R122690.
+ ?dataset orkgp:HAS_DATASET?datasetHasDataset.
+ ?dataset?hasMetric.
+ ?hasMetric a orkgp:Predicate

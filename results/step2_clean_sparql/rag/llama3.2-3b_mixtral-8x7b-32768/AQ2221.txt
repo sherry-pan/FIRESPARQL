@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX orkc: <http://example.org/orkc#>
+PREFIX orkp: <http://example.org/orkp#>
+
+SELECT ?paper ?title ?code
+WHERE {
+  ?paper orkc:hasModel ?model.
+  ?model orkc:hasType orkg:Model.
+  
+  ?model orkp:hasProperty ?property1.
+  ?property1 orkp:label "AlexNet"@en.
+
+  ?model orkp:hasProperty ?property2.
+  ?property2 orkp:label "MultiGrasp model"@en.
+  
+  ?paper orkp:hasProperty ?codeProp.
+  ?codeProp orkp:label "links to their code"@en.
+  ?codeProp orkp:hasValue ?code.
+
+  ?paper orkp:hasTitle ?title.
+}
+```

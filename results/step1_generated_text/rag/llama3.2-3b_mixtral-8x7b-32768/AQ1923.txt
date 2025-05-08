@@ -1,0 +1,37 @@
+Question:
+List the code links in papers that use the Long Short Transformer model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/orkg/resource/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    
+    SELECT?codeLink?paper
+    WHERE {
+     ?paper orkg:uses?model.
+     ?model rdfs:label "Long Short Transformer model"@en.
+     ?paper orkg:hasCodeLink?codeLink.
+     ?codeLink rdf:type orkg:CodeLink.
+     ?paper orkg:hasBenchmark?benchmark.
+     ?benchmark rdfs:label "benchmark"@en.
+     ?benchmark orkg:hasBenchmark?benchmark.
+    }
+    ```
+
+
+## Step 1: Understand the context provided
+The context includes the input question, extracted terms, and candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question.
+
+## Step 2: Identify the relevant entities and properties
+From the context, we can identify the relevant entities and properties as follows:
+- Entities: "Long Short Transformer model", "code links", "papers", "benchmark"
+- Properties: "uses", "hasCodeLink", "hasBenchmark", "rdf:type"
+
+## Step 3: Determine the SPARQL query structure
+To list the code links in papers that use the Long Short Transformer model in any benchmark, we need to find papers that use the model and have a code link, and also have a benchmark. The SPARQL query should select the code links and papers that satisfy these conditions.
+
+## Step 4: Write the SPARQL query
+The SPARQL query should be written as follows:
+```sparql
+SELECT?codeLink

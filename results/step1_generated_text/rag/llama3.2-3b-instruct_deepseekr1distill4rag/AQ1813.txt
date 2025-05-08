@@ -1,0 +1,80 @@
+Question:
+What is the best performing model benchmarking the iNaturalist 2018 dataset in terms of Top-1 Accuracy metric?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkp: <http://example.org/orkp/>
+    PREFIX orkc: <http://example.org/orkc/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX orkc: <http://example.org/orkc/>
+
+    SELECT?model?metric?score
+    WHERE {
+     ?model orkp:hasProperty?benchmark.
+     ?benchmark orkp:hasValue?dataset.
+     ?dataset orkp:hasValue?iNaturalist_2018_dataset.
+     ?dataset orkp:hasProperty?metric.
+     ?metric rdfs:label?metricLabel.
+     ?metric orkp:hasValue?metricValue.
+     ?metricValue rdfs:label?Top1Accuracy.
+      FILTER (STR(?metricLabel) = "Top-1 Accuracy").
+     ?model orkp:hasProperty?benchmark.
+     ?benchmark orkp:hasValue?validationResearch.
+     ?validationResearch rdfs:label?evaluationMethod.
+     ?evaluationMethod rdfs:label?EvaluationMethod.
+      FILTER (STR(?evaluationMethod) = "benchmarking").
+      BIND (MAX(?metricValue) AS?score)
+    }
+    ``` 
+```
+    Note: The output SPARQL query is based on the provided context and the inference of the closest matches for the entities and properties in the input question. The actual query may need to be adjusted based on the actual RDF data in the ORKG. 
+
+    The SPARQL query uses the following assumptions:
+    - The iNaturalist 2018 dataset is a resource in the ORKG with a URI like orkg:iNaturalist_2018_dataset.
+    - The Top-1 Accuracy metric is a resource in the ORKG with a URI like orkg:Top-1_Accuracy_metric.
+    - The benchmarking property is a predicate in the ORKG with a URI like orkp:benchmarking.
+    - The validation research property is a predicate in the ORKG with a URI like orkp:validationResearch.
+    - The evaluation method property is a predicate in the ORKG with a URI like orkp:evaluationMethod.
+
+    The query filters the results to only include models that have the "benchmarking" property, and the dataset that has the "iNaturalist 2018 dataset" property. It also filters the results to only include the metric with the label "Top-1 Accuracy". The query then binds the maximum value of the metric to a variable named "score".
+
+    The actual SPARQL query may need to be adjusted based on the actual RDF data in the ORKG. 
+
+    Please note that the output SPARQL query is generated based on the provided context and the inference of the closest matches for the entities and properties in the input question. The actual query may need to be adjusted based on the actual RDF data in the ORKG. 
+
+    The SPARQL query uses the following prefixes:
+    - orkg: <http://example.org/orkg/>
+    - orkp: <http://example.org/orkp/>
+    - orkc: <http://example.org/orkc/>
+    - rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    - rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    - orkc: <http://example.org/orkc/>
+
+    The query returns the model, metric, and score for the best performing model benchmarking the iNaturalist 2018 dataset in terms of Top-1 Accuracy metric. 
+
+    The query uses the following variables:
+    -?model: The model that has the "benchmarking" property.
+    -?metric: The metric that has the label "Top-1 Accuracy".
+    -?score: The maximum value of the metric.
+
+    The query uses the following filters:
+    - FILTER (STR(?metricLabel) = "Top-1 Accuracy"): Filters the results to only include the metric with the label "Top-1 Accuracy".
+    - FILTER (STR(?evaluationMethod) = "benchmarking"): Filters the results to only include the evaluation method with the label "benchmarking".
+
+    The query binds the maximum value of the metric to a variable named "score" using the BIND function.
+
+    The query returns the results in the following format:
+    -?model?metric?score
+
+    The query uses the following RDF types:
+    - orkg:Resource
+    - orkp:Predicate
+    - orkc:Dataset
+    - orkc:Metric
+    - orkc:Property
+
+    The query uses the following RDF properties:
+    - orkp:hasProperty
+    - orkp:

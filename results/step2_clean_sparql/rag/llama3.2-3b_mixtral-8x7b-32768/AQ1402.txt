@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.orkgp.org/ontology/>
+PREFIX orkgr: <http://www.orkgr.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkgr:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgr:HAS_DATASET ?dataset.
+  ?dataset orkgr:LABEL "NYT-single".
+  ?evaluation orkgr:HAS_METRIC ?metric.
+  ?metric orkgr:F1SCORE ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

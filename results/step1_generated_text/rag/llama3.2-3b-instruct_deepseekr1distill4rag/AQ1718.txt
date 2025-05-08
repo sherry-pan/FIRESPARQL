@@ -1,0 +1,20 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Up and Down dataset in terms of Score metric?
+
+Generated SPARQL:
+ ```sparql
+SELECT?model?metric?score
+WHERE {
+ ?model rdfs:label?modelLabel.
+ ?model rdfs:label?benchmarking.
+ ?model orkgc:has_dataset?dataset.
+ ?dataset rdfs:label?datasetLabel.
+ ?dataset orkgc:has_metric?metric.
+ ?metric rdfs:label?metricLabel.
+ ?model orkgp:benchmarking?dataset?metric.
+ ?dataset a orkgc:Dataset.
+ ?metric a orkgc:Metric.
+  BIND(1.0 - (COUNT(?model) / COUNT(DISTINCT?dataset)) AS?score).
+}
+```
+    Note: The SPARQL query is generated based on the provided context and the question. It is assumed that the RDF data dump contains the necessary information to answer the question. The query is not optimized for performance and is intended to illustrate the process of generating a SPARQL query from a natural language question.<|eot_id|>

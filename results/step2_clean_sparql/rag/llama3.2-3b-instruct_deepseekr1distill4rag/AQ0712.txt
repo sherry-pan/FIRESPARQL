@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?metric ?dataset
+WHERE {
+  ?dataset orkgc:relatedTo ?metric.
+  FILTER (str(?metric) = "validation" OR str(?metric) = "accuracy" OR str(?metric) = "F1-score").
+  FILTER (?dataset = orkgr:SciTLDR).
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkgc:has_contribution ?contribution.
+  ?contribution orkgc:has_evaluation ?evaluation.
+  ?evaluation orkgp:has_evaluation_type "benchmark".
+  ?contribution orkgr:has_resource ?resource.
+  ?resource orkgr:has_label "MEMEN (single model) model".
+  ?resource orkgp:has_predicate ?predicate.
+  ?predicate orkgr:label "code".
+  ?resource orkgr:has_uri ?code.
+}
+```

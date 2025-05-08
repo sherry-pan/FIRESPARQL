@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkgc:Resource.
+  ?paper orkg:usesModel ?model.
+  ?model orkgp:name "LSTM (Bai et al., 2018)".
+  ?paper orkg:hasCodeLink ?code_link.
+  ?paper orkg:benchmark ?benchmark.
+  ?benchmark orkgp:hasName ?benchmarkName.
+  FILTER (strstarts(str(?benchmarkName), "MNIST"))
+}
+```

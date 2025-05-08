@@ -1,0 +1,66 @@
+Question:
+Where can I find code references in papers that have used the Tsetlin Machine model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:R1 orkgp:HAS_PAPER.
+       orkgp:R1 orkgp:HAS_BENCHMARK;
+             orkgp:HAS_BENCHMARK orkgp:HAS_CODE.
+       orkgp:HAS_CODE?code.
+       FILTER(REGEX(?code, "Tsetlin Machine"))
+     }   
+
+```python
+def generate_sparql_query(input_question, context):
+    """
+    This function generates a SPARQL query based on the input question and the provided context.
+
+    Args:
+    input_question (str): The natural language question in English.
+    context (dict): The context as background information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    
+    # Extract the terms (entities and properties) mentioned in the question
+    extracted_terms = context["extracted_terms"]
+    
+    # Extract the candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question
+    candidates = context["candidates"]
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?code"
+    
+    # Define the pattern for the papers
+    papers_pattern = "orkgp:HAS_PAPER"
+    
+    # Define the pattern for the benchmarking purposes
+    benchmarking_purposes_pattern = "orkgp:HAS_BENCHMARK"
+    
+    # Define the pattern for the code references
+    code_references_pattern = "orkgp:HAS_CODE"
+    
+    # Add the pattern for the papers to the SPARQL query
+    sparql_query += "\nWHERE {"
+    sparql_query += f"{papers_pattern} orkgp:HAS_PAPER."
+    
+    # Add the pattern for the benchmarking purposes to the SPARQL query
+    sparql_query += f"\n{papers_pattern} orkgp:HAS_BENCHMARK;"
+    sparql_query += f" orkgp:HAS_BENCHMARK {benchmarking_purposes_pattern}."
+    
+    # Add the pattern for the code references to the SPARQL query
+    sparql_query += f"\n{benchmarking_purposes_pattern} {code_references_pattern};"
+    sparql_query += f" {code_references_pattern}?code."
+    
+    # Add the filter for the Tsetlin Machine model to the SPARQL query
+    sparql_query += "\nFILTER(REGEX(?code, \"Tsetlin Machine\"))"
+    
+    # Close the WHERE clause in the SPARQL query
+    sparql_query += "\n}"
+    
+    # Return the generated SPARQL query
+    return sparql_query
+
+input_question = "Where can I find code references in papers that have used the Tsetlin Machine model for benchmark

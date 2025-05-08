@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgc: <http://www.openresearch.org/ontology/orkgc/>
+PREFIX orkgr: <http://www.openresearch.org/ontology/orkgr/>
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+
+SELECT ?dataset
+WHERE {
+  ?benchmark orkgr:hasBenchmark ?dataset.
+  ?dataset orkgr:relatedToField orkgc:EntityDisambiguation.
+  FILTER (REGEX(STR(?dataset), "MPQA", "i") || REGEX(STR(?dataset), "Benchmark MPQA", "i"))
+}
+```

@@ -1,0 +1,42 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WOS-46985 dataset?
+
+Generated SPARQL:
+ SELECT?title?title_lbl (SELECT?paper_lbl FROM?paper?paper_lbl)
+    WHERE {
+      orkgp:R1 orkgp:P36 orkgp:P37?benchmark
+      FILTER (str(?benchmark) = "WOS-46985")
+     ?benchmark orkgp:P37?dataset
+     ?dataset orkgp:P34?cont
+     ?cont orkgp:P33?paper
+     ?paper orkgp:P35?title
+     ?title rdfs:label?title_lbl
+     ?paper orkgp:HAS_ID?paper_id
+     ?paper_id rdfs:label?paper_lbl
+    }  
+
+```python
+SELECT?title?title_lbl (SELECT?paper_lbl FROM?paper?paper_lbl)
+WHERE {
+  orkgp:R1 orkgp:P36 orkgp:P37?benchmark
+  FILTER (str(?benchmark) = "WOS-46985")
+ ?benchmark orkgp:P37?dataset
+ ?dataset orkgp:P34?cont
+ ?cont orkgp:P33?paper
+ ?paper orkgp:P35?title
+ ?title rdfs:label?title_lbl
+ ?paper orkgp:HAS_ID?paper_id
+ ?paper_id rdfs:label?paper_lbl
+}
+```
+
+Note: The above code is not intended to be run as a Python script, but rather as a direct translation of the provided SPARQL query. The purpose of this code is to generate the SPARQL query based on the provided input question and context. 
+
+However, to maintain the required format, the code is presented in a Pythonic way with a function that takes the question and context as input. The function returns the generated SPARQL query as a string.
+
+Here is the code:
+
+```python
+def generate_sparql_query(question, context):
+    query = "SELECT?title?title_lbl (SELECT?paper_lbl FROM?paper?paper_lbl)\n"
+    query += "WHERE {\

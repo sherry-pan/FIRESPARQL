@@ -1,0 +1,76 @@
+<think>
+Okay, I need to figure out how to answer the question: "What is the name of the top performing model in terms of Unpermuted Accuracy score when benchmarked on the Sequential CIFAR-10 dataset?" using the provided ORKG RDF data dump.
+
+First, I'll extract the relevant terms from the question. The key entities here are "model" and "Sequential CIFAR-10 dataset". The property mentioned is "Unpermuted Accuracy score" and the action is "benchmark on".
+
+Looking through the context, I see that there are several resources related to models and datasets. For example, R147652 describes a method involving SVM and MNIST, which might be relevant. There's also R283709 which mentions "Named entity recognition" and "Graph analytics", which could be related to models.
+
+I need to find entities that are models and datasets. From the context, I see mentions of "SVM" and "MNIST" as seed terms, which are a model and a dataset respectively. There's also a mention of "SciBERT" used for clustering, which is another model.
+
+For the dataset, "Sequential CIFAR-10" isn't directly mentioned, but "CIFAR-10" is a known dataset, so maybe there's a related resource. However, in the provided data, I don't see a direct reference to "Sequential CIFAR-10", but I can infer that "CIFAR-10" might be related.
+
+The property "Unpermuted Accuracy score" would relate to evaluation metrics. In the context, R147244 has a value of "93.9", which might be an accuracy score. It's linked via HAS_VALUE, so that could be the property we're looking for.
+
+Now, I'll look for models and datasets in the context. Models mentioned include "SVM", "SciBERT", and others like "CRF algorithm". Datasets include "MNIST".
+
+I'll need to map these to their URIs. For example, "SVM" might be R147652, and "MNIST" could be another resource. Since "Sequential CIFAR-10" isn't present, I might have to consider "CIFAR-10" as a close match.
+
+Putting it all together, the top models would be those mentioned in the context with high accuracy scores. The top performing model might be linked to R147244 with a 93.9 score.
+
+I'll structure the JSON output with the extracted terms and their candidates, ensuring the correct RDF prefixes are used for URIs and types.
+</think>
+
+```json
+{
+  "question": "What is the name of the top performing model in terms of Unpermuted Accuracy score when benchmarked on the Sequential CIFAR-10 dataset?",
+  "extracted_terms": {
+    "model": "model",
+    "Sequential CIFAR-10 dataset": "Sequential CIFAR-10 dataset",
+    "Unpermuted Accuracy score": "Unpermuted Accuracy score",
+    "benchmark on": "benchmark on"
+  },
+  "candidates": {
+    "model": [
+      {
+        "uri": "orkgr:R147652",
+        "rdfs:label": "SVM",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R283709",
+        "rdfs:label": "Named entity recognition",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R283710",
+        "rdfs:label": "Graph analytics",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "Sequential CIFAR-10 dataset": [
+      {
+        "uri": "orkgr:R122689",
+        "rdfs:label": "MNIST",
+        "rdf:type": "orkgc:Dataset"
+      }
+    ],
+    "Unpermuted Accuracy score": [
+      {
+        "uri": "orkgp:HAS_VALUE",
+        "rdf:type": "orkgp:Predicate"
+      },
+      {
+        "uri": "orkgr:R147244",
+        "rdfs:label": "93.9",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmark on": [
+      {
+        "uri": "orkgp:HAS_BENCHMARK",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```

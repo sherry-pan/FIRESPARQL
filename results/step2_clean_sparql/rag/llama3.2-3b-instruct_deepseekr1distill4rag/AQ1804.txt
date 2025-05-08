@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkd: <http://example.org/orkd/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name
+WHERE { 
+  ?model orkgp:hasProperty ?paramsScore.
+  ?paramsScore orkgp:hasValue ?score.
+  ?model orkgp:hasProperty ?benchmarkOn.
+  ?benchmarkOn orkgp:hasValue <http://example.org/vtab-1k-dataset>.
+  ?model rdfs:label ?name.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

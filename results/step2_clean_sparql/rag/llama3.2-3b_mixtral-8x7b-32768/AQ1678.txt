@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracyScore
+WHERE {
+  ?model rdfs:label ?modelLabel.
+  ?model schema:accuracyScore ?accuracyScore.
+  ?model schema:benchmarkedOn ?dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  
+  FILTER (STR(?datasetLabel) = "MLDoc Zero-Shot English-to-French dataset")
+}
+ORDER BY DESC(?accuracyScore)
+LIMIT 1
+```

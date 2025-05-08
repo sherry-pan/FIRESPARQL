@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasBenchmark ?benchmark.
+  ?benchmark ora:achievedOn ?imdb_dataset.
+  ?benchmark ora:hasMetric ?metric.
+  ?benchmark ora:hasValue ?value.
+  BIND(iri("orkgr:IMDb-M_dataset") AS ?imdb_dataset).
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

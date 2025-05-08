@@ -1,0 +1,47 @@
+Question:
+List the metrics that are used to evaluate models on the 200k Short Texts for Humor Detection benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metricLabel
+    WHERE {
+       ?dataset a ora:Dataset.
+       ?dataset ora:hasDataset?dataset.
+       ?dataset ora:hasMetric?metric.
+       ?metric ora:hasMetric?metricLabel.
+        FILTER (str(?dataset) = "200k Short Texts for Humor Detection benchmark dataset").
+        BIND (str(?metricLabel) AS?metricLabel).
+    }
+    Note: The provided SPARQL query assumes that the dataset is already linked to the ORKG with the correct URI. 
+    Also, the filter condition (str(?dataset) = "200k Short Texts for Humor Detection benchmark dataset") is used to filter out the correct dataset. 
+
+    In the query,?metric and?metricLabel are the variables that represent the metrics used to evaluate models on the dataset. The?metric variable represents the metric object, and the?metricLabel variable represents the label of the metric object. 
+
+    The WHERE clause of the query consists of several sub-clauses. The first sub-clause filters the dataset to get only the dataset with the correct name. The second sub-clause gets the metrics of the filtered dataset. The third sub-clause gets the metric labels of the metrics obtained in the second sub-clause. 
+
+    The filter condition (str(?dataset) = "200k Short Texts for Humor Detection benchmark dataset") is used to filter out the correct dataset. This condition ensures that the query only returns the metrics used to evaluate models on the correct dataset. 
+
+    The BIND function is used to convert the string representation of the metric label to a literal value that can be used in the query. 
+
+    Therefore, the final output is a list of metrics with their corresponding labels, which are used to evaluate models on the correct dataset. 
+
+    Example use case:
+    - To find the metrics used to evaluate models on the 200k Short Texts for Humor Detection benchmark dataset, 
+      run the provided SPARQL query on the ORKG. 
+      - The query will return a list of metrics with their corresponding labels, 
+        which are used to evaluate models on the correct dataset. 
+
+    ```python
+    import orkg
+
+    # Initialize the ORKG
+    orkg.initialize()
+
+    # Create a SPARQL query
+    query = """
+        SELECT?metric?metricLabel
+        WHERE {
+           ?dataset a ora:Dataset.
+           ?dataset ora:hasDataset?dataset.
+           ?dataset ora:hasMetric?metric.
+           ?metric ora:hasMetric?metricLabel.
+            FILTER (str(?dataset) = "

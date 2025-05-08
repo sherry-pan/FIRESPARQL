@@ -1,0 +1,47 @@
+Question:
+Which model has achieved the highest Accuracy score on the Reuters En-De benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl (MAX(?score) AS?accuracy)
+     WHERE {
+       orkgp:R1P0R4 orkgp:P2 orkgp:R0P1?model.
+      ?model rdfs:label?model_lbl.
+      ?model orkgp:P2?score.
+      ?score rdfs:label?score_lbl.
+       FILTER(REGEX(?score_lbl, "Accuracy"))
+      ?model orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31 orkgp:R122689.
+      ?model orkgp:P2?score.
+      ?score rdfs:label?score_lbl.
+       FILTER(REGEX(?score_lbl, "score"))
+       BIND(xsd:float(?score_lbl) AS?score)
+       BIND(xsd:float(?model_lbl) AS?model_lbl)
+       SELECT?model?model_lbl (MAX(?score) AS?accuracy)
+       WHERE {
+         orkgp:R1P0R4 orkgp:P2 orkgp:R0P1?model.
+        ?model rdfs:label?model_lbl.
+        ?model orkgp:P2?score.
+        ?score rdfs:label?score_lbl.
+         FILTER(REGEX(?score_lbl, "Accuracy"))
+        ?model orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P31 orkgp:R122689.
+        ?model orkgp:P2?score.
+        ?score rdfs:label?score_lbl.
+         FILTER(REGEX(?score_lbl, "score"))
+         BIND(xsd:float(?score_lbl) AS?score)
+         BIND(xsd:float(?model_lbl) AS?model_lbl)
+       }
+       UNION
+       SELECT?model?model_lbl (MAX(?score) AS?accuracy)
+       WHERE {
+         orkgp:R1P0R4 orkgp:P2 orkgp:R0P1?model.
+        ?model rdfs:label?model_lbl.
+        ?model orkgp:P2?score.
+        ?score rdfs:label?score_lbl.
+         FILTER(REGEX(?score_lbl, "Accuracy"))
+        ?model orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P31 orkgp:R122689.
+        ?model orkgp:P2?score.
+        ?score rdfs:label?score_lbl.
+         FILTER(REGEX(?score_lbl, "score"))
+         BIND(xsd:float(?score_lbl) AS?

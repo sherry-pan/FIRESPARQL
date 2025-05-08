@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.io/rdf/ontology/>
+PREFIX orkc: <http://orkc.io/rdf/ontology/>
+PREFIX orkp: <http://orkp.io/rdf/ontology/>
+
+SELECT ?m (COUNT(?e) AS ?count)
+WHERE {
+  ?m orkp:relatedTo orkp:Performance_Assessment;
+     orkp:relatedTo orkp:Evaluation_Method;
+     orkp:relatedTo orkc:dataset;
+     orkp:relatedTo orkg:evaluation_metrics.
+  ?m orkp:relatedTo ?e.
+  ?m orkc:dataset orkc:datasetURI <http://nlp.stanford.edu/data/SQuAD2.0>.
+}
+GROUP BY ?m
+```

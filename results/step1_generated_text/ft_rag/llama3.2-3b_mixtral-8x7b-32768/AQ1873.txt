@@ -1,0 +1,75 @@
+Question:
+Provide a list of benchmarked datasets related to the Audio Classification research area?
+
+Generated SPARQL:
+ SELECT?dataset?dataset_lbl
+     WHERE {
+       orkgp:R123456 orkgp:P123456?classification.
+       FILTER(REGEX(STR(?classification), "Audio Classification"))
+      ?classification orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+     }
+     SELECT?dataset?dataset_lbl
+     WHERE {
+       orkgp:R123456 orkgp:P123456?classification.
+       FILTER(REGEX(STR(?classification), "Audio Classification"))
+      ?dataset orkgp:HAS_DATASET?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(STR(?benchmark_lbl) = "MPQA")
+      ?dataset orkgp:P123456?classification.
+      ?classification rdfs:label?classification_lbl.
+       FILTER(REGEX(STR(?classification_lbl), "Audio Classification"))
+     }
+     UNION
+     SELECT?dataset?dataset_lbl
+     WHERE {
+       orkgp:R123456 orkgp:P123456?classification.
+       FILTER(REGEX(STR(?classification), "Audio Classification"))
+      ?dataset orkgp:HAS_DATASET?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(STR(?benchmark_lbl) = "MPQA")
+      ?dataset orkgp:P123456?classification.
+      ?classification rdfs:label?classification_lbl.
+       FILTER(REGEX(STR(?classification_lbl), "Audio Classification"))
+     }    
+
+
+```python
+def generate_sparql_query(input_question):
+    # Define the context
+    context = {
+        "extracted_terms": {
+            "benchmarked datasets": ["MPQA"],
+            "Audio Classification": ["Audio Classification"]
+        },
+        "candidates": {
+            "benchmarked datasets": [
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "MPQA",
+                    "rdf:type": "orkgc:Resource"
+                },
+                {
+                    "uri": "orkgr:R122689",
+                    "rdfs:label": "MPQA",
+                    "rdf:type": "orkgc:Dataset"
+                }
+            ],
+            "Audio Classification": [
+                {
+                    "uri": "orkgc:C123456",
+                    "rdfs:label": "Audio Classification",
+                    "rdf:type": "orkgc:ResearchArea"
+                }
+            ]
+        }
+    }
+
+    # Define the prefixes
+    prefixes = {
+        "orkgc": "http://orkg.org/ontology/gc/",
+        "orkgp": "http://orkg.org/ontology/pb/"
+    }
+
+    # Define the SELECT clause
+    select_clause =

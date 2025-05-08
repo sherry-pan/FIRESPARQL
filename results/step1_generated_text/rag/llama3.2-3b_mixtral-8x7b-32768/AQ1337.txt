@@ -1,0 +1,53 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ SELECT?metric?score?result 
+     WHERE {
+    ?result  a  orkgp:BenchmarkResult.
+    ?result orkgp:HAS_METRIC?metric.
+    ?result orkgp:HAS_SCORE?score.
+    ?result orkggr:CONTAINS?dataset.
+    ?dataset orkggr:IS_INSTANCE_OF orkggr:Dataset.
+    ?dataset orkggr:IS_INSTANCE_OF orkggr:PaperFieldDataset.
+     }
+    Note: The answer should be a single SPARQL query. The answer may have multiple lines in the output. 
+
+    ```python
+def generate_sparql_query(question, context):
+    #...
+
+    # Construct the SPARQL query
+    sparql_query = "SELECT?metric?score?result "  # Select the variables to retrieve
+    sparql_query += "WHERE {"  # Start the WHERE clause
+    sparql_query += "?result a orkgp:BenchmarkResult."  # Assert the subject is a BenchmarkResult
+    sparql_query += "?result orkgp:HAS_METRIC?metric."  # Assert the subject has a metric
+    sparql_query += "?result orkgp:HAS_SCORE?score."  # Assert the subject has a score
+    sparql_query += "?result orkggr:CONTAINS?dataset."  # Assert the subject contains a dataset
+    sparql_query += "?dataset orkggr:IS_INSTANCE_OF orkggr:Dataset."  # Assert the dataset is an instance of Dataset
+    sparql_query += "?dataset orkggr:IS_INSTANCE_OF orkggr:PaperFieldDataset."  # Assert the dataset is an instance of PaperFieldDataset
+    sparql_query += "}"  # End the WHERE clause
+
+    return sparql_query
+
+# Test the function
+question = "Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?"
+context = {
+    "question": "Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?",
+    "extracted_terms": {
+        "highest benchmark result",
+        "metric",
+        "score",
+        "Paper Field dataset"
+    },
+    "candidates": {
+        "highest benchmark result": [
+        {
+            "uri": "orkgp:HAS_BEST_RESULT",
+            "rdfs:label": "Highest benchmark result",
+            "rdf:type": "orkgp:Predicate"
+        }
+        ],
+        "metric": [
+        {
+           

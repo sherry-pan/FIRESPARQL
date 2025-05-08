@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgc: <http://orkgr.org/resource/>
+PREFIX orkgr: <http://orkgr.org/resource/>
+PREFIX orkgp: <http://orkgr.org/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model a orkgc:Model .
+  ?result orkgr:EvaluatedOn orkgc:CIFAR-100 ;
+          orkgr:UsesMetric ?flops ;
+          orkgr:HasModel ?model .
+  ?flops a orkgr:FLOPS .
+}
+ORDER BY DESC(?flops)
+LIMIT 1
+```

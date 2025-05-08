@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?p
+WHERE {
+  ?article orkgp:has_contribution ?p.
+  ?article orkgc:Resource orkgr:R147246.
+  ?article orkgp:about ?topic.
+  ?topic orkgr:label "coronavirus".
+}
+GROUP BY ?p
+ORDER BY DESC(COUNT(?article))
+LIMIT 1
+```

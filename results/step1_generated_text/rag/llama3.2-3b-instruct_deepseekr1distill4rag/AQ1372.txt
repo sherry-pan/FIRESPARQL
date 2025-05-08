@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset DocRED (Human-annotated)?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?value
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset a orkg:has_dataset_docred_human_annotated.
+ ?benchmark_result a orkg:Result.
+ ?benchmark_result orkg:has_benchmark_result?result.
+ ?result orkg:has_metric?metric.
+ ?result orkg:has_value?value.
+ ?metric a orkg:Predicate.
+ ?value a orkg:Value.
+ ?benchmark_result orkg:has_benchmark_result?result.
+ ?result orkg:has_value?value.
+ ?result orkg:has_metric?metric.
+  FILTER (STR(?metric) = "F1-score" OR STR(?metric) = "accuracy").
+  FILTER (STR(?value) = "93.9").
+}
+```    Note: The above SPARQL query is based on the provided context and the question. It might need adjustments to fit the actual structure of the ORKG RDF data dump.<|eot_id|>

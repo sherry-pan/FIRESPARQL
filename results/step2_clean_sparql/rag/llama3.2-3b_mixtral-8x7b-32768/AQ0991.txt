@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?metric ?dataset 
+WHERE {
+    ?dataset orkgc:hasResource ?r.
+    ?r orkgc:label "Reuters De-En".
+    ?dataset orkgp:hasEvaluationMetric ?metric.
+    ?metric orkgp:label ?metricLabel.
+    FILTER (CONTAINS(?metricLabel, "accuracy") || CONTAINS(?metricLabel, "F1 score") || CONTAINS(?metricLabel, "precision") || CONTAINS(?metricLabel, "recall"))
+}
+```

@@ -1,0 +1,62 @@
+Question:
+What are the metrics of evaluation over the Hutter Prize dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (CONCAT(?eval, " = ",?value) AS?eval_value)
+     WHERE {
+     orkgp:R1 orkgp:HAS_EVALUATION?eval.
+    ?eval orkgp:HAS_DATASET?dataset.
+    ?dataset orkgp:HAS_DATASET?dataset_lbl.
+    ?dataset_lbl orkgp:HAS_DATASET?dataset.
+    ?dataset orkgp:HAS_DATASET orkgp:HAS_DATASET?eval.
+    ?eval orkgp:HAS_METRIC?metric.
+    ?metric orkgp:HAS_DATASET?dataset.
+    ?dataset orkgp:HAS_DATASET orkgp:HAS_DATASET?eval.
+    ?eval orkgp:HAS_METRIC?metric_lbl.
+     }   
+
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the given question and context.
+
+    Args:
+    - question (str): The natural language question.
+    - context (dict): The context information.
+
+    Returns:
+    - str: The generated SPARQL query.
+    """
+
+    # Initialize the SPARQL query
+    query = "SELECT?metric?metric_lbl (CONCAT(?eval, \" = \",?value) AS?eval_value)\n"
+
+    # Get the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+
+    # Get the candidates for the extracted terms
+    candidates = context["candidates"]
+
+    # Add the WHERE clause to the query
+    query += "WHERE {\n"
+
+    # Iterate over the extracted terms
+    for term in extracted_terms:
+        # Get the candidates for the current term
+        term_candidates = candidates[term]
+
+        # Iterate over the candidates
+        for candidate in term_candidates:
+            # Get the URI and label of the candidate
+            uri = candidate["uri"]
+            label = candidate["rdfs:label"]
+
+            # Add the clauses for the current candidate
+            if term == "metrics of evaluation":
+                query += f"  orkgp:{uri} orkgp:HAS_EVALUATION?eval.\n"
+                query += f" ?eval orkgp:HAS_DATASET?dataset.\n"
+                query += f" ?dataset orkgp:HAS_DATASET?dataset_lbl.\n"
+                query += f" ?dataset_lbl orkgp:HAS_DATASET?dataset.\n"
+                query += f" ?dataset orkgp:HAS_DATASET orkgp:HAS_DATASET?eval.\n"
+                query += f" ?eval orkgp:HAS

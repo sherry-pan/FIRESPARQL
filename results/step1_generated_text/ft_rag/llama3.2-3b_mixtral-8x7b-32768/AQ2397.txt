@@ -1,0 +1,46 @@
+Question:
+Where can I find code references in papers that have used the DeiT-Ti model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:Model      a            orkgc:Model;
+                       rdfs:label      ?model_lbl.
+        FILTER (str(?model_lbl) = "DeiT-Ti model")
+      ?model orkgp:P31       orkgp:HAS_MODEL.
+      ?cont      orkgp:P31      ?model;
+                 orkgp:HAS_MODEL      ?model.
+      ?eval      orkgp:P31      ?cont;
+                 orkgp:HAS_EVALUATION      ?eval.
+      ?eval      orkgp:HAS_EVALUATION       orkgp:HAS_DATASET      ?dataset.
+      ?dataset      orkgp:HAS_DATASET       orkgp:HAS_CODE        ?code.
+      ?cont      rdfs:label      ?cont_lbl.
+       FILTER (str(?cont_lbl) = "papers")
+      ?paper      orkgp:P31      ?cont;
+                  orkgp:HAS_MODEL      ?model.
+      ?code      orkgp:HAS_CODE      ?cont;
+                  orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_EVALUATION      ?eval.
+      }     .      ```
+The final answer is: 
+SELECT?code
+WHERE {
+ ?model      a           ?model_lbl.
+  FILTER (str(?model_lbl) = "DeiT-Ti model")
+ ?model      orkgp:P31      ?cont.
+ ?cont      orkgp:P31      ?model;
+             orkgp:HAS_MODEL      ?model.
+ ?cont      rdfs:label      ?cont_lbl.
+  FILTER (str(?cont_lbl) = "papers")
+ ?paper      orkgp:P31      ?cont;
+             orkgp:HAS_MODEL      ?model.
+ ?code      orkgp:HAS_CODE      ?cont;
+             orkgp:HAS_DATASET      ?dataset;
+             orkgp:HAS_EVALUATION      ?eval.
+ ?eval      orkgp:HAS_EVALUATION       orkgp:HAS_DATASET      ?dataset.
+ ?dataset      orkgp:HAS_DATASET       orkgp:HAS_CODE        ?code.
+}     .      ```      SELECT?code
+      WHERE {
+       ?cont      orkgp:P31      ?model.
+       ?model      orkgp:P31      ?model_lbl.
+        FILTER (str(?model_lbl) = "DeiT-T

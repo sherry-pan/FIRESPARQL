@@ -1,0 +1,35 @@
+Question:
+Can you list benchmarked problems in the area of Artificial Intelligence?
+
+Generated SPARQL:
+ PREFIX orkgr: <http://example.com/orkgr/>
+     PREFIX orkgc: <http://example.com/orkgc/>
+     PREFIX orkgp: <http://example.com/orkgp/>
+     SELECT?uri?label?score?type?rdfType 
+     WHERE {
+      ?uri orkgr:label?label.
+       BIND(FILTER(STR(?uri) = "benchmarked_problems" OR STR(?uri) = "Artificial_Intelligence")) AS?term.
+      ?uri orkgc:resource?resource.
+      ?resource orkgp:has_type?type.
+      ?resource orkgp:label?label.
+      ?resource orkgc:rdfs:label?rdfType.
+       BIND(FILTER(STR(?type) = "Problem" OR STR(?type) = "Field")) AS?termType.
+      ?resource orkgr:score?score.
+       BIND(FILTER((STR(?score) > 0.85) OR (STR(?type) = "Problem" AND STR(?score) > 0.9)))) AS?scoreFilter.
+      ?resource orkgr:uri?uri.
+      ?resource orkgc:resource?resource2.
+      ?resource2 orkgc:label?label.
+       FILTER((?scoreFilter OR (STR(?uri) = "benchmarked_problems" OR STR(?uri) = "Artificial_Intelligence"))) AND (STR(?uri)!= "benchmarked_problems" OR STR(?uri)!= "Artificial_Intelligence"))
+       BIND(CONCAT("http://example.com/orkgr/",?uri) AS?uri)
+       BIND(CONCAT("http://example.com/orkgc/",?type) AS?type)
+       BIND(CONCAT("http://example.com/orkgp/",?rdfType) AS?rdfType)
+       BIND(CONCAT("http://example.com/orkgr/",?score) AS?score)
+       BIND(CONCAT("http://example.com/orkgc/",?termType) AS?termType)
+       BIND(CONCAT("http://example.com/orkgr/",?term) AS?term)
+       FILTER(?score > 0.85)
+     } GROUP BY?term?termType?score?type?rdfType?uri
+     HAVING COUNT(DISTINCT?term) = 5 AND COUNT(DISTINCT?termType) = 5 AND COUNT(DISTINCT?score) = 5 AND COUNT(DISTINCT?type) = 5 AND COUNT(DISTINCT?rdfType) = 5
+     ORDER BY?score DESC
+```
+
+**Note**: This is a SPARQL query that returns a JSON response in the format specified in the prompt. The query is designed to retrieve the top 5 candidates for each of the extracted terms ("benchmarked problems" and "Artificial Intelligence") based on their similarity scores. The query uses the provided RDF prefixes and filters the results to ensure that only the most relevant candidates are returned. The final response is in JSON format, with each candidate represented by its URI, label, score, type, and RDF type.<|eot_id|>

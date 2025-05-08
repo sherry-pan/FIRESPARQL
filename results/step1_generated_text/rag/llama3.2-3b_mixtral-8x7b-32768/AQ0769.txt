@@ -1,0 +1,51 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the WMT2014 English-German dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkp: <http://example.org/orkp/>
+    PREFIX orkgs: <http://example.org/orkgs/>
+
+    SELECT?metric?dataset
+    WHERE {
+     ?dataset orkgs:hasDataset?dataset2.
+     ?dataset2 orkp:hasMetric?metric.
+     ?metric orkp:hasMetric?metric2.
+     ?metric2 rdfs:label?metricLabel.
+      FILTER (STR(?metricLabel) = "BLEU").
+     ?dataset orkgs:hasModel?model.
+     ?model orkp:hasMetric?metric3.
+     ?metric3 rdfs:label?metricLabel2.
+      FILTER (STR(?metricLabel2) = "ROUGE").
+    }
+    ```
+
+
+
+## Step 1: Understand the context provided
+The context includes the question, extracted terms, and candidate entities and properties in the ORKG. The question is "What evaluation metrics are commonly used when benchmarking models on the WMT2014 English-German dataset?" The extracted terms are "WMT2014 English-German dataset", "evaluation metrics", and "benchmarking models". The candidate entities and properties include URIs, labels, and types for these terms.
+
+## Step 2: Identify the relevant entities and properties
+From the context, we can identify the following relevant entities and properties:
+- Dataset: WMT2014 English-German dataset
+- Evaluation metrics: has evaluation metric, has metric
+- Benchmarking models: has model
+
+## Step 3: Construct the SPARQL query
+We need to construct a SPARQL query that retrieves the evaluation metrics commonly used when benchmarking models on the WMT2014 English-German dataset. The query should use the identified entities and properties.
+
+## Step 4: Write the SPARQL query
+The SPARQL query is as follows:
+```sparql
+SELECT?metric?dataset
+WHERE {
+ ?dataset orkgs:hasDataset?dataset2.
+ ?dataset2 orkp:hasMetric?metric.
+ ?metric orkp:hasMetric?metric2.
+ ?metric2 rdfs:label?metricLabel.
+  FILTER (STR(?metricLabel) = "BLEU").
+ ?dataset orkgs:hasModel?model.
+ ?model orkp:hasMetric?metric3.
+ ?metric3 rdfs:label?metricLabel2.
+

@@ -1,0 +1,58 @@
+Question:
+Could you provide a list of models that have been tested on the RTE benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX orkgp: <http://orkg.io/ontology/predicate/>
+    PREFIX orkgc: <http://orkg.io/ontology/resource/>
+    PREFIX orkgr: <http://orkg.io/ontology/resource/orkgr/>
+
+    SELECT?model?dataset
+    WHERE {
+     ?model orkgp:testedOn?dataset.
+      FILTER (IS_BROAD_MATCH(BC:match("RTE benchmark dataset",?dataset)) OR IS_BROAD_MATCH(BC:match("MNIST",?dataset)))
+    }
+    ```
+
+
+## Step 1: Determine the relevant RDF prefixes and types.
+The RDF prefixes and types needed for the query are:
+- `rdfs: <http://www.w3.org/2000/01/rdf-schema#>` for RDF schema
+- `orkgp: <http://orkg.io/ontology/predicate/>` for ORKG predicates
+- `orkgc: <http://orkg.io/ontology/resource/>` for ORKG resources
+- `orkgr: <http://orkg.io/ontology/resource/orkgr/>` for ORKG resources with specific URIs
+
+## Step 2: Define the query structure and variables.
+The query will select models that have been tested on the RTE benchmark dataset or MNIST. The variables are `?model` and `?dataset`.
+
+## Step 3: Specify the conditions for the filter.
+The filter will check if the dataset is a broad match for "RTE benchmark dataset" or "MNIST".
+
+## Step 4: Construct the SPARQL query.
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://orkg.io/ontology/predicate/>
+PREFIX orkgc: <http://orkg.io/ontology/resource/>
+PREFIX orkgr: <http://orkg.io/ontology/resource/orkgr/>
+
+SELECT?model?dataset
+WHERE {
+ ?model orkgp:testedOn?dataset.
+  FILTER (IS_BROAD_MATCH(BC:match("RTE benchmark dataset",?dataset)) OR IS_BROAD_MATCH(BC:match("MNIST",?dataset)))
+}
+```
+
+The final answer is: 
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://orkg.io/ontology/predicate/>
+PREFIX orkgc: <http://orkg.io/ontology/resource/>
+PREFIX orkgr: <http://orkg.io/ontology/resource/orkgr/>
+
+SELECT?model?dataset
+WHERE {
+ ?model orkgp:testedOn?dataset.
+  FILTER (IS_BROAD_MATCH(BC:match("RTE benchmark dataset",?dataset)) OR IS_BROAD_MATCH(BC:match("MNIST",?dataset)))
+}
+```<|eot_id|>

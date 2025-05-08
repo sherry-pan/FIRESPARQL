@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?dataset 
+WHERE {
+  ?dataset orkg:label ?label .
+  FILTER (regex(str(?label), "benchmarked", "i") && regex(str(?label), "dataset", "i")) .
+  
+  ?dataset orkgp:P28 ?related .
+  FILTER (regex(str(?related), "related to", "i")) .
+  
+  ?dataset orkgc:hasResearchArea ?classificationArea .
+  FILTER (regex(str(?classificationArea), "Sentence Classification", "i")) .
+}
+```

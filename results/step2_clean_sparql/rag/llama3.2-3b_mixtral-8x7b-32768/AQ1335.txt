@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset rdf:type orkg:Dataset.
+    ?dataset orkgp:HAS_NAME "Yelp-14".
+    ?dataset orkgp:HAS_BENCHMARK_RESULT ?benchmark.
+    ?benchmark orkgp:HAS_METRIC ?metric.
+    ?benchmark orkgp:HAS_RESULT ?benchmarkResult.
+    ?benchmarkResult orkgp:HAS_VALUE ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

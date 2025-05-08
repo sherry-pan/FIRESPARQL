@@ -1,0 +1,63 @@
+Question:
+What are the metrics of evaluation over the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgp:R1 orkgp:HAS_DATASET orkggp:R122689.
+       orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "PWC Leaderboards (restricted)", "i"))
+       orkgp:HAS_DATASET?dataset orkgp:HAS_METRIC?metric?metric_lbl.
+     }   
+
+
+```python
+def generate_sparql_query(context):
+    """
+    Generate a SPARQL query based on the provided context.
+    
+    Args:
+        context (dict): A dictionary containing the context information.
+        
+    Returns:
+        str: The generated SPARQL query.
+    """
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?metric?metric_lbl\n"
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += "WHERE {\n"
+    
+    # Get the dataset URI from the extracted terms
+    dataset_uri = extracted_terms["PWC Leaderboards (restricted) dataset"][0]["uri"]
+    
+    # Add the dataset to the SPARQL query
+    sparql_query += f"  orkgp:R1 orkgp:HAS_DATASET orkggp:{dataset_uri}.\n"
+    
+    # Add the dataset label to the SPARQL query
+    sparql_query += f"  orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset?dataset_lbl.\n"
+    sparql_query += "  FILTER(REGEX(STR(?dataset_lbl), \"PWC Leaderboards (restricted)\", \"i\"))\n"
+    
+    # Add the metric to the SPARQL query
+    sparql_query += "  orkgp:HAS_DATASET?dataset orkgp:HAS_METRIC?metric?metric_lbl.\n"
+    
+    # Close the WHERE clause in the SPARQL query
+    sparql_query += "}\n"
+    
+    return sparql_query
+
+context = {
+    "question": "What are the metrics of evaluation over the PWC Leaderboards (restricted) dataset?",
+    "extracted_terms": {
+        "PWC Leaderboards (restricted) dataset": [
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "PWC Leaderboards (restricted)",
+                "rdf:type": "orkgc:Resource"
+            },
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:

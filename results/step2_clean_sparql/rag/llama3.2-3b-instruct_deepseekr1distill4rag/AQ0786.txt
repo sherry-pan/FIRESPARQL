@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+SELECT ?metric ?dataset
+WHERE {
+  ?metric orkgc:relatedTo ?evaluation_method.
+  ?evaluation_method orkgp:hasProperty ?benchmarking_property.
+  ?benchmarking_property orkgc:hasValue ?benchmarking_value.
+  ?benchmarking_value orkgp:hasTarget ?benchmarking_target.
+  ?benchmarking_target orkgc:relatedTo ?dataset.
+  ?dataset a orkgc:Dataset.
+  FILTER (STR(?dataset) = "UCF101")
+  FILTER (STR(?metric) = "validation research" || STR(?metric) = "performance assessment").
+}
+```

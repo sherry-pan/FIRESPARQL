@@ -1,0 +1,41 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WMT2016 German-English dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+      WHERE {
+        orkgp:R123456?eval
+     ?eval orkgp:HAS_DATASET?dataset
+     ?dataset rdfs:label?dataset_lbl
+      FILTER (str(?dataset_lbl) = "WMT2016 German-English dataset")
+     ?eval orkgp:HAS_EVALUATION?evalu
+     ?evalu orkgp:HAS_PAPER?paper
+     ?paper rdfs:label?paper_lbl
+      }     
+
+
+
+```python
+SELECT?paper?paper_lbl
+WHERE {
+  orkgp:R123456?eval
+ ?eval orkgp:HAS_DATASET?dataset
+ ?dataset rdfs:label?dataset_lbl
+  FILTER (str(?dataset_lbl) = "WMT2016 German-English dataset")
+ ?eval orkgp:HAS_EVALUATION?evalu
+ ?evalu orkgp:HAS_PAPER?paper
+ ?paper rdfs:label?paper_lbl
+}
+```
+
+
+
+Note that the actual ID for the query `orkgp:R123456` will need to be replaced with the actual ID of the query that corresponds to the question "Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WMT2016 German-English dataset?". This ID can be obtained from the ORKG. 
+
+
+
+The SPARQL query can be used to query the ORKG to retrieve the required information. The query works as follows:
+- It selects two variables, `?paper` and `?paper_lbl`, which will hold the values of the paper and its title, respectively.
+- It then queries the graph to find all queries (`orkgp:R123456`) that have an evaluation (`?eval`).
+- For each evaluation, it checks if the evaluation is associated with a dataset (`?dataset`). If it is, it checks if the label of the dataset matches the WMT2016 German-English dataset. If it does, it continues to the next step.
+- For each evaluation that is associated with the WMT2016 German-English dataset, it checks if the evaluation has

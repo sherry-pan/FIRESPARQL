@@ -1,0 +1,12 @@
+```sparql
+SELECT ?p ?o 
+WHERE {
+  ?o a ora:Dataset.
+  ?o orkg:relatedTo ?related.
+  ?related orkg:hasValue ?v.
+  ?v rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(str(?label)), "metrics") && 
+          CONTAINS(LCASE(str(?label)), "evaluation") && 
+          CONTAINS(LCASE(str(?label)), "Atari"))
+}
+```

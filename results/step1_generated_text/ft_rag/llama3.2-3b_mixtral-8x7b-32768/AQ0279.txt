@@ -1,0 +1,44 @@
+Question:
+What are the models that have been benchmarked on the Atari 2600 Road Runner dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Road Runner")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+          ?model        orkgp:HAS_MODEL         ?cont.
+          ?model      rdfs:label              ?model_lbl.
+     } 
+
+    Note that the answer to the question is the list of models that have been benchmarked on the Atari 2600 Road Runner dataset. The answer will be a list of URIs and their corresponding labels. 
+
+    Here's an explanation of the SPARQL query:
+    The query first filters the dataset labels to get only the "Atari 2600 Road Runner" dataset. 
+    Then, it gets the models that have been benchmarked on this dataset by traversing the "HAS_DATASET" and "HAS_BENCHMARK" relationships. 
+    Finally, it gets the labels of these models by traversing the "HAS_MODEL" and "RDFS:label" relationships. 
+    The query outputs the URIs and labels of the models that have been benchmarked on the Atari 2600 Road Runner dataset. 
+
+    Note that the output format is (URI, Label). 
+
+    Example output:
+    (orkgp:R1, "Model 1")
+    (orkgp:R2, "Model 2")
+    (orkgp:R3, "Model 3") 
+    where orkp:R1, orkp:R2, orkp:R3 are URIs of the models. 
+
+    This query will return the models that have been benchmarked on the Atari 2600 Road Runner dataset. 
+
+    The answer will be a list of tuples, where each tuple contains the URI and label of a model. 
+
+    The ORKG provides the following predicates for the following relationships:
+    - orkgp:HAS_DATASET: A model has been benchmarked on a dataset.
+    - orkgp:HAS_BENCHMARK: A benchmark has been performed on a model.
+    - orkgp:HAS_MODEL: A model has been trained on a task. 
+    - orkgc:Dataset: A dataset is a collection of data.
+    - orkgc:Resource: A resource is a thing that has an identity. 
+    - rdfs:label: A resource has a label. 
+    - rdfs:type: A resource has a type. 
+    -

@@ -1,0 +1,48 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Enduro dataset?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkgp: <http://example.org/orkgp/>
+     PREFIX orkgr: <http://example.org/orkgr/>
+     SELECT?model?score
+     WHERE {
+     ?model orkgp:HAS_MODEL?score.
+     ?score orkgp:HAS_SCORE?score.
+     ?score orkgr:R122689.
+     ?model orkgr:R122689.
+      FILTER (STR(?score) = "Score Score" && STR(?score) = "top performing model" && STR(?score) = "Atari 2600 Enduro dataset" )
+      }
+      ```
+
+
+
+## Step 1: Identify the entities and properties mentioned in the question
+The question mentions the following entities and properties:
+- "top performing model"
+- "Score score"
+- "benchmarked on"
+- "Atari 2600 Enduro dataset"
+
+## Step 2: Match the entities and properties with the candidates provided in the context
+From the context, we have the following matches:
+- "top performing model" with the URI "orkgp:HAS_MODEL"
+- "Score score" with the URI "orkgp:HAS_SCORE"
+- "benchmarked on" with the URI "orkgp:HAS_EVALUATION"
+- "Atari 2600 Enduro dataset" with the URI "orkgr:R122689"
+
+## Step 3: Construct the SPARQL query based on the matched entities and properties
+We need to find the top performing model that has a Score score when benchmarked on the Atari 2600 Enduro dataset.
+
+```sparql
+SELECT?model?score
+WHERE {
+ ?model orkgp:HAS_MODEL?score.
+ ?score orkgp:HAS_SCORE?score.
+ ?score orkgr:R122689.
+ ?model orkgr:R122689.
+  FILTER (STR(?score) = "Score Score" && STR(?score) = "top performing model" && STR(?score) = "Atari 2600 Enduro dataset" )
+}
+```
+
+## Step 4: Refine the query to only

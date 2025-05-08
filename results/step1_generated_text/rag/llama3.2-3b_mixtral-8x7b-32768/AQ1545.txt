@@ -1,0 +1,46 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the CoNLL 2012 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?benchmark?metric 
+     WHERE {
+    ?model orkgp:HAS_MODEL?m.
+    ?m orkgp:HAS_METRIC?metric.
+    ?m orkgp:HAS_BENCHMARK?benchmark.
+    ?benchmark a orkgc:Benchmark.
+    ?benchmark orkgr:R122690.
+     filter (contains(str(?benchmark), "CoNLL 2012")).
+     filter (str(?metric) = "F1").
+     } 
+
+```python
+def generate_sparql_query(context):
+    """
+    Generate a SPARQL query based on the given context.
+    
+    The context is expected to contain the following elements:
+    - question: a string representing the natural language question
+    - extracted_terms: a set of strings representing the terms extracted from the question
+    - candidates: a dictionary containing candidate entities and properties in the ORKG
+    
+    The function returns a SPARQL query as a string.
+    """
+    # Extract the question, extracted terms, and candidates from the context
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?model?benchmark?metric "
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += "WHERE {"
+    
+    # Add the model subquery to the SPARQL query
+    sparql_query += "?model orkgp:HAS_MODEL?m."
+    
+    # Add the metric subquery to the SPARQL query
+    sparql_query += "?m orkgp:HAS_METRIC?metric."
+    
+    # Add the benchmark subquery to the SPARQL query
+    sparql_query += "?m

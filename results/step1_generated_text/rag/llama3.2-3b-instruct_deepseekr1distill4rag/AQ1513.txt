@@ -1,0 +1,25 @@
+Question:
+What is the name of the top performing model in terms of A2 score when benchmarked on the ANLI test dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkgp: <http://www.ontotext.com/orkg/>
+    PREFIX orkgc: <http://www.ontotext.com/orkgc/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    SELECT?model?A2score?ANLItestdataset
+    WHERE {
+     ?model orkgp:hasBenchmark?benchmark.
+     ?benchmark orkgp:hasDataset?dataset.
+     ?benchmark orkgp:hasMetric?metric.
+     ?metric orkgp:hasValue?value.
+     ?value orkgp:hasUnit?unit.
+     ?unit rdfs:label?A2score.
+     ?benchmark orkgp:hasMetric?metric2.
+     ?metric2 orkgp:hasDataset?dataset2.
+     ?dataset2 orkgp:hasName?ANLItestdataset.
+     ?benchmark orkgp:hasRank?rank.
+     ?rank orkgp:hasValue?topRank.
+     ?topRank orkgp:hasDataset?topBenchmarkedDataset.
+     ?topBenchmarkedDataset orkgp:hasName?topModel.
+    }
+    ```    Note: The above SPARQL query is a simplified version and may need to be adjusted based on the actual structure of the ORKG RDF data dump.<|eot_id|>

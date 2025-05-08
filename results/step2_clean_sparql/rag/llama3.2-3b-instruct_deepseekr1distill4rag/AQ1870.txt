@@ -1,0 +1,25 @@
+```sparql
+SELECT ?dataset ?uri ?label ?score ?type ?typeLabel
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:relatedTo ?relatedDataset.
+  ?relatedDataset a ora:Dataset.
+  ?relatedDataset ora:benchmark ?benchmark.
+  ?benchmark a ora:Benchmark.
+  ?benchmark ora:topic ?topic.
+  ?topic ora:topicOf ?topicOf.
+  ?topicOf a ora:ResearchArea.
+  ?topicOf ora:label ?topicLabel.
+  ?topicOf ora:uri ?topicUri.
+  
+  FILTER (?topicOf = ora:Semantic_Role_Labeling)
+  
+  SERVICE orca:dataset {
+    BIND(iri(?dataset) AS ?uri)
+    BIND(iri(?dataset) AS ?label)
+    BIND(iri(?dataset) AS ?score)
+    BIND(ora:Dataset AS ?type)
+    BIND(ora:Dataset AS ?typeLabel)
+  }
+}
+```

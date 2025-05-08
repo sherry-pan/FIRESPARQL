@@ -1,0 +1,21 @@
+Question:
+What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkp: <http://example.org/orkp/>
+    PREFIX orkpredicate: <http://example.org/orkpredicate/>
+
+    SELECT?model?dataset?score
+    WHERE {
+     ?model orkpredicate:ROUGE-2_score?score.
+     ?model orkpredicate:validation_research?dataset.
+     ?dataset orkpredicate:benchmarkedBy?dataset_benchmarked_by.
+     ?dataset orkpredicate:benchmarkedBy?model_benchmarked_by.
+     ?dataset_benchmarked_by orkpredicate:dataset?dataset.
+     ?model_benchmarked_by orkpredicate:model?model.
+      FILTER (?score > 0.75 AND?dataset = "AIDA").
+      FILTER (?score > 0.70 AND?model = "SVM" OR?model = "Stanford_NER" OR?model = "Flair_NER").
+    }
+    ```<|eot_id|>

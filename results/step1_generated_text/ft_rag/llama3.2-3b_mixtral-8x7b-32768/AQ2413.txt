@@ -1,0 +1,32 @@
+Question:
+Provide a list of papers that have utilized the CvT-21 (384 res) model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgp:Paper rdfs:label?paper.
+       orkgp:Paper orkgp:HAS_SOURCE orkgp:Source;
+                  orkgp:HAS_MODEL orkgp:Model;
+                  orkgp:HAS_CODE?code.
+       orkgp:Model rdfs:label?model.
+       FILTER(REGEX(?model, "CvT-21 (384 res)"))
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P27?util.
+      ?util orkgp:P28?code.
+     }
+     SELECT?model?code
+     WHERE {
+       orkgp:Paper rdfs:label?paper.
+       orkgp:Paper orkgp:HAS_SOURCE orkgp:Source;
+                  orkgp:HAS_MODEL orkgp:Model;
+                  orkgp:HAS_CODE?code.
+       orkgp:Model rdfs:label?model.
+       FILTER(REGEX(?model, "CvT-21 (384 res)"))
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P27?util.
+      ?util orkgp:P28?code.
+     }
+     UNION
+     SELECT?model?code
+     WHERE {
+       orkgp:Paper rdfs

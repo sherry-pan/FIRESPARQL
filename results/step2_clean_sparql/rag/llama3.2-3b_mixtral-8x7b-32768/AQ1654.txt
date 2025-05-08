@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkpd: <http://example.org/orkpd/>
+
+SELECT ?model
+WHERE {
+  ?model orkpd:has_metric ?metric.
+  ?metric orkp:has_benchmark ?benchmark.
+  ?benchmark orkgc:has_dataset ?dataset.
+  FILTER (str(?metric) = "PARAMS").
+  FILTER (str(?dataset) = "FGVC Aircraft benchmark dataset").
+}
+```

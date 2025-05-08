@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?result rdfs:label ?label.
+  FILTER (strcontains(STR(?label), 'validation') && strcontains(STR(?label), 'research')).
+  ?result a ?dataset.
+  FILTER (strcontains(STR(?dataset), 'Oxford-IIIT_Pets')).
+  ?result orkgr:has_value ?value.
+  ?result orkgr:has_metric ?metric.
+  ?metric a orkgp:Metric.
+  ?dataset a orkgp:Dataset.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

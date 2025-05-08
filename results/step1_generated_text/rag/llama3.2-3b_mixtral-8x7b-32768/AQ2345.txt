@@ -1,0 +1,35 @@
+Question:
+List the code links in papers that use the DDQN-PC model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+    SELECT?codeLink?paper 
+    WHERE {
+     ?paper orkg:usesModel ddqn-PC-model.
+     ?paper orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:hasCodeLink?codeLink.
+     ?paper orkg:hasID?id.
+     ?codeLink orkg:hasCodeLink?codeLink.
+      FILTER (?id!= "deleted")
+    }
+    ```
+``` 
+    Note: The SPARQL query uses the `rdf:type` property for the `Contribution` class. However, it does not explicitly state the `Contribution` class for the `papers` entity. Therefore, the query will not return any results for the `papers` entity. To resolve this, we need to add the `rdf:type` property for the `papers` entity as well.
+
+    ```sparql
+    PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX orkg:Contribution <http://orkg.org/orkg/class/Contribution>
+
+    SELECT?codeLink?paper 
+    WHERE {
+     ?paper orkg:usesModel ddqn-PC-model.
+     ?paper orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:hasCodeLink?codeLink.
+     ?paper orkg:hasID?id.
+     ?codeLink orkg:hasCodeLink?code

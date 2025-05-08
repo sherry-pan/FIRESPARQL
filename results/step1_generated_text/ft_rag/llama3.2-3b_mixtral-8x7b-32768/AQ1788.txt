@@ -1,0 +1,44 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Montezuma's Revenge dataset in terms of Average Return (NoOp) metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Montezuma's Revenge")
+         ?benchmark      orkgp:HAS_DATASET      ?dataset.
+         ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+         ?cont          orkgp:HAS_MODEL          ?model.
+         ?model         rdfs:label               ?model_lbl.
+      } UNION {
+      ?cont      orkgp:HAS_DATASET      ?dataset.
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Montezuma's Revenge")
+         ?benchmark      orkgp:HAS_DATASET      ?dataset.
+         ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+         ?cont          orkgp:HAS_METRIC        ?metric.
+         ?metric         orkgp:HAS_VALUE         ?value.
+         ?value         rdfs:label               ?value_lbl.
+         ?value         orkgp:HAS_AVERAGE_RETURN ?atp.
+         ?atp           orkgp:HAS_NOOP           ?noop.
+         ?noop          rdfs:label               ?noop_lbl.
+         ?model         rdfs:label               ?model_lbl.
+      }
+      SELECT?model?model_lbl
+      WHERE {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Montezuma's Revenge")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont          orkgp:HAS_MODEL          ?model.
+       ?model         rdfs:label               ?model_lbl.
+      }
+      ORDER BY DESC(?atp)
+      LIMIT 1.    ```select distinct?model?model_lbl
+      where {
+       ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 260

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkggc: <http://orkg.org/orkggc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?dataset a orkggc:Dataset;
+           rdfs:label "Atari 2600 Tennis benchmark dataset"@en.
+  ?model a orkggc:Model;
+         orkggc:score ?score.
+  FILTER NOT EXISTS {
+    ?otherModel a orkggc:Model;
+                orkggc:score ?otherScore.
+    FILTER(?otherScore > ?score)
+  }
+}
+```

@@ -1,0 +1,85 @@
+Question:
+Where can I find code references in papers that have used the MMV model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper orkgp:HAS_PAPER?paper.
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?pred.
+      ?pred orkgp:P33?benchmark.
+      ?benchmark orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_CODE?code.
+     } 
+     LIMIT 10; 
+     OFFSET 0; 
+
+```python
+def get_orkg_query(question, context):
+    # Context is a dictionary
+    extracted_terms = context['extracted_terms']
+    candidates = context['candidates']
+
+    # Initialize the SPARQL query with the SELECT clause
+    query = "SELECT?code"
+    
+    # Add the WHERE clause
+    query += " WHERE {\n"
+    
+    # Add the pattern for papers
+    query += "      ?paper orkgp:HAS_PAPER?paper."
+    
+    # Add the pattern for containing papers
+    query += "      ?paper orkgp:P31?cont."
+    
+    # Add the pattern for containing containing papers
+    query += "      ?cont orkgp:P32?pred."
+    
+    # Add the pattern for benchmarks
+    query += "      ?pred orkgp:P33?benchmark."
+    
+    # Add the pattern for benchmarking with a specific predicate
+    query += "      ?benchmark orkgp:HAS_BENCHMARK?benchmark."
+    
+    # Add the pattern for code references
+    query += "      ?benchmark orkgp:HAS_CODE?code."
+    
+    # Close the WHERE clause
+    query += "     }"
+    
+    # Add the LIMIT and OFFSET clauses
+    query += " LIMIT 10; "
+    query += "OFFSET 0; "
+
+    return query
+
+question = "Where can I find code references in papers that have used the MMV model for benchmarking purposes?"
+context = {
+    "extracted_terms": {
+        "MMV model": "MMV model",
+        "benchmarking purposes": "benchmarking purposes",
+        "code references": "code references",
+        "papers": "papers"
+    },
+    "candidates": {
+        "MMV model": [
+            {
+                "uri": "orkgr:R147244",
+                "rdfs:label": "MMV model",
+                "rdf:type": "orkgc:Resource"
+            }
+        ],
+        "benchmarking purposes": [
+            {
+                "uri": "orkgp:HAS_BENCHMARK",
+                "rdfs:label": "has benchmark",
+                "rdf:type": "orkgp:Predicate"
+            }
+        ],
+        "code references": [
+            {
+                "uri": "orkgp:HAS_CODE",
+                "rdfs:label": "has code",
+                "rdf:type": "orkgp:Predicate"
+            }
+       

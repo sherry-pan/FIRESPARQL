@@ -1,0 +1,39 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+     ?
+      orkgp:P31?contrib;
+        rdfs:label?paper.
+     ?contrib orkgp:P32?benchmark;
+               orkgp:P33?metric.
+     ?value a orkgp:Value;
+             orkgp:HAS_VALUE?value_val.
+      BIND(xsd:float(?value_val) AS?value)
+      FILTER(?metric =?cont)
+     ?cont orkgp:P32?cont_benchmark;
+            rdfs:label?cont_benchmark_lbl.
+      FILTER(REGEX(STR(?cont_benchmark_lbl), "Paper Field"))
+     ?cont_benchmark orkgp:P33?cont_metric.
+      FILTER(?cont_metric =?metric)
+     ?cont_value orkgp:P32?cont_benchmark;
+                 orkgp:P33?cont_metric.
+      FILTER(?cont_metric =?metric)
+     ?cont_value orkgp:P31?cont_contrib;
+                 orkgp:P32?cont_benchmark;
+                 orkgp:P33?cont_metric.
+     ?cont_contrib orkgp:P31?cont_paper;
+                   rdfs:label?cont_paper_lbl.
+      FILTER(REGEX(STR(?cont_paper_lbl), "Paper Field")
+     ?cont_value orkgp:P31?cont_contrib;
+                 orkgp:P32?cont_benchmark;
+                 orkgp:P33?cont_metric;
+                 orkgp:P40?cont_value
+     ?cont_value orkgp:P31?cont_contrib;
+                 orkgp:P32?cont_benchmark;
+                 orkgp:P33?cont_metric;
+                 orkgp:P40?cont_value
+     ?cont_value orkgp:P31?cont_contrib;
+                

@@ -1,0 +1,70 @@
+Question:
+List the code links in papers that use the Multi-Perspective Matching (ensemble) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkp: <http://example.org/orkp/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX orkgp: <http://example.org/orkgp/>
+
+    SELECT?model?code_link
+    WHERE {
+       ?model a orkg:Model.
+       ?model orkgp:has_model_component?component.
+       ?component a orkg:Entity_Linkage_Model.
+       ?paper a orkp:Paper.
+       ?paper orkp:has_code_link?code_link.
+       ?code_link a orkp:DOI_Link.
+       ?paper orkp:has_benchmark?benchmark.
+       ?benchmark a orkp:Benchmark.
+       ?benchmark orkp:has_model?benchmark_model.
+       ?benchmark_model a orkg:Model.
+       ?benchmark_model orkg:has_model_component?benchmark_component.
+       ?benchmark_component a orkg:Entity_Linkage_Model.
+       ?benchmark_component rdfs:label "Multi-Perspective Match (ensemble)".
+    }
+    LIMIT 1.     ```
+
+
+## Step 1: Identify the main entities and action in the query
+The main entities are "Multi-Perspective Match (ensemble) model" and "code links in papers." The action is "list," which implies retrieving specific information about these entities.
+
+## Step 2: Extract terms related to the model and code links
+The model in question is "Multi-Perspective Match (ensemble)," which is related to the methods described in the context. The code links would be URLs or DOIs associated with papers.
+
+## Step 3: Compute similarity scores
+Since the model isn't directly mentioned, we look for related concepts. Resource R284316 discusses entity recognition and linking, which might be similar.
+
+## Step 4: Select the top candidates
+The DOI from R284317 is the most relevant code link. For the model, even though it's not explicitly named, R284316's discussion on entity linking tools might be the closest match.
+
+## Step 5: Structure the answer with the extracted terms and their top candidates
+The extracted terms and their top candidates include the DOI as the code link and the related resource as the model.
+
+## Step 6: Generate the SPARQL query
+The SPARQL query should be able to query the ORKG, getting correct answer to the input question.
+
+## Step 7: Write the SPARQL query
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?model?code_link
+WHERE {
+   ?model a orkg:Model.
+   ?model orkgp:has_model_component?component.
+   ?component a orkg:Entity_Linkage_Model.
+   ?paper a orkp:Paper.
+   ?paper orkp:has_code_link?code_link.
+   ?code_link a orkp:DOI_Link.
+   ?paper orkp:has_benchmark?benchmark.
+   ?benchmark a orkp:Benchmark.
+   ?benchmark orkp:has_model?benchmark_model.
+   ?benchmark_model a orkg:Model.
+   ?benchmark_model orkg:has_model_component?benchmark_component.
+   ?benchmark_component a orkg:Entity_Linkage_Model.
+   ?benchmark_component rdfs:label "Multi-Perspective Match (ensemble)".
+}
+
+LIMIT 1.<|eot_id|>

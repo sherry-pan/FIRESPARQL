@@ -1,0 +1,44 @@
+Question:
+List the code links in papers that use the A3C FF (1 day) hs model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper orkgp:HAS_PAPER?paperPaper.
+      ?paper orkgp:HAS_BENCHMARK?benchmarkBench.
+      ?benchmarkBench rdfs:label?benchmarkLabel.
+      ?benchmarkBench orkgp:HAS_CODE?code.
+       FILTER(REGEX(STR(?benchmarkLabel), "A3C FF (1 day) hs"))
+      ?paper orkgp:HAS_CODE?code.
+     }
+     HAVING (COUNT(?code) > 0)
+     GROUP BY?code
+     ORDER BY (COUNT(?code) DESC)
+     LIMIT 10
+    ```
+The code links in papers that use the A3C FF (1 day) hs model in any benchmark can be retrieved by using the following SPARQL query.
+The query starts by selecting papers that use the A3C FF (1 day) hs model by filtering the benchmarks. It then retrieves the code links in these papers. The query uses a regular expression to filter the benchmarks, and it uses a `GROUP BY` and `HAVING` clause to limit the results to the top 10 code links. 
+
+The `FILTER(REGEX(STR(?benchmarkLabel), "A3C FF (1 day) hs"))` line filters the benchmarks to only include those with the label "A3C FF (1 day) hs". The `GROUP BY` and `HAVING` clauses are used to limit the results to the top 10 code links. 
+
+The `SELECT?code` line selects the code links, and the `WHERE` clause retrieves the code links in the papers that use the A3C FF (1 day) hs model. 
+
+The `ORDER BY (COUNT(?code) DESC)` line sorts the results in descending order based on the number of code links. 
+
+The `LIMIT 10` line limits the results to the top 10 code links. 
+
+This query can be used to retrieve the code links in papers that use the A3C FF (1 day) hs model in any benchmark. 
+
+The final answer is: SELECT?code
+WHERE {
+ ?paper orkgp:HAS_PAPER?paperPaper.
+ ?paper orkgp:HAS_BENCHMARK?benchmarkBench.
+ ?benchmarkBench rdfs:label?benchmarkLabel.
+ ?benchmarkBench orkgp:HAS_CODE?code.
+  FILTER(REGEX(STR(?benchmarkLabel), "A3C FF (1 day) hs"))
+ ?paper orkgp:HAS_CODE?code.
+}
+HAVING (COUNT(?code) > 0)
+GROUP BY?code
+ORDER BY (COUNT(?code) DESC)
+LIMIT

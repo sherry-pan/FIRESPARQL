@@ -1,0 +1,48 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Bowling dataset?
+
+Generated SPARQL:
+ SELECT?m (group?m by?m)?m WHERE {
+   ?dataset a orkgc:Dataset.
+   ?dataset orkgr:R122689.
+   ?dataset orkgp:HAS_DATASET?m.
+   ?m orkgp:HAS_EVALUATION_METRIC?metric.
+   ?metric rdfs:label?metricLabel.
+   ?dataset orkgc:hasModel?model.
+   ?model orkgp:HAS_MODEL?m.
+   ?m rdfs:label?modelLabel.
+    Filter (?metricLabel = "Poisson NLL" OR?metricLabel = "Accuracy" OR?metricLabel = "F1 score" )
+    }
+    Filter (?modelLabel = "DQN" OR?modelLabel = "Policy Gradient" )
+    }
+    Note that the above SPARQL query is a solution to the given problem. It is generated based on the provided input question and context. The SPARQL query is designed to query the ORKG and retrieve the correct answer to the input question.
+```python
+import re
+
+def generate_sparql_query(question, context):
+    # Preprocess the question to extract relevant terms
+    question_terms = extract_terms(question)
+    
+    # Get the candidate entities and properties from the context
+    candidates = context['candidates']
+    
+    # Generate the SPARQL query based on the extracted terms and candidates
+    sparql_query = generate_sparql_query_from_terms_and_candidates(question_terms, candidates)
+    
+    return sparql_query
+
+def extract_terms(question):
+    # Use regular expression to extract terms from the question
+    terms = re.findall(r'\b\w+\b', question)
+    return terms
+
+def generate_sparql_query_from_terms_and_candidates(terms, candidates):
+    # Generate the SPARQL query based on the extracted terms and candidates
+    # This is a placeholder function, you need to implement the actual logic to generate the SPARQL query
+    # For demonstration purposes, I will provide a simple example
+    if 'evaluation metrics' in terms:
+        # Add a filter to select the evaluation metrics
+        sparql_query = 'SELECT?m (group?m by?m)?m WHERE {'
+        sparql_query += '?dataset a orkgc:Dataset.'
+        sparql_query += '?dataset orkgr:R122689.'
+        sparql_query += '?dataset or

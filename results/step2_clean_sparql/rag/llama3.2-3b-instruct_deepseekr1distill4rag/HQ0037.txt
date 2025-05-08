@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgr: <http://www.openresearchknowledgegraph.org/resource/>
+
+SELECT ?contributor (COUNT(?article) AS ?article_count)
+WHERE {
+  ?article orkgc:has_contribution ?contributor.
+  ?article orkgr:topic ?topic.
+  FILTER (STR(?topic) = "coronavirus").
+}
+GROUP BY ?contributor
+ORDER BY DESC(?article_count)
+LIMIT 1
+```

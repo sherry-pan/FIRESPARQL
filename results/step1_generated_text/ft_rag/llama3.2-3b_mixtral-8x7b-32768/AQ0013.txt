@@ -1,0 +1,58 @@
+Question:
+Can you list the models that have been evaluated on the CommonsenseQA dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Resource;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "CommonsenseQA")
+          ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+          ?dataset_has_dataset       orkgp:HAS_MODEL      ?model.
+          ?model       rdfs:label              ?model_lbl.
+      }
+    Note: The query returns all the models that have been evaluated on the specified dataset. The models are identified by their URIs, which are represented as labels in the query output.
+    Note: The query uses the `str(?dataset_lbl)` filter to ensure that the correct dataset is selected, since the dataset's label is used to identify it in the ORKG. 
+    Note: The query uses the `?model       orkgp:HAS_DATASET      ?dataset_has_dataset.` line to get all the models that have been evaluated on the specified dataset. 
+
+```python
+def get_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the input question and context.
+
+    Args:
+        question (str): The input question in English.
+        context (dict): The context as background information for linking the correct entities or properties in the ORKG.
+
+    Returns:
+        str: The generated SPARQL query.
+    """
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+    
+    # Initialize the SPARQL query
+    sparql_query = ""
+    
+    # Define the SELECT clause
+    sparql_query += "SELECT?model?model_lbl\n"
+    
+    # Define the WHERE clause
+    sparql_query += "WHERE {\n"
+    
+    # Get the dataset
+    dataset = extracted_terms["CommonsenseQA dataset"]
+    dataset_lbl = "str(?dataset_lbl)"
+    sparql_query += "      ?dataset       a                orkgc:Resource;\n"
+    sparql_query += "                      " + dataset_lbl + "\n"
+    sparql_query += "           FILTER (" + dataset_lbl + " = \"" + dataset + "\")\n"
+    
+    # Get the dataset and its has_dataset property
+    sparql_query += "          ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.\n"
+    
+    # Get the models that have been evaluated on the dataset
+    sparql_query += "          ?dataset_has_dataset       orkgp:HAS_MODEL      ?model.\n"
+    
+    # Get the models and their labels
+    sparql_query += "          ?model       rdfs:label              ?model_lbl.\n"
+    
+    # Close

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model orkgc:hasModel ?m. 
+  ?m orkp:label ?modelLabel.
+  ?m orkp:hasEvaluation ?eval.
+  ?eval orkgc:hasDataset ?ds. 
+  ?ds orkgc:label ?dsLabel.
+  FILTER (str(?dsLabel) = "ShARe/CLEF eHealth corpus dataset").
+}
+```

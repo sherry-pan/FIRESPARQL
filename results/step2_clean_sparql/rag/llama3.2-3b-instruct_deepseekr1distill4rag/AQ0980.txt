@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?m
+WHERE {
+  ?m a orkgp:Predicate.
+  FILTER CONTAINS(STR(?m), 'evaluation').
+  ?m orkgp:evaluatedOn ?d.
+  ?d a orkgr:Dataset.
+  FILTER CONTAINS(STR(?d), 'Yelp-5').
+}
+GROUP BY ?m
+```

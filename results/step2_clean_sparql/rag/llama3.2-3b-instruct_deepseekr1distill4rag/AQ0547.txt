@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkc: <http://orkc.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkpredicate: <http://orkpredicate.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkc:Research_Paper.
+  ?paper orkpredicate:include_a_benchmark_for ?benchmark.
+  ?benchmark orkpredicate:has_dataset ?dataset.
+  ?dataset orkg:label ?dataset_label.
+  FILTER (?dataset_label = "Walker, walk (DMControl500k) dataset"@en)
+  ?paper orkpredicate:has_title ?title.
+  ?paper orkpredicate:has_id ?id.
+}
+```

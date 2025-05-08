@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkgr.org/ontology/>
+PREFIX orkgc: <http://orkgr.org/ontology#>
+PREFIX orkgp: <http://orkgr.org/ontology/predicate/>
+SELECT ?metric ?score
+WHERE {
+  ?benchmarkResult orkgc:hasMetric ?metric.
+  ?benchmarkResult orkgc:hasScore ?score.
+  ?dataset orkgc:hasBenchmarkResult ?benchmarkResult.
+  FILTER(?dataset = orkgr:WMT2014_French_English_dataset).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

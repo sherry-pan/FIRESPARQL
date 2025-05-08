@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?evaluation orkgr:hasModel ?model.
+  ?evaluation orkgr:hasAccuracy ?accuracy.
+  ?evaluation orkgr:hasDataset ?dataset.
+  ?dataset rdfs:label "Reuters En-De benchmark".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

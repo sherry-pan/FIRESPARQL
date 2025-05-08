@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/resource/>
+
+SELECT ?model ?bleu_score 
+WHERE {
+    ?model orkgc:hasEntity ?entity.
+    ?entity orkg:hasProperty ?property.
+    ?property orkg:hasValue ?bleu_score.
+    ?entity orkgc:hasDataset ?dataset.
+    ?dataset orkgc:hasBenchmark ?benchmark.
+    ?benchmark orkgc:hasDataset orkgc:WMT2016_Romanian_English.
+}
+ORDER BY DESC(?bleu_score)
+LIMIT 1
+```

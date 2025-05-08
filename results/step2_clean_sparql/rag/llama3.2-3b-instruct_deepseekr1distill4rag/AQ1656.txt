@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?value
+WHERE {
+  ?model rdfs:label ?model_label.
+  ?model orkgc:has_metric ?metric.
+  ?metric rdfs:label ?metric_label.
+  ?model orkgp:has_benchmarking ?benchmarking.
+  ?benchmarking rdfs:label ?benchmarking_label.
+  ?model orkg:has_dataset ?dataset.
+  ?dataset rdfs:label ?dataset_label.
+  ?model orkg:has_score ?value.
+  
+  FILTER (?benchmarking_label = "benchmarking").
+  FILTER (?metric_label = "FLOPS").
+  FILTER (?dataset_label = "Oxford-IIIT Pets dataset").
+  FILTER (isNumeric(?value)).
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

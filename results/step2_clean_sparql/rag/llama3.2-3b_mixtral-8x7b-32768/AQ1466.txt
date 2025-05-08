@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkgp:HAS_MODEL ?f1_model.
+  ?f1_model orkgp:ACHIEVED_F1_SCORE ?score.
+  ?f1_model orkgr:R122689 orkgp:HAS_BENCHMARK ?f1_benchmark.
+  ?f1_benchmark orkgp:HAS_EVALUATION ?f1_evaluation.
+  ?f1_evaluation a orkgc:Dataset.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

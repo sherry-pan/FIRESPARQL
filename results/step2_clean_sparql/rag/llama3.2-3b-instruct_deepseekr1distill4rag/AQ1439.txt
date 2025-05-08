@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkg: <http://example.org/orkgp/>
+PREFIX orkc: <http://example.org/orkgc/>
+
+SELECT ?model ?dataset ?metric
+WHERE {
+  ?model orkg:benchmark ?dataset ;
+         orkg:with ?metric.
+  ?dataset orkg:resourceName "ImageNet 64x64".
+  FILTER (STR(?metric) = "Bits per dim").
+}
+ORDER BY ?metric
+LIMIT 1
+```

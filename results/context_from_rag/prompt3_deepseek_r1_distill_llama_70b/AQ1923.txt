@@ -1,0 +1,69 @@
+<think>
+Okay, so I need to figure out how to answer the query: "List the code links in papers that use the Long Short Transformer (LSTM) model in any benchmark?" using the provided ORKG RDF data. Let me break this down step by step.
+
+First, I'll extract the relevant terms from the question. The key entities here are "code links," "papers," "Long Short Transformer (LSTM) model," and "benchmarks." The properties involved would be things like "uses," "implemented in," "evaluated on," etc.
+
+Looking at the context data, I see several resources and predicates. For example, R147246 is a paper with authors and a venue. R283709 and R283710 are also papers with their own details. The predicates like P27 mention authors, P28 is the year, P29 is the volume, P31 links to other resources, and HAS_VENUE gives the publication place.
+
+I need to find entities related to "code links." In the data, I don't see explicit links, but maybe "HAS_VENUE" or other predicates can help. For "papers," resources like R147246 and R283710 are papers. The "Long Short Transformer" isn't directly mentioned, but maybe "LSTM" is referred to elsewhere. Benchmarks are mentioned in the context as "Benchmark MPQA" and similar.
+
+Next, I'll look for the top similar entities or properties. Since "code links" aren't explicitly present, I'll consider "HAS_VENUE" as a possible link. For "papers," the resources R147246 and R283710 are relevant. For "LSTM," maybe there's a related resource or predicate. Benchmarks are covered under resources like R122689.
+
+Now, selecting the top candidates, I'll list the most relevant ones. For "code links," R147247 (HAS_VENUE) is a good fit. For "papers," R147246 and R283710 are top choices. "LSTM' might relate to R283709, which is about methods and models. Benchmarks could be R122689 or R131168.
+
+I'll structure the JSON output with these extracted terms and their candidates, ensuring each entry has the correct URI, label, and type. I'll also make sure to use the right prefixes for URIs and include the necessary rdf:type information.
+
+Finally, I'll format everything into the specified JSON structure, grouping the results under each extracted term and ensuring the top five candidates are included where applicable.
+</think>
+
+```json
+{
+  "question": "List the code links in papers that use the Long Short Transformer model in any benchmark?",
+  "extracted_terms": {
+    "code links": "code links",
+    "papers": "papers",
+    "Long Short Transformer model": "Long Short Transformer model",
+    "benchmarks": "benchmarks"
+  },
+  "candidates": {
+    "code links": [
+      {
+        "uri": "orkgr:R147247",
+        "rdfs:label": "HAS_VENUE",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "papers": [
+      {
+        "uri": "orkgr:R147246",
+        "rdfs:label": "Paper",
+        "rdf:type": "orkgc:Resource"
+      },
+      {
+        "uri": "orkgr:R283710",
+        "rdfs:label": "Paper",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "Long Short Transformer model": [
+      {
+        "uri": "orkgr:R283709",
+        "rdfs:label": "method",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmarks": [
+      {
+        "uri": "orkgr:R122689",
+        "rdfs:label": "MPQA",
+        "rdf:type": "orkgc:Dataset"
+      },
+      {
+        "uri": "orkgr:R131168",
+        "rdfs:label": "Benchmark MPQA",
+        "rdf:type": "orkgc:Benchmark"
+      }
+    ]
+  }
+}
+```

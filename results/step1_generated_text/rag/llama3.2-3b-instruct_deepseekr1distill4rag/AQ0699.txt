@@ -1,0 +1,20 @@
+Question:
+List the metrics that are used to evaluate models on the CommonsenseQA benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?metric?dataset
+WHERE {
+ ?metric orkgp:evaluatedOn?dataset.
+ ?dataset orkgr:rdfType orkgc:Dataset.
+  SERVICE orkgr:filter {
+    bind((or:accuracy OR or:f1-score OR or:precision OR or:recall OR or:roc-auc) as?metric)
+  }
+}
+```
+    Note: The `orkgr:filter` service is used to filter the results based on the extracted metrics. The `bind` function is used to bind the filtered metric URIs to the `?metric` variable. The `or` function is used to combine the metric URIs into a single binding.
+
+    This SPARQL query retrieves the metrics that are used to evaluate models on the CommonsenseQA benchmark dataset. The `SELECT` clause specifies the variables to retrieve, and the `WHERE` clause defines the conditions for the retrieval. The `SERVICE orkgr:filter` clause uses the `orkgr:filter` service to filter the results based on the extracted metrics. The `bind` function is used to bind the filtered metric URIs to the `?metric` variable. The `or` function is used to combine the metric URIs into a single binding.<|eot_id|>

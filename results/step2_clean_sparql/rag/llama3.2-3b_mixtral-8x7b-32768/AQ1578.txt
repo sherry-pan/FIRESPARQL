@@ -1,0 +1,13 @@
+```sparql
+SELECT ?model ?score
+FROM <https://example.org/orkg/>
+WHERE {
+  ?model ortkgc:HAS_MODEL ?best_model.
+  ?best_model ortkgc:HAS_DATASET ?dataset.
+  ?dataset ortkgc:HAS_EVALUATION_METRIC ?metric.
+  ?metric ortkgc:HAS_ROUGE_2 ?score.
+  FILTER (STR(?score) > "0").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

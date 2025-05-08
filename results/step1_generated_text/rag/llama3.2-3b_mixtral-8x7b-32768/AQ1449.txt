@@ -1,0 +1,40 @@
+Question:
+What is the name of the top performing model in terms of Accuracy (High) score when benchmarked on the RACE dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT?model?score?dataset
+WHERE {
+ ?model orkgp:HAS_MODEL?model2.
+ ?model2 orkgp:HAS_SCORE?score.
+ ?score orkgp:HAS_EVALUATION?evaluation.
+ ?evaluation orkgr:RACE?dataset.
+ ?model orkgp:HAS_EVALUATION?evaluation2.
+ ?evaluation2 orkgr:RACE?dataset2.
+  FILTER (str(?score) = "Accuracy (High) Score").
+  FILTER (str(?dataset) = "RACE").
+  FILTER (str(?evaluation) = "benchmarked on").
+ ?model orkgp:HAS_MODEL?model3.
+ ?model3 orkgp:HAS_SCORE?score2.
+ ?score2 orkgp:HAS_EVALUATION?evaluation3.
+ ?evaluation3 orkgr:RACE?dataset3.
+ ?model orkgp:HAS_MODEL?model4.
+ ?model4 orkgp:HAS_SCORE?score3.
+ ?score3 orkgp:HAS_EVALUATION?evaluation4.
+ ?evaluation4 orkgr:RACE?dataset4.
+  FILTER (str(?score) = "Accuracy (High) Score").
+  FILTER (str(?dataset) = "RACE").
+  FILTER (str(?evaluation) = "benchmarked on").
+ ?model orkgp:HAS_MODEL?model5.
+ ?model5 orkgp:HAS_SCORE?score4.
+ ?score4 orkgp:HAS_EVALUATION?evaluation5.
+ ?evaluation5 orkgr:RACE?dataset5.
+  FILTER (str(?score) = "Accuracy (High) Score").
+  FILTER (str(?dataset) = "RACE").
+  FILTER (str(?evaluation) = "benchmarked on").
+ ?model orkgp:HAS_MODEL?model6.
+ ?model6 orkgp:HAS_SCORE?score5.
+ ?score5

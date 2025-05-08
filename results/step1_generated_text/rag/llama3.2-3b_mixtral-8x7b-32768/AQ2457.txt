@@ -1,0 +1,45 @@
+Question:
+Can you provide links to code used in papers that benchmark the COMET - Direct model?
+
+Generated SPARQL:
+ SELECT?paper?code?link 
+     WHERE {
+    ?paper rdf:type oksgc:Paper.
+    ?paper orkgc:hasCode?code.
+    ?code orkgp:hasLink?link.
+    ?paper orkgp:hasBenchmark?benchmark.
+    ?benchmark orkgp:hasEvaluation?evaluation.
+    ?evaluation orkgp:hasEvaluationTarget?target.
+    ?target orkg:label "COMET - Direct model"@en.
+     FILTER (STRLEN(?target) = 23)
+     }
+     END { } 
+
+```
+
+## Step 1:  Identify the key entities and properties mentioned in the question.
+The key entities and properties mentioned in the question are: "COMET - Direct model", "papers", "benchmark", and "code".
+
+## Step 2:  Identify the candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question.
+The candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question are: "COMET - Direct model" with URI "orkgr:R44252", "papers" with URIs "orkgr:R147246" and "orkgr:R36054", "benchmark" with URI "orkgp:HAS_EVALUATION", and "code" with URI "orkgp:HAS_CODE".
+
+## Step 3:  Determine the relationships between the entities and properties.
+The relationships between the entities and properties are: "papers" are related to "benchmark" through "hasBenchmark", and "code" is related to "benchmark" through "hasEvaluationTarget", and "code" is related to "papers" through "hasCode".
+
+## Step 4:  Construct the SPARQL query based on the relationships determined in step 3.
+The SPARQL query can be constructed as follows:
+- Select the "papers" that have "hasBenchmark" with "benchmark" that has "hasEvaluationTarget" with "target" that has label "COMET - Direct model"@en.
+- Filter the results to only include papers that have exactly 23 characters in their label.
+
+## Step 5:  Write the final SPARQL query.
+The final SPARQL query is:
+```
+SELECT?paper?code?link 
+WHERE {
+ ?paper rdf:type oksgc:Paper.
+ ?paper orkgc:hasCode?code.
+ ?code orkgp:hasLink?link.
+ ?paper orkgp:hasBenchmark?benchmark.
+ ?benchmark orkgp:hasEvaluation?evaluation.
+ ?evaluation orkgp:hasEvaluationTarget?target.
+ ?target orkg:label

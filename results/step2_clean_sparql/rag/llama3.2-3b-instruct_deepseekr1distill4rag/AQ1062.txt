@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://orkgr.org/ontology#>
+PREFIX orkgp: <http://orkgp.org/ontology#>
+PREFIX orkgc: <http://orkgc.org/ontology#>
+
+SELECT ?b ?m ?v
+WHERE {
+  ?s orkgc:relatedTo ?o.
+  ?s orkgr:hasBenchmarkScore ?b.
+  ?b orkgr:hasMetric ?m.
+  ?b orkgp:hasValue ?v.
+  FILTER (str(?o) = "Automatically labeled Medline abstracts corpus dataset"@en).
+  FILTER (?v = "93.9"^^xsd:float).
+}
+```
+
+This corrected query removes the typo errors related to variable selection and correctly utilizes FILTER conditions to find the entry with the "Automatically labeled Medline abstracts corpus dataset" and fetches the associated benchmark score and its metric. The @en tag is kept for strings where it makes sense linguistically, and the datatype for "93.9" is set to `xsd:float` to ensure a correct literal query.

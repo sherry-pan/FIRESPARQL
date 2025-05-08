@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?title ?id
+WHERE {
+ ?paper orkgp:has_benchmark ?benchmark.
+ ?benchmark orkgc:has_dataset ?dataset.
+ FILTER (CONTAINS(STR(?dataset), "SemEval-2018 Task 7"))
+ ?paper orkgp:has_title ?title.
+ ?paper orkgp:has_id ?id.
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?githubLink 
+WHERE {
+  ?paper a orkgc:Resource.
+  ?paper rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(STR(?label)), "bert + bilstm + crf decoding model")).
+  ?paper orkgp:hasCode ?code.
+  ?code a orkgp:Code_Link.
+  ?code orkgp:GitHub_Repository ?githubLink.
+}
+```

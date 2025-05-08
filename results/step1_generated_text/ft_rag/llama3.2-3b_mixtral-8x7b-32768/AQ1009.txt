@@ -1,0 +1,58 @@
+Question:
+What are the metrics of evaluation over the ObjectNet dataset?
+
+Generated SPARQL:
+ SELECT?metric
+     WHERE {
+         orkgr:R122689 rdfs:label?dataset.
+         FILTER(STR(?dataset) = "ObjectNet")
+         orkgr:R122689 orkgp:HAS_METRIC?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?metric orkgp:HAS_EVALUATION?eval.
+        ?eval rdfs:label?eval_lbl.
+         FILTER(REGEX(?eval_lbl, "accuracy|f1|recall|precision|AP", "i"))
+        ?metric orkgp:HAS_SCORE?score.
+        ?score rdfs:label?score_lbl.
+         FILTER(REGEX(?score_lbl, "accuracy|f1|recall|precision|AP", "i"))
+     } 
+    END; 
+
+    SELECT?metric
+    WHERE {
+         orkgr:R122689 rdfs:label?dataset.
+         FILTER(STR(?dataset) = "ObjectNet")
+         orkgp:HAS_EVALUATION?eval.
+        ?eval rdfs:label?eval_lbl.
+         FILTER(REGEX(?eval_lbl, "accuracy|f1|recall|precision|AP", "i"))
+        ?eval orkgp:HAS_METRIC?metric.
+        ?metric rdfs:label?metric_lbl.
+         FILTER(REGEX(?metric_lbl, "accuracy|f1|recall|precision|AP", "i"))
+        ?metric orkgp:HAS_SCORE?score.
+        ?score rdfs:label?score_lbl.
+         FILTER(REGEX(?score_lbl, "accuracy|f1|recall|precision|AP", "i"))
+     } 
+    END; 
+
+    Note: The above SPARQL query is just one possible query. The same question could have multiple possible queries. Other queries may also return the same results. 
+    Please verify the results and refine the query if needed. 
+
+```python
+def get_sparql_query(context):
+    # Define the prefixes
+    prefixes = {
+        'rdfs': 'rdfs:label',
+        'orkgr': 'orkgr:label',
+        'orkgc': 'orkgc:label',
+        'orkgp': 'orkgp:label',
+    }
+
+    # Define the query
+    query = """
+    SELECT?metric
+    WHERE {
+        orkgr:R122689 rdfs:label?dataset.
+        FILTER(STR(?dataset) = "ObjectNet")
+        orkgr:R122689 orkgp:HAS_METRIC?metric.
+       ?metric rdfs:label?metric_lbl.
+       ?metric orkgp:HAS_EVALUATION?eval.
+       ?eval rdfs:label

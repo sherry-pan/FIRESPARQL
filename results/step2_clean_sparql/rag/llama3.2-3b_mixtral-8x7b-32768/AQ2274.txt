@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/prop/>
+
+SELECT ?paper ?paperCodeReference
+WHERE {
+  ?paper orkg:hasPaper ?p1.
+  ?p1 orkg:hasCodeReference ?paperCodeReference.
+  FILTER (CONTAINS(LCASE(STR(?p1)), "pegasus") && CONTAINS(LCASE(STR(?paperCodeReference)), "benchmarking"))
+}
+```

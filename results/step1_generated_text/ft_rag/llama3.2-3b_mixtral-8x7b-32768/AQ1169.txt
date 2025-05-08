@@ -1,0 +1,52 @@
+Question:
+What is the top benchmark score and its metric on the Words in Context dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+     orkgp:R136475     orkgc:CONTAIN?dataset.
+    ?dataset      a                orkgc:Dataset;
+                   orkgp:HAS_DATASET      ?has_dataset.
+      ?has_dataset   a                orkgp:Value;
+                     orkgp:HAS_DATASET      ?has_dataset.
+      ?has_dataset      orkgp:HAS_DATASET       orkgp:HAS_METRIC.
+      ?has_metric      orkgp:HAS_METRIC       orkgp:HAS_VALUE.
+      ?has_value       orkgp:HAS_VALUE       orkgp:Value;
+                       orkgp:GET_VALUE        ?get_value.
+      ?get_value      rdfs:label              ?metric_lbl.
+      ?metric         orkgp:HAS_METRIC         orkgp:HAS_VALUE.
+      ?metric         orkgp:HAS_VALUE        ?has_value.
+      ?has_value      orkgp:HAS_VALUE        ?value.
+      ?value         orkgp:GET_VALUE        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+     FILTER(REGEX(?metric_lbl, "93.9", "i"))
+     }
+     ```
+
+
+    SELECT?metric?metric_lbl
+    WHERE {
+      orkgp:R136475       orkgc:CONTAIN?dataset.
+     ?dataset            a                orkgc:Dataset;
+                          orkgp:HAS_DATASET      ?has_dataset.
+     ?has_dataset        orkgp:HAS_DATASET       orkgp:HAS_METRIC.
+     ?has_metric        orkgp:HAS_METRIC       orkgp:HAS_VALUE.
+     ?has_value         orkgp:HAS_VALUE       orkgp:Value;
+                          orkgp:GET_VALUE        ?get_value.
+     ?get_value         rdfs:label              ?metric_lbl.
+     ?metric            orkgp:HAS_METRIC         orkgp:HAS_VALUE.
+     ?metric            orkgp:HAS_VALUE        ?has_value.
+     ?has_value         orkgp:HAS_VALUE        ?value.
+     ?value            orkgp:GET_VALUE        ?metric.
+     ?metric            rdfs:label              ?metric_lbl.
+      FILTER(REGEX(?metric_lbl, "93.9", "i"))
+    } 
+   .order by DESC(?metric_lbl)
+    LIMIT 1
+    ```
+
+
+
+    SELECT?metric?metric_lbl
+    WHERE {
+      orkgp:R136475       orkgc:CONTAIN

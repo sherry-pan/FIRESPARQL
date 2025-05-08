@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?sector ?energy_sector ?freq
+WHERE {
+  ?sector orkgp:P39020 ?energy_sector.
+  ?energy_sector orkgp:P28 ?freq.
+  BIND(SUBSTR(STR(?freq), 4) AS ?freq)
+}
+```

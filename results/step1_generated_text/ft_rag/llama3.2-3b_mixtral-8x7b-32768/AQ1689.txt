@@ -1,0 +1,43 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Seaquest dataset in terms of Score metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Seaquest")
+        ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+        ?cont          orkgp:HAS_DATASET      ?dataset_has_dataset;
+                        orkgp:P32              ?dataset_has_model.
+        ?model        orkgp:HAS_MODEL        ?model_has_model;
+                      orkgp:P32              ?dataset_has_model.
+        ?model      rdfs:label              ?model_lbl.
+        ?cont      orkgp:HAS_EVALUATION   ?eval_has_cont.
+        ?eval      orkgp:HAS_METRIC       ?eval_has_metric;
+                    orkgp:P31              ?eval_has_eval.
+         FILTER (str(?eval_has_metric      = "Score"))
+        ?eval      orkgp:HAS_VALUE         ?eval_has_value;
+                   orkgp:P31              ?eval_has_eval.
+        ?value     orkgp:HAS_VALUE         ?eval_has_value.
+        ?cont      rdfs:label              ?cont_lbl.
+        ?model      orkgp:BEST_PERFORMANCE   ?model_has_best.
+        ?cont_lbl    rdfs:label              ?cont_lbl.
+        ?cont      orkgp:HAS_MODEL        ?model_has_model;
+                    orkgp:P32              ?dataset_has_model.
+        ?model      orkgp:HAS_MODEL        ?model_has_model;
+                    orkgp:P32              ?dataset_has_model.
+        ?cont      orkgp:HAS_EVALUATION   ?eval_has_cont.
+        ?eval      orkgp:HAS_METRIC       ?eval_has_metric;
+                   orkgp:P31              ?eval_has_eval.
+         FILTER (str(?eval_has_metric      = "Score"))
+         ORDER BY DESC(?model_has_best)
+         LIMIT 1
+     }
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?cont      orkgp:HAS_MODEL        ?model_has_model;
+                orkgp:P32              ?dataset_has_model.
+     ?model      orkgp:HAS_MODEL        ?model_has_model;
+                  orkgp:P32              ?dataset_has_model.
+     ?cont      or

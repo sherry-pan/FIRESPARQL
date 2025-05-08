@@ -1,0 +1,105 @@
+Question:
+List the code links in papers that use the DDQN-PC model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX orkp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+    PREFIX orkc: <http://www.openresearchknowledgegraph.org/ontology/resource/>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicate/property/>
+
+    SELECT?paper?code_link?model?benchmark
+    WHERE {
+     ?paper orkp:usesModel?model.
+     ?paper orkp:usesBenchmark?benchmark.
+     ?model orkg:relatedTo?model_type.
+     ?model_type orkg:label?model_type_label.
+     ?model_type orkg:label?model_type_label.
+      FILTER (?model_type_label = "NLP technique").
+     ?paper orkp:hasCodeLink?code_link.
+     ?code_link orkg:label?code_link_label.
+      FILTER (?code_link_label = "http://dx.doi.org/10.13052/jwe1540-9589.2075").
+    }
+    ```    </sparql> 
+
+```json
+{
+  "question": "List the code links in papers that use the DDQN-PC model in any benchmark?",
+  "extracted_terms": [
+    {
+      "rdfs:label": "code links",
+      "uri": "orkgr:code_links",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    },
+    {
+      "rdfs:label": "papers",
+      "uri": "orkgr:papers",
+      "type": "Dataset",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "DDQN-PC model",
+      "uri": "orkgr:DDQN-PC_model",
+      "type": "Model",
+      "rdf:type": "orkgc:Resource"
+    },
+    {
+      "rdfs:label": "benchmark",
+      "uri": "orkgr:benchmark",
+      "type": "Property",
+      "rdf:type": "orkgp:Predicate"
+    }
+  ],
+  "candidates": {
+    "code links": [
+      {
+        "uri": "orkgr:R284317",
+        "rdfs:label": "http://dx.doi.org/10.13052/jwe1540-9589.2075",
+        "score": 0.95,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ],
+    "papers": [
+      {
+        "uri": "orkgr:R284316",
+        "rdfs:label": "Journal Article",
+        "score": 0.92,
+        "type": "Dataset",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "DDQN-PC model": [
+      {
+        "uri": "orkgr:NLP_technique",
+        "rdfs:label": "NLP technique",
+        "score": 0.90,
+        "type": "Model",
+        "rdf:type": "orkgc:Resource"
+      }
+    ],
+    "benchmark": [
+      {
+        "uri": "orkgr:validation_research",
+        "rdfs:label": "validation research",
+        "score": 0.88,
+        "type": "Property",
+        "rdf:type": "orkgp:Predicate"
+      }
+    ]
+  }
+}
+```    </sparql> 
+```
+    The provided SPARQL query is designed to retrieve the code links in papers that use the DDQN-PC model in any benchmark. The query filters the results based on the extracted terms and their corresponding URIs, labels, scores, types, and RDF types. The query uses the `orkgp:usesModel`, `orkgp:usesBenchmark`, `orkg:relatedTo`, `orkg:label`, and `orkgp:hasCodeLink` predicates to filter the results. The query also filters the results based on the model type and code link labels. The output of the query will provide the desired information in the format of URIs, labels, scores, types, and RDF types. 
+
+    Note that the actual output will depend on the data in the ORKG RDF data dump and the specific URIs, labels, scores, types, and RDF types used in the query. 
+
+    The SPARQL query is designed to work with the provided context and extracted terms, and it can be used to retrieve the desired information from the ORKG RDF data dump. 
+
+    The query uses the following predicates and resources:
+
+    * `orkgp:usesModel` and `orkgp:usesBenchmark`: to filter papers that use the DDQN-PC model and benchmarks.
+    * `orkg:relatedTo`: to filter the model type.
+    * `orkg:label`: to filter the model type and

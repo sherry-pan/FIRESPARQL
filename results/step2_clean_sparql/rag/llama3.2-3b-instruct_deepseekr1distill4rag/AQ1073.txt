@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.io/ontology/>
+PREFIX orkgc: <http://orkg.io/schema/ontology#>
+PREFIX orkp: <http://orkp.io/schema/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?score
+WHERE {
+  ?s orkgc:hasMetric ?metric.
+  ?s orkgc:hasScore ?score.
+  ?s orkgc:hasDataset ?d.
+  ?d a orkgc:Pubmed_dataset.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

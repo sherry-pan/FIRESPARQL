@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgd: <http://example.org/orkgd/>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?evaluation orkgp:hasValue ?accuracy .
+    ?evaluation orkgp:hasSubject ?s .
+    ?s orkgd:hasDataset "Kuzushiji-MNIST" .
+    ?s orkgd:hasModel ?model .
+    ?evaluation orkgp:hasProperty orkgd:Accuracy .
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

@@ -1,0 +1,41 @@
+Question:
+Can you provide links to code used in papers that benchmark the CAIT-XS-36 model?
+
+Generated SPARQL:
+ SELECT?paper?code?link 
+    WHERE {
+     ?paper orkgc:hasBenchmark?benchmark.
+     ?benchmark orkgp:hasEvaluation?evaluation.
+     ?evaluation orkgp:hasCode?code.
+     ?paper orkgc:hasResource?resource.
+     ?resource orkgr:RDFProperty?prop.
+     ?prop orkgr:RDFType?propType.
+     ?propType rdfs:label?label.
+     ?label filter (strstarts(?label, "CAIT-XS-36" ) or strstarts(?label, "CAIT-XS-36 model" )).
+     ?resource orkgc:hasLink?link.
+     ?link a orkgr:Resource.
+     ?link rdfs:label?linkLabel.
+     ?linkLabel filter (strstarts(?linkLabel, "https://") or strstarts(?linkLabel, "http://") ).
+     ?paper orkgc:hasResource?resource.
+     ?paper orkgr:RDFProperty?prop.
+     ?prop orkgr:RDFType?propType.
+     ?propType rdfs:label?label.
+     ?label filter (strstarts(?label, "papers" ) or strstarts(?label, "benchmark" ) ).
+     ?resource orkgc:hasLink?link.
+     ?link a orkgr:Resource.
+     ?link rdfs:label?linkLabel.
+     ?linkLabel filter (strstarts(?linkLabel, "https://") or strstarts(?linkLabel, "http://") ).
+     ?code orkgp:hasLink?link.
+     ?link a orkgr:Resource.
+     ?link rdfs:label?linkLabel.
+     ?linkLabel filter (strstarts(?linkLabel, "https://") or strstarts(?linkLabel, "http://") ).
+    } GROUP BY?paper?code?link 
+    HAVING COUNT(DISTINCT?paper) > 1 
+    HAVING COUNT(DISTINCT?code) > 1 
+    HAVING COUNT(DISTINCT?link) > 1 
+    } 
+    ORDER BY COUNT(DISTINCT?paper) DESC, COUNT(DISTINCT?code) DESC, COUNT(DISTINCT?link) DESC 
+    LIMIT 10 
+
+    ```python
+def orkg

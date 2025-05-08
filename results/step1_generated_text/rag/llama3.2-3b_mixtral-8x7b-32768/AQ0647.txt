@@ -1,0 +1,38 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WOS-46985 dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.com/orkg/>
+PREFIX orkp: <http://example.com/orkp/>
+PREFIX orkgp: <http://example.com/orkgp/>
+
+SELECT?title?id?uri
+WHERE {
+ ?paper orkp:hasPaper?p {
+    orkp:hasPaper?p orkgp:hasPaper?pp.
+    orkp:hasPaper?p orkp:hasDataset?ds.
+    filter (str(?ds) = "WOS-46985" )
+  }
+ ?paper orkgp:hasTitle?t {
+    orkgp:hasTitle?t
+  }
+ ?paper orkgp:hasID?id {
+    orkgp:hasID?id
+  }
+ ?paper orkgp:hasBenchmark?b {
+    orkgp:hasBenchmark?b
+  }
+}
+``` 
+    Given the context, how does the SPARQL query relate to the input question and what does it achieve?
+
+    The SPARQL query achieves the following:
+    1. It filters papers that have performed benchmarks on the WOS-46985 dataset.
+    2. It retrieves the titles of these papers.
+    3. It retrieves the IDs of these papers.
+    The query relates to the input question by answering the question "Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WOS-46985 dataset?" by querying the ORKG for papers that have performed benchmarks on the specified dataset and then retrieving their titles and IDs. 
+
+    In essence, the query is designed to filter out papers that do not meet the specified criteria, and then retrieve the relevant information (titles and IDs) for the remaining papers. This achieves the desired outcome of providing a list of research papers that meet the specified criteria, along with their titles and IDs. 
+
+    The use of the `filter` function in the query ensures that only papers that have performed benchmarks on the WOS-46985 dataset are included in

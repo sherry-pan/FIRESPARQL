@@ -1,0 +1,22 @@
+```sparql
+PREFIX ora: <http://example.org/ontology#>
+PREFIX orkgr: <http://example.org/kgr#>
+PREFIX orkgp: <http://example.org/kgp#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a ora:Model.
+  ?model ora:hasProperty ?property.
+  ?property ora:hasValue ?value.
+  ?property a ora:Property.
+  ?value a ora:Value.
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasProperty ?property.
+  
+  FILTER(?dataset = orkgr:MNIST).
+  FILTER(?property = orkgp:Permuted_Accuracy_score).
+}
+
+ORDER BY DESC(?value)
+LIMIT 1
+```

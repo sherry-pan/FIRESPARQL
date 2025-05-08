@@ -1,0 +1,55 @@
+Question:
+What is the name of the top performing model in terms of Unpermuted Accuracy score when benchmarked on the Sequential CIFAR-10 dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgp:R123456 orkgp:P2?dataset.
+      ?dataset orkgp:P2 orkgp:R122690.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P3?cont.
+      ?cont orkgp:P4?model.
+      ?model rdfs:label?model_lbl.
+      ?model orkgp:P1?score.
+      ?score rdfs:label?accuracy_lbl.
+       FILTER(REGEX(STR(?accuracy_lbl), "Unpermuted Accuracy", "i"))
+      ?model orkgp:HAS_MODEL?model_lbl.
+       ORDER BY DESC(?score)
+       LIMIT 1.
+     } 
+
+    Note that the answer may vary depending on the specific data in the Open Research Knowledge Graph (ORKG).
+    Note that the provided SPARQL query may need to be adjusted based on the actual data and the specific requirements of the question. 
+
+    This is the provided code:
+    ```python
+import orkgp
+
+# Initialize the query
+query = orkgp.Query("SELECT?model?model_lbl")
+    # Add the WHERE clause to the query
+query.add_where_clause(
+    orkgp.Predicates(
+        orkgp.P2,  # "benchmarked on"
+        orkgp.R122690,  # "Sequential CIFAR-10"
+    ),
+)
+# Add more predicates as needed
+query.add_where_clause(
+    orkgp.Predicates(
+        orkgp.P3,  # "cont"
+        orkgp.R123456,  # "some model"
+    ),
+)
+# Add more predicates as needed
+query.add_where_clause(
+    orkgp.Predicates(
+        orkgp.P4,  # "model"
+        orkgp.R123456,  # "some model"
+    ),
+)
+# Add more predicates as needed
+query.add_where_clause(
+    orkgp.Predicates(
+       

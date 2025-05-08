@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkgp/>
+PREFIX orkr: <http://example.org/orkrc/>
+PREFIX orkw: <http://example.org/orkw/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model
+WHERE {
+  ?model orkp:hasMetric ?metric.
+  ?metric orkp:hasDataset ?dataset.
+  ?dataset orkw:hasBenchmark "BC5CDR-disease".
+  ?metric orkp:hasType "F1".
+  ?metric orkp:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

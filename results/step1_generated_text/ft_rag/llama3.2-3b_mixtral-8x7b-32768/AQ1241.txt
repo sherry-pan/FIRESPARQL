@@ -1,0 +1,63 @@
+Question:
+What is the top benchmark score and its metric on the CINIC-10 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?score) AS?score_lbl)
+     WHERE {
+     orkgp:R1 orkgp:HAS_DATASET orkggp:HAS_DATASET.
+     orkgp:R1 orkgp:HAS_METRIC orkggp:HAS_METRIC.
+    ?dataset orkgp:HAS_DATASET?dataset_lbl.
+     FILTER (str(?dataset_lbl) = "CINIC-10")
+    ?dataset?cont orkgp:HAS_DATASET.
+    ?cont orkgp:HAS_METRIC?metric.
+    ?metric orkgp:HAS_METRIC?metric_lbl.
+     OPTIONAL {?cont orkgp:HAS_BENCHMARK_SCORE?score}.
+     IF (?cont orkgp:HAS_BENCHMARK_SCORE?score)
+     THEN
+    ?score?score_lbl.
+     ELSE
+    ?score_lbl      = 0.
+     END IF.
+    ?cont orkgp:HAS_BENCHMARK_SCORE?score.
+    ?score?score_lbl.
+     }
+     
+
+```python
+SELECT?metric?metric_lbl (MAX(?score) AS?score_lbl)
+WHERE {
+  orkgp:R1 orkgp:HAS_DATASET orkggp:HAS_DATASET.
+  orkgp:R1 orkgp:HAS_METRIC orkggp:HAS_METRIC.
+ ?dataset orkgp:HAS_DATASET?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CINIC-10")
+ ?dataset?cont orkgp:HAS_DATASET.
+ ?cont orkgp:HAS_METRIC?metric.
+ ?metric orkgp:HAS_METRIC?metric_lbl.
+  OPTIONAL {?cont orkgp:HAS_BENCHMARK_SCORE?score}.
+  IF (?cont orkgp:HAS_BENCHMARK_SCORE?score)
+  THEN
+ ?score?score_lbl.
+  ELSE
+ ?score_lbl      = 0.
+  END IF.
+ ?cont orkgp:HAS_BENCHMARK_SCORE?score.
+ ?score?score_lbl.
+}
+```
+
+Note: The provided Python code is not used in this task. The task requires generating a SPARQL query based on the input question and the provided context. 
+
+Please provide the response in the required format. 
+
+Note that I have removed the prefix declarations from the SPARQL query as per the requirements. 
+
+The final answer is:
+SELECT?metric?metric_lbl (MAX(?score) AS?score_lbl)
+WHERE {
+  orkgp:R1 orkgp:HAS_DATASET orkggp:HAS_DATASET.
+  orkgp:R1 orkgp:HAS_METRIC orkggp:HAS_METRIC.
+ ?dataset orkgp:HAS_DATASET?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CINIC-10")
+ ?dataset?cont orkgp:HAS_DATASET.
+ ?cont orkgp:HAS_METRIC?metric.
+ ?

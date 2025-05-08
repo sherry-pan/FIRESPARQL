@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:hasResearchPaper ?r.
+  ?r orkg:hasBenchmark ?b.
+  ?b orkg:includes ?dataset.
+  ?dataset orkg:uri ?uri.
+  FILTER (?uri = <http://www.openresearchknowledgegraph.org/ontology/#ShARe/CLEF_eHealth_corpus_dataset>).
+  ?paper orkg:hasID ?id.
+  ?paper rdfs:label ?title.
+}
+```

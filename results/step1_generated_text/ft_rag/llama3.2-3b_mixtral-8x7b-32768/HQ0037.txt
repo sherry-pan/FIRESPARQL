@@ -1,0 +1,51 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ SELECT?contributor?contributor_lbl
+     WHERE {
+       orkgp:R1 orkgp:P1?contributor.
+      ?contributor orkgp:HAS_PUBLICATION?publication.
+      ?publication orkgp:HAS_COUNT?count.
+       BIND(xsd:integer(?count) AS?contributor_lbl)
+       FILTER(REGEX(STR(?contributor), "Coronavirus"))
+       BIND(xsd:integer(?count) AS?contributor)
+      ?contributor rdfs:label?contributor_lbl.
+       ORDER BY DESC(?contributor)
+       LIMIT 1
+     } 
+    Note: The answer to the question "Who has contributed to the largest number of articles about coronavirus?" is a single value. The query provided should return only one value. 
+
+    ```
+    SELECT?contributor?contributor_lbl
+    WHERE {
+      orkgp:R1 orkgp:P1?contributor.
+     ?contributor orkgp:HAS_PUBLICATION?publication.
+     ?publication orkgp:HAS_COUNT?count.
+      BIND(xsd:integer(?count) AS?contributor_lbl)
+      FILTER(REGEX(STR(?contributor), "Coronavirus"))
+     ?contributor rdfs:label?contributor_lbl.
+      ORDER BY DESC(?contributor)
+      LIMIT 1
+    }
+    ``` 
+
+    This SPARQL query is designed to retrieve the contributor who has contributed to the largest number of articles about coronavirus. The query first filters the contributors to only include those who have contributed to articles about coronavirus. It then orders the contributors by the number of articles they have contributed to in descending order and limits the output to the top contributor. The `FILTER(REGEX(STR(?contributor), "Coronavirus"))` clause ensures that only contributors who have contributed to articles about coronavirus are included in the output. 
+
+    Note that the `BIND(xsd:integer(?count) AS?contributor)` line is unnecessary and can be removed to simplify the query. The `?contributor rdfs:label?contributor_lbl` line is also unnecessary and can be removed to simplify the query. 
+
+    Here is the simplified query:
+    ```
+    SELECT?contributor?contributor_lbl
+    WHERE {
+      orkgp:R1 orkgp:P1?contributor.
+     ?contributor orkgp:HAS_PUBLICATION?publication.
+     ?publication orkgp:HAS_COUNT?count.
+      FILTER(REGEX(STR(?contributor), "Coronavirus"))
+     ?contributor rdfs:label?contributor_lbl.
+      ORDER BY DESC(?contributor)
+      LIMIT 1
+    }
+    ``` 
+
+    This query will return the contributor who has contributed to the largest number

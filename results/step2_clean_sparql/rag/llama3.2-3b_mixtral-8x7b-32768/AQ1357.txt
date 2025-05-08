@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://www.openresearch.org/ontology/orkgp/>
+PREFIX orkgr: <http://www.openresearch.org/ontology/orkgr/>
+
+SELECT ?metric ?score
+WHERE {
+  orkgr:R122689 orkgp:HAS_BEST_RESULT ?result.
+  ?result orkgp:HAS_METRIC ?metric.
+  ?result orkgp:HAS_SCORE ?score.
+  FILTER (lang(?metric) = "en" AND lang(?score) = "en")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

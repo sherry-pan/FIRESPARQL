@@ -1,0 +1,61 @@
+Question:
+What are the metrics of evaluation over the BioASQ dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?eval) AS?eval_count) 
+     WHERE {
+       orkgp:R1 orkgp:P1 orkgp:R2
+       FILTER(REGEX(STR(?eval), "BioASQ"))
+      ?eval orkgp:HAS_EVALUATION?evalu
+      ?evalu orkgp:HAS_DATASET?dataset
+      ?dataset orkgp:HAS_DATASET?dataset
+      ?dataset orkgp:P1?cont
+      ?cont orkgp:HAS_EVALUATION?evalu
+      ?evalu orkgp:HAS_METRIC?metric
+      ?metric rdfs:label?metric_lbl
+      ?metric orkgp:HAS_EVALUATION?eval
+     } 
+     GROUP BY?metric?metric_lbl
+     ORDER BY DESC(?eval_count) 
+
+    ```python
+def generate_sparql_query(context):
+    """
+    This function generates a SPARQL query based on the input context.
+    
+    Parameters:
+    context (dict): A dictionary containing the question, extracted terms, and candidates.
+    
+    Returns:
+    str: The generated SPARQL query.
+    """
+    question = context["question"]
+    extracted_terms = context["extracted_terms"]
+    candidates = context["candidates"]
+    
+    # Define the SPARQL query
+    sparql_query = """
+    SELECT?metric?metric_lbl (COUNT(?eval) AS?eval_count) 
+    WHERE {
+      orkgp:R1 orkgp:P1 orkgp:R2
+      FILTER(REGEX(STR(?eval), "BioASQ"))
+     ?eval orkgp:HAS_EVALUATION?evalu
+     ?evalu orkgp:HAS_DATASET?dataset
+     ?dataset orkgp:HAS_DATASET?dataset
+     ?dataset orkgp:P1?cont
+     ?cont orkgp:HAS_EVALUATION?evalu
+     ?evalu orkgp:HAS_METRIC?metric
+     ?metric rdfs:label?metric_lbl
+     ?metric orkgp:HAS_EVALUATION?eval
+    } 
+    GROUP BY?metric?metric_lbl
+    ORDER BY DESC(?eval_count) 
+    """
+    
+    return sparql_query
+
+# Test the function
+context = {
+    "question": "What are the metrics of evaluation over the BioASQ dataset?",
+    "extracted_terms": {
+       

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+SELECT ?benchmarkScore ?metric
+WHERE {
+  ?dataset orkgc:hasBenchmark ?benchmarkScore.
+  ?benchmarkScore orkgp:hasMetric ?metric.
+  FILTER (str(?dataset) = "http://example.org/orkgr/Atari_2600_Breakout_Dataset")
+  }
+ORDER BY DESC(?benchmarkScore)
+LIMIT 1
+```

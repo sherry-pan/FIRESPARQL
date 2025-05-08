@@ -1,0 +1,68 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Seaquest dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+    WHERE {
+     ?dataset a ora:Dataset.
+     ?dataset ora:name "Atari 2600 Seaquest".
+     ?dataset ora:dataset "orkgr:R122689".
+     ?dataset ora:hasBenchmarkScore?benchmarkScore.
+     ?benchmarkScore ora:score "93.9".
+     ?benchmarkScore ora:metric?metric.
+     ?metric ora:label?metricLabel.
+     ?metric ora:metric "max".
+     ?metric ora:metricType "orkgp:metric".
+     ?metric ora:hasMetricType?metricType.
+     ?metricType ora:label "orkgp:metric".
+     ?metricType ora:metricType "orkgp:metric".
+     ?metric ora:metricType?metricType.
+     ?metricType ora:label "orkgp:metric".
+     ?metricLabel ora:label "max".
+    } 
+    END; 
+    SELECT?dataset?score?metric
+    WHERE {
+     ?dataset a ora:Dataset.
+     ?dataset ora:name "Atari 2600 Seaquest".
+     ?dataset ora:dataset "orkgr:R122689".
+     ?dataset ora:hasBenchmarkScore?benchmarkScore.
+     ?benchmarkScore ora:score?score.
+     ?benchmarkScore ora:metric?metric.
+    } 
+    END; 
+
+    Note: The two SELECT clauses are used to get the top benchmark score and its metric. The first SELECT clause is used to get the metric type, and the second SELECT clause is used to get the score and metric. 
+
+```python
+def generate_sparql_query(input_question, context):
+    """
+    Generate a SPARQL query based on the input question and context.
+    
+    Args:
+    input_question (str): The natural language question.
+    context (dict): The context with extracted terms, candidates, and background information.
+    
+    Returns:
+    str: The generated SPARQL query.
+    """
+    
+    # Extract the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+    
+    # Initialize an empty list to store the terms to be used in the SPARQL query
+    terms_to_use = []
+    
+    # Iterate over the extracted terms
+    for term in extracted_terms["top benchmark score"]:
+        # If the term is "top benchmark score", use it as is
+        if term == "top benchmark score":
+            terms_to_use.append(term)
+        # If the term is "metric", use it as is
+        elif term == "metric":
+            terms_to_use.append(term)
+        # If the term is "Atari 2600 Seaquest dataset", use it as is
+        elif term == "Atari 2600 Seaquest dataset":
+            terms_to_use.append(term)
+    
+    # Initialize an empty list to store

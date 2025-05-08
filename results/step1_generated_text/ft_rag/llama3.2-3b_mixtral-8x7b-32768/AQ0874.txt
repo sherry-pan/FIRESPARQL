@@ -1,0 +1,49 @@
+Question:
+List the metrics that are used to evaluate models on the NCBI Disease benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgc:R123456 orkgp:HAS_DATASET orkgp:HAS_DATASET.
+       FILTER(REGEX(STR(?dataset), "NCBI Disease", "i"))
+      ?dataset orkgp:HAS_EVALUATION orkgp:HAS_EVALUATION_METRIC.
+      ?evaluation orkgp:HAS_METRIC?metric.
+      ?metric rdfs:label?metric_lbl.
+     }
+     ```python
+import pandas as pd
+
+def orkg_query_to_df(query):
+    # Parse the SPARQL query
+    query = query.replace("SELECT?metric?metric_lbl", "SELECT?metric_lbl")
+    query = query.replace("WHERE {", "WHERE {?dataset orkgp:HAS_DATASET orkgp:HAS_DATASET.")
+    query = query.replace(" FILTER(REGEX(STR(?dataset), \"NCBI Disease\", \"i\"))", "")
+    query = query.replace("?dataset orkgp:HAS_EVALUATION orkgp:HAS_EVALUATION_METRIC", "?dataset orkgp:HAS_EVALUATION orkgp:HAS_EVALUATION_METRIC.")
+    query = query.replace("?evaluation orkgp:HAS_METRIC?metric.", "?metric orkgp:HAS_METRIC?metric.")
+    query = query.replace("?metric rdfs:label?metric_lbl.", "?metric_lbl rdfs:label?metric.")
+
+    # Execute the query
+    results = pd.read_html("sparql://localhost:7200/repo/orkgr/ask", query)
+    return results
+
+# Define the input question
+input_question = """
+    The Open Research Knowledge Graph (ORKG) is a semantic knowledge graph designed to represent, 
+    compare, and retrieve scholarly contributions. Given a natural language question in English, your task 
+    is to generate the corresponding SPARQL query to this question. The generated SPARQL query should be 
+    able to query the ORKG, getting correct answer to the input question.
+    Input Question: List the metrics that are used to evaluate models on the NCBI Disease benchmark dataset?
+    You are also provided with the following context as background information for linking the correct entities or properties in the ORKG.
+    The context includes the following information:
+    1. Terms (entities and properties) mentioned in the question.
+    2. Candidate entities and properties in the ORKG that can be linked to the entities and properties mentioned in the question.
+    """
+# Extract the context from the input question
+context = {
+    "question": "List the metrics that are used to evaluate models on the NCBI Disease benchmark dataset?",
+    "extracted_terms": {
+        "NCBI Disease benchmark dataset",
+        "metrics",
+        "evaluate models"
+    },
+

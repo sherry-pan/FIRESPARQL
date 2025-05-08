@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           orkgc:hasBenchmarkResult ?result;
+           orkgc:hasDataset ?dataset1.
+  ?dataset1 a orkgr:R122690.
+  ?result orkgp:hasMetric ?metric;
+          orkgp:hasValue ?value.
+  FILTER EXISTS {
+    ?result orkgp:hasMetric "F1";
+            orkgp:hasValue "0.99".
+  }
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

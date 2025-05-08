@@ -1,0 +1,34 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the ObjectNet dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "ObjectNet")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:CONTAINS         ?benchmark;
+                           orkgp:HAS_EVALUATION   ?eval.
+          ?eval          rdfs:label              ?eval_lbl.
+           FILTER (str(?eval_lbl) = "has evaluation")
+          ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+          ?paper         orkgp:HAS_PAPER         ?cont.
+          ?cont         rdfs:label              ?paper_lbl.
+          ?paper         rdfs:label              ?paper_lbl.
+       }     ```
+
+SELECT?paper?paper_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ObjectNet")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont          orkgp:CONTAINS         ?benchmark;
+                orkgp:HAS_EVALUATION   ?eval.
+ ?eval          rdfs:label              ?eval_lbl.
+  FILTER (str(?eval_lbl) = "has evaluation")
+ ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+ ?paper         orkgp:HAS_PAPER         ?cont.
+ ?cont         rdfs:label              ?paper_lbl.
+ ?paper         rdfs:

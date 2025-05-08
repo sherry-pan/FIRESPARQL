@@ -1,0 +1,62 @@
+Question:
+What models are being evaluated on the UrbanSound8k dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Resource;
+                  rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "UrbanSound8k")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:HAS_EVALUATION    ?cont;
+                  orkgp:P33              ?benchmark.
+ ?paper         orkgp:HAS_EVALUATION    ?eval,
+                  orkgp:HAS_MODEL         ?model.
+ ?model_lbl     rdfs:label              ?model_lbl.
+}
+```
+
+
+      ORKG SPARQL Query:
+      ```sparql
+SELECT DISTINCT?model?model_lbl
+WHERE {
+  orkgp:HAS_DATASET      ?dataset       a                orkgc:Resource;
+                          rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "UrbanSound8k")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_BENCHMARK     ?cont.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:HAS_EVALUATION    ?cont;
+                  orkgp:P33              ?benchmark.
+ ?paper         orkgp:HAS_EVALUATION    ?eval,
+                  orkgp:HAS_MODEL         ?model.
+ ?model_lbl     rdfs:label              ?model_lbl.
+}
+```
+
+
+    The above SPARQL query is correct. It retrieves the models that are being evaluated on the UrbanSound8k dataset.
+
+    If you want to get the model names, the query should be:
+    ```sparql
+SELECT DISTINCT?model_lbl
+WHERE {
+  orkgp:HAS_DATASET      ?dataset       a                orkgc:Resource;
+                          rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "UrbanSound8k")
+ ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  orkgp:HAS_BENCHMARK     ?cont.
+ ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+ ?eval           orkgp:HAS_EVALUATION    ?cont;
+                  orkgp:P33              ?benchmark.
+ ?paper         orkgp:HAS_EVALUATION    ?eval,
+                  orkgp:HAS_MODEL         ?model.
+ ?model_lbl     rdfs:label              ?model_lbl.
+}
+```
+
+
+    This query will return the model labels directly. If you want to get the model names, you should map the model

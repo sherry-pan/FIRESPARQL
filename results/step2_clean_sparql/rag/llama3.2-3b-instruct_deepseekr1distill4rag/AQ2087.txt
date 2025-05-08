@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?model ?code_link
+WHERE {
+  ?model a orkg:Model.
+  ?model orkgp:has_model_component ?component.
+  ?component a orkg:Entity_Linkage_Model.
+  ?paper a orkp:Paper.
+  ?paper orkp:has_code_link ?code_link.
+  ?code_link a orkp:DOI_Link.
+  ?paper orkp:has_benchmark ?benchmark.
+  ?benchmark a orkp:Benchmark.
+  ?benchmark orkp:has_model ?benchmark_model.
+  ?benchmark_model a orkg:Model.
+  ?benchmark_model orkg:has_model_component ?benchmark_component.
+  ?benchmark_component a orkg:Entity_Linkage_Model.
+  ?benchmark_component rdfs:label "Multi-Perspective Matching (ensemble)".
+}
+```

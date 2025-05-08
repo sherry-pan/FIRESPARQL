@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?p ?o ?label
+WHERE {
+  ?p a orkgp:Predicate.
+  ?p orkgp:label ?label.
+  FILTER (CONTAINS(?label, "metrics of evaluation") || CONTAINS(?label, "F1-score") || CONTAINS(?label, "accuracy") || CONTAINS(?label, "validation research") || CONTAINS(?label, "Journal Article")).
+  
+  ?o a orkgc:Resource.
+  ?o orkgp:label ?label.
+  FILTER (CONTAINS(?label, "Fashion-MNIST dataset") || CONTAINS(?label, "MNIST") || CONTAINS(?label, "AIDA") || CONTAINS(?label, "MEANTIME") || CONTAINS(?label, "Journal Article")).
+}
+```

@@ -1,0 +1,82 @@
+Question:
+Provide a list of papers that have utilized the Tokenlearner model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkp2: <http://example.org/orkp2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?p?o?oLabel?oType?oScore?oURI
+WHERE {
+ ?p a orkp2:Property.
+ ?o a orkgc:Resource.
+  FILTER (?p = orkp2:code_links OR?p = orkp2:doi_link).
+  BIND (CONCAT(?oURI," ",?oLabel) AS?oLabel).
+  BIND (CONCAT("http://",SUBSTR(?oURI,7)) AS?oType).
+  BIND (SUBSTR(?oURI,7) AS?oScore).
+  BIND (SUBSTR(?oURI,7) AS?oURI).
+  BIND (FILTER(?oType = "http://example.org/orkgp:Predicate") AS?oScore).
+ ?o orkgc:Resource.
+  BIND (CONCAT(?oLabel," ",?oType) AS?oScore).
+  BIND (SUBSTR(?oURI,7) AS?oURI).
+  BIND (CONCAT("http://",SUBSTR(?oURI,7)) AS?oType).
+ ?o orkp2:code_links.
+ ?o orkp2:doi_link.
+ ?o orkp2:code_links.
+ ?o orkp2:doi_link.
+ ?o orkp2:code_links.
+ ?o orkp2:doi_link.
+}
+```    Please let me know if you need any further assistance. 
+
+Note: The SPARQL query is generated based on the provided context and the extracted terms. The query is not guaranteed to work with the actual ORKG RDF dump, as the RDF prefixes and URIs are fictional. 
+
+Please let me know if you'd like me to explain any part of the query or if you have any further questions. 
+
+Also, note that the SPARQL query is quite complex and may require optimization for better performance. 
+
+The final answer is the provided SPARQL query. 
+
+Let me know if you need anything else! 
+
+Best regards,
+[Your Name] 
+[Your Affiliation] 
+
+[Contact Information]
+```
+
+The final answer is: ```sparql
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkp2: <http://example.org/orkp2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?p?o?oLabel?oType?oScore?oURI
+WHERE {
+ ?p a orkp2:Property.
+ ?o a orkgc:Resource.
+  FILTER (?p = orkp2:code_links OR?p = orkp2:doi_link).
+  BIND (CONCAT(?oURI," ") AS?oLabel).
+  BIND (CONCAT("http://",SUBSTR(?oURI,7)) AS?oType).
+  BIND (SUBSTR(?oURI,7) AS?oScore).
+  BIND (SUBSTR(?oURI,7) AS?oURI).
+  BIND (FILTER(?oType = "http://example.org/orkgp:Predicate") AS?oScore).
+ ?o orkgc:Resource.
+  BIND (CONCAT(?oLabel," ") AS?oScore).
+  BIND (SUBSTR(?oURI,7) AS?oURI).
+  BIND (CONCAT("http://",SUBSTR(?oURI,7)) AS?oType).
+ ?o orkp2:code_links.
+ ?o orkp2:doi_link.
+ ?o orkp2:code_links.
+ ?o orkp2:doi_link.
+ ?o orkp2:code_links.
+ ?o orkp2:doi_link.
+}
+```<|eot_id|>

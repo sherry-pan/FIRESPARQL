@@ -1,0 +1,47 @@
+Question:
+Can you list the models that have been evaluated on the SciTLDR dataset?
+
+Generated SPARQL:
+ SELECT?model?resource
+     WHERE {
+      ?resource a ora:Model.
+      ?resource ora:hasModel?model.
+      ?resource ora:hasEvaluation?evaluation.
+      ?evaluation ora:hasDataset?resource.
+      ?resource ora:hasDataset?dataset.
+      ?dataset a ora:Dataset.
+      ?dataset rdfs:label "SciTLDR".
+      ?model rdfs:label?resource.
+       }
+    Note: The provided SPARQL query is already optimized for the given input question, and it is the expected output format. 
+
+```
+SELECT?model?resource
+WHERE {
+ ?resource a ora:Model.
+ ?resource ora:hasModel?model.
+ ?resource ora:hasEvaluation?evaluation.
+ ?evaluation ora:hasDataset?resource.
+ ?resource ora:hasDataset?dataset.
+ ?dataset a ora:Dataset.
+ ?dataset rdfs:label "SciTLDR".
+ ?model rdfs:label?resource.
+}
+```
+
+## Step 1: Understand the Context
+The context provided includes the input question, extracted terms, and candidate entities and properties in the ORKG. The question is "Can you list the models that have been evaluated on the SciTLDR dataset?" The extracted terms are "SciTLDR dataset", "models", and "evaluated on". The candidates include "SciTLDR dataset" with its URI "orkgr:R122689", "models" with its predicate "has model" (orkgp:HAS_MODEL), and "evaluated on" with its predicate "has evaluation" (orkgp:HAS_EVALUATION).
+
+## Step 2: Identify the Entities and Properties
+From the context, we can identify the entities and properties needed for the SPARQL query. The entities are "models" and "SciTLDR dataset". The properties are "has model" (orkgp:HAS_MODEL), "has evaluation" (orkgp:HAS_EVALUATION), and "has dataset" (orkgp:HAS_DATASET).
+
+## Step 3: Construct the SPARQL Query
+Using the identified entities and properties, we can construct the SPARQL query. The query should list the models that have been evaluated on the SciTLDR dataset. We start by selecting the models that have a "has model" predicate, then filter the results to only include models that have a "has evaluation" predicate, and finally filter the results to only include models that have a "has dataset" predicate with the label "SciTLDR".
+
+## Step 4: Write the SPARQL Query
+The SPARQL query is as follows:
+```
+SELECT?model?resource
+WHERE {
+ ?resource a ora:Model.
+ 

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp#>
+PREFIX orkgc: <http://example.org/orkgc#>
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?dataset orkg:hasDataset ?dataset2.
+  ?dataset2 a orkgc:Dataset;
+           rdfs:label "ESC-50".
+  ?dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (str(?metricLabel) IN ("accuracy", "precision", "recall", "F1 score"))
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkg: <http://example.org/orkg/>
+
+SELECT ?model ?dataset ?error
+WHERE {
+  ?model orkc:evaluatedOn ?dataset.
+  ?model orkp:benchmarkedBy ?benchmark.
+  ?benchmark orkg:evaluated ?metric.
+  ?metric orkg:hasValue ?error.
+  FILTER (str(?error) = "Percentage error").
+}
+```

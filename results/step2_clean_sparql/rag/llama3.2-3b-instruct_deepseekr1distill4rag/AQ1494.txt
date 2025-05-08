@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.ontology.org/orkgr/>
+PREFIX orkgc: <http://www.ontology.org/orkgc/>
+PREFIX orkgp: <http://www.ontology.org/orkgp/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?benchmark orkg:hasResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasScore ?score.
+  FILTER (str(?dataset) = "RotoWire (Content Ordering) dataset").
+  FILTER (str(?metric) = "BLEU").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,63 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Battle Zone dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Resource;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Atari 2600 Battle Zone")
+          ?dataset       orkgp:HAS_DATASET      ?cont;
+                           orkgp:P34               ?eval.
+          ?eval           orkgp:HAS_EVALUATION     ?eval_lbl;
+                           orkgp:HAS_DATASET        ?cont.
+          ?cont          orkgp:HAS_MODEL          ?model;
+                          orkgp:HAS_DATASET        ?cont.
+          ?model        rdfs:label                ?model_lbl.
+     }
+     ```python
+def generate_sparql_query(input_question, context):
+    # Define the prefix declarations
+    prefix_declarations = """
+PREFIX orkgc:           <http://orkgr.org/ontology/orkgc/>
+PREFIX orkgp:          <http://orkgr.org/ontology/orkgp/>
+"""
+
+    # Define the SELECT clause
+    select_clause = "SELECT?model?model_lbl"
+
+    # Define the WHERE clause
+    where_clause = """
+    WHERE {
+     ?dataset       a                orkgc:Resource;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Battle Zone")
+     ?dataset       orkgp:HAS_DATASET      ?cont;
+                      orkgp:P34               ?eval.
+     ?eval           orkgp:HAS_EVALUATION     ?eval_lbl;
+                      orkgp:HAS_DATASET        ?cont.
+     ?cont          orkgp:HAS_MODEL          ?model;
+                      orkgp:HAS_DATASET        ?cont.
+     ?model        rdfs:label                ?model_lbl.
+    }
+    """
+
+    # Combine the prefix declarations, SELECT clause, and WHERE clause
+    sparql_query = f"{prefix_declarations}\n{select_clause}\n{where_clause}"
+
+    return sparql_query
+
+# Test the function
+input_question = "Can you list the models that have been evaluated on the Atari 2600 Battle Zone dataset?"
+context = {
+    "question": "Can you list the models that have been evaluated on the Atari 2600 Battle Zone dataset?",
+    "extracted_terms": {
+        "Atari 2600 Battle Zone dataset",
+        "models",
+        "evaluated on"
+    },
+    "candidates": {
+        "Atari 2600 Battle Zone dataset": [
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkp: <http://example.org/orkp/>
+
+SELECT ?s ?score ?metric
+WHERE {
+  ?s orkc:label ?sLabel.
+  FILTER regex(?sLabel, ".*Atari 2600 Alien dataset.*", "i")
+
+  ?s orkp:hasValue ?score.
+  ?score orkc:label ?scoreLabel.
+  FILTER regex(?scoreLabel, ".*top.*", "i")
+
+  ?s orkp:hasMetric ?metric.
+  ?metric orkc:label ?metricLabel.
+  FILTER regex(?metricLabel, ".*metric.*", "i")
+}
+```

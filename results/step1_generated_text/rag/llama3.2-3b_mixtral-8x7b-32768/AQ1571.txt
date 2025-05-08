@@ -1,0 +1,78 @@
+Question:
+What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?
+
+Generated SPARQL:
+ SELECT?model?score?dataset
+    WHERE {
+   ?model orkgr:has_benchmark?score.
+   ?score rdfs:label?scoreLabel.
+   ?score orkgr:has_dataset?dataset.
+   ?dataset orkgr:has_label "NCBI Disease dataset".
+   ?score orkgr:has_label?scoreLabel.
+    FILTER (?scoreLabel = "F1 entity level score").
+   ?model orkgr:has_dataset?dataset.
+    FILTER (?dataset = "orkgr:R122689").
+    } 
+
+```python
+def generate_sparql_query(question, context):
+    """
+    Generate a SPARQL query based on the input question and context.
+
+    Args:
+    question (str): The input natural language question in English.
+    context (dict): The context information, including extracted terms, candidates, and background knowledge.
+
+    Returns:
+    str: The generated SPARQL query.
+    """
+    # Extract the extracted terms from the context
+    extracted_terms = context['extracted_terms']
+
+    # Initialize the SPARQL query
+    sparql_query = "SELECT?model?score?dataset"
+
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+
+    # Add the subqueries for each extracted term
+    for term in extracted_terms:
+        # Get the candidates for the current term
+        candidates = context['candidates'][term]
+
+        # Iterate over each candidate
+        for candidate in candidates:
+            # Get the URI and label of the candidate
+            uri = candidate['uri']
+            label = candidate['rdfs:label']
+
+            # Add the subquery for the current candidate
+            sparql_query += "?{} orkgr:has_benchmark?{}.".format(term, uri)
+            sparql_query += "?{} rdfs:label?{}.".format(term, label)
+
+    # Add the filters for the extracted terms
+    for term in extracted_terms:
+        # Get the candidates for the current term
+        candidates = context['candidates'][term]
+
+        # Iterate over each candidate
+        for candidate in candidates:
+            # Get the URI and label of the candidate
+            uri = candidate['uri']
+            label = candidate['rdfs:label']
+
+            # Add the filter for the current candidate
+            sparql_query += " FILTER (?{} = '{}').".format(term, label)
+
+    # Add the filter for the dataset
+    sparql_query += "?dataset orkgr:has_label 'NCBI Disease dataset'."
+
+    # Close the WHERE clause
+    sparql_query += " }"
+
+    return sparql_query
+
+# Test the function
+question = "What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?"
+context = {
+    "

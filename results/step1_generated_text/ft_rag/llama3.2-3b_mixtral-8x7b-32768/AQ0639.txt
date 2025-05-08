@@ -1,0 +1,54 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Ohsumed dataset?
+
+Generated SPARQL:
+ SELECT?title?paper_id
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Ohsumed")
+          ?benchmark      orkgp:HAS_BENCHMARK      ?cont;
+                           orkgp:CONTAINS          ?dataset      ?cont.
+          ?cont           rdfs:label              ?cont_lbl.
+           FILTER (str(?cont_lbl) = "benchmark")
+          ?paper         orkgp:HAS_BENCHMARK      ?cont;
+                      orkgp:HAS_PAPER        ?cont        ?paper.
+          ?paper         orkgp:HAS_ID          ?paper_id.
+          ?paper         rdfs:label              ?paper_lbl.
+           FILTER (str(?paper_lbl) = "research papers")
+          ?title         orkgp:HAS_TITLE        ?paper        ?title.
+          ?title         rdfs:label              ?title_lbl.
+           FILTER (str(?title_lbl) = "title")
+    }    ```
+
+
+SELECT?title?paper_id
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Ohsumed")
+ ?benchmark      orkgp:HAS_BENCHMARK      ?cont;
+                 orkgp:CONTAINS          ?dataset      ?cont.
+ ?cont           rdfs:label              ?cont_lbl.
+  FILTER (str(?cont_lbl) = "benchmark")
+ ?paper         orkgp:HAS_BENCHMARK      ?cont;
+                orkgp:HAS_PAPER        ?cont        ?paper.
+ ?paper         orkgp:HAS_ID          ?paper_id.
+ ?paper         rdfs:label              ?paper_lbl.
+  FILTER (str(?paper_lbl) = "research papers")
+ ?title         orkgp:HAS_TITLE        ?paper        ?title.
+ ?title         rdfs:label              ?title_lbl.
+  FILTER (str(?title_lbl) = "title")
+}```
+
+
+      -   -
+
+
+      -   -
+
+
+      -   -
+
+
+      -

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkgc:Research_Paper.
+  ?paper orkgc:includes ?dataset.
+  ?dataset a orkgc:Dataset.
+  ?dataset orkgc:label ?label.
+  FILTER (CONTAINS(STR(?label), 'PWC Leaderboards (restricted)')).
+  ?paper orkgc:label ?title.
+  ?paper orkgr:uri ?id.
+}
+```

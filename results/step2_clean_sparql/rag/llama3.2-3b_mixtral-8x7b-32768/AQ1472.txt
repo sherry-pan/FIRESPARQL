@@ -1,0 +1,15 @@
+```sparql
+SELECT ?mLabel 
+WHERE {
+  ?m a orkg:Model;
+     orkg:hasMetric ?m2;
+     orkg:benchmarkOn ?e;
+     rdfs:label ?mLabel.
+  ?m2 orkg:hasValue ?v.
+  ?v orkg:hasUnit "accuracy".
+  ?e orkg:hasDataset ?d.
+  ?d rdfs:label "TriviaQA".
+}
+ORDER BY DESC(?v)
+LIMIT 1
+```

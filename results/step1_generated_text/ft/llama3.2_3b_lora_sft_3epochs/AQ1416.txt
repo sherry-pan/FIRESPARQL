@@ -1,0 +1,46 @@
+Question:
+What is the best performing model benchmarking the WMT2016 English-Russian dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "BLEU score")
+               or
+               str(?metric_lbl      = "ROUGE-Ngram")
+               or
+               str(?metric_lbl      = "ROUGE-UF5")
+               or
+               str(?metric_lbl      = "ROUGE-UF5-ngram")
+               or
+               str(?metric_lbl      = "ROUGE-UF5-1gram")
+               or
+               str(?metric_lbl      = "BLEU")
+               or
+               str(?metric_lbl      = "BLEU (Automatic)")
+               or
+               str(?metric_lbl      = "ROUGE-1")
+               or
+               str(?metric_lbl      = "ROUGE-2")
+               or
+               str(?metric_lbl      = "ROUGE-L")
+               or
+               str(?metric_lbl      = "ROUGE-SU")
+               or
+               str(?metric_lbl      = "BLEU (Manual)"))
+      ?eval       orkgp:HAS_DATASET       ?dataset.
+      ?dataset    orkgp:HAS_EVAL        ?eval.
+      ?eval       orkgp:HAS_MODEL        ?model.
+      ?model      rdfs:label              ?model_lbl.
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?metric     a       orkgc:Metric;
+                      rdfs:label ?metric_lbl.
+           FILTER (str(?metric_lbl      = "BLEU score")
+                   or
+                   str(?metric_lbl      = "ROUGE-Ngram")
+                   or
+                   str(?metric_lbl      = "ROUGE-UF5")
+

@@ -1,0 +1,40 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the DCASE dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/predicate/>
+    PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/resource/>
+    SELECT?paper?title?id
+    WHERE {
+       ?paper orkgc:Paper.
+       ?paper orkggp:HAS_PAPER?b.
+       ?b orkggp:HAS_BENCHMARK?benchmark.
+       ?benchmark orkgc:Dataset.
+       ?benchmark orkgc:hasDataset?dataset.
+       ?dataset orkgc:Dataset.
+       ?dataset orkg:R122689.
+       ?paper orkggp:HAS_ID?id.
+       ?paper orkggp:HAS_TITLE?title.
+        FILTER (str(?title)!= "")
+        FILTER (str(?id)!= "")
+    }
+    ```sparql
+    Output:
+    ```
+    ```sparql
+    ```sparql
+    Note: The prefix declarations are not included in the output as they are already provided in the prompt. 
+    The output is the SPARQL query that can be used to query the ORKG to get the correct answer to the input question. 
+    The query is based on the provided context and the extracted terms from the question. 
+    It uses the predicates and resources mentioned in the context to link the correct entities or properties in the ORKG. 
+    The query filters out any papers with empty titles or IDs to ensure that only valid papers are returned. 
+    ```sparql
+    ```sparql
+    Note: The output is the SPARQL query, not the answer to the question. The answer would be the result of executing the SPARQL query on the ORKG. 
+    To get the actual answer, you would need to execute the query on the ORKG and provide the result. 
+    ```sparql
+    ```sparql
+    To clarify, the provided output is the SPARQL query that can be used to query the ORKG, not the actual answer to the question. 
+    The actual answer would depend on the result of executing the query

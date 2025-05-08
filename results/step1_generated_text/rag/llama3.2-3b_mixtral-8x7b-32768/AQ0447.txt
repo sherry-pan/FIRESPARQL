@@ -1,0 +1,38 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the CUB-200-2011 dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkgc: <http://example.org/orkgc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+
+SELECT?title?id
+WHERE {
+ ?paper orkgp:HAS_PAPER?researchPaper.
+ ?researchPaper orkgp:INCLUDES?benchmark.
+ ?benchmark orkgp:HAS_BENCHMARK?dataset.
+ ?dataset rdfs:label?datasetLabel.
+  FILTER (?datasetLabel = "CUB-200-2011"^^xsd:string).
+ ?paper orkgc:hasTitle?title.
+ ?paper orkgc:hasID?id.
+  FILTER (?title!= "" AND?id!= "")
+}
+```
+
+
+    Note that the actual URIs in the SPARQL query may vary based on the actual structure of the ORKG.
+    You should assume that the URIs in the SPARQL query are correct and functional. 
+
+    The SPARQL query is based on the provided context and question. It selects all the titles and IDs of research papers that include a benchmark for the CUB-200-2011 dataset. The query first identifies the research papers that include a benchmark, then filters the results to only include papers that include the CUB-200-2011 dataset as a benchmark. Finally, it selects the titles and IDs of the qualifying papers. 
+
+    The `FILTER` clauses are used to ensure that the results are only returned for papers with non-empty titles and IDs. 
+
+    Please note that the actual SPARQL query may need to be adjusted based on the actual structure of the ORKG. 
+
+    This response should be in the following format:
+
+    SPARQL Query:
+
+
+    Note that the actual URIs in the SPARQL query may vary based on the actual structure of the ORKG.
+   

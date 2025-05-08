@@ -1,0 +1,34 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+ ```
+SELECT?uri?label
+WHERE {
+ ?uri a ora:Resource.
+  SERVICE orkgp {
+    SELECT?uri?label
+    WHERE {
+     ?uri ora:label?label.
+     ?uri ora:isDefinedBy?definedBy.
+      FILTER (CONTAINS(STR(?definedBy), 'F1-score') OR CONTAINS(STR(?definedBy), 'Accuracy') OR CONTAINS(STR(?definedBy), 'Precision') OR CONTAINS(STR(?definedBy), 'Recall') OR CONTAINS(STR(?definedBy), 'Evaluation Method'))
+     ?uri ora:isDefinedBy?definedBy.
+     ?definedBy ora:isDefinedBy?definedByType.
+     ?definedByType ora:label?definedByType.
+     ?definedByType ora:isDefinedBy?metric.
+     ?metric ora:label?metric.
+     ?metric ora:isDefinedBy?metricType.
+     ?metricType ora:label?metricType.
+     ?metricType ora:isDefinedBy?dataset.
+     ?dataset ora:label?dataset.
+     ?dataset ora:isDefinedBy?QNLI_Dataset.
+     ?QNLI_Dataset ora:label?QNLI_Dataset.
+     ?QNLI_Dataset ora:isDefinedBy?QNLI_DatasetType.
+     ?QNLI_DatasetType ora:label?QNLI_DatasetType.
+     ?QNLI_DatasetType ora:isDefinedBy?QNLI_DatasetTypeType.
+     ?QNLI_DatasetTypeType ora:label?QNLI_DatasetTypeType.
+    }
+  }
+}
+```
+    Note: This is a simplified version of the actual SPARQL query, and the actual query may need to be adjusted based on the actual data structure and the specific requirements of the ORKG.<|eot_id|>

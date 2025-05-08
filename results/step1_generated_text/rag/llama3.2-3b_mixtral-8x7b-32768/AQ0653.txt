@@ -1,0 +1,47 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciCite dataset?
+
+Generated SPARQL:
+ ```
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+     PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology#>
+     PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology#>
+     SELECT?researchPaper?title?ID
+     WHERE {
+       ?researchPaper a orkgc:Contribution.
+       ?researchPaper orkgp:HAS_ID?ID.
+       ?researchPaper orkgp:HAS_TITLE?title.
+       ?researchPaper orkgp:HAS_DATASET orkgc:SciCiteDataset.
+       ?researchPaper orkgp:HAS_BENCHMARK?benchmark.
+       ?benchmark a orkgc:Benchmark.
+        FILTER (str(?benchmark) = "SciCite")
+        }
+    ```
+
+
+
+## Step 1: Define the prefixes for the given ontologies.
+The prefixes for the given ontologies are defined as follows:
+- orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+- orkgc: <http://www.openresearchknowledgegraph.org/ontology#>
+- orkgp: <http://www.openresearchknowledgegraph.org/ontology#>
+
+## Step 2: Select the required variables from the given context.
+The required variables are:
+-?researchPaper
+-?title
+-?ID
+
+## Step 3: Define the conditions for the research papers.
+The conditions for the research papers are:
+- The research paper is a contribution.
+- The research paper has an ID.
+- The research paper has a title.
+- The research paper is associated with the SciCite dataset.
+- The research paper has performed benchmarks.
+
+## Step 4: Filter the benchmarks to only include those related to the SciCite dataset.
+The filter condition for the benchmarks is:
+- The benchmark is related to the SciCite dataset.
+
+## Step 5: Write the SPARQL query based

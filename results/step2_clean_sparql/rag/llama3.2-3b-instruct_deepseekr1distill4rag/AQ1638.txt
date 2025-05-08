@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX orkp: <http://orkp.org/ontology/>
+PREFIX orkc: <http://orkc.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkp:hasDataset ?dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasScore ?score.
+  FILTER (STR(?dataset) = "Ball in cup, catch (DMControl100k)"@en)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

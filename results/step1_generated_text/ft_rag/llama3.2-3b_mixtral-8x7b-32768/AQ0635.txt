@@ -1,0 +1,21 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the DBpedia dataset?
+
+Generated SPARQL:
+ SELECT?title?id
+     WHERE {
+     ?cont       a            orkgc:Contribution.
+      FILTER (str(?cont, orkgp:CONTAINS) = "contain")
+     ?cont       orkgp:HAS_DATASET      ?dataset.
+      FILTER (str(?dataset, orkgp:HAS_DATASET, orkgp:HAS_DATASET) = "has dataset")
+     ?dataset      orkgp:HAS_BENCHMARK     ?benchmark.
+      FILTER (str(?benchmark, orkgp:HAS_BENCHMARK, orkgp:HAS_BENCHMARK) = "has benchmark")
+     ?benchmark    orkgp:HAS_DATASET        ?dataset.
+      FILTER (str(?dataset, orkgp:HAS_DATASET, orkgp:HAS_DATASET) = "has dataset")
+     ?dataset      rdfs:label                ?dataset_lbl.
+     ?dataset_lbl  orkgp:HAS_DATASET        ?dataset.
+      FILTER (str(?dataset, orkgp:HAS_DATASET, orkgp:HAS_DATASET) = "has dataset")
+     ?cont       orkgp:HAS_DATASET        ?dataset.
+      FILTER (str(?dataset, orkgp:HAS_DATASET, orkgp:HAS_DATASET) = "has dataset")
+     ?cont       orkgp:HAS_BENCHMARK     ?benchmark.
+      FILTER (str(?benchmark, orkgp:HAS_BENCHMARK, orkgp:HAS_BENCHMARK) = "has benchmark

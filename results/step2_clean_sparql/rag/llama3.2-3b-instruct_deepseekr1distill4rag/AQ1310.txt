@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Resource;
+           orkg:label "Atari 2600 Boxing dataset"@en.
+  ?benchmark a orkc:BenchmarkResult;
+             orkp:dataset ?dataset;
+             orkp:metric ?metric;
+             orkp:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

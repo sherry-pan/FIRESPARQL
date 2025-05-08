@@ -1,0 +1,58 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Battle Zone dataset?
+
+Generated SPARQL:
+ SELECT?model?modelLabel WHERE {
+   ?model orkgp:hasModel?m. 
+    SERVICE orkgr:service {
+      SELECT?model?modelLabel 
+      WHERE {
+       ?m orkgp:hasModel?m1. 
+       ?m1 orkgr:hasDataset?ds. 
+       ?ds a orkgr:Dataset. 
+       ?m1 orkgr:hasEvaluation?ev. 
+       ?ev a orkgr:Evaluation. 
+       ?ev orkgr:hasDataset?ds2. 
+        FILTER (str(?ds2) = "Atari 2600 Battle Zone"). 
+       ?m1 orkgp:hasModel?m2. 
+       ?m2 rdfs:label?modelLabel. 
+        FILTER (str(?modelLabel) = "Atari 2600 Battle Zone Battle Zone"). 
+      }
+    }
+  }
+  }  
+
+```python
+def generate_sparql_query(context):
+    # Start with the base query
+    sparql_query = "SELECT?model?modelLabel WHERE {\n"
+    
+    # Get the extracted terms from the context
+    extracted_terms = context["extracted_terms"]
+    
+    # Add the query for the terms
+    for term in extracted_terms:
+        # Get the candidates for the term
+        candidates = context["candidates"][term]
+        
+        # Get the URI of the first candidate
+        uri = candidates[0]["uri"]
+        
+        # Add the query for the term
+        sparql_query += "  " + term + " orkgp:hasModel?m. \n"
+        sparql_query += "  SERVICE orkgr:service {\n"
+        sparql_query += "    SELECT?model?modelLabel \n"
+        sparql_query += "    WHERE {\n"
+        
+        # Get the candidates for the term
+        for candidate in candidates[term]:
+            # Get the URI of the candidate
+            uri = candidate["uri"]
+            
+            # Add the query for the candidate
+            sparql_query += "      " + uri + " orkgp:hasModel?m1. \n"
+            sparql_query += "      " + uri + " orkgr:hasDataset?ds. \n"
+            sparql_query += "     ?ds a orkgr:Dataset. \n"
+            sparql_query += "      " + uri + " orkgr:hasEvaluation?ev. \n"
+            sparql_query += "     ?ev a orkgr:Evaluation. \n"
+            sparql_query += "

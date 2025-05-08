@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+
+SELECT ?codeLink
+WHERE {
+  ?paper orkp:mentions ?model .
+  ?model orkp:label ?label .
+  FILTER(STRSTARTS(UCASE(?label), "H-NLI MODEL"))
+  
+  ?paper orkp:hasCodeLink ?codeLink .
+  FILTER(STRSTARTS(STR(?codeLink), "http://dx.doi.org/"))
+}
+```

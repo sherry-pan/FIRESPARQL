@@ -1,0 +1,46 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Ms. Pacman dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Ms. Pacman")
+     ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+     ?dataset_has_dataset       orkgp:HAS_DATASET      ?eval.
+     ?eval      orkgp:HAS_EVALUATION     ?eval_has_eval;
+                 orkgp:HAS_DATASET         ?eval_has_dataset.
+     ?eval_has_dataset       orkgp:HAS_DATASET      ?model.
+     ?model      rdfs:label              ?model_lbl.
+      OPTIONAL {?model       orkgp:HAS_MODEL          ?model_has_model.}
+     ?model_has_model       orkgp:HAS_MODEL          ?model_has_model_lbl.
+     ?model_has_model_lbl      rdfs:label              ?model_lbl.
+      }      ```
+
+SELECT?model?model_lbl
+WHERE {
+ ?dataset       a                orkgc:Dataset;
+                 rdfs:label      ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Ms. Pacman")
+ ?dataset       orkgp:HAS_DATASET      ?dataset_has_dataset.
+ ?dataset_has_dataset       orkgp:HAS_DATASET      ?eval.
+ ?eval      orkgp:HAS_EVALUATION     ?eval_has_eval;
+             orkgp:HAS_DATASET         ?eval_has_dataset.
+ ?eval_has_dataset       orkgp:HAS_DATASET      ?model.
+ ?model      rdfs:label              ?model_lbl.
+  OPTIONAL {?model       orkgp:HAS_MODEL          ?model_has_model.}
+ ?model_has_model       orkgp:HAS_MODEL          ?model_has_model_lbl.
+ ?model_has_model_lbl      rdfs:label              ?model_lbl.
+} ```
+
+
+    The provided SPARQL query is incorrect. The query does not correctly list the models that have been evaluated on the Atari 2600 Ms. Pacman dataset. To correct the query, we need to remove the OPTIONAL clause and the?model_has_model_lbl variable from the query. Here is the corrected query:
+
+
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Ms. Pacman")
+     ?dataset       orkg

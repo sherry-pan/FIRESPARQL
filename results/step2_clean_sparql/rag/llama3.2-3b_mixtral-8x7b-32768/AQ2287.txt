@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper orkgc:hasContribution ?contribution.
+  ?contribution orkgc:hasEntity ?entity.
+  ?entity orkgc:hasProperty ?property.
+  ?property orkgp:hasCode ?codeReference.
+  ?paper orkgr:hasBenchmark ?benchmark.
+  ?benchmark orkgp:hasPurpose "benchmarking purposes".
+  ?contribution orkgc:hasResource ?res.
+  ?res orkgr:label "Pointer + Coverage + EntailmentGen + QuestionGen".
+}
+```

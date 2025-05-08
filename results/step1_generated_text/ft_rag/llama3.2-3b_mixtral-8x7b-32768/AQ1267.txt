@@ -1,0 +1,70 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Double Dunk dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+      orkgp:R136625 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset.
+     ?dataset orkgp:HAS_EVALUATION?eval.
+     ?eval orkgp:HAS_BENCHMARK_RESULT?result.
+     ?result orkgp:HAS_METRIC?metric.
+     ?metric orkgp:HAS_VALUE?value.
+      } 
+
+```python
+def generate_sparql_query(context):
+    """
+    This function generates a SPARQL query based on the provided context.
+    
+    Parameters:
+    context (dict): A dictionary containing the context information.
+    
+    Returns:
+    str: The generated SPARQL query.
+    """
+    
+    # Initialize an empty string to store the SPARQL query
+    sparql_query = ""
+    
+    # Add the SELECT clause to the SPARQL query
+    sparql_query += "SELECT?metric?value"
+    
+    # Add the WHERE clause to the SPARQL query
+    sparql_query += " WHERE {"
+    
+    # Add the filter for the dataset
+    sparql_query += " orkgp:R136625 orkgp:HAS_DATASET orkgp:HAS_DATASET?dataset."
+    
+    # Add the filter for the evaluation
+    sparql_query += "?dataset orkgp:HAS_EVALUATION?eval."
+    
+    # Add the filter for the benchmark result
+    sparql_query += "?eval orkgp:HAS_BENCHMARK_RESULT?result."
+    
+    # Add the filter for the metric
+    sparql_query += "?result orkgp:HAS_METRIC?metric."
+    
+    # Add the filter for the value
+    sparql_query += "?metric orkgp:HAS_VALUE?value."
+    
+    # Close the WHERE clause
+    sparql_query += " }"
+    
+    # Return the generated SPARQL query
+    return sparql_query
+
+# Example usage:
+context = {
+    "question": "What is the highest benchmark result achieved on the Atari 2600 Double Dunk dataset, including the metric and its value?",
+    "extracted_terms": {
+        "Atari 2600 Double Dunk dataset",
+        "highest benchmark result",
+        "metric",
+        "value"
+    },
+    "candidates": {
+        "Atari 2600 Double Dunk dataset": [
+            {
+                "uri": "orkgr:R122689",
+                "rdfs:label": "Atari 2600 Double Dunk",
+               

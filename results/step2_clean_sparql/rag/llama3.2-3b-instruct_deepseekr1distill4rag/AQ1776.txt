@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgr: <http://example.org/orkgr/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model orkgp:benchmarks orkgr:ImageNet_dataset ;
+         orkgr:hasPerformanceMetric ?metric .
+  ?metric orkgr:metricType orkgr:Number_of_params_metric ;
+          orkgr:metricValue ?metricValue .
+}
+ORDER BY ?metricValue
+LIMIT 1
+```

@@ -1,0 +1,37 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciERC dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX orkgc: <http://example.org/orkgc/>
+    PREFIX orkgp: <http://example.org/orkgp/>
+    
+    SELECT?title?id?uri
+    WHERE {
+     ?paper orkgp:HAS_PAPER?paperpaper.
+     ?paper orkgp:HAS_TITLE?paperpaper.
+     ?paper orkgp:HAS_ID?paperpaper.
+     ?paper orkgp:HAS_DATASET?dataset.
+     ?dataset orkgr:RMatch "SciERC dataset"@en.
+     ?paper orkgp:HAS_BENCHMARK?benchmark.
+     ?benchmark orkgp:HAS_PAPER?benchmarkpaper.
+     ?benchmarkpaper orkgp:HAS_TITLE?title.
+     ?benchmarkpaper orkgp:HAS_ID?id.
+     ?benchmarkpaper orkgp:uri?uri.
+      BIND(Concat(?title, " ",?id) AS?result).
+      FILTER(BOUND(?title) && BOUND(?id) && BOUND(?uri))
+    }
+```sparql
+    Note that the `PREFIX` declarations are not included in the output. 
+
+    The generated SPARQL query retrieves all the papers that have performed benchmarks on the SciERC dataset, along with their titles and IDs. The query uses the following predicates:
+    - `orkgp:HAS_PAPER` to link research papers to the query result
+    - `orkgp:HAS_TITLE` to link titles to the query result
+    - `orkgp:HAS_ID` to link IDs to the query result
+    - `orkgp:HAS_DATASET` to link datasets to the query result
+    - `orkgr:RMatch` to link datasets to the SciERC dataset
+    - `orkgp:HAS_BENCHMARK` to link benchmarks to the query result
+    - `orkgp:HAS_PAPER` to link benchmarks to the query result
+    - `orkgp:HAS_TITLE` and `orkgp:HAS_ID` to link benchmarks to the query result
+   

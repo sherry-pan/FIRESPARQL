@@ -1,0 +1,15 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Cart Pole (OpenAI Gym) Dataset")
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+          ?cont          orkgp:HAS_BENCHMARKED_MODEL     ?benchmark.
+          ?model        a                orkgp:Model;
+                         rdfs:label      ?model_lbl.
+          ?paper       orkgp:HAS_MODEL         ?model;
+                       orkgp:HAS_BENCHMARKED_MODEL     

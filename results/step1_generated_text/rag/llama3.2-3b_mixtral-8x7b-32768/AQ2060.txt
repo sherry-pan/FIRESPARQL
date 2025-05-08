@@ -1,0 +1,26 @@
+Question:
+Can you provide links to code used in papers that benchmark the BERTwwm + SQuAD 2 model?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT?resource?resourceLabel?code?benchmark
+WHERE {
+ ?resource orkg:resourceType orkg:Resource.
+ ?resource orkg:hasPaper?paper.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasMethod?method.
+ ?method orkg:hasDataset?dataset.
+ ?resource orkg:label?resourceLabel.
+ ?paper orkg:label?paperLabel.
+ ?benchmark orkg:label?benchmarkLabel.
+ ?resource orkg:code?code.
+  FILTER (CONTAINS(STR(?resourceLabel), "BERTwwm + SQuAD 2 model") OR CONTAINS(STR(?paperLabel), "BERTwwm + SQuAD 2 model") OR CONTAINS(STR(?benchmarkLabel), "BERTwwm + SQuAD 2 model"))
+ ?resource orkg:hasCode?code.
+ ?code orkg:label?codeLabel.
+  FILTER (CONTAINS(STR(?codeLabel), "code") OR CONTAINS(STR(?codeLabel), "benchmark"))
+}
+``` 
+    The final answer is the provided SPARQL

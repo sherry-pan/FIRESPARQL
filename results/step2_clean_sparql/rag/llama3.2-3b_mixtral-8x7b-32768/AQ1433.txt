@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?bleuScore
+WHERE {
+  ?model orkg:performedBest ?performance.
+  ?performance orkg:hasMetric orkg:BLEU.
+  ?performance orkg:score ?bleuScore.
+  ?performance orkg:dataset orkg:WMT2016_EnDe.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

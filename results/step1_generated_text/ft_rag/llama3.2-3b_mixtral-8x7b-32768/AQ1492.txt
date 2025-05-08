@@ -1,0 +1,45 @@
+Question:
+Indicate the model that performed best in terms of Precision metric on the RotoWire (Relation Generation) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "RotoWire (Relation Generation) benchmark dataset")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval           orkgp:HAS_EVALUATION    ?cont;
+                      orkgp:HAS_METRIC        ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+       FILTER (str(?metric_lbl) = "Precision metric")
+      ?eval           orkgp:HAS_VALUE         ?eval_value;
+                      orkgp:HAS_PRECISION     ?metric.
+      ?value         rdfs:label              ?value_lbl.
+       FILTER (str(?value_lbl) = "best")
+      ?cont           orkgp:HAS_MODEL        ?model.
+      ?model         rdfs:label              ?model_lbl.
+       BIND(xsd:integer(?model_lbl) AS?model_lbl)
+      ?cont           orkgp:HAS_PRECISION     ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+       FILTER (str(?metric_lbl) = "best")
+      ?cont           orkgp:HAS_VALUE         ?eval_value;
+                      orkgp:HAS_PRECISION     ?metric.
+      ?value         rdfs:label              ?value_lbl.
+       BIND(xsd:integer(?value_lbl) AS?value_lbl)
+      ?cont           orkgp:HAS_MODEL        ?model.
+      ?model         rdfs:label              ?model_lbl.
+       FILTER (str(?model_lbl) = "BERT")
+     }
+     GROUP BY?model?model_lbl
+     HAVING (COUNT(?value_lbl) = MAX(COUNT(?value_lbl)))
+     ORDER BY DESC(?value_lbl) ASC(?model_lbl)
+     LIMIT 1;```
+
+
+
+## Step 1: Define the SELECT clause of the SPARQL query
+The SELECT clause of the SPARQL query should be defined to select the model that performed best in terms of Precision metric. The model is represented by the variable?model, and its label is represented by?model_lbl.
+
+## Step 2: Define the FILTER clause for the dataset
+The FILTER clause is used to filter the dataset to only include the RotoWire (Relation Generation) benchmark dataset. This is done

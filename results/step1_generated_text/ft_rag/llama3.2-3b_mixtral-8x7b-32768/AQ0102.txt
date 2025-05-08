@@ -1,0 +1,27 @@
+Question:
+Could you provide a list of models that have been tested on the Reuters-21578 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgp:HAS_DATASET       a            orkgc:Resource;
+                           rdfs:label      ?dataset_lbl. 
+       FILTER (str(?dataset_lbl) = "Reuters-21578")
+       orkgp:HAS_BENCHMARK      orkgp:HAS_DATASET       rdfs:label      ?benchmark_lbl.
+       orkgp:HAS_DATASET         orkgp:HAS_BENCHMARK      rdfs:label      ?benchmark_lbl.
+       orkgp:HAS_MODEL          orkgp:HAS_DATASET       rdfs:label      ?model_lbl.
+       orkgp:HAS_MODEL          orkgp:HAS_MODEL         rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "models")
+       orkgp:HAS_MODEL          orkgp:HAS_DATASET       orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_MODEL          orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_EVALUATION     orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_EVALUATION     orkgp:HAS_DATASET       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Reuters-21578")
+       orkgp:HAS_DATASET         orkgp:HAS_MODEL          orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_DATASET         orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_EVALUATION     orkgp:HAS_MODEL          rdfs:label      ?model_lbl.
+       orkgp:HAS_EVALUATION     orkgp:HAS_MODEL          rdfs:label      ?model_lbl.
+       orkgp:HAS_MODEL          orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_MODEL          orkgp:HAS_EVALUATION      rdfs:label      ?eval_lbl.
+       orkgp:HAS_EVALUATION     orkgp:HAS_MODEL          rdfs:label      ?model_lbl.
+       orkgp:HAS_EVALUATION     orkgp:HAS_MODEL

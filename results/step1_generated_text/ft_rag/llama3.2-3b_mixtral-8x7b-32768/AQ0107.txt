@@ -1,0 +1,59 @@
+Question:
+What are the models that have been benchmarked on the Natural Questions (short) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Natural Questions (short)")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont          orkgp:CONTAINS        ?benchmark;
+                        orkgp:HAS_DATASET      ?dataset.
+        ?eval         orkgp:HAS_EVALUATION  ?cont;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+        ?model      orkgp:HAS_MODEL        ?cont;
+                    orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont      rdfs:label              ?model_lbl.
+     } 
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+      orkgp:HAS_DATASET      ?dataset,
+     ?cont         orkgp:CONTAINS        ?dataset;
+                    orkgp:HAS_DATASET      ?dataset.
+     ?eval         orkgp:HAS_EVALUATION  ?cont;
+       ?model      orkgp:HAS_MODEL        ?cont;
+       ?model      rdfs:label              ?model_lbl.
+    } 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+      orkgp:HAS_DATASET      ?dataset,
+     ?cont         orkgp:HAS_DATASET      ?dataset;
+       ?eval         orkgp:HAS_EVALUATION  ?cont;
+       ?model      orkgp:HAS_BENCHMARK     ?eval;
+       ?model      rdfs:label              ?model_lbl.
+    } 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+      orkgp:HAS_DATASET      ?dataset,
+     ?cont         orkgp:HAS_DATASET      ?dataset;
+       ?model      orkgp:HAS_MODEL        ?cont;
+       ?model      rdfs:label              ?model_lbl.
+    } 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+      orkgp:HAS_DATASET      ?dataset,
+     ?cont         orkgp:HAS_DATASET      ?dataset;
+       ?eval         orkgp:HAS_EVALUATION  ?cont;
+       ?model      orkgp:HAS_MODEL        ?cont;
+       ?model      rdfs:label              ?model_lbl.
+    } 
+    UNION
+    SELECT DISTINCT?model?model_lbl
+    WHERE {
+      orkgp:HAS_DATASET      ?dataset,
+     ?cont         orkgp:HAS_DATASET      ?dataset;
+     ?eval         orkgp:HAS_EVALUATION

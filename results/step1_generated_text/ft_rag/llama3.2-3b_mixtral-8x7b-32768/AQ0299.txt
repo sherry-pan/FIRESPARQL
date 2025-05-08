@@ -1,0 +1,59 @@
+Question:
+What models are being evaluated on the Classic dataset?
+
+Generated SPARQL:
+ ```sparql
+     SELECT?model?model_lbl
+     WHERE {
+       orkgp:Model       a                orkgp:Model;
+                        rdfs:label      ?model_lbl.
+       orkgp:Model       orkgp:HAS_MODEL  ?model.
+       orkgp:HAS_EVALUATION      ?eval        .
+       FILTER(REGEX(STR(?eval), "HAS_EVALUATION"))
+       FILTER(REGEX(STR(?eval), "HAS_DATASET"))
+      ?dataset       orkgp:HAS_DATASET      ?eval.
+       FILTER(REGEX(STR(?eval), "HAS_DATASET"))
+      ?cont         orkgp:P35              ?dataset.
+       FILTER(REGEX(STR(?cont), "HAS_DATASET"))
+      ?cont         orkgp:P36              ?cont.
+       FILTER(REGEX(STR(?cont), "HAS_MODEL"))
+      ?cont         orkgp:P37              ?model.
+       FILTER(REGEX(STR(?cont), "HAS_MODEL"))
+      ?model      orkgp:HAS_MODEL        ?model.
+       FILTER(REGEX(STR(?model), "HAS_MODEL"))
+      ?model      rdfs:label              ?model_lbl.
+       FILTER(REGEX(STR(?model_lbl), "Classic"))
+     }
+     ```
+
+
+
+## Step 1: Define the query parameters
+We need to define the parameters that will be used in the SPARQL query. In this case, we want to retrieve the models that are being evaluated on the Classic dataset.
+
+## Step 2: Identify the relevant entities and properties
+From the context, we can identify the relevant entities and properties:
+- Entity: models
+- Property: orkgp:HAS_MODEL
+- Entity: dataset
+- Property: orkgp:HAS_DATASET
+- Entity: evaluation
+- Property: orkgp:HAS_EVALUATION
+
+## Step 3: Construct the SPARQL query
+Using the identified entities and properties, we can construct the SPARQL query. The query will filter the models that are being evaluated on the Classic dataset.
+
+```sparql
+SELECT?model?model_lbl
+WHERE {
+  orkgp:Model       a                orkgp:Model;
+                   rdfs:label      ?model_lbl.
+  orkgp:Model       orkgp:HAS_MODEL  ?model.
+  orkgp:HAS_EVALUATION      ?eval        .
+  FILTER(REGEX(STR(?eval), "HAS_EVALUATION"))
+  FILTER(REGEX(STR(?eval), "HAS_DATASET"))
+ ?dataset       orkgp:HAS_DATASET      ?eval.
+  FILTER(REGEX(STR(?eval), "HAS_DATASET"))
+ ?cont         orkgp:P35              ?dataset.
+  FILTER(REGEX(STR(?cont), "HAS_DATASET"))
+ ?

@@ -1,0 +1,16 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the ACE 2005 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R8368 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P34?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(REGEX(STR(?benchmark_lbl), "ACE 2005")
+      ?contrib orkgp:P2006?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?contrib orkgp:P2005?value.
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

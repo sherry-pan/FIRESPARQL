@@ -1,0 +1,13 @@
+```sparql
+SELECT ?bestModel ?metric 
+WHERE {
+  ?bestModel a ora:Model.
+  ?bestModel ora:hasDataset ?dataset.
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasMetric ?metric.
+  ?metric a ora:Metric.
+  ?metric ora:hasLabel ?label.
+  FILTER (STR(?label) = "Accuracy").
+  ?dataset ora:hasBestModel ?bestModel.
+}
+```

@@ -1,0 +1,33 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WMT2016 English-Romanian dataset?
+
+Generated SPARQL:
+ ```
+    PREFIX orkg: <http://example.org/orkg/>
+PREFIX orkp: <http://example.org/orkp/>
+PREFIX orkc: <http://example.org/orkc/>
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgc: <http://example.org/orkgc/>
+
+SELECT?paperTitle?paperId
+WHERE {
+ ?paper orkgc:hasContribution?contribution
+  SERVICE orkp:sparql
+  { BIND(irk:R147246 AS?contribution)
+  }
+ ?contribution orkgp:hasPaper?paper
+ ?paper orkgp:hasModel?model
+ ?model orkgp:hasBenchmark?benchmark
+ ?benchmark orkgp:hasDataset?dataset
+ ?dataset orkg:hasLabel "WMT2016 English-Romanian dataset"@en
+}
+``` 
+    Note: The URIs in the SPARQL query are placeholders and should be replaced with the actual URIs from the ORKG. 
+
+    The SPARQL query is designed to retrieve the research paper titles and IDs that have benchmarked models on the WMT2016 English-Romanian dataset. The query uses the following steps:
+    1. It selects the research papers that have a contribution (represented by the URI "irk:R147246").
+    2. It filters the contributions to only those that have a paper (represented by the URI "orkgp:HAS_PAPER").
+    3. It further filters the papers to only those that have a model (represented by the URI "orkgp:HAS_MODEL").
+    4. It filters the models to only those that have been benchmarked (represented by the URI "orkgp:HAS_BENCHMARK").
+    5. It filters the benchmarked models to only those that have been benchmarked on the WMT2016 English-Romanian dataset (represented by the URI "orkgp:HAS_DATASET" and the label "WMT2016 English-Romanian dataset"@en).
+    6. The

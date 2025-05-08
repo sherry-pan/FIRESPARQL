@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgp: <http://example.org/orkgp/>
+PREFIX orkgr: <http://example.org/orkgr/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkgp:HAS_MODEL ?score.
+  ?score orkgp:HAS_SCORE ?accuracy.
+  ?score orkgp:HAS_DATASET orkgr:R122689.
+  FILTER CONTAINS(STR(?accuracy), "Top 1 Accuracy").
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```
