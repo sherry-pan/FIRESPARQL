@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasScore ?score ;
+         orkg:benchmark ?benchmark.
+
+  ?benchmark a orkg:ReacherBenchmark ;
+             dcterms:title "Reacher, easy (DMControl500k)".
+
+  FILTER NOT EXISTS {
+    ?otherModel a orkg:Model ;
+                orkg:hasScore ?otherScore ;
+                orkg:benchmark ?benchmark.
+    FILTER (?otherScore > ?score)
+  }
+}
+```

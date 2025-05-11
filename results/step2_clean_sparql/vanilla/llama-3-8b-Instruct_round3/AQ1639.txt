@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model;
+         orkg:achievedScore ?score.
+  ?run a orkg:Run;
+       orkg:benchmark ?benchmark;
+       orkg:dataset ?dataset.
+  ?benchmark a orkg:Benchmark;
+             orkg:name "DMControl500k".
+  ?dataset a orkg:Dataset;
+           orkg:name "Cheetah".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

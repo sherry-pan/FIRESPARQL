@@ -1,0 +1,19 @@
+Question:
+Does paper "Disambiguating authors in citations on the web and authorship correlations" employe Cosine similarity?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX doi: <http://purl.org/dc/elements/1.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX wkm: <http://www.wkm.io/ontologies/ORKG/>
+     SELECT?paper?author?similarity
+     WHERE {
+    ?paper wkm:hasPaperTitle "Disambiguating authors in citations on the web and authorship correlations"@en.
+    ?paper wkm:hasAuthor?author.
+    ?author wkm:hasCitation?citation.
+    ?citation wkm:usesCosineSimilarity?similarity.
+    ?similarity rdfs:label?similarityLabel.
+     FILTER (STRIKE?similarityLabel)
+     }
+    <|eot_id|>

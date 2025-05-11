@@ -1,0 +1,20 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?title?id
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:about <http://www.biomedcentral.com/10.1186/1471-2164/12/1>.
+    ?benchmark rdfs:label?title.
+    ?paper orkg:hasID?id.
+    ?paper schema:keywords?keywords.
+     FILTER (regex(str(?title), "PubMedQA")
+     FILTER (regex(str(?id), "PubMedQA"))
+     }<|eot_id|>

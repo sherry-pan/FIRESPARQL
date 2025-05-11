@@ -1,0 +1,22 @@
+```sparql
+PREFIX es: <http://es.wikipedia.org/metadata/evaluation/standard>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX se: <http://seel.cse.lsu.edu/ontology/>
+
+SELECT ?metric ?value 
+WHERE {
+  ?dataset a se:Dataset.
+  ?dataset rdfs:label "re17.zip".
+  ?dataset schema:description ?description.
+  ?dataset schema:datasetType ?datasetType.
+  ?datasetType se:evaluationMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  ?metric schema:range ?range.
+  ?range a xsd:integer.
+  FILTER (STR(?metricLabel) = "accuracy" || STR(?metricLabel) = "f1 score" || STR(?metricLabel) = "precision" || STR(?metricLabel) = "recall" || STR(?metricLabel) = "F1 score" || STR(?metricLabel) = "mean average precision" || STR(?metricLabel) = "mean average recall" || STR(?metricLabel) = "AUC-ROC" || STR(?metricLabel) = "AUC-ROC area under the curve" || STR(?metricLabel) = "AUC-ROC area under the curve, macro")
+}
+```

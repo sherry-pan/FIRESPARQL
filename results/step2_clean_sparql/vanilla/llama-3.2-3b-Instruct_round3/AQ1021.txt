@@ -1,0 +1,18 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX pwc: <https://pwc.vlado.org/pwc/>
+PREFIX wot: <http://www.wotsit.org/schema/2.1/>
+PREFIX wotm: <http://www.wotsit.org/schema/1.1/wotm>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset <https://pwc.vlado.org/pwc/dataset/Leaderboards-restricted>.
+  ?dataset wot:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  ?metric wotm:hasValue ?value.
+  ?metric wotm:hasMetricName ?metricName.
+  FILTER (CONTAINS(STR(?metricLabel), "Evaluation") || CONTAINS(STR(?metricName), "Evaluation"))
+}
+ORDER BY DESC(?metric)
+```

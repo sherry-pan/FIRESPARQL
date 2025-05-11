@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?model_name ?params
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark dcterms:title "ImageNet ReaL".
+  ?benchmark orkg:metric "Params".
+  ?benchmark orkg:hasBestValue ?params.
+  ?model orkg:hasName ?model_name.
+  FILTER (?params = xsd:integer(?params)).
+}
+ORDER BY DESC(?params)
+```

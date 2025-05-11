@@ -1,0 +1,13 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasReference ?reference.
+  ?reference schema:about ?model.
+  ?model schema:name "BiLSTM-Attention + ELMo".
+  ?paper orkg:hasCode ?code.
+  FILTER EXISTS { ?reference rdfs:label ?benchmark }
+}

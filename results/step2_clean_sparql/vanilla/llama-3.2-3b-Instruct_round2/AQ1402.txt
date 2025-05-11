@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model schema:description ?description.
+  FILTER (CONTAINS(STR(?description), 'NYT-single')).
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark schema:description ?benchmarkDescription.
+  FILTER (CONTAINS(STR(?benchmarkDescription), 'F1-score')).
+  ?benchmark orkg:score ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?type 
+WHERE {
+  ?nanocarrier dbo:hasTherapeuticEffect ?effect.
+  ?nanocarrier rdfs:label ?label.
+  ?type rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(?label), "nanocarrier") AND CONTAINS(LCASE(?label), "therapeutic"))
+}
+```

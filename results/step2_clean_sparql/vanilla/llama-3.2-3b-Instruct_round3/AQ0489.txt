@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper schema:about ?benchmark.
+  ?benchmark schema:hasBenchmark ?snliBenchmark.
+  ?paper rdfs:label ?title.
+  ?paper orkg:id ?id.
+  FILTER (CONTAINS(LCASE(?title), "snli"))
+}
+```

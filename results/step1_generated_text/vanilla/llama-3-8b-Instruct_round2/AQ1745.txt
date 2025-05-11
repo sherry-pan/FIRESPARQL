@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest F1 score score on the BUCC Chinese-to-English benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?f1score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasResult?result.
+ ?result orkg:hasMetric orkg:F1Score.
+ ?result orkg:hasValue?f1score.
+ ?result orkg:hasDataset orkg:BUCC_Chinese-to-English.
+ ?result orkg:hasBenchmark orkg:BUCC_Chinese-to-English_Benchmark.
+  FILTER(?f1score = MAX(?f1score))
+}<|eot_id|>

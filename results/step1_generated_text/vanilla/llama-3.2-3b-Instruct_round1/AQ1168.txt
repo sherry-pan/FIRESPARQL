@@ -1,0 +1,24 @@
+Question:
+What is the highest benchmark result achieved on the Supervised: dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?value 
+     WHERE {
+        ?benchmark a orkg:Benchmark.
+        ?benchmark orkg:dataset "Supervised:".
+        ?benchmark orkg:hasMetric?metric.
+        ?metric rdfs:label?metricLabel.
+        ?metric orkg:hasValue?value.
+        ?benchmark orkg:hasMetric?metric.
+        ?metric orkg:metricType?metricType.
+         FILTER (STRLIKE(STR(?metricType), "metric")
+                 || STRLIKE(STR(?metricType), "value"))
+        ?benchmark orkg:hasResult?result.
+        ?result orkg:hasMetric?metric.
+        ?metric orkg:hasValue?value.
+         FILTER (STR(?metric) =?metricLabel)
+     }<|eot_id|>

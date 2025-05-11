@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+SELECT ?metric ?score
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasScore ?score.
+    ?benchmark orkg:hasDataset ?benchmark_dataset.
+    ?benchmark_dataset orkg:hasName "Sequential MNIST".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

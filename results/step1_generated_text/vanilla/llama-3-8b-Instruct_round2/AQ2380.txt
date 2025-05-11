@@ -1,0 +1,18 @@
+Question:
+Where can I find code references in papers that have used the Tsetlin Machine model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?codeReference
+WHERE {
+ ?paper a bibo:AcademicPaper.
+ ?paper orkg:usedModel orkg:TsetlinMachine.
+ ?paper orkg:benchmarkingPurpose prov:usedAs.
+ ?codeReference a orkg:CodeReference.
+ ?codeReference orkg:references?paper.
+  FILTER(?codeReference!=?paper)
+}<|eot_id|>

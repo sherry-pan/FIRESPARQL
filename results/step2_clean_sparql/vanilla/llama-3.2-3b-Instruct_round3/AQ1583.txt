@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orcid.org/ontology/>
+SELECT ?model ?accuracy 
+WHERE {
+  ?model schema:description ?description.
+  ?model orkg:hasModel ?modelModel.
+  ?modelModel schema:mainEntity ?mainEntity.
+  ?mainEntity schema:title ?title.
+  ?title dbo:accuracy ?accuracy.
+  FILTER (?accuracy > 0.99)
+}
+ORDER BY DESC(?accuracy)
+```

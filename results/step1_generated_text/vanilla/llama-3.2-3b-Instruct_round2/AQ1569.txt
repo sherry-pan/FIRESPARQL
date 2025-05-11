@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX p: <http://purl.org/dc/elements/1.1/>
+     PREFIX cdf: <http://purl.org/cdr/disease/>
+     PREFIX bc5cdr: <http://purl.org/dc/bc5cdr/>
+     SELECT?model
+     WHERE {
+      ?model wdt:P31?class.
+      ?class rdfs:subClassOf* [ a wd:Q12345678 ]. 
+      ?model bc5cdr:F1Score?score.
+       FILTER (?score >= ( SELECT MAX (?score )
+                          {?m bc5cdr:F1Score?score.
+                            FILTER (?m wdt:P31?class.
+                                     ?class rdfs:subClassOf* [ a wd:Q12345678 ]. ) } ) )
+     }<|eot_id|>

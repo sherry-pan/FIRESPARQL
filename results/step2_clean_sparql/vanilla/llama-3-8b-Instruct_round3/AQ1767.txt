@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark owl:sameAs schema:StanfordCarsBenchmark.
+  ?model orkg:hasMetric ?metric.
+  ?metric rdfs:label "Accuracy"@en.
+  ?model orkg:hasValue ?accuracy.
+}
+```

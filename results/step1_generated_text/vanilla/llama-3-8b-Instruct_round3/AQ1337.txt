@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?score
+WHERE {
+ ?paper a orkg:Paper ;
+         orkg:dataset orkg:Paper_Field ;
+         orkg:benchmark?benchmark.
+ ?benchmark orkg:metric?metric ;
+             orkg:score?score.
+  FILTER (?metric = "Highest" &&?score = xsd:float(max(?score)))
+}<|eot_id|>

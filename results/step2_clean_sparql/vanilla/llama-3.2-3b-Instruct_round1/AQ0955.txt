@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?description
+WHERE {
+  ?metric orkg:evaluatableFor ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:datasetName "Atari 2600 Defender".
+  ?metric orkg:description ?description.
+  FILTER (contains(str(?metric), "evaluation") && contains(str(?metric), "metric"))
+}
+GROUP BY ?metric
+ORDER BY DESC(COUNT(?metric))
+```

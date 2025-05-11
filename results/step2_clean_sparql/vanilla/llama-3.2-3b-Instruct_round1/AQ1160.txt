@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c-wsdl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikibase.org/schema/0.5/>
+
+SELECT ?metric ?value
+WHERE {
+  ?metric wikibase:label ?metricLabel.
+  FILTER(CONTAINS(LCASE(?metricLabel), 'top benchmark result (metric and value) over the dataset rotowire (relation generation)')).
+  ?metric wikibase:rank ?metricRank.
+  FILTER(STR(?metricRank) = 'top').
+  ?metric wdt:metricValue ?value.
+}
+```

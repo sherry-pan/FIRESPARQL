@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/entity/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation dcterms:references ?dataset.
+  ?dataset rdfs:label "CoNLL 2003 (English)".
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label "F1 score".
+  ?evaluation orkg:hasValue ?f1Score.
+  FILTER (?f1Score > xsd:float(-1) && isLiteral(?f1Score)).
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

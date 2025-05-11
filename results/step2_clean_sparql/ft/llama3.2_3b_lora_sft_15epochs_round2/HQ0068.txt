@@ -1,0 +1,12 @@
+```sparql
+SELECT ?sectors COUNT(?sectors) AS ?freq
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "energy"))
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_SECTOR ?sector.
+  ?sector rdfs:label ?sectors.
+}
+GROUP BY ?sectors
+```

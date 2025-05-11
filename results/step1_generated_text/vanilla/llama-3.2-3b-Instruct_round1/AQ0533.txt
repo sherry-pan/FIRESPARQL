@@ -1,0 +1,31 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/wdt#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+
+     SELECT?paper?title 
+     WHERE {
+    ?paper schema:description?description.
+    ?paper schema:keywords?keywords.
+     FILTER (REGEX(?keywords, "ShARe/CLEF eHealth") || REGEX(?keywords, "eHealth")).
+    ?paper schema:hasPart?paperid.
+    ?paperid rdfs:label?paperidLabel.
+     FILTER (REGEX(?paperidLabel, "http://example.org/paper/")).
+     SERVICE dfn:search {
+     SELECT?paperid?title 
+     WHERE {
+    ?paper schema:description?description.
+    ?paper schema:keywords?keywords.
+     FILTER (REGEX(?keywords, "ShARe/CLEF eHealth") || REGEX(?keywords, "eHealth")).
+    ?paper schema:hasPart?paperid.
+    ?paperid rdfs:label?paperidLabel.
+     FILTER (REGEX(?paperidLabel, "http://example.org/paper/")).
+     BIND(replace(str(?paperidLabel), "http://example.org/paper/", "") AS?paperid).
+     FILTER (REGEX(replace(str(?paperid), "[^0-9]+", ""), "http://example.org/paper/")).
+     BIND(re

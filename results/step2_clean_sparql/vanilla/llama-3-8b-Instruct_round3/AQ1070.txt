@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX fsns: <http://openresearchknowledge.org/ontology/fsns/>
+
+SELECT ?metric ?value
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+        orkg:hasResult ?result ;
+        orkg:hasDataset fsns:Test.
+   ?result a orkg:BenchmarkResult ;
+        orkg:hasMetric ?metric ;
+        orkg:hasValue ?value.
+   FILTER (?metric != "fsns:unknown" && ?value != "fsns:unknown")
+}
+```

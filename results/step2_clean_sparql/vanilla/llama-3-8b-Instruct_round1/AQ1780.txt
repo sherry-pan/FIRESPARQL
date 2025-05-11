@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset a orkg:Dataset; orkg:name "Oxford-IIIT Pets".
+  ?benchmark orkg:metric ?metric.
+  ?metric a orkg:Metric; orkg:name "Top-1 Error Rate".
+  ?benchmark orkg:score ?score.
+}
+ORDER BY ?score
+LIMIT 1
+```

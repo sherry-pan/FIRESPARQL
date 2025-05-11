@@ -1,0 +1,19 @@
+Question:
+List the code links in papers that use the BiT-M model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT?paper?codeLink
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:usesModel <http://openresearchknowledge.org/ontology/BiT-M>.
+ ?paper orkg:usesBenchmark?benchmark.
+ ?benchmark a bibo:Benchmark.
+ ?paper orkg:hasCodeLink?codeLink.
+  FILTER (?benchmark!= <http://openresearchknowledge.org/ontology/No_Benchmark>)
+}<|eot_id|>

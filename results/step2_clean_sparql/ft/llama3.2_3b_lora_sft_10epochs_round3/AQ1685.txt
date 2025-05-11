@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CL-SciSumm")
+  ?dataset orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  ?model orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_METRIC orkgc:ROUGE2;
+              orkgp:HAS_VALUE ?score.
+  FILTER (?score >= 0.8 && ?score <= 1.0)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

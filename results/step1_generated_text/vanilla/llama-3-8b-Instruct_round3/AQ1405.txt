@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?model?entityF1Score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasResult?result.
+ ?result orkg:dataset dc:title "SciERC benchmark dataset".
+ ?result orkg:metric rdfs:label "Entity F1 score".
+ ?result orkg:value?entityF1Score.
+  FILTER (?entityF1Score = MAX(?entityF1Score) )
+}<|eot_id|>

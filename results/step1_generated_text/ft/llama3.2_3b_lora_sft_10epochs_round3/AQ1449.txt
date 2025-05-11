@@ -1,0 +1,28 @@
+Question:
+What is the name of the top performing model in terms of Accuracy (High) score when benchmarked on the RACE dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Accuracy (High)")
+         {
+           orkgp:R80378 orkgp:run {
+            ?value     a               orkgp:Value;
+                       orkgp:value      ?value_lbl.
+           }
+           BIND(
+             if(?value_lbl    = "0.979"^^xsd:string
+                 ,?model       a                orkgp:Model;
+                             rdfs:label      ?model_lbl
+                  )
+             THEN
+              NEXT
+             ELSE
+              BIND(?model      ?model_lbl)
+           ) AS?score
+         }
+         ORDER BY DESC(?score)
+         LIMIT 1
+     }<|eot_id|>

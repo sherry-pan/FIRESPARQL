@@ -1,0 +1,18 @@
+```sparql
+PREFIX wot: <http://www.wot.org/ontology#>
+PREFIX rdf: <http://www.wot.org/rdf#>
+PREFIX rdfs: <http://www.wot.org/rdf#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.wot.org/ontology#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+
+SELECT ?model 
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBestFlopsResult "CIFAR-100".
+    ?model schema:description ?description.
+    FILTER (CONTAINS(str(?description), "FLOPS") && CONTAINS(str(?description), "model") && CONTAINS(str(?description), "CIFAR-100"))
+}
+```

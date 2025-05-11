@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmarkedOn ?benchmark.
+  ?benchmark rdfs:label "NYT-single".
+  ?benchmark orkg:hasEvaluationMetric ?metric.
+  ?metric rdfs:label "F1 score".
+  ?metric orkg:hasValue ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

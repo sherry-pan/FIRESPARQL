@@ -1,0 +1,19 @@
+Question:
+Where can I find code references in papers that have used the Pointer + Coverage + EntailmentGen + QuestionGen model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+        ?paper rdfs:label?title.
+         FILTER(REGEX(?title, "Pointer + Coverage + EntailmentGen + QuestionGen"))
+        ?paper orkgp:has_source?source.
+        ?source rdfs:label?source_label.
+        ?paper orkgp:has_code?code.
+        ?code rdfs:label?code_label.
+         FILTER(REGEX(?code_label, "benchmarking"))
+        ?paper orkgp:has_benchmark?benchmark.
+        ?benchmark rdfs:label?benchmark_label.
+         FILTER(REGEX(?benchmark_label, "Papers with the following models:"))
+     }
+     ORDER BY DESC(?benchmark_label)
+     LIMIT 10<|eot_id|>

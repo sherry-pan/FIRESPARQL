@@ -1,0 +1,26 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX bio2kel: <http://bio2kel.org/ontology/bio2kel/>
+PREFIX fsn: <http://purl.org/linguistics/fsn/>
+PREFIX wikibase: <http://wikiba.se/ontology/wikibase/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?model
+WHERE {
+    ?benchmark a fsn:Benchmark ;
+               fsn:hasName "FSNS - Test" .
+    ?metric a fsn:Metric ;
+            fsn:hasName "Sequence error" .
+    ?evaluation a fsn:Evaluation ;
+                fsn:isEvaluationOf ?benchmark ;
+                fsn:hasMetric ?metric ;
+                fsn:hasModel ?model ;
+                fsn:hasScore ?score .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+```sparql
+SELECT ?lead_compound
+WHERE {
+  {
+    SELECT ?lead_compound (COUNT(?lead_compound) AS ?count)
+    WHERE {
+      ?compound a orkgc:Compound;
+                orkgp:P31 ?properties.
+      ?properties orkgp:P34 ?leads.
+      ?leads orkgp:P4319 ?lead_compound.
+      ?lead_compound orkgp:HAS_DATASET ?dataset.
+      FILTER(REGEX(?dataset, "NVL"))
+    }
+    GROUP BY ?lead_compound
+    ORDER BY DESC(?count)
+    LIMIT 1
+  }
+}
+```

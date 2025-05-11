@@ -1,0 +1,16 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ SELECT?number_of_questions
+     WHERE {
+      ?papers rdfs:label?titles.
+       FILTER(REGEX(?titles, "QA"))
+      ?papers orkgp:P31?cont.
+      ?cont orkgp:P34?questions.
+      ?questions orkgp:HAS_VALUE?number_of_values.
+      ?number_of_values orkgp:HAS_DATATYPE?datatype.
+      ?number_of_values orkgp:P32?number_of.
+      ?datatype rdfs:label "int"^^<http://www.w3.org/2001/XMLSchema#string>.
+       FILTER(xsd:int(?number_of) > 10000)
+     }<|eot_id|>

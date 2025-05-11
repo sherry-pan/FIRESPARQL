@@ -1,0 +1,18 @@
+```sparql
+PREFIX wot: <http://www.wot.org/ontologies/wordnet>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontologies/orkg/>
+
+SELECT ?model ?bleuScore
+WHERE {
+  ?model wot:hasBenchmark "WMT2016 German-English".
+  ?model schema:hasMetric ?metric.
+  ?metric schema:hasMetricName "BLEU Score".
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasScore ?bleuScore.
+  FILTER (isNumeric(?bleuScore) && ?bleuScore > 0).
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

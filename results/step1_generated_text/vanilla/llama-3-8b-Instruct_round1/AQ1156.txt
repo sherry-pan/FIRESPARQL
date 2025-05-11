@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset SQuAD2.0?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             dcterms:title "SQuAD2.0" ;
+             orkg:hasResult?result.
+ ?result a orkg:Result ;
+          orkg:hasMetric?metric ;
+          orkg:hasValue?value.
+  FILTER (?metric = "TOP" &&?value > 0)
+}<|eot_id|>

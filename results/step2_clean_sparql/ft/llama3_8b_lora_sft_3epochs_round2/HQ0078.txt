@@ -1,0 +1,13 @@
+```sparql
+SELECT ?location
+WHERE {
+  orkgr:R155351 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P50444 ?location.
+  ?location orkgp:P50447 ?scale.
+  ?scale orkgp:compareContribution ?scale_contrib.
+  ?scale_contrib orkgp:P50444 ?scale_value.
+  FILTER(?scale_value = ?max_value)
+  ?max_value orkgp:P50444 ?max_value_value.
+  FILTER(?max_value_value = "study")
+}
+```

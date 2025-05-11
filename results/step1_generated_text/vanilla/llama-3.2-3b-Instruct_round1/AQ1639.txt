@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest Score score on the Cheetah, run (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+     SELECT?model?score
+     WHERE {
+    ?model schema:about <https://www.example.org/models/Model1> ;
+        orkg:score rdfs:label?score.
+    ?model schema:about <https://www.example.org/models/Model2> ;
+        orkg:score rdfs:label?score2.
+    ...
+    ?model schema:about <https://www.example.org/models/ModelN> ;
+        orkg:score rdfs:label?scoreN.
+     }
+     ORDER BY ( Desc(?score) )<|eot_id|>

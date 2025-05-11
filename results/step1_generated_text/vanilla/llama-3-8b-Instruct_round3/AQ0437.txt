@@ -1,0 +1,16 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STL-10 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/>
+     PREFIX bibo: <http://purl.org/ontology/bibo/>
+     SELECT?paper?title?id
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper bibo:hasTitle?title.
+      ?paper orkg:hasID?id.
+      ?benchmark a orkg:Benchmark.
+      ?benchmark orkg:dataset?dataset.
+      ?dataset a orkg:Dataset ; orkg:name "STL-10".
+      ?paper orkg:performedBenchmark?benchmark.
+     }<|eot_id|>

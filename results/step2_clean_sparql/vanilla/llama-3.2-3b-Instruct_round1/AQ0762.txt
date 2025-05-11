@@ -1,0 +1,10 @@
+```sparql
+PREFIX wmt: <http://www.wikidata.org/entity/wiki/2014/WMT_evaluations>
+PREFIX wmtv: <http://www.wikidata.org/entity/wiki/2014/WMT_evaluations_values>
+SELECT ?metric (COUNT(?metric) AS ?number_of_metrics)
+WHERE {
+  ?metric wmt:hasEvaluationMetric wmt:evaluationMetric.
+  ?metric wmtv:hasDataset wmt:WMT2014_French-English.
+  FILTER(lang(?metric) = "en")
+}
+```

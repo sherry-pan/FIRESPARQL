@@ -1,0 +1,29 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Sequential MNIST dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgescape.org/ontologies/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?metric?score
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset schema:datasetName "Sequential MNIST".
+    ?dataset orkg:benchmarkResults?benchmark.
+    ?benchmark schema:dataset?benchmarkDataset.
+    ?benchmark schema:metric?metric.
+    ?benchmark schema:score?score.
+    ?benchmark orkg:bestResult?bestResult.
+    ?bestResult schema:dataset?benchmarkDataset.
+    ?benchmarkDataset orkg:datasetName "Sequential MNIST".
+    ?metric rdfs:label?metricLabel.
+    ?metric schema:type "Number".
+    ?score rdfs:label?scoreLabel.
+    ?benchmark orkg:dataset?benchmark.
+    ?benchmark schema:metric?metric.
+    ?benchmark schema:score?score.
+    ?benchmark orkg:bestResult?bestResult.
+     FILTER (STRLIKE(?metricLabel, "Benchmark Result") || STRLIKE(?scoreLabel, "Score"))
+     }<|eot_id|>

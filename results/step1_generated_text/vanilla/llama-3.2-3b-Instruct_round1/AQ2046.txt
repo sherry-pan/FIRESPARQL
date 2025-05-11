@@ -1,0 +1,35 @@
+Question:
+Where can I find code references in papers that have used the MMV model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearch.org/orkg/>
+     PREFIX orkg: <http://openresearch.org/orkg/ontology/>
+     SELECT?p?o
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper schema:author?author.
+    ?author schema:affiliation?affiliation.
+    ?affiliation schema:hasPaper?paper.
+    ?paper schema:hasCitation?citation.
+    ?citation schema:hasReference?ref.
+    ?ref schema:description?description.
+    ?ref schema:subject?subject.
+    ?subject schema:hasType "paper".
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasModel "MMV".
+    ?paper orkg:hasCodeReference?codeRef.
+    ?codeRef schema:description "Code reference".
+    ?p a schema:CodeReference.
+    ?p orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasModel "MMV".
+    ?p orkg:hasCodeReference?codeRef.
+    ?codeRef schema:description "Code reference".
+    ?paper schema:hasCitation?citation.
+    ?citation schema:hasReference?ref.
+    ?ref schema:description "Code reference".
+    ?p schema:type?type.
+    ?type rdfs:label "Code reference".
+     }<|eot_id|>

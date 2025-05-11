@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Double Dunk dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology#>
+PREFIX atari: <http://openresearchknowledge.org/ontology/atari#>
+PREFIX metrics: <http://purl.org/ontology/mo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?metric
+WHERE {
+ ?dataset a atari:AtariDataset ;
+          rdfs:label "Double Dunk".
+ ?dataset orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+  FILTER(?metric rdfs:subClassOf* metrics:Metric).
+}<|eot_id|>

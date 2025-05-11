@@ -1,0 +1,24 @@
+Question:
+What is the best performing model benchmarking the ImageNet dataset in terms of Number of params metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                    rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Number of params")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ImageNet")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:HAS_METRIC        ?metric.
+         BIND(xsd:integer(?value) AS?value)
+        ?cont       orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_MODEL        ?model.
+        ?model      rdfs:label              ?model_lbl.
+         FILTER(?model_lbl = "best")
+         BIND(xsd:integer(?value) AS?num_params)
+         ORDER BY DESC(?num_params)
+         LIMIT 10<|eot_id|>

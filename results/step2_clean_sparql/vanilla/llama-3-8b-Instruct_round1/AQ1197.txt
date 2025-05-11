@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?result a orkg:BenchmarkResult.
+  ?result orkg:dataset <http://www.orkg.org/ontology/STS_Benchmark>.
+  ?result orkg:metric ?metric.
+  ?result orkg:value ?value.
+  FILTER (xsd:float(?value) = ?maxValue)
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

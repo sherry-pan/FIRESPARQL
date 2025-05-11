@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?avgReturn
+WHERE {
+  ?model a orkg:Model.
+  ?model dbo:benchmark ?benchmark.
+  ?benchmark orkg:dataset orkg:Atari2600MontezumasRevenge.
+  ?benchmark orkg:metric schema:AvgReturn.
+  ?benchmark orkg:metricValue ?avgReturn.
+  FILTER(?avgReturn = ?maxAvgReturn)
+}
+ORDER BY DESC(?avgReturn)
+LIMIT 1
+```

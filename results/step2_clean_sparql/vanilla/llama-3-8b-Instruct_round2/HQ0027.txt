@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?country ?prevalence
+WHERE {
+  ?study a orkg:Study ;
+         orkg:hasResult ?result.
+  ?result a orkg:Result ;
+          orkg:hasValue ?prevalence ;
+          orkg:hasAttribute ?country.
+  ?country rdfs:label "country of study".
+}
+ORDER BY DESC(?prevalence)
+LIMIT 1
+```

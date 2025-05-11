@@ -1,0 +1,21 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?dataset (COUNT(?citedPaper) AS ?count)
+WHERE {
+  ?dataset a schema:Dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset orkg:relatedTo ?paper.
+  ?paper a schema:ResearchPaper.
+  ?paper schema:about schema:FieldOfStudy/rdfs:label "Natural Language Inference"@en.
+  ?dataset orkg:usedIn ?paper.
+  ?paper schema:citedBy ?citedPaper.
+  ?citedPaper schema:cites ?dataset.
+  FILTER(?datasetLabel != "NA" && ?datasetLabel != "" && isLiteral(?datasetLabel)).
+}
+GROUP BY ?dataset
+ORDER BY DESC(?count)
+```

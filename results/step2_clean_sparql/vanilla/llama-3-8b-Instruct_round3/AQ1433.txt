@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX wmt: <http://openresearchknowledge.org/wmt/>
+
+SELECT ?model ?score
+WHERE {
+    ?model a orkg:Model.
+    ?model wmt:hasResult ?result.
+    ?result wmt:hasScore ?score.
+    ?result wmt:dataset wmt:WMT2016.
+    ?result wmt:languagePair wmt:English-German.
+    ?result wmt:metric wmt:BLEU.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

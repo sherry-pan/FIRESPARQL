@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+   ?paper a schema:ScholarlyArticle ;
+          schema:about ?dataset, ?evaluation.
+   ?evaluation rdfs:label ?metric.
+   FILTER (?dataset = <http://www.orkg.org/orkg/resource/datasets/DocRED_HumanAnnotated>)
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R74980 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label "Amazon-2"^^xsd:string.
+    ?contrib orkgp:P7034 ?metric.
+    OPTIONAL { ?metric rdfs:label ?metric_lbl. }
+    ?metric ?value.
+    FILTER(?value > 0)
+}
+```

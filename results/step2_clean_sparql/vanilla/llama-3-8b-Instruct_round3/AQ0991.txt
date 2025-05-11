@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasPublicationVenue ?venue ;
+         orkg:hasPublicationDate ?date ;
+         orkg:hasEvaluationMetric ?metric.
+  ?venue rdfs:label "Reuters De-En dataset"@en.
+  FILTER (?date > "2000-01-01"^^xsd:date && ?date < "2022-12-31"^^xsd:date)
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://purl.org/sawz/orkg/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?metric 
+WHERE {
+    ?model orkg:isBenchmarkedFor ?benchmark.
+    ?benchmark schema:name "ImageNet ReaL".
+    ?model schema:description ?d.
+    ?d schema:name "Params".
+    ?model orkg:isBestPerformingFor ?bestModel.
+    ?bestModel schema:description ?metric.
+    FILTER (LOWER(?metric) = "params")
+}
+```

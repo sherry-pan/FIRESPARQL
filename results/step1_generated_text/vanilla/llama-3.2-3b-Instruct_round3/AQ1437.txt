@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX vocab: <http://www.openresearch.org/ontologies/orkg/ontology/>
+     PREFIX wmt: <http://www.w3.org/2017/OWL/WMT17/ontologies/>
+     SELECT?model?score
+     WHERE {
+    ?model vocab:hasBenchmark vocab:WMT2016_Romanian_English.
+    ?model vocab:hasScore?score.
+     FILTER (?score >= (SELECT MAX (?score) {?m vocab:hasBenchmark vocab:WMT2016_Romanian_English.?m vocab:hasScore?score. }) )
+     }
+     ORDER BY DESC(?score)<|eot_id|>

@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX nyc: <http://example.org/nyc/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?value
+     WHERE {
+    ?dataset a nyc:Dataset.
+    ?dataset schema:hasDatasetType nyc:NYT-single.
+    ?dataset schema:hasBenchmark?benchmark.
+    ?benchmark rdfs:label?metric.
+    ?benchmark schema:hasValue?value.
+    ?benchmark schema:hasType schema:Quantity.
+     FILTER (strContains(STR(?metric), "result") && strContains(STR(?metric), "benchmark"))
+     }
+     ORDER BY DESC(?value)<|eot_id|>

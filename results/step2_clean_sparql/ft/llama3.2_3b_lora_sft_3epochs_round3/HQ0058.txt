@@ -1,0 +1,28 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (AVG(?value) AS ?value)
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 ?cont.
+  ?cont orkgp:P32 [
+    orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:P34 [
+      orkgp:P33 ?classifier.
+      ?classifier orkgp:P41 ?algorithm.
+      ?algorithm rdfs:label ?algorithm_lbl.
+      FILTER(REGEX(STR(?algorithm_lbl), "naive bayes"^^xsd:string))
+      ?classifier orkgp:P42 ?eval.
+      ?eval orkgp:P41 ?classifier2.
+      ?classifier2 rdfs:label ?classifier_lbl.
+      FILTER(REGEX(STR(?classifier_lbl), "machine learning feature bag of words"^^xsd:string))
+      ?eval orkgp:P43 [
+        orkgp:P32 [
+          orkgp:P29 ?problem.
+          ?problem rdfs:label ?problem_lbl.
+          FILTER(REGEX(STR(?problem_lbl), "classify user feedback as feature request"^^xsd:string))
+          ?metric rdfs:label ?metric_lbl.
+        ]
+      ]
+    ]
+  ]
+}
+```

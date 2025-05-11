@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the PIQA dataset in terms of Accuracy metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmarks?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:dataset orkg:PIQA.
+ ?benchmark orkg:metric schema:Accuracy.
+ ?benchmark orkg:result?accuracy.
+  FILTER (?accuracy = xsd:decimal("1.0")^^xsd:float ).
+  ORDER BY DESC(?accuracy)
+  LIMIT 1
+}<|eot_id|>

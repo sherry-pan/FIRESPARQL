@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R85036 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?contrib orkgp:P31 ?cont.
+    ?cont orkgp:HAS_VALUE ?value.
+    ?value rdfs:label ?value_lbl.
+    FILTER(REGEX(?value_lbl, "Ball in cup, catch"))
+  }
+  {
+    orkgr:R85036 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?eval orkgp:P31 ?cont.
+    ?cont orkgp:HAS_VALUE ?value.
+  }
+}
+```

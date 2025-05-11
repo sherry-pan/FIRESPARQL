@@ -1,0 +1,25 @@
+Question:
+List the metrics that are used to evaluate models on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX wikibase: <http://wikibase.com/ontology#>
+     SELECT?metric
+     WHERE {
+    ?metric rdfs:label "metrics for Penn Treebank benchmark".
+     }
+     UNION
+     SELECT?metric?label
+     WHERE {
+    ?metric rdfs:label?label.
+     FILTER (CONTAINS(LOWERCASE(?label), "penn treebank")
+     AND CONTAINS(LOWERCASE(?label), "benchmark")
+     )
+     }
+     GROUP BY?metric
+     ORDER BY DESC(Len(?label))
+    <|eot_id|>

@@ -1,0 +1,21 @@
+Question:
+Could you provide a list of models that have been tested on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+    SELECT?model?modelLabel
+    WHERE {
+     ?model a orkg:Model.
+     ?model orkg:hasTestStd?testStd.
+     ?testStd schema:about "Habitat 2020 Object Nav test-std".
+     ?model orkg:hasBeenTestedOn?testStd.
+      SERVICE orkg:suggestLabel {
+        bd:service?model?modelLabel.
+      }
+    }
+    ```
+    Note: This query uses the `orkg:suggestLabel` service to get the label of each model. This service is not a standard SPARQL service and may not be supported by all ORKG instances.<|eot_id|>

@@ -1,0 +1,23 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Double Dunk dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/schema/1.0/>
+     SELECT?metric?value
+     WHERE {
+    ?metric schema:description "Evaluation metrics".
+    ?metric schema:keywords "atari 2600 double dunk".
+    ?metric schema:description?description.
+     FILTER (contains(?description, "metrics") || contains(?description, "evaluation"))
+    ?metric schema:keyword?k.
+    ?k schema:name?metric.
+    ?metric schema:value?value.
+     BIND(strftime('%Y-%m-%d',?value) as?valueStr)
+     }
+     GROUP BY?metric
+     HAVING (count(?metric) > 1)
+     ORDER BY DESC?metric<|eot_id|>

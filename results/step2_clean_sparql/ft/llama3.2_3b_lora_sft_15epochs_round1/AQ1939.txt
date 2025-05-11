@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont rdfs:label ?cont_lbl.
+  FILTER(REGEX(STR(?cont_lbl), "Concept Mention Extraction"))
+  ?paper orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P5016 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "Concept Mention Extraction"))
+  ?paper orkgp:P5015 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(STR(?code_lbl), "code"))
+}
+```

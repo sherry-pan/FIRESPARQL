@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the ImageNet V2 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R6386 orkgp:compareContribution?cont.
+          ?cont orkgp:P31?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?cont orkgp:P43134?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?cont orkgp:P43133?value.
+           BIND(xsd:float(?value) AS?value).
+         }
+     GROUP BY?metric?metric_lbl
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

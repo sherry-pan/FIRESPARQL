@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/v1/>
+SELECT ?model
+WHERE {
+    ?model orkg:isTopPerformingModel ?modelForDataset.
+    ?model orkg:dataset ?dataset.
+    ?dataset orkg:datasetName "MLDoc Zero-Shot English-to-French".
+    ?model orkg:isBenchmarkedOn ?benchmark.
+    ?benchmark orkg:benchmarkName "MLDoc Zero-Shot English-to-French".
+    ?model orkg:benchmarkAccuracy ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

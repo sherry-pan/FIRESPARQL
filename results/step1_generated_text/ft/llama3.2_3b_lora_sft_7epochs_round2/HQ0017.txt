@@ -1,0 +1,19 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+      ?paper a orkgc:Paper.
+      ?paper orkgp:P27?location.
+       BIND(
+         COUNT(?location) AS?count
+       )
+       FILTER(?count = (SELECT MAX(?count)
+                     FROM {
+                      ?paper orkgp:P27?location.
+                       BIND(
+                         COUNT(?location) AS?count
+                       )
+                     }))
+     }<|eot_id|>

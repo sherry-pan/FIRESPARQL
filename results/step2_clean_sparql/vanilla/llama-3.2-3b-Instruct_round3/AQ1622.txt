@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?macsScore
+WHERE {
+  ?model dbpedia:hasModel ?modelModel.
+  ?modelModel schema:description ?description.
+  ?description dbpedia:hasMeasurement ?measurement.
+  ?measurement dbpedia:hasMACsScore ?macsScore.
+  FILTER NOT EXISTS {
+    ?otherMeasurement dbpedia:hasMACsScore ?otherMACsScore.
+    FILTER(?otherMACsScore > ?macsScore)
+  }
+}
+```

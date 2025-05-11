@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the WMT2014 English-German dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wmt: <http://www.wmt-sg.org/benchmarks/wmt14>
+     SELECT?metric?value 
+     WHERE {
+      ?benchmark a orkg:Benchmark.
+      ?benchmark wmt:dataset "English-German".
+      ?benchmark wmt:dataset wmt:benchmarkFor?
+      ?metric.
+      ?benchmark wmt:score?value.
+       FILTER (?benchmark =?benchmark) 
+       FILTER (?metric = "English-German") 
+       ORDER BY DESC(?value)
+       LIMIT 1
+     }<|eot_id|>

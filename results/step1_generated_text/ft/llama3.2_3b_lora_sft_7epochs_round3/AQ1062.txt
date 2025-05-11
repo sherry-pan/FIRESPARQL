@@ -1,0 +1,25 @@
+Question:
+What is the top benchmark score and its metric on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R44963 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P34?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+           FILTER(REGEX(?dataset_lbl, "Automatically labeled Medline abstracts"))
+         } UNION {
+           orkgr:R44963 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P34?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+           FILTER(REGEX(?dataset_lbl, "Automatically labeled Medline abstracts"))
+          ?metric orkgp:P35?value.
+          ?value rdfs:label?value_lbl.
+           BIND(xsd:float(?value_lbl) AS?value)
+         }
+     }<|eot_id|>

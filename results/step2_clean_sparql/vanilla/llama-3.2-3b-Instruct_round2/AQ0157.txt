@@ -1,0 +1,17 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model 
+WHERE {
+  ?model a skos:Concept.
+  ?model rdfs:label ?label.
+  ?model dbpedia:hasTopic ?topic.
+  ?topic schema:description ?desc.
+  ?desc schema:topicOf ?topic2.
+  ?topic2 dbpedia:dataset "Penn Treebank (Character Level)".
+  FILTER (lang(?label) = "en")
+}
+```

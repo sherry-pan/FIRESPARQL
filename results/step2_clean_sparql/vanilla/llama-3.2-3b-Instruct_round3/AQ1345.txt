@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value 
+WHERE {
+  ?benchmark a dbo:Benchmark.
+  ?benchmark schema:description "ImageNet V2".
+  ?benchmark schema:metric ?metric.
+  ?benchmark schema:benchmarkScore ?value.
+  FILTER (CONTAINS(LCASE(?metric), "top"))
+}
+```

@@ -1,0 +1,25 @@
+Question:
+Provide a list of papers that have utilized the Duel hs model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX bio2vec: <http://example.org/bio2vec/>
+     PREFIX dualhs: <http://example.org/dualhs/>
+     PREFIX r2r: <http://example.org/r2r/>
+     SELECT?paper?paperTitle?codeLink 
+     WHERE {
+    ?paper dcterms:hasPart?code.
+    ?code schema:description?codeDescription.
+     filter (contains(str(?codeDescription,"Dual hs") or contains(str(?codeDescription,"Dual HS"))).
+    ?paper bio2vec:embbeddings dualhs:Duel hs.
+    ?paper rdfs:label?paperTitle.
+    ?paper schema:description?paperDescription.
+     filter (str(?paperDescription,"Dual hs") or str(?paperDescription,"Dual HS")).
+    ?paper r2r:code?code.
+    ?code schema:description?codeDescription.
+     filter (contains(str(?codeDescription,"Dual hs") or contains(str(?codeDescription,"Dual HS"))).
+     }<|eot_id|>

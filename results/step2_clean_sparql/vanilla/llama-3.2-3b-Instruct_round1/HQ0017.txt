@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?l (COUNT(?s) AS ?lcount)
+WHERE {
+  ?s orkg:contributesTo ?p.
+  ?s rdfs:label ?l.
+  FILTER (lang(?l) = 'en').
+  ?s wdt:P31 ?type.
+  ?s wdt:P131 ?st.
+  ?st rdfs:label ?stl.
+}
+GROUP BY ?l
+ORDER BY DESC(?lcount)
+```

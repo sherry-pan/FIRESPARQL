@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "AAPD".
+  ?paper dc:title ?title.
+  ?paper dc:identifier ?id.
+  FILTER (REGEX(?id, "^[a-zA-Z0-9-]+$"))
+}
+```

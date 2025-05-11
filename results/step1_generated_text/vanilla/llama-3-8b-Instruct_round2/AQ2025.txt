@@ -1,0 +1,18 @@
+Question:
+List the code links in papers that use the Rfa-Gate-arccos model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?code_link
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:uses_model?model.
+    ?model rdfs:label "Rfa-Gate-arccos model".
+    ?paper orkg:has_benchmark?benchmark.
+    ?code_link a orkg:CodeLink.
+    ?code_link orkg:references?paper.
+    ?code_link orkg:references?benchmark.
+     FILTER (?model =?benchmark)
+     }<|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+What is the best performing model benchmarking the BUCC German-to-English dataset in terms of F1 score metric?
+
+Generated SPARQL:
+ PREFIX ork: <http://ork.buffalo.edu/ontology/ork/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://schema.org/>
+
+     SELECT?model?f1score 
+     WHERE {
+      ?model schema:description "Benchmarking results for a German-to-English model".
+      ?model schema:description?description.
+      ?model ork:dataset "BUCC".
+      ?model ork:metric "F1 score".
+      ?model ork:bestPerformance?f1score.
+       FILTER (regex(?description, "German-to-English"))
+     }<|eot_id|>

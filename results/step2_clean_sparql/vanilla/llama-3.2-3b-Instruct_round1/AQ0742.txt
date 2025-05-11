@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orcid.org/resource/og5OtFbp9bG>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX duie: <http://www.mpi-sws.org/duie/>
+PREFIX wds: <http://www.wds.mpi-sws.org/ontology/>
+
+SELECT ?metric ?value 
+WHERE {
+    ?metric schema:description "Evaluation metric"@en.
+    ?metric rdfs:label ?metricLabel.
+    ?metric wds:hasMetricFor ?metricType.
+    FILTER (REGEX(STR(?metricLabel), "Evaluation"@en) OR REGEX(STR(?metricLabel), "Evaluation metric"@en))
+    ?metric wds:hasValue ?value.
+}
+```

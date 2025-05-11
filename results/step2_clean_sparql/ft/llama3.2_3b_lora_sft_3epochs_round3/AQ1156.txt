@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SQuAD2.0")
+  ?dataset ?metric ?value.
+  BIND(xsd:int(?value) AS ?value)
+}
+GROUP BY ?metric ?metric_lbl
+```

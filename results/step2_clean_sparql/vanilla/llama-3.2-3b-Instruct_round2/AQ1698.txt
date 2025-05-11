@@ -1,0 +1,14 @@
+```sparql
+PREFIX ork: <http://ork.gsi.de/ontology/ork>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?metric ?score
+WHERE {
+  ?model ork:isBenchmarkFor ?benchmark.
+  ?benchmark rdfs:label "Atari 2600 Centipede".
+  ?benchmark ork:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  ?benchmark ork:hasScore ?score.
+  FILTER (?metricLabel = "Score")
+  BIND(str(?metricLabel) as ?metric)
+}
+```

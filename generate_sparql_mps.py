@@ -9,13 +9,15 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 torch.mps.empty_cache()
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 def load_model(local_model_path):
     tokenizer = AutoTokenizer.from_pretrained(local_model_path)
     model = AutoModelForCausalLM.from_pretrained(
         local_model_path,
         torch_dtype=torch.float16,
-        device_map="auto",
+        # device_map="auto",
+        device_map={"": "cpu"},
         low_cpu_mem_usage=True
     )
     return model, tokenizer

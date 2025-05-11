@@ -1,0 +1,22 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bio2vec: <http://example.org/bio2vec/>
+     PREFIX orkg: <http://example.org/orkg/>
+
+     SELECT?title?id
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper schema:hasTitle?title.
+      ?paper orkg:hasBenchmarkedModel?model.
+      ?model schema:hasDataset?dataset.
+      ?dataset schema:hasDatasetType "Cart Pole".
+      ?dataset schema:hasDatasetType "OpenAI Gym".
+      ?paper orkg:hasID?id.
+       FILTER (regex(?title, "Cart Pole")) 
+     }<|eot_id|>

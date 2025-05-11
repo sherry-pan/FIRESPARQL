@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?model?f1_score
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:benchmarkedOn?benchmark.
+    ?benchmark schema:name "Natural Questions (long)".
+    ?model orkg:metricValue?f1_score.
+    ?f1_score a xsd:float.
+     FILTER (?f1_score = max(?f1_score) )
+     }<|eot_id|>

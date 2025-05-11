@@ -1,0 +1,16 @@
+```sparql
+PREFIX wmt: <http://wmt2021.org/ontology#>
+SELECT ?model 
+WHERE {
+  ?model a wmt:Model.
+  ?model wmt:performance wmt:BLEU ?bleu.
+  ?model wmt:dataset "IWSLT2014 German-English".
+  ?model skos:broader ?benchmark.
+  ?benchmark rdfs:label "IWSLT2014 German-English".
+  FILTER NOT EXISTS {
+    ?otherModel wmt:dataset "IWSLT2014 German-English".
+    ?otherModel wmt:performance wmt:BLEU ?otherBleu.
+    FILTER(?otherBleu > ?bleu)
+  }
+}
+```

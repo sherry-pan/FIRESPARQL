@@ -1,0 +1,20 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Rotowire (Content Selection) dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+    SELECT?paper?title?id
+    WHERE {
+     ?paper a orkg:ResearchPaper.
+      orkg:hasBenchmark?benchmark.
+     ?benchmark dbo:dataset "Rotowire (Content Selection)".
+     ?benchmark orkg:hasPaper?paper.
+     ?paper orkg:hasTitle?title.
+     ?paper orkg:id?id.
+    }
+    ```<|eot_id|>

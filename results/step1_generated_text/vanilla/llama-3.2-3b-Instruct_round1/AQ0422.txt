@@ -1,0 +1,19 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WMT2016 English-Romanian dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/OWL/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikiba.se/ontology/>
+     PREFIX wmt: <http://wmt18.wmt.eu/2016/eng-rom/>
+     SELECT?paper?paperID
+     WHERE {
+    ?paper wmt:hasBenchmark?benchmark.
+    ?benchmark wmt:hasDataset <http://wmt18.wmt.eu/2016/eng-rom/>.
+    ?benchmark rdfs:label?label.
+     FILTER (lang(?label) = 'en' )
+    ?paper wmt:hasTitle?title.
+    ?title rdfs:label?paperID.
+     FILTER (lang(?paperID) = 'en' )
+     }<|eot_id|>

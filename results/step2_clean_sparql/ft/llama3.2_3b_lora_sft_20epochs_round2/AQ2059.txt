@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper.
+  ?paper orkgp:P30 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "DrQA"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(?code_lbl = "code"^^xsd:string)
+}
+```

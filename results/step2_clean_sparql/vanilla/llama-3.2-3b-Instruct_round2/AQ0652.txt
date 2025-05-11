@@ -1,0 +1,27 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontologies/orcg/>
+PREFIX PubMedCitations: <http://purl.org/medline/citation/>
+
+SELECT ?paperId ?title
+WHERE {
+  ?paper dbo:title ?title.
+  FILTER (
+    CONTAINS(LCASE(?title), "pubmed 20k rct") ||
+    CONTAINS(LCASE(?title), "rct pubmed 20k") ||
+    CONTAINS(LCASE(?title), "20k pubmed rct") ||
+    CONTAINS(LCASE(?title), "rct 20k pubmed") ||
+    CONTAINS(LCASE(?title), "20k rct pubmed") ||
+    CONTAINS(LCASE(?title), "pubmed 20k") ||
+    CONTAINS(LCASE(?title), "rct 20k") ||
+    CONTAINS(LCASE(?title), "20k pubmed") ||
+    CONTAINS(LCASE(?title), "pubmed rct") ||
+    CONTAINS(LCASE(?title), "rct pubmed") ||
+    CONTAINS(LCASE(?title), "20k rct") ||
+    CONTAINS(LCASE(?title), "rct pubmed 20k")
+  )
+}
+```

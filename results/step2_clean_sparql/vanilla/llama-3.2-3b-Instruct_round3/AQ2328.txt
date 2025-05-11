@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX wot: <http://www.wot.org/oagis/dcp/ontologies/wot/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+SELECT ?code
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper wot:hasCode ?code.
+    ?paper schema:description ?description.
+    FILTER (STRLIKE(?description, "benchmark MFEC") AND NOT STRLIKE(?description, "not benchmark MFEC")).
+    ?paper dbpedia:hasLink ?link.
+    ?link schema:contentURL ?code.
+}
+```

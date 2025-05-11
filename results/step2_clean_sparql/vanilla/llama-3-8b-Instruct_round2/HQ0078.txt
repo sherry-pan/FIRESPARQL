@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?location
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:hasGeographicScale ?scale.
+  ?study orkg:location ?location.
+  { 
+    SELECT (MAX(?s) AS ?scale)
+    WHERE {
+      ?study a orkg:Study.
+      ?study orkg:hasGeographicScale ?s.
+    }
+  }
+  FILTER (?location != owl:nil).
+}
+```

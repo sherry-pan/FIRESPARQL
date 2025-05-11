@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/wsdl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX bio: <http://bio.ontobio.org/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper dcterms:hasPart ?benchmark ;
+         dbo:hasTitle ?title ;
+         dbo:inDataset <http://purl.obolibrary.org/obo/RO-0000003> ;
+         rdfs:label ?id.
+  FILTER (CONTAINS(STR(?benchmark), "PubMed 20k RCT"))
+}
+```

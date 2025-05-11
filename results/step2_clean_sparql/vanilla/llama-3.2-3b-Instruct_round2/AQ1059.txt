@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/orkg#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?metric schema:description "Benchmark Score".
+    ?benchmark rdfs:label "MAZEA".
+    ?benchmark orkg:benchmarkScore ?value.
+    ?benchmarkScore schema:about ?metric.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

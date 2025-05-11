@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark score and its metric on the Words in Context dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX ork: <http://orkg.org/ontology/>
+     SELECT?benchmark?metric
+     WHERE {
+    ?benchmark a dbo:benchmark.
+    ?benchmark schema:description "Words in Context".
+    ?benchmark schema:dataset "Words in Context".
+    ?benchmark ork:benchmarkScore?score.
+    ?benchmark ork:benchmarkMetric?metric.
+    ?benchmark schema:score?score.
+     FILTER (?score >= ( MIN(?benchmark ork:benchmarkScore ) ) )
+     ORDER BY DESC(?benchmark ork:benchmarkScore )
+     LIMIT 1
+     }
+    <|eot_id|>

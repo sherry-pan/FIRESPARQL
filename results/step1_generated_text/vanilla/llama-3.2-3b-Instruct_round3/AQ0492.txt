@@ -1,0 +1,23 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the enwik8 dataset?
+
+Generated SPARQL:
+ PREFIX w3c: <http://www.w3.org/2002/07/owl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX bio2vec: <http://bio2vec.org/ontology/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX enwik8: <http://www.enwik8.org/ontology/>
+
+     SELECT?paperTitle?paperId
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasDataset enwik8:Enwik8.
+      ?benchmark rdfs:label?benchmarkLabel.
+      ?benchmark rdfs:label?benchmarkLabel.
+       FILTER (STRINGS(?benchmarkLabel) = "Benchmark on enwik8" )
+      ?paper orkg:hasTitle?paperTitle.
+      ?paper orkg:paperId?paperId
+     }<|eot_id|>

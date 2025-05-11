@@ -1,0 +1,29 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?metric ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark a orkg:Dataset.
+  ?benchmark orkg:datasetName "Supervised".
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:metricValue ?score.
+  FILTER(?metric = "SemEval 2013").
+  FILTER(?score = ?maxScore).
+  {
+    SELECT (MAX(?score2) AS ?maxScore)
+    WHERE {
+      ?m2 a orkg:Model.
+      ?m2 orkg:benchmarks ?b2.
+      ?b2 a orkg:Dataset.
+      ?b2 orkg:datasetName "Supervised".
+      ?b2 orkg:metric ?metric2.
+      ?b2 orkg:metricValue ?score2.
+      FILTER(?metric2 = "SemEval 2013").
+    }
+  }
+}
+```

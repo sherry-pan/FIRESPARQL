@@ -1,0 +1,16 @@
+```sparql
+SELECT ?lead_compound
+WHERE {
+  ?problem a orkgc:Problem; 
+           rdfs:label ?problem_label.
+  FILTER(REGEX(?problem_label, "What is the most common (.-?) lead compound?"))
+  ?paper orkgp:P30_91535 ?problem;
+         orkgp:P31_9216 ?compound;
+         rdfs:label ?paper_label.
+  ?compound a orkgc:Compound;
+            rdfs:label ?compound_label.
+  ?compound orkgp:P31_9216 ?lead_compound.
+}
+ORDER BY DESC(COUNT(?lead_compound))
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX ptc: <http://www.openresearch.org/ptc/>
+PREFIX ork: <http://www.openresearch.org/ork/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?title ?id WHERE {
+  ?paper a ork:Paper.
+  ?paper schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset <http://dbpedia.org/ontology/PennTreebank>.
+  ?benchmarkedPaper ptc:hasTitle ?title.
+  ?benchmarkedPaper ptc:hasId ?id.
+}
+```

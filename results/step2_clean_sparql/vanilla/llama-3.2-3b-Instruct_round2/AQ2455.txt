@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?paper ?title ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCitation ?citation.
+  ?citation orkg:isBasedOn ?baseModel.
+  ?baseModel rdfs:label ?baseModelLabel.
+  FILTER (CONTAINS(?baseModelLabel, "XLNet (base)")).
+  ?paper orkg:hasLink ?link.
+  ?link a orkg:CodeLink.
+  ?link orkg:linkTo ?code.
+  FILTER (CONTAINS(?code, "git"))
+}
+```

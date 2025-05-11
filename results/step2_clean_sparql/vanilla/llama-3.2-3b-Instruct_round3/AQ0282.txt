@@ -1,0 +1,14 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vocab: <https://example.org/orkg/vocab/>
+SELECT ?model 
+WHERE {
+  ?model vocab:hasBenchmark ?benchmark.
+  ?benchmark vocab:hasDataset "Atari 2600 Space Invaders".
+  FILTER (regex(?benchmark, "Atari 2600 Space Invaders", "i") 
+         || regex(?benchmark, "Space Invaders Atari 2600", "i") 
+         || regex(?benchmark, "Atari 2600", "i") 
+         || regex(?benchmark, "Space Invaders", "i"))
+}
+```

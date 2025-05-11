@@ -1,0 +1,14 @@
+Question:
+Could you provide a list of models that have been tested on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://schema.orkg.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     SELECT?model?modelLabel
+     WHERE {
+      ?model a orkg:Model.
+      ?model dcterms:references orkg:benchmark/NLP-TDMS.
+      ?model dcterms:location?location.
+       FILTER (?location = "arXiv" &&?model a orkg:Experiment).
+       SERVICE orkg:onto {?model onto?modelLabel }
+     }<|eot_id|>

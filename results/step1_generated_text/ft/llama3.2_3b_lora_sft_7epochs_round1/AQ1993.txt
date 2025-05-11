@@ -1,0 +1,16 @@
+Question:
+Where can I find code references in papers that have used the PNDec model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+        ?paper a orkgc:Paper.
+        ?paper orkgp:P31?cont.
+        ?cont orkgp:P32?eval.
+        ?eval orkgp:P33?benchmark.
+        ?benchmark rdfs:label?benchmark_label.
+         FILTER(REGEX(?benchmark_label, "PNDec"))
+        ?benchmark orkgp:P34?code.
+        ?code rdfs:label?code.
+         FILTER(REGEX(?code, "^[^\\s]+$"))
+     }<|eot_id|>

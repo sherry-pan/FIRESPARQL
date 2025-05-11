@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/api/v1/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset ?datasetLabel ?description
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset orkg:hasDescription ?description.
+  ?dataset orkg:hasTopic orkg:Topic_ReadingComprehension.
+  FILTER (lang(?datasetLabel) = "en").
+  FILTER (lang(?description) = "en").
+}
+```

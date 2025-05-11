@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX schema: <http://schema.org/>
+SELECT ?paper ?code
+WHERE {
+    ?paper schema:name ?name.
+    FILTER(contains(lcase(?name), "bidaf") && 
+           contains(lcase(?name), "self attention") && 
+           contains(lcase(?name), "elmo") && 
+           contains(lcase(?name), "single model"))
+    ?paper schema:related ?code.
+    ?code schema:contentURL ?codeLink.
+}
+```

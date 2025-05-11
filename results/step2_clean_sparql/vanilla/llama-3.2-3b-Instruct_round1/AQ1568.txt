@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX wot: <http://www.wot.org/ns/wot#>
+SELECT ?model ?f1Score
+WHERE {
+    ?model wot:hasModel ?f1Score.
+    ?f1Score dcterms:date "2003".
+    ?f1Score dbpedia:benchmark "CoNLL".
+    ?f1Score dbpedia:dataset "English".
+    ?f1Score rdfs:label ?f1ScoreLabel.
+    FILTER (STRLEN(STR(?f1ScoreLabel)) != 0 && CONTAINS(LCASE(?f1ScoreLabel), "f1 score")).
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

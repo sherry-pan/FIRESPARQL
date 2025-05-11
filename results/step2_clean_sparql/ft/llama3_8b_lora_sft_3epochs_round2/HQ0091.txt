@@ -1,0 +1,32 @@
+```sparql
+SELECT ?label
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37534 ?method.
+  ?method rdfs:label ?method_label.
+  FILTER(REGEX(?method_label, "raman", "i"))
+  ?contrib orkgp:P7034 ?paper.
+  ?paper orkgp:P7035 ?date.
+  ?date orkgp:hasTimezone ?timezone.
+  BIND(xsd:dateTime(?date) AS ?dt)
+  BIND(
+    IF(?dt > "2021-01-01T00:00:00"^^xsd:dateTime, "after 2021", 
+       IF(?dt < "2021-01-01T00:00:00"^^xsd:dateTime, "before 2021", "in 2021"))
+    AS ?timeperiod)
+  ?paper orkgp:P7036 ?title.
+  ?title rdfs:label ?title_label.
+  BIND(
+    IF(STRLEN(?title_label) > 45, "longer than 45", 
+       IF(STRLEN(?title_label) < 45, "shorter than 45", "around 45"))
+    AS ?title_len)
+  ?contrib orkgp:P7037 ?abstract.
+  ?abstract rdfs:label ?abstract_label.
+  BIND(
+    IF(STRLEN(?abstract_label) > 150, "longer than 150", 
+       IF(STRLEN(?abstract_label) < 150, "shorter than 150", "around 150"))
+    AS ?abstract_len)
+  ?cont orkgp:P7038 ?cont_label.
+  FILTER(REGEX(?cont_label, "raman spectroscopy", "i"))
+  ?cont orkgp:P7039 ?label
+}
+```

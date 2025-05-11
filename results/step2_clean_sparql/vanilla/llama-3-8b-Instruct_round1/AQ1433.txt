@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wmt: <http://www.wmt.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasResult ?result.
+  ?result a wmt:BenchmarkResult ;
+          wmt:benchmark wmt:WMT2016 ;
+          wmt:metric wmt:BLEU ;
+          wmt:result ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

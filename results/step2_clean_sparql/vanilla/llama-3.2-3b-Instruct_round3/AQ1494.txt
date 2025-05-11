@@ -1,0 +1,21 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://opendata.cscs.ch/orkg/>
+
+SELECT ?model
+WHERE {
+    ?benchmark orkg:dataset "RotoWire (Content Ordering)".
+    ?benchmark orkg:metric ?metric.
+    ?metric schema:name "BLEU"@en.
+    ?benchmark schema:numeric ?benchmarkValue.
+    ?benchmark orkg:model ?model.
+    NOT EXISTS {
+        ?otherBenchmark orkg:dataset "RotoWire (Content Ordering)".
+        ?otherBenchmark orkg:metric ?metric.
+        ?otherBenchmark schema:numeric ?otherBenchmarkValue.
+        ?otherBenchmark orkg:model ?otherModel.
+        FILTER(?otherBenchmarkValue > ?benchmarkValue)
+    }
+}
+```

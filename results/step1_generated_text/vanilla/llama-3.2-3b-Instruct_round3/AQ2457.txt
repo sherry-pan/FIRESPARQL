@@ -1,0 +1,24 @@
+Question:
+Can you provide links to code used in papers that benchmark the COMET - Direct model?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dct: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/schema/orkg/>
+     SELECT?p?o 
+     WHERE {
+    ?paper a orkg:Paper.
+     orkg:hasCode?code.
+    ?code schema:url?url.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasSource?source.
+    ?source dbpedia:Paper.
+    ?source dbpedia:hasTitle "COMET - Direct".
+    ?paper orkg:hasReference?ref.
+    ?ref schema:url?url.
+     FILTER (CONTAINS(LCASE(?paper), "COMET - Direct") OR CONTAINS(LCASE(?benchmark), "COMET - Direct"))
+     }<|eot_id|>

@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WNLI".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  OPTIONAL {
+    ?paper orkgp:HAS_SOURCE_CODE ?code.
+    ?code orkgp:HAS_VERSION ?version.
+    ?version rdfs:label ?version_lbl.
+    ?paper orkgp:P31_organizations ?org.
+    ?org rdfs:label ?org_lbl.
+  }
+}
+GROUP BY ?metric ?metric_lbl
+```

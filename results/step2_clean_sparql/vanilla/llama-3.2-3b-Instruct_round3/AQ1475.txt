@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?model schema:description ?description.
+    ?model dbpedia:benchmark "Story Cloze Test".
+    ?model schema:accuracy ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

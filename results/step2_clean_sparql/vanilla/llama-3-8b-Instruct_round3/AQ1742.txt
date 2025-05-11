@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "Sequential CIFAR-10".
+  ?benchmark orkg:hasEvaluationMetric ?metric.
+  ?metric rdfs:label "Unpermuted Accuracy".
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasScore ?score.
+  ?model orkg:hasName ?modelLabel.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

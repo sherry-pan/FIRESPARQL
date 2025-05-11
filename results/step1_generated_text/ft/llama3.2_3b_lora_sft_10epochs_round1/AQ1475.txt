@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest Accuracy score on the Story Cloze Test benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Accuracy")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Story Cloze Test")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:P31              ?metric,
+                         orkgp:HAS_MODEL         ?model.
+         BIND(xsd:float(?value) AS?value)
+        ?model      rdfs:label              ?model_lbl.
+         FILTER(?model_lbl = "BERT")
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

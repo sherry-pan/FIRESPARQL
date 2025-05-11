@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?link
+WHERE {
+    ?paper schema:keywords "BiDAF Self Attention ELMo ensemble".
+    ?paper schema:keywords "benchmark".
+    ?paper schema:versionInfo ?versionInfo.
+    ?versionInfo schema:description ?description.
+    FILTER CONTAINS(?description, "code") .
+    FILTER (lang(?description) = "en") .
+    ?paper schema:file ?file.
+    ?file schema:contentURL ?link.
+}
+```

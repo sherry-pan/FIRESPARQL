@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?country ?percent
+WHERE {
+    ?question orkg:aspect "Epilepsy prevalence by country".
+    ?country orkg:hasAspect "country".
+    ?country orkg:hasAspect "prevalence".
+    ?country orkg:hasAspect "overall".
+    ?country rdfs:label ?countryLabel.
+    FILTER (STR(?countryLabel) = "country").
+}
+ORDER BY DESC(?percent)
+LIMIT 1
+```

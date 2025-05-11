@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:title ?title.
+  ?paper orkg:usesModel ?model.
+  ?model rdfs:label "Unsupervised NMT + weight-sharing model".
+  ?paper orkg:evaluatedOn ?benchmark.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER CONTAINS(LCASE(?benchmarkLabel), "benchmark")
+  ?paper orkg:hasCodeLink ?codeLink.
+}
+```

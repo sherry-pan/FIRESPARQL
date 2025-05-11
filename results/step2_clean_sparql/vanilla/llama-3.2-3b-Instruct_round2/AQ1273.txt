@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/2013-10-28/>
+PREFIX wotsi: <http://wotsi.org/schema/2019/01/11/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX biblio: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?metric ?score
+WHERE {
+    ?metric wotsi:benchmark "Centipede".
+    ?metric wotsi:hasBenchmarkScore ?score.
+    FILTER (CONTAINS(STR(?metric), "Atari 2600") && CONTAINS(STR(?score), "top"))
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+SELECT ?paper ?code
+WHERE {
+    ?paper orkg:utilizes ?model.
+    ?model orkg:code ?code.
+    ?paper orkg:title ?paperTitle.
+    FILTER(STRLIKE(?paperTitle, "BERT + BiLSTM + CRF Decoding") || STRLIKE(?paperTitle, "BERT + BiLSTM + CRF"))
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

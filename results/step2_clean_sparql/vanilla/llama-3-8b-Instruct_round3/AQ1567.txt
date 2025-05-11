@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/owl/orkg.owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset <https://www.orkg.org/resource/conll++>.
+  ?benchmark orkg:metric "F1".
+  ?benchmark orkg:value ?f1.
+}
+ORDER BY DESC(xsd:decimal(?f1))
+LIMIT 1
+```

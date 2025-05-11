@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dctype: <http://purl.org/dc/terms/>
+PREFIX rkg: <http://linked.data.columbia.edu/ontology/rkg/>
+
+SELECT ?model ?title
+WHERE {
+  ?model rkg:hasBenchmark rkg:Benchmark "Reuters RCV1/RCV2 English-to-German".
+  SERVICE dfn: RDFDataForge {
+    GRAPH <http://linked.data.columbia.edu/dataset/rkg/> {
+      ?model rkg:hasModel ?modelLabel.
+      ?model rkg:hasTitle ?title.
+      FILTER(lang(?title) = 'en').
+      FILTER(!isLiteral(?modelLabel)).
+    }
+  }
+}
+```

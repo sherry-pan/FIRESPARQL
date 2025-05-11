@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT ?metric ?value WHERE {
+  ?result a orkg:Result ;
+          orkg:dataset orkg:DMControl500k ;
+          orkg:benchmark ?benchmark ;
+          orkg:metric ?metric ;
+          orkg:value ?value .
+  ?benchmark a orkg:Benchmark ;
+             dcterms:title ?title ;
+             dcterms:hasResult ?result .
+  FILTER(?title = "Walker, walk" && ?metric != "" && isLiteral(?value))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?metric ?value 
+WHERE {
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasValue ?value.
+    ?benchmark orkg:hasHighestResult ?highestResult.
+    ?highestResult orkg:hasMetric ?metric.
+    ?highestResult orkg:hasValue ?value.
+    FILTER (regex(?metric, "Supervised:", "i"))
+}
+```

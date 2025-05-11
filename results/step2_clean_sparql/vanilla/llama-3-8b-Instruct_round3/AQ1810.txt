@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?params
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset orkg:ImageNetReaL.
+  ?benchmark schema:params ?params.
+  FILTER (?params = "Params"^^xsd:string)
+  FILTER (?model orkg:metricBestPerforming ?benchmark)
+}
+```

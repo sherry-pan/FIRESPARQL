@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+SELECT ?model ?error
+WHERE {
+    ?model orkg:isBenchmarkFor ?benchmark.
+    ?benchmark orkg:isForDataset <http://purl.org/core/cifar10>.
+    ?model orkg:hasMetric ?metric.
+    ?metric orkg:hasMetricType orkg:PercentageError.
+    ?model orkg:hasValue ?error.
+    FILTER (STRLEN(?error) > 0)
+}
+```

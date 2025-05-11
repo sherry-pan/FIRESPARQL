@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg-ml: <http://orkg.org/ontology/ml/>
+PREFIX orkg-ds: <http://orkg.org/ontology/ds>
+PREFIX orkg-p: <http://orkg.org/ontology/p>
+
+SELECT ?model ?f1Score
+WHERE {
+    ?dataset orkg-p:benchmarkedBy ?experiment .
+    ?experiment orkg-p:usesModel ?model .
+    ?dataset rdfs:label "200k Short Texts for Humor Detection" .
+    ?experiment orkg-ml:hasMetric/orkg-p:metricValue ?f1Score .
+    ?experiment orkg-ml:hasMetric/orkg-p:metricType rdfs:label "F1-score" .
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

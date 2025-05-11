@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset IMDb-B?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX imdb: <http://www.orkg.org/resources/imdb#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+   ?dataset a orkg:Dataset ;
+        orkg:hasBenchmark?benchmark.
+   ?benchmark a orkg:Benchmark ;
+        orkg:hasMetric?metric ;
+        orkg:hasValue?value ;
+        orkg:hasDataset imdb:IMDb-B.
+    FILTER (?metric = "top benchmark result" &&?dataset = imdb:IMDb-B)
+}<|eot_id|>

@@ -1,0 +1,12 @@
+```sparql
+PREFIX wmt: <http://www.wikidata.org/prop/direct/WMT>
+PREFIX wikibase: <http://wikibase.org/bibo/ontology/ontologies/WMT>
+SELECT ?model ?bleuScore 
+WHERE {
+  ?model wmt:score ?score.
+  ?score wikibase:scoredOn wmt:benchmark "WMT2014-English-German".
+  ?score wikibase:bleu ?bleuScore.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

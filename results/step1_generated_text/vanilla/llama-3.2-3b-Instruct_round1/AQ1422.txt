@@ -1,0 +1,28 @@
+Question:
+Indicate the model that performed best in terms of BLEU score metric on the IWSLT2014 German-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX vcard: <http://www.w3.org/2001/vcard-rdf/2.1/>
+     PREFIX wmt: <http://wmt2021.org/ontology#>
+     PREFIX wikibase: <http://wikibase.org/timeless/>
+     SELECT?model 
+     WHERE {
+      ?model a wmt:Model.
+      ?model wmt:performance wmt:BLEU?bleu.
+      ?model wmt:dataset wmt:dataset "IWSLT2014 German-English".
+      ?model skos:broader?benchmark.
+      ?benchmark rdfs:label?benchmarkLabel.
+      ?benchmark skos:prefLabel?benchmarkLabel.
+       FILTER (STRIDIFY(?benchmarkLabel) = "IWSLT2014 German-English").
+      ?benchmark owl:sameAs <http://dbpedia.org/page/IWSLT_2014_German-English>.
+      ?benchmark dbr:scored?score.
+       FILTER (STRIDIFY(?score) = "Best").
+       BIND (STRIDIFY(?bleu) AS?bleuScore).
+       BIND (STRIDIFY(?benchmarkLabel) AS?benchmarkLabel).
+      ?model skos:bro

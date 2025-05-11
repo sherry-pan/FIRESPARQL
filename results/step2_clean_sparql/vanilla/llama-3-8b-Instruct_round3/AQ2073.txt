@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?codeReference
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper schema:about ?topic.
+    ?topic owl:sameAs <http://www.wikidata.org/entity/Q10477>.
+    ?paper schema:hasPart ?codeReference.
+    ?codeReference a schema:Code.
+    ?paper orkg:hasMethod ?method.
+    ?method owl:sameAs <http://www.wikidata.org/entity/Q5321429>.
+    FILTER (contains(lcase(str(?paper)), "bidaf") && contains(lcase(str(?paper)), "self attention") && contains(lcase(str(?paper)), "elmo"))
+}
+```

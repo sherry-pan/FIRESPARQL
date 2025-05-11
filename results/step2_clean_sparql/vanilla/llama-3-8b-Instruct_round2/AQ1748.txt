@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn orkg:NottinghamDataset.
+  ?model orkg:hasPerformance ?performance.
+  ?performance schema:property orkg:NLL.
+  ?performance orkg:value ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

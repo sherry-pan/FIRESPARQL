@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paper_title ?code_reference
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:uses_model "DeiT-Ti".
+ ?paper orkg:has_benchmarking_purpose true.
+ ?paper rdfs:comment ?paper_title.
+ ?paper bibo:has_part ?code_reference.
+ ?code_reference a schema:Code.
+}
+```

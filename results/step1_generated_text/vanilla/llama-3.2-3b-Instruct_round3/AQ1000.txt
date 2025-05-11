@@ -1,0 +1,16 @@
+Question:
+List the metrics that are used to evaluate models on the VTAB-1k benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric 
+     WHERE {
+    ?metric rkg:isMetricFor?benchmark. 
+    ?benchmark rkg:isBenchmarkFor "VTAB-1k".
+     SERVICE orkg: sparqlService { 
+    ?metric orkg:hasName?metricName. 
+     FILTER (lang(?metricName) = "en" || lang(?metricName) = "en-GB") 
+     }
+     FILTER (str(?metricName) = "accuracy" || str(?metricName) = "f1-score" || str(?metricName) = "f1-score macro" || str(?metricName) = "f1-score weighted" || str(?metricName) = "f1-score macro weighted" || str(?metricName) = "auc" || str(?metricName) = "roc-auc" || str(?metricName) = "roc-auc macro" || str(?metricName) = "roc-auc macro weighted")
+     }<|eot_id|>

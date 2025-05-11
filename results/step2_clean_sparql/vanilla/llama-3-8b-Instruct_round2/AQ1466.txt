@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?f1score
+WHERE {
+  ?model a orkg:Model.
+  ?model schema:evaluation ?evaluation.
+  ?evaluation schema:dataset/schema:hasPart/schema:benchmark/schema:hasPart/schema:datasetPart/schema:hasPart/schema:dataset ?dataset.
+  ?dataset schema:name "SQuAD1.1".
+  ?evaluation schema:evaluationMetric/schema:metricValue ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

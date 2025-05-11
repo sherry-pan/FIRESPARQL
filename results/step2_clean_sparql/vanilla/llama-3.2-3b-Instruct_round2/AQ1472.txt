@@ -1,0 +1,13 @@
+```sparql
+PREFIX vocab: <https://www.wikidata.org/ontology/>
+
+SELECT ?model
+WHERE {
+  ?evaluation vocab:hasAccuracy ?accuracy;
+              vocab:hasBenchmark ?benchmark.
+  ?benchmark vocab:hasDataset ?dataset;
+             vocab:hasModel ?model.
+  ?dataset vocab:hasBenchmarkedDataset "TriviaQA".
+  FILTER (?accuracy > 0.9)
+}
+```

@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the IMDb-M dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasResult?result.
+ ?result orkg:hasMetric?metric ;
+    orkg:hasValue?value.
+ ?benchmark orkg:dataset orkg:IMDb-M ;
+    orkg:hasResult?result.
+  FILTER (?metric!= owl:nothing &&?value!= owl:nothing)
+} ORDER BY DESC(?value) LIMIT 1<|eot_id|>

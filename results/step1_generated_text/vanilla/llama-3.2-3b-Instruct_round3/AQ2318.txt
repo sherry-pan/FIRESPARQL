@@ -1,0 +1,20 @@
+Question:
+Provide a list of papers that have utilized the Rainbow+SEER model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?url
+    WHERE {
+     ?paper a orkg:Paper.
+     ?paper orkg:hasCode?code.
+     ?code schema:code?url.
+     ?paper orkg:utilizes?model.
+     ?model schema:description "Rainbow+SEER"@en.
+      FILTER (lang(?paper) = "en" OR lang(?paper) = "en-GB")
+    }
+    ```<|eot_id|>

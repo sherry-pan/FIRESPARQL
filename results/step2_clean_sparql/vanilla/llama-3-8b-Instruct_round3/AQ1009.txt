@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?metricLabel
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:dataset orkg:ObjectNet.
+   ?paper orkg:evaluation ?evaluation.
+   ?evaluation orkg:metric ?metric.
+   ?metric rdfs:label ?metricLabel.
+   FILTER(lang(?metricLabel) = "en").
+}
+```

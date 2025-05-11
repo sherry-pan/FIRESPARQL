@@ -1,0 +1,17 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?method,?method_lbl
+     WHERE {
+        ?paper rdfs:label?title.
+        ?paper orkgp:P32?method.
+        ?method orkgp:P32?cont.
+        ?cont orkgp:P31?contrib.
+        ?contrib rdfs:label?contrib_lbl.
+        ?method orkgp:P5001?metric.
+         BIND(xsd:integer(?metric) AS?score)
+         FILTER(REGEX(?contrib_lbl, "^[^0-9]+"))
+         ORDER BY DESC(?score)
+         LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the AlexNet, MultiGrasp model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX bibo: <http://purl.org/ontology/bibo/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?paper_title?code_link
+     WHERE {
+      ?paper a orkg:ResearchOutput.
+      ?paper dc:title?paper_title.
+      ?paper bibo:isCitedBy?model.
+      ?model a orkg:Model.
+      ?model schema:name "AlexNet".
+      ?model schema:name "MultiGrasp".
+      ?paper dc:hasCode?code.
+      ?code schema:downloadURL?code_link.
+     }<|eot_id|>

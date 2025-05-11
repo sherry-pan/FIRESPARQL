@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasTestStd ?testStd.
+  ?testStd schema:about "Habitat 2020 Object Nav test-std".
+  SERVICE orkg:suggestLabel {
+    bd:serviceParam orkg:entity ?model.
+    bd:serviceParam orkg:mode "label".
+    bd:serviceParam orkg:language "en".
+  }
+}
+```

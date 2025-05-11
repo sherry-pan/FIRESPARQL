@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX orkg_imgnet: <http://www.orkg.org/ontology/orkg_imgnet.owl#>
+SELECT ?model ?numParams
+WHERE {
+  ?model a orkg_imgnet:ImageNetBenchmarkModel.
+  ?model orkg_imgnet:numberOfParams ?numParams.
+  ?model orkg_imgnet:bestPerformingModel true.
+  FILTER(?numParams = (
+    SELECT MAX(?numParams2)
+    WHERE {
+      ?model2 a orkg_imgnet:ImageNetBenchmarkModel.
+      ?model2 orkg_imgnet:numberOfParams ?numParams2
+    }
+  ))
+}
+```

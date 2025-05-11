@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R155337 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P34 ?value.
+    ?value orkgval:P2008 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(STR(?benchmark_lbl), "Hutter Prize"))
+  }
+  UNION {
+    orkgr:R155337 orkgp:P30 ?value.
+    ?value orkgp:P2008 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(STR(?benchmark_lbl), "Hutter Prize"))
+  }
+  OPTIONAL {
+    ?value orkgp:P2009 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

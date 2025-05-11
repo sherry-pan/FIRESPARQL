@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <https://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasResult ?result.
+  ?result orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "Sequential MNIST".
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

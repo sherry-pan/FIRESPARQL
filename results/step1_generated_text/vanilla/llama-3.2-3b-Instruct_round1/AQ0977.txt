@@ -1,0 +1,21 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Amazon-2 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?metric
+     WHERE {
+    ?metric schema:description "Evaluation metric".
+    ?metric schema:isBenchmarkFor [ a?benchmarks.
+    ?benchmarks schema:topic [ a dbpedia:Dataset, a dbpedia:DatasetLabel "Amazon-2".
+     ]
+     }
+     GROUP BY?metric
+     HAVING (COUNT(?metric) > 1)
+     ORDER BY DESC
+     LIMIT 10<|eot_id|>

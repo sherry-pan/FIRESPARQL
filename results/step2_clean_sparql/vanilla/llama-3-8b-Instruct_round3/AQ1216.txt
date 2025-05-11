@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <https://www.orkg.org/ontology/>
+PREFIX bc5cdr: <https://www.orkg.org/ontology/bc5cdr/>
+
+SELECT ?score ?metric
+WHERE {
+    ?result a orkg:Result.
+    ?result orkg:evaluationDataset bc5cdr:BC5CDR-disease.
+    ?result orkg:score ?score.
+    ?result orkg:scoreMetric ?metric.
+    FILTER (?metric = "benchmark score" && isLiteral(?score)).
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

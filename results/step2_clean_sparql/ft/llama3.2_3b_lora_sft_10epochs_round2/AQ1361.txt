@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R8341 orkgp:compareContribution ?c.
+    ?c orkgp:P31 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    BIND(replace(str(?dataset_lbl), "&", " ") AS ?dataset_lbl_lbl).
+    ?c orkgp:P36 ?eval.
+    BIND(xsd:int(?eval) AS ?value).
+    ?c orkgp:metric ?metric.
+    ?metric rdfs:label ?metric_lbl.
+}
+```

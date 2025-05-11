@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Ball in cup, catch (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX wot: <http://example.org/wot/>
+     PREFIX wotb: <http://example.org/wotb/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmarkResult?result.
+    ?result wotb:hasMetric?metric.
+    ?result wotb:hasValue?value.
+    ?result wotb:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "Ball in cup, catch (DMControl500k)".
+    ?result wotb:metricLabel?metric.
+    ?result wotb:value?value.
+     FILTER (STRLIKE(STR(?metric), "DMControl500k.*") && STRLIKE(STR(?value), ".*"))
+     }<|eot_id|>

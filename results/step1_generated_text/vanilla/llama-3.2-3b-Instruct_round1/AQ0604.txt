@@ -1,0 +1,29 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Atari 2600 Venture dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+    PREFIX wot: <http://purl.org/wot/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?title?id WHERE {
+       ?paper wot:hasBenchmark?benchmark.
+       ?benchmark schema:about?benchmarkIRI.
+       ?benchmark schema:hasDataset "Atari 2600 Venture".
+       ?benchmark schema:hasBenchmarkFor?paper.
+       ?paper wot:hasID?id.
+       ?paper schema:hasTitle?title.
+    } UNION
+
+    SELECT?paper?title?id WHERE {
+       ?paper schema:hasDataset "Atari 2600 Venture".
+       ?paper wot:hasBenchmark?benchmark.
+       ?benchmark schema:about?benchmarkIRI.
+       ?benchmark schema:hasBenchmarkFor?paper.
+       ?paper wot:hasID?id.
+       ?paper schema:hasTitle?title.
+    }
+    ```<|eot_id|>

@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/vocab/>
+     PREFIX wot: <http://www.wotontext.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model
+     WHERE {
+    ?model orkg:isBenchmarkedBy?benchmark.
+    ?benchmark orkg:benchmarkingMetric "F1 score".
+    ?benchmark orkg:benchmarkingDataset "Natural Questions (long)".
+    ?benchmark orkg:topPerformingModel?topModel.
+    ?topModel rdfs:label?name.
+     FILTER (STR(?name) = "Top performing model")
+     }<|eot_id|>

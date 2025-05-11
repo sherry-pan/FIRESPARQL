@@ -1,0 +1,15 @@
+```
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:evaluates ?model.
+  ?model orkg:usesDataset ?dataset.
+  ?dataset rdfs:label "Atari 2600 Zaxxon".
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER (?metric != "undefined").
+}
+```

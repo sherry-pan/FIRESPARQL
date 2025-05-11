@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?name
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "VTAB-1k".
+  ?model orkg:performance ?performance.
+  ?performance orkg:paramsScore ?paramsScore.
+  ?model orkg:name ?name.
+}
+ORDER BY DESC(?paramsScore)
+LIMIT 1
+```

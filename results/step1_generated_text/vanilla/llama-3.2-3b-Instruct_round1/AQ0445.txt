@@ -1,0 +1,21 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Reuters-21578 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:keyword "Reuters-21578".
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark orkg:hasTitle?title.
+    ?benchmark orkg:id?id.
+    ?paper orkg:hasID?id.
+     FILTER (lang(?benchmarkLabel) = "en" || lang(?benchmarkLabel) = "en-US")
+     }
+     LIMIT 100<|eot_id|>

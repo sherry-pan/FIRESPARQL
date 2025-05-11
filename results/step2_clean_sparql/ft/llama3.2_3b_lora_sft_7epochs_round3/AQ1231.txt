@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R63866 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?dataset orkgp:P31 ?benchmark.
+    ?benchmark orkgp:P32 ?evaluator.
+    ?evaluator orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_VALUE ?value.
+    ?value orkgp:P30 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+}
+```

@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the Prior noop model and include the links to their code?
+
+Generated SPARQL:
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paper?paperTitle?codeLink
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:usesModel <http://rdf.orkg.org/Models/Prior_noop>.
+ ?paper bibo:hasURL?codeLink.
+  FILTER lang(?paperTitle) = "en".
+  FILTER regex(str(?codeLink), "github.com|gitlab.com|doi.org").
+  SERVICE <https://api.crossref.org/doi/> {
+   ?paper bibo:DOI?doi.
+  }
+  FILTER (lang(?paperTitle) = "en" && exists {?paper bibo:DOI?doi } )
+}<|eot_id|>

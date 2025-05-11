@@ -1,0 +1,18 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WLPC dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?title?paperId
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+         orkg:hasBenchmarkedModel?benchmarkedModel.
+ ?benchmarkedModel orkg:hasDataset?dataset ;
+                  orkg:hasDatasetName "WLPC".
+ ?paper orkg:hasTitle?title ;
+         orkg:hasId?paperId.
+}<|eot_id|>

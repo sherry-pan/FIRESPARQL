@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/resource/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:uses_model ?model.
+ ?model orkg:model_name "Dynamic Coattention Networks".
+ ?paper schema:benchmark ?benchmark.
+ ?paper orkg:code_link ?code_link.
+ FILTER (?benchmark != "None").
+}
+```

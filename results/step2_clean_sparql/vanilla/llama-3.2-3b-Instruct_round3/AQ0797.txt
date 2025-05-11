@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdp: <http://www.wdp.io/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?evaluation
+WHERE {
+  ?metric wdp:evaluationMetric rdfs:label ?metricLabel.
+  ?metric wdp:evaluationMetric wdp:evaluationMetricFor ?evaluation.
+  ?evaluation schema:description ?description.
+  FILTER (STRLIKE(?description, "BioASQ"))
+}
+```

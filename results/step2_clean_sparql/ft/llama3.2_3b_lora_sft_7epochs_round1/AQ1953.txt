@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "CL-Titles-Parser")
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
+  OPTIONAL {
+    ?cont orkgp:P32 ?paper.
+    ?paper orkgp:HAS_SOURCE_CODE ?code.
+  }
+  OPTIONAL {
+    ?cont orkgp:P31 ?paper.
+    ?paper orkgp:HAS_SOURCE_CODE ?code.
+  }
+}
+```

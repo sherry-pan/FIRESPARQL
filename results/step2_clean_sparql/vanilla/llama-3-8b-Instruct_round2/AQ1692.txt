@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark <http://orkg.org/benchmarks/Atari_2600_Crazy_Climber>.
+  ?model dcterms:hasScore ?score.
+  ?score schema:scoreValue ?value.
+  FILTER(?value = ?max)
+}
+GROUP BY ?model ?score
+ORDER BY DESC(?value)
+LIMIT 1
+```

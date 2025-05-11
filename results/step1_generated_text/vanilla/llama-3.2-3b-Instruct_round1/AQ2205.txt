@@ -1,0 +1,19 @@
+Question:
+Can you provide links to code used in papers that benchmark the NASCell model?
+
+Generated SPARQL:
+ PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paper?link 
+     WHERE {
+    ?paper a ork:Papers.
+    ?paper ork:hasCode?code.
+    ?code rdfs:label?label.
+    ?label rdfs:label "NASCell".
+    ?paper ork:hasBenchmark?benchmark.
+    ?benchmark ork:hasCode?benchmarkCode.
+    ?benchmarkCode rdfs:label?benchmarkLabel.
+    ?benchmarkLabel rdfs:label "Benchmark".
+    ?benchmark ork:hasLink?link.
+     FILTER (CONTAINS(LCASE(?benchmarkLabel), "nas cell") )
+     }<|eot_id|>

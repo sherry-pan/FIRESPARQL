@@ -1,0 +1,13 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://orion.demeter-project.org/schema/ork#>
+     SELECT?model?bleuScore
+     WHERE {
+    ?model ork:hasModel?modelName.
+    ?model ork:hasDataset "WMT2016 Romanian-English".
+    ?model ork:hasMetric "BLEU score".
+    ?model ork:hasValue?bleuScore.
+     FILTER (REGEX(?bleuScore, "^\d+(\.\d+)?$") && (?bleuScore > (SELECT MAX(?b) FROM?model WHERE {?model ork:hasDataset "WMT2016 Romanian-English". })))
+     }<|eot_id|>

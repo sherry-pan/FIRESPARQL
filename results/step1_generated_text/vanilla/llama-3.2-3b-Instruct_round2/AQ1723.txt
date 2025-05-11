@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Tennis benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?model?score
+     WHERE {
+    ?model orkg:has_model?m.
+    ?m schema:description?description.
+    ?m schema:has_score?score.
+    ?m schema:has_benchmark "Atari 2600 Tennis".
+    ?m schema:has_metric "Score".
+     FILTER (STRLIKE(STR(?score), "^[0-9.]+")).
+     FILTER (STRLIKE(STR(?description), "Atari 2600 Tennis benchmark")).
+     }<|eot_id|>

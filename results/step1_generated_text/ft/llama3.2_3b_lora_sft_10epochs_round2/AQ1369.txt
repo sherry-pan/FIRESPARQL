@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset IMDb-B?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153801 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P35?eval Set.
+          ?eval orkgp:P36?metric?value.
+           FILTER(REGEX(?metric, "mean"))
+         } UNION {
+           orkgr:R153801 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P35?eval.
+          ?eval orkgp:P36?metric?value.
+           FILTER(REGEX(?metric, "std"))
+         }
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

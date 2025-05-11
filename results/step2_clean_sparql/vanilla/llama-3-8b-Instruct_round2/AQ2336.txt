@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology#>
+
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasModel ?model.
+  ?model rdfs:label "DQN-PixelCNN".
+  ?paper orkg:hasCode ?code.
+  ?code rdfs:label ?code_link.
+  FILTER (?code_link != "").
+}
+```

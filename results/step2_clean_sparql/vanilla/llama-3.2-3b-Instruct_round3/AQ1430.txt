@@ -1,0 +1,16 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX wikibase: <http://wikibase.org/bio/ontology#>
+SELECT ?model ?score
+WHERE {
+  ?model wdt:P3010 ?score.
+  FILTER(CONTAINS(LCASE(?score), "bleu"))
+  FILTER(CONTAINS(LCASE(?score), "wmt2014"))
+  FILTER(CONTAINS(LCASE(?score), "english-german"))
+  FILTER(CONTAINS(LCASE(?score), "benchmark"))
+}
+```

@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the IWSLT2015 German-English dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?metric?score
+     WHERE {
+    ?paper a orkg:Paper ;
+     orkg:hasBenchmarkResult?benchmarkResult.
+    ?benchmarkResult a orkg:BenchmarkResult ;
+     orkg:hasMetric?metric ;
+     orkg:hasScore?score.
+    ?benchmarkResult orkg:relatedTo?dataset.
+    ?dataset a orkg:Dataset ;
+     dcterms:title "IWSLT2015 German-English".
+     FILTER (?metric = "Benchmark Metric" &&?score = "Benchmark Score")
+     }<|eot_id|>

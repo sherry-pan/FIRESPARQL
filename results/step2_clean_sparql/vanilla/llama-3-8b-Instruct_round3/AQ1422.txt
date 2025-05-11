@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+   ?paper a orkg:Paper ;
+          orkg:hasModel ?model ;
+          orkg:hasMetric "BLEU" ;
+          orkg:hasDataset "IWSLT2014" ;
+          orkg:hasDatasetLanguagePair "German-English" ;
+          orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

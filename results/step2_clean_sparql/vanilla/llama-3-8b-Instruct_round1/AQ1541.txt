@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?pearsonCorrelation
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label "Pearson Correlation".
+  ?evaluation orkg:hasValue ?pearsonCorrelation.
+  ?evaluation orkg:hasDataset orkg:MedSTS.
+} 
+ORDER BY DESC(xsd:decimal(?pearsonCorrelation))
+LIMIT 1
+```

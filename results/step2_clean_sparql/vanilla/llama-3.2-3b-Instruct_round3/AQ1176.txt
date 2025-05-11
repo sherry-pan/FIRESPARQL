@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://ork.org/ontology/>
+PREFIX wnl: <http://www.semantic-mapping.org/wnli/>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a ork:benchmark.
+    ?benchmark ork:hasResult ?result.
+    ?result ork:hasValue ?value.
+    ?result ork:hasMetric ?metric.
+    ?benchmark wnl:hasDataset 'wnli'.
+    FILTER (regex(?value, "^[0-9]+(\\.[0-9]+)?$"))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

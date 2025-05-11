@@ -1,0 +1,18 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the ImageNet ReaL dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orcg.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paperTitle?paperId WHERE {
+    ?paper?paperId orkg:hasDataset schema:datasetName "ImageNet ReaL". 
+    ?paper schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasBenchmarkedModel?model.
+    ?model schema:hasBenchmarkedDataset?dataset.
+    ?dataset schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasBenchmarkedPaper?benchmarkedPaper.
+    ?benchmarkedPaper schema:hasTitle?paperTitle.
+     FILTER (STRLIKE(?paperTitle, "ImageNet ReaL") || STRLIKE(?paperTitle, "ImageNet Real")).
+     }<|eot_id|>

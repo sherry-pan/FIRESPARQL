@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c-wsdl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX bio2rdf: <http://bio2rdf.org/ontology/2006/03/bio2rdf#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper orkg:hasModel "Large mLSTM".
+  ?paper schema:description ?description.
+  ?description schema:software ?code.
+  ?code schema:code ?codeLink.
+  FILTER (lang(?description) = "en")
+}
+```

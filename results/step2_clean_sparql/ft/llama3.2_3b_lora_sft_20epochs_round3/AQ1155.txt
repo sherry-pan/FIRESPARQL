@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6908 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43131 ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "Natural Questions \\(long\\)"))
+}
+```

@@ -1,0 +1,26 @@
+Question:
+What is the best performing model benchmarking the Supervised: dataset in terms of SemEval 2013 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Supervised:")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.}
+         OPTIONAL {?eval           orkgp:HAS_MODEL         ?model_lbl.}
+         IF(?eval           orkgp:HAS_MODEL         ?model)
+         THEN {
+            ?model      rdfs:label              ?model_lbl.
+             BIND(?value   as?score)
+         }
+         ELSE
+         BIND(EMPTY_STRING AS?score)
+         ENDwhile
+         BIND(concat(?model_lbl, " - ",?score) as?stats)
+         ORDER BY DESC(?score)
+         LIMIT 1
+     }<|eot_id|>

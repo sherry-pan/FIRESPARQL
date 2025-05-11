@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX oreg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?title ?url
+WHERE {
+  ?paper oreg:hasCode ?code.
+  ?paper oreg:hasUsedModel ?model.
+  ?model schema:name "BCN+ELMo".
+  ?paper oreg:hasLink ?link.
+  ?link schema:contentURL ?url.
+  FILTER (STR(?url) LIKE "*https%*")
+}
+```

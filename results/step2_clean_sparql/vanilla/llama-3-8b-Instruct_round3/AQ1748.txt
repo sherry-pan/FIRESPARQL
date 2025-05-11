@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?nll_score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasBenchmarkedDataset orkg:NottinghamDataset ;
+         orkg:hasPerformance ?performance.
+  ?performance a orkg:Performance ;
+               orkg:hasMetric orkg:NLL ;
+               orkg:hasValue ?nll_score.
+}
+ORDER BY DESC(xsd:float(?nll_score))
+LIMIT 1
+```

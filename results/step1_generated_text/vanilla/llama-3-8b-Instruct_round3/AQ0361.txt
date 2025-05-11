@@ -1,0 +1,17 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciERC dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT?paper?title?id
+WHERE {
+   ?paper a orkg:ResearchPaper.
+   ?paper bibo:hasTitle?title.
+   ?paper orkg:hasId?id.
+   ?paper orkg:hasBenchmarked?benchmark.
+   ?benchmark schema:about schema:SciERC.
+}<|eot_id|>

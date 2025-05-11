@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset ?dataset ;
+             orkg:metric ?metric ;
+             orkg:value ?value.
+  ?dataset a orkg:Dataset ;
+           orkg:name "MLDoc Zero-Shot English-to-Spanish".
+  FILTER EXISTS {
+    ?benchmark a orkg:TopBenchmark.
+  }
+  FILTER EXISTS {
+    ?metric a owl:DatatypeProperty.
+  }
+}
+```

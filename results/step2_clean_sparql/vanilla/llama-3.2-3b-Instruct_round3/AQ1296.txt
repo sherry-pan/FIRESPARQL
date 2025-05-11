@@ -1,0 +1,12 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX schema: <http://schema.org/> 
+SELECT ?benchmark ?metric 
+WHERE { 
+  ?benchmark dbo:benchmarkFor "Atari 2600 Wizard of Wor". 
+  ?benchmark schema:score ?score. 
+  ?benchmark schema:scoreType ?metric. 
+  FILTER (STRCONTAINS(?benchmark, "top") 
+    AND STRCONTAINS(?benchmark, "score")) 
+}
+```

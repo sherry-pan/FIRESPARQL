@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?metricValue
+WHERE {
+  ?article a orkg:Article ;
+           orkg:dataset ?dataset ;
+           orkg:metric ?metric.
+  ?dataset rdfs:label "Fashion-MNIST".
+  ?metric rdfs:label ?metricName.
+  FILTER (lang(?metricName) = "en").
+  ?metric owl:sameAs ?metricURI.
+  ?metricURI schema:additionalProperty ?metricValue.
+  FILTER (lang(?metricValue) = "en").
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:usesModel <http://rdf.orkg.org/Models/Prior_noop>.
+  ?paper bibo:hasURL ?codeLink.
+  ?paper schema:name ?paperTitle.
+  FILTER(lang(?paperTitle) = "en").
+  FILTER regex(str(?codeLink), "github.com|gitlab.com|doi.org").
+}
+```

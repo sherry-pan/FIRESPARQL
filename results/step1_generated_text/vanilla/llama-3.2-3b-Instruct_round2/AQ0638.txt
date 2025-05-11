@@ -1,0 +1,27 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the TREC-6 dataset?
+
+Generated SPARQL:
+ PREFIX obo: <http://purl.obolibrary.org/obo/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX bio: <http://purl.bioontology.org/ontology/>
+     PREFIX cta: <http://www.biomedgrid.org/resource/ctapius.taxon term/>
+     PREFIX curation: <http://purl.obolibrary.org/obo/curate_curation#>
+     PREFIX ont: <http://purl.obolibrary.org/obo/inference/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+     PREFIX sparql: <http://www.w3.org/TR/xpath2rdf/>
+
+     SELECT?title?id
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper schema:description?desc.
+       FILTER (CONTAINS(LCASE(?desc), "TREC-6").
+      ?paper dcterms:hasBenchmark?benchmark.
+      ?benchmark schema:description?benchmarkDesc.
+      ?benchmark schema:title?benchmarkTitle.
+       BIND (CONCAT(?benchmarkTitle, " ") AS?title.
+      ?paper orkg:id?id
+     }<|eot_id|>

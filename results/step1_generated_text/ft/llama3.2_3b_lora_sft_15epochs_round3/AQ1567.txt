@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the CoNLL++ dataset in terms of F1 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                    rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "F1")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "CoNLL++")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:HAS_METRIC        ?metric.
+         BIND(?value as?cont)
+        ?benchmark      orkgp:HAS_MODEL         ?model.
+        ?model        orkgp:HAS_LABEL         ?model_lbl.
+     }
+     ORDER BY DESC(?cont)
+     LIMIT 1<|eot_id|>

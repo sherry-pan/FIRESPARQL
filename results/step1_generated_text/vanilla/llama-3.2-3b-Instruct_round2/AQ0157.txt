@@ -1,0 +1,25 @@
+Question:
+What models are being evaluated on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ PREFIX pd: <http://www.biopax.org/paxvoc/level1/PD/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX sparql: <http://www.w3.org/TR/sparql/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX bio: <http://purl.org/linked-data/cube/bio/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX vcard: <http://purl.org/vcard/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model 
+     WHERE {
+    ?model a skos:Concept.
+    ?model rdfs:label?label.
+    ?model dbpedia:hasTopic?topic.
+    ?topic schema:description?desc.
+    ?desc schema:topicOf?topic2.
+    ?topic2 dbpedia:dataset "Penn Treebank (Character Level)".
+    ?model rdfs:label?label.
+     FILTER (lang(?label) = "en" )
+     }<|eot_id|>

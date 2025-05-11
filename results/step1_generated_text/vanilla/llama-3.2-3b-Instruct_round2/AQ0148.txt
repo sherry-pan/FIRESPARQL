@@ -1,0 +1,18 @@
+Question:
+Could you provide a list of models that have been tested on the QNLI benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX vocab: <http://www.openresearchknowledgegraph.org/vocab/>
+
+     SELECT?model?name
+     WHERE {
+      ?model vocab:hasTopic?topic.
+      ?topic vocab:hasRelatedDataset "QNLI".
+      ?model vocab:hasBeenTestedOn?test.
+      ?test vocab:hasDataset?dataset.
+      ?dataset vocab:hasModel?model.
+       FILTER (?model vocab:hasName?name)
+     }<|eot_id|>

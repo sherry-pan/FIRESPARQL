@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the Duel hs model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/ontology/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?code 
+    WHERE {
+     ?paper a orkg:Papers.
+      orkg:has_title "Duel hs".
+     ?paper schema:description?description.
+      BIND(strd:normalize(?description) AS?normalizedDescription).
+     ?paper schema:description?description.
+     ?paper orkg:has_code?code.
+      FILTER (?normalizedDescription =~ "Duel hs" && exists(?code)) 
+    }
+    ```<|eot_id|>

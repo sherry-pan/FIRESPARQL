@@ -1,0 +1,20 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+    ?problem a orkgc:Problem;
+             rdfs:label ?problem_lbl.  
+    FILTER (str(?problem_lbl) = "Joint Entity and Relation Extraction")
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    ?cont orkgp:HAS_DATASET ?dataset;
+          orkgp:P32 ?problem;
+          orkgp:P334 ?metric.
+    ?metric orkgp:P3748 ?scale.
+    ?scale rdfs:label ?scale_lbl.
+    ?metric_value orkgp:P4505 ?metric;
+                  orkgp:P3750 ?value.
+    BIND(xsd:float(?value) AS ?final_value)
+    FILTER(?scale_lbl = "F1" && ?final_value > 0.8)
+}
+ORDER BY DESC(?final_value)
+```

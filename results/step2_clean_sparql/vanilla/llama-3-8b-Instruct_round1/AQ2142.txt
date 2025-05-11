@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:usesModel ?model.
+  ?model rdfs:label "Transformer-XL".
+  ?model orkg:hasConfiguration ?configuration.
+  ?configuration orkg:hasLayerCount 12.
+  ?paper orkg:hasCodeLink ?code_link.
+  ?paper orkg:hasBenchmark ?benchmark.
+}
+```

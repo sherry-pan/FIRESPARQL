@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper schema:description ?desc.
+  FILTER (CONTAINS(LCASE(?desc), "trec-6")).
+  ?paper dcterms:hasBenchmark ?benchmark.
+  ?benchmark schema:title ?title.
+  ?paper orkg:id ?id.
+}
+```

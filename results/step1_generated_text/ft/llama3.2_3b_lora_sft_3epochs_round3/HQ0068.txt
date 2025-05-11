@@ -1,0 +1,16 @@
+Question:
+Which sectors are modeled as energy sectors and how often?
+
+Generated SPARQL:
+ SELECT?sectors,?sectors_labels, COUNT(*) AS num_sectors
+     WHERE {
+      ?papers rdf:type orkgc:Paper.
+      ?papers orkgp:P32?energy_sector.
+      ?energy_sector rdfs:label?sectors_labels.
+      ?papers orkgp:P33?sector.
+      ?sector orkgp:P27?modelled_sector.
+      ?modelled_sector rdfs:label?modelled_sector_labels.
+       FILTER(REGEX(?modelled_sector_labels, "energy"))
+     }
+     GROUP BY?sectors_labels
+     HAVING (COUNT(?sectors) > 1)<|eot_id|>

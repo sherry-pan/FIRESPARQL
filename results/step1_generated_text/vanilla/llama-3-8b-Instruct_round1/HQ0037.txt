@@ -1,0 +1,15 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT?author (COUNT(?article) as?count)
+WHERE {
+ ?article a orkg:Article.
+ ?article orkg:about <http://www.semantic-web-journal.net/orkg/Coronavirus>.
+ ?article orkg:contributor?author.
+ ?author a foaf:Person.
+  GROUP BY?author
+  ORDER BY DESC(?count) LIMIT 1<|eot_id|>

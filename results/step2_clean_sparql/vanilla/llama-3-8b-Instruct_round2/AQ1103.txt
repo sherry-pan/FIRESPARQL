@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?experiment a orkg:Experiment ;
+              orkg:hasDataset ?dataset ;
+              orkg:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult a orkg:BenchmarkResult ;
+                   orkg:hasMetric ?metric ;
+                   orkg:hasValue ?value.
+  ?dataset a orkg:Dataset ;
+           rdfs:label "WMT2016 English-Russian".
+}
+```

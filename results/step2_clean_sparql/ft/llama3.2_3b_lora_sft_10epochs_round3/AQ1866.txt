@@ -1,0 +1,15 @@
+```sparql
+SELECT ?dataset ?dataset_label
+WHERE {
+    ?problem a orkgc:Problem;
+             rdfs:label "Natural Language Inference".
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          rdfs:label ?problem_label.
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_label.
+}
+GROUP BY ?dataset ?dataset_label
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 10
+```

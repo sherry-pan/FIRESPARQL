@@ -1,0 +1,15 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperURL
+WHERE {
+    ?paper schema:name "ImageNet + iNat on WS-DAN".
+    ?paper schema:url ?paperURL.
+    ?paper schema:description ?description.
+    FILTER(CONTAINS(?description, "WS-DAN")).
+    ?paper schema:abstract ?abstract.
+    FILTER(CONTAINS(?abstract, "benchmark")).
+    ?paper schema:about ?topic.
+    FILTER(CONTAINS(?topic, "ImageNet") && CONTAINS(?topic, "iNat")).
+}
+```

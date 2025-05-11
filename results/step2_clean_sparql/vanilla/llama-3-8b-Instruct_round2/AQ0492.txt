@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper_title ?paper_id
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+        dcterms:title ?paper_title ;
+        orkg:hasBenchmark ?benchmark ;
+        dcterms:identifier ?paper_id.
+ ?benchmark a orkg:Benchmark ;
+            orkg:dataset ?dataset ;
+            orkg:model ?model.
+ ?dataset dcterms:title "enwik8".
+  FILTER(?model != "no model" && ?model != "no model specified")
+}
+```

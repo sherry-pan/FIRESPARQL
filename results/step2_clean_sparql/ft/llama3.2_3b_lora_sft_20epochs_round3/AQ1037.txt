@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R155271 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43156 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P43154 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P43157 ?model.
+  ?model orkgp:P43155 ?eval2.
+  ?eval2 orkgp:HAS_VALUE ?value.
+  FILTER(REGEX(?dataset, "Scholarly entity usage detection"))
+}
+```

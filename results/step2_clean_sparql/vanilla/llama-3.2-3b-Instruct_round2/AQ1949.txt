@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/2019/01/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?codeLink
+WHERE {
+  ?paper schema:abstract ?abstract.
+  FILTER (CONTAINS(STR(?abstract), 'BERT') && CONTAINS(STR(?abstract), 'BiLSTM') && CONTAINS(STR(?abstract), 'CRF'))
+  OPTIONAL {
+    ?paper schema:codeRepository ?codeLink.
+  }
+}
+```

@@ -1,0 +1,34 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R110903 skos:HAS_DATASET orkgp:HAS_DATASET,
+               orkgp:HAS_DATASET rdfs:label?dataset_lbl.
+           FILTER(REGEX(?dataset_lbl, "Scholarly entity usage detection"))
+          ?dataset orkgp:P31?contrib.
+          ?contrib orkgp:P32?metric.
+          ?metric orkgp:HAS_DATASET?dataset.
+          ?dataset orkgp:HAS_BENCHMARK?benchmark.
+          ?benchmark orkgp:P31?cont.
+          ?cont rdfs:label?cont_lbl.
+          ?cont_lbl orkgp:P32?metric.
+          ?metric orkgp:P8014?value.
+         }
+     UNION
+     {
+           orkgr:R110903 skos:HAS_DATASET orkgp:HAS_DATASET,
+               orkgp:HAS_DATASET rdfs:label?dataset_lbl.
+           FILTER(REGEX(?dataset_lbl, "Scholarly entity usage detection"))
+          ?dataset orkgp:P31?contrib.
+          ?contrib orkgp:P32?metric.
+          ?metric orkgp:HAS_DATASET?dataset.
+          ?dataset orkgp:HAS_BENCHMARK?benchmark.
+          ?benchmark orkgp:P31?cont.
+          ?cont rdfs:label?cont_lbl.
+          ?cont_lbl orkgp:P32?metric.
+          ?metric orkgp:P8015?value.
+         }
+     ORDER BY DESC(?score)<|eot_id|>

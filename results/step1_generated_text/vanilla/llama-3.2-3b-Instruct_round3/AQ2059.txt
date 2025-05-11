@@ -1,0 +1,25 @@
+Question:
+List the code links in papers that use the DrQA model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX wdx: <http://www.wikidata.org/prop/direct/>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?codeLink 
+     WHERE {
+    ?paper a wd:Q123456.
+    ?paper schema:author?author.
+    ?author foaf:name?name.
+    ?paper schema:hasBenchmark?benchmark.
+    ?benchmark schema:uses?code.
+    ?code schema:description?codeLink.
+    ?benchmark wdx:hasBenchmark?benchmark.
+    ?benchmark rdfs:label "DrQA".
+    ?paper rdfs:label "Research Paper".
+     }
+     LIMIT 10<|eot_id|>

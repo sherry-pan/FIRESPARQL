@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX seel: <http://seel.cse.lsu.edu/ontology/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+           rdfs:label "re17.zip" ;
+           orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasMetric ?metric ;
+             orkg:hasScore ?score.
+  FILTER (?dataset = seel:re17.zip)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

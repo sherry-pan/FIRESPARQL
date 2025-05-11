@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?paper_url ?code_url
+WHERE {
+ ?paper a bibo:Article.
+ ?paper schema:about schema:Transformer-XL.
+ ?paper schema:benchmarks ?benchmark.
+ ?benchmark schema:uses ?code.
+ ?code bibo:code ?code_url.
+ ?paper schema:URL ?paper_url.
+}
+```

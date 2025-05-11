@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://semantic-scholar.org/v1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:hasTitle ?title.
+   FILTER (str(?title) LIKE "%Atari 2600 Bowling%").
+   ?paper orkg:hasEvaluationMetric ?metric.
+   FILTER (?metric != owl:nothing).
+}
+```

@@ -1,0 +1,11 @@
+```sparql
+SELECT ?lead 
+WHERE {
+  orkgr:R44978 orkgp:compareContribution ?cont.
+  ?cont orkgp:P37578 ?lead.
+  ?lead rdfs:label ?label.
+  FILTER(REGEX(STR(?label), "common", "i"))
+}
+ORDER BY DESC(COUNT(?label))
+LIMIT 1
+```

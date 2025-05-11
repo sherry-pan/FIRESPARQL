@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?accuracy
+WHERE {
+    ?paper a orkg:Paper ;
+           orkg:hasResult ?result.
+    ?result a orkg:Result ;
+            dc:metric "Accuracy" ;
+            orkg:value ?accuracy.
+    ?paper orkg:hasModel ?model.
+    ?model a orkg:Model ;
+           orkg:benchmark orkg:Kuzushiji-MNIST.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

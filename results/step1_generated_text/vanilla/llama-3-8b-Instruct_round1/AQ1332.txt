@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the WOS-5736 dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+     PREFIX wos: <https://www.openresearchknowledge.org/ontology/WOS/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?value
+     WHERE {
+      ?result a orkg:BenchmarkResult ;
+             orkg:dataset wos:WOS-5736 ;
+             orkg:metric?metric ;
+             orkg:value?value.
+       FILTER (?metric!= owl:nothing)
+       FILTER (?value > xsd:0)
+       ORDER BY DESC(?value)
+       LIMIT 1
+     }<|eot_id|>

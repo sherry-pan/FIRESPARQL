@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:hasBenchmark "Atari 2600 Asteroids".
+  ?model orkg:hasScore ?score.
+  ?model orkg:hasMetric "Score".
+  FILTER (isNumeric(?score))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

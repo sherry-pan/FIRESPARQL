@@ -1,0 +1,25 @@
+Question:
+Which model has achieved the highest F1 score on the CoNLL 2003 (English) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dmt: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikiba.se/ontology/>
+     SELECT?model?f1score
+     WHERE {
+    ?model dmt:hasModel?modelObject.
+    ?modelObject dbpedia:abstract?abstract.
+     filter (lang(?abstract) = 'en').
+    ?abstract dmt:hasModel?f1score.
+     filter (?f1score > 0.0).
+    ?model dmt:hasDataset?dataset.
+    ?dataset dbpedia:dataset?datasetName.
+     filter (?datasetName = 'CoNLL 2003 (English)').
+    ?model dmt:hasMetric?metric.
+    ?metric rdfs:label?f1score.
+     filter (?f1score =?f1score).
+     }<|eot_id|>

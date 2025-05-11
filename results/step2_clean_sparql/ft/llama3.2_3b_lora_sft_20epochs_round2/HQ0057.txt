@@ -1,0 +1,16 @@
+```sparql
+SELECT ?repository
+WHERE {
+  ?dataset a orkgc:Dataset;
+          rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Comparison of machine learning algorithms")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_DATASET ?dataset;
+         orkgp:HAS_SOURCE_CODE ?source_code.
+  ?source_code orkgp:HAS_REPOSITORY ?repository.
+  ?repository rdfs:label ?repository_lbl.
+  FILTER (str(?repository_lbl) = "Git")
+}
+ORDER BY ?repository_lbl
+```

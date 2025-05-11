@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark "BC5CDR-disease".
+  ?model orkg:metric "F1".
+  ?model orkg:value ?f1.
+  FILTER (xsd:decimal(?f1) > 0).
+}
+```

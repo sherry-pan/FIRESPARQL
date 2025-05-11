@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper schema:keywords orkg:hasKeyword "Shake-Shake (SAM)".
+  ?paper schema:code ?code.
+  SERVICE orkg:search {
+    ?paper orkg:hasLink ?link.
+    ?link schema:url ?url.
+    FILTER (lang(?url) = 'en')
+  }
+}
+```

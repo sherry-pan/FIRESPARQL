@@ -1,0 +1,21 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R6381 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R6894 orkgp:compareContribution ?contrib.
+  }
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(str(?dataset_lbl) = "IWSLT2015 German-English")
+  
+  ?contrib orkgp:P31 ?benchmark;
+           orkgp:P32 ?dataset;
+           orkgp:P2008 ?metric.
+
+  ?benchmark orkgp:P5000 ?value.
+  OPTIONAL { ?metric orkgp:P2009 ?metric_lbl. }
+}
+GROUP BY ?metric ?metric_lbl
+```

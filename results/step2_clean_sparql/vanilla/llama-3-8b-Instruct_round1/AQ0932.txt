@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+   ?paper a orkg:Paper ;
+          dc:title ?title ;
+          orkg:benchmarks ?benchmark.
+   ?benchmark orkg:dataset ?dataset ;
+              orkg:evaluationMetric ?metric.
+   ?dataset orkg:game ?game.
+   ?game rdfs:label "Atari 2600 Berzerk".
+}
+```

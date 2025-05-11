@@ -1,0 +1,17 @@
+```sparql
+PREFIX bio2rdf: <http://www.mendeley.com/ontology/bio2rdf#>
+PREFIX orkg: <http://orcid.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX wmt: <http://www.w3.org/2018/02/wmt18-ontologies#>
+PREFIX sparql: <http://www.w3.org/TR/sparql11/query/>
+SELECT ?paper ?code ?link
+WHERE {
+  ?paper orkg:hasReference ?ref.
+  ?ref wmt:hasCode ?code.
+  ?ref orkg:hasLink ?link.
+  ?paper rdfs:label ?label.
+  FILTER (lang(?label) = "en" && CONTAINS(?label, "BERTwwm") && CONTAINS(?label, "SQuAD 2"))
+}
+```

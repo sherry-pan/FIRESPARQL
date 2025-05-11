@@ -1,0 +1,22 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "naive bayes", "i"))
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "feature request", "i"))
+  ?comparison orkgp:compare ?dataset, ?model;
+              rdfs:label ?comparison_lbl.
+  FILTER(REGEX(?comparison_lbl, "naive bayes.*bag of words.*feature request", "i"))
+  ?eval orkgp:evaluate ?comparison, ?metric, ?value.
+  BIND(xsd:float(?value) AS ?val)
+  FILTER(?metric = "precision" || ?metric = "recall" || ?metric = "f1")
+  BIND(IF(?metric = "precision", ?val, NULL) AS ?precision)
+  BIND(IF(?metric = "recall", ?val, NULL) AS ?recall)
+  BIND(IF(?metric = "f1", ?val, NULL) AS ?f1)
+}
+ORDER BY DESC(?f1)
+LIMIT 10
+```

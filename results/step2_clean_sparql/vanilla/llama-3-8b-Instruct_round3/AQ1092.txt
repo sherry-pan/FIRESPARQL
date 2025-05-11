@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/entities/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+    orkg:NYT-single a orkg:Dataset ;
+    orkg:hasBenchmark ?benchmark.
+    ?benchmark a orkg:Benchmark ;
+               orkg:hasMetric ?metric ;
+               orkg:hasValue ?value.
+    FILTER (?metric = "TOP_RESULT"^^xsd:string && ?value = "TOP_VALUE"^^xsd:string)
+}
+```

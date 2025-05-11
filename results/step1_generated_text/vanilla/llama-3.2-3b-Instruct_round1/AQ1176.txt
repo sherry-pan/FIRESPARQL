@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the WNLI dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX wnl: <http://dbpedia.org/ontology/WNLI>
+     PREFIX wnlbench: <http://dbpedia.org/ontology/WNLIBenchmark>
+     SELECT?metric?value
+     WHERE {
+    ?metric rdfs:label?metricLabel.
+     FILTER (BCASE (?metricLabel = "Highest Benchmark Result")).
+    ?metric wnlbench:benchmarkOf?benchmark.
+    ?benchmark wnl:dataset "WNLI".
+    ?benchmark rdfs:label?benchmarkLabel.
+     FILTER (BCASE (?benchmarkLabel = "WNLI Benchmark")).
+    ?benchmark wnlbench:score?value.
+     }<|eot_id|>

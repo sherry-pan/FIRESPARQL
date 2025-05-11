@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "BC5CDR-disease")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+                  ?model      rdfs:label              ?model_lbl.}
+        ?eval         rdfs:label              ?eval_lbl.
+         FILTER (str(?eval_lbl) = "F1")
+         ORDER BY DESC(?eval_lbl)
+         LIMIT 1
+     }
+    <|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+   ?result a orkg:BenchmarkResult ;
+           orkg:dataset <http://openresearchknowledge.org/datasets/Atari_2600_Double_Dunk> ;
+           orkg:metric ?metric ;
+           orkg:value ?value.
+   FILTER (?metric != "" && ?value != "")
+}
+ORDER BY DESC(xsd:double(?value))
+LIMIT 1
+```

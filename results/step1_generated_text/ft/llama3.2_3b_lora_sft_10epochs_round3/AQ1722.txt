@@ -1,0 +1,30 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Tutankham dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Atari 2600 Tutankham")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?eval           orkgp:HAS_MODEL        ?model.}
+         OPTIONAL {?eval           orkgp:HAS_MODEL        ?model2.}
+         BIND(
+           IF(BOUND(?model) && BOUND(?model2), 
+               IF(?model =?model2,?model_lbl,?model_lbl),
+               IF(?model = xsd:string("*Not available*)",?model_lbl,?model_lbl))
+           AS?score_lbl)
+         BIND(
+           IF(BOUND(?model) && BOUND(?model2), 
+               IF(?model =?model2,?value,?value),
+               IF(?model = xsd:string("*Not available*)",?value,?value))
+           AS?value_num)
+         BIND(
+           IF(BOUND(?model),?score_lbl, xsd:string("*Not available*"))
+           AS?score)
+         ORDER BY DESC(?value_num)
+         LIMIT 1
+     }<|eot_id|>

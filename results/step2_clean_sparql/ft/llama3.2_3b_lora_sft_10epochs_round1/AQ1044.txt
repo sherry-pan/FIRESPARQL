@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    {
+        orkgr:R75380 orkgp:compareContribution ?contrib.
+        ?contrib orkgp:P31 ?dataset.
+        ?dataset rdfs:label "Softcite"^^xsd:string.
+        ?contrib orkgp:P32 ?eval.
+        ?eval orkgp:HAS_VALUE ?value.
+        BIND(xsd:float(?value) AS ?value).
+    }
+    UNION
+    {
+        orkgr:R75378 orkgp:compareContribution ?contrib.
+        ?contrib orkgp:P31 ?dataset.
+        ?dataset rdfs:label "Softcite"^^xsd:string.
+        ?contrib orkgp:P32 ?eval.
+        ?eval orkgp:HAS_VALUE ?value.
+        BIND(xsd:float(?value) AS ?value).
+    }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

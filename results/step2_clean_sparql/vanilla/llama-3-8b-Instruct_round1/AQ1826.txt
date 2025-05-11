@@ -1,0 +1,22 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dc: <http://purl.org/dc/terms/>
+
+SELECT ?model ?metric ?value
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper bibo:publicationDate ?date.
+    FILTER (?date = "arXiv")
+    ?paper orkg:hasResult ?result.
+    ?result a orkg:EvaluationResult.
+    ?result orkg:hasMetric ?metric.
+    FILTER (?metric = "Macro Precision")
+    ?result orkg:hasValue ?value.
+    ?result orkg:hasModel ?model.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,22 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Star Gunner dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/properties/>
+     PREFIX dbr: <http://dbpedia.org/resource/>
+
+     SELECT?metric?value 
+     WHERE {
+    ?metric dbp:benchmarkFor dbr:Star_Gunner_2600.
+    ?metric dbp:bestResult dbr:Atari_2600.
+    ?metric rdfs:label?metricLabel.
+    ?metricLabel rdfs:label?metricLabel.
+     FILTER (lang(?metricLabel) = 'en' || lang(?metricLabel) = 'en-US')
+     BIND(STR(?metricLabel) AS?metric)
+     BIND(STR(?metric) AS?value)
+     }
+     LIMIT 1<|eot_id|>

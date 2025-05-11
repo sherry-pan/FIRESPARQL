@@ -1,0 +1,25 @@
+Question:
+What are the metrics of evaluation over the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ PREFIX es: <http://es.wikipedia.org/metadata/evaluation/standard>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX se: <http://seel.cse.lsu.edu/ontology/>
+     SELECT?metric?value 
+     WHERE {
+     ?dataset a se:Dataset.
+     ?dataset rdfs:label?label.
+     ?dataset schema:description?description.
+     ?dataset schema:description?description.
+     ?dataset rdfs:label "re17.zip".
+     ?dataset schema:datasetType?datasetType.
+     ?datasetType se:evaluationMetric?metric.
+     ?metric rdfs:label?metricLabel.
+     ?metric schema:range?range.
+     ?range xsd:integer.
+      FILTER (STR(?metricLabel = "accuracy" OR STR(?metricLabel = "f1 score" OR STR(?metricLabel = "precision" OR STR(?metricLabel = "recall" OR STR(?metricLabel = "F1 score")) OR STR(?metricLabel = "mean average precision" OR STR(?metricLabel = "mean average recall" OR STR(?metricLabel = "AUC-ROC" OR STR(?metricLabel = "AUC-ROC area under the curve" OR STR(?metricLabel = "AUC-ROC area under the curve, macro"

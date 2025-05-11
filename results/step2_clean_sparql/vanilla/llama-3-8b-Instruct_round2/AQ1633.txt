@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasScore ?score.
+  ?benchmark a orkg:Benchmark;
+             rdfs:label "Reacher, easy (DMControl500k)"@en.
+  ?model orkg:achievedBestScoreOn ?benchmark.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?score
+WHERE {
+  ?benchmark a orkg:Benchmark;
+    orkg:dataset ?dataset;
+    orkg:model ?model;
+    schema:score ?score;
+    orkg:metric schema:Score.
+  ?dataset a orkg:Dataset;
+    schema:name "Atari 2600 Centipede".
+  FILTER NOT EXISTS {
+    ?otherBenchmark a orkg:Benchmark;
+      orkg:dataset ?dataset;
+      schema:score ?otherScore.
+    FILTER (?otherScore > ?score)
+  }
+}
+```

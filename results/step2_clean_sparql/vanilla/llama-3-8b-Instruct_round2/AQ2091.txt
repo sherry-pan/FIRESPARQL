@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?url
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper dcterms:hasPart ?component.
+  ?component a orkg:Code.
+  ?paper dcterms:title ?title.
+  FILTER CONTAINS(?title, "Multi-Perspective Matching").
+  ?paper orkg:hasMethod ?method.
+  FILTER (?method = "single model").
+  ?component dcterms:type ?type.
+  FILTER (?type = "benchmark").
+  ?component bibo:uri ?url.
+}
+```

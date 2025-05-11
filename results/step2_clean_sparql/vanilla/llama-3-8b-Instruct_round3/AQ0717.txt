@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:publishedOn ?pubDate ;
+         orkg:evaluatedOn ?benchmark.
+  ?dataset a schema:Dataset ;
+           schema:name "ART/CoreSC".
+  ?benchmark a orkg:Benchmark ;
+             orkg:benchmarkDataset ?dataset ;
+             orkg:hasMetric ?metric.
+  FILTER (?pubDate >= "2020-01-01"^^xsd:date && ?pubDate <= "2022-12-31"^^xsd:date)
+}
+```

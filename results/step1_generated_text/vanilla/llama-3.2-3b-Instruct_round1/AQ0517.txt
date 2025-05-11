@@ -1,0 +1,21 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the DCASE dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dcase: <http://purl.org/dc-ase/1.1/>
+     PREFIX orkg: <http://example.org/orkg/>
+
+     SELECT?title?id 
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark dcase:hasDataset "DCASE".
+    ?benchmark dcase:hasBenchmark?benchmark.
+    ?benchmark dcase:hasBenchmark?benchmark.
+    ?paper orkg:hasID?id.
+    ?benchmark orkg:hasTitle?title.
+     FILTER (str(?title) = ".*")
+     }
+     LIMIT 100<|eot_id|>

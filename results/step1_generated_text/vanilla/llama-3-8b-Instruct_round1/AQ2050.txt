@@ -1,0 +1,25 @@
+Question:
+Provide a list of papers that have utilized the MMV TSM-50x2 model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/owl/orkg.owl#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?paper?code
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:hasModel orkg:MMV_TSM_50x2.
+ ?paper dcterms:isPartOf?journal.
+ ?journal schema:hasPart?issue.
+ ?issue schema:hasPart?volume.
+ ?volume schema:hasPart?year.
+ ?paper dcterms:isAccessibleByUri?code.
+  FILTER (lang(?code) = "en")
+}<|eot_id|>

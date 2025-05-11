@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?f1score 
+WHERE {
+  ?model wdt:P31 wd:Q3439169.
+  ?model wdt:P131 ?benchmark.
+  ?benchmark rdfs:label "200k Short Texts for Humor Detection".
+  ?benchmark wdt:P162 ?f1score.
+  FILTER (REGEX(LCASE(?f1score), "f1-score"))
+}
+```

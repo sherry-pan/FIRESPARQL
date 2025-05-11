@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX fsn: <http://purl.org/linked-data/fsn#>
+PREFIX wsd: <http://purl.org/linked-data/wordnet#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a dbo:Benchmark.
+  ?benchmark fsn:hasBenchmarkResult ?result.
+  ?result wsd:hasValue ?value.
+  ?benchmark dbo:dataset/fsn:hasDataset ?dataset.
+  ?dataset wsd:datasetId "FSNS-Test".
+  ?benchmark dbo:bestResult ?metric.
+}
+```

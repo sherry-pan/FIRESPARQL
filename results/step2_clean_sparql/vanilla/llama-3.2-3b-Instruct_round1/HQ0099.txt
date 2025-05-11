@@ -1,0 +1,19 @@
+```sparql
+PREFIX fma: <http://musicinformation.net/ontology#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX org: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX wikibase: <http://wikibase.org/schema.org/>
+
+SELECT ?material ?time 
+WHERE {
+    ?material dbpedia:piezoresistive_material.
+    ?material org:has_least_response_time ?time.
+    SERVICE wikibase:label {
+        bd:serviceParam wikibase:language "en".
+    }
+}
+```

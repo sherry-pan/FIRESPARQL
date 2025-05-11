@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?precision
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:publishedIn <http://arXiv.org> ;
+         orkg:hasResult ?result.
+  ?result a orkg:Result ;
+          orkg:metric "Macro Precision" ;
+          orkg:metricValue ?precision ;
+          orkg:achievedBy ?model.
+  FILTER (?precision > 0)
+}
+ORDER BY DESC(?precision)
+LIMIT 1
+```

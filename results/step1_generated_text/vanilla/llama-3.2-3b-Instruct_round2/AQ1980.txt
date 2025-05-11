@@ -1,0 +1,23 @@
+Question:
+Where can I find code references in papers that have used the TCN model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX wikibase: <http://wikiba.se/ontology/>
+     SELECT?paper?title?url
+     WHERE {
+    ?paper schema:about/?title.
+     schema:about?paper dbo:inLanguage "en".
+     schema:about?paper dbo:hasPart?code.
+    ?code schema:about/?codeRef.
+    ?codeRef schema:about/?code.
+    ?code schema:description "TCN model".
+    ?paper schema:about/?paper.
+    ?paper schema:about/?benchmark.
+    ?benchmark schema:about/?benchmark.
+    ?benchmark schema:about/?benchmark.
+    ?benchmark schema:about/?benchmark.
+     FILTER (regex(str(?benchmark), "benchmark") && regex(str(?benchmark), "TCN model"))
+     }<|eot_id|>

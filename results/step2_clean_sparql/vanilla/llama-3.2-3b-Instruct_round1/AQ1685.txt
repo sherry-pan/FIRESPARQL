@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX cts: <http://www.w3.org/ns/cts/ctsi#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?model ?name
+WHERE {
+  ?model wdt:P31 wd:Q15164621.
+  ?model schema:description "Top performing model".
+  ?score schema:scoreValue ?value.
+  ?score rdfs:label "ROUGE-2 score"@en.
+  ?score cts:scoredOn wd:Q23623453.
+  ?model wdt:P1624 ?value.
+  ?mainEntity wdt:P31 wd:Q15164621.
+  ?mainEntity schema:description "CL-SciSumm"@en.
+  ?mainEntity rdfs:label "CL-SciSumm"@en.
+  FILTER (datatype(?value) = xsd:float).
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

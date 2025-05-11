@@ -1,0 +1,14 @@
+```sparql
+SELECT ?quantity
+WHERE {
+  orkgr:R155237 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43149 ?quantity.
+  ?quantity rdfs:label ?label.
+  FILTER(REGEX(STR(?label), "iron oxide", "i"))
+  ?contrib orkgp:P37543 *;
+           orkgp:P43148 ?date.
+  ?date rdfs:label ?date_label.
+  FILTER(REGEX(STR(?date_label), "Elorza", "i"))
+  BIND(xsd:float(?quantity) AS ?answer)
+}
+```

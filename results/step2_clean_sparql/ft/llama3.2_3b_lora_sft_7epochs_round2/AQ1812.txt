@@ -1,0 +1,19 @@
+```
+SELECT DISTINCT ?model
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Percentage error".
+
+  ?comparison a orkgp:Comparison;
+              orkgp:HAS_DATASET ?dataset;
+              orkgp:HAS_METRIC ?metric;
+              orkgp:HAS_MODEL ?model.
+
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?contr.
+  ?contr rdfs:label "SVHN";
+         orkgp:P32 ?comparison.
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

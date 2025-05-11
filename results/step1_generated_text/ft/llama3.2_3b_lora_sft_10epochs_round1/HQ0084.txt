@@ -1,0 +1,15 @@
+Question:
+What is the emergency type of AMBER Alert?
+
+Generated SPARQL:
+ SELECT?emergency_types,?emergency_types_labels
+     WHERE {
+      ?contrib
+       orkgp:P32?researcher.
+      ?researcher orkgp:P33?contrib.
+      ?contrib orkgp:P34?emergency_type.
+      ?emergency_type rdfs:label?emergency_types_labels.
+       FILTER(REGEX(STR(?emergency_types_labels), "AMBER"))
+     }
+     GROUP BY?emergency_types_labels
+     HAVING(COUNT(?emergency_types) > 1)<|eot_id|>

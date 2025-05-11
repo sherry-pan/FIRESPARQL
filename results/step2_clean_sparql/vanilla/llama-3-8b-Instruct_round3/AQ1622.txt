@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?macs
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:hasBenchmarkResult ?result.
+   ?result orkg:hasBenchmark ?benchmark.
+   ?benchmark rdfs:label "ImageNet".
+   ?result orkg:hasMetricValue ?macs.
+   ?result orkg:metricName "MACs".
+}
+ORDER BY DESC(?macs)
+LIMIT 1
+```

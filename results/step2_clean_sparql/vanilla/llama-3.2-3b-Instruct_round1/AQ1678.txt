@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/WDT#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+
+SELECT ?item ?itemLabel
+WHERE {
+    ?item schema:about <http://example.org/Model_123> ;
+          schema:inDataset <http://example.org/MLDoc_Zero-Shot_English-to-French> ;
+          orkg:hasBenchmarkingResult ?score.
+    ?score schema:name "Accuracy" ;
+           wdt:P31 ?type.
+    ?type rdfs:label ?itemLabel.
+    FILTER (REGEX(STR(?itemLabel), "Accuracy", "i"))
+}
+```

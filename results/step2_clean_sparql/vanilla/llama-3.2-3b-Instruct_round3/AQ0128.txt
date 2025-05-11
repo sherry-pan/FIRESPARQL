@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://purl.org/orcg/>
+PREFIX wds: <http://www.wds.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?name
+WHERE {
+  ?model wds:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset schema:SearchQA.
+  ?model rdfs:label ?name.
+  FILTER (lang(?name) = 'en')
+}
+```

@@ -1,0 +1,20 @@
+Question:
+What is the best performing model benchmarking the BUCC German-to-English dataset in terms of F1 score metric?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?metric?f1score 
+     WHERE {
+    ?model schema:description "Model".
+    ?model schema:topic <http://dbpedia.org/ontology/Topic/BUCC_German_to_English>.
+    ?model schema:metric?metric.
+    ?metric rdfs:label?metricLabel.
+    ?model rdfs:label?modelLabel.
+     FILTER (BCASE (?metricLabel = "F1 score") AND BCASE (?modelLabel = "best performing"))
+     }
+     ORDER BY DESC(?f1score)
+     LIMIT 1<|eot_id|>

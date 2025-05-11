@@ -1,0 +1,14 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orcid.org/ontology/>
+
+SELECT ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper schema:hasDescription ?description.
+  FILTER (STR(?description) = "Rfa-Gate-arccos")
+  ?paper schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult schema:hasCode ?code.
+}
+```

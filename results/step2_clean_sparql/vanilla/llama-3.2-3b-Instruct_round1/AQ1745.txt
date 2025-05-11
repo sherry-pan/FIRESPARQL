@@ -1,0 +1,17 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1Score
+WHERE {
+  ?model dbpedia:F1Score ?f1Score.
+  ?model schema:hasBenchmark ?benchmark.
+  ?benchmark schema:name "BUCC Chinese-to-English".
+} 
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

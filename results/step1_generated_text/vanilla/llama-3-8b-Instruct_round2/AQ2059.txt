@@ -1,0 +1,16 @@
+Question:
+List the code links in papers that use the DrQA model in any benchmark?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:usesModel <http://purl.org/ontology/bibo/DrQA>.
+ ?paper schema:mentions?code_link.
+  FILTER(lang(?code_link) = "en").
+}<|eot_id|>

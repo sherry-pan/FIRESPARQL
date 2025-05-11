@@ -1,0 +1,23 @@
+Question:
+List the code links in papers that use the LSTM (Bai et al., 2018) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bio2rdf: <http://bio2rdf.org/ontology/>
+     PREFIX oboInChI: <http://purl.org/obo/inchi/narrow/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbpediaowl: <http://dbpedia.org/ontology/>
+     PREFIX bio2rdf: <http://bio2rdf.org/ontology/>
+     SELECT?p?b?a
+     WHERE {
+    ?p a orkg:CodeLink.
+    ?p orkg:paper?b.
+    ?b orkg:author?a.
+    ?a foaf:name "Bai et al.".
+    ?b schema:description?d.
+     FILTER(contains(str(?d), "LSTM") AND contains(str(?d), "Bai et al., 2018"))
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+Could you provide a list of models that have been tested on the GENIA - LAS benchmark dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?model?name
+     WHERE {
+    ?model a dbo:Model.
+    ?model schema:description?description.
+    ?model orkg:has_test_dataset?test_dataset.
+    ?test_dataset schema:about <http://orkg.org/ontology#GENIA_LAS>.
+    ?model rdfs:label?name.
+     FILTER (lang(?name) = "en")
+     }<|eot_id|>

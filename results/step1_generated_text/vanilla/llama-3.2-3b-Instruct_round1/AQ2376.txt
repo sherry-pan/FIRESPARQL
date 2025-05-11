@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the ANODE model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX wikibase: <http://wikibase.org/schema/ontology/>
+    PREFIX wkm: <http://www.wikidata.org/ontology/>
+    PREFIX wkg: <http://www.wikidata.org/ontology/wiki/>
+    PREFIX owd: <http://ontology.io/wikipedia/>
+
+    SELECT?paper?title?url
+    WHERE {
+     ?paper wkg:usesAnode?anode.
+     ?anode wkg:hasCode?code.
+     ?code wkg:hasRepository?repo.
+     ?repo wkg:hasLink?link.
+      FILTER (CONTAINS(LCASE(?title), "anode") AND CONTAINS(LCASE(?title), "model"))
+      SERVICE wikibase:label {?paper wkg:label?title. }
+    }
+    ```<|eot_id|>

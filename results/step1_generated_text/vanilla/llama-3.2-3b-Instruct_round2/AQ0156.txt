@@ -1,0 +1,20 @@
+Question:
+Can you list the models that have been evaluated on the enwiki8 dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX q: <http://www.wikidata.org/entity/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?model
+     WHERE {
+    ?model wdt:P31 q:Q5.
+    ?model wdt:P31?type.
+    ?type rdfs:label?label.
+     FILTER (lang(?label) = 'en' OR lang(?label) = 'en')
+    ?model wdt:P1478?dataset.
+    ?dataset rdfs:label?datasetLabel.
+     FILTER (lang(?datasetLabel) = 'enwiki8')
+     }
+    <|eot_id|>

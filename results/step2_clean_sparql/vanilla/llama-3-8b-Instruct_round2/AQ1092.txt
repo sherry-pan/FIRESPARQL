@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label "NYT-single" ;
+          orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:hasResult ?result.
+ ?result orkg:metric ?metric ;
+         orkg:value ?value .
+} ORDER BY DESC(?value) LIMIT 1
+```

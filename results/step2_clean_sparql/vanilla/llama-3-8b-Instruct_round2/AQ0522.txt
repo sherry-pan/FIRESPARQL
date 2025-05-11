@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         dc:title ?paperTitle ;
+         orkg:hasBenchmark ?benchmark ;
+         orkg:hasId ?paperId.
+  ?benchmark orkg:benchmarkedOn ?dataset.
+  ?dataset dc:title "MPQA".
+}
+```

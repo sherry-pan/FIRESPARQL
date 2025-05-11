@@ -1,0 +1,18 @@
+Question:
+Provide a list of benchmarked datasets related to the Sentence Classification research area?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://rdf.openresearchknowledge.org/orkg/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT?dataset?datasetLabel?paper
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:category orkg:SentimentAnalysis.
+ ?dataset orkg:benchmarkedFor?paper.
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:topic rdfs:label?datasetLabel.
+  FILTER(lang(?datasetLabel) = "en")
+}<|eot_id|>

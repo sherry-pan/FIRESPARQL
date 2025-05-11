@@ -1,0 +1,11 @@
+```sparql
+SELECT ?paper ?paperLink ?codeLink
+WHERE {
+  ?paper a owl:Thing.
+  ?paper rdfs:label ?label.
+  FILTER(CONTAINS(?label, 'XLNet (base)') OR CONTAINS(?label, 'XLNet base') OR CONTAINS(?label, 'XLNet-base')).
+  ?paper wdc:hasCode ?code.
+  ?code wdc:hasRepository ?repository.
+  ?repository wdc:hasCode ?codeLink.
+}
+```

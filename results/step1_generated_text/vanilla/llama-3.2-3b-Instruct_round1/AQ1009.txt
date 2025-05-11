@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the ObjectNet dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?value
+     WHERE {
+    ?metric orkg:isEvaluationMetric rdfs:subClassOf* orkg:EvaluationMetric.
+    ?metric rkg:hasMetricName?name.
+    ?metric orkg:isAssociatedWith?dataset.
+    ?dataset orkg:datasetName "ObjectNet".
+    ?metric orkg:hasMetricValue?value.
+     FILTER (STRLIKE(?name, "metric" OR STRLIKE(?name, "accuracy") OR STRLIKE(?name, "f1-score") OR STRLIKE(?name, "precision") OR STRLIKE(?name, "recall") OR STRLIKE(?name, "AUC-ROC") OR STRLIKE(?name, "AUC-PR"))
+     }
+     LIMIT 10<|eot_id|>

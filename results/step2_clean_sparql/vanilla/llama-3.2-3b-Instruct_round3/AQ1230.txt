@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX wot: <http://www.webofthings.org/ontology/>
+
+SELECT ?metric ?score
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetIdentifier "DMControl100k".
+    ?dataset orkg:hasDatasetTitle "Ball in cup".
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasScore ?score.
+    FILTER (str(?metric) IN ("accuracy", "f1", "precision", "recall", "AUC-ROC", "AUC-PR", "AP", "mAP"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

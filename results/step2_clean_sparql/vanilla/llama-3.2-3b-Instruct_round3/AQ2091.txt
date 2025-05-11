@@ -1,0 +1,15 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c_wideweb_daml_1.0/widewebd#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX ork: <http://orcid.org/resource/>
+
+SELECT ?paper ?url
+WHERE {
+  ?paper ork:hasCitation ?citation.
+  ?citation schema:code "benchmark".
+  ?paper ork:hasDocument ?doc.
+  ?doc owl:sameAs ?url.
+  FILTER CONTAINS(?descriptionLiteral, "Multi-Perspective Matching (single model)")
+}
+```

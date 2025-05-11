@@ -1,0 +1,26 @@
+Question:
+Indicate the model that performed best in terms of Sequence error metric on the FSNS - Test benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "Sequence error")
+               || str(?metric_lbl      = "Sequence Error")
+               || str(?metric_lbl      = "Sequence Accuracy")
+               || str(?metric_lbl      = "Sequence Accuracy (Unlabeled)"))
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl = "FSNS - Test"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+       BIND(xsd:float(?value) AS?val)
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         orkgp:P32               ?model.
+       BIND(xsd:float(?val) AS?model_val)
+       ORDER BY DESC(?model_val)
+       LIMIT 1
+    <|eot_id|>

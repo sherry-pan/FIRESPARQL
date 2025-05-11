@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result dcterms:title ?title.
+  ?result orkg:hasScore ?score.
+  ?result orkg:dataset rdfs:label "WMT2016 Romanian-English benchmark dataset".
+  ?result orkg:metric rdfs:label "BLEU score".
+} ORDER BY DESC(?score) LIMIT 1
+```

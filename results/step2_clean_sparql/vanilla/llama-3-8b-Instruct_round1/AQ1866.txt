@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset ?datasetLabel
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset orkg:relatedTopic orkg:Topic "Natural Language Inference".
+  ?dataset orkg:usageFrequency ?frequency.
+  FILTER (?frequency > 10)
+}
+ORDER BY DESC(?frequency)
+LIMIT 10
+```

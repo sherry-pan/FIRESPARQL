@@ -1,0 +1,17 @@
+Question:
+Can you provide links to code used in papers that benchmark the FG fine-grained gate model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+    SELECT?paper?code
+    WHERE {
+     ?paper a orkg:Paper.
+     ?paper orkg:benchmarks?benchmark.
+     ?benchmark orkg:benchmarks?code.
+     ?code a orkg:Code.
+     ?code orkg:usedIn?paper.
+      FILTER (strstarts( str(?benchmark), "FG fine-grained gate model") )
+    }<|eot_id|>

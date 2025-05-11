@@ -1,0 +1,12 @@
+```sparql
+SELECT ?code
+WHERE {
+    ?paper rdf:type orkgc:Paper.
+    ?paper orkgp:P30_0001 ?paper_title.
+    FILTER(REGEX(?paper_title, "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.")).
+    ?paper orkgp:P31_0001 ?code.
+    ?code orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark rdfs:label ?benchmark_label.
+    FILTER(REGEX(?benchmark_label, "benchmarking")).
+}
+```

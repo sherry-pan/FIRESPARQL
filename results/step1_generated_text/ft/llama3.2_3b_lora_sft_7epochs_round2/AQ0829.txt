@@ -1,0 +1,29 @@
+Question:
+What are the metrics of evaluation over the CommitmentBank dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?value) AS?count)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "CommitmentBank")
+        ?dataset       orkgp:HAS_DATASET      ?paper.
+        ?paper         orkgp:P32               ?metric.
+        ?metric        rdfs:label              ?metric_lbl.
+        ?paper         rdfs:label              ?paper_lbl.
+        ?paper         orkgp:HAS_EVALUATION     ?eval.
+         OPTIONAL {?eval           orkgp:HAS_VALUE          ?value.}
+         OPTIONAL {?eval           orkgp:P31               ?compare.}
+         OPTIONAL {?compare      orkgp:HAS_METRIC         ?metric.}
+         OPTIONAL {?eval           orkgp:HAS_DATASET         ?dataset.}
+         OPTIONAL {?eval           orkgp:P32               ?metric.}
+         OPTIONAL {?eval           orkgp:P31               ?compare.}
+         OPTIONAL {?compare      orkgp:HAS_VALUE          ?value.}
+         OPTIONAL {?value      a                orkgp:Value.}
+         OPTIONAL {?eval           orkgp:HAS_LABEL         ?eval_lbl.}
+         OPTIONAL {?eval_lbl      rdfs:label              ?eval_lbl.}
+         OPTIONAL {?eval           orkgp:P32               ?metric.}
+         OPTIONAL {?eval           orkgp:P31               ?compare.}
+         OPTIONAL {?compare      orkgp:HAS_VALUE          ?value.}
+         OPTIONAL {?value      a                orkgp:Value.}
+     }<|eot_id|>

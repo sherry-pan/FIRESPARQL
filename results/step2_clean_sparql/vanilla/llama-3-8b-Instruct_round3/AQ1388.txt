@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_evaluation ?evaluation.
+  ?evaluation schema:dataset <http://dbpedia.org/resource/CoNLL04>.
+  ?evaluation orkg:metric "RE+ Micro F1 score".
+  ?evaluation orkg:value ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

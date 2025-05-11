@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R153847 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P4316 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "Atari 2600 Breakout"))
+    ?contrib orkgp:P4317 ?value.
+    ?value rdfs:label ?value_lbl.
+    BIND(xsd:float(?value_lbl) AS ?value)
+}
+```

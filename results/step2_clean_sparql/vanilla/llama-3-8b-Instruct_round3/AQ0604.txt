@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?paper ?title ?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper dc:title ?title.
+ ?paper orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:hasDataset ?dataset.
+ ?dataset rdfs:label "Atari 2600 Venture".
+ ?paper orkg:hasIdentifier ?id.
+}
+```

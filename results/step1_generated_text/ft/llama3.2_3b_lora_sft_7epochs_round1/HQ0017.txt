@@ -1,0 +1,17 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?location,?location_labels
+     WHERE {
+        ?papers rdf:type orkgc:Paper.
+        ?papers orkgp:P30_0003 rdfs:label?location_labels.
+        ?papers orkgp:P30_0003 orkgp:P34_0003?location.
+        ?location rdfs:label?location.
+         FILTER(REGEX(?location, "^[^,]*,"))
+         FILTER(REGEX(?location, "^[^,]*,"))
+     }
+     GROUP BY?location
+     ORDER BY COUNT(?location) DESC
+     LIMIT 1<|eot_id|>

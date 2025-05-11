@@ -1,0 +1,22 @@
+Question:
+Could you provide a list of models that have been tested on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?modelLabel?dataset?benchmark?result
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:testedOn?dataset.
+   ?dataset dcterms:title "Habitat 2020 Object Nav test-std benchmark".
+   ?model orkg:evaluatedOn?benchmark.
+   ?benchmark a orkg:Benchmark.
+   ?model orkg:hasResult?result.
+   ?result a orkg:Result.
+   ?model orkg:label?modelLabel.
+    FILTER (?modelLabel!= "")
+}<|eot_id|>

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?quantity
+WHERE {
+  ?resource orkgp:P34 ?event.
+  ?event orkgp:P31 ?cont.
+  ?cont orkgp:P37534 ?iron_oxide.
+  ?iron_oxide rdfs:label ?iron_oxide_lbl.
+  FILTER(REGEX(?iron_oxide_lbl, "Elorza"))
+  ?event orkgp:P43135 ?quantity.
+  BIND(xsd:float(?quantity) AS ?quantity)
+}
+```

@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:benchmarks ?benchmark;
+         orkg:dataset ?dataset;
+         orkg:metric ?metric;
+         orkg:score ?score.
+  ?benchmark a orkg:Benchmark;
+             orkg:model ?model;
+             orkg:dataset ?dataset.
+  ?dataset a orkg:Dataset;
+           orkg:name "WMT2016 German-English".
+  ?metric a orkg:Metric;
+          orkg:name "BLEU score".
+  FILTER (?score = 
+    ?maxScore 
+  )
+} 
+GROUP BY ?model ?score
+HAVING (?score = MAX(?score))
+```

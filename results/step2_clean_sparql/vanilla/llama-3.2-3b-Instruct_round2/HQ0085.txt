@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX che: <http://chemdata.nncbc.org/che/>
+
+SELECT ?format
+WHERE {
+    ?item a dbo:Corpus.
+    ?item che:dataset "CHEMDNER".
+    ?item schema:description ?d.
+    ?d schema:type ?f.
+    FILTER (CONTAINS(LCASE(?f), "data format") AND NOT EXISTS {?item rdfs:label ?l. FILTER(LANG(?l) = "en" && ?l = "data format")})
+}
+```

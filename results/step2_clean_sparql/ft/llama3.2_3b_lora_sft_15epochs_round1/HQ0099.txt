@@ -1,0 +1,15 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+    ?benchmark orkgp:7153 orkgp:151;
+               orkgp:P4310 ?material.
+    ?material a orkgp:Material;
+              rdfs:label ?material_lbl.
+    ?benchmark orkgp:1537 orkgp:154;
+               orkgp:P4310 ?material.
+    BIND(xsd:long(?benchmark orkgp:154 - ?benchmark orkgp:151) AS ?res_time)
+    FILTER(?res_time = "0.010245")
+}
+ORDER BY DESC(?res_time)
+LIMIT 1
+```

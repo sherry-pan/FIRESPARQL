@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper.
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ].
+  FILTER(REGEX(?title, "SAC"))
+  ?paper orkgp:P32 [
+    orkgp:P5008 ?component.
+    ?component orkgp:P31 [
+      rdfs:label ?model
+    ];
+    FILTER(?model = "SAC")
+    orkgp:P4009 ?code
+  ]
+}
+```

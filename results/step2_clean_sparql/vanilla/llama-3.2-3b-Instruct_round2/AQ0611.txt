@@ -1,0 +1,18 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX dctype: <http://purl.org/dc/types/gold>
+PREFIX okg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a okg:ResearchPaper.
+  ?paper okg:hasBenchmark ?benchmark.
+  ?benchmark dbp:dataset ?dataset.
+  ?dataset dbp:datasetLabel "Atari 2600 Asterix".
+  ?paper okg:hasTitle ?title.
+  ?paper okg:id ?id.
+}
+```

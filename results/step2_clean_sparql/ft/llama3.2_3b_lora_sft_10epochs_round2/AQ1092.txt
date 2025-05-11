@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R113777 orkgr:HAS_BENCHMARK ?benchmark;
+                orkgr:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?benchmark orkgr:HAS_EVALUATION ?eval.
+  ?eval orkgr:HAS_VALUE ?value.
+  BIND(xsd:int(?value) AS ?value).
+  FILTER(?dataset_lbl = "NYT-single")
+}
+ORDER BY DESC(?score)
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?codeLink
+WHERE {
+  ?paper a bibo:Article.
+  ?paper dc:subject ?subject.
+  ?subject rdfs:label ?model.
+  FILTER (str(?model) = "linear-chain CRFs model").
+  ?paper orkg:uses ?codeLink.
+  ?codeLink a orkg:Code.
+  ?paper bibo:benchmarks ?benchmark.
+  ?benchmark a bibo:Benchmark.
+}
+```

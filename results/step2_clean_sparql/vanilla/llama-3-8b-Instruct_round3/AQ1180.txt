@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasResult ?result.
+  ?result a orkg:Result ;
+          orkg:hasScore ?score ;
+          orkg:hasMetric ?metric.
+  ?paper orkg:hasDataset ?dataset.
+  ?dataset orkg:name "Hutter Prize dataset".
+  FILTER (?metric = "Benchmark Score")
+} ORDER BY DESC(?score) LIMIT 1
+```

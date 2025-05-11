@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest MACs score on the ImageNet benchmark dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX kg: <http://data.openresearchknowledge.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?score
+WHERE {
+ ?model a kg:Model.
+ ?model kg:hasScore?score.
+ ?score kg:dataset kg:ImageNet.
+ ?score kg:metric kg:MACs.
+ ?score kg:value?v.
+  FILTER(?v = MAX(?v2) 
+         FILTER(?model2 a kg:Model,?model2 kg:hasScore?score2,?score2 kg:dataset kg:ImageNet,?score2 kg:metric kg:MACs,?score2 kg:value?v2))
+}<|eot_id|>

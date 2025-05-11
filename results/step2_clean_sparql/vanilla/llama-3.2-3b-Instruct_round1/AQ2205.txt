@@ -1,0 +1,14 @@
+```sparql
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?link 
+WHERE {
+    ?paper a ork:Papers.
+    ?paper ork:hasCode ?code.
+    ?code rdfs:label ?label.
+    FILTER (LCASE(?label) = "nascell")
+    ?paper ork:hasBenchmark ?benchmark.
+    ?benchmark ork:hasCode ?benchmarkCode.
+    ?benchmark ork:hasLink ?link.
+}
+```

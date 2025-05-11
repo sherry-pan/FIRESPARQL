@@ -1,0 +1,35 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Montezuma's Revenge benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Score")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Atari 2600 Montezuma's Revenge")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:HAS_METRIC        ?metric.
+        ?value         rdfs:label              ?value_lbl.
+         FILTER(?value_lbl     = "0.998")
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                        orkgp:HAS_MODEL        ?model.
+        ?model       rdfs:label              ?model_lbl.
+         {
+           SELECT?model?model_lbl
+           WHERE {
+            ?model      orkgp:HAS_DATASET      ?dataset.
+            ?dataset   orkgp:HAS_EVALUATION   ?eval.
+            ?eval        orkgp:HAS_VALUE        ?value.
+            ?value     rdfs:label              ?value_lbl.
+             FILTER(?value_lbl = "0.998")
+            ?model      orkgp:HAS_MODEL        ?model.
+            ?model    rdfs:label              ?model_lbl.
+             FILTER(?model_lbl = "BASIX"^^<http://www.w3.org/2001/10/srf-escape#x12a)
+           }
+         ORDER BY DESC(?value_lbl)
+         LIMIT 1<|eot_id|>

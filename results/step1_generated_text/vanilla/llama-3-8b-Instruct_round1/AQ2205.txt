@@ -1,0 +1,20 @@
+Question:
+Can you provide links to code used in papers that benchmark the NASCell model?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX orkg: <http://www.orkg.org/>
+    PREFIX paper: <http://www.orkg.org/paper/>
+    PREFIX code: <http://www.orkg.org/code/>
+    SELECT?paper?code
+    WHERE {
+       ?paper a orkg:Paper.
+       ?paper owl:sameAs?paperUri.
+       ?paperUri orkg:hasCode?code.
+       ?code a code:Code.
+       ?code orkg:benchmarks?benchmark.
+       ?benchmark owl:sameAs?benchmarkUri.
+       ?benchmarkUri rdfs:label?benchmarkLabel.
+        FILTER (contains(?benchmarkLabel, "NASCell") && contains(?benchmarkLabel, "benchmark"))
+    }<|eot_id|>

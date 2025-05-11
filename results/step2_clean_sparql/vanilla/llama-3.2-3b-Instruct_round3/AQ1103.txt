@@ -1,0 +1,16 @@
+```sparql
+PREFIX wmt: <http://www.wmt.org/translation-evaluation/standards/>
+PREFIX wsd: <http://www.wsd.uib.no/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark wmt:benchmark "WMT2016 English-Russian".
+  ?benchmark dcterms:description ?description.
+  FILTER (STR(?description) = "WMT2016 English-Russian").
+  ?benchmark wmt:metric ?metric.
+  ?benchmark dcterms:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

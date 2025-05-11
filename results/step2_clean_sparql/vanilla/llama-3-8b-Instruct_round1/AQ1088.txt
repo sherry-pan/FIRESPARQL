@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?metric ?score
+WHERE {
+   ?paper a orkg:Paper;
+          orkg:dataset orkg:ACE2005;
+          orkg:benchmarkResult ?benchmarkResult.
+   ?benchmarkResult a orkg:BenchmarkResult;
+                    dcterms:title ?metric;
+                    orkg:score ?score.
+   FILTER (?metric = "Highest")
+}
+```

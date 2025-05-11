@@ -1,0 +1,13 @@
+```sparql
+PREFIX wmt: <http://www.w3.org/2015/02/wmt15-questions/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+  ?metric wmt:dataset "WMT2014 English-German".
+  ?metric rdfs:comment ?comment.
+  FILTER CONTAINS(?comment, "evaluation metric").
+  ?metric wmt:benchmark "true".
+  ?metric rdfs:label ?label.
+  FILTER (lang(?label) = "en")
+}
+```

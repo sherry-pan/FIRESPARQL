@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:hasBenchmark ?benchmark;
+         orkg:hasField orkg:PaperField.
+  ?benchmark orkg:hasMetric ?metric;
+             orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

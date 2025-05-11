@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?cont orkgp:P31 ?dataset;
+        rdfs:label ?title;
+        orkgp:P5008 ?dataset;
+        orkgp:P5009 ?metric;
+        orkgp:P5010 ?value.
+  FILTER(REGEX(STR(?title), "Atari 2600 Ice Hockey"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

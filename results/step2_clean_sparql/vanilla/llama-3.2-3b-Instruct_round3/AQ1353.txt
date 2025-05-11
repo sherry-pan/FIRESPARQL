@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocabulary/>
+SELECT ?metric ?value
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasValue ?value.
+    FILTER (STR(?metric) = "Birdsnap").
+    FILTER (STR(?value) = "highest").
+}
+```

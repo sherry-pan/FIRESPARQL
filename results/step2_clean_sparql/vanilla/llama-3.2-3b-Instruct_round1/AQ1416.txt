@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model schema:name ?name.
+  ?model ork:dataset "WMT2016 English-Russian".
+  ?model ork:hasMetric ?metric.
+  ?metric schema:name "BLEU score".
+  ?model ork:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

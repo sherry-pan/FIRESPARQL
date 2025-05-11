@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX wdx: <http://www.w3.org/ns/wdx/>
+PREFIX tconvss: <http://example.org/tconvss/>
+
+SELECT ?item ?itemLabel ?itemLink
+WHERE {
+  ?item wdx:hasCode "t-conv-s2s".
+  ?item schema:description ?itemDescription.
+  ?item tconvss:benchmark ?benchmark.
+  ?benchmark schema:description ?benchmarkDescription.
+  ?benchmark schema:about ?item.
+  ?item wdx:hasLink ?itemLink.
+  FILTER (lang(?itemDescription) = "en" && lang(?benchmarkDescription) = "en")
+}
+ORDER BY ?itemLabel
+LIMIT 10
+```

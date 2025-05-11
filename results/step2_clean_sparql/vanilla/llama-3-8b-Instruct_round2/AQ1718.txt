@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset <http://openresearchknowledge.org/dataset/Atari_2600_Up_and_Down>.
+  ?benchmark orkg:metric orkg:Score.
+  ?benchmark orkg:result ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

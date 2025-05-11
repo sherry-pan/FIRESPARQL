@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:dataset orkg:Paper_Field ;
+         orkg:benchmark ?benchmark.
+  ?benchmark orkg:metric ?metric ;
+             orkg:score ?score.
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

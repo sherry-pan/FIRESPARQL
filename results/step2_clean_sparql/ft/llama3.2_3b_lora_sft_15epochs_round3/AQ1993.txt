@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "PNDec"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?benchmark;
+        orkgp:P331 ?eval.
+  ?eval orkgp:P3354 ?code.
+}
+```

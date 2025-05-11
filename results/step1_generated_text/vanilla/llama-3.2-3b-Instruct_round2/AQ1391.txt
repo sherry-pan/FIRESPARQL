@@ -1,0 +1,31 @@
+Question:
+What is the best performing model benchmarking the ACE 2004 dataset in terms of RE+ Micro F1 metric?
+
+Generated SPARQL:
+ PREFIX wot: <http://purl.org/wot/ontology/>
+     PREFIX wotx: <http://purl.org/wot/ontology/x>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX orkg2: <http://openresearchknowledgegraph.org/ontology2/>
+
+     SELECT?model?metric?metricValue
+     WHERE {
+    ?model wotx:benchmarkFor?benchmark.
+    ?benchmark wotx:dataset "ACE 2004".
+    ?benchmark wotx:metric?metric.
+    ?metric schema:name?metricName.
+    ?metric schema:description?metricDescription.
+    ?metric schema:label?metricLabel.
+    ?metric rdfs:label?metricLabel.
+    ?model wotx:performance?performance.
+    ?performance schema:value?metricValue.
+     FILTER (STRFTIME(?metricValue, "%Y") = "2004")
+     FILTER (STRFTIME(?metricValue, "%") = "micro F1")
+     }
+     GROUP BY?metric
+     ORDER BY (-?performance)<|eot_id|>

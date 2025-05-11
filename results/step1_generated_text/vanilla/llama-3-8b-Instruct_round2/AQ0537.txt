@@ -1,0 +1,18 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Reacher, easy (DMControl100k) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     SELECT?paperId?title
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper dcterms:title?title.
+      ?paper orkg:hasDataset?dataset.
+      ?dataset orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasName "DMControl100k".
+      ?benchmark orkg:difficultyLevel "easy".
+      ?benchmark orkg:relatedTo?reacher.
+      ?reacher a orkg:Robot.
+       FILTER (?paperId =?paper orkg:id)
+     }<|eot_id|>

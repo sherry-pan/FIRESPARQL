@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?code ?code_url
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:title ?title.
+  ?paper bibo:isPartOf ?journal.
+  ?journal schema:about "Temporal Convolutional Network".
+  ?paper orkg:usesCode ?code.
+  ?code dc:hasFormat ?code_url.
+  FILTER(?title = "benchmarking the Temporal Convolutional Network model")
+}
+```

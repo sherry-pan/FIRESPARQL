@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Star Gunner dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R73822 orkgp:compareContribution?cont.
+        ?cont orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+        ?dataset orkgp:P31?cont.
+        ?cont orkgp:P32?eval.
+        ?eval orkgp:P36?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?cont orkgp:P34?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "Atari 2600 Star Gunner"))
+        ?benchmark orkgp:P35?value.
+         BIND(xsd:float(?value) AS?value)
+     }<|eot_id|>

@@ -1,0 +1,36 @@
+Question:
+List the metrics that are used to evaluate models on the CoQA benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+     SELECT?metric
+     WHERE {
+    ?metric rdfs:label?label.
+     FILTER (STR(?label) = "F1 score"@en)
+     UNION
+     FILTER (STR(?label) = "Accuracy"@en)
+     UNION
+     FILTER (STR(?label) = "Mean squared error"@en)
+     UNION
+     FILTER (STR(?label) = "Mean absolute error"@en)
+     UNION
+     FILTER (STR(?label) = "Precision"@en)
+     UNION
+     FILTER (STR(?label) = "Recall"@en)
+     UNION
+     FILTER (STR(?label) = "F2 score"@en)
+     UNION
+     FILTER (STR(?label) = "Area under the ROC curve"@en)
+     UNION
+     FILTER (STR(?label) = "Area under the PR curve"@en)
+     UNION
+     FILTER (STR(?label) = "Area under the confusion matrix"@en)
+     }
+     GROUP BY?metric
+     HAVING (COUNT(?metric) > 1)
+     ORDER BY DESC(?metric)<|eot_id|>

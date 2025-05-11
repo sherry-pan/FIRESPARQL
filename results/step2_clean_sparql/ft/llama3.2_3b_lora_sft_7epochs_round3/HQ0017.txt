@@ -1,0 +1,18 @@
+```sparql
+SELECT ?location
+WHERE {
+  ?papers rdf:type orkgc:Study.
+  ?papers rdfs:containing ?locations.
+  ?locations rdf:location ?location.
+  {
+    SELECT ?location (COUNT(?location) AS ?count)
+    WHERE {
+      ?papers rdfs:containing ?locations.
+      ?locations rdf:location ?location.
+    }
+    GROUP BY ?location
+    ORDER BY DESC(?count)
+    LIMIT 1
+  }
+}
+```

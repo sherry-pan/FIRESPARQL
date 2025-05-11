@@ -1,0 +1,19 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  orkgr:R70680 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P34 ?algorithm.
+  ?algorithm rdfs:label ?algorithm_labels.
+  FILTER(REGEX(?algorithm_labels, "naive bayes"))
+  ?contrib orkgp:P41 ?eval.
+  ?eval orkgp:P4319 ?eval_clas.
+  ?eval_clas rdfs:label ?eval_clas_labels.
+  FILTER(REGEX(?eval_clas_labels, "bag of words"))
+  ?contrib orkgp:P4309 ?feedback.
+  ?feedback rdfs:label ?feedback_labels.
+  FILTER(REGEX(?feedback_labels, "feature request"))
+  ?eval orkgp:P4310 ?precision;
+        orkgp:P4311 ?recall;
+        orkgp:P4312 ?f1.
+}
+```

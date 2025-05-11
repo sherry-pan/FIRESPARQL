@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasBenchmark ?benchmark ;
+           rdfs:label "CoNLL++".
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasResult ?result.
+  ?result orkg:hasMetric ?metric ;
+          orkg:hasValue ?value.
+  FILTER(?metric = "top")
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+  ?publication a orkg:Publication ;
+    orkg:hasResult ?result.
+  ?result orkg:hasBenchmark ?benchmark ;
+    orkg:hasMetric ?metric ;
+    orkg:hasValue ?value.
+  ?benchmark orkg:name "Birdsnap".
+}
+ORDER BY DESC(xsd:integer(?value))
+LIMIT 1
+```

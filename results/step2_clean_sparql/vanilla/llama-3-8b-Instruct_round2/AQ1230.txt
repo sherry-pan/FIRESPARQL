@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+           dcterms:title "Ball in cup, catch (DMControl100k)" .
+  ?dataset orkg:benchmark ?benchmark .
+  ?benchmark orkg:metric ?metric ;
+             orkg:score ?score .
+  FILTER NOT EXISTS {
+    ?benchmark2 a orkg:Benchmark ;
+                orkg:dataset ?dataset ;
+                orkg:metric ?metric ;
+                orkg:score ?score2 .
+    FILTER(?score2 > ?score)
+  }
+}
+```

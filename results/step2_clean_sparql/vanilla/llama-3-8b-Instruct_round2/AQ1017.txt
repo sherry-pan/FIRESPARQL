@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric 
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER(LANG(?metricLabel) = "en").
+  FILTER(STR(?metricLabel) = "BUCC Russian-to-English dataset").
+}
+```

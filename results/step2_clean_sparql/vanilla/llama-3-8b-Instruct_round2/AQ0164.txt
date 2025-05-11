@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?modelLabel
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "TempEval-3".
+  ?model orkg:evaluatedBy ?evaluation.
+  ?model rdfs:label ?modelLabel.
+}
+```

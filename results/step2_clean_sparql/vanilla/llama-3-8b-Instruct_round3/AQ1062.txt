@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasBenchmark ?benchmark ;
+         orkg:benchmark_score ?score ;
+         orkg:benchmark_metric ?metric.
+  ?benchmark orkg:hasProperty orkg:benchmark_name "Automatically labeled Medline abstracts corpus".
+  FILTER(?score > ?min_score).
+  FILTER(?metric = "top benchmark score metric").
+}
+```

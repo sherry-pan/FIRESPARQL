@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://schema.org/>
+PREFIX vtab: <http://www.orkg.org/ontology/VTAB#>
+PREFIX score: <http://www.orkg.org/ontology/Score#>
+PREFIX model: <http://www.orkg.org/ontology/Model#>
+PREFIX dataset: <http://www.orkg.org/ontology/Dataset#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a model:Model.
+  ?model score:Top1Accuracy ?accuracy.
+  ?model vtab:benchmarkedOn dataset:VTAB-1k.
+  ?modelLabel a orkg:Label; rdfs:label ?modelName.
+  FILTER (lang(?modelName) = "en").
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

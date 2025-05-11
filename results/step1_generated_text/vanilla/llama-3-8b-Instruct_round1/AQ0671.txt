@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://wifo5-04.uni-kassel.de/orkg/resource/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paperId?title
+     WHERE {
+    ?paper orkg:hasResourceType orkg:ResearchPaper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:dataset?dataset.
+    ?dataset rdfs:label "BUCC German-to-English".
+    ?paper dc:title?title.
+    ?paper orkg:hasId?paperId.
+     FILTER (?paperId!= "").
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+Which model has achieved the highest Score score on the Cheetah, run (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?eval UOF RLE. 
+         FILTER(REGEX(?eval, "Score"))
+        ?eval A orkgc:Benchmark. 
+        ?benchmark orkgp:HAS_DATASET,?dataset.
+        ?dataset orkgp:P32,?benchmark.
+        ?benchmark orkgp:HAS_EVALUATION,?eval.
+        ?eval orkgp:HAS_MODEL,?model.
+        ?model rdfs:label?model_lbl.
+         FILTER(?model_lbl = "Cheetah, run (DMControl500k)")
+         BIND(xsd:integer(?eval) AS?score)
+         BIND(xsd:integer(?model) AS?model_lblscore)
+         FILTER(REGEX(?score, "maximum"))
+     }<|eot_id|>

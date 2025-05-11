@@ -1,0 +1,19 @@
+```
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?dataset ?datasetName ?description
+WHERE {
+  ?dataset a orkg:BenchmarkDataset.
+  ?dataset orkg:hasType orkg:JointEntityAndRelationExtractionBenchmark.
+  ?dataset dc:title ?datasetName.
+  ?dataset dc:description ?description.
+  OPTIONAL {
+    ?dataset orkg:hasCount ?count.
+    FILTER (?count > 10)
+  }
+}
+ORDER BY DESC(?count)
+LIMIT 10
+```

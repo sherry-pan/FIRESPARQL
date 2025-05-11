@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkggr:R8349 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P30 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "BC5CDR-chemical"))
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:P30 ?metric.
+    BIND(xsd:float(?eval.value) AS ?value)
+}
+ORDER BY DESC(?score)
+LIMIT 10
+```

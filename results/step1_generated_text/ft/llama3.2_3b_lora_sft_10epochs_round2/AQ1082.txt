@@ -1,0 +1,36 @@
+Question:
+What is the highest benchmark result achieved on the NYT29 dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R110600 orkgp:compareContribution?c.
+          ?c orkgp:HAS_DATASET?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?dataset orkgp:P31?has_dataset_14580.
+          ?has_dataset_14580 rdfs:label?has_dataset_14580_lbl.
+          ?has_dataset_14580 orkgp:P29 orkgp:P31?eval.
+          ?eval orkgp:P32?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?c orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value_).
+         }
+     UNION
+     {
+           orkgr:R110600 orkgp:compareContribution?c.
+          ?c orkgp:HAS_DATASET?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?dataset orkgp:P31?has_dataset_14580.
+          ?has_dataset_14580 rdfs:label?has_dataset_14580_lbl.
+          ?has_dataset_14580 orkgp:P29 orkgp:P31?eval.
+          ?eval orkgp:P32?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?c orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value_).
+          ?metric orkgp:P33?cont.
+           BIND(xsd:float(?cont) AS?cont_)
+          ?cont_ orkgp:P34?metric_lbl_.
+           BIND(xsd:float(?metric_lbl_ AS?metric_lbl).
+         }
+

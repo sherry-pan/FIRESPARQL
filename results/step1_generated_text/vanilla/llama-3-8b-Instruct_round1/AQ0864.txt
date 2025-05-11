@@ -1,0 +1,18 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Yelp Fine-grained classification dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://wifo5-03.informatik.uni-erlangen.de/orkg/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark schema:about?dataset.
+ ?dataset rdfs:label "Yelp Fine-grained classification".
+ ?benchmark orkg:usesEvaluationMetric?metric.
+  FILTER (?metric!= orkg:defaultMetric)
+}<|eot_id|>

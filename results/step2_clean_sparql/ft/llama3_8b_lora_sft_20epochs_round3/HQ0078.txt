@@ -1,0 +1,14 @@
+```sparql
+SELECT ?location
+WHERE {
+  orkgr:R44980 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P4136 ?location.
+  ?location rdfs:label ?location_lbl.
+  FILTER(REGEX(STR(?location_lbl), "world"))
+  ?contrib orkgp:P4310 ?scale.
+  ?scale rdfs:label ?scale_lbl.
+  FILTER(REGEX(STR(?scale_lbl), "max"^^xsd:string))
+}
+ORDER BY DESC(?scale)
+LIMIT 1
+```

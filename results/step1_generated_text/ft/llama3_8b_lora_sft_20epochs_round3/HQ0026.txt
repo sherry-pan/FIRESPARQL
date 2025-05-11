@@ -1,0 +1,13 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ SELECT?title
+    WHERE {
+      orkgr:R110393 orkgp:compareContribution?cont.
+     ?cont orkgp:P31?benchmark.
+     ?benchmark rdfs:label?title;
+                 orkgp:P12571?number_of_questions.
+      BIND(xsd:int(?number_of_questions) > 10000 AS?has_more_than_10_000_questions)
+      FILTER(?has_more_than_10_000_questions)
+    }<|eot_id|>

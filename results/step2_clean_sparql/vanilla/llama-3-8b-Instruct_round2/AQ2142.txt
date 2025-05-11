@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a bibo:AcademicPaper.
+  ?paper orkg:usesModel orkg:TransformerXL.
+  ?paper orkg:evaluatedOn ?benchmark.
+  ?benchmark a bibo:Benchmark.
+  ?paper bibo:hasCodeLink ?code_link.
+  ?benchmark schema:name ?benchmark_name.
+  FILTER (CONTAINS(LCASE(?benchmark_name), "12-layer transformer-xl"))
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://ork.gerrit.eu/orc>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+SELECT ?paper ?codeLink 
+WHERE {
+  ?paper ork:usesModel ?model.
+  ?model ork:hasBenchmark ?benchmark.
+  ?benchmark wdt:P31 wd:Q11637271.
+  ?paper ork:code ?codeLink.
+  FILTER (CONTAINS(LCASE(?codeLink), "a3c-cts"))
+}
+```

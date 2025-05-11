@@ -1,0 +1,19 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+
+SELECT?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label?datasetLabel.
+ ?dataset orkg:hasBenchmarkingMetric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?datasetLabel = "MultiRC" && str(?metricLabel) IN ("F1-score", "Accuracy", "Precision", "Recall", "ROUGE", "BLEU", "METEOR"))
+}<|eot_id|>

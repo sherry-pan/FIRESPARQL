@@ -1,0 +1,13 @@
+```sparql
+SELECT ?variable
+WHERE {
+  ?paper orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31 ?model.
+  ?model rdfs:label ?model_label.
+  FILTER(REGEX(?model_label, "atmosphere", "i"))
+  ?model orkgp:P32 ?variable.
+}
+GROUP BY ?variable
+ORDER BY DESC(COUNT(?variable))
+LIMIT 3
+```

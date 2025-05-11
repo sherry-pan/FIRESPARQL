@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 River Raid benchmark dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bash#>
+     SELECT?model?score 
+     WHERE {
+    ?model dbp:relatedTo [ rdfs:label?label ].
+    ?model dbp:relatedTo [ rdfs:label?label ] dbp:score?score.
+    ?model dbp:relatedTo [ rdfs:label "Atari 2600 River Raid" ].
+    ?model dbp:relatedTo [ rdfs:label?label ] wikibase:rankedSparqlResults "true".
+     FILTER (CONTAINS(LCASE(?label), "Atari 2600 River Raid").
+     FILTER (CONTAINS(LCASE(?score), "score").
+     GROUP BY?model 
+     HAVING (MAX(?score) )
+     ORDER BY DESC(?score)
+     }<|eot_id|>

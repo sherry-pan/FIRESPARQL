@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model
+WHERE {
+  ?model orkg:topModelByNLL ?nllScore.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark orkg:dataset "Nottingham".
+  FILTER (CONTAINS(STR(?nllScore), "^[0-9]+(\.[0-9]+)?$"))
+}
+```

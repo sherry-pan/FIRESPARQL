@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper schema:description ?description.
+  FILTER(CONTAINS(LCASE(?description), "duel hs"))
+  ?paper orkg:has_code ?code.
+}
+```

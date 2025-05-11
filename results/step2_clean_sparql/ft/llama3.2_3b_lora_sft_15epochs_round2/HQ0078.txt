@@ -1,0 +1,16 @@
+```sparql
+SELECT ?location
+WHERE {
+  ?study orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P3740 ?location.
+  {
+    SELECT ?location (MAX(?scale) AS ?max_scale)
+    WHERE {
+      ?study orkgp:compareContribution ?contrib.
+      ?contrib orkgp:P3740 ?location.
+      ?location rdfs:scale ?scale.
+    }
+  }
+  ?location rdfs:scale ?max_scale.
+}
+```

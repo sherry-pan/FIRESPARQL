@@ -1,0 +1,15 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2004/02/skos/core#wdt>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?paper ?reference 
+WHERE {
+    ?paper dcterms:hasPart ?reference.
+    FILTER (REGEX(STR(?reference), "https?://[^/]+/(?:benchmarks|test|example)/")).
+    ?paper schema:description ?desc.
+    FILTER (REGEX(STR(?desc), "AxCell model", "i"))
+}
+```

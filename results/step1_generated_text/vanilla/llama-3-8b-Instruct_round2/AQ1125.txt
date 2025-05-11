@@ -1,0 +1,21 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Kinetics-600 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?metric?score
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper dc:title?title.
+       FILTER (?title = "Kinetics-600").
+      ?paper orkg:benchmark?benchmark.
+      ?benchmark orkg:metric?metric.
+      ?benchmark orkg:score?score.
+       FILTER (?metric!= "None").
+       FILTER (?score!= "None").
+       FILTER (?metric &&?score).
+       ORDER BY DESC(?score)
+       LIMIT 1
+     }<|eot_id|>

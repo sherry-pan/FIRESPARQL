@@ -1,0 +1,11 @@
+```sparql
+SELECT ?name WHERE { 
+  ?cont orkgp:P31 ?article_count.
+  ?article_count rdfs:label ?label.
+  BIND(xsd:integer(?label) AS ?number_of_articles)
+  ?cont orkgp:P27 ?author.
+  ?author rdfs:label ?name.
+} 
+ORDER BY DESC(?number_of_articles)
+LIMIT 1
+```

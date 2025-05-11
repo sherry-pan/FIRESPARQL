@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikiba.se/ontology/>
+
+SELECT ?model ?testPerplexity
+WHERE {
+    ?model rdfs:label ?modelLabel.
+    ?model wikibase:abstract ?abstract.
+    ?abstract wikibase:mainEntity ?mainEntity.
+    ?mainEntity dbo:wikiPageID "Q12055".
+    ?mainEntity wikibase:perplexity ?testPerplexity.
+}
+ORDER BY DESC(?testPerplexity)
+LIMIT 1
+```

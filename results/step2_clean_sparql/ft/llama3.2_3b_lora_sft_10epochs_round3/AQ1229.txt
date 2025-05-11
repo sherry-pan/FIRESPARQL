@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R8342 orkgp:compareTo(64530, ?ch).
+    ?ch orkgp:P34049 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?metric orkgp:P33988 ?value.
+  }
+  UNION
+  {
+    orkgr:R82932 orkgp:compareTo(64530, ?ch).
+    ?ch orkgp:P34049 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?metric orkgp:P33988 ?value.
+  }
+}
+ORDER BY DESC(?score)
+```

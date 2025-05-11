@@ -1,0 +1,19 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the UCF101 (finetuned) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/ontology/>
+    PREFIX dct: <http://purl.org/dc/terms/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    SELECT?title?id
+    WHERE {
+     ?paper a orkg:ResearchPaper ;
+             dct:title?title ;
+             orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:hasDataset?dataset ;
+               orkg:hasModel?model.
+     ?dataset orkg:hasName "UCF101" ;
+               orkg:hasVariant "finetuned".
+     ?model orkg:hasBenchmark?benchmark.
+     ?paper orkg:hasId?id.
+    }<|eot_id|>

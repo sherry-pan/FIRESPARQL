@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:datasetName "ACE 2004".
+    ?dataset orkg:benchmarkResults ?benchmarkResult.
+    ?benchmarkResult a orkg:BenchmarkResult.
+    ?benchmarkResult orkg:benchmarkMetric ?metric.
+    ?benchmarkResult orkg:benchmarkValue ?value.
+    ?metric rdfs:label ?metricLabel.
+    ?benchmarkResult orkg:topResult ?topResult.
+    ?topResult a orkg:TopResult.
+    ?topResult orkg:metric ?metric.
+    ?topResult orkg:value ?topValue.
+}
+```

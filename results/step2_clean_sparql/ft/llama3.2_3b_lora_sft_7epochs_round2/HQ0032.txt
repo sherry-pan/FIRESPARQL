@@ -1,0 +1,14 @@
+```sparql
+SELECT ?lead
+WHERE {
+  ?paper rdf:type orkgc:Paper.
+  ?paper orkgp:P31 ?compound.
+  ?compound rdfs:label ?title.
+  ?paper orkgp:P40040 ?lead.
+  ?compound rdfs:label ?compound_label.
+  FILTER(REGEX(?title, "^[^,]*"))
+  FILTER(?compound_label = ?title)
+}
+ORDER BY DESC(?lead)
+LIMIT 1
+```

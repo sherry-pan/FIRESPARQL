@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "MMV"))
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont ?benchmark ?paper.
+  ?paper orkgp:HAS_SOURCE_CODE ?source_code.
+  ?source_code rdfs:label ?code.
+}
+```

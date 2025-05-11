@@ -1,0 +1,32 @@
+```sparql
+SELECT DISTINCT ?material ?material_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Response time")
+  {
+    SELECT ?material ?material_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      orkgp:HAS_DATASET ?dataset;
+      orkgp:P32 ?paper.
+      ?paper orkgp:HAS_MATERIAL ?material.
+      ?material rdfs:label ?material_lbl.
+      ?paper orkgp:HAS_SENSORS ?sensor.
+      ?sensor orkgp:P31 ?sensor_lbl.
+      ?sensor orkgp:HAS_MODEL ?model.
+      ?model rdfs:label ?model_lbl.
+      ?paper orkgp:P32 ?metric.
+      ?metric orkgp:HAS_VALUE ?value.
+      BIND(xsd:float(?value) AS ?value_float)
+      ?value orkgp:HAS_DATASET ?dataset.
+      ?value orkgp:HAS_MODEL ?model.
+      BIND(xsd:float(?value_float) AS ?response_time)
+      FILTER(?response_time = 0.00001)
+    }
+    ORDER BY DESC(?response_time)
+    LIMIT 1
+  }
+}
+```

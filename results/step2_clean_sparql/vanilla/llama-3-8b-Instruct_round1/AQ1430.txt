@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://schema.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:name "WMT2014 English-German".
+  ?result orkg:metricValue ?score.
+  ?result orkg:metric ?metric.
+  ?metric a orkg:BLEU.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

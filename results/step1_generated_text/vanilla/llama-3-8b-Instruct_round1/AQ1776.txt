@@ -1,0 +1,23 @@
+Question:
+What is the best performing model benchmarking the ImageNet dataset in terms of Number of params metric?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?modelLabel?params
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmark?benchmark.
+ ?benchmark orkg:dataset <http://www.orkg.org/datasets/Imagenet>.
+ ?benchmark orkg:metric?metric.
+ ?metric rdfs:label "Number of params".
+ ?benchmark orkg:best?model.
+ ?model orkg:hasProperty?property.
+ ?property rdfs:label?modelLabel.
+ ?model orkg:hasPropertyValue?params.
+ ?params xsd:integer.
+  FILTER (?modelLabel = "best performing model" )
+}<|eot_id|>

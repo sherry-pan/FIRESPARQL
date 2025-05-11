@@ -1,0 +1,16 @@
+Question:
+Can you list the models that have been evaluated on the enwiki8 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX enwiki8: <http://dbpedia.org/ontology/enwiki8#>
+     SELECT?m
+     WHERE {
+    ?m orkg:isModel?m1.
+    ?m1 orkg:evaluatedOn?e.
+    ?e enwiki8:dataset "enwiki8".
+     FILTER (REGEX(?e, "enwiki8")) 
+     }<|eot_id|>

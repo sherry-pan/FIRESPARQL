@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orcg.org/ontology/>
+
+SELECT ?model ?metric ?value
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:description ?description.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasValue ?value.
+  ?metric rdfs:label ?metricLabel.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset dbpedia:datasetName "CoNLL++".
+  FILTER (REGEX(STR(?metricLabel), "F1", "i"))
+}
+```

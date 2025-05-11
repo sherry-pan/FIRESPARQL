@@ -1,0 +1,30 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R113777 as orkgr:Dataset;
+           orkgr:HAS_BENCHMARK, orkgr:R113777 orkgr:P31?benchmark.
+          ?benchmark orkgr:P31?cont;
+                    orkgrHAS_DATASET?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?cont orkgr:HAS_EVALUATION?eval.
+          ?eval orkgr:P31?eval_lbl.
+          ?eval orkgrHAS_VALUE?value.
+           BIND(xsd:int(?value) AS?value).
+           BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+         }
+     UNION
+     {
+       orkgr:R113777 orkgr:P31?cont;
+               orkgrHAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+      ?cont orkgr:HAS_EVALUATION?eval.
+      ?eval orkgr:P31?eval_lbl.
+      ?eval orkgr:HAS_VALUE?value.
+       BIND(xsd:int(?value) AS?value).
+       BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+     }
+     ORDER BY DESC(?score)<|eot_id|>

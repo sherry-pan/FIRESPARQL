@@ -1,0 +1,21 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ SELECT?material
+    WHERE {
+      orkgr:R155843 orkgp:compareContribution?contrib.
+     ?contrib orkgp:P43135?material.
+     ?contrib orkgp:HAS_VALUE?value.
+      FILTER(?value = (SELECT?value
+                       WHERE {
+                        ?cont orkgp:HAS_VALUE?value.
+                        ?cont orkgp:P43133?response_time.
+                        ?cont orkgp:compareContribution?compareContribution.
+                        ?compareContribution orkgp:P43135?cont_mat.
+                         FILTER(?cont_mat = "Cu"^^xsd:string)
+                       }
+                       ORDER BY DESC(?value)
+                       LIMIT 1
+                     )
+     }<|eot_id|>

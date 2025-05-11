@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasId ?id.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset skos:prefLabel "STS Benchmark".
+  FILTER (xsd:integer(?id) > 0)
+}
+```

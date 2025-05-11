@@ -1,0 +1,25 @@
+Question:
+Where can I find code references in papers that have used the Pointer + Coverage + EntailmentGen + QuestionGen model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+     SELECT?p?o
+     WHERE {
+    ?paper a orkg:Paper.
+     orkg:hasSource?source.
+    ?source schema:description?description.
+     WHERE {
+    ?description schema:mainText?mainText.
+    ?mainText orkg:contains?codeRef.
+    ?codeRef orkg:hasUsed?usedModel.
+    ?usedModel orkg:hasBenchmarkingPurpose?benchmarkingPurpose.
+    ?benchmarkingPurpose orkg:hasModel?model.
+    ?model schema:alternateName "Pointer + Coverage + EntailmentGen + QuestionGen".
+     FILTER (strContains(?description, "benchmarking"))
+     }
+     ORDER BY (length(?description))<|eot_id|>

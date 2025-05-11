@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Tutankham dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    SELECT?model?score
+    WHERE {
+       ?model a orkg:Model.
+       ?model orkg:benchmarkedOn?dataset.
+       ?dataset rdfs:label "Atari 2600 Tutankham".
+       ?model orkg:score?score.
+        FILTER (?score = max(?score2).
+       ?model orkg:score?score2.
+        FILTER (?dataset = <http://openresearchknowledge.org/dataset/Atari_2600_Tutankham> ) )
+    }<|eot_id|>

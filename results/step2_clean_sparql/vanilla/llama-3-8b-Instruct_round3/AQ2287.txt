@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?paperTitle ?codeReference
+WHERE {
+  ?paper a orkg:Paper .
+  ?paper dcterms:title ?paperTitle .
+  ?paper bibo:hasCodeReference ?codeReference .
+  ?codeReference orkg:mentionsModel "Pointer + Coverage + EntailmentGen + QuestionGen" .
+  ?paper dcterms:hasFormat "benchmarking" .
+}
+```

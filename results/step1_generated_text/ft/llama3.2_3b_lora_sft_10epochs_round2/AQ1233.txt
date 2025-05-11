@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Walker, walk (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R79457 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label "Walker, walk (DMControl500k)"^?dataset_lbl.
+        ?dataset_lbl rdfs:label?dataset_lbl_lbl.
+        ?contrib orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P31?paper.
+        ?paper orkgp:P32?eval.
+        ?eval orkgp:HAS_VALUE?value.
+         BIND(xsd:float(?value) AS?value).
+         BIND(xsd:string(?dataset_lbl_lbl) AS?dataset_lbl_lbl)
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark score and its metric on the Hendrycks Test dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R155801 orkgp:compareContribution?cont.
+          ?cont orkgp:P31?paper.
+          ?paper orkgp:P32?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?cont orkgp:P43186?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?cont orkgp:P43187?value.
+           BIND(xsd:float(?value) AS?value).
+         }
+         FILTER(?dataset_lbl "Hendrycks Test")
+         ORDER BY DESC(?score)
+         LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R68874 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31 ?dataset.
+  ?dataset rdfs:label "AESLC".
+  ?contrib orkgp:P32 ?eval.
+  ?eval orkgp:P31 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:int(?value) AS ?value)
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+Question:
+Are children examined in the studies?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+     SELECT?s?p?o 
+     WHERE {
+    ?s orkg:hasStudy?study
+    ?study schema:description?description
+    ?study orkg:hasStudySubject?subject
+    ?subject schema:keywords?k
+     FILTER (REGEX(LOWER(?k) = "children") or REGEX(LOWER(?k) = "child"))
+    ?s orkg:hasContributor?c
+    ?c schema:affiliation?affiliation
+    ?affiliation schema:description?affiliationDescription
+     FILTER (REGEX(LOWER(?affiliationDescription) = "children") or REGEX(LOWER(?affiliationDescription) = "child"))
+     }<|eot_id|>

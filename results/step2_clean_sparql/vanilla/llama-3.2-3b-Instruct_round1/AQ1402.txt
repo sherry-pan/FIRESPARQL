@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/>
+SELECT ?model 
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:dataset "nyt-single".
+  ?benchmark orkg:metric "f1".
+  ?benchmark orkg:hasResult ?result.
+  ?result orkg:score ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

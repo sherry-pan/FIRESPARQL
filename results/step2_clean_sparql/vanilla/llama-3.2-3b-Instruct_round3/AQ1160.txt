@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX cta: <http://purl.org/ctapien/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:name "RotoWire".
+  ?dataset orkg:relationGeneration ?relGen.
+  ?relGen a cta:RelationGeneration.
+  ?relGen schema:description ?desc.
+  ?desc schema:mainEntity ?metric.
+  ?metric schema:mainEntityOfPage ?metricPage.
+  ?metricPage schema:description ?value.
+  FILTER (?metricPage IS NOT NULL)
+}
+```

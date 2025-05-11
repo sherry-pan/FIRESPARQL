@@ -1,0 +1,17 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?location (COUNT(?study) AS?count) 
+WHERE {
+ ?study a orkg:Study.
+ ?study orkg:location?location.
+  FILTER (?location!= "Unknown")
+  GROUP BY?location
+  ORDER BY DESC(?count)
+}<|eot_id|>

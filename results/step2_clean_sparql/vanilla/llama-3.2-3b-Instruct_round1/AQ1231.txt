@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <https://orcg.org/ontology/>
+PREFIX BCD: <http://example.org/BCD#>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset;
+           orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark;
+             orkg:hasRun ?run;
+             orkg:hasScore ?score.
+  ?run a orkg:Run;
+       rkg:identifier "DMControl500k";
+       orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (BCD:contains(?metricLabel, "top") && BCD:contains(?metricLabel, "benchmark"))
+}
+```

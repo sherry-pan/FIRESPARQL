@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "HMDB51")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

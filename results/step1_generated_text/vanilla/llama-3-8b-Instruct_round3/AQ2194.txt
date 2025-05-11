@@ -1,0 +1,18 @@
+Question:
+Provide a list of papers that have utilized the Adaptive Input Large model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web.at/orkg/resource/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?paper?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:utilizes?model.
+ ?model rdfs:label "Adaptive Input Large".
+ ?paper dc:hasCode?code.
+  FILTER (lang(?code) = "code" || lang(?code) = "sourcecode" || lang(?code) = "repository").
+}<|eot_id|>

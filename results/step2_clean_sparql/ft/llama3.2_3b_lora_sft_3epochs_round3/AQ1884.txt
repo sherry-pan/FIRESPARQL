@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?rf a orkgc:ResearchField;
+      rdfs:label ?rf_lbl.
+  FILTER (str(?rf_lbl) = "Text Summarization")
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:P31 ?rf.
+  ?dataset orkgp:P32 ?cont.
+  ?cont rdfs:label ?cont_lbl.
+  FILTER (str(?cont_lbl) = "most commonly used")
+}
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 10
+```

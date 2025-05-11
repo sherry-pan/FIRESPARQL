@@ -1,0 +1,15 @@
+```sparql
+PREFIX wemod: <http://www.wemod.org/ontology/2012/01/wemod/>
+PREFIX oreg: <http://www.openresearcher.org/ontology/2011/04/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model 
+WHERE {
+  ?model wemod:hasModel ?f1Score.
+  ?model oreg:hasDataset "ShARe/CLEF eHealth corpus".
+  ?model schema:about ?modelLabel.
+  FILTER (regex(?modelLabel, ".*F1.*") || regex(?modelLabel, ".*score.*") || regex(?modelLabel, ".*model.*"))
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

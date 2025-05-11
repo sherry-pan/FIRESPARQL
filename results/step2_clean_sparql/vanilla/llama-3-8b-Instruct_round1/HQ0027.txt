@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?country
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:hasStudyLocation ?location.
+  ?location rdfs:label ?country.
+  ?study orkg:hasMeasurement ?measurement.
+  ?measurement orkg:hasValue ?value.
+  ?measurement orkg:hasUnit "prevalence".
+  ?measurement orkg:hasStudyType "epilepsy".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?dataset
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset a dbpedia:Dataset.
+    ?dataset dbpedia:datasetLabel "Atari 2600 Montezuma's Revenge".
+    ?benchmark orkg:hasMetric ?metric.
+    ?metric a schema:Measurement.
+    ?metric schema:description "Average Return (NoOp)".
+}
+```

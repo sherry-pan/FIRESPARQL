@@ -1,0 +1,20 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Kinetics-600 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?paperId
+     WHERE {
+    ?paper orkg:hasBenchmarkedModel?benchmark.
+    ?benchmark orkg:hasKinetics600Dataset?benchmarkKinetics600.
+    ?benchmark orkg:hasTitle?paper.
+    ?benchmarkKinetics600 orkg:hasPaper?benchmarkKinetics600Paper.
+    ?benchmarkKinetics600Paper orkg:hasId?benchmarkKinetics600PaperId.
+    ?benchmarkKinetics600Paper orkg:hasTitle?paper.
+    ?benchmarkKinetics600Paper orkg:hasPaper?benchmark.
+     FILTER (REGEX(LCASE(?paper) "Kinetics-600"))
+     }
+     LIMIT 100<|eot_id|>

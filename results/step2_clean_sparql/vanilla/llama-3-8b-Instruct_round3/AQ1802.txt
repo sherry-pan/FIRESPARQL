@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?maxAccuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasMetric orkg:Accuracy.
+  ?result orkg:hasValue ?accuracy.
+  ?result orkg:hasDataset orkg:ReutersEnDe.
+}
+GROUP BY ?model
+ORDER BY DESC(?maxAccuracy)
+LIMIT 1
+```

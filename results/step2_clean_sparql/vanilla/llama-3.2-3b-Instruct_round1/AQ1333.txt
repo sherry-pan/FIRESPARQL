@@ -1,0 +1,16 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+
+SELECT ?metric ?value 
+WHERE {
+    ?paper orkg:hasDataset orkg:datasetId "WOS-46985".
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark schema:description ?metric.
+    ?metric schema:numeric ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

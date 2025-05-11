@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasPaperCode ?code.
+  ?paper orkg:usesModel ?model.
+  ?model rdfs:label "DocRED-BiLSTM".
+  ?paper orkg:evaluatedIn ?benchmark.
+  FILTER (?benchmark != "null" && ?benchmark != "undefined")
+}
+```

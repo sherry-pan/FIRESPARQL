@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest F1 score on the CoNLL 2003 (English) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/ontology/>
+     SELECT?model?f1score
+     WHERE {
+    ?model orkg:has_model?m.
+    ?m orkg:is_benchmark?b.
+    ?b dbpedia:dataset?ds.
+    ?ds dbpedia:dataset_name "CoNLL 2003 (English)".
+    ?m orkg:has_result?r.
+    ?r orkg:has_f1score?f1score.
+     FILTER (REGEX(STR(?f1score) "[0-9]+(\.[0-9]+)?"))
+     ORDER BY DESC(?f1score)
+     LIMIT 1
+     }
+    <|eot_id|>

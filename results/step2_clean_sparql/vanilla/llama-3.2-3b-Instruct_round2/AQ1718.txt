@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://purl.org/LinkedData/orkg/>
+SELECT ?model ?score 
+WHERE {
+  ?model orkg:isBenchmarkFor ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasMetric ?metric.
+  ?metric orkg:hasMetricDefinition ?metricDefinition.
+  ?metricDefinition orkg:hasMetricValue ?score.
+  ?model orkg:hasBenchmarkingResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?benchmark orkg:hasName "Atari 2600 Up and Down".
+  FILTER (CONTAINS(LCASE(?metricDefinition), "score"))
+}
+```

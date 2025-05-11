@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX ace: <http://www.ace2004.org/>
+
+SELECT ?model ?microF1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ace:ACE2004.
+  ?benchmark orkg:metric "RE+ Micro F1".
+  ?benchmark orkg:score ?microF1.
+}
+ORDER BY DESC(?microF1)
+LIMIT 1
+```

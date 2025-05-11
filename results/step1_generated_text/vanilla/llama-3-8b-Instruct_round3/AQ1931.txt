@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the Switch Transformer model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?paperTitle?codeLink
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:hasModel orkg:SwitchTransformer.
+ ?paper bibo:hasCode?codeLink.
+  FILTER(lang(?paperTitle) = "en").
+  FILTER(?codeLink!= "".
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en".
+ ?paper rdfs:label?paperTitle.
+  }
+}<|eot_id|>

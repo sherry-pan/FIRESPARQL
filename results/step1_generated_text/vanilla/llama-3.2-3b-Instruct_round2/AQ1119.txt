@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Stanford Dogs dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/2015/01/orcg>
+     SELECT?score?metric
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasDataset?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:name "Stanford Dogs".
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasScore?score.
+     ORDER BY DESC(?score)
+     LIMIT 1
+     }
+    <|eot_id|>

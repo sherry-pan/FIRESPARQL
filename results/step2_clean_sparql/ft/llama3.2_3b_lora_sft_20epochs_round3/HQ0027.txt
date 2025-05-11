@@ -1,0 +1,13 @@
+```sparql
+SELECT ?country_label
+WHERE {
+  ?paper a orkgc:Paper.
+  ?paper orkgp:P5015 ?epi.
+  ?epi orkgp:P5048 ?country.
+  ?country rdfs:label ?country_label.
+  FILTER(REGEX(?country_label, "Epidemiology of epilepsy in"))
+}
+GROUP BY ?country_label
+ORDER BY DESC(COUNT(?country_label))
+LIMIT 1
+```

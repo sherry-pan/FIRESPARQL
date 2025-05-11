@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code ?url
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:benchmarks ?benchmark.
+  ?benchmark orkg:benchmarks ?kdLSTMReg.
+  ?kdLSTMReg a orkg:KD_LSTM_REG.
+  ?code schema:url ?url.
+}
+```

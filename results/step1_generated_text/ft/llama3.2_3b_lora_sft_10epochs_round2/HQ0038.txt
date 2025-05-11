@@ -1,0 +1,19 @@
+Question:
+What is the mean capacity of a carbon-based fuel?
+
+Generated SPARQL:
+ SELECT?mean_value
+     WHERE {
+      ?properties    a       orkgc:Properties;
+                   rdfs:label  ?properties_labels.
+       FILTER (str(?properties_labels) = "capacity"^^xsd:string).
+      ?values      a                orkgc:Values;
+                   orkgp:P31     ?properties;
+                               orkgp:P32     ?properties_labels.
+      ?input        orkgp:P31     ?properties;
+                     orkgp:P31     ?values.
+      ?constant      orkgp:P32     ?properties;
+                     orkgp:HAS_VALUE  ?values;
+                                    orkgp:HAS_INPUT     ?input.
+       BIND(xsd:float(?valuesHAS_VALUE) AS?mean_value)
+     }<|eot_id|>

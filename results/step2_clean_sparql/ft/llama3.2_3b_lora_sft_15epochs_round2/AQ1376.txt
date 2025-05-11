@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1 score")
+  {
+    orkgp:Comparison orkgp:HAS_DATASET orkgp:dataset_1441;
+                     orkgp:HAS_MODEL ?model.
+    ?model orkgp:HAS_EVALUATION ?evaluation.
+    ?evaluation orkgp:HAS_VALUE ?value.
+    BIND(xsd:float(?value) AS ?value).
+    ?model orkgp:P31 ?model_lbl.
+  }
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

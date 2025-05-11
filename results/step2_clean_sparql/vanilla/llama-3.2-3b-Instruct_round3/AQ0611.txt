@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://example.org/ork/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?title ?id
+WHERE {
+  ?paper ork:hasBenchmark ?benchmark .
+  ?benchmark ork:hasDataset <http://example.org/ork/asterix> .
+  ?paper ork:id ?id .
+  ?paper rdfs:label ?title .
+}
+FILTER (CONTAINS(str(?title), "Atari 2600 Asterix"))
+```

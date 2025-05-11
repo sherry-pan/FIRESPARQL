@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wmt: <http://wmt.org/>
+
+SELECT ?metric ?value
+WHERE {
+   ?publication a orkg:Publication;
+        orkg:hasResult ?result;
+        wmt:dataset wmt:WMT2014_English-German.
+   ?result wmt:metric ?metric;
+        wmt:value ?value.
+   FILTER (?metric != "translation edit rate").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

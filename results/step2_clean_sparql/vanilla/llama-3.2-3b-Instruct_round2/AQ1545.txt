@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?model
+WHERE {
+  ?model schema:description "Model for CoNLL 2012".
+  ?model schema:mainClass dbpedia:Model.
+  ?metric schema:name "F1 metric".
+  ?metric schema:mainClass dbpedia:Conll2012Metric.
+  ?model ?metric ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

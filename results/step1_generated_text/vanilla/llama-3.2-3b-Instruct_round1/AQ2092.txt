@@ -1,0 +1,29 @@
+Question:
+List the code links in papers that use the Dynamic Coattention Networks (single model) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX wot: <http://www.openresearchknowledgegraph.org/ontology/wot/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?p?o 
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper wot:hasCodeLink?codeLink.
+    ?codeLink schema:code?code.
+    ?paper wot:usesModel?model.
+    ?model wot:isRelatedTo?dynamicCoattention.
+    ?dynamicCoattention wot:isBenchmark?benchmark.
+    ?paper wot:hasBenchmark?benchmark.
+    ?benchmark schema:hasBenchmark?benchmark.
+    ?benchmark schema:benchmarkCode?benchmarkCode.
+    ?benchmarkCode schema:code?benchmarkCode.
+    ?code wot:isBenchmarkCode?benchmarkCode.
+    ?paper wot:hasCodeLink?codeLink.
+    ?codeLink schema:code?code.
+    ?model wot:isRelatedTo?dynamicCoattention.
+    ?benchmark schema:benchmarkCode?benchmarkCode.
+     FILTER (LOWER(?benchmarkCode) = "benchmark") 
+     }<|eot_id|>

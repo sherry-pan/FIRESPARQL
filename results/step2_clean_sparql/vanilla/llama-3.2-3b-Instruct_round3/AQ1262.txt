@@ -1,0 +1,15 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX o: <http://openresearch.kg.org/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmarkResult o:hasBenchmarkResult ?dataset.
+  ?dataset rdfs:label "AESLC"@en.
+  ?benchmarkResult wdt:P1540 ?metric.
+  ?benchmarkResult wdt:P1595 ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

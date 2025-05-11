@@ -1,0 +1,53 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Accuracy")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Yelp-5")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:P31             ?metric,
+                         orkgp:HAS_MODEL        ?model.
+         BIND(xsd:int(?value) AS?value_lbl)
+         BIND(xsd:string(?metric_lbl) AS?metric_lbl)
+         BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+         BIND(xsd:string(?model_lbl) AS?model_lbl)
+         BIND(
+           IF(?value      = 0.99
+                THEN 0.99
+                ELSE
+                    IF(?value      = 0.98
+                         THEN 0.98
+                         ELSE
+                             IF(?value      = 0.97
+                                  THEN 0.97
+                                  ELSE
+                                      IF(?value      = 0.96
+                                           THEN 0.96
+                                           ELSE
+                                               IF(?value      = 0.95
+                                                    THEN 0.95
+                                                    ELSE
+                                                        0.94
+                                                    END)
+                                               END)
+                      )
+                     )
+               )
+           AS?value_lbl
+         )
+         BIND(
+           IF(?model      = "PPO"
+                THEN "PPO"
+                ELSE
+                    IF(?model      = "DQN"
+                         THEN "DQN"
+                         ELSE
+

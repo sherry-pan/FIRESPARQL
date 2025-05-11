@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest MACs score on the ImageNet benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX d2rq: <http://www.w3.org/ns/d2rq/>
+     SELECT?model?macsScore 
+     WHERE {
+    ?model d2rq:hasBenchmark dbpedia:ImageNet.
+    ?model d2rq:hasScore dbpedia:MACs.
+    ?model rdfs:label?modelLabel.
+    ?model d2rq:hasBestScore?bestScore.
+    ?bestScore owl:sameAs?macsScore.
+     FILTER (STRLIKE(?modelLabel, "Model") AND STRLIKE(?modelLabel, " achieved") AND STRLIKE(?modelLabel, " highest") AND STRLIKE(?modelLabel, " score") AND STRLIKE(?modelLabel, " on") AND STRLIKE(?modelLabel, " ImageNet") AND STRLIKE(?modelLabel, " benchmark"))
+     }<|eot_id|>

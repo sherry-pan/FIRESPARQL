@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasBenchmark ?benchmark ;
+           rdfs:label "Walker, walk (DMControl500k)".
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasResult ?result.
+  ?result orkg:hasMetric ?metric ;
+          orkg:hasValue ?value.
+  FILTER (?metric != "" && ?value != "" && isLiteral(?value) && datatype(?value) = xsd:float)
+}
+```

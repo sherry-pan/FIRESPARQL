@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of Test perplexity metric on the WikiText-103 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     SELECT?model 
+     WHERE {
+    ?model wdt:P31 p:Model.
+    ?model wdt:P576?testPerplexity.
+    ?model wdt:P577?testDataset.
+    ?testDataset wdt:P31 p:Dataset.
+    ?testDataset wdt:P1084 "WikiText-103".
+    ?testDataset wdt:P31?benchmark.
+    ?benchmark wdt:P31 p:Benchmark.
+    ?benchmark wdt:P1102 "TestPerplexity".
+    ?model wdt:P577?benchmark.
+     FILTER (REGEX(LCASE(?testPerplexity) "(?testPerplexity)")) 
+     }<|eot_id|>

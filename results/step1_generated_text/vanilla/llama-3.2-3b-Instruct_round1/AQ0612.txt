@@ -1,0 +1,19 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?title?id 
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasDataset?dataset.
+    ?dataset dbpedia:datasetName "Atari 2600 Defender".
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark dbpedia:benchmarkFor?dataset.
+    ?benchmark rdfs:label?title.
+    ?paper orkg:id?id.
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX dcat: <http://www.w3.org/ns/dcat/>
+PREFIX wdt: <http://dbpedia.org/properties/>
+
+SELECT ?metric ?value
+WHERE {
+  ?metric wdt:P31 ?class.
+  ?metric dbp:dataset "ModelNet40".
+  ?metric wdt:P31 ?model.
+  ?model dcat:benchmark ?benchmark.
+  ?benchmark wdt:P306 ?benchmarkValue.
+  FILTER (STRLIKE(?benchmarkValue, "top score"))
+  BIND(SUBSTR(?benchmarkValue, 1, INSTR(?benchmarkValue, " ") - 1) AS ?value)
+}
+```

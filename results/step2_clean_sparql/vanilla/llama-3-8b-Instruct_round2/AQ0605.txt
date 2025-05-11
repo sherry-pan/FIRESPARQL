@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?title ?paperId
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper dc:title ?title.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "Atari 2600 Skiing".
+  ?paper orkg:hasId ?paperId.
+}
+```

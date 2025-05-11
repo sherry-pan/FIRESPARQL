@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasExperiment?experiment.
+ ?experiment orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasDataset?dataset.
+ ?dataset schema:name "Yelp-5".
+ ?experiment orkg:hasMetric?metric.
+ ?metric schema:name "Accuracy".
+ ?experiment orkg:hasValue?accuracy.
+  FILTER (?accuracy >?prevAccuracy)
+  ORDER BY DESC(?accuracy)
+  LIMIT 1
+}<|eot_id|>

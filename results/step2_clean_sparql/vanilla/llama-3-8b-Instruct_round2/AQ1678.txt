@@ -1,0 +1,16 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "MLDoc Zero-Shot English-to-French".
+  ?benchmark orkg:hasMetric ?metric.
+  ?metric rdfs:label "Accuracy".
+  ?benchmark orkg:hasValue ?accuracy.
+  FILTER(?accuracy = MAX(?accuracy))
+  ?model rdfs:label ?modelLabel.
+}

@@ -1,0 +1,35 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R110849 orkgp:compareContribution(
+               orkgp:Dataset attained value?value;
+               orkgp:Dataset sameAs?dataset.
+           );
+          ?dataset orkgp:P31?dataset_r34589.
+          ?dataset_r34589 rdfs:label?dataset_lbl.
+           BIND(xsd:int(?dataset_lbl) AS?dataset_lbl)
+           {
+             orkgp:compareContribution(
+                 orkgp:Dataset sameAs?dataset;
+                 orkgp:Dataset r34589.
+             ) orkgp:P31?contrib.
+            ?contrib orkgp:P32?metric;
+                        orkgp:P31?contrib_t.
+             OPTIONAL {?contrib_t rdfs:label?contrib_lbl.}
+             BIND(xsd:int(?contrib_lbl) AS?contrib_lbl)
+           }
+         } UNION {
+           orkgp:compareContribution(
+               orkgp:Dataset sameAs?dataset;
+               orkgp:Dataset r34589.
+           ) orkgp:P31?contrib.
+          ?contrib orkgp:P32?metric;
+                      orkgp:P31?contrib_t.
+           OPTIONAL {?contrib_t rdfs:label?contrib_lbl.}
+           BIND(xsd:int(?contrib_lbl) AS?contrib_lbl)
+         }
+     }<|eot_id|>

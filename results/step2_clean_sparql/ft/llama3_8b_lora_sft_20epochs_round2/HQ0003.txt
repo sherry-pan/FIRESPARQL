@@ -1,0 +1,13 @@
+```sparql
+SELECT ?title
+WHERE {
+  orkgr:R155371 orkgp:compareContribution ?cont.
+  ?cont orkgp:P7009 ?knowledge_representations.
+  ?knowledge_representations rdfs:label ?title.
+  ?cont orkgp:P7040 ?implementation.
+  ?implementation rdfs:label ?implementation_labels.
+  FILTER(REGEX(STR(?implementation_labels), "source"))
+}
+ORDER BY DESC(COUNT(?title))
+LIMIT 1
+```

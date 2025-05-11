@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the WMT2016 German-English dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX orkg: <http://www.orkg.org/>
+    PREFIX dct: <http://purl.org/dc/terms/>
+    PREFIX bibo: <http://purl.org/ontology/bibo/>
+    PREFIX mml: <http://www.orkg.org/model/model#>
+    PREFIX wmt: <http://www.orkg.org/model/wmt#>
+    PREFIX bleu: <http://www.orkg.org/model/bleu#>
+    SELECT?model?bleuScore
+    WHERE {
+   ?model a mml:Model.
+   ?model wmt:benchmarkedDataset wmt:WMT2016_German_English.
+   ?model mml:metric bleu:BLEU.
+   ?model mml:score?bleuScore.
+   ?bleuScore a bleu:BLEU_Score.
+   ?bleuScore bleu:value?score.
+    FILTER (?score = xsd:float("best performing"))
+    }<|eot_id|>

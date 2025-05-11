@@ -1,0 +1,12 @@
+```sparql
+SELECT ?benchmark ?benchmark_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "QA"^^xsd:string)
+  ?benchmark a orkgc:Benchmark;
+             orkgp:HAS_DATASET ?dataset;
+             rdfs:label ?benchmark_lbl.
+  FILTER (?dataset > 10000)
+}
+```

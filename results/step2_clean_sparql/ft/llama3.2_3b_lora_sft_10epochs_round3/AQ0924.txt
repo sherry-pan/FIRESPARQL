@@ -1,0 +1,10 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average_value)
+WHERE {
+    orkgr:R6848 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P4026 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P4026 ?value.
+    BIND(xsd:float(?value) AS ?value)
+}
+```

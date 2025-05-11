@@ -1,0 +1,37 @@
+Question:
+What is the top benchmark score and its metric on the MAZEA dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+         orkgr:R6898 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P34779?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "MAZEA"))
+        ?contrib orkgp:P23198?value.
+         OPTIONAL {?contrib orkgp:P23199?value_2.
+                 ?value_2 orkgp:P23196?metric.}
+         OPTIONAL {?contrib orkgp:P23200?value_3.
+                 ?value_3 orkgp:P23197?metric.}
+       }
+       UNION {
+         orkgr:R6897 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P34779?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "MAZEA"))
+        ?contrib orkgp:P23199?value.
+        ?value orkgp:P23196?metric.
+       }
+       UNION {
+         orkgr:R6896 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P34779?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "MAZEA"))
+        ?contrib orkgp:P23200?value.
+        ?value orkgp:P23197?metric.
+       }
+      ?metric rdfs:label?metric_lbl. 
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

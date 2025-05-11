@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:uses_model ?model.
+  ?model orkg:has_name "OTF spelling+lemma (single)".
+  ?paper orkg:uses_benchmark ?benchmark.
+  ?codeLink a orkg:CodeLink.
+  ?codeLink orkg:references ?paper.
+  FILTER (?benchmark != owl:nil)
+}
+```

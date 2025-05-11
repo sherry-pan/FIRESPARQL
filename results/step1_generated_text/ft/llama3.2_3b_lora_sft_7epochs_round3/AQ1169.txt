@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark score and its metric on the Words in Context dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153863 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P4024?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:P4030?value.
+           FILTER(?value > 0)
+         }
+         UNION
+         {
+           orkgr:R153863 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P4031?value.
+           FILTER(?value > 0)
+         }
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?bitsPerDim
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark dcterms:title "ImageNet 64x64".
+  ?benchmark orkg:metric ?metric.
+  ?metric rdfs:label ?bitsPerDim.
+  FILTER (?metric = "Bits per dim" && isLiteral(?bitsPerDim) && str(?bitsPerDim) = str(max(?bitsPerDim)))
+}
+```

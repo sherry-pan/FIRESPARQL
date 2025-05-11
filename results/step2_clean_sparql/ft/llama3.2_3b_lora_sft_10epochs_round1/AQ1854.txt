@@ -1,0 +1,14 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?paper orkgp:HAS_SOURCE ?cont.
+  ?cont orkgp:P31 ?researchField;
+        rdfs:label ?cont_lbl.
+  FILTER(REGEX(?cont_lbl, "Joint Entity and Relation Extraction"))
+}
+GROUP BY ?dataset ?dataset_lbl
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 10
+```

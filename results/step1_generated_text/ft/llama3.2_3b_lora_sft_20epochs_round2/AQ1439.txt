@@ -1,0 +1,36 @@
+Question:
+What is the best performing model benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                 rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "Bits per dim")
+               || str(?metric_lbl      = "Computational Cost")
+               || str(?metric_lbl      = "FLOPS")
+               || str(?metric_lbl      = "Memory Usage")
+               || str(?metric_lbl      = "Memory per neuron")
+               || str(?metric_lbl      = "Memory per layer")
+               || str(?metric_lbl      = "F1")
+               || str(?metric_lbl      = "Accuracy")
+               || str(?metric_lbl      = "Mean Squared Error")
+               || str(?metric_lbl      = "Mean Absolute Error"))
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl      = "ImageNet 64x64")
+                   || str(?dataset_lbl      = "CIFAR-10")
+                   || str(?dataset_lbl      = "MNIST")
+                   || str(?dataset_lbl      = "MNIST1M")
+                   || str(?dataset_lbl      = "SVT")
+                   || str(?dataset_lbl      = "TOxicity5")
+                   || str(?dataset_lbl      = "TOxicity9"))
+          ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+          ?eval           orkgp:HAS_VALUE        ?value;
+                     orkgp:HAS_METRIC        ?metric.
+          ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                        orkgp

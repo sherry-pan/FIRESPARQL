@@ -1,0 +1,22 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Ms. Pacman dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Atari 2600 Ms. Pacman")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         rdfs:label              ?model_lbl.
+        ?model         rdfs:label              ?model.
+         OPTIONAL {?model      orkgp:HAS_MODEL_EVAL     ?eval.
+                  ?eval          orkgp:P32              ?metric.
+                  ?metric         rdfs:label              ?metric_lbl.}
+        ?cont         orkgp:HAS_PAPER         ?paper.
+         OPTIONAL {?cont      orkgp:HAS_DATASET        ?dataset.
+                  ?dataset      rdfs:label              ?dataset_lbl.}
+        ?model      orkgp:P31               ?cont.
+      }<|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of Macro Recall metric on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX yorkt: <http://yorkt.org/ontology/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+
+     SELECT?model 
+     WHERE {
+      ?model a yorkt:Model.
+      ?model yorkt:bestMetric "Macro Recall"@en.
+      ?model yorkt:dataset yorkt:Dataset "NLP-TDMS"@en.
+      ?model yorkt:dataset yorkt:source "arXiv"@en.
+      ?model yorkt:dataset yorkt:benchmark "NLP-TDMS"@en.
+       FILTER (CONTAINS(LCASE(?model), "nlp-tdms"@en) )
+       }
+     LIMIT 1<|eot_id|>

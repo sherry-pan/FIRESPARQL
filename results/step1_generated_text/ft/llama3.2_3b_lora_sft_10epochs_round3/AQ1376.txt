@@ -1,0 +1,27 @@
+Question:
+Which model has achieved the highest F1 score score on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "F1 score")
+         {
+           orkgp:R75335       a                orkgc:Dataset;
+                          rdfs:label              ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "Penn Treebank")
+          ?dataset       a                orkgc:Dataset       orkgc:Dataset;
+                   orkgp:P31       ?paper_lbl.
+          ?paper         orkgp:P32       ?model.
+          ?paper         orkgp:P3759     ?metric      ?value.
+           BIND(xsd:float(?value) AS?value)
+           BIND(xsd:float(?value) AS?metric_value)
+           IF(?metric_value = 0.992 
+                THEN
+              ?model      a                orkgc:Model;
+                          rdfs:label              ?model_lbl.
+           ENDIF
+           }
+       ORDER BY DESC(?metric_value)
+       LIMIT 1<|eot_id|>

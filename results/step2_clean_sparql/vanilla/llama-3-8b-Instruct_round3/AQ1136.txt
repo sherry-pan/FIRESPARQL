@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://semantic-scholar.org/cocitation/>
+PREFIX qb: <http://purl.org/qualtime/qualtime-build/builder/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:Paper;
+         dcterms:title ?title;
+         qb:hasBenchmarkScore ?score;
+         qb:hasBenchmarkMetric ?metric;
+         orkg:dataset ?dataset.
+  ?dataset dcterms:title "Natural Questions (short)".
+  FILTER(?title = "Benchmark score on Natural Questions (short)" || ?title = "Benchmark scores on Natural Questions (short)")
+}
+```

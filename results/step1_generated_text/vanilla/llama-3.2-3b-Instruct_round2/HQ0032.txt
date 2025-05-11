@@ -1,0 +1,13 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?compound?frequency
+     WHERE {
+    ?compound a orkg:Compound.
+    ?compound orkg:lead?lead.
+    ?compound orkg:frequency?frequency.
+     GROUP BY?compound
+     HAVING (SUM(?frequency) = (SELECT MAX(frequency) FROM?compound))
+     }<|eot_id|>

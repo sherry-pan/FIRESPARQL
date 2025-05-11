@@ -1,0 +1,32 @@
+Question:
+What is the best performing model benchmarking the WMT2014 German-English dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bio/ontology/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?model?metric?value 
+     WHERE {
+    ?model orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasDataset?dataset.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark wikibase:label?label.
+     FILTER (BCASE(?label) = "WMT2014 German-English")
+    ?model orkg:hasDataset?dataset.
+    ?dataset orkg:hasMetric?metric.
+    ?dataset wikibase:label?datasetLabel.
+    ?metric rdfs:label?metricLabel.
+    ?metric owl:equivalentTo?metricLabel.
+    ?metric wikibase:label?metricLabel.
+     FILTER (BCASE(?metricLabel) = "BLEU")
+    ?model rdfs:label?modelLabel.
+    ?model wikibase:label?modelLabel.
+     FILTER (BCASE(?modelLabel) = "best performing")
+    ?model wikibase:label?modelLabel.
+    ?model orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+     }<|eot_id|>

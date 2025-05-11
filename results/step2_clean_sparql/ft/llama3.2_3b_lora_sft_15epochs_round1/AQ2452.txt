@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+    ?paper a orkgc:Paper.
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:P32 ?model.
+    ?model rdfs:label "AxCell"^^xsd:string.
+    ?model orkgp:P37531 ?benchmark.
+    ?benchmark orkgp:P32 ?cont.
+    ?cont orkgp:P43106 ?code.
+    FILTER(REGEX(STR(?code), "https?://"))
+}
+```

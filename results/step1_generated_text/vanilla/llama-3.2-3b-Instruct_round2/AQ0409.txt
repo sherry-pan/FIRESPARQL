@@ -1,0 +1,16 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WLPC dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/ontology/>
+    PREFIX wlp: <http://wlpdataset.org/ontology/>
+    SELECT?paper?title
+    WHERE {
+     ?paper orkg:hasBenchmark?benchmark.
+     ?benchmark wlp:hasDataset <http://wlpdataset.org/ontology/wlp:WLPC>.
+     ?benchmark orkg:hasTitle?title.
+     ?paper orkg:hasId?id.
+      FILTER (STRLIKE(?id, "PUB*") OR STRLIKE(?id, "AR*") OR STRLIKE(?id, "PR*"))
+    }
+    ```<|eot_id|>

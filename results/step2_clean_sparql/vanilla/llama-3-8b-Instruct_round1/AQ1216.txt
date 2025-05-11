@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+        orkg:dataset <http://www.orkg.org/datasets/BC5CDR-disease> ;
+        orkg:topScore ?score ;
+        orkg:metric ?metric.
+   FILTER (?metric = "benchmark score" || ?metric = "metric")
+}
+ORDER BY DESC(?score) LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasEvaluationMetric ?metric.
+  ?evaluation a orkg:Evaluation ;
+              orkg:hasModel ?model ;
+              orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:hasName "DMControl500k".
+  ?evaluation a orkg:runCheetahEvaluation.
+}
+```

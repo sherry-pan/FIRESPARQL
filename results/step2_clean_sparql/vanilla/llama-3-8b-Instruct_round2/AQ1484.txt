@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset <http://rdf.orkg.org/dataset/NaturalQuestions_long>.
+  ?benchmark orkg:metric schema:F1Score.
+  ?benchmark orkg:value ?f1Score.
+  ?model orkg:hasLabel ?modelLabel.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

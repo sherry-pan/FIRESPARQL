@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the Reacher, easy (DMControl100k) dataset in terms of Score metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://rdf.orkg.org/owl/>
+PREFIX skos: <http://www.w3.org/2004/02/02-skoscore#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model ;
+         orkg:benchmarks?benchmark.
+ ?benchmark a orkg:Benchmark ;
+             orkg:dataset <http://rdf.orkg.org/orkg/DMControl100k> ;
+             orkg:metric skos:Score ;
+             orkg:result?score.
+  FILTER (?model orkg:benchmarks?benchmark)
+  FILTER (?benchmark orkg:dataset <http://rdf.orkg.org/orkg/DMControl100k>)
+  FILTER (?benchmark orkg:metric skos:Score)
+  FILTER (?score > (SELECT max(?score2) {?model orkg:benchmarks?benchmark ; orkg:benchmark?benchmark2.?benchmark2 orkg:dataset <http://rdf.orkg.org/orkg/DMControl100k> ; orkg:metric skos:Score ; orkg:result?score2 } ) )
+}<|eot_id|>

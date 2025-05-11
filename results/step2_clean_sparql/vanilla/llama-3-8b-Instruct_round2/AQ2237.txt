@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/api/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a orkg:ResearchEntity.
+  ?paper dcterms:hasPart ?publication.
+  ?publication a bibo:Article.
+  ?paper orkg:usesModel ?model.
+  ?model schema:name "BCN+ELMo".
+  ?paper orkg:hasCode ?code.
+  ?code schema:downloadURL ?codeLink.
+}
+```

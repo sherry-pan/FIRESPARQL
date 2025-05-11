@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R153801 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R153802 orkgp:compareContribution ?contrib.
+  }
+  ?contrib orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "Atari 2600 Tennis"))
+  ?contrib orkgp:P7039 ?value.
+  OPTIONAL {
+    ?contrib orkgp:P7038 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+ORDER BY DESC(?score)
+```

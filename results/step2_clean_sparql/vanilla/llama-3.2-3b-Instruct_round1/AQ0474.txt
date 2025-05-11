@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orcg.org/ns/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?id 
+WHERE {
+  ?paper schema:about <http://orcg.org/orcg#PaperID123>;
+         schema:inDataset <http://orcg.org/orcg#RotoWireRelationGeneration>;
+         schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasPaper ?paper;
+             schema:hasTitle ?title;
+             schema:hasId ?id.
+}
+```

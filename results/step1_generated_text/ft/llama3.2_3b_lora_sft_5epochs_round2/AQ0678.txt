@@ -1,0 +1,13 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "PWC Leaderboards (restricted)")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_PAPER        ?paper.
+        ?paper      orkgp:P31               ?paper_lbl
+     }<|eot_id|>

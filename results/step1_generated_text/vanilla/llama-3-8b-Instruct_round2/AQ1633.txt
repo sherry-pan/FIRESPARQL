@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest Score score on the Reacher, easy (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasScore?score.
+ ?benchmark a orkg:Benchmark ;
+             rdfs:label "Reacher, easy (DMControl500k)"@en.
+ ?benchmark orkg:hasBenchmark?dataset.
+ ?dataset a orkg:Dataset ;
+           rdfs:label "DMControl500k"@en.
+ ?model orkg:achievedBestScoreOn?benchmark.
+  FILTER (?score = MAX(?score))
+}<|eot_id|>

@@ -1,0 +1,30 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the DTD dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R68070 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label "DTD"^^xsd:string.
+          ?dataset orkgp:P7046?eval.
+          ?eval orkgp:hasValue?value.
+          ?value orkgp:hasCompare?compare.
+          ?compare orkgp:P31?cont.
+          ?cont orkgp:P32?metric.
+          ?metric rdfs:label?metric_lbl.
+         }
+     UNION
+     {
+       orkgr:R68071 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P31?dataset.
+      ?dataset rdfs:label "DTD"^^xsd:string.
+      ?dataset orkgp:P7046?eval.
+      ?eval orkgp:hasValue?value.
+      ?value orkgp:hasCompare?compare.
+      ?compare orkgp:P31?cont.
+      ?cont orkgp:P32?metric.
+      ?metric rdfs:label?metric_lbl.
+     }
+     ORDER BY DESC(?score)<|eot_id|>

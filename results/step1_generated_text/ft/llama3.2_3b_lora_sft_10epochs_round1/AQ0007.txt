@@ -1,0 +1,34 @@
+Question:
+What models are being evaluated on the ACL Anthology dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ACL Anthology")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+                  ?model      rdfs:label              ?model_lbl.}
+         FILTER(?model_lbl          = "T5-base" 
+               ||?model_lbl          = "T5-large" 
+               ||?model_lbl          = "Long Short-Term Memory" 
+               ||?model_lbl          = "Bi-LSTM" 
+               ||?model_lbl          = "LSTM" 
+               ||?model_lbl          = "GRU" 
+               ||?model_lbl          = "Attention is All You Need" 
+               ||?model_lbl          = "BERT" 
+               ||?model_lbl          = "RoBERTa" 
+               ||?model_lbl          = "XLNet" 
+               ||?model_lbl          = "ProModel" 
+               ||?model_lbl          = "BigBird" 
+               ||?model_lbl          = "Reformer" 
+               ||?model_lbl          = "Pegasus" 
+               ||?model_lbl          = "T5-full" 
+               ||?model_lbl          = "Parallexa" 
+               ||?model_lbl          = "Parallexa (no post-processing)" 
+               ||?model_lbl          = "BigBird (no post-processing)" 
+               ||?model_lbl          = "Pegasi" 
+               ||?model_lbl          = "

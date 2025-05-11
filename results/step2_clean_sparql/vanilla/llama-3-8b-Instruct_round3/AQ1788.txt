@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?metricValue
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarkingDataset orkg:Atari_2600_Montezuma's_Revenge ;
+         orkg:metric orkg:Average_Return ;
+         orkg:metricValue ?metricValue ;
+         rdfs:label ?modelLabel.
+  FILTER(?modelLabel = "best performing model" && ?metricValue = "NoOp")
+}
+```

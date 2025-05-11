@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, "MPAD-path"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?benchmark;
+        orkgp:P2006 ?eval.
+  ?eval orkgp:P2007 ?code.
+}
+```

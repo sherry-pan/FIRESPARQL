@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, "SRU\\+\\+ Base"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:P32 ?code.
+  ?benchmark orkgp:P5048 ?eval;
+             orkgp:P5047 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "SRU\\+\\+ Base"))
+}
+```

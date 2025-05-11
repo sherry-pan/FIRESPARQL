@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label "Reuters En-De".
+  ?benchmark orkg:hasResult ?result.
+  ?result orkg:hasMetric orkg:Accuracy.
+  ?result orkg:hasValue ?accuracy.
+}
+ORDER BY DESC(xsd:float(?accuracy))
+LIMIT 1
+```

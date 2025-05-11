@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label "Rotowire (Content Selection)"@en ;
+          orkg:uses_metric ?metric.
+ ?metric rdfs:label ?metricLabel.
+ FILTER (lang(?metricLabel) = "en").
+ FILTER (?metricLabel IN ("F1-score", "Precision", "Recall", "Accuracy", "ROUGE-1", "ROUGE-2", "ROUGE-L")).
+}
+```

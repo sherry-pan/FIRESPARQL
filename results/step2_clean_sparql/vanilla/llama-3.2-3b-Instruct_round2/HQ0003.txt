@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+SELECT ?method (COUNT(?common_usage) AS ?count)
+WHERE {
+  ?method orkg:has_representation ?representation.
+  ?representation orkg:has_common_usage ?common_usage.
+  ?common_usage orkg:has_most_common ?most_common.
+  ?most_common orkg:label ?method_label.
+  FILTER (str(?method_label) = "Knowledge Representation")
+}
+GROUP BY ?method
+ORDER BY DESC(?count)
+```

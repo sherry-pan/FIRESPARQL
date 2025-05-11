@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Tennis dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R6908 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P32?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         OPTIONAL {?benchmark orkgp:P31?subclass.
+                  ?subclass rdfs:label?subclass_lbl}
+        ?contrib orkgp:P34?eval.
+         OPTIONAL {?eval orkgp:P5004?metric.
+                 ?metric rdfs:label?metric_lbl}
+         BIND(xsd:float(?value) AS?value)
+         BIND(xsd:float(?score) AS?score)
+         FILTER(REGEX(?benchmark_lbl, "Atari 2600 Tennis"))
+         FILTER(REGEX(?metric_lbl, "score"))
+      }<|eot_id|>

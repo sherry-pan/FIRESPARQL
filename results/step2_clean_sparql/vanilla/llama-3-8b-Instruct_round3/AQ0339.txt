@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?modelLabel
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:evaluatedOn ?dataset.
+ ?dataset rdfs:label "PROTEINS".
+ SERVICE orkg:sameAs {
+   ?model orkg:identifier ?modelId.
+   ?modelId owl:sameAs ?modelLabel.
+ }
+}
+```

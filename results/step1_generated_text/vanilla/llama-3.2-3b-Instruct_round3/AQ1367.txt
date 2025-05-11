@@ -1,0 +1,17 @@
+Question:
+What is the highest benchmark result achieved on the REDDIT-B dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?metric?value 
+     WHERE {
+    ?dataset a dbo:Dataset.
+    ?dataset schema:description "REDDIT-B".
+    ?dataset schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasMetric?metric.
+    ?benchmark schema:hasValue?value.
+    ?benchmark rdfs:label?benchmarkLabel.
+     FILTER (LOWER(?benchmarkLabel) = "reddit-b").
+     }<|eot_id|>

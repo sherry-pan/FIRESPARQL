@@ -1,0 +1,20 @@
+Question:
+Could you provide a list of models that have been tested on the Reuters RCV1/RCV2 English-to-German benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel?benchmark?benchmarkLabel?dataset?datasetLabel
+WHERE {
+ ?model a orkg:Model.
+ ?model rdfs:label?modelLabel.
+ ?model orkg:testedOn?benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+ ?benchmark orkg:dataset?dataset.
+ ?dataset rdfs:label?datasetLabel.
+  FILTER (?benchmarkLabel = "Reuters RCV1/RCV2 English-to-German benchmark dataset" && schema:language("en") ).
+}<|eot_id|>

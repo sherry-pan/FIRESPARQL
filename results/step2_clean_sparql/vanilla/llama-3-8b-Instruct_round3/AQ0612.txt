@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?id ?title
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER (str(?benchmarkLabel) = "Atari 2600 Defender")
+  BIND(STR(?paper) AS ?id)
+}
+```

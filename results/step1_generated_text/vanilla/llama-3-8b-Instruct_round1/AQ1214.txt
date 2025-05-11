@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CoNLL++?
+
+Generated SPARQL:
+ PREFIX orkg: <https://w3id.org/orkg/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX orkg: <https://w3id.org/orkg/>
+    SELECT?metric?value
+    WHERE {
+       ?dataset a orkg:Dataset ;
+                  rdfs:label "CoNLL++"@en.
+       ?result a orkg:Result ;
+                 orkg:dataset?dataset ;
+                 orkg:metric?metric ;
+                 orkg:value?value.
+        FILTER (?metric!= "other")
+    }
+    ORDER BY DESC(?value) LIMIT 1<|eot_id|>

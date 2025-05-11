@@ -1,0 +1,22 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+    SELECT?metric?score
+    WHERE {
+     ?publication a orkg:Publication ;
+                  orkg:hasBenchmark?benchmark.
+     ?benchmark a orkg:Benchmark ;
+                  orkg:hasMetric?metric ;
+                  orkg:hasScore?score.
+     ?benchmark orkg:dataset?dataset.
+     ?dataset rdfs:label "BUCC German-to-English".
+      FILTER (?metric!= "none" &&?score!= "none")
+    }
+    ORDER BY DESC(?score) LIMIT 1<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?title ?id
+WHERE {
+  ?paper a dbo:ResearchPaper.
+  ?paper dbo:dataset "Penn Treebank (Character Level)".
+  ?paper dbo:hasBenchmark ?benchmark.
+  ?benchmark dbo:benchmarkModel ?model.
+  ?model dcterms:hasDataset ?modelDataset.
+  ?modelDataset rdfs:label ?title.
+  ?paper dbo:identifier ?id.
+  FILTER (?benchmarkLabel = "Benchmark on Penn Treebank (Character Level)")
+}
+```

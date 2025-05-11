@@ -1,0 +1,16 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://example.org/orkg/>
+
+SELECT ?metric ?metricLabel 
+WHERE {
+    ?metric schema:description "Evaluation metric"@en.
+    ?metric schema:description ?description.
+    FILTER (CONTAINS(?description, "OntoNotes")).
+    ?metric orkg:associatedDataset <http://example.org/dataset/onto_notes>.
+    ?metric schema:name ?metricLabel.
+}
+```

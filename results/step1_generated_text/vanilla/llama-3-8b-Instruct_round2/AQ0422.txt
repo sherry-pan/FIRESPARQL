@@ -1,0 +1,19 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WMT2016 English-Romanian dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX bibo: <http://purl.org/ontology/bibo/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX wmt: <http://www.openresearchknowledgegraph.org/ontology/WMT/>
+
+    SELECT?paperTitle?paperID
+    WHERE {
+       ?paper a orkg:ResearchPaper.
+       ?paper dcterms:title?paperTitle.
+       ?paper orkg:hasPaperID?paperID.
+       ?paper wmt:benchmarksOn?benchmark.
+       ?benchmark wmt:dataset wmt:WMT2016_EnglishRomanian.
+    }<|eot_id|>

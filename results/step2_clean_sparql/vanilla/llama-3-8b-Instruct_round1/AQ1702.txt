@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasBenchmark ?benchmark ;
+         orkg:hasScore ?score.
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset ?dataset ;
+             orkg:hasScore ?score.
+  ?dataset a orkg:Dataset ;
+           dcterms:title "Atari 2600 Assault".
+  FILTER(?score = MAX(?score))
+  SERVICE orkg:label { ?model orkg:label ?modelLabel }
+}
+```

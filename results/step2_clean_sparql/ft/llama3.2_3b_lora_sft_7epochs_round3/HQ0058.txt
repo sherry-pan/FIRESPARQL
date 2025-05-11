@@ -1,0 +1,21 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+    ?study a orkgc:Study;
+           rdfs:label ?study_label.
+    FILTER(REGEX(?study_label, "naive bayes and \"machine learning feature bag of words\" and \"classify user feedback as feature request"))
+
+    ?paper orkgp:HAS_STUDY ?study;
+           orkgp:P32 ?comparison.
+    ?comparison orkgp:HAS_DATASET ?dataset;
+                orkgp:HAS_PAPER ?paper.
+    ?dataset orkgp:HAS_MODEL ?model;
+             orkgp:HAS_EVALUATION ?evaluation.
+    ?evaluation rdfs:label ?eval_label.
+
+    ?evaluation orkgp:P302 ?metric.
+    ?metric orkgp:HAS_VALUE ?precision.
+    ?metric orkgp:HAS_VALUE ?recall.
+    ?metric orkgp:HAS_VALUE ?f1.
+}
+```

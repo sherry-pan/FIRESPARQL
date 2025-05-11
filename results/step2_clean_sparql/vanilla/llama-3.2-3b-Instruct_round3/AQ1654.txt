@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://or.kaggle.com/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX fgvc: <http://www.fgvc.org/metrics#>
+PREFIX param: <http://www.fgvc.org/metrics#PARAMS>
+
+SELECT ?model
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:dataset "FGVC Aircraft".
+    ?model orkg:metric param:PARAMS.
+    ?model param:PARAMS ?value.
+    ?model orkg:bestOf ?best.
+    ?best orkg:dataset "FGVC Aircraft".
+    ?best param:PARAMS ?bestValue.
+    FILTER (?bestValue = MAX(?value))
+}
+```

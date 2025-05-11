@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX yelp: <http://dbpedia.org/ontology/Yelp5>
+     SELECT?model?accuracy
+     WHERE {
+    ?model yelp:Accuracy?accuracy.
+     FILTER (STRLIKE(?accuracy, ".*\d+(?:\.\d+)?"))
+     ORDER BY DESC(?accuracy)
+     LIMIT 1
+     }
+    <|eot_id|>

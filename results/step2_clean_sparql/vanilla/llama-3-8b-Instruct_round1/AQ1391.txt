@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX ace: <http://rdf.orkg.org/ontology/ace/>
+PREFIX metric: <http://rdf.orkg.org/ontology/metric/>
+
+SELECT ?model ?modelLabel ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark ace:dataset ace:ACE_2004.
+  ?benchmark metric:metric metric:RE_Micro_F1.
+  ?model rdfs:label ?modelLabel.
+  ?benchmark orkg:bestPerformingScore ?f1.
+}
+```

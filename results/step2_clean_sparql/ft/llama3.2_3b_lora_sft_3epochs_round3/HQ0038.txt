@@ -1,0 +1,12 @@
+```sparql
+SELECT ?mean_value
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "mean capacity".
+  ?value orkgp:HAS_VALUE ?value_value;
+         orkgp:P31 ?cont.
+  BIND(xsd:float(?value_value) AS ?mean_value)
+}
+ORDER BY DESC(?mean_value)
+LIMIT 10
+```

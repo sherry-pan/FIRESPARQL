@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paperUri ?codeUri
+WHERE {
+  ?paper a orkg:Paper;
+         dc:title ?title;
+         orkg:hasCode ?code;
+         orkg:benchmarks ?benchmark.
+  ?code a orkg:Code.
+  ?benchmark a orkg:Benchmark;
+             orkg:benchmarksMFEC ?model.
+  ?model a orkg:MFECModel.
+  FILTER regex(?title, "benchmark", "i")
+  BIND(URI(CONCAT("http://www.openresearchknowledgegraph.org/ontology/paperUri#", STR(?paper))) AS ?paperUri)
+  BIND(URI(CONCAT("http://www.openresearchknowledgegraph.org/ontology/codeUri#", STR(?code))) AS ?codeUri)
+}
+```

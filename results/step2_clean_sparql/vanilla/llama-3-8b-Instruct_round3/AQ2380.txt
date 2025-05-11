@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paperDoi ?codeReference
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:usesModel orkg:TsetlinMachine.
+    ?paper orkg:usesModelForBenchmarking "true".
+    ?paper schema:hasPart ?codeReference.
+    ?codeReference a schema:Code.
+    FILTER(?codeReference != "null")
+}
+```

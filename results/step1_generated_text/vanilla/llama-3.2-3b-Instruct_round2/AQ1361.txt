@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX orkg: <http://purl.org/orkg/>
+     CONSTRUCT {?s?p?o }
+     WHERE {?s :hasBenchmark?b.
+      ?b :name "top benchmark score"@en.
+      ?b :metric "metric"@en.
+      ?b :dataset "ModelNet40"@en.
+      ?b :score?o.
+       FILTER (regex(str(?o), "^\d+\.\d+$") )
+       FILTER (regex(str(?s), "ModelNet40"@en) )
+       FILTER (regex(str(?b), "top benchmark score"@en) )
+     }<|eot_id|>

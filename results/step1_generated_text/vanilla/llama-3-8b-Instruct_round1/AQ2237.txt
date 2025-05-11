@@ -1,0 +1,20 @@
+Question:
+Provide a list of papers that have utilized the BCN+ELMo model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX schema: <http://schema.org/>
+    PREFIX bibo: <http://purl.org/ontology/bibo/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+
+    SELECT?paper?paperTitle?codeLink
+    WHERE {
+       ?paper a orkg:Paper.
+       ?paper orkg:hasModel orkg:BCN+ELMo.
+       ?paper bibo:isBasedOnWorkOnOrAbout?code.
+       ?code a schema:SoftwareSourceCode.
+       ?code dcterms:identifier?codeLink.
+       ?paper rdfs:label?paperTitle.
+    }<|eot_id|>

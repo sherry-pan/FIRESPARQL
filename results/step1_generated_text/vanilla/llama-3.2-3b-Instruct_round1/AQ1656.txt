@@ -1,0 +1,23 @@
+Question:
+What is the best performing model benchmarking the Oxford-IIIT Pets dataset in terms of FLOPS metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     SELECT?model?metric?value 
+     WHERE {
+    ?model schema:description "Oxford-IIIT Pets".
+    ?model schema:versionInfo schema:datePublished?date.
+    ?model schema:versionInfo schema:version?version.
+    ?model schema:versionInfo schema:metric?metric.
+    ?metric schema:name "FLOPS".
+    ?model rdfs:label?modelLabel.
+    ?modelLabel schema:description?modelDescription.
+    ?model schema:versionInfo schema:value?value.
+    ?model schema:versionInfo schema:metric?metric.
+     FILTER (STRIDIFY(?modelLabel) = "Oxford-IIIT Pets")
+     FILTER (STRIDIFY(?metric) = "FLOPS")
+     }<|eot_id|>

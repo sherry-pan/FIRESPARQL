@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the Walker, walk (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX prov: <http://www.w3.org/ns/prov#>
+     SELECT?metric?value
+     WHERE {
+    ?result a orkg:Result ;
+     orkg:dataset orkg:DMControl500k ;
+     orkg:benchmark?benchmark.
+    ?benchmark a orkg:Benchmark ;
+     dcterms:title?title.
+     FILTER(?title = "Walker, walk" &&?benchmark dcterms:hasResult?result).
+    ?result orkg:metric?metric ;
+     orkg:value?value.
+     FILTER(?metric!= "" && isLiteral(?value)).
+     ORDER BY DESC(?value) LIMIT 1
+     }<|eot_id|>

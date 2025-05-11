@@ -1,0 +1,25 @@
+Question:
+List the code links in papers that use the Multi-Perspective Matching (ensemble) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX ork: <http://opendata.cranfield.ac.uk/ork/1.0/>
+     PREFIX qrel: <http://opendata.cranfield.ac.uk/qrel/1.0/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?paper?code
+     WHERE {
+      ?paper a schema:CreativeWork.
+       schema:description?d.
+       dcterms:title?title.
+       ork:uses?model.
+      ?model rdfs:label "Multi-Perspective Matching (ensemble)"@en.
+      ?paper schema:about?code.
+       FILTER (contains(str(?title), "Multi-Perspective Matching")
+       )
+     }<|eot_id|>

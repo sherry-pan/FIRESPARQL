@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset orkg:Pubmed ;
+             orkg:metric ?metric ;
+             orkg:score ?score.
+  FILTER (?metric != owl:nil)
+}
+ORDER BY DESC(?score) LIMIT 1
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:testedOn ?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark rdfs:label "NLP-TDMS (Exp, arXiv only)".
+    ?benchmark orkg:dataset ?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset rdfs:label ?datasetLabel.
+    FILTER (?datasetLabel = "arXiv").
+    SERVICE orkg:expand {
+        ?model orkg:hasLabel ?modelLabel.
+    }
+}
+```

@@ -1,0 +1,18 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the enwik8 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?title?id WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasDataset?dataset.
+    ?dataset dbo:datasetName "enwik8".
+    ?benchmark schema:hasModel?model.
+    ?model schema:hasBenchmark?benchmark.
+    ?paper orkg:hasTitle?title.
+     FILTER (REGEX(?title, ".*enwik8.*")) 
+     }<|eot_id|>

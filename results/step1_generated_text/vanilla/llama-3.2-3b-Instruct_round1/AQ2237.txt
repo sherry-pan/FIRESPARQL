@@ -1,0 +1,23 @@
+Question:
+Provide a list of papers that have utilized the BCN+ELMo model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/ontology#>
+    PREFIX bcnelmo: <http://orkg.org/ontology/bcnelmo#>
+    PREFIX w3c: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?code 
+    WHERE {
+     ?paper a orkg:Papers.
+      bcnelmo:utilizedModel?utilizedModel.
+     ?utilizedModel bcnelmo:version?version.
+     ?version schema:description?description.
+      FILTER (contains(STR(?description), "BCN+ELMo")).
+     ?paper schema:url?paperUrl.
+      BIND(URI(?paperUrl) AS?code)
+    }
+    ```<|eot_id|>

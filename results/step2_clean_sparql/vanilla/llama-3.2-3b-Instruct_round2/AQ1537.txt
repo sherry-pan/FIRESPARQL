@@ -1,0 +1,26 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpediaowl: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+SELECT ?model 
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset dbpediaowl:datasetName "Penn Treebank (Character Level)".
+  ?benchmark schema:benchmarkType "Model Performance".
+  ?benchmark orkg:hasMetric ?metric.
+  ?metric a schema:Score.
+  ?benchmark orkg:hasScore ?score.
+  ?score schema:scoreType "Number of params".
+  ?benchmark orkg:hasRank ?rank.
+  ?rank schema:maxValue ?max.
+  FILTER (?max > 0)
+}
+ORDER BY DESC(?max) 
+LIMIT 1
+```

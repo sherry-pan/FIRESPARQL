@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:hasModel ?model.
+  ?model schema:code ?code.
+  ?paper orkg:hasCitation ?citation.
+  ?citation schema:contains ?text.
+  ?text orkg:containsText "Tokenlearner".
+  FILTER(LANG(?text) = 'en')
+}
+```

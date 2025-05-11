@@ -1,0 +1,17 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ SELECT?lead
+     WHERE {
+      ?paper rdf:type orkgc:Paper.
+      ?paper orkgp:P31?compound.
+      ?compound rdfs:label?title.
+      ?paper orkgp:P40040?lead.
+       FILTER(REGEX(?title, "^[^,]*")
+              )
+      ?compound rdfs:label?compound_label.
+       FILTER(?compound_label =?title)
+       ORDER BY DESC(?paper orkgp:P40040)
+       LIMIT 1
+     }<|eot_id|>

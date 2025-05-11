@@ -1,0 +1,19 @@
+Question:
+List the metrics that are used to evaluate models on the Rotowire (Content Selection) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric
+     WHERE {
+    ?metric rkg:isEvalMetricFor?benchmark.
+    ?benchmark rkg:isRelatedTo?benchmarkType.
+    ?benchmarkType rkg:hasMetric?metric.
+    ?benchmark rkg:isBenchmarkFor "Rotowire (Content Selection)".
+     FILTER (lang(?metric) = "en")
+     }
+     GROUP BY?metric
+     ORDER BY (count(?metric) DESC)
+     LIMIT 10<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "Atari 2600 Berzerk".
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

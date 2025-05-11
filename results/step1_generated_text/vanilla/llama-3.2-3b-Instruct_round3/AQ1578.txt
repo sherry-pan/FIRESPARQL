@@ -1,0 +1,28 @@
+Question:
+What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wem: <http://wemall.org/ontology/>
+     PREFIX dc: <http://purl.org/dc/terms/>
+     CONSTRUCT {?s?p?o }
+     WHERE {
+    ?s orkg:hasTopic "X-Sum".
+    ?s orkg:hasBenchmark "model".
+    ?s schema:mainEntity?e.
+    ?e schema:keywords?k.
+     FILTER (contains(str(?k), "ROUGE-2")).
+    ?e schema:description?d.
+    ?d dcterms:language "en".
+    ?s skos:broader?b.
+    ?b rdfs:label?o.
+     FILTER (str(?o) = "best performing").
+     }
+     ORDER BY DESC(?s)
+     LIMIT 1<|eot_id|>

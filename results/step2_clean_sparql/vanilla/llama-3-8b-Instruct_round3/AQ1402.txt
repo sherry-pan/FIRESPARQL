@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/owl/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?modelName ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?dataset.
+  ?dataset rdfs:label "NYT-single".
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric owl:someValuesFrom dcterms:F1Score.
+  ?evaluation orkg:hasValue ?f1Score.
+  ?model orkg:hasName ?modelName.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

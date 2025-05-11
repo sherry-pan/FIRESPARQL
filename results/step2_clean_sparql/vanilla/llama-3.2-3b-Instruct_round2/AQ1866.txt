@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://openresearch.org/ontologies/orlg/1.0/>
+SELECT ?dataset 
+WHERE {
+  ?dataset ork:isBenchmarkFor ?benchmark.
+  ?benchmark ork:isRelatedTo ?field.
+  ?field ork:isFieldOfStudy "Natural Language Inference".
+  SERVICE ork:datasetSearch {
+    ?dataset ork:hasDataset ?datasetName.
+    FILTER (regex(?datasetName, "NLI|GLUE|SQuAD|SNLI|MNLI"))
+  }
+}
+```

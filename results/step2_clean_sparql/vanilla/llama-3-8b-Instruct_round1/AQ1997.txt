@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:ResearchEntity.
+  ?paper orkg:hasContribution ?contribution.
+  ?contribution orkg:usesModel "Table-Sequence".
+  ?contribution orkg:hasCode ?code.
+  ?paper bibo:doi ?doi.
+  FILTER (LANG(?doi) = "eng").
+}
+```

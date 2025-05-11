@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Percentage error score on the SVHN benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.or.kr/ontology/>
+     PREFIX svhn: <http://rdf.or.kr/ontology/SVHN/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     SELECT?model?percentageError
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasResult?result.
+      ?result svhn:dataset svhn:SVHN.
+      ?result dcterms:hasPart?performance.
+      ?performance orkg:metricValue?percentageError.
+      ?performance orkg:metricName "percentage error".
+       FILTER (?percentageError = FILTER MAX(?percentageError) )
+     }<|eot_id|>

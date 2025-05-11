@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasModel ?model.
+  ?model orkg:hasCode ?code.
+  ?code schema:code ?codeLink.
+  FILTER EXISTS {
+    ?paper orkg:hasModel ?model.
+    FILTER (?model = "DQN-PixelCNN")
+  }
+}
+```

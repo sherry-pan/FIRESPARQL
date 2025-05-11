@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    
+    SELECT?model?score
+    WHERE {
+     ?model a orkg:Model.
+     ?model orkg:benchmarks?benchmark.
+     ?benchmark orkg:dataset <http://rdf.openresearchknowledgegraph.org/datasets/CL-SciSumm>.
+     ?benchmark orkg:metric "ROUGE-2".
+     ?benchmark orkg:result?score.
+      FILTER (?score > (SELECT max(?score2) {?model2 a orkg:Model ; orkg:benchmarks?benchmark2.?benchmark2 orkg:dataset <http://rdf.openresearchknowledgegraph.org/datasets/CL-SciSumm> ; orkg:metric "ROUGE-2" ; orkg:result?score2 } ) )
+    }<|eot_id|>

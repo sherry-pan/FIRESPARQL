@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowlegde.org/ontologies/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX pearson: <http://www.w3.org/2007/01/owls#>
+
+SELECT ?model
+WHERE {
+    ?model orkg:hasBenchmark "MedSTS".
+    ?model owl:sameAs ?correlationModel.
+    ?correlationModel pearson:correlation ?correlation.
+}
+ORDER BY DESC(?correlation)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?accuracy
+WHERE {
+    ?model orkg:hasModel ?accuracy.
+    ?accuracy orkg:hasDataset "Sequential MNIST".
+    ?accuracy orkg:hasBenchmark "Permuted Accuracy".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

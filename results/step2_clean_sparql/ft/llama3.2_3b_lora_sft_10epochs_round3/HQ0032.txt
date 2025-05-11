@@ -1,0 +1,15 @@
+```sparql
+SELECT ?lead_compound (COUNT(?lead_compound) AS ?count)
+WHERE {
+  ?compound a orkgc:Compound;
+            rdfs:label ?compound_lbl.
+  FILTER(REGEX(?compound_lbl, "^(?=.*Lead).*$"))
+  ?development_time orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_SOURCE ?source.
+  ?source orkgp:P31 ?development_time.
+  ?development_time orkgp:HAS_COMPOUND ?compound;
+                    orkgp:HAS_LEAD_COMPOUND ?lead_compound.
+}
+GROUP BY ?lead_compound
+ORDER BY DESC(COUNT(?lead_compound))
+```

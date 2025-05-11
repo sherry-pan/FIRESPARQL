@@ -1,0 +1,22 @@
+Question:
+What is the highest benchmark result achieved on the IMDb-M dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R113851 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P4319?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:P4316?value.
+           FILTER(?value > 0)
+         } UNION {
+           orkgr:R113851 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P4317?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:P4316?value.
+           FILTER(?value = 0)
+         }
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?title ?id
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper dc:title ?title.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset orkg:datasetName "MPQA".
+    ?paper orkg:hasId ?id.
+    FILTER (?dataset != "" && ?title != "")
+}
+```

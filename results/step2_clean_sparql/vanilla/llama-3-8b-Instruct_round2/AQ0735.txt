@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label ?dataset_label.
+ ?dataset orkg:hasBenchmark ?benchmark.
+ ?benchmark a orkg:Benchmark ;
+          rdfs:label ?benchmark_label.
+ ?benchmark orkg:hasBenchmarkDataset ?benchmark_dataset.
+ ?benchmark_dataset a orkg:BenchmarkDataset ;
+          rdfs:label ?benchmark_dataset_label.
+ ?benchmark_dataset orkg:hasBenchmarkMetric ?metric.
+  FILTER (?benchmark_dataset_label = "Penn Treebank" && ?dataset_label = "Penn Treebank benchmark dataset")
+}
+```

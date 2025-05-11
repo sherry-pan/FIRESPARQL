@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the WOS-46985 dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX wos: <http://www.wos.org/0.1/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?metric?score
+     WHERE {
+      ?benchmark wos:dataset "WOS-46985".
+      ?benchmark rdfs:label?benchmarkLabel.
+      ?benchmark wos:benchmarkScore?score.
+      ?benchmark wos:benchmarkMetric?metric.
+       FILTER (STRIKE?benchmarkLabel "Top benchmark score"i)
+       BIND (STRDT:parseDate(?score) AS?scoreDate)
+     }<|eot_id|>

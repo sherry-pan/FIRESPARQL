@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest F1 score score on the BUCC Chinese-to-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bio/ontology#>
+     SELECT?model?f1score
+     WHERE {
+    ?model rdf:type owl:Ontology.
+     dbpedia:Model?f1score.
+     FILTER (REGEX (STR(?f1score) "F1 score" @english))
+     FILTER (STR(?f1score =~ "BUCC Chinese-to-English" @english))
+     FILTER (MAX(?f1score))
+     }<|eot_id|>

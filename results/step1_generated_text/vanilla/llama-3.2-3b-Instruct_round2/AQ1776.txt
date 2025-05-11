@@ -1,0 +1,26 @@
+Question:
+What is the best performing model benchmarking the ImageNet dataset in terms of Number of params metric?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbpedia_labels: <http://dbpedia.org/ontology Labels/>
+     PREFIX vcr: <http://purl.org/vcr/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX orkg_labels: <http://orkg.org/ontology/Labels/>
+
+     SELECT?model?metric?value 
+     WHERE {
+    ?model orkg:hasBenchmark "ImageNet".
+    ?model orkg:hasMetric?metric.
+    ?metric rdfs:label?metricLabel.
+    ?metric orkg:hasValue?value.
+     FILTER (BCD(STR(?metricLabel) = "Number of params") AND 
+           BCD(STR(?metricLabel) = "params") AND 
+           BCD(STR(?metricLabel) = "Number of parameters") AND 
+           BCD(STR(?metricLabel) = "params"))
+     }
+     ORDER BY DESC(?value)<|eot_id|>

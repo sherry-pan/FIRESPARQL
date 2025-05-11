@@ -1,0 +1,47 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Natural Questions (long)")
+         BIND(
+           {
+             SELECT?model?model_lbl
+             WHERE {
+                ?dataset       a                orkgc:Dataset;
+                                  rdfs:label      ?dataset_lbl.
+                ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                                  orkgp:HAS_EVALUATION   ?eval.
+                ?eval           orkgp:HAS_VALUE        ?value.
+                 BIND(xsd:int(?value) AS?value)
+                ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+                 OPTIONAL {?cont           orkgp:HAS_MODEL         ?model.}
+                 IF(?model           a                orkgc:Model
+                      rdfs:label          ?model_lbl
+                      orkgp:HAS_SOURCE_CODE   ?code)
+                 THEN
+                  ?model           a                orkgc:Model;
+                                    rdfs:label          ?model_lbl.
+                 ENDIF
+             }
+           )
+           AS?score
+           ORDER BY DESC(?score)
+           LIMIT 1
+       )
+       BIND(xsd:string(?model) AS?model_lbl)
+       WHERE {
+           orkgp:P32               various
+           orkgp:HAS_DATASET        ?dataset;
+                             orkgp:HAS_EVALUATION     ?eval.
+          ?dataset               a                orkgc:Dataset;
+                               rdfs:label              ?dataset_lbl.
+           BIND(
+             {
+               SELECT?model?model_lbl
+               WHERE {
+                  ?dataset               a                orkgc:Dataset;
+                                            rdfs:label              

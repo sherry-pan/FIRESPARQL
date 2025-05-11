@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "FLOPS")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_DATASET ?dataset.
+  ?cont rdfs:label ?title.
+  ?paper orkgp:P32 ?cont.
+  ?paper rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "Oxford-IIIT Pets")
+}
+```

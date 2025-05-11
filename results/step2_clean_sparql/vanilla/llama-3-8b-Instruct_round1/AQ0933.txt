@@ -1,0 +1,12 @@
+PREFIX orkg: <https://www.orkg.org/api/v1/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric
+WHERE {
+  ?model a orkg:Model;
+         orkg:evaluatedOn ?dataset;
+         orkg:metric ?metric.
+  ?dataset rdfs:label "Atari 2600 Zaxxon".
+  FILTER (?metric != owl:nil)
+}

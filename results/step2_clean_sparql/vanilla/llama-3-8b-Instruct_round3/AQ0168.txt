@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluation ?evaluation.
+  ?evaluation orkg:dataset <http://dbpedia.org/resource/STS_Benchmark>.
+  ?model rdfs:label ?modelLabel.
+  FILTER (LANG(?modelLabel) = "en")
+}
+```

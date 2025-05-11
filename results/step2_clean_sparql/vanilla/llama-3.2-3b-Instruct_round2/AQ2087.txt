@@ -1,0 +1,21 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX ork: <http://opendata.cranfield.ac.uk/ork/1.0/>
+PREFIX qrel: <http://opendata.cranfield.ac.uk/qrel/1.0/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a schema:CreativeWork.
+  ?paper schema:description ?d.
+  ?paper dcterms:title ?title.
+  ?paper ork:uses ?model.
+  ?model rdfs:label "Multi-Perspective Matching (ensemble)"@en.
+  ?paper schema:about ?code.
+  FILTER (contains(str(?title), "Multi-Perspective Matching"))
+}
+```

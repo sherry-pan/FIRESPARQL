@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric; rdfs:label ?metric_lbl.
+    FILTER (str(?metric_lbl) = "Senseval 2")
+    ?evaluation a orkgc:Evaluation;
+                orkgc:usesMetric ?metric;
+                orkgc:onDataset orkgd:SupervisedBenchmark;
+                orkgc:performedByModel ?model.
+    ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?evaluation)
+LIMIT 1
+```

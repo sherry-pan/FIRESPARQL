@@ -1,0 +1,21 @@
+Question:
+Can you list benchmarked problems in the area of Artificial Intelligence?
+
+Generated SPARQL:
+ SELECT DISTINCT?problem?problem_lbl
+     WHERE {
+        ?domain        a            orkgc:Domain;
+                    rdfs:label      ?domain_lbl.
+         FILTER (str(?domain_lbl) = "Artificial Intelligence")
+        ?problem      a            orkgc:Problem;
+                      rdfs:label      ?problem_lbl.
+         FILTER (str(?problem_lbl) = "benchmarked")
+        ?benchmark      orkgp:HAS_DATASET       ?dataset.
+        ?cont         orkgp:HAS_PROBLEM       ?problem;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont          orkgp:HAS_SOURCE_CODE     ?source_code.
+        ?source_code   orkgp:HAS_FILE           ?file.
+        ?file         orkgp:P31               ?cont.
+        ?cont         rkgp:P31                ?problem.
+        ?problem      rkgp:P31                ?benchmark.
+      }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P1537 ?language.
+  ?language orkgp:P1558 ?code.
+  ?cont rdfs:label ?paper.
+  ?paper orkgp:P1559 ?model.
+  FILTER(REGEX(?model, "LSTM"))
+  FILTER(?model = "Bai et al., 2018")
+}
+```

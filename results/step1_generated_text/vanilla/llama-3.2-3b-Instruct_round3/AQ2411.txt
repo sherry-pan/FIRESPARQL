@@ -1,0 +1,28 @@
+Question:
+Can you provide links to code used in papers that benchmark the CAIT-XS-36 model?
+
+Generated SPARQL:
+ PREFIX ork: <http://example.org/ork/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?url
+     WHERE {
+    ?paper schema:about?paperURI.
+     schema:describes?describes.
+    ?describes schema:about?benchmark.
+    ?benchmark schema:hasPart?benchmarkURI.
+    ?benchmarkURI schema:about?link.
+    ?link schema:contentURL?url.
+    ?paper ork:hasCitation?citation.
+    ?citation schema:hasPart?citationURI.
+    ?citationURI schema:about?linkURI.
+    ?linkURI schema:contentURL?url.
+    ?paper schema:author?author.
+    ?author foaf:maker?authorURI.
+    ?authorURI schema:affiliation?affiliation.
+    ?benchmark schema:inLanguage "en".
+     FILTER (lang(?benchmark) = "en" || lang(?benchmark) = "eng").
+     FILTER (lang(?url) = "en" || lang(?url) = "eng").
+     }<|eot_id|>

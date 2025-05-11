@@ -1,0 +1,15 @@
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?modelLabel
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmarkedDataset ?dataset.
+ ?dataset dcterms:title "MNIST dataset".
+ ?model rdfs:label ?modelLabel.
+ FILTER(LANG(?modelLabel) = "en").
+}
+```

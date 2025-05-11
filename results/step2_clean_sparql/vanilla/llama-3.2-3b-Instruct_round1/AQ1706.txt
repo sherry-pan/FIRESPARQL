@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ontology/>
+PREFIX wdt: <http://www.wikidata.org/property/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:isModelOf ?model1.
+  ?model1 orkg:hasScore ?score.
+  ?model1 orkg:hasBenchmark "Atari 2600 Asteroids".
+  ?model1 orkg:hasScoreMetric "Score".
+  FILTER (STRLIKE(STR(?score), "^[0-9\\.]+$"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

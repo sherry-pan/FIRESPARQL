@@ -1,0 +1,15 @@
+Question:
+What is the highest benchmark result achieved on the Birdsnap dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R69080 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P4319?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?contrib orkgp:HAS_DATASET orkgp:P3014.
+         orkgp:P3014 rdfs:label?dataset.
+         FILTER(REGEX(STR(?dataset), "Birdsnap"))
+        ?contrib orkgp:HAS_BENCHMARK?benchmark.
+        ?benchmark orkgp:P4318?value.
+     }<|eot_id|>

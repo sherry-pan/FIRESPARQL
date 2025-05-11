@@ -1,0 +1,27 @@
+Question:
+Can you provide links to code used in papers that benchmark the MEMEN (single model) model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX wdt: <http://www.w3.org/2004/02/skos/xsds#WDt>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?paper?link
+     WHERE {
+    ?paper schema:description?description.
+     FILTER(contains(str(?description), 'MEMEN single model')).
+    ?paper schema:about <http://example.org/papers/paper1>.
+    ?paper schema:genre schema:SoftwareSourceCode.
+    ?paper schema:softwareCode?code.
+    ?code schema:description?description.
+     FILTER(contains(str(?description), 'benchmarking')).
+    ?code schema:softwareCode?benchmark.
+    ?benchmark schema:description?description.
+     FILTER(contains(str(?description), 'MEMEN')).
+    ?benchmark schema:softwareCode?link.
+     SERVICE wikibase:label {
+     bd:serviceParam wikibase:language "en".
+     }
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://ork.buffalo.edu/ontology/>
+PREFIX se: <http://semEval.org/ontology/>
+
+SELECT ?model ?metric
+WHERE {
+  ?model ork:isBenchmarkFor ?b.
+  ?b se:isDatasetFor ?d.
+  ?b se:isBenchmarkForSemEval2013 ?metric.
+  ?d ork:hasDatasetSupervised ?supervised.
+  FILTER (?metric = "Supervised")
+}
+```

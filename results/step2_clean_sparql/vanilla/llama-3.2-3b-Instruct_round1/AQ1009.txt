@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+    ?metric orkg:isEvaluationMetric/rdfs:subClassOf* orkg:EvaluationMetric.
+    ?metric orkg:hasMetricName ?name.
+    ?metric orkg:isAssociatedWith ?dataset.
+    ?dataset orkg:datasetName "ObjectNet".
+    ?metric orkg:hasMetricValue ?value.
+    FILTER (STRLIKE(?name, "metric") || STRLIKE(?name, "accuracy") || STRLIKE(?name, "f1-score") || STRLIKE(?name, "precision") || STRLIKE(?name, "recall") || STRLIKE(?name, "AUC-ROC") || STRLIKE(?name, "AUC-PR"))
+}
+LIMIT 10
+```

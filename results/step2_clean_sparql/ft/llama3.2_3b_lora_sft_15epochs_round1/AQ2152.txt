@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.")
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P3309 ?evaluator;
+             orkgp:P4319 ?model.
+  ?model orkgp:P4318 ?code.
+}
+```

@@ -1,0 +1,31 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?score 
+     WHERE {
+    ?s orkg:hasBenchmark?b.
+    ?b schema:description "Atari 2600 Berzerk".
+    ?b schema:subject <http://dbpedia.org/ontology/Category:Video_games>.
+    ?b orkg:hasMetric?m.
+    ?m schema:name "Benchmark".
+    ?m schema:description "The highest benchmark score".
+    ?m schema:property "highestScore".
+    ?m schema:range <http://schema.org/QuantitativeValue>.
+    ?m schema:range?s.
+    ?s schema:name "Score".
+    ?m schema:description "The highest benchmark result".
+    ?b orkg:hasResult?r.
+    ?r schema:name "BenchmarkResult".
+    ?r schema:description "The metric and score".
+    ?r schema:property "score".
+    ?r schema:property "metric".
+    ?r schema:property "metric"?m.
+    ?m schema:name "Benchmark".
+     FILTER (CONTAINS(LCASE(?s), "Atari 2600 Berzerk"))
+     }<|eot_id|>

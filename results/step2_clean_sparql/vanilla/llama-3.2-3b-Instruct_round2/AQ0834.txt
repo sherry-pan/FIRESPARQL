@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric
+WHERE {
+    ?metric rkg:isMetricFor ?dataset.
+    ?metric rkg:isEvaluationMetricFor ?QNLI.
+    FILTER (
+        CONTAINS(LCASE(?metric), "f1-score") ||
+        CONTAINS(LCASE(?metric), "accuracy") ||
+        CONTAINS(LCASE(?metric), "precision") ||
+        CONTAINS(LCASE(?metric), "recall") ||
+        CONTAINS(LCASE(?metric), "rouge-score") ||
+        CONTAINS(LCASE(?metric), "bleu-score")
+    )
+}
+```

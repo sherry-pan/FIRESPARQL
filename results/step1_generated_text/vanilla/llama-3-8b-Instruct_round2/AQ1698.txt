@@ -1,0 +1,15 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Centipede dataset in terms of Score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.or.kr/>
+    PREFIX schema: <http://schema.org/>
+    SELECT?model?score
+    WHERE {
+     ?model a orkg:Model.
+     ?model orkg:benchmarks?benchmark.
+     ?benchmark schema:name "Atari 2600 Centipede".
+     ?benchmark schema:metric "Score".
+     ?benchmark orkg:best?score.
+      FILTER (?score = FILTER(?score >?otherScore))
+    }<|eot_id|>

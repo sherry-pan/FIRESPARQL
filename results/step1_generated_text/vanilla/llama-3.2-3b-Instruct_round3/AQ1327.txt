@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the IMDb-M dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+    PREFIX imdb: <http://dbpedia.org/ontology/imdb>
+    PREFIX dbr: <http://dbpedia.org/ontology/>
+
+    SELECT?metric?value
+    WHERE {
+     ?benchmark a dbo:benchmark.
+     ?benchmark imdb:dataset "IMDb-M".
+     ?benchmark imdb:metric?metric.
+     ?benchmark imdb:bestResult?value.
+      FILTER (lang(?metric) = "en" AND lang(?value) = "en")
+    }
+    ```<|eot_id|>

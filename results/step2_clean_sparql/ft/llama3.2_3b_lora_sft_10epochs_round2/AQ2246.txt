@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+    ?paper orkgp:P31 ?cont;
+           rdfs:label ?title.
+    ?cont orkgp:P32 ?model.
+    ?model orkgp:P20331 ?implementation.
+    ?implementation orkgp:P20333 ?code.
+    ?paper orkgp:P3514 ?repository.
+    FILTER(REGEX(?repository, "gitHub"))
+    ?code rdfs:label ?code.
+}
+```

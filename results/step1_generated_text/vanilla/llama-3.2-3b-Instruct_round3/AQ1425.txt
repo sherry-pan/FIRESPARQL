@@ -1,0 +1,21 @@
+Question:
+What is the best performing model benchmarking the WMT2014 German-English dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX wmt: <http://wmt2020.org/nlp/>
+     PREFIX goa: <http://goa-project.eu/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?metric?score
+     WHERE {
+    ?model wmt:benchmarkedAgainst?benchmark.
+    ?benchmark schema:about?benchmarkingTask.
+    ?benchmarkingTask schema:keyword "WMT2014".
+    ?benchmarkingTask schema:keyword "German-English".
+    ?benchmarkingTask schema:metric?metric.
+    ?model schema:hasScore?score.
+     FILTER (regex(str(?metric,"BLEU")) && regex(str(?score,"^best"))
+     }<|eot_id|>

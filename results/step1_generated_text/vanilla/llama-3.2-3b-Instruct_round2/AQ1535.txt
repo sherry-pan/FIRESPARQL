@@ -1,0 +1,19 @@
+Question:
+Which model has achieved the highest Test perplexity score on the WikiText-2 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikiba.se/ontology/>
+     SELECT?model?testPerplexity 
+     WHERE {
+    ?model rdfs:label?modelLabel.
+    ?model wikibase:abstrakt?abstrakt.
+    ?abstrakt wikibase:mainEntity?mainEntity.
+    ?mainEntity dbo:wikiPageID "Q12055".
+    ?mainEntity wikibase:perplexity?testPerplexity.
+    ?model rdfs:label?modelLabel.
+     FILTER (BCASE(?modelLabel) = "BERT" OR BCASE(?modelLabel) = "BERT-Dev" )
+     }
+     LIMIT 1<|eot_id|>

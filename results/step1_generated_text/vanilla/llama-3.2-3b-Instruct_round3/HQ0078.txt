@@ -1,0 +1,15 @@
+Question:
+Where did the study with maximal geographic scale take place?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?study?location 
+     WHERE {
+    ?study orkg:hasStudyLocation?location.
+     SERVICE orkg:geographicScale {
+     bd:geographicScale(?study) > 0.
+     } 
+     FILTER (?location IS NOT NULL )
+     ORDER BY (bd:geographicScale DESC)
+     LIMIT 1
+     }<|eot_id|>

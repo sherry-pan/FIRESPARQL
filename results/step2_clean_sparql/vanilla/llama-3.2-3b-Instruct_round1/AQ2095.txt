@@ -1,0 +1,22 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX bio2vec: <http://www.mmlucy.de/bio2vec/>
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?url
+WHERE {
+    ?paper schema:description ?description.
+    ?paper schema:title ?title.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark schema:description ?description.
+    ?benchmark orkg:hasModel ?model.
+    OPTIONAL {
+        ?paper orkg:hasCode ?code.
+        ?code schema:description ?url.
+    }
+    FILTER (STRCONTAINS(lcase(?title), "fine-grained gating") && 
+            STRCONTAINS(lcase(?description), "benchmark"))
+}
+```

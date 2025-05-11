@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ork: <https://orkg.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX purl: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?metric ?score
+WHERE {
+  ?s ork:hasDataset "Kinetics-600"@en.
+  ?s ork:hasBenchmark ?b.
+  ?b schema:description ?d.
+  ?d schema:term ?metric.
+  ?b schema:value ?score.
+  FILTER (lang(?d) = "en")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

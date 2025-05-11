@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paperId ?title
+WHERE {
+  ?paper orkg:hasTitle ?title;
+         orkg:hasBenchmarkedModel ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset;
+             orkg:isBenchmarkedModel "finetuned".
+  ?dataset orkg:isDataset "UCF101".
+  BIND(STR(?paper) AS ?paperId)
+}
+```

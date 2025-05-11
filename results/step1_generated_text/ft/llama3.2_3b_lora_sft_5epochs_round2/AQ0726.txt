@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (SUM(?value) AS?sum_value)
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                         rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "seel.cse.lsu.edu/data/re17.zip")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_METRIC        ?metric.
+         BIND(xsd:integer(?metric_value as?value)
+               (if(?metric_lbl = "micro F1" then?value :=?value * 10000 else if(?metric_lbl = "macro F1" then?value :=?value * 100 else if(?metric_lbl = "macro F1 - macro F1" then?value :=?value else if(?metric_lbl = "macro average" then?value :=?value / 4 else if(?metric_lbl = "macro average - macro F1" then?value :=?value / 4 else if(?metric_lbl = "macro average - macro F1 - macro F1" then?value :=?value / 4 else?value))
+               ))
+        ?metric      rdfs:label              ?metric_lbl.
+         BIND(?sum_value =?value)
+     }<|eot_id|>

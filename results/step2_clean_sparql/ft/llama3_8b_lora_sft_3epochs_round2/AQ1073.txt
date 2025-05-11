@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?work orkg:R8342 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P7046 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Pubmed")
+  ?contrib orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:MEASURE ?metric.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+}
+GROUP BY ?metric ?metric_lbl
+```

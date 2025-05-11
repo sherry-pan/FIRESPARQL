@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:hasPaperPart ?part.
+  ?part schema:hasPart ?code.
+  ?paper orkg:usesModel ?model.
+  ?model orkg:isBenchmarkModel "SemExp".
+}
+LIMIT 100
+```

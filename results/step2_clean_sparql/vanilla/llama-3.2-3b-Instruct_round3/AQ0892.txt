@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX vocab: <http://purl.org/vocab/>
+SELECT ?metric
+WHERE {
+    ?metric rdfs:label ?metricLabel.
+    ?metric vocab:isDefinedFor ?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset vocab:hasStandard ?standard.
+    ?standard vocab:hasMetric ?metric.
+    ?standard vocab:hasBenchmark ?benchmark.
+    ?benchmark vocab:hasDataset ?benchmarkDataset.
+    ?benchmarkDataset vocab:identifier "Habitat2020ObjectNavTest-std".
+}
+LIMIT 10
+```

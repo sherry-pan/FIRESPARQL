@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?metricValue
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:benchmarks ?benchmark.
+    ?benchmark orkg:dataset ?dataset.
+    ?dataset schema:name "ANLI".
+    ?benchmark orkg:metric ?metric.
+    ?metric schema:name "A3".
+    ?benchmark orkg:result ?metricValue.
+    FILTER NOT EXISTS {
+        ?otherBenchmark orkg:dataset ?dataset.
+        ?otherBenchmark orkg:metric ?metric.
+        ?otherBenchmark orkg:result ?otherMetricValue.
+        FILTER(?otherMetricValue > ?metricValue)
+    }
+}
+```

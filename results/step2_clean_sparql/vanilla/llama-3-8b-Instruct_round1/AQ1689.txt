@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmarks ?benchmark.
+   ?benchmark a orkg:Benchmark.
+   ?benchmark orkg:dataset ?dataset.
+   ?dataset a orkg:Dataset; rdfs:label "Seaquest".
+   ?benchmark orkg:metric ?metric.
+   ?metric rdfs:label "Score".
+   ?benchmark orkg:result ?result.
+   ?result orkg:value ?score.
+   FILTER NOT EXISTS {
+       ?benchmark orkg:result ?result2.
+       ?result2 orkg:value ?score2.
+       FILTER(?score2 > ?score)
+   }
+}
+```

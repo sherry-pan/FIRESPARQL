@@ -1,0 +1,16 @@
+Question:
+What are the metrics of evaluation over the Hutter Prize dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?average)
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "Hutter Prize"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+         OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                 ?metric          rdfs:label              ?metric_lbl.}
+         BIND(xsd:float(?value) AS?value)
+        ?eval           orkgp:P30               ?value.
+     }<|eot_id|>

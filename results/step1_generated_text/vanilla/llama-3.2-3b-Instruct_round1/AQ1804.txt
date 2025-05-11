@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/properties/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?model 
+     WHERE {
+    ?model dbr:topPerformingModel 
+    ?vtab1kDataset schema:benchmarkedOn "VTAB-1k" 
+    ?paramsScore schema:maxValue?params 
+     FILTER (?params > 0) 
+     }<|eot_id|>

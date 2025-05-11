@@ -1,0 +1,27 @@
+Question:
+Where can I find code references in papers that have used the DCN model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/orkg/>
+     PREFIX dcn: <http://purl.org/dcn/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX vocab: <http://purl.org/orkg/vocab/>
+
+     SELECT?paper?title?url
+     WHERE {
+    ?paper a orkg:Paper.
+     vocab:hasCode?code.
+    ?code vocab:hasBenchmark?benchmark.
+    ?benchmark vocab:hasModel dcn:DCN.
+    ?benchmark vocab:hasType vocab:benchmarking.
+    ?paper vocab:hasReference?reference.
+    ?reference vocab:hasFormat vocab:PDF.
+    ?paper orkg:hasAuthor?author.
+    ?author vocab:hasAffiliation?affiliation.
+    ?affiliation vocab:hasName?affiliationName.
+    ?paper vocab:hasTitle?title.
+    ?paper vocab:hasURL?url.
+     FILTER (STRLIKE(STR(?title), "DCN") || STRLIKE(STR(?title), "benchmarking"))
+     }<|eot_id|>

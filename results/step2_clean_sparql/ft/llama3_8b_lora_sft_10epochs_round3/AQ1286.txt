@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    ORKGQ33270669 orkgp:P31 ?cont.
+    ?cont orkgp:P34 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(STR(?benchmark_lbl), "Atari 2600 Alien"))
+  } UNION {
+    ORKGQ44544524 orkgp:P31 ?cont.
+    ?cont orkgp:P34 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(STR(?benchmark_lbl), "Atari 2600 Alien"))
+  }
+  ?cont orkgp:P38 ?cont_result.
+  ?cont_result orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont_result orkgp:HAS_VALUE ?values.
+  ?values rdfs:label ?values_lbl.
+  BIND(xsd:float(STR(?values_lbl)) AS ?value)
+}
+ORDER BY DESC(?score)
+```

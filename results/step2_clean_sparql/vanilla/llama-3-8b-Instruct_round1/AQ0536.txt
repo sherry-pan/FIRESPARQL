@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper dc:title ?paperTitle.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:benchmarkOn ?dataset.
+  ?dataset rdfs:label "Walker, walk (DMControl100k)".
+  ?paper orkg:hasId ?paperId.
+}
+```

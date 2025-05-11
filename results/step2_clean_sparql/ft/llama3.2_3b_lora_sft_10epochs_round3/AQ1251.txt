@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R110951 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31 ?dataset.
+  ?contrib orkgp:P32 ?eval.
+  ?dataset rdfs:label "MLDoc Zero-Shot English-to-Spanish"^^xsd:string.
+  ?eval orkgp:HAS_METRIC ?metric.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(
+    IF(?metric = "accuracy", "Accuracy",
+    IF(?metric = "F1", "F1",
+    IF(?metric = "ROUGE-N", "ROUGE-N",
+    IF(?metric = "ROUGE", "ROUGE", ?metric)))) AS ?metric_lbl
+  )
+}
+```

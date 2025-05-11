@@ -1,0 +1,11 @@
+```sparql
+SELECT ?ont ?ont_label
+WHERE {
+  orkgr:R155371 orkgp:compareContribution ?cont.
+  ?cont orkgp:P41379 ?ont.
+  ?ont rdfs:label ?ont_label.
+  FILTER(REGEX(?ont_label, "common", "i"))
+}
+ORDER BY DESC(COUNT(?ont_label))
+LIMIT 1
+```

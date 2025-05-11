@@ -1,0 +1,15 @@
+Question:
+List the code links in papers that use the H-NLI model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+        ?paper a orkgc:Paper.
+        ?paper orkgp:P32?benchmark.
+        ?benchmark orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_SOURCE_CODE?code.
+        ?code rdfs:label?code_lbl.
+         FILTER(REGEX(?code_lbl, "H-NLI"))
+     }
+     ORDER BY ASC(?code_lbl)
+     LIMIT 10<|eot_id|>

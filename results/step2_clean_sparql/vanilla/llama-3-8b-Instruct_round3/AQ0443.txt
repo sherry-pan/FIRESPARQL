@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://semantic-mediawiki.org/swivt/1.0#>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper rdfs:label ?title.
+  ?paper orkg:hasID ?id.
+  ?benchmarking a orkg:Benchmarking.
+  ?benchmarking orkg:usesDataset orkg:UCF101.
+  ?benchmarking orkg:finetuned true.
+  ?benchmarking orkg:usesResearchPaper ?paper.
+}
+```

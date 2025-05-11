@@ -1,0 +1,17 @@
+Question:
+Can you list the metrics used to evaluate models on the MUTAG dataset?
+
+Generated SPARQL:
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX orkg: <http://orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper ;
+         dc:title?title.
+ ?paper orkg:has_evaluation?evaluation.
+ ?evaluation orkg:has_metric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?title = "MUTAG dataset" &&?metricLabel = "metrics used to evaluate models" )
+}<|eot_id|>

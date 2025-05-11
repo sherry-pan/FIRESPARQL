@@ -1,0 +1,30 @@
+Question:
+Which model has achieved the highest Score score on the Ball in cup, catch (DMControl100k) benchmark dataset?
+
+Generated SPARQL:
+ ```
+SELECT?model (-bind(?model as?model) { 
+   ?model rdfs:label?label.
+    Filter (?label = "DMControl100k"^^xsd:string).
+    Filter (?label = "Ball in cup, catch"^^xsd:string).
+    Filter (?label = "Score"^^xsd:string).
+    Bind((?score as?score) { 
+      SELECT?model?score { 
+       ?model rdfs:label?label.
+        Filter (?label = "Score"^^xsd:string).
+       ?model rdfs:label?score.
+        Filter (?score >= (xsd:integer "0"^^xsd:number).
+        Filter (?score <= (xsd:integer "1"^^xsd:number).
+        Bind((?score as?score) { 
+          FILTER (STR(?score) = "0.95"^^xsd:number)
+          FILTER (STR(?score) = "0.96"^^xsd:number)
+          FILTER (STR(?score) = "0.97"^^xsd:number)
+          FILTER (STR(?score) = "0.98"^^xsd:number)
+          FILTER (STR(?score) = "0.99"^^xsd:number)
+        })
+      }
+    )
+  })
+  GROUP BY?model
+  ORDER BY (-?score)
+```<|eot_id|>

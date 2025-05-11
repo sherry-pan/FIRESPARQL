@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model orkgp:P31 ?model_label.
+  ?model_label rdfs:label ?model_label_label.
+  FILTER(REGEX(?model_label_label, "GCN Hybrid", "i"))
+  ?model orkgp:P9306 ?benchmark.
+  ?benchmark orkgp:P31 ?benchmark_label.
+  ?benchmark_label rdfs:label ?benchmark_label_label.
+  ?benchmark orkgp:P9310 ?code.
+  ?code rdfs:label ?code_label.
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper
+WHERE {
+    ?paper schema:about ?paperID;
+           orkg:usedForBenchmarking ?benchmark;
+           orkg:hasReference ?reference.
+    ?reference schema:hasCode ?code.
+    FILTER (contains(str(?benchmark), "PEGASUS"))
+}
+```

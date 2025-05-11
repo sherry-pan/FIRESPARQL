@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the Nottingham dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+         orkgr:R34880 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P34047?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "Nottingham"))
+        ?contrib orkgp:P40553?cont.
+        ?cont orkgp:P2008?value;
+                orkgp:P4196?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+     }
+     ORDER BY DESC(?score)<|eot_id|>

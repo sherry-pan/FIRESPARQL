@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:usesModel <http://openresearchknowledge.org/ontology/BiT-M>.
+  ?paper orkg:usesBenchmark ?benchmark.
+  ?benchmark a bibo:Benchmark.
+  ?paper orkg:hasCodeLink ?codeLink.
+  FILTER (?benchmark != <http://openresearchknowledge.org/ontology/No_Benchmark>)
+}
+```

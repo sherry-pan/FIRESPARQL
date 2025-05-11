@@ -1,0 +1,28 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R8360 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?dataset orkgp:P32 ?eval.
+    ?eval orkgp:P31 ?property.
+    ?property rdfs:label ?property_lbl.
+    ?contrib orkgp:HAS_VALUE ?value.
+    BIND(xsd:float(?value) AS ?value)
+  }
+  UNION
+  {
+    orkgr:R8359 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?dataset orkgp:P32 ?eval.
+    ?eval orkgp:P31 ?property.
+    ?property rdfs:label ?property_lbl.
+    ?contrib orkgp:HAS_VALUE ?value.
+    BIND(xsd:float(?value) AS ?value)
+  }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

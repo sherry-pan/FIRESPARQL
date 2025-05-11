@@ -1,0 +1,13 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper schema:about <http://dbpedia.org/ontology/Paper/000000000000000000000000>.
+  ?paper schema:hasPart ?code.
+  FILTER(CONTAINS(LCASE(?code), "resnet") && CONTAINS(LCASE(?code), "bit-m"))
+}
+```

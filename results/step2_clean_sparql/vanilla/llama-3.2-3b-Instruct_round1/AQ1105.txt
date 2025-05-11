@@ -1,0 +1,14 @@
+```sparql
+PREFIX wmt: <http://www.wikimedia.org/wiki/WikiProject:LanguageData/2014/WMT2014>
+PREFIX wdt: <http://www.wikimedia.org/wiki/WikiProject:LanguageData/2014/WMT2014#Datatype>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark wdt:P3014 "WMT2014 French-English".
+  ?benchmark wdt:P3021 ?metric.
+  ?benchmark wdt:P3022 ?score.
+  FILTER (STRLIKE(STR(?metric), "metrics/.*") || STRLIKE(STR(?metric), "score/.*") || STRLIKE(STR(?metric), "rank/.*"))
+}
+LIMIT 1
+```

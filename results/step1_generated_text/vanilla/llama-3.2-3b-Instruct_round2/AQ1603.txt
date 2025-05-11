@@ -1,0 +1,24 @@
+Question:
+Indicate the model that performed best in terms of FLOPS metric on the CIFAR-100 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX v: <http://www.openresearchknowledgegraph.org/vocab#>
+     SELECT?model?flops
+     WHERE {
+    ?model orkg:has_contribution?c.
+    ?c v:has_metric?metric.
+    ?metric rdfs:label "FLOPS"@en.
+    ?metric v:has_value?flops.
+    ?model orkg:has_dataset?dataset.
+    ?dataset dbp:datasetName "CIFAR-100"@en.
+    ?model orkg:has_model_name?modelName.
+    ?model orkg:has_benchmark?benchmark.
+    ?benchmark rdfs:label "CIFAR-100"@en.
+     FILTER (REGEX(STR(?model) || "^[^ ]+$") @en)
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX wmt: <http://wmt2016.org/>
+PREFIX bleu: <http://purl.org/ontology/bleu/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model wmt:benchmarks ?benchmark.
+  ?benchmark wmt:dataset wmt:WMT2016EnglishRussian.
+  ?benchmark bleu:metric bleu:BLEU.
+  ?benchmark orkg:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

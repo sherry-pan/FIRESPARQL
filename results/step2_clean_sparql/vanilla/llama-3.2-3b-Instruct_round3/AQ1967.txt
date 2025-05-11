@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX flair: <http://flair-research.org/ontology#>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper flair:utilizes ?code.
+  ?paper schema:hasLicense schema:CreativeCommonsZero. 
+  ?paper schema:description ?d. 
+  BIND(str(?d) AS ?description) 
+  FILTER(lang(?d) = 'en') 
+  FILTER(CONTAINS(LCASE(?description), 'flair') && CONTAINS(LCASE(?description), 'tdm')) 
+}
+```

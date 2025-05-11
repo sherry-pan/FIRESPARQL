@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BC2GM?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX bc2gm: <http://www.openresearchknowledgegraph.org/ontology/bc2gm/>
+
+     SELECT?metric?value 
+     WHERE {
+    ?q a orkg:Question.
+     bc2gm:dataset "BC2GM" a bc2gm:Dataset.
+    ?q bc2gm:dataset?dataset.
+    ?dataset bc2gm:benchmark?benchmark.
+    ?benchmark bc2gm:metric?metric.
+    ?benchmark bc2gm:value?value.
+     FILTER (str(?metric) = "top" AND str(?value) ~ "result" AND?value > 0)
+     }<|eot_id|>

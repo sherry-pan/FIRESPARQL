@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Gibson PointGoal Navigation dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+  FILTER (str(?benchmarkLabel) CONTAINS "Gibson PointGoal Navigation".
+ ?paper orkg:hasTitle?title.
+ ?paper orkg:hasId?id.
+}<|eot_id|>

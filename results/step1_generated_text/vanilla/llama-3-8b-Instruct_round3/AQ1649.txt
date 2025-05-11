@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest SUCCESS score on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:achievedResult?result.
+ ?result orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/Habitat_2020_Object_Nav_test-std>.
+ ?result orkg:metric orkg:SUCCESS.
+ ?result orkg:value?score.
+  FILTER (?score = MAX(?score))
+}<|eot_id|>

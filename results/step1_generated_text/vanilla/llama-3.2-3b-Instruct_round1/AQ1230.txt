@@ -1,0 +1,20 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Ball in cup, catch (DMControl100k) dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX ork: <http://openresearchknowledgegraph.org/ork/>
+     SELECT?metric?score 
+     WHERE {
+    ?benchmark a dbo:benchmark.
+    ?benchmark schema:about "Ball in cup, catch (DMControl100k)".
+    ?benchmark rdfs:label?label.
+    ?benchmark ork:hasBenchmarkResult?result.
+    ?result ork:hasMetric?metric.
+    ?result ork:hasScore?score.
+    ?result rdfs:label?metric.
+     FILTER (STRLIKE(STR(?metric), "Metric") && STRLIKE(STR(?score), "Score"))
+     }<|eot_id|>

@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset; rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Penn Treebank (Character Level)")
+    ?benchmark orkgp:HAS_DATASET ?dataset; orkgp:HAS_EVALUATION ?eval.
+    ?paper orkgp:HAS_BENCHMARK ?benchmark.
+    ?model orkgp:HAS_PAPER ?paper; rdfs:label ?model_lbl.
+    ?model orkgp:HAS_MODELparameters ?params.
+    ?params rdfs:label ?number_of_params_lbl.
+    FILTER(?number_of_params_lbl = "Number of params")
+    {
+        SELECT ?model ?model_lbl
+        WHERE {
+            ?model a orkgc:Model; rdfs:label ?model_lbl.
+            ?model orkgp:HAS_MODELparameters ?params.
+            ?params rdfs:label ?number_of_params.
+            FILTER(?number_of_params = "Number of params")
+            ORDER BY DESC(?params)
+            LIMIT 1
+        }
+    }
+}
+```

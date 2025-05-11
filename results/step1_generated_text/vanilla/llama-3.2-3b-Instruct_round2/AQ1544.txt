@@ -1,0 +1,34 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the OntoNotes benchmark dataset?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/property/>
+
+     SELECT?model 
+     WHERE {
+       ?model schema:abstract?abstract.
+       ?model schema:name?name.
+        FILTER (REGEX(LOWER(?name) || "f1")i)
+       ?model dbp:year?year.
+       ?model dbp:author?author.
+       ?author foaf:name?author_name.
+       ?model dbp:score?score.
+        FILTER ((?score >= 0.8) && (?score <= 1))
+       ?model rdfs:label?model_label.
+        FILTER (REGEX(LOWER(?model_label) || "best")i)
+       ?model schema:description?description.
+        SERVICE dfn:descriptiveGraph {
+          SELECT?model?description WHERE {
+           ?model schema:description?description.
+          }
+        }
+        SERVICE wikibase:label {
+          bd:serviceParam wikibase:language "en".
+        }
+      }<|eot_id|>

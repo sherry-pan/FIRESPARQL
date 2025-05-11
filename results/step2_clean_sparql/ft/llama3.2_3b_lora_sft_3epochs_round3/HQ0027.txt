@@ -1,0 +1,22 @@
+```sparql
+SELECT ?country ?country_lbl
+WHERE {
+  ?data a orkgc:Dataset;
+        rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Epilepsy"))
+  ?paper orkgp:HAS_DATASET ?data.
+  ?study orkgp:HAS_PAPER ?paper.
+  ?country orkgp:P32 ?study;
+           rdfs:label ?country_lbl.
+  {
+    SELECT ?country ?country_lbl
+    WHERE {
+      ?country a orkgc:Country;
+               rdfs:label ?country_lbl.
+      ?study orkgp:P32 ?prevalence.
+    }
+    ORDER BY DESC(?prevalence)
+    LIMIT 1
+  }
+}
+```

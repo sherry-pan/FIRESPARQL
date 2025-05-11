@@ -1,0 +1,20 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?score 
+     WHERE {
+    ?paper a ork:Paper.
+    ?paper schema:description?description.
+     FILTER (STRContains(STR(?description), "Paper Field") AND STRContains(STR(?description), "benchmark"))
+    ?paper schema:benchmark?benchmark.
+    ?benchmark schema:metric?metric.
+    ?benchmark schema:score?score.
+     ORDER BY DESC(?score)
+     LIMIT 1
+     }<|eot_id|>

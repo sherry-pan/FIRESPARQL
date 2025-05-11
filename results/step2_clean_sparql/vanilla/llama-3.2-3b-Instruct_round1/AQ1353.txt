@@ -1,0 +1,17 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dcbeta: <http://dbpedia.org/ontology/Birdsnap/>
+PREFIX fma: <http://dbpedia.org/ontology/Frequency_Measurement_Analyst>
+PREFIX wkm: <http://dbpedia.org/ontology/Workbench_Kit_Measurement>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a dbpedia:Birdsnap.
+  ?benchmark wkm:benchmarkResult ?result.
+  ?result fma:metric ?metric.
+  ?result fma:value ?value.
+  FILTER (STR(?metric) IN ("accuracy", "F1", "Precision", "Recall", "AP", "MAP", "R@1", "R@5", "R@10", "R@100", "R@1000", "MRR", "MRR@1000"))
+}
+```

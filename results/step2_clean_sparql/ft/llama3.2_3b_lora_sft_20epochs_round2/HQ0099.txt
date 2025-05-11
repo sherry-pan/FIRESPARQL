@@ -1,0 +1,15 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+    ?time a orkgc:Time;
+          rdfs:label ?time_lbl.
+    ?dataset orkgp:HAS_DATASET ?dataset.
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?cont orkgp:HAS_MODEL ?model.
+    ?model orkgp:HAS_MODELParameter ?param.
+    ?param rdfs:label ?material_lbl.
+}
+ORDER BY ASC(KOWS_RDF2019:response_time_lbl)
+LIMIT 1
+```

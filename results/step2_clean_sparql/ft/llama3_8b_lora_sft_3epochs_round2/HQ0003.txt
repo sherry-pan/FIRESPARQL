@@ -1,0 +1,12 @@
+```sparql
+SELECT ?method ?method_labels
+WHERE {
+  ?paper orkgp:P5025 ?method.
+  ?method rdfs:label ?method_labels.
+  ?papers rdfs:label "Knowledge representation"^^xsd:string.
+  ?papers orkgp:P31 ?paper.
+  FILTER(REGEX(STR(?method_labels), "Common"))
+}
+ORDER BY DESC(COUNT(?method_labels))
+LIMIT 1
+```

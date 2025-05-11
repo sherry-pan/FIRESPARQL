@@ -1,0 +1,12 @@
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?paper
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:testedOn ?paper.
+  ?paper orkg:dataset orkg:SciCite.
+  SERVICE schema:sparql {
+    ?model schema:name ?modelLabel.
+  }
+}

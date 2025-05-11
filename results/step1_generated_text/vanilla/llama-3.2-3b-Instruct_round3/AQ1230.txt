@@ -1,0 +1,22 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Ball in cup, catch (DMControl100k) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearch.org/orkg/>
+     PREFIX wot: <http://www.webofthings.org/ontology/>
+     SELECT?metric?score
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetIdentifier "DMControl100k".
+    ?dataset orkg:hasDatasetTitle "Ball in cup".
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset?dataset.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasScore?score.
+    ?benchmark orkg:hasDataset?dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+     FILTER (str(?metric) = "accuracy" OR str(?metric) = "f1" OR str(?metric) = "precision" OR str(?metric) = "recall" OR str(?metric) = "AUC-ROC" OR str(?metric) = "AUC-PR" OR str(?metric) = "AP" OR str(?metric) = "mAP" OR str(?metric) = "mAP" OR str(?metric) = "AP" OR str(?metric) = "f1" OR str(?metric) = "accuracy" OR str(?metric) = "f1" OR str(?metric) = "precision" OR str(?metric) = "recall")
+     }
+     GROUP BY?metric
+     ORDER BY?score DESC
+     LIMIT 1<|eot_id|>

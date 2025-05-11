@@ -1,0 +1,22 @@
+Question:
+Where can I find code references in papers that have used the CATTS-XSUM model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX cat: <http://cat.ts.tsukuba.ac.jp/ontologies/ontology#>
+     PREFIX orkg: <http://orkg.org/ontology/>
+
+     SELECT?paper?paperTitle?reference
+     WHERE {
+      ?paper a cat:Paper.
+       cat:hasBenchmark?benchmark.
+      ?benchmark schema:hasReference?reference.
+      ?benchmark schema:hasKeyword "CATTS-XSUM".
+      ?benchmark schema:hasKeyword "benchmark".
+      ?paper rdfs:label?paperTitle.
+       FILTER (lang(?paperTitle) = "en")
+     }<|eot_id|>

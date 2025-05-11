@@ -1,0 +1,14 @@
+Question:
+Can you list the models that have been evaluated on the MultiNLI dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MultiNLI")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_MODEL        ?model.
+        ?model        rdfs:label              ?model_lbl.
+     }<|eot_id|>

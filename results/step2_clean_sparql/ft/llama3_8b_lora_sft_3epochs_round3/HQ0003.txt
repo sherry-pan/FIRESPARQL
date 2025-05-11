@@ -1,0 +1,13 @@
+```sparql
+SELECT ?method ?method_label
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P37578 ?method.
+  ?paper orkgp:P31 ?type.
+  FILTER(?type = "Research_Paper")
+  ?method rdfs:label ?method_label.
+}
+GROUP BY ?method ?method_label
+ORDER BY DESC(COUNT(?method))
+LIMIT 1
+```

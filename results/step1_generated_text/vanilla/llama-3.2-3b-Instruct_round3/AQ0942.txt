@@ -1,0 +1,29 @@
+Question:
+Can you list the metrics used to evaluate models on the Atari 2600 Freeway dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX vcard: <http://purl.org/vcard/2.1/>
+     PREFIX dcat: <http://www.w3.org/ns/dcat#>
+     PREFIX oag: <http://openerp.org/ontologies/openag/ontology#>
+     PREFIX wso: <http://www.wsoar.com/sparql/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     SELECT?metric 
+     WHERE {
+      ?metric rdfs:label "Atari 2600 Freeway dataset".
+      ?metric rdfs:label?metricLabel.
+       FILTER (lang(?metricLabel) = "en" )
+       SERVICE dfre:descriptiveMetadata { 
+        bd:description?descriptions.
+        bd:subject?subject.
+        bd:subject <http://dbpedia.org/ontology/evaluationMetric>.
+        bd:subject?subject.
+       ?metric rdfs:label?metricLabel.
+        FILTER (lang(?metricLabel) = "en" )
+       }
+     }<|eot_id|>

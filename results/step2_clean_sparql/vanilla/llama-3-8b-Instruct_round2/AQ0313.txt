@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluatedOn ?dataset.
+  ?dataset dct:title "5 seconds at 12 kHz".
+  ?dataset dct:subject orkg:ClassicalMusic.
+  SERVICE orkg:schema {
+    ?model orkg:label ?modelLabel.
+  }
+}
+```

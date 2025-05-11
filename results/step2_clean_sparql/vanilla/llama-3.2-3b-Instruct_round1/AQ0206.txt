@@ -1,0 +1,18 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orcg.org/orcg/>
+
+SELECT ?model ?name 
+WHERE {
+    ?model orkg:hasDataset ?dataset.
+    ?dataset schema:datasetType "object navigation".
+    ?dataset schema:datasetName "Habitat 2020 Object Nav test-std".
+    ?model orkg:hasTest ?test.
+    ?test schema:benchmark "true".
+    ?model rdfs:label ?name.
+    FILTER (lang(?name) = "en")
+}
+LIMIT 10
+```

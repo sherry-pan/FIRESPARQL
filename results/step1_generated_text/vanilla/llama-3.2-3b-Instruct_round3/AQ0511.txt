@@ -1,0 +1,23 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STS Benchmark dataset?
+
+Generated SPARQL:
+ ```
+SELECT?paper?title?id
+WHERE {
+ ?paper rdf:type owl:Ontology.
+ ?paper rdfs:label?title.
+ ?paper stsb:hasBenchmark?benchmark.
+ ?benchmark stsb:hasDataset "STS Benchmark".
+  SERVICE dbpedia:SPARQL
+  {
+    BIND(iri(?benchmark) as?benchmarkIri)
+    SELECT?id?paper?title
+    WHERE {
+     ?benchmark stsb:hasBenchmark?benchmarkIri.
+     ?benchmark stsb:hasPaper?paper.
+     ?paper stsb:hasID?id.
+      FILTER(LONG(?id) > 0)
+    }
+  }
+}<|eot_id|>

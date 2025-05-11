@@ -1,0 +1,30 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX wdt: <http://www.w3.org/2000/01/w3c_wdt#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?metric?score
+    WHERE {
+     ?dataset a schema:Dataset.
+     ?dataset schema:description?description.
+      filter(str.contains(?description,'re17.zip' )).
+     ?dataset wdt:P301?benchmark.
+     ?benchmark schema:keyword?keyword.
+     ?benchmark schema:description?description.
+      filter(str.contains(?description, 'benchmark result' )).
+     ?benchmark schema:mainEntity?entity.
+     ?entity rdfs:label?metric.
+     ?benchmark schema:mainEntity?entity2.
+     ?benchmark schema:mainMetric?metric.
+     ?benchmark wdt:P31?type.
+     ?type rdfs:label?metricLabel.
+      filter(str.contains(?metricLabel,'metric' )).
+     ?benchmark schema:mainScore?score.
+      filter( str(?score) = 'highest' )
+    }
+    ```<|eot_id|>

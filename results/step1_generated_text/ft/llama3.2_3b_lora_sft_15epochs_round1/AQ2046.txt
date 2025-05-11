@@ -1,0 +1,15 @@
+Question:
+Where can I find code references in papers that have used the MMV model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper    orkgp:P30   ?cont.
+      ?cont     orkgp:P31   ?code.
+      ?paper orkgp:P32   ?benchmark.
+      ?benchmark     orkgp:P5009   ?model.
+      ?model       orkgp:P5009   ?model_value;
+                    rdfs:label   ?mmv_label.
+       FILTER(REGEX(STR(?mmv_label), "MMV"))
+       FILTER(?model_value = "benchmarking")
+     }<|eot_id|>

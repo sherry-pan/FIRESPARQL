@@ -1,0 +1,23 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+    PREFIX vocab: <http://www.w3.org/2004/02/sosao#>
+
+    SELECT?name?contributionsCount
+    WHERE {
+     ?author a orkg:Author.
+     ?author orkg:hasContribution?contribution.
+     ?contribution vocab:hasSubject <http://www.w3.org/2004/02/sosao#Coronavirus>.
+     ?contribution orkg:hasPublication?publication.
+     ?publication orkg:hasAuthor?author.
+     ?author foaf:name?name.
+      GROUP BY?name
+      HAVING (COUNT(?contribution) = (SELECT MAX(COUNT(?contribution)) FROM?contribution))
+    }
+    ```<|eot_id|>

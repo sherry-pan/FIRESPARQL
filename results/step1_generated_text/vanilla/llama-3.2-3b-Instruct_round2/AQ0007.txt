@@ -1,0 +1,28 @@
+Question:
+What models are being evaluated on the ACL Anthology dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX vocab: <http://www.oxford-hansard.org/vocab/>
+     PREFIX wikibase: <http://wikibase.org/biodiversity/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model 
+     WHERE {
+    ?model a vocab:DatasetModel.
+    ?model vocab:hasModelEvaluation?evaluation.
+    ?evaluation vocab:hasDataset?dataset.
+    ?dataset dbpedia:datasetName "ACL Anthology".
+    ?model vocab:hasModelEvaluation?evaluation.
+    ?evaluation vocab:hasDataset?dataset.
+    ?dataset dbpedia:datasetName "ACL Anthology".
+    ?model orkg:hasModelEvaluation?evaluation.
+    ?evaluation orkg:hasDataset?dataset.
+    ?model orkg:hasModelEvaluation?evaluation.
+    ?evaluation orkg:hasDataset?dataset.
+    ?evaluation rdfs:label?label.
+     FILTER (CONTAINS(LCASE(?label), "model").
+     }
+     LIMIT 100<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.1/orkg#>
+SELECT ?dataset
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:topic orkg:SemanticRoleLabeling.
+  SERVICE orkg:datasetSearch {
+    ?dataset orkg:benchmark ?benchmark.
+    FILTER (CONTAINS(LCASE(STR(?benchmark)), "semantic role labeling"))
+  }
+}
+LIMIT 10
+```

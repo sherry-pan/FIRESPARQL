@@ -1,0 +1,37 @@
+Question:
+Can you provide links to code used in papers that benchmark the Fine-Grained Gating model?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX bio2vec: <http://www.mmlucy.de/bio2vec/>
+     PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?paper?url
+     WHERE {
+    ?paper schema:description?description.
+    ?paper schema:date?date.
+    ?paper schema:title?title.
+    ?paper orkg:hasCode?code.
+    ?code schema:description?description.
+    ?code dcterms:license?license.
+    ?code dcterts:relation?relation.
+    ?relation schema:genre?genre.
+    ?paper dcterms:rights?rights.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:description?description.
+    ?benchmark schema:title?title.
+    ?benchmark orkg:hasModel?model.
+    ?model schema:description?description.
+    ?model bio2vec:vector?vector.
+    ?model bio2vec:vector?vector.
+    ?benchmark orkg:hasCode?benchmarkCode.
+    ?benchmarkCode schema:description?description.
+    ?benchmarkCode dcterms:license?benchmarkLicense.
+    ?benchmarkCode dcterts:relation?benchmarkRelation.
+    ?benchmarkCode schema:genre?benchmarkGenre.
+    ?benchmarkCode schema:rights?benchmarkRights.
+     FILTER (STRCONTAINS(lower(?title), "fine-grained gating") AND 
+     STRCONTAINS(lower(?description), "benchmark"))
+     }<|eot_id|>

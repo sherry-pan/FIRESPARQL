@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the BART model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX bibo: <http://purl.org/ontology/bibo/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    
+    SELECT?paper?code
+    WHERE {
+     ?paper a orkg:ResearchArtifact ;
+        dc:title?title.
+     ?paper bibo:isBasedOn?code.
+     ?code a bibo:Code ;
+        rdfs:label?codeLabel.
+      FILTER (CONTAINS(LCASE(?title), "bart") && EXISTS {?code rdfs:label?codeLabel })
+    }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset;
+             orkg:hasMetric ?metric;
+             orkg:hasScore ?score.
+  ?dataset rdfs:label "AAPD".
+  FILTER(?metric = "highest")
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX bc5cdr: <http://dbpedia.org/2014/01/ontologies/BC5CDR/>
+
+SELECT ?metric ?value 
+WHERE {
+    ?benchmark a bc5cdr:Benchmark.
+    ?benchmark bc5cdr:dataset bc5cdr:BC5CDRChemical.
+    ?benchmark bc5cdr:hasResult ?result.
+    ?result a bc5cdr:Result.
+    ?result bc5cdr:metric ?metric.
+    ?result bc5cdr:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

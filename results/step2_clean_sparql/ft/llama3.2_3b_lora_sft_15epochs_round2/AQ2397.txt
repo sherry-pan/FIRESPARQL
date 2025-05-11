@@ -1,0 +1,36 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "DeiT-Ti"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+
+  {
+    ?code rdfs:label ?code_lbl.
+    FILTER(REGEX(?code_lbl, "code"))
+  }
+  OPTIONAL {
+    ?cont orkgp:HAS_SOURCE_CODE_OF_SOURCE_CODE ?source_code.
+    ?source_code rdfs:label ?source_code_lbl.
+    FILTER(REGEX(?source_code_lbl, "code"))
+  }
+  OPTIONAL {
+    ?cont orkgp:HAS_SOURCE_CODE_OF_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+    FILTER(REGEX(?model_lbl, "DeiT-Ti"))
+  }
+  OPTIONAL {
+    ?cont orkgp:HAS_SOURCE_CODE_OF_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "dataset"))
+  }
+  OPTIONAL {
+    ?cont orkgp:HAS_SOURCE_CODE_OF_EVALUATION ?eval.
+    ?eval rdfs:label ?eval_lbl.
+    FILTER(REGEX(?eval_lbl, "evaluation"))
+  }
+}
+```

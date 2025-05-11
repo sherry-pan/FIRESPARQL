@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?f1score
+WHERE {
+  ?model orkg:isBenchmarkFor ?benchmark.
+  ?benchmark orkg:isBenchmarkFor ?dataset.
+  ?dataset orkg:hasDatasetDataset ?datasetDataset.
+  ?datasetDataset orkg:name "Natural Questions (long)".
+  ?model orkg:hasModelModel ?modelModel.
+  ?modelModel rdfs:label ?model.
+  ?modelModel orkg:hasF1Score ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

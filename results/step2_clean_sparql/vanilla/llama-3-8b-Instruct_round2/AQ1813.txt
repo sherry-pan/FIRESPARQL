@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?top1Accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset <http://orkg.org/datasets/inaturalist_2018>.
+  ?benchmark schema:top1Accuracy ?top1Accuracy.
+  {
+    SELECT ?model (MAX(?x) AS ?top1Accuracy)
+    WHERE {
+      ?benchmark2 schema:top1Accuracy ?x.
+      ?model orkg:benchmark ?benchmark2.
+      ?model orkg:dataset <http://orkg.org/datasets/inaturalist_2018>.
+    }
+    GROUP BY ?model
+  }
+}
+```

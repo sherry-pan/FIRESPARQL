@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+    ?metric orkg:isEvalMetricFor ?benchmark.
+    ?benchmark orkg:isRelatedTo ?benchmarkType.
+    ?benchmarkType orkg:hasMetric ?metric.
+    ?benchmark orkg:isBenchmarkFor "Rotowire (Content Selection)".
+    FILTER (lang(?metric) = "en")
+}
+GROUP BY ?metric
+ORDER BY DESC (count(?metric))
+LIMIT 10
+```

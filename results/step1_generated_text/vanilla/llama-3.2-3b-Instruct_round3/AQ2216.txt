@@ -1,0 +1,23 @@
+Question:
+Where can I find code references in papers that have used the LayerNorm HM-LSTM model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openeuropeana.net/orkg/>
+     PREFIX orkg: <http://openeuropeana.net/orkg/paper/>
+     PREFIX orkg: <http://openeuropeana.net/orkg/concept/>
+     PREFIX orkg: <http://openeuropeana.net/orkg/paper-concept-link/>
+
+     SELECT?paper?paperTitle 
+     WHERE {
+    ?paper orkg:hasPaperConcept?concept.
+    ?concept orkg:hasConceptLabel "LayerNorm HM-LSTM".
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasTopic "benchmarking".
+    ?paper orkg:hasReference?reference.
+    ?reference schema:hasFormat "PDF".
+     FILTER (lang(?paperTitle) = "en")
+     }
+     ORDER BY (asc(?paperTitle))<|eot_id|>

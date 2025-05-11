@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?title ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?code schema:versionInfo ?version.
+  ?code schema:software ?software.
+  ?software schema:softwareName "AlexNet", "MultiGrasp".
+  ?paper rdfs:label ?title.
+}
+```

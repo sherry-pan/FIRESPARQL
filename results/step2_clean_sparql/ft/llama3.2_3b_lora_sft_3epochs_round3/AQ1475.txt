@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?performance a orkgc:Performance;
+               orkgc:hasOnTestDataset orkgc:Story_Cloze_Test;
+               orkgc:hasMetric ?metric;
+               orkgc:hasValue ?value;
+               orkgc:achievedBy ?model.
+  ?metric rdfs:label "Accuracy".
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?p ?o 
+WHERE {
+  ?p a orkg:Paper.
+  ?p schema:description ?d.
+  ?d schema:about ?o.
+  FILTER (STRSTARTS(?o, 'https://github.com/'))
+}
+```

@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset a orkg:Dataset; orkg:name "RACE".
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?metric orkg:name "Accuracy"; orkg:hasScore ?score.
+    ?score orkg:hasValue ?value.
+    ?model orkg:hasLabel ?modelLabel.
+    FILTER(LANG(?modelLabel) = "en").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

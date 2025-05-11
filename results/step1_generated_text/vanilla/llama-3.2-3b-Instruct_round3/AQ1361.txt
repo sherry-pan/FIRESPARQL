@@ -1,0 +1,14 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX wot: <http://www.wot SemanticWeb.org/ontology/>
+     SELECT?score?metric 
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark wot:hasMetric?metric.
+    ?benchmark wot:hasDataset "ModelNet40".
+    ?benchmark wot:hasScore?score.
+     FILTER (CONTAINS(LCASE(?metric), "score") OR CONTAINS(LCASE(?metric), "metric"))
+     }<|eot_id|>

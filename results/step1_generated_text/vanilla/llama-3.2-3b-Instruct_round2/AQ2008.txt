@@ -1,0 +1,18 @@
+Question:
+List the code links in papers that use the DocRED-BiLSTM model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     SELECT?paper?code 
+     WHERE {
+    ?paper orkg:uses?code.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark wdt:P275?benchmarkCode.
+    ?benchmark wdt:P162?benchmarkPaper.
+    ?benchmarkPaper orkg:uses?code.
+    ?benchmarkPaper orkg:hasBenchmark?benchmark.
+    ?benchmark wdt:P162?benchmarkCode.
+     FILTER (STRLIKE(?benchmarkPaperLabel?benchmarkCode))
+     }<|eot_id|>

@@ -1,0 +1,25 @@
+Question:
+List the code links in papers that use the POP3D model in any benchmark?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2004/02/soso/ontology#with>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX pop3d: <http://purl.org/pop3d/>
+
+     SELECT?paper?code_link
+     WHERE {
+      ?paper a schema:CreativeWork.
+       schema:description?d.
+       rdfs:label?label.
+       dcterms:subject?subject.
+       filter(bif:contains(?subject,"POPD")).
+      ?paper pop3d:uses?model.
+      ?model pop3d:hasBenchmark?benchmark.
+      ?benchmark schema:hasPart?benchmarkPaper.
+      ?benchmarkPaper wdt:P301?code_link.
+       filter(isLiteral(?code_link))
+     }<|eot_id|>

@@ -1,0 +1,21 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "feature request"))
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?model orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_ALGORITHM ?algorithm.
+  ?algorithm rdfs:label ?algorithm_lbl.
+  FILTER(REGEX(?algorithm_lbl, "naive bayes"))
+  ?model orkgp:HAS_TEKNIK ?teknik;
+         orkgp:HAS_FEATURE ?feature.
+  ?feature rdfs:label ?feature_lbl.
+  FILTER(REGEX(?feature_lbl, "bag of words"))
+}
+```

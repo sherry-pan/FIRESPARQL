@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:usesModel ?model.
+  ?model rdfs:label "Transformer-XL".
+  ?paper orkg:benchmark ?benchmark.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  ?paper schema:codeRepository ?codeLink.
+  FILTER(?benchmarkLabel IN ("GLUE", "SuperGLUE", "WMT", "SQuAD", "Wikitext103", "WikiText", "Wikitext2", "CommonSenseQA", "MultiWOZ", "WebQuestions", "TriviaQA", "BoolQ", "ReCoRD", "e-SNLI", "MultiNLI", "OpenBookQA"))
+}
+```

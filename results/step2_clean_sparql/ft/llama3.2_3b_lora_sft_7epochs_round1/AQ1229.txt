@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    {
+        orkgr:R84000 orkgp:compareTo orkgp:R83995.
+        orkgp:R84000 orkgp:P31 ?cont.
+        ?cont orkgp:P32 ?dataset.
+        ?dataset rdfs:label "Cart Pole (OpenAI Gym)".
+        ?cont orkgp:HAS_BENCHMARK ?benchmark.
+        ?benchmark orkgp:HAS_VALUE ?value.
+        ?value orkgp:HAS_METRIC ?metric.
+        ?metric rdfs:label ?metric_lbl.
+    }
+    UNION
+    {
+        orkgr:R83995 orkgp:compareTo orkgp:R84000.
+        orkgp:R83995 orkgp:P31 ?cont.
+        ?cont orkgp:P32 ?dataset.
+        ?dataset rdfs:label "Cart Pole (OpenAI Gym)".
+        ?cont orkgp:HAS_BENCHMARK ?benchmark.
+        ?benchmark orkgp:HAS_VALUE ?value.
+        ?value orkgp:HAS_METRIC ?metric.
+        ?metric rdfs:label ?metric_lbl.
+    }
+}
+```

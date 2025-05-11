@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:hasResult ?result.
+  ?result orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasName "Gibson PointGoal Navigation".
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasScore ?score.
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

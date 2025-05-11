@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper schema:about ?title.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:dataset "SNLI".
+  ?benchmark schema:hasPaper ?paper.
+}
+```

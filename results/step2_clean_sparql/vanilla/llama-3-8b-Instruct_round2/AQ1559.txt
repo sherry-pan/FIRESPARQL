@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_result ?result.
+  ?result schema:about "SST-5 Fine-grained classification benchmark".
+  ?result schema:score ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

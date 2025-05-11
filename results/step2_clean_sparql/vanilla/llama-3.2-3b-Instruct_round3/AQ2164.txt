@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?v ?o
+WHERE {
+    ?p orkg:contains ?v.
+    ?v orkg:hasSource ?o.
+    ?o orkg:hasCode ?code.
+    ?code orkg:isBenchmarkedBy ?b.
+    ?b orkg:hasPaper ?b1.
+    FILTER (contains(str(?b1), "AWD-LSTM"))
+}
+LIMIT 10
+```

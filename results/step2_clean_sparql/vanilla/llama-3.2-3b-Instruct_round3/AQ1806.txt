@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?accuracy 
+WHERE {
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark dbp:benchmarkName "ImageNet V2".
+    ?model orkg:hasTop1Accuracy ?accuracy.
+} 
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

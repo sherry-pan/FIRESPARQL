@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/2015-04-27/ontology/>
+PREFIX wkm: <http://www.wikidata.org/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark rdfs:label "Atari 2600 Double Dunk".
+  ?benchmark wkm:hasMetric ?metric.
+  ?benchmarkResult dbr:hasBenchmarkResult ?value.
+  ?benchmarkResult wkm:hasMetric ?metric.
+  FILTER(LONG(?value) > 0)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

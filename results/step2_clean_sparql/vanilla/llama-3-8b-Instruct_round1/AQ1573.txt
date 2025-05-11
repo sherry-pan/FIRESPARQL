@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT ?model ?f1
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:title ?title.
+  FILTER (?title = "ShARe/CLEF eHealth corpus benchmark dataset").
+  ?paper orkg:hasResult ?result.
+  ?result owl:property ?property.
+  ?result ?property ?model.
+  ?result orkg:metric ?metric.
+  ?metric owl:property ?f1.
+  FILTER (?metric = "F1").
+  FILTER (?property = "performed best in").
+}
+```

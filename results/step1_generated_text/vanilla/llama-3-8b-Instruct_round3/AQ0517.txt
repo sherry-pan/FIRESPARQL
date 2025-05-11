@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the DCASE dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+    SELECT?paperTitle?paperID
+    WHERE {
+     ?paper a orkg:ResearchPaper.
+     ?paper orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:dataset?dataset.
+     ?dataset orkg:datasetName "DCASE".
+     ?paper dc:title?paperTitle.
+     ?paper orkg:paperID?paperID.
+    }<|eot_id|>

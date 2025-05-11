@@ -1,0 +1,29 @@
+```sparql
+PREFIX orkg: <http://purl.org/net/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX w3c: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model
+WHERE {
+    ?model schema:description ?description.
+    FILTER (contains(STR(?description), "MNIST") 
+        AND EXISTS {
+            ?model schema:dataset ?dataset.
+            ?dataset schema:datasetType "Image classification".
+            ?model schema:benchmark ?benchmark.
+            ?benchmark schema:dataset ?benchmark_dataset.
+            FILTER (?benchmark_dataset = ?dataset).
+        }
+    )
+}
+GROUP BY ?model
+ORDER BY (count(?benchmark) DESC)
+LIMIT 100
+```

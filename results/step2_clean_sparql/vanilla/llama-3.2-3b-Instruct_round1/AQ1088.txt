@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?metric dbo:benchmark "ACE 2005".
+  ?metric rdfs:label ?metricLabel.
+  ?metric dbo:score ?score.
+  FILTER (lang(?metricLabel) = "en").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

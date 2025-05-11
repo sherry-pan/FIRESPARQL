@@ -1,0 +1,13 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?person (COUNT(?article) AS ?count)
+WHERE {
+  ?article dbo:editor ?person.
+  ?article dbo:subject [rdfs:label "Coronavirus"].
+}
+GROUP BY ?person
+ORDER BY DESC(?count)
+LIMIT 1
+```

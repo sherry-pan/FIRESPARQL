@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX schema: <http://schema.org/> 
+PREFIX ork: <http://orion.tu-dortmund.de/orion/ork/> 
+
+SELECT ?paper ?code 
+WHERE { 
+    ?paper schema:hasPart ?item. 
+    ?item schema:hasPart ?item1. 
+    ?item1 rdfs:label "Rfa-Gate-arccos". 
+    ?paper schema:hasPart ?item2. 
+    ?item2 rdfs:label "benchmark". 
+    ?paper schema:hasPart ?code . 
+    ?code a schema:SoftwareSourceCode .
+}
+```

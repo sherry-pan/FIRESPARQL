@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?score ?metric
+WHERE {
+  ?run a orkg:Run ;
+       orkg:dataset ?dataset ;
+       orkg:benchmark_score ?score ;
+       orkg:benchmark_metric ?metric.
+  ?dataset a orkg:Dataset ;
+           rdfs:label "DMControl500k".
+  FILTER (?metric = "top benchmark score")
+}
+```

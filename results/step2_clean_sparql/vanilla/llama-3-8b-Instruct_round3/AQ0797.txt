@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/>
+
+SELECT ?metric ?metricLabel
+WHERE {
+  ?metric a orkg:Metric;
+          rdfs:label ?metricLabel.
+  ?dataset a orkg:Dataset;
+           orkg:hasEvaluation ?evaluation;
+           orkg:name "BioASQ".
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER(lang(?metricLabel) = "en").
+}
+```

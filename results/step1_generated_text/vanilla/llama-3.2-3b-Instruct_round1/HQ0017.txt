@@ -1,0 +1,20 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?l?lcount
+     WHERE {
+    ?s orkg:contributesTo?p.
+    ?s rdfs:label?l.
+     FILTER (lang(?l) = 'en').
+    ?s wdt:P31?type.
+    ?s wdt:P131?st.
+    ?st rdfs:label?stl.
+     GROUP BY?l
+     HAVING (COUNT(?s) > 1)
+     ORDER BY DESC(?lcount)
+     }<|eot_id|>

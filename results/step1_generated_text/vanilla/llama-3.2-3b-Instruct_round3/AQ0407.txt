@@ -1,0 +1,16 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the SciERC dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?paperId?title
+WHERE {
+ ?paper a ora:Paper.
+ ?paper ora:hasBenchmark?benchmark.
+ ?benchmark ora:hasDataset ora:SciERC.
+ ?benchmark ora:hasModel?model.
+ ?model ora:hasBenchmark?benchmark.
+ ?paper ora:hasTitle?title.
+  FILTER (lang(?title) = 'en')
+}
+```<|eot_id|>

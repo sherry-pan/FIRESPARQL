@@ -1,0 +1,14 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     SELECT?paper?title
+     WHERE {
+    ?paper wdt:P106?title.
+    ?paper wdt:P1476?benchmark.
+    ?benchmark wdt:P131?dataset.
+     FILTER (STRLIKE(?dataset, "PubMedQA"))
+     }<|eot_id|>

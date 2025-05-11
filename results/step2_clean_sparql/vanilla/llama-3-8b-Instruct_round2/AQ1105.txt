@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasResult ?result.
+  ?result a orkg:Result ;
+          orkg:hasMetric ?metric ;
+          orkg:hasScore ?score.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:hasName "WMT2014 French-English".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

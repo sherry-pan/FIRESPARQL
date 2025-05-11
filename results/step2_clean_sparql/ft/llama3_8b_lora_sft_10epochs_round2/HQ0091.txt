@@ -1,0 +1,15 @@
+```sparql
+SELECT ?concept
+WHERE {
+  ?resource rdfs:label ?title.
+  FILTER(REGEX(?title, "Raman"))
+  ?resource a orkgc:Contribution;
+            rdfs:label ?label.
+  OPTIONAL {
+    ?resource orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?label2.
+  }
+  ?resource orkgp:HAS_CONCEPT ?concept.
+  ?concept rdfs:label ?concept_lbl.
+}
+```

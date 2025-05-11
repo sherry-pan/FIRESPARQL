@@ -1,0 +1,21 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Atari 2600 Skiing dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX ockn: <http://openresearchknowledge.net/ontology/>
+     PREFIX wikibase: <http://wikibase.org vocab/>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper ockn:isRelatedTo?dataset.
+    ?dataset dbp:datasetLabel "Atari 2600 Skiing".
+    ?paper ockn:hasBenchmark?benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark dbp:benchmarkingPlatform?platform.
+    ?platform rdfs:label "Atari 2600".
+    ?benchmark dbp:benchmarkingDataset?dataset.
+    ?paper ockn:hasIdentifier?id.
+     FILTER (STRLIKE(?benchmarkLabel, "Skiing") AND STRLIKE(?id, "https://arxiv.org/abs/"))
+     }<|eot_id|>

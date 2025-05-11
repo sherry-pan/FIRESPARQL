@@ -1,0 +1,20 @@
+Question:
+List the datasets benchmarked under the Fine-Grained Image Classification research problem?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?dataset 
+     WHERE {
+      ?dataset schema:description "Fine-Grained Image Classification".
+      ?dataset schema:keywords?k.
+      ?k schema:description?kdesc.
+       FILTER (STRLIKE(STR(?kdesc), "Image Classification") && 
+              STRLIKE(STR(?kdesc), "Grained") && 
+              STRLIKE(STR(?kdesc), "Classification"))
+       }
+     LIMIT 10<|eot_id|>

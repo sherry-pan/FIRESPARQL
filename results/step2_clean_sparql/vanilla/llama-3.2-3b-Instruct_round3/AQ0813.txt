@@ -1,0 +1,23 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+    ?metric schema:description "Benchmarking models on SQuAD2.0".
+    ?metric schema:topic "SQuAD2.0".
+    ?metric schema:relation "Evaluation metric".
+    ?metric schema:description "Commonly used to evaluate model performance".
+    ?metric rdfs:label ?metricLabel.
+    FILTER (CONTAINS(LCASE(?metricLabel), "bleu")
+    OR CONTAINS(LCASE(?metricLabel), "rouge")
+    OR CONTAINS(LCASE(?metricLabel), "em")
+    OR CONTAINS(LCASE(?metricLabel), "meteor")
+    OR CONTAINS(LCASE(?metricLabel), "pplm")
+    OR CONTAINS(LCASE(?metricLabel), "cider")
+    OR CONTAINS(LCASE(?metricLabel), "rouge-nl")
+    OR CONTAINS(LCASE(?metricLabel), "squad"))
+}
+```

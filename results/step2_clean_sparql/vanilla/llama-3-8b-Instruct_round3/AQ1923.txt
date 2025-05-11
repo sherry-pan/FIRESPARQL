@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:usesModel ?model.
+  ?model rdfs:label "Long Short Transformer".
+  ?paper orkg:evaluatedOn ?benchmark.
+  ?codeLink a orkg:CodeLink.
+  ?codeLink orkg:belongsTo ?paper.
+  FILTER(?benchmark != orkg:None)
+}
+```

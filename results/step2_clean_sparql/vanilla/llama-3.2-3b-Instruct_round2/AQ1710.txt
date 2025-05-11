@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/0.1/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?score 
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:score ?score.
+    ?model orkg:dataset "Atari 2600 Freeway".
+    ?model orkg:metric "Score".
+    FILTER (REGEX(?score, "^[0-9.]+")).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

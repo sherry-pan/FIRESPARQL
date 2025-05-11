@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology#>
+
+SELECT ?model ?modelLabel ?accuracy
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:dataset rdfs:label "RACE".
+    ?benchmark orkg:metric orkg:Accuracy.
+    ?benchmark orkg:score ?accuracy.
+    ?model orkg:hasLabel ?modelLabel.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

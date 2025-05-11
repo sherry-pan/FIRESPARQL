@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/2019/05/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paperId ?title
+WHERE {
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "Atari 2600 Asterix".
+  ?paper orkg:hasId ?paperId.
+  FILTER (lang(?title) = "en").
+}
+```

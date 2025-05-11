@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/resource/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?score
+WHERE {
+   ?benchmark a orkg:Benchmark;
+              dcterms:title "Atari 2600 Q*Bert";
+              orkg:hasScore ?score.
+   ?model a orkg:Model;
+          orkg:hasBenchmark ?benchmark.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

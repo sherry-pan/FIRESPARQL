@@ -1,0 +1,20 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX ork: <https://orcid.org/ork/>
+     PREFIX purl: <https://orcid.org/purl/>
+     PREFIX w3c: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     SELECT?metric?score 
+     WHERE {
+        ?dataset a ork:Dataset.
+        ?dataset w3c:hasBenchmark?benchmark.
+        ?benchmark a ork:Benchmark.
+        ?benchmark w3c:hasMetric?metric.
+        ?benchmark ork:hasDataset?dataset.
+        ?benchmark ork:hasScore?score.
+        ?dataset ork:identifier "https://seel.cse.lsu.edu/data/re17.zip".
+         FILTER (REGEX(STR(?metric), ".*Benchmark.*Score.*")) 
+     }<|eot_id|>

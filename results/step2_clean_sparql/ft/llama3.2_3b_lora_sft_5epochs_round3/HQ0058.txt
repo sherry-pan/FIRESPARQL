@@ -1,0 +1,19 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+    ?algorithm a orkgc:Algorithm;
+               rdfs:label "naive bayes".
+    ?dataset a orkgc:Dataset;
+             rdfs:label "machine learning feature bag of words to classify user feedback as feature request".
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_ALGORITHM ?algorithm;
+               orkgp:P32 ?cont.
+    ?cont orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:P30 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    BIND(xsd:float(?metric_lbl) AS ?precision)
+    BIND(xsd:float(?eval) AS ?recall)
+    BIND(xsd:float(?eval) AS ?f1)
+    FILTER(?precision > 0 && ?recall > 0 && ?f1 > 0)
+}
+```

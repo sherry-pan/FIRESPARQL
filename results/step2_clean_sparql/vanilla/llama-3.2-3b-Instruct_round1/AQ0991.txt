@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+    ?metric ork:isEvaluationMetricFor ?dataset.
+    ?dataset ork:datasetLabel "Reuters De-En".
+    ?metric rdfs:label ?metricLabel.
+    FILTER (CONTAINS(STR(?metricLabel), "Accuracy") || 
+            CONTAINS(STR(?metricLabel), "F1-score") || 
+            CONTAINS(STR(?metricLabel), "ROUGE-N") || 
+            CONTAINS(STR(?metricLabel), "BLEU-score") || 
+            CONTAINS(STR(?metricLabel), "PPLM-100"))
+}
+```

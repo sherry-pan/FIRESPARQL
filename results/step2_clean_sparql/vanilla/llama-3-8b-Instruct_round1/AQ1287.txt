@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+        orkg:dataset ?dataset .
+   ?dataset rdfs:label "Atari 2600 Enduro" .
+   ?benchmark orkg:result ?result .
+   ?result orkg:metric ?metric ;
+        orkg:value ?value .
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

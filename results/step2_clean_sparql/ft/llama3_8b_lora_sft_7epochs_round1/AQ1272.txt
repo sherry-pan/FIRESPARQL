@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "Atari 2600 Breakout"))
+  ?contrib orkgp:HAS_VALUE ?value.
+  ?value orkgp:P2006 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?score)
+```

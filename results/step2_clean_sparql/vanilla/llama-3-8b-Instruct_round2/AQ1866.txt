@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?dataset (COUNT(?citations) AS ?count)
+WHERE {
+  ?dataset a orkg:BenchmarkDataset.
+  ?dataset orkg:relatedTo ?paper.
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:domain orkg:NaturalLanguageInference.
+  ?paper orkg:citedBy ?citations.
+}
+GROUP BY ?dataset
+HAVING (?count > 10)
+ORDER BY DESC(?count)
+LIMIT 10
+```

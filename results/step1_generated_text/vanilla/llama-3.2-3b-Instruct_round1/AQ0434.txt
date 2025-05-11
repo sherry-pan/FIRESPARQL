@@ -1,0 +1,19 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Stanford Cars dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX vocab: <http://purl.org/vocab/>
+    SELECT?paper?title?id WHERE {
+     ?paper schema:about?title.
+     ?paper vocab:hasBenchmark?benchmark.
+     ?benchmark schema:hasDataset?dataset.
+     ?dataset vocab:datasetName "Stanford Cars".
+     ?benchmark vocab:hasDataset?dataset.
+     ?paper orkg:hasID?id.
+    }
+    ```<|eot_id|>

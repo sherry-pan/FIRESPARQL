@@ -1,0 +1,17 @@
+Question:
+What are the most commonly used benchmark datasets for the Joint Entity and Relation Extraction research field?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/openresearchknowledgegraph/>
+     SELECT?dataset?frequency
+     WHERE {
+    ?dataset orkg:topic "Joint Entity and Relation Extraction".
+    ?dataset orkg:domain "Natural Language Processing".
+    ?dataset orkg:researchArea orkg:researchArea/label?researchArea.
+    ?dataset orkg:benchmark?benchmark.
+    ?dataset orkg:benchmarkCount?benchmarkCount.
+     FILTER (STRIKE?benchmarkCount > 1)
+     GROUP BY?dataset
+     HAVING COUNT(?benchmark) > 5
+     ORDER BY DESC(?benchmarkCount)
+     }<|eot_id|>

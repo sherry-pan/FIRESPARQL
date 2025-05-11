@@ -1,0 +1,21 @@
+Question:
+Could you provide a list of models that have been tested on the SciCite benchmark dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model?title
+     WHERE {
+      ?model a schema:Model.
+      ?model schema:description?description.
+       dbpedia:hasTestedOn?model dbpedia:Dataset,
+                           dbpedia:Dataset "SciCite".
+       SERVICE wikibase:label {
+         bd:serviceParam wikibase:language "[autonym].
+        ?model rdfs:label?title.
+       }
+     }<|eot_id|>

@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset SQuAD2.0?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/orkg#>
+     PREFIX sqad: <http://orkg.org/schema/squad#>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+
+     SELECT?metric?value
+     WHERE {
+      ?dataset a sqad:Dataset.
+      ?dataset sqad:benchmark?benchmark.
+      ?benchmark sqad:dataset?dataset.
+      ?benchmark sqad:metric?metric.
+      ?benchmark sqad:value?value.
+      ?dataset sqad:dataset?dataset2.
+      ?dataset2 sqad:benchmark?benchmark.
+      ?benchmark sqad:dataset?dataset2.
+       FILTER (CONTAINS(LCASE(?metric), "top") AND CONTAINS(LCASE(?metric), "benchmark"))
+       BIND (GROUP BY?metric (COUNT(?value) AS?count) ORDER BY DESC(?count) LIMIT 1) AS?metric
+      ?metric?value
+     }<|eot_id|>

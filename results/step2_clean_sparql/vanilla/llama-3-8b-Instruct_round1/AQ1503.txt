@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?metric ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "Supervised: dataset".
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:metricValue ?score.
+  ?metric rdfs:label "SemEval 2013".
+  FILTER NOT EXISTS {
+    ?model orkg:benchmarks ?benchmark2.
+    ?benchmark2 orkg:dataset ?dataset.
+    ?benchmark2 orkg:metric ?metric.
+    ?benchmark2 orkg:metricValue ?score2.
+    FILTER(?score2 > ?score)
+  }
+}
+```

@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest Top 1 Accuracy score on the ImageNet V2 benchmark dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX p: <http://www.openresearch.org/>
+
+SELECT?model?accuracy
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:hasBenchmark?benchmark.
+   ?benchmark dbo:dataset "ImageNet V2".
+   ?model orkg:hasResult?result.
+   ?result orkg:metric "Top 1 Accuracy".
+   ?result orkg:value?accuracy.
+    FILTER (?accuracy >?maxAccuracy).
+    BIND (MAX(?accuracy) AS?maxAccuracy)
+}<|eot_id|>

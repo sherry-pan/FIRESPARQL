@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/terms/>
+
+SELECT ?paperTitle ?paperID
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasBenchmarkedModel ?benchmarkedModel.
+  ?benchmarkedModel orkg:usedDataset ?dataset.
+  ?dataset dc:title "Penn Treebank (Character Level)".
+  ?paper dc:title ?paperTitle.
+  ?paper orkg:hasID ?paperID.
+}
+```

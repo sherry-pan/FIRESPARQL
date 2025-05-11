@@ -1,0 +1,37 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ SELECT?material?material_label
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                   rdfs:label      ?problem_label.
+       FILTER (str(?problem_label) = "piezoresistive material")
+      ?benchmark      orkgp:HAS_PROBLEM      ?problem;
+                      orkgp:HAS_SOURCE_file     ?source_file.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_SOURCE_FILE     ?source_file.
+      ?source_file  orkgp:HAS_CODE         ?code.
+      ?code         orkgp:HAS_MODEL         ?model;
+                      orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_MODEL2        ?model.
+      ?model       rdfs:label              ?model_label.
+       OPTIONAL {
+        ?model      orkgp:HAS_EVALUATION     ?evaluation.
+        ?evaluation      rdfs:label              ?eval_label.
+         FILTER (str(?eval_label) = "response time")
+         BIND(xsd:float(?evaluation) as?eval_value)
+         BIND(xsd:float(?eval_value) as?eval_value_).
+       }
+       OPTIONAL {
+        ?cont         orkgp:P32             ?constraint.
+        ?constraint   rdfs:label              ?constraint_label.
+         FILTER (str(?constraint_label) = "time")
+         BIND(xsd:int(?constraint) as?constraint_value)
+         BIND(xsd:int(?constraint_value) as?constraint_value_).
+       }
+       BIND(xsd:float(max(?eval_value_,?constraint_value_) as?response_time)
+       BIND(xsd:float(?response_time) as?response_time_)
+       SELECT?material?material_label
+       WHERE {
+        ?model      a                orkgc:Model

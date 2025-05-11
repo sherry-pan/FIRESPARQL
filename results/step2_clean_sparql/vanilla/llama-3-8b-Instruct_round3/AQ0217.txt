@@ -1,0 +1,13 @@
+```
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:testedOn ?dataset.
+  ?dataset rdfs:label "Reuters RCV1/RCV2 English-to-German benchmark dataset"@en.
+  ?model orkg:languageModel ?modelLabel.
+  FILTER(LANG(?modelLabel) = "en").
+}
+```

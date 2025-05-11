@@ -1,0 +1,24 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CoNLL++?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX vcard: <http://purl.org/vcard/3.0/>
+     SELECT?metric?value WHERE {
+    ?q a orkg:Question.
+     rdfs:label?qLabel.
+     schema:description?qDescription.
+     dbo:abstract?qAbstract.
+     vcard:author?author.
+     orkg:relatedTo?related.
+    ?related orkg:dataset "CoNLL++".
+    ?related orkg:benchmark?benchmark.
+    ?benchmark orkg:metric?metric.
+    ?benchmark orkg:value?value.
+     FILTER (STR(?metric) = "top" AND STR(?value) = "benchmark" )
+     }<|eot_id|>

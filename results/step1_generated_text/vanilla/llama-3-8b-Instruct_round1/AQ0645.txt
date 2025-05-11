@@ -1,0 +1,14 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the HoC dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paper_title?paper_id
+     WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:referencesDataset orkg:HoC.
+    ?paper orkg:title?paper_title.
+    ?paper orkg:doi?paper_id.
+     FILTER lang(?paper_title) = "en" }<|eot_id|>

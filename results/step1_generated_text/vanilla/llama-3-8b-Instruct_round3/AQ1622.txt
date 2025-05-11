@@ -1,0 +1,19 @@
+Question:
+Which model has achieved the highest MACs score on the ImageNet benchmark dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT?model?macs
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:hasBenchmarkResult?result.
+   ?result orkg:hasBenchmark?benchmark.
+   ?benchmark rdfs:label "ImageNet".
+   ?result orkg:hasMetricValue?macs.
+   ?result orkg:metricName "MACs".
+    FILTER (?macs >?prevMacs)
+    ORDER BY DESC(?macs)
+    LIMIT 1
+}<|eot_id|>

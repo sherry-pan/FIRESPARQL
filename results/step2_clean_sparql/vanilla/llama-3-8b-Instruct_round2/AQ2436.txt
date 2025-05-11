@@ -1,0 +1,15 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper dcterms:title ?title.
+  FILTER (CONTAINS(LCASE(str(?title)), "imagenet") && CONTAINS(LCASE(str(?title)), "inat") && CONTAINS(LCASE(str(?title)), "ws-dan")).
+ ?paper orkg:hasCode ?code.
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX psd: <http://persistence-schema.org/2012/07/persistence-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?metric psd:benchmarkName "Cartpole, swingup (DMControl500k)".
+    ?metric psd:benchmarkMetric ?metricLabel.
+    ?metric psd:benchmarkValue ?value.
+    FILTER (REGEX(STR(?metricLabel), ".*\\(.*\\)$") || REGEX(STR(?metricLabel), ".*result.*"))
+}
+```

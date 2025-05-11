@@ -1,0 +1,20 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/2015/02/properties/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikibase.org/biodiversity/>
+SELECT ?model ?score
+WHERE {
+  ?model dbr:dataset ?dataset.
+  ?dataset dbr:datasetType "River Raid".
+  ?model dbr:benchmark ?benchmark.
+  ?benchmark wdt:P31 ?benchmarkClass.
+  ?benchmarkClass rdfs:label ?benchmarkClassLabel.
+  ?model dbr:score ?score.
+  FILTER (STR(?benchmarkClassLabel) = "Atari 2600 River Raid benchmark" && 
+          STR(?score) = "highest")
+}
+```

@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Tennis")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(?value > 0)
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?model a orkgc:Model;
+             rdfs:label ?model_lbl.
+      ?model orkgp:P32 ?benchmark.
+      ?benchmark orkgp:HAS_METRIC ?metric.
+      ?metric orkgp:HAS_VALUE ?value.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

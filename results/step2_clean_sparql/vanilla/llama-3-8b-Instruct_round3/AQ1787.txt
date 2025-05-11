@@ -1,0 +1,15 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:achievedScore ?score.
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/Atari_2600_Yars_Revenge> ;
+             orkg:relatedTo ?model.
+  ?benchmark rdfs:label "Yars Revenge".
+}
+ORDER BY DESC(?score)
+LIMIT 1

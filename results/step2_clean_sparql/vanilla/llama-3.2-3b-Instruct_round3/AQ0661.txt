@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkgSchema: <http://purl.org/orkg/schema/>
+SELECT ?title ?id
+WHERE {
+  ?p orkg:hasBenchmarkedModel ?model.
+  ?model schema:hasBenchmarkedOn ?benchmark.
+  ?benchmark schema:hasDataset ?dataset.
+  ?dataset schema:datasetName "ImageNet ReaL".
+  ?p orkg:hasPaper ?paper.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasId ?id.
+}
+ORDER BY DESC(?id)
+```

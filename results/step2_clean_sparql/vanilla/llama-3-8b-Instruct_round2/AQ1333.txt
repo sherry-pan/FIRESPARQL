@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wos: <http://www.openresearchknowledgegraph.org/ontology/wos/>
+
+SELECT ?score ?metric
+WHERE {
+    ?paper a orkg:Paper ;
+           wos:dataset wos:WOS-46985 ;
+           orkg:hasResult ?result.
+    ?result orkg:hasScore ?score ;
+            orkg:hasMetric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

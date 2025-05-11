@@ -1,0 +1,16 @@
+```sparql
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bio4r: <http://bio4r.org/ontology/>
+PREFIX bio4rdataset: <http://bio4r.org/dataset/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?modelLabel
+WHERE {
+    ?model bio4r:hasModel ?evaluation.
+    ?evaluation bio4r:hasDataset ?dataset.
+    ?dataset dbpedia:datasetName "PROTEINS".
+    ?model rdfs:label ?modelLabel.
+    FILTER (lang(?modelLabel) = "en")
+}
+```

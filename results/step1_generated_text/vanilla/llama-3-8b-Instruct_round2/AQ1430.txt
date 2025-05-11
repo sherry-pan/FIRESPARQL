@@ -1,0 +1,35 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://schema.orkg.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT?model?bleuScore
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:hasResult?result.
+   ?result orkg:hasBenchmark?benchmark.
+   ?benchmark orkg:dataset?dataset.
+   ?dataset a orkg:Dataset ; 
+           orkg:name "WMT2014 English-German".
+   ?result orkg:hasMetric?metric.
+   ?metric a orkg:Metric ; 
+           orkg:name "BLEU score".
+   ?result orkg:hasValue?bleuScore.
+    FILTER (?bleuScore = xsd:decimal(?maxBleuScore ).
+   ?maxBleuScore = (
+        SELECT MAX(?bleuScore) 
+        WHERE {
+           ?model a orkg:Model.
+           ?model orkg:hasResult?result.
+           ?result orkg:hasBenchmark?benchmark.
+           ?benchmark orkg:dataset?dataset.
+           ?dataset a orkg:Dataset ; 
+                   orkg:name "WMT2014 English-German".
+           ?result orkg:hasMetric?metric.
+           ?metric a orkg:Metric ; 
+                   orkg:name "BLEU score".
+           ?result orkg:hasValue?bleuScore
+        }
+    ) )<|eot_id|>

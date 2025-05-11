@@ -1,0 +1,22 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX tconvss: <http://example.org/t-conv-s2s/>
+
+SELECT ?p ?c
+WHERE {
+  ?p a orkg:Paper.
+  ?p schema:description ?d.
+  ?d schema:about ?o.
+  ?o tconvss:TConvS2S.
+  ?p schema:hasPart ?c.
+  ?c schema:language "en".
+  FILTER (contains(STR(?c), "benchmark"))
+}
+ORDER BY DESC(?p)
+LIMIT 10
+```

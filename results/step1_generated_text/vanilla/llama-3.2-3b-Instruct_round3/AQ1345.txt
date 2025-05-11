@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark score and its metric on the ImageNet V2 dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark a dbo:Benchmark.
+    ?benchmark schema:description "ImageNet V2".
+    ?benchmark schema:dataset "ImageNet V2".
+    ?benchmark rdfs:label?metric.
+    ?benchmark schema:metric?metric.
+    ?benchmark schema:benchmarkScore?value.
+     FILTER (CONTAINS(LCASE(?metric), "top")
+     AND CONTAINS(LCASE(?metric), "benchmark"))
+     }<|eot_id|>

@@ -1,0 +1,27 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R76035 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P30?evalset.
+          ?evalset orkgp:P35?metric;
+                  orkgp:P36?value.
+           FILTER(REGEX(?metric_lbl, "^\w+:")
+                  &&?metric_lbl =?metric)
+         }
+         UNION
+         {
+           orkgr:R76035 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P30?evalset.
+          ?evalset rdfs:label?evalset_lbl.
+           FILTER(REGEX(?metric_lbl, "^\w+:")
+                  &&?metric_lbl =?metric)
+         }
+     }
+     GROUP BY?metric?metric_lbl
+     HAVING (COUNT(?value) > 1)
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

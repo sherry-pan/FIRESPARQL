@@ -1,0 +1,20 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c-wsdl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX cat: <http://dbpedia.org/ontology/CATTS_XSUM>
+PREFIX bio: <http://dbpedia.org/ontology/>
+
+SELECT ?p ?o
+WHERE {
+  ?paper a owl:Thing.
+  ?paper cat:uses ?model.
+  ?model cat:benchmarkedBy ?benchmark.
+  ?benchmark schema:hasText ?text.
+  ?text schema:contains "CATTS-XSUM".
+  ?paper rdfs:label ?label.
+  FILTER (lang(?label) = 'en' || lang(?label) = 'en-US').
+  ?p cat:references ?o.
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wots: <http://www.wotsnet.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?model wots:isModelOf ?dataset.
+  ?dataset wots:datasetName "Atari 2600 Enduro".
+  ?model wots:hasScore ?score.
+  ?model wots:isTopModel ?topModel.
+  ?topModel wots:hasScore ?topScore.
+  FILTER (?score >= ?topScore)
+}
+```

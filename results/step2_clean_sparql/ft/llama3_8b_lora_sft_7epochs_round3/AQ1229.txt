@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R6941 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R6955 orkgp:compareContribution ?contrib.
+  }
+  ?contrib orkgp:P31034 ?benchmark;
+            orkgp:P31 ?cont.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "Cart Pole (OpenAI Gym)"))
+  ?cont orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P5021 ?value;
+        orkgp:P5020 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?score)
+```

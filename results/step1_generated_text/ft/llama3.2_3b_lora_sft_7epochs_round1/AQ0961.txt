@@ -1,0 +1,47 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Frostbite dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+         orkgr:R79435 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P30?eval_set.
+        ?eval_set orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         BIND(
+           xmap(
+             {
+               SELECT?metric?metric_lbl
+               WHERE {
+                ?contrib orkgp:P30?eval_set.
+                ?eval_set orkgp:P31?dataset.
+                ?dataset rdfs:label?dataset_lbl.
+                ?dataset orkgp:P32?metric.
+                ?metric rdfs:label?metric_lbl.
+               }
+               ORDER BY DESC(?metric)
+           )
+         ) AS?eval_metric
+         FILTER(?eval_metric > 0)
+         BIND(
+           {
+             SELECT?metric?metric_lbl
+             WHERE {
+              ?contrib orkgp:P30?eval_set.
+              ?eval_set orkgp:P31?dataset.
+              ?dataset rdfs:label?dataset_lbl.
+              ?dataset orkgp:P32?metric.
+              ?metric rdfs:label?metric_lbl.
+             }
+           }
+           ORDER BY ASC(?metric)
+       ) AS?eval_metric_ascending
+       ) AS?eval_metric_value
+         WHERE {
+            ?contrib orkgp:P30?eval_set.
+            ?eval_set orkgp:P31?dataset.
+            ?dataset rdfs:label?dataset_lbl.
+            ?dataset orkgp:P32?metric.
+            ?metric rdfs:label?metric_lbl.
+           }
+     }<|eot_id|>

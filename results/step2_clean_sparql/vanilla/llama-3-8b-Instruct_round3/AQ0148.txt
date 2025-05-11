@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/api/v1/resource/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?modelLabel ?paper
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper dcterms:title ?title.
+   FILTER (CONTAINS(LCASE(?title), "qnli benchmark dataset") || 
+           CONTAINS(LCASE(?title), "qnli dataset") || 
+           CONTAINS(LCASE(?title), "qnli")).
+   ?paper orkg:hasModel ?model.
+   ?model a orkg:Model.
+   ?model orkg:label ?modelLabel.
+}
+```

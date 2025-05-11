@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://semantic-mediawiki.org/swd/ontology/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:hasBenchmark <http://semantic-mediawiki.org/swd/ontology/orkg/Asteroids_2600>.
+   ?model orkg:hasMetric schema:Score.
+   ?model orkg:hasValue ?score.
+}
+ORDER BY DESC(xsd:decimal(?score))
+LIMIT 1
+```

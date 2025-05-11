@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_contribution ?contribution.
+  ?contribution orkg:uses_model ?model.
+  ?model rdfs:label "FQF model".
+  ?paper orkg:has_code_link ?code_link.
+  FILTER (?code_link != "").
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX wmt: <http://www.wikidata.org/prop/direct/WMT/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset wdt:P275 ?metric;
+           wdt:P3003 ?score;
+           wdt:P31 wd:Q147;
+           wdt:P301 ?benchmark.
+  FILTER (str(?benchmark) = "WMT2014 French-English")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

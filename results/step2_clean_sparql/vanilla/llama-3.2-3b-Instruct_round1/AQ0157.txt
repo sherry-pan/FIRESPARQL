@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?model
+WHERE {
+    ?model orkg:hasDataset ?dataset.
+    ?dataset dbp:datasetLabel "Penn Treebank (Character Level)".
+    FILTER (regex(str(?model), "^[A-Za-z]+$") && regex(str(?model), "[a-zA-Z]+_(Character|Level)$"))
+}
+```

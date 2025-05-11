@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?result a orkg:Result ;
+          orkg:hasBenchmark ?benchmark ;
+          orkg:hasScore ?score ;
+          orkg:hasMetric ?metric.
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:name "ModelNet40".
+  FILTER (?metric = "top" && ?score != "")
+}
+```

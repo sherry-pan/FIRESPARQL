@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasPublicationDate ?date ;
+         orkg:hasDataset ?dataset ;
+         orkg:hasEvaluationMetric ?metric.
+  ?dataset a orkg:Dataset ;
+           orkg:name "Yelp Fine-grained classification dataset".
+  FILTER (?date >= "2015-01-01"^^xsd:date && ?date <= "2022-12-31"^^xsd:date)
+  FILTER (str(?metric) IN ("Accuracy", "F1-score", "Precision", "Recall", "AUC-ROC"))
+}
+```

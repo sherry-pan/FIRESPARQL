@@ -1,0 +1,15 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P5041 ?model.
+  ?model rdfs:label ?model_label.
+  FILTER(REGEX(?model_label, "AxCell"))
+  ?paper orkgp:P5042 ?code.
+  ?code rdfs:label ?code_label.
+  FILTER(REGEX(?code_label, "code"))
+}
+ORDER BY DESC(?code)
+LIMIT 10
+```

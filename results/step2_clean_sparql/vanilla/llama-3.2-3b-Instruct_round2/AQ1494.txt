@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX vcard: <http://purl.org/vcard/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT ?model ?benchmark ?metric
+WHERE {
+  ?model orkg:isModel ?modelLabel.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset "RotoWire (Content Ordering)".
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:bestPerformingModel ?bestModel.
+  FILTER (?metric = "BLEU")
+}
+ORDER BY DESC(?benchmark)
+```

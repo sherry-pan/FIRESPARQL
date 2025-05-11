@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wmt14: <http://wmt2014.org/schema/2014/02/rankings>
+
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?metricLabel.
+  ?metric wmt14:evaluationMetricFor ?dataset.
+  ?dataset wmt14:datasetName "English-German"@en.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+```

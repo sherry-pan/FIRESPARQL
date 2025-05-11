@@ -1,0 +1,25 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Sequential CIFAR-10 dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+
+     SELECT?metric
+     WHERE {
+      ?model a schema:Model.
+      ?model schema:description?description.
+      ?description schema:keywords?keywords.
+       filter (contains(str(?keywords), "CIFAR-10").
+      ?metric schema:keywords?metric.
+       filter (contains(str(?metric), "evaluation").
+      ?model schema:dataset?dataset.
+      ?dataset schema:datasetType "CIFAR-10".
+      ?model schema:benchmark?benchmark.
+       filter (contains(str(?benchmark), "evaluation").
+       }
+     LIMIT 10<|eot_id|>

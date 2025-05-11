@@ -1,0 +1,44 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Boxing dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+         orkgr:R155801 orkgp:compareContribution?contrib.
+       } UNION {
+         orkgr:R155802 orkgp:compareContribution?contrib.
+       }
+      ?paper orkgp:P31?contrib.
+       OPTIONAL {?contrib orkgp:P34?value.
+              ?value orkgp:P2006?metric.}
+       OPTIONAL {?contrib orkgp:P34?value_.
+              ?value_ orkgp:P2005?metric.
+               {
+                 orkgr:R155801 orkgp:compareContribution?contrib_;
+                ?contrib_ orkgp:P34?value__.
+                ?value__ orkgp:P2006?metric__;
+                 BIND(
+                   IF(?value__ >?value,?value__,?value) AS?value
+                 )
+                 BIND(
+                   IF(?value__ >?value_, "higher", "lower") AS?direction
+                 )
+               }
+       }
+       OPTIONAL {?contrib orkgp:P34?value_;
+                ?value_ orkgp:P2005?metric_;
+                 {
+                   orkgr:R155802 orkgp:compareContribution?contrib__;
+                  ?contrib__ orkgp:P34?value__;
+                  ?value__ orkgp:P2006?metric__;
+                   BIND(
+                     IF(?value__ >?value_,?value__,?value_) AS?value
+                   )
+                   BIND(
+                     IF(?value__ >?value_, "higher", "lower") AS?direction
+                   )
+                 }
+               }
+       BIND(
+         IF(?value >?value_, "higher", "lower

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?code ?code_url
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper rdfs:comment ?title.
+  FILTER regex(?title, "Transformer-XL Base", "i").
+  ?paper orkg:hasCode ?code.
+  ?code rdfs:label ?code_name.
+  FILTER regex(?code_name, "benchmark", "i").
+  ?code orkg:hasLocation ?code_url.
+}
+```

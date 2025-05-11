@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmark <http://openresearchknowledgegraph.org/ontology/Sequential_MNIST>.
+ ?model orkg:score?score.
+  FILTER (?score = (SELECT MAX(?score2) {?m2 a orkg:Model ; orkg:benchmark <http://openresearchknowledgegraph.org/ontology/Sequential_MNIST> ; orkg:score?score2 } ) )
+}<|eot_id|>

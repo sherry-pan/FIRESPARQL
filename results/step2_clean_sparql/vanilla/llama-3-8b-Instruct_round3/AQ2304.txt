@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?code ?paper
+WHERE {
+  ?paper a bibo:Article.
+  ?paper dc:title ?title.
+  ?paper dc:subject ?subject.
+  ?subject rdfs:label "Rational DQN Average".
+  ?paper orkg:hasCode ?code.
+  FILTER (lang(?title) = "en" && contains(?title, "benchmark"))
+}
+```

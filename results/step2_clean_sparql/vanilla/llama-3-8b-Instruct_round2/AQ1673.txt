@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:metric "Accuracy".
+  ?result orkg:value ?accuracy.
+  ?result orkg:dataset orkg:MLDoc_ZeroShot_English_to_German.
+  ?result orkg:metricType owl:Best.
+  FILTER(?accuracy = (SELECT max(?accuracy2) 
+                      WHERE {
+                        ?model2 a orkg:Model.
+                        ?result2 orkg:metric "Accuracy".
+                        ?result2 orkg:value ?accuracy2.
+                        ?result2 orkg:dataset orkg:MLDoc_ZeroShot_English_to_German
+                      }))
+}
+```

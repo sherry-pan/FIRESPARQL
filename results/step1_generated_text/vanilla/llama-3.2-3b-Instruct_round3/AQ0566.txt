@@ -1,0 +1,22 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the MLDoc Zero-Shot English-to-Russian dataset?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX orkg: <http://orcid.org/ontology/>
+
+     SELECT?paper?title?id
+     WHERE {
+     -[:a orkg:hasTitle?title.].
+     -[:a orkg:hasId?id.].
+     -[:a orkg:hasBenchmark?benchmark.].
+    ?benchmark orkg:hasDataset "MLDoc Zero-Shot English-to-Russian".
+    ?benchmark orkg:hasPaper?paper.
+     } GROUP BY?paper?title?id
+     ORDER BY DESC(?benchmark)
+     ```<|eot_id|>

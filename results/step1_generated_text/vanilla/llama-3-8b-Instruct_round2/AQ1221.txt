@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Ball in cup, catch (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?value
+     WHERE {
+      ?dataset a orkg:Dataset ;
+                 orkg:name "Ball in cup, catch (DMControl500k)".
+      ?benchmark a orkg:Benchmark ;
+                 orkg:dataset?dataset ;
+                 orkg:result?result.
+      ?result a orkg:Result ;
+                 orkg:metric?metric ;
+                 orkg:value?value.
+       FILTER (?metric = "highest" &&?value = xsd:float(?value) )
+     }<|eot_id|>

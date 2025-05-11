@@ -1,0 +1,16 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?compound
+     WHERE {
+    ?compound schema:description "lead compound".
+    ?compound schema:description?d.
+     GROUP BY?d
+     HAVING (COUNT(?d) = (SELECT MAX(COUNT(?d)) FROM?compound))
+    ?compound
+     }<|eot_id|>

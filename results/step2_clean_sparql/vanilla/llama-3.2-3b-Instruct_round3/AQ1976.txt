@@ -1,0 +1,23 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/properties/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?paper ?link 
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?code dbo:identifier ?codeId.
+  ?code dbp:code ?codeText.
+  ?code dbp:codeScheme "Benchmarking".
+  ?paper ^ps:hasCitation ?citation.
+  ?citation dbp:citationCode ?code.
+  ?code dbo:identifier ?codeId.
+  ?code foaf:primaryContact ?contact.
+  ?contact rdfs:label ?link.
+  FILTER(LANG(?codeId) > 0)
+}
+LIMIT 10
+```

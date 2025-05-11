@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?codeUrl
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:utilizedModel ?model.
+  ?model rdfs:label "Tokenlearner".
+  ?paper orkg:hasCode ?code.
+  ?code orkg:hasCodeUrl ?codeUrl.
+  FILTER (?codeUrl != "null")
+}
+```

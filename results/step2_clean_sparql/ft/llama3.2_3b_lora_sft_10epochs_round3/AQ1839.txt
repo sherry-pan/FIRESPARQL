@@ -1,0 +1,13 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.
+  FILTER (str(?problem_lbl) = "Image Classification")
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:P32 ?problem.
+}
+```

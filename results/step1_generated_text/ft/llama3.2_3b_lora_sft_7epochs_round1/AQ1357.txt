@@ -1,0 +1,37 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R73891 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?paper.
+          ?paper orkgp:P34?eval.
+          ?eval orkgp:P35?metric;
+                 orkgp:P36?value.
+           FILTER(REGEX(?metric_lbl, "t2e")
+                  || REGEX(?metric_lbl, "WAT")
+                  || REGEX(?metric_lbl, "ROUGE")
+                  || REGEX(?metric_lbl, "BLEU")
+                  || REGEX(?metric_lbl, "METEOR")
+                  || REGEX(?metric_lbl, "ROUGE-SU")
+                  || REGEX(?metric_lbl, "T2E-SU"))
+          ?metric_lbl rdfs:label?metric_lbl.
+          ?contrib orkgp:P32?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+           FILTER(?dataset_lbl = "BUCC German-to-English")
+          ?eval a orkgp:Evaluation.
+         }
+         UNION {
+           orkgr:R73891 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?paper.
+          ?paper orkgp:P34?eval.
+          ?eval orkgp:P35?metric;
+                 orkgp:P36?value.
+           FILTER(REGEX(?metric_lbl, "t2e")
+                  || REGEX(?metric_lbl, "WAT")
+                  || REGEX(?metric_lbl, "ROUGE")
+                  || REGEX(?metric_lbl, "BLEU")
+                  || REGEX(?metric_lbl, "METEOR")
+                  || REGEX(?metric_lbl, "RO

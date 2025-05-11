@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+SELECT ?benchmarkScore ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset schema:description "Alien".
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:benchmarkScore ?benchmarkScore.
+  FILTER (CONTAINS(LCASE(?metric), "top benchmark score"))
+  FILTER (CONTAINS(LCASE(?benchmark), "atari 2600"))
+}
+ORDER BY DESC(?benchmarkScore)
+```

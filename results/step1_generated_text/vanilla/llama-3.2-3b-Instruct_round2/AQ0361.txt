@@ -1,0 +1,15 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciERC dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?paper?title?id 
+WHERE {
+ ?paper a dbo:ResearchPaper.
+ ?paper dbo:hasBenchmark?benchmark.
+ ?benchmark dbo:hasDataset?dataset.
+ ?dataset dbo:datasetName "SciERC".
+  SERVICE dfn:search 
+  { bd:service <http://linked.data.gov.uk/ontology/dfn/search>. }
+}
+```<|eot_id|>

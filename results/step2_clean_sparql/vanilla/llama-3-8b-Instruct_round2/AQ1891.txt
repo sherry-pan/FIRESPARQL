@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?dataset
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label ?label.
+  ?dataset orkg:fieldOfStudy orkg:Entity_Disambiguation.
+  FILTER(LANG(?label) = "en" && STRSTARTS(STR(?label), "Benchmark"))
+}
+LIMIT 10
+```

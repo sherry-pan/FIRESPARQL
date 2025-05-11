@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+SELECT ?name (COUNT(?article) AS ?count)
+WHERE {
+  ?article a orkg:Article.
+  ?article orkg:hasTitle "Coronavirus".
+  ?article orkg:hasContributor ?c.
+  ?c orkg:hasName ?name.
+}
+GROUP BY ?name
+ORDER BY DESC(?count)
+LIMIT 1
+```

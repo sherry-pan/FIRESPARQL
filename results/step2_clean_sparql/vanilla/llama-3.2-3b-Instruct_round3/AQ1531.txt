@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX wikitext: <http://example.org/wiki-text/>
+SELECT ?model 
+WHERE {
+  ?model wikitext:hasText "perplexity metric".
+  ?model wikitext:hasBenchmark "WikiText-103".
+  ?model orkg:bestResult ?bestResult.
+  ?bestResult orkg:metric "test perplexity".
+  FILTER (STRLIKE(STR(?bestResult), "^[0-9]+"))
+}
+```

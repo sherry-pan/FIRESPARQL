@@ -1,0 +1,26 @@
+Question:
+What is the highest benchmark result achieved on the WMT2016 English-Russian dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?experiment a orkg:Experiment ;
+             orkg:hasDataset?dataset ;
+             orkg:hasBenchmarkResult?benchmarkResult.
+ ?benchmarkResult a orkg:BenchmarkResult ;
+                 orkg:hasMetric?metric ;
+                 orkg:hasValue?value.
+ ?dataset a orkg:Dataset ;
+           rdfs:label "WMT2016 English-Russian".
+  FILTER (?experiment/orkg:hasMetric?metric &&?metric/rdfs:label?metricLabel.
+        ?metricLabel = "BLEU" ||?metricLabel = "TER" ||?metricLabel = "METEOR" || 
+        ?metricLabel = "ROUGE" ||?metricLabel = "ChrF" ||?metricLabel = "BER" || 
+        ?metricLabel = "F1" ||?metricLabel = "BLEU-T" ||?metricLabel = "BLEU-04" || 
+        ?metricLabel = "BLEU-05" ||?metricLabel = "BLEU-06" ||?metricLabel = "BLEU-07" || 
+        ?metricLabel = "BLEU-08" ||?metricLabel = "BLEU-09" ||?metricLabel = "BLEU-10" || 
+        ?metricLabel = "BLEU-11" ||?metricLabel = "BLEU-12" ||?metricLabel

@@ -1,0 +1,15 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX yelp: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://dbpedia.org/ontology/research_paper/>
+PREFIX BCD: <http://www.bigdata.com/rdf/search#> 
+
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?metricLabel.
+  FILTER (BCD:contains(?metricLabel, "Yelp-5") && BCD:contains(?metricLabel, "evaluate") && BCD:contains(?metricLabel, "metric"))
+}
+```

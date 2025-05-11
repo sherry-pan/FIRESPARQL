@@ -1,0 +1,20 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?ont?ont_label
+     WHERE {
+       orkgr:R44978 orkgp:compareContribution?cont.
+      ?cont orkgp:P7046?ont.
+      ?ont rdfs:label?ont_label.
+       FILTER (MAX(xsd:int(?ont_count)) =?ont_count)
+       {
+         SELECT?ont?ont_label (COUNT(?papers) AS?ont_count)
+         WHERE {
+          ?ont a orkgc:KnowledgeRepresentation;
+                 rdfs:label?ont_label.
+          ?papers orkgp:P7046?ont.
+         }
+         ORDER BY DESC(?ont_count)
+       }
+     }<|eot_id|>

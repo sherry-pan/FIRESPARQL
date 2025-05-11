@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/schema/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:hasBenchmark "Cart Pole (OpenAI Gym)".
+    ?model orkg:hasScore ?score.
+    FILTER (isNumeric(?score))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmarkedOn ?dataset.
+ ?dataset schema:name "TriviaQA".
+ ?model orkg:hasResult ?result.
+ ?result orkg:score ?accuracy.
+} 
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

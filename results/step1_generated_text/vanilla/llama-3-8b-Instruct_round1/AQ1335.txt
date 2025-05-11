@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Yelp-14 dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+        orkg:hasDataset <http://www.openresearchknowledgegraph.org/dataset/Yelp-14> ;
+        orkg:hasResult?result.
+   ?result a orkg:Result ;
+        orkg:hasMetric?metric ;
+        orkg:hasValue?value.
+    FILTER (?metric =?metric &&?value = xsd:float(max(?value)) )
+}<|eot_id|>

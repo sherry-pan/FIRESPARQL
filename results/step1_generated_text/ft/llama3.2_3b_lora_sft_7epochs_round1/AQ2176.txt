@@ -1,0 +1,26 @@
+Question:
+Where can I find code references in papers that have used the PAR Transformer Large model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+        ?paper rdf:type orkgc:Paper.
+        ?paper orkgp:P32?cont.
+        ?cont orkgp:P31?model.
+        ?model rdfs:label?model_lbl.
+         FILTER(REGEX(?model_lbl, "PAR Transformer Large"))
+        ?model orkgp:P32?benchmark.
+        ?benchmark orkgp:P34?eval.
+        ?eval orkgp:P35?code.
+         FILTER(REGEX(?code, "code"))
+        ?paper orkgp:P36?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "dataset"))
+        ?cont orkgp:P33?paper_lbl.
+        ?paper_lbl rdfs:label?paper_lbl.
+         FILTER(REGEX(?paper_lbl, "paper"))
+        ?cont orkgp:P37?cont_lbl.
+        ?cont_lbl rdfs:label?cont_lbl.
+         BIND(xsd:int(?cont_lbl) AS?cont_lbl_count)
+         BIND(xsd:int(?cont_lbl) AS?cont_lbl_count)
+      }<|eot_id|>

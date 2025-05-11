@@ -1,0 +1,18 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Assault dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark "Atari 2600 Assault".
+    ?model orkg:hasScore?score.
+    ?score schema:description "Score".
+     FILTER (STR(?score) > (min(?score) FILTER (str(?score) = "Score")) )
+     }<|eot_id|>

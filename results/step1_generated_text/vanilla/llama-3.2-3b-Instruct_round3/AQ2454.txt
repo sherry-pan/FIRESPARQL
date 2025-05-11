@@ -1,0 +1,19 @@
+Question:
+List the code links in papers that use the GPT-2 (small) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowlegde.org/schema/orkg/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikibase.org/schema/inference/ontologies/core/>
+     SELECT?paper?code
+     WHERE {
+    ?paper orkg:uses?gpt2_model.
+    ?gpt2_model wdt:P279?gpt2_model_type.
+     FILTER (?gpt2_model_type = wd:Q59476437).
+    ?paper wdt:P275?benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark rdfs:label?benchmarkLabel.
+     FILTER(LCASE(?benchmarkLabel) = "gpt-2 (small)").
+     FILTER(?paper orkg:code?code).
+     }<|eot_id|>

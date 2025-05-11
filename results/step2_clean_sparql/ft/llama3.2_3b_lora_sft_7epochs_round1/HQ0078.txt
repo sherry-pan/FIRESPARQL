@@ -1,0 +1,15 @@
+```sparql
+SELECT ?location WHERE {
+  ?study a orkgc:Study;
+         rdfs:label ?study_label;
+         orkgp:HAS_DATASET ?dataset;
+         orkgp:HAS_LOCATION ?location.
+  
+  FILTER(REGEX(?study_label, "scale"))
+  ?dataset orkgp:HAS_SOURCE ?source.
+  ?source rdfs:label ?source_label.
+  FILTER(REGEX(?source_label, "geographic"))
+} 
+ORDER BY DESC(?location)
+LIMIT 1
+```

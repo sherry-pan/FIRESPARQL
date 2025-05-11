@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?flops
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmark <http://www.openresearchknowledgegraph.org/ontology/CIFAR-100> ;
+         orkg:metricValue ?flops.
+  ?flops schema:metricType "FLOPS".
+}
+ORDER BY DESC(?flops)
+LIMIT 1
+```

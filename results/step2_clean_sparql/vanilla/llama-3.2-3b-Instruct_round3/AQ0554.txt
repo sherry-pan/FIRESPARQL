@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper schema:about ?paperID.
+  ?paper schema:hasPart ?benchmarkPaper.
+  ?benchmarkPaper schema:about ?benchmarkID.
+  ?paper schema:identifier ?id.
+  FILTER(regex(str(?benchmarkID), "Oxford-IIIT Pets"))
+}
+LIMIT 10
+```

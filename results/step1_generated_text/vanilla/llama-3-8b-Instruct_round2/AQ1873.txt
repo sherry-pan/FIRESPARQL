@@ -1,0 +1,23 @@
+Question:
+Provide a list of benchmarked datasets related to the Audio Classification research area?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT?dataset?datasetLabel?benchmark
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset rdfs:label?datasetLabel.
+ ?dataset dc:subject?topic.
+ ?topic rdfs:label "Audio Classification".
+ ?dataset prov:wasDerivedFrom?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+  FILTER (lang(?datasetLabel) = "en" && lang(?benchmarkLabel) = "en")
+}<|eot_id|>

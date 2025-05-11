@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperTitle ?codeLink ?multiGraspCodeLink
+WHERE {
+   ?paper a orkg:ResearchOutput.
+   ?paper dcterms:title ?paperTitle.
+   ?paper orkg:hasMethod ?method.
+   ?method rdfs:label "AlexNet".
+   ?method orkg:hasCode ?code.
+   ?code rdfs:label ?codeLink.
+   ?paper orkg:hasMethod ?multiGraspMethod.
+   ?multiGraspMethod rdfs:label "MultiGrasp".
+   ?multiGraspMethod orkg:hasCode ?multiGraspCode.
+   ?multiGraspCode rdfs:label ?multiGraspCodeLink.
+}
+```

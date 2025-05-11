@@ -1,0 +1,27 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX york: <http://york.ac.uk/thesaurus/>
+     PREFIX york: <http://york.ac.uk/thesaurus/>
+     PREFIX yorkt: <http://york.ac.uk/thesaurus/types/>
+     PREFIX yorkv: <http://york.ac.uk/thesaurus/values/>
+     PREFIX yorkb: <http://york.ac.uk/thesaurus/benchmark/>
+     PREFIX yorks: <http://york.ac.uk/thesaurus/skills/>
+     PREFIX yorkd: <http://york.ac.uk/thesaurus/data/>
+     PREFIX yorkr: <http://york.ac.uk/thesaurus/results/>
+
+     SELECT?metric?value 
+     WHERE {
+       ?benchmark a york:benchmark.
+       ?benchmark yorkt:benchmarkName "top".
+       ?benchmark yorkd:dataset "NYT-single".
+       ?benchmark yorkr:metric?metric.
+       ?benchmark yorkr:value?value.
+        FILTER (strlike(STR(?metric), "metric") AND strlike(STR(?metric), "value"))
+        }
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?f1Score
+WHERE {
+    ?model orkg:hasContribution ?c.
+    ?c orkg:hasResult ?r.
+    ?r orkg:hasDataset ?ds.
+    ?ds orkg:hasBenchmark ?b.
+    ?b orkg:hasDataset ?ds.
+    FILTER (?b = "squad.1.1"^^<http://www.w3.org/2001/XMLSchema#string> 
+    AND ?b = "dev"^^<http://www.w3.org/2001/XMLSchema#string>).
+    ?r orkg:hasF1Score ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

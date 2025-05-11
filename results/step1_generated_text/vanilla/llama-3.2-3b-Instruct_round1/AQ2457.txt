@@ -1,0 +1,26 @@
+Question:
+Can you provide links to code used in papers that benchmark the COMET - Direct model?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX p: <http://purl.org/metrics/papers/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX dcat: <http://www.w3.org/ns/dcat#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?paper?paperTitle?url
+     WHERE {
+      ?paper dcat:hasMetadata?metadata.
+      ?metadata dcterms:type?type.
+      ?type schema:description "benchmarking".
+      ?paper p:hasCode?code.
+      ?code schema:software?software.
+      ?software dcat:hasVersion "COMET-Direct".
+      ?paper wdt:P31 wd:Q12742245.
+      ?paper wdt:P31 wd:Q5.
+      ?paper wdt:P577?url.
+       SERVICE wikibase:label {
+         bd:serviceParam wikibase:language "en".
+       }
+     }<|eot_id|>

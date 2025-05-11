@@ -1,0 +1,18 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Yelp Fine-grained classification dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/vocabulary/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     SELECT?metric 
+     WHERE {
+    ?metric wdt:P0317?dataset.
+    ?dataset wdt:P1476 "Yelp Fine-grained classification".
+    ?metric wdt:P1764?value.
+     FILTER (CONTAINS(LCASE(?value), "accuracy") OR CONTAINS(LCASE(?value), "f1") 
+     OR CONTAINS(LCASE(?value), "precision") OR CONTAINS(LCASE(?value), "recall") 
+     OR CONTAINS(LCASE(?value), "f1-score") OR CONTAINS(LCASE(?value), "roc-auc") 
+     OR CONTAINS(LCASE(?value), "ap") OR CONTAINS(LCASE(?value), "area under the curve")
+     }
+     LIMIT 10<|eot_id|>

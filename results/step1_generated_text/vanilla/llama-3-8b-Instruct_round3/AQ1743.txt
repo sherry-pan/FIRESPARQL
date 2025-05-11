@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the BUCC German-to-English dataset in terms of F1 score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?f1Score
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmarks?benchmark.
+   ?benchmark orkg:dataset <http://purl.org/orkg/datasets/BUCC>.
+   ?benchmark orkg:metric "F1 score".
+   ?benchmark orkg:result?f1Score.
+    FILTER (?f1Score = FILTER (xsd:float(?f1Score) FILTER (xsd:float(?f1Score) >= 0 && xsd:float(?f1Score) <= 1)))
+    FILTER (xsd:float(?f1Score) = max(xsd:float(?f1Score)))
+}
+ORDER BY DESC(?f1Score)<|eot_id|>

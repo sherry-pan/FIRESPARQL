@@ -1,0 +1,16 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  orkgr:R154801 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43135 ?algorithm.
+  ?algorithm rdfs:label ?algorithm_lbl.
+  FILTER(REGEX(?algorithm_lbl, "naive bayes", "i"))
+  ?contrib orkgp:P43136 ?machine_learning_feature.
+  ?machine_learning_feature rdfs:label ?mlf_lbl.
+  FILTER(REGEX(?mlf_lbl, "bag of words", "i"))
+  ?contrib orkgp:P43139 ?evaluation.
+  ?evaluation orkgp:P43140 ?precision;
+              orkgp:P43141 ?recall;
+              orkgp:P43142 ?f1.
+}
+```

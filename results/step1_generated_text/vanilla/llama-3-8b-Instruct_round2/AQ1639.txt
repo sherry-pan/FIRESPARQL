@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest Score score on the Cheetah, run (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:achievedScore?score.
+ ?benchmark a orkg:Benchmark ;
+             orkg:dataset <http://www.orkg.org/Benchmark/DMControl500k>.
+ ?benchmark orkg:run?run.
+ ?run orkg:model?model.
+ ?run orkg:score?score.
+  FILTER (?score = xsd:integer("MAX"^^xsd:integer))
+}<|eot_id|>

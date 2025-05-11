@@ -1,0 +1,15 @@
+```sparql
+PREFIX wgsn: <http://www.w3.org/ns/wgsn#>
+PREFIX dmc: <http://purl.org/lium/dmc/>
+PREFIX dor: <http://purl.org/lium/dataset-orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark ?metric ?score.
+  FILTER (CONTAINS(LCASE(STR(?benchmark)), "ball in cup, catch (dmcontrol100k)"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

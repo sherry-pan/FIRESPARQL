@@ -1,0 +1,18 @@
+Question:
+List the metrics that are used to evaluate models on the ART/CoreSC benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric
+     WHERE {
+      ?paper a orkg:Paper ;
+             orkg:publishedOn?pubDate.
+      ?paper orkg:evaluatedOn?benchmark ;
+             orkg:benchmarkDataset?dataset.
+      ?dataset a schema:Dataset ;
+             schema:name "ART/CoreSC".
+      ?benchmark a orkg:Benchmark ;
+             orkg:hasMetric?metric.
+       FILTER (?pubDate >= "2020-01-01"^^xsd:date &&?pubDate <= "2022-12-31"^^xsd:date)
+     }<|eot_id|>

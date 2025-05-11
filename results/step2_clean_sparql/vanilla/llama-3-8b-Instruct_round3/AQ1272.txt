@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?score ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+           dc:title "Atari 2600 Breakout" ;
+           orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasMetric ?metric ;
+             orkg:hasScore ?score.
+  FILTER (?metric = "top benchmark score")
+}
+```

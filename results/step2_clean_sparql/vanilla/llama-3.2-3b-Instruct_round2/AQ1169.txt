@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX wikibase: <http://wikibase.org/bash#>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasValue ?value.
+    ?benchmark orkg:dataset "Words in Context".
+    ?benchmark rdfs:label ?benchmarkLabel.
+    FILTER (CONTAINS(?benchmarkLabel, "top") || CONTAINS(?benchmarkLabel, "best") || CONTAINS(?benchmarkLabel, "highest"))
+    SERVICE wikibase:label {
+        bd:serviceParam wikibase:language "en".
+    }
+}
+ORDER BY DESC(?value)
+```

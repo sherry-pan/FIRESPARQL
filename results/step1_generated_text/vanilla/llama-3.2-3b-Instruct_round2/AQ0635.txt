@@ -1,0 +1,24 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the DBpedia dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?title?id 
+     WHERE {
+    ?paper a skos:Concept.
+     rdfs:label?paperLabel.
+     dbo:abstract?abstract.
+    ?abstract dbo:contains "<http://dbpedia.org/ontology/Benchmark>". 
+    ?paper skos:broader?benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?paper skos:broader?benchmark.
+    ?benchmark skos:broader skos:Concept.
+    ?paper skos:broader?concept.
+    ?concept rdfs:label?conceptLabel.
+    ?paper dbo:abstract?abstract.
+     FILTER(LANG(?abstract) = 'en' OR LANG(?abstract) = 'en-US') 
+     }
+     LIMIT 100<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wiki: <http://www.openresearchknowledgegraph.org/ontology/wiki/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result wiki:hasBenchmark wiki:WikiText-2.
+  ?result wiki:hasMetric wiki:TestPerplexity.
+  ?result wiki:hasValue ?score.
+}
+ORDER BY DESC(xsd:double(?score))
+LIMIT 1
+```

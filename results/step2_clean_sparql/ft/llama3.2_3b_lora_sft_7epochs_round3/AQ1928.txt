@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code 
+WHERE {
+  ?paper orkgp:HAS_CODE ?code.
+  ?code rdfs:HAS_SOURCE_CODE ?source_code.
+  ?source_code orkgp:P32 ?model.
+  ?model orkgp:P5029 ?model_name.
+  FILTER(REGEX(STR(?model_name), "Tokenlearner"))
+  ?paper orkgp:P31 ?contribution.
+  ?contribution rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "Tokenlearner"))
+}
+```

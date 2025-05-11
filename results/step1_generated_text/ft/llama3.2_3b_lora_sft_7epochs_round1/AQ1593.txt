@@ -1,0 +1,24 @@
+Question:
+Indicate the model that performed best in terms of 1-of-100 Accuracy metric on the PolyAI Reddit benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "PolyAI Reddit")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                        orkgp:HAS_MODEL         ?model.
+        ?model      rdfs:label              ?model_lbl.
+        ?value       rdfs:label              ?value_lbl.
+         FILTER (str(?value_lbl) = "1-of-100 Accuracy")
+         BIND(xsd:float(?value) AS?value_float)
+         BIND(xsd:float(?value_float) AS?accuracy)
+         BIND(xsd:float(?accuracy) AS?accuracy_float)
+         BIND(xsd:float(?accuracy_float) AS?accuracy_float_s)
+         ORDER BY DESC(?accuracy_float_s)
+         LIMIT 1
+     }<|eot_id|>

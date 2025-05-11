@@ -1,0 +1,17 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the WMT2014 German-English dataset?
+
+Generated SPARQL:
+ PREFIX wmt: <http://www.wmt.eu/standards/benchmarks>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikibase.org/schema/instantiation>
+     SELECT?title?id
+     WHERE {
+    ?paper a wmt:Benchmark.
+     wmt:hasBenchmark wmt:dataset wmt:WMT2014-DE.
+    ?paper wmt:hasBenchmark wmt:WMT2014-DE.
+    ?paper wikibase:label?label.
+     FILTER (lang(?label) = 'en' || lang(?label) = 'de').
+     BIND (STR(?label) AS?title).
+     BIND (URI(?paper) AS?id)
+     }<|eot_id|>

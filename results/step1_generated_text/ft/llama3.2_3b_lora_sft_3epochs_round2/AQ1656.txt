@@ -1,0 +1,30 @@
+Question:
+What is the best performing model benchmarking the Oxford-IIIT Pets dataset in terms of FLOPS metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "FLOPS")
+               || str(?metric_lbl      = "FLOPS (Watt)")
+               || str(?metric_lbl      = "FLOPS (GFLOPS)")
+               || str(?metric_lbl      = "FLOPS (TFLOPS)")
+               || str(?metric_lbl      = "FLOPS (PetaFLOPS)")
+               || str(?metric_lbl      = "FLOPS (ExaFLOPS)")
+               || str(?metric_lbl      = "FLOPS (ZettaFLOPS)")
+               || str(?metric_lbl      = "FLOPS (YottaFLOPS)")
+               || str(?metric_lbl      = "FLOPS (PetaFLOPS)"))
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model      rdfs:label               ?model_lbl.
+      ?cont         orkgp:HAS_MODEL         ?model;
+                      orkgp:HAS_DATASET       ?dataset.
+      ?cont         rdfs:label               ?title.
+      ?paper        orkgp:P32           ?cont.
+      ?paper       rdfs:label               ?paper_lbl.
+       FILTER (str(?paper_lbl      = "Oxford-IIIT Pets")
+              || str(?paper_lbl      = "Oxford-IIIT Pets (Watt)")
+              || str(?paper_lbl      = "Oxford-IIIT Pets (GFLOPS)")
+              ||

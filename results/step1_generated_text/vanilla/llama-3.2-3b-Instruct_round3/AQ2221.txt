@@ -1,0 +1,23 @@
+Question:
+Provide a list of papers that have utilized the AlexNet, MultiGrasp model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+    SELECT?paper?title?codeLink
+    WHERE {
+     ?paper a orkg:Paper.
+     ?paper orkg:hasCode?code.
+     ?code schema:versionInfo?version.
+     ?code schema:software?software.
+     ?software schema:softwareName "AlexNet".
+     ?software schema:softwareName "MultiGrasp".
+     ?paper rdfs:label?title.
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+    }
+    ```<|eot_id|>

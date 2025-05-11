@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BUCC French-to-English?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT DISTINCT?metric?value
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+               orkg:dataset?dataset ;
+               orkg:metric?metric ;
+               orkg:value?value.
+   ?dataset a orkg:Dataset ;
+             orkg:name "BUCC French-to-English".
+    FILTER (?metric = "Benchmark Metric" &&?value = "Benchmark Value").
+    ORDER BY DESC(?value)
+    LIMIT 1
+}<|eot_id|>

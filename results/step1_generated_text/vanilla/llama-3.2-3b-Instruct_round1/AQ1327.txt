@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the IMDb-M dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric?value 
+WHERE {
+ ?paper a wd:Q12345678. 
+ ?paper wdt:P31 wd:Work.
+ ?paper wdt:P154 wd:Dataset.
+ ?paper wdt:P154 wd:IMDb-M.
+ ?metric wdt:P154 wd:IMDb-M.
+ ?metric rdfs:label?label.
+ ?metric wdt:P31 wd:Metric.
+  FILTER (REGEX(?label, ".*benchmark.*value.*") @i)
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+```<|eot_id|>

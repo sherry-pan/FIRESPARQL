@@ -1,0 +1,22 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?title 
+     WHERE {
+    ?paper schema:maintainedBy?maintainer ;
+     schema:keywords "PWC Leaderboards (restricted)".
+    ?paper schema:hasBenchmark?benchmark ;
+    ?benchmark schema:hasDataset?dataset ;
+    ?dataset schema:datasetType "benchmark".
+    ?benchmark schema:hasTitle?benchmarkTitle ;
+    ?benchmarkTitle rdfs:label?title.
+     SERVICE dfn:label {
+     FILTER(LONG IS (STR(?title) =~ "PWC Leaderboards (restricted)")
+     } 
+     }
+     ORDER BY (DESC(?paper))<|eot_id|>

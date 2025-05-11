@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasResult ?result.
+ ?result dbo:benchmark "Stanford Cars".
+ ?result orkg:metric "Accuracy".
+ ?result orkg:value ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

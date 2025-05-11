@@ -1,0 +1,24 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT?model?bleuScore
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmark?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark rdfs:label "WMT2016 Romanian-English".
+ ?benchmark orkg:hasResult?result.
+ ?result orkg:hasMetric?metric.
+ ?metric rdfs:label "BLEU score".
+ ?result orkg:hasValue?bleuScore.
+ ?bleuScore a schema:Float.
+  FILTER (?bleuScore = FILTER (MAX(?score) AS?maxScore) ).
+}<|eot_id|>

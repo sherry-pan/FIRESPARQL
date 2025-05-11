@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX ork: <http://openresearchknowledgegraph.org/ork/>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a dbo:benchmark.
+  ?benchmark schema:about "Ball in cup, catch (DMControl100k)".
+  ?benchmark ork:hasBenchmarkResult ?result.
+  ?result ork:hasMetric ?metric.
+  ?result ork:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?paper ?paperId
+WHERE {
+    ?paper orkg:hasBenchmarkedModel ?benchmark.
+    ?benchmark orkg:hasKinetics600Dataset ?benchmarkKinetics600.
+    ?paper orkg:hasId ?paperId.
+    FILTER (REGEX(LCASE(?paper), "kinetics-600"))
+}
+LIMIT 100
+```

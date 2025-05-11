@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset ;
+             orkg:metric ?metric ;
+             orkg:metricValue ?f1score.
+  ?dataset dct:title "200k Short Texts for Humor Detection".
+  ?metric schema:name "F1-score".
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

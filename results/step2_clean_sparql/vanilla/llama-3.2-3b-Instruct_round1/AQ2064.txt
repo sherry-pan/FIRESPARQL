@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX san: <http://www.ontology-shop.org/2008/01/san#>
+
+SELECT ?paper ?homepage
+WHERE {
+  ?paper a san:Paper.
+  ?paper san:utilizes ?sanModel.
+  ?sanModel san:uri ?sanModelURI.
+  ?paper foaf:hasHomepage ?homepage.
+  FILTER (str(?sanModelURI) = 'single')
+}
+```

@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?metricLabel.
+  FILTER (STR(?metricLabel) = "accuracy" ||
+          STR(?metricLabel) = "f1-score" ||
+          STR(?metricLabel) = "precision" ||
+          STR(?metricLabel) = "recall" ||
+          STR(?metricLabel) = "f2" ||
+          STR(?metricLabel) = "roc-auc")
+}
+LIMIT 10
+```

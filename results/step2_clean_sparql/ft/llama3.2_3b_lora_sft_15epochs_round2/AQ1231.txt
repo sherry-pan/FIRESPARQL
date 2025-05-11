@@ -1,0 +1,15 @@
+```
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R153801 orkgp:compareContribution ?cont.
+    ?cont orkgp:P43135 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?cont orkgp:P43133 ?eval.
+    ?eval orkgp:P43136 ?value.
+    FILTER(REGEX(?metric_lbl, "top"))
+    FILTER(?value > 0)
+    FILTER(?metric = "benchmark score")
+    ?cont orkgp:P43134 ?run.
+    ?run orkgp:P43129 "Cheetah"; orkgp:P43130 "DMControl500k".
+}
+```

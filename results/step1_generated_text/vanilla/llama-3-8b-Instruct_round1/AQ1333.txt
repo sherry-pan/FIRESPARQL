@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the WOS-46985 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX wos: <http://www.semantic-web-journal.net/orkg/wos/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?score?metric
+WHERE {
+ ?paper a wos:Publication ;
+        wos:hasBenchmark?benchmark.
+ ?benchmark wos:hasScore?score ;
+            wos:hasMetric?metric.
+ ?paper wos:doi "10.1016/j.ijqc.2019.04.004".
+  FILTER (?benchmark wos:dataset wos:WOS-46985).
+}<|eot_id|>

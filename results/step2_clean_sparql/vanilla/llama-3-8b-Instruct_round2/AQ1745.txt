@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasMetric orkg:F1Score.
+  ?result orkg:hasValue ?f1score.
+  ?result orkg:hasDataset orkg:BUCC_Chinese-to-English.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

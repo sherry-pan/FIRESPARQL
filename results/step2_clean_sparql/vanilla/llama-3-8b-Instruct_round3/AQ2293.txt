@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?codeLink
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:usesModel ?model.
+    ?model rdfs:label "Duel Noop Model".
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?codeLink a orkg:CodeLink; 
+              orkg:participatesIn ?paper.
+}
+```

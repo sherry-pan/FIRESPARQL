@@ -1,0 +1,12 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vocab: <http://www.openresearcher.org/ontologies/vocab#>
+PREFIX orkg: <http://www.openresearcher.org/ontologies/orkg#>
+SELECT ?paper ?code_link
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:usesModel vocab:Transformer-XL_12.
+  ?benchmark orkg:hasCodeLink ?code_link.
+  FILTER (lang(?code_link) = "en")
+}
+```

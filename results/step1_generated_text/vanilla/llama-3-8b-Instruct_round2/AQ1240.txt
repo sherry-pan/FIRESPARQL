@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset Oxford-IIIT Pets?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:dataset orkg:Oxford-IIIT_Pets ;
+             orkg:metric?metric ;
+             orkg:value?value.
+  FILTER (?metric!= xsd:string("undefined"))
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

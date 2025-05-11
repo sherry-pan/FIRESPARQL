@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT?metric?value
+WHERE {
+ ?dataset a orkg:Dataset ;
+    orkg:hasBenchmark?benchmark.
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasResult?result.
+ ?result a orkg:Result ;
+    orkg:metric?metric ;
+    orkg:value?value ;
+    orkg:dataset?dataset.
+ ?dataset rdfs:label "NYT-single".
+} ORDER BY DESC(?value) LIMIT 1<|eot_id|>

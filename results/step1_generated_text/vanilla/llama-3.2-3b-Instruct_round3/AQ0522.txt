@@ -1,0 +1,13 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the MPQA dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c/wdt#>
+     SELECT?paper?paperID 
+     WHERE {
+    ?paper wdt:P3010 "MPQA".
+    ?paper wdt:P312?benchmark.
+    ?benchmark wdt:P312?benchmarkLabel.
+     FILTER (REGEX (STR(?benchmarkLabel) "dataset"i) && REGEX (STR(?benchmarkLabel) "MPQA"i))
+     }
+     ORDER BY DESC(?paperID)<|eot_id|>

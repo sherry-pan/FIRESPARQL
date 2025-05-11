@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, "OTF spelling\\+lemma \\(single\\)"))
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_label.
+  ?cont a orkgc:Container;
+        rdfs:label ?cont_label.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:HAS_CONTAINER ?cont.
+  ?cont orkgp:HAS_SOURCE_CODE ?code.
+}
+```

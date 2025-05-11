@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "Joint Entity and Relation Extraction"))
+    ?dataset rdfs:has_dataset ?dataset_cont.
+    ?cont orkgp:HAS_DATASET ?dataset_cont.
+    ?cont rkgp:P31 ?paper.
+}
+```

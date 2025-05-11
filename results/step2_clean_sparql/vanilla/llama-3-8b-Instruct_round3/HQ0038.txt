@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?capacity
+WHERE {
+ ?s a orkg:Entity.
+ ?s rdfs:label ?label.
+ FILTER (STRSTARTS(?label, "Carbon-based fuel")).
+ ?s orkg:hasProperty ?p.
+ ?p rdfs:label "mean capacity".
+ ?p orkg:hasValue ?capacity.
+}
+```

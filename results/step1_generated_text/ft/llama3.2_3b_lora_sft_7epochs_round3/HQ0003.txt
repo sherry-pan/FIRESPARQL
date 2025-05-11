@@ -1,0 +1,23 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?method
+     WHERE {
+      ?paper rdf:type orkgc:Paper.
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?approach.
+      ?approach rdfs:label?method.
+       FILTER(REGEX(?method, ".*", "i"))
+      ?paper orkgp:P27?eval.
+      ?eval orkgp:P33?metric.
+      ?metric rdfs:label?metric_label.
+       FILTER(REGEX(?metric_label, ".*", "i"))
+      ?paper orkgp:P28?value.
+      ?value orkgp:P30?benchmark.
+      ?benchmark rdfs:label?benchmark_label.
+       FILTER(REGEX(?benchmark_label, ".*", "i"))
+       COUNT(?value) AS?count
+       ORDER BY DESC(?count)
+       LIMIT 1
+      }<|eot_id|>

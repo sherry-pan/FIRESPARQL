@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX vocab: <http://purl.org/vocab/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?dataset ?datasetLabel
+WHERE {
+    ?dataset a vocab:Dataset.
+    ?dataset vocab:hasTopic schema:Topic "Reading Comprehension".
+    ?dataset vocab:hasBenchmark ?benchmark.
+    ?benchmark vocab:hasDataset ?dataset.
+    ?dataset rdfs:label ?datasetLabel.
+    FILTER (lang(?datasetLabel) = "en" || lang(?datasetLabel) = "en-US")
+}
+ORDER BY DESC(?datasetLabel)
+```

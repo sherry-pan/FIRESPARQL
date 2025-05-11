@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://purl.org/openresearchknowledgegraph/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?url
+WHERE {
+  ?paper dbo:hasPaper ?paper_ref.
+  ?paper_ref dbp:hasBenchmark ?benchmark.
+  ?benchmark schema:topic "SRU++ Base".
+  ?benchmark schema:hasReference ?benchmark_ref.
+  
+  ?paper wdt:P301 ?benchmark_ref.
+}
+```

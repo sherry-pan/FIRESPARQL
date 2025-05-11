@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?benchmark ?benchmark_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "QA"))
+    ?benchmark a orkgc:Benchmark;
+               rdfs:label ?benchmark_lbl;
+               orkgp:has_dataset ?dataset;
+               orkgp:has_QA_question ?question.
+    ?question orkgp:has_answer ?answer.
+    ?answer orkgp:has_value ?value.
+    FILTER(?value > 10000)
+}
+```

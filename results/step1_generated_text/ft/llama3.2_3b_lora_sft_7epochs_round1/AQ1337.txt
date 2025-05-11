@@ -1,0 +1,40 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153810 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?paper.
+          ?paper orkgp:P5004?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:HAS_DATASET?dataset.
+          ?dataset rdfs:label "Paper Field"^^xsd:string.
+          ?dataset orkgp:P31?dataset_labels.
+          ?dataset_labels rdfs:label?dataset_labels_lbl.
+          ?contrib orkgp:HAS_BENCHMARK?benchmark.
+          ?benchmark orkgp:P32?cont.
+          ?cont rdfs:label?cont_lbl.
+          ?cont orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value)
+         }
+     UNION
+     {
+           orkgr:R153810 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P5005?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:HAS_DATASET?dataset.
+          ?dataset rdfs:label "Paper Field"^^xsd:string.
+          ?contrib orkgp:HAS_BENCHMARK?benchmark.
+          ?benchmark orkgp:P32?cont.
+          ?cont rdfs:label?cont_lbl.
+          ?cont orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value)
+         }
+     UNION
+     {
+           orkgr:R153810 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P5006?metric.
+          ?metric rdfs:label?metric_lbl.
+          

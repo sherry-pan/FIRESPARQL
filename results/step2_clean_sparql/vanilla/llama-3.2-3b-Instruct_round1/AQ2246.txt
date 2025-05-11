@@ -1,0 +1,15 @@
+```sparql
+PREFIX sac: <http://purl.org/sac/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?codeLink
+WHERE {
+    ?paper a sac:sac_model.
+    ?paper rdfs:label ?title.
+    ?paper schema:software ?software.
+    ?software schema:code ?codeLink.
+    FILTER (str.contains(str(?title), "SAC") || str.contains(str(?title), "SAC model"))
+}
+```

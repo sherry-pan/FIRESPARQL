@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasMetric orkg:F1.
+  ?result orkg:hasValue ?f1.
+  ?benchmark a orkg:Benchmark ; rdfs:label "OntoNotes".
+  ?result orkg:wasOn ?benchmark.
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

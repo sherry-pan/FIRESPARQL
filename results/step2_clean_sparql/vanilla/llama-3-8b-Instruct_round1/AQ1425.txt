@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX wmt: <http://www.wmt.org/ontology/>
+PREFIX bleu: <http://www.bleu.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+ ?model a orkg:Model.
+ ?model wmt:benchmark ?benchmark.
+ ?benchmark wmt:dataset wmt:WMT2014_German_English.
+ ?benchmark bleu:metric bleu:BLEU.
+ ?benchmark orkg:performance ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

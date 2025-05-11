@@ -1,0 +1,21 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Penn Treebank (Word Level) dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX vocab: <http://purl.org/vocab/linguistics/>
+     PREFIX orkg: <http://linked.data.gov/ontologies/orcg/>
+
+     SELECT?title?id 
+     WHERE {
+      ?paper a vocab:ResearchPaper.
+       vocab:hasDataset vocab:PennTreebank ;
+         vocab:hasDatasetDataset vocab:WordLevel.
+      ?paper orkg:hasPublication?pub.
+      ?pub vocab:hasTitle?title.
+      ?pub orkg:hasIdentifier?id.
+       FILTER (REGEX(?title, ".*Penn Treebank.*") || REGEX(?title, ".*Word Level.*"))
+     }<|eot_id|>

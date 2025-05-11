@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?model ?accuracy
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark orkg:PolyAI_Reddit.
+  ?paper orkg:hasModel ?model.
+  ?paper orkg:hasMetric ?accuracy.
+  ?accuracy a orkg:Accuracy.
+  ?accuracy orkg:metricType "1-of-100".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

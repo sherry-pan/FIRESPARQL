@@ -1,0 +1,40 @@
+Question:
+What is the best performing model benchmarking the WMT2016 German-English dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT?model?score
+WHERE {
+ ?paper a orkg:Paper;
+         orkg:benchmarks?benchmark;
+         orkg:dataset?dataset;
+         orkg:metric?metric;
+         orkg:score?score.
+ ?benchmark a orkg:Benchmark;
+             orkg:model?model;
+             orkg:dataset?dataset.
+ ?dataset a orkg:Dataset;
+             orkg:name "WMT2016 German-English".
+ ?metric a orkg:Metric;
+             orkg:name "BLEU score".
+  FILTER (?score > (SELECT MAX(?score2) 
+                     { 
+                      ?paper a orkg:Paper;
+                             orkg:benchmarks?benchmark2;
+                             orkg:dataset?dataset;
+                             orkg:metric?metric;
+                             orkg:score?score2.
+                      ?benchmark2 a orkg:Benchmark;
+                                   orkg:model?model2;
+                                   orkg:dataset?dataset;
+                                   FILTER (?dataset =?dataset &&?metric =?metric)
+                     } 
+                   ) 
+                )
+}<|eot_id|>

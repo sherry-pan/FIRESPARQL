@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:utilizes ?model.
+  ?model rdfs:label "Funnel Transformer".
+  ?paper orkg:hasCode ?codeLink.
+  ?paper rdfs:label ?paperTitle.
+  FILTER (lang(?paperTitle) = "en")
+}
+```

@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset IMDb-B?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX imdb: <http://www.imdb.org/sparql/>
+     SELECT?metric?value 
+     WHERE {
+    ?dataset a imdb:Dataset.
+    ?dataset imdb:hasBenchmark?benchmark.
+    ?benchmark imdb:hasMetric?metric.
+    ?benchmark imdb:hasValue?value.
+    ?benchmark imdb:hasDataset?benchmarkDataset.
+    ?benchmarkDataset imdb:hasDataset?dataset.
+     FILTER (str.contains(LOWER(?benchmark), "IMDb-B") )
+    ?benchmark imdb:hasResult?result.
+    ?result imdb:hasMetric?metric.
+    ?result imdb:hasValue?value.
+     FILTER (str.contains(LOWER(?metric), "Top") )
+     }<|eot_id|>

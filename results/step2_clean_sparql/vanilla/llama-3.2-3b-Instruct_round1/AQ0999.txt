@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orcg.org/ontology/>
+SELECT ?metric ?value
+WHERE {
+    ?s orkg:hasSubject "Classical music".
+    ?s orkg:hasDataset "5 seconds at 12 kHz".
+    ?s orkg:hasMetric ?metric.
+    ?s orkg:hasValue ?value.
+    ?s a orkg:Dataset.
+    FILTER (REGEX(STR(?metric), "^\w+$") || REGEX(STR(?metric), "^\w+/\w+$"))
+}
+```

@@ -1,0 +1,19 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the TriviaQA dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+     SELECT?model 
+     WHERE {
+    ?model rdfs:label?label.
+    ?model schema:bestKnownFor?best_known_for.
+    ?best_known_for schema:name "TriviaQA".
+    ?model schema:accuracy?accuracy.
+     ORDER BY?accuracy DESC
+     LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+Question:
+Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/WDT#weight>
+     PREFIX pq: <http://purl.org/pq/>
+     SELECT?model?f1score 
+     WHERE {
+    ?model pq:hasQuestion "Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?"
+    ?model pq:hasAnswer?f1score.
+     FILTER (REGEX(?f1score, "F1 score: (\\d+(?:\\.\\d+)?)"))
+     FILTER (REGEX(?f1score, "SQuAD1.1 dev benchmark dataset"))
+     }<|eot_id|>

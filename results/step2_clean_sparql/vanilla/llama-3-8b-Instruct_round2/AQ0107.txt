@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark schema:dataset ?dataset.
+  ?dataset rdfs:label "Natural Questions (short)"@en.
+  SERVICE orkg:label { ?model rdfs:label ?modelLabel. }
+  FILTER (lang(?modelLabel) = "en")
+}
+```

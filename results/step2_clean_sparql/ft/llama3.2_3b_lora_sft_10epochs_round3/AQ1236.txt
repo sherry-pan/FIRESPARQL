@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R8386 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P34037 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(?benchmark_lbl, "Gibson PointGoal Navigation"))
+  }
+  UNION
+  {
+    orkgr:R8386 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P34038 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(?benchmark_lbl, "Gibson PointGoal Navigation"))
+  }
+}
+```

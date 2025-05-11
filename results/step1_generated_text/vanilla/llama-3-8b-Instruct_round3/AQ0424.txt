@@ -1,0 +1,15 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the WMT2014 German-English dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+     PREFIX wmt: <http://www.openresearchknowledgegraph.org/wmt/>
+     SELECT?paper_title?paper_id
+     WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper orkg:has_benchmark?benchmark.
+    ?benchmark wmt:dataset wmt:WMT2014_German_English.
+    ?paper orkg:title?paper_title.
+    ?paper orkg:id?paper_id.
+     FILTER (lang(?paper_title) = "en").
+     }<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?reference
+WHERE {
+  ?paper a orkg:Paper;
+         rdfs:label ?paperLabel;
+         orkg:hasTopic "DQNMMCe+SR";
+         orkg:hasReference ?reference.
+  ?reference wdt:P276 ?value.
+  FILTER (lang(?paperLabel) = "en")
+}
+LIMIT 10
+```

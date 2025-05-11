@@ -1,0 +1,27 @@
+Question:
+List the code links in papers that use the OTF spelling+lemma (single) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+     PREFIX otfschema: <http://example.org/otf-schema/>
+
+     SELECT?code
+     WHERE {
+      ?p a orkg:Paper.
+      ?p orkg:usesModel?model.
+      ?model otfschema:spelling?spelling.
+      ?model otfschema:lemma?lemma.
+      ?p orkg:hasBenchmark?benchmark.
+      ?benchmark schema:code?code.
+      ?benchmark schema:code?benchmarkCode.
+      ?p orkg:usesModel?model.
+      ?model otfschema:spelling+lemma?spelling+lemma.
+      ?benchmark schema:code?benchmarkCode.
+      ?benchmark orkg:relatedTo?benchmarkCode.
+      ?benchmarkCode orkg:code?code.
+       FILTER (STRCONTAINS(?spelling+lemma, "single") &&?benchmarkCode =?code)
+     }<|eot_id|>

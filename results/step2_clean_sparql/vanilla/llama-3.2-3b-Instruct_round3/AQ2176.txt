@@ -1,0 +1,18 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?title ?model
+WHERE {
+    ?paper schema:about <http://www.openresearch.org/orkg/resource/7c3b3a4f-2c5d-4f44-b7f1-123456789012> ;
+           schema:hasPart ?reference ;
+           dcterms:identifier "arXiv:2109.06740".
+    ?reference schema:hasFormat schema:Organization ;
+               schema:affiliation "TransformerX" ;
+               schema:affiliation "HuggingFace".
+}
+```

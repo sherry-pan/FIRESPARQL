@@ -1,0 +1,29 @@
+Question:
+Provide a list of papers that have utilized the SAN (single) model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX san: <http://www.ontology-shop.org/2008/01/san#>
+
+    SELECT?paper?code 
+    WHERE {
+     ?paper a san:Paper.
+     ?paper san:utilizes?sanModel.
+     ?sanModel san:uri?sanModelURI.
+     ?paper foaf:hasHomepage?homepage.
+      FILTER (lang(?paper) = 'en' OR lang(?paper) = 'en-US' OR lang(?paper) = 'en-GB' OR lang(?paper) = 'en-AU' OR lang(?paper) = 'en-CA')
+      FILTER (str(?sanModelURI) ='single')
+     ?paper rdfs:label?label.
+      SERVICE dfs.sparql
+      {
+        bd:subject(?paper) AS?subject
+        bd:subject?sanModelURI.
+        bd:subject?sanModelURI.
+        FILTER (str(?sanModelURI) ='single')
+      }
+    }
+    ```<|eot_id|>

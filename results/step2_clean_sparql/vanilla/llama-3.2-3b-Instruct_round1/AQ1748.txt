@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model 
+WHERE {
+  ?model schema:description ?desc.
+  ?model schema:name ?name.
+  ?model schema:rating ?rating.
+  FILTER (?rating > 0).
+  ?model dbpedia:benchmark "Nottingham".
+  ?model dbpedia:score "NLL".
+}
+ORDER BY DESC(?rating)
+LIMIT 1
+```

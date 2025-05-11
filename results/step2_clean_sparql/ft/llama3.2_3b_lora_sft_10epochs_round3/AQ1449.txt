@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Accuracy (High)".
+  orkgp:R80378 orkgp:run [
+    a orkgp:Value;
+    orkgp:value "0.979"^^xsd:string;
+    orkgp:model ?model
+  ].
+  ?model a orkgp:Model;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

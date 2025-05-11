@@ -1,0 +1,30 @@
+Question:
+What are the most commonly used benchmark datasets for the Natural Language Inference research field?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c-wsdl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orcid.org/ontology/>
+
+     SELECT?dataset?frequency
+     WHERE {
+    ?dataset schema:description?d.
+    ?dataset schema:keywords "Natural Language Inference".
+    ?dataset schema:version?v.
+    ?dataset orkg:hasContribution?c.
+    ?c orkg:hasDataset?dataset.
+    ?c schema:keywords?k.
+    ?k rdfs:label?kLabel.
+     FILTER (STRIKE?kLabel "Natural Language Inference"i)
+    ?dataset orkg:hasCitation?c2.
+    ?c2 schema:dataset?d2.
+    ?d2 schema:version?v2.
+    ?dataset orkg:frequency?f.
+     FILTER (STRIKE?f "high"i)
+     GROUP BY?dataset
+     HAVING (COUNT(?c) > 10)
+     ORDER BY DESC(?f)
+     }<|eot_id|>

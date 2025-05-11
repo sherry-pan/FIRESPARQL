@@ -1,0 +1,23 @@
+Question:
+What is the top benchmark score and its metric on the Hendrycks Test dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearch knowledgegraph.org/ontology/>
+     SELECT?score?metric 
+     WHERE {
+    ?benchmark a orkg:benchmark.
+    ?benchmark schema:description "Hendrycks Test".
+    ?benchmark orkg:has_score?score.
+    ?score schema:score?metric.
+    ?benchmark orkg:has_metric?metric.
+    ?benchmark orkg:has_dataset?dataset.
+    ?dataset schema:name "Hendrycks Test".
+    ?benchmark orkg:has_top_score?top_score.
+    ?top_score?benchmark. 
+     ORDER BY DESC(?score) 
+     LIMIT 1
+     }<|eot_id|>

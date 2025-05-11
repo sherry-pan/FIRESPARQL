@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?author (COUNT(?article) AS ?count)
+WHERE {
+  ?article a orkg:Article.
+  ?article orkg:about <http://www.semantic-web-journal.net/orkg/Coronavirus>.
+  ?article orkg:contributor ?author.
+  ?author a foaf:Person.
+}
+GROUP BY ?author
+ORDER BY DESC(?count)
+LIMIT 1
+```

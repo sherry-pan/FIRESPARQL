@@ -1,0 +1,14 @@
+```sparql
+PREFIX wotsi: <http://www.wotsi.org/ontology/wotsi/>
+PREFIX biosses: <http://purl.org/biosses/>
+
+SELECT ?paper ?title ?id
+WHERE {
+    ?paper wotsi:relatedTo ?benchmark.
+    ?benchmark wotsi:benchmarkLabel "biosses".
+    ?benchmark biosses:benchmarkId ?id.
+    ?paper wotsi:hasTitle ?title.
+    FILTER(lang(?title) = "en")
+}
+LIMIT 100
+```

@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest Top 1 Accuracy score on the ImageNet V2 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?model?accuracy
+     WHERE {
+    ?model ork:hasBenchmark "ImageNet V2".
+    ?model ork:hasAccuracy?accuracy.
+    ?accuracy ork:isTop1Accuracy.
+     FILTER (?accuracy > 80.0 )
+     ORDER BY DESC(?accuracy)
+     LIMIT 1
+     }
+    <|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Habitat 2020 Object Nav test-std dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wot: <http://www.wot ontology.org/2005/06/25/sense2entity#>
+     PREFIX owl: <http://www.wot.org/2006/01/sparql#>
+     PREFIX vocab: <http://purl.org/vocab/>
+     SELECT?metric
+     WHERE {
+    ?metric rdfs:label?metricLabel.
+    ?metric vocab:isDefinedFor?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset vocab:hasStandard?standard.
+    ?standard vocab:hasMetric?metric.
+    ?standard vocab:hasBenchmark?benchmark.
+    ?benchmark vocab:hasDataset?benchmarkDataset.
+    ?benchmarkDataset vocab:identifier "Habitat2020ObjectNavTest-std".
+     }
+     LIMIT 10<|eot_id|>

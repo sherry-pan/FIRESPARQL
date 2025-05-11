@@ -1,0 +1,23 @@
+```sparql
+SELECT ?material
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl;
+             orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?benchmark_lbl, "piezoresistive"))
+  
+  ?evaluation orkgp:HAS_VALUE ?value.
+  ?dataset orkgp:HAS_EVALUATION ?evaluation.
+  
+  ?model_params rdfs:label ?model_params_lbl.
+  FILTER(REGEX(?model_params_lbl, "piezoresistive"))
+  ?model_params orkgp:HAS_SOURCE_CODE ?source_code.
+  
+  ?source_code orkgp:HAS_MODEL ?model;
+               orkgp:HAS_MODELparameters ?model_params. 
+  
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY ?value
+LIMIT 1
+```

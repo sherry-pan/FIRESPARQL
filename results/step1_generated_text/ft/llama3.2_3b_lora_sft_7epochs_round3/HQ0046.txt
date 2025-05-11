@@ -1,0 +1,14 @@
+Question:
+Are children examined in the studies?
+
+Generated SPARQL:
+ SELECT?has_children
+     WHERE {
+       orkgr:R154901 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P31?species.
+      ?species rdfs:label?species_label.
+       FILTER(REGEX(?species_label, "children", "i"))
+      ?contrib orkgp:P32?has_children.
+       OPTIONAL {?has_children rdfs:label?has_children_label}
+       BIND(xsd:string(?has_children_label) AS?has_children)
+     }<|eot_id|>

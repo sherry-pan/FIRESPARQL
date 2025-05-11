@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper orkg:usesModel "Unsupervised NMT + weight-sharing".
+  ?paper orkg:hasCode ?code.
+  FILTER (CONTAINS(LCASE(STR(?code)), "code") || CONTAINS(LCASE(STR(?code)), "github") || CONTAINS(LCASE(STR(?code)), "gitlab"))
+}
+```

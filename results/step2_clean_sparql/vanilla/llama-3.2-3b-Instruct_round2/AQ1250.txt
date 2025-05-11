@@ -1,0 +1,14 @@
+```sparql
+PREFIX mldoc: <http://orkg.org/schema/1.1/mldoc/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a mldoc:Dataset;
+               mldoc:hasBenchmarkResult ?result;
+               mldoc:hasDataset ?dataset.
+    ?result mldoc:hasMetric ?metric;
+            mldoc:hasValue ?value.
+    ?dataset schema:name "MLDoc Zero-Shot German-to-French"@en.
+}
+```

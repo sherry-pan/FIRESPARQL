@@ -1,0 +1,15 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+       orkgr:R155445 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P15249?location;
+               orkgp:P31?cont.
+      ?cont orkgp:P43135?count.
+       FILTER(REGEX(STR(?location), "USA"^^xsd:string))
+       FILTER(?count > 10.0)
+     }
+     ORDER BY DESC(?count)
+     LIMIT 1<|eot_id|>

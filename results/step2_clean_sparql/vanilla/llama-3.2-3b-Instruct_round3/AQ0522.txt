@@ -1,0 +1,12 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?paper ?paperID 
+WHERE {
+  ?paper wdt:P3010 "MPQA".
+  ?paper wdt:P312 ?benchmark.
+  ?benchmark ?benchmarkLabel.
+  FILTER (REGEX(STR(?benchmarkLabel), "dataset", "i") && REGEX(STR(?benchmarkLabel), "MPQA", "i"))
+}
+ORDER BY DESC(?paperID)
+```

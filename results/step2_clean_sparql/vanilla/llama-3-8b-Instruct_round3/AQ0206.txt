@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?test ?testLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasTest ?test.
+  ?test a orkg:Test.
+  ?test orkg:dataset ?dataset.
+  ?dataset rdfs:label ?testLabel.
+  FILTER (?testLabel = "Habitat 2020 Object Nav test-std benchmark").
+  ?model rdfs:label ?modelLabel.
+  FILTER (?modelLabel != "").
+}
+ORDER BY ?modelLabel
+```

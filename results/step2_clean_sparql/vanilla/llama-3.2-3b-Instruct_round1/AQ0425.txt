@@ -1,0 +1,13 @@
+```sparql
+PREFIX wmt: <http://www.wikidata.org/entity/wiki/Quiz/WMT2016>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?paper ?title ?id 
+WHERE {
+  ?paper wdt:P275 ?benchmark.
+  ?benchmark wdt:P147 ?wmt2016benchmark.
+  ?benchmark wmt:benchmark_for ?paper.
+  ?paper wdt:P31 ?paperType.
+  FILTER(CONTAINS(LCASE(?paperType), "researchpaper")).
+  ?paper wdt:P577 ?title.
+}
+```

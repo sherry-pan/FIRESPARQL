@@ -1,0 +1,16 @@
+Question:
+What is the highest benchmark result achieved on the STS Benchmark dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R153801 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+        ?dataset orkgp:P29?eval.
+        ?eval orkgp:P31?assessment.
+        ?assessment orkgp:P27?metric;
+                  orkgp:P33?value.
+         BIND(xsd:int(?value) AS?value).
+        ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

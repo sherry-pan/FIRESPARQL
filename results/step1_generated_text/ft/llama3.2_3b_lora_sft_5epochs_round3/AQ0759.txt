@@ -1,0 +1,23 @@
+Question:
+List the metrics that are used to evaluate models on the 200k Short Texts for Humor Detection benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "200k Short Texts for Humor Detection")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     orkgp:HAS_EVALUATION   ?eval.
+     ?eval           orkgp:HAS_METRIC        ?metric;
+                      rdfs:label              ?metric_lbl.
+      FILTER(?metric_lbl = "F1"^^xsd:string or?metric_lbl = "Accuracy"^^xsd:string or
+                         ?metric_lbl = "Precision"^^xsd:string or?metric_lbl = "Recall"^^xsd:string or
+                         ?metric_lbl = "AP"^^xsd:string or?metric_lbl = "ROUGE-N"^^xsd:string or
+                         ?metric_lbl = "ROUGE-L"^^xsd:string or?metric_lbl = "ROUGE-L-1"^^xsd:string or
+                         ?metric_lbl = "ROUGE-L-2"^^xsd:string or
+                         ?metric_lbl = "ROUGE-L-SU"^^xsd:string or?metric_lbl = "F1-SU"^^xsd:string or
+                         ?metric_lbl = "PPLS"^^xsd:string or?metric_lbl = "PPLS-SU"^^xsd:string or
+                         ?metric_lbl = "DICE"^^xsd:string or?metric_lbl = "MCC"^^xsd:string or
+                         ?metric_lbl = "ASD"^^xsd:string or?metric_lbl = "SAS"^^xsd:string or
+                         ?metric_lbl = "Kappa"^^xsd:string or?metric_lbl = "PPLS-SU (

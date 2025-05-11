@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ImageNet 64x64")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:P32             ?metric.
+        ?metric         rdfs:label              ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Bits per dim")
+        ?benchmark      orkgp:HAS_MODEL         ?model.
+        ?model       rdfs:label              ?model_lbl.
+         BIND(?value as?score)
+         ORDER BY DESC(?value)
+         LIMIT 1
+     }
+    <|eot_id|>

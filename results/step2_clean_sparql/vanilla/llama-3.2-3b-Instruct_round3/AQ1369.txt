@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX imdb: <http://www.imdb.org/sparql/>
+
+SELECT ?metric ?value 
+WHERE {
+  ?dataset a imdb:Dataset.
+  ?dataset imdb:hasBenchmark ?benchmark.
+  ?benchmark imdb:hasMetric ?metric.
+  ?benchmark imdb:hasValue ?value.
+  ?benchmark imdb:hasDataset ?benchmarkDataset.
+  ?benchmarkDataset imdb:hasDataset ?dataset.
+  FILTER (str.contains(LCASE(str(?benchmark)), "imdb-b"))
+  FILTER (str.contains(LCASE(str(?metric)), "top"))
+}
+```

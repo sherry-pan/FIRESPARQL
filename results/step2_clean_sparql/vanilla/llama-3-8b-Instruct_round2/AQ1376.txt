@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model dc:references ?paper.
+  ?paper schema:about ?dataset.
+  ?dataset dc:title "Penn Treebank benchmark dataset".
+  ?paper schema:hasPart ?result.
+  ?result schema:value ?f1Score.
+  ?result schema:property schema:F1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wlp: <http://wlpdataset.org/ontology/>
+SELECT ?paper ?title
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark wlp:hasDataset <http://wlpdataset.org/ontology/wlp:WLPC>.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasId ?id.
+  FILTER (STRSTARTS(?id, "PUB") || STRSTARTS(?id, "AR") || STRSTARTS(?id, "PR"))
+}
+```

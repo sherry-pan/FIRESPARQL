@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://purl.org/orkg/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasEvaluationMetric ?metric.
+  ?metric a schema:EvaluationMetric ;
+          rdfs:label ?metricLabel.
+  FILTER (CONTAINS(LCASE(?metricLabel), "benchmarking") &&
+          CONTAINS(LCASE(?metricLabel), "DRI Corpus"))
+}
+```

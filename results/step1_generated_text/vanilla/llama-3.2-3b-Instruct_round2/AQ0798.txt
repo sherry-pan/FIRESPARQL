@@ -1,0 +1,24 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX schemaorg: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontologies/ora/>
+     PREFIX multirc: <http://schema.org/MultiRC>
+
+     SELECT?metric
+     WHERE {
+    ?metric schemaorg:about <http://schema.org/Question_1234>.
+    ?metric schemaorg:hasQuestion "What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?"
+    ?metric schemaorg:hasAnswer [a schemaorg:StructuredQuestionAnswer].
+    ?metric schemaorg:hasAnswer?answer.
+    ?answer schemaorg:answerText?text.
+    ?text schemaorg:answerText?metric.
+    ?metric schemaorg:hasAnswer?answer2.
+    ?answer2 schemaorg:answerText?text2.
+     FILTER (STRLIKE(?text, "MultiRC") || STRLIKE(?text2, "MultiRC"))
+     }<|eot_id|>

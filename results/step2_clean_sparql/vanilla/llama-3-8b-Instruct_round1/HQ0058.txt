@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?study ?precision ?recall ?f1
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:hasMethod ?method.
+  ?method a orkg:NaiveBayes;
+          orkg:hasFeature ?feature.
+  ?feature a orkg:BagOfWords.
+  ?study orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasPrecision ?precision;
+              orkg:hasRecall ?recall;
+              orkg:hasF1 ?f1.
+}
+```

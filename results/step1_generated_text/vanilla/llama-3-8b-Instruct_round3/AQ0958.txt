@@ -1,0 +1,19 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Tutankham dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/entities/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+           dcterms:title "Tutankham".
+ ?dataset orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (LANG(?metricLabel) = "en" && STRSTARTS(?metricLabel, "Atari 2600")).
+}<|eot_id|>

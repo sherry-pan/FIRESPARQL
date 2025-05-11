@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?percentage
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluation ?evaluation.
+  ?evaluation schema:dataset <http://www.orkg.org/dataset/SVHN>.
+  ?evaluation orkg:metric schema:PercentageError.
+  ?evaluation orkg:value ?percentage.
+}
+ORDER BY DESC(?percentage)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?run orkg:model ?model;
+       orkg:score ?score.
+  ?benchmark a orkg:Benchmark;
+             orkg:dataset <http://www.orkg.org/Benchmark/DMControl500k>;
+             orkg:run ?run.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

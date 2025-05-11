@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocab/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name
+WHERE {
+    ?model orkg:isBenchmarkedBy ?benchmark.
+    ?benchmark orkg:benchmarkingMetric "F1 score".
+    ?benchmark orkg:benchmarkingDataset "Natural Questions (long)".
+    ?benchmark orkg:topPerformingModel ?topModel.
+    ?topModel rdfs:label ?name.
+}
+```

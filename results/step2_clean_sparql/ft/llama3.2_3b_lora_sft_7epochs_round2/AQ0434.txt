@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Stanford Cars")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:P32 ?cont.
+    ?cont orkgp:HAS_PAPER ?paper.
+    ?paper rdfs:label ?paper_lbl.
+}
+```

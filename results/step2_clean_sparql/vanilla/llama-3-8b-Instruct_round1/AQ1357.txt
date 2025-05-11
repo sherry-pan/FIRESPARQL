@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?publication a orkg:Publication ;
+               orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasMetric ?metric ;
+             orkg:hasScore ?score ;
+             orkg:dataset ?dataset.
+  ?dataset rdfs:label "BUCC German-to-English".
+}
+ORDER BY DESC(?score) LIMIT 1
+```

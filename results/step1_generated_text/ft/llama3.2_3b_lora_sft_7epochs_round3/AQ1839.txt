@@ -1,0 +1,17 @@
+Question:
+Name the datasets that have been used for benchmarking in the Image Classification research problem?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a            orkgc:Problem;
+                  rdfs:label      ?problem_lbl.  
+       FILTER (str(?problem_lbl) = "Image Classification")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont          orkgp:P31               ?problem;
+                      orkgp:P31               ?paper.
+      ?paper         orkgp:HAS_SOURCE        ?source.
+      ?source       rdfs:label              ?source_lbl.
+       FILTER (str(?source_lbl) = "Image Classification")
+     }<|eot_id|>

@@ -1,0 +1,30 @@
+Question:
+Provide a list of papers that have utilized the Large mLSTM model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://example.org/orkg/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+    SELECT?paper?code
+    WHERE {
+     ?paper schema:hasTopic "Large mLSTM model".
+     ?paper schema:hasCode?code.
+      SERVICE dfn:run { 
+       ?paper schema:hasTopic?topic.
+       ?topic schema:hasDescription?description.
+        FILTER (LOWER(?description) = "large mlstm model")
+       ?paper schema:hasAuthor?author.
+       ?author foaf:hasHomepage?homepage.
+        FILTER (LOWER(strftime("%Y",?homepage) = "2020") OR LOWER(strftime("%Y",?homepage) = "2021") )
+       ?paper schema:hasIdentifier?identifier.
+        FILTER (LOWER(strftime("%Y",?identifier) = "2020") OR LOWER(strftime("%Y",?identifier) = "2021") )
+       ?paper schema:hasURL?url.
+        FILTER (LOWER(strftime("%Y",?url) = "2020") OR LOWER(strftime("%Y",?url) = "2021") )
+      }
+    }
+    ```<|eot_id|>

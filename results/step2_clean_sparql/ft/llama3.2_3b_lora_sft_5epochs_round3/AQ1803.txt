@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+    orkgr:R153183 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P7046 ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?contrib orkgp:P7047 ?model.
+    ?model rdfs:label ?model_lbl.
+    FILTER(REGEX(?model_lbl, "T2") OR REGEX(?model_lbl, "HTR8"))
+    ?contrib orkgp:P7034 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?eval orkgp:HAS_VALUE ?eval_value.
+    BIND(xsd:float(?eval_value) AS ?eval_value)
+    ?contrib orkgp:P7030 ?cont.
+    ?cont orkgp:P7036 ?model.
+}
+ORDER BY DESC(?eval_value)
+LIMIT 1
+```

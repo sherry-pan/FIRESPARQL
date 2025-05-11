@@ -1,0 +1,24 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Bank Heist dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?paper?title
+     WHERE {
+    ?paper schema:hasTitle?title.
+    ?paper schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasDataset?dataset.
+    ?dataset schema:hasName "Atari 2600 Bank Heist".
+    ?benchmark schema:hasDataset?dataset.
+    ?dataset schema:hasDataset?dataset.
+    ?paper orkg:hasId?id.
+    ?benchmark orkg:hasPaper?paper.
+     }
+     ORDER BY DESC(?paper orkg:hasId)
+     LIMIT 10<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.scholarge.org/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a bibo:Article.
+  ?paper schema:mentions ?model.
+  ?model schema:name "BiDAF + Self Attention + ELMo".
+  ?paper schema:mentions ?codeReference.
+  ?paper schema:hasBenchmark true.
+  ?codeReference a bibo:CodeSnippet.
+}
+```

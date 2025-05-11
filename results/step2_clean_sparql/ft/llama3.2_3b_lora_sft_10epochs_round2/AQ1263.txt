@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R155859 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P43038 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P43100 ?value.
+    ?value rdfs:label ?value_lbl.
+    FILTER(REGEX(STR(?value_lbl), "Seaquest"))
+    ?contrib orkgp:P33080 ?environment.
+    ?environment rdfs:label ?environment_lbl.
+    FILTER(REGEX(STR(?environment_lbl), "Atari 2600"))
+    BIND(xsd:float(?value) AS ?value)
+}
+```

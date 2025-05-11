@@ -1,0 +1,21 @@
+Question:
+What is the best performing model benchmarking the iNaturalist 2018 dataset in terms of Top-1 Accuracy metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/orkg/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?model?top1Accuracy
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper dc:title?title.
+       FILTER (?title = "Benchmarking iNaturalist 2018 dataset").
+      ?paper orkg:hasResult?result.
+      ?result owl:property?metric.
+       FILTER (?metric = "Top-1 Accuracy").
+      ?result orkg:hasValue?top1Accuracy.
+      ?model orkg:usedIn?result.
+       FILTER (?model!= "undefined").
+       ORDER BY DESC(?top1Accuracy)
+       LIMIT 1
+     }<|eot_id|>

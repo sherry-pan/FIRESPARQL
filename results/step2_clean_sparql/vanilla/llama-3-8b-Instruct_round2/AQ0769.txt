@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX wmt: <http://rdf.orkg.org/wmt#>
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper wmt:benchmarks ?benchmark.
+  ?benchmark wmt:dataset wmt:WMT2014_English_German.
+  ?benchmark wmt:evaluation_metric ?metric.
+  ?metric rdfs:label ?metric_label.
+  FILTER (lang(?metric_label) = "en" && CONTAINS(?metric_label, "evaluation metric"))
+}
+```

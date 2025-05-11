@@ -1,0 +1,17 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wmt: <http://wmt.org/>
+
+SELECT ?model ?bleuScore
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarkedDataset wmt:WMT2016EnglishRussianDataset ;
+         orkg:metric wmt:BLEUScore ;
+         orkg:hasMetricValue ?bleuScore.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

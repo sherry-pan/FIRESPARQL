@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wmt: <http://wmt.org/>
+SELECT ?metric ?value
+WHERE {
+    orkg:WMT2016_Czech-English a orkg:Dataset ;
+    orkg:hasResult ?result.
+    ?result a orkg:Result ;
+    orkg:hasMetric ?metric ;
+    orkg:hasValue ?value.
+    FILTER(?metric = wmt:BLEU || ?metric = wmt:METEOR || ?metric = wmt:ROUGE || ?metric = wmt:TER)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

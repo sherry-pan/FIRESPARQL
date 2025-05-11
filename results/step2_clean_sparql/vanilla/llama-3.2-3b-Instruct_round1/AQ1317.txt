@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?metric ?value
+WHERE {
+    ?metric dbp:benchmarkFor dbr:Star_Gunner_2600.
+    ?metric dbp:bestResult ?value.
+    ?metric rdfs:label ?metricLabel.
+    FILTER (lang(?metricLabel) = 'en' || lang(?metricLabel) = 'en-US')
+    BIND(STR(?metricLabel) AS ?metric)
+}
+LIMIT 1
+```

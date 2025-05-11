@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ontology#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset;
+           orkg:datasetName "IWSLT2015 German-English";
+           orkg:benchmark ?benchmark.
+  ?benchmark a orkg:Benchmark;
+             orkg:metric ?metric;
+             orkg:score ?score.
+  FILTER (STR(?metric) = "highest"^^xsd:string)
+}
+```

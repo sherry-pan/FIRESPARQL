@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the CATTS-XSUM model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX dc: <http://purl.org/dc/terms/>
+    PREFIX bibo: <http://purl.org/ontology/bibo/>
+    SELECT?paper?codeReference
+    WHERE {
+     ?paper a orkg:Paper.
+     ?paper bibo:isReferencedBy?reference.
+     ?reference dc:creator?author.
+     ?author foaf:affiliation?institution.
+     ?paper orkg:usedModel?model.
+     ?model rdfs:label "CATTS-XSUM".
+     ?paper orkg:hasCodeReference?codeReference.
+    }<|eot_id|>

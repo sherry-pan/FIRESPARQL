@@ -1,0 +1,19 @@
+Question:
+What is the name of the top performing model in terms of Accuracy (High) score when benchmarked on the RACE dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?model?modelLabel?accuracyScore
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmarkedOn?benchmark.
+ ?benchmark rdfs:label "RACE".
+ ?model orkg:score?accuracyScore.
+  FILTER (?accuracyScore = "High"@en).
+ ?model orkg:hasBestScore?accuracyScore.
+ ?model orkg:hasLabel?modelLabel.
+  FILTER (str(?modelLabel) = "top performing model").
+}<|eot_id|>

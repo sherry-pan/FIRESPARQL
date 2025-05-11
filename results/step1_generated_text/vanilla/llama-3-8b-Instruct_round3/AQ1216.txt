@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the BC5CDR-disease dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX orkg: <https://www.orkg.org/ontology/>
+     PREFIX bc5cdr: <https://www.orkg.org/ontology/bc5cdr/>
+     SELECT?score?metric
+     WHERE {
+    ?result a orkg:Result.
+    ?result rdfs:label?title.
+    ?result orkg:evaluationDataset bc5cdr:BC5CDR-disease.
+    ?result orkg:score?score.
+    ?result orkg:scoreMetric?metric.
+     FILTER (?metric = "benchmark score" && isLiteral(?score)).
+     FILTER (xsd:float(?score) > (SELECT max(xsd:float(?s)) AS maxScore
+     FROM {?result orkg:score?s }))
+     }<|eot_id|>

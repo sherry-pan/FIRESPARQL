@@ -1,0 +1,27 @@
+Question:
+What is the best performing model benchmarking the Supervised: dataset in terms of SemEval 2013 metric?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/schema/orkg>
+     PREFIX semeval: <http://example.org/semeval/>
+     PREFIX dcat: <http://www.w3.org/ns/dcat/>
+     PREFIX wotsi: <http://wotsi.org/schema/1.1/>
+     PREFIX sparql: <http://www.w3.org/TR/rdf-schema#>
+     SELECT?model?metric?value 
+     WHERE {
+    ?model a orkg:Model.
+    ?model schema:description?description.
+    ?model orkg:dataset "Supervised".
+    ?model semeval:metric?metric.
+    ?metric schema:description "SemEval 2013".
+    ?model wotsi:benchmark?benchmark.
+    ?benchmark schema:description "Benchmark".
+    ?model dcat:keyword?keyword.
+    ?keyword schema:description "best performing".
+    ?model orkg:bestPerforming?bestPerforming.
+    ?bestPerforming a orkg:BestPerforming.
+     FILTER (?metric = <http://www.w3.org/2004/02/skos/core#bestPerformingMetric> )
+     }<|eot_id|>

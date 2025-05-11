@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R75366 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P32 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    ?benchmark orkgp:P31 ?cont.
+    ?cont orkgp:P32 ?benchmark;
+          orkgp:HAS_VALUE ?value.
+    BIND(xsd:int(?value) AS ?value).
+    FILTER(REGEX(STR(?metric_lbl), "Natural Questions (short)"))
+    FILTER(?metric_lbl = "accuracy")
+}
+```

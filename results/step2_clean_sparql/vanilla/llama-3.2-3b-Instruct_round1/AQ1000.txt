@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+    ?metric rdfs:label ?label.
+    ?metric schema:description "VTAB-1k benchmark dataset".
+    ?metric schema:about <http://www.openresearchknowledgegraph.org/dataset/vtab-1k>.
+}
+GROUP BY ?metric
+HAVING (COUNT(?metric) > 1)
+ORDER BY DESC(COUNT(?metric))
+```

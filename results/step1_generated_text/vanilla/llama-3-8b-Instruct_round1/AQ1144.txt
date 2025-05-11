@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CommonsenseQA?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX skos: <http://www.w3.org/2004/02/02-skos/core#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?value
+     WHERE {
+      ?dataset a orkg:Dataset ; 
+               dcterms:title "CommonsenseQA".
+      ?result a orkg:Result ; 
+               orkg:dataset?dataset ; 
+               schema:metric?metric ; 
+               schema:value?value.
+      ?result a orkg:BenchmarkResult.
+       FILTER (?result a orkg:BenchmarkResult && 
+               ?metric a schema:PropertyValue )
+     }<|eot_id|>

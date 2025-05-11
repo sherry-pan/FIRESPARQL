@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocab/> 
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX schema: <http://schema.org/> 
+SELECT ?metric ?value 
+WHERE { 
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasBenchmarkResult ?result.
+    ?result orkg:hasMetric ?metric.
+    ?result schema:value ?value.
+    ?benchmark dbo:dataset "MultiNLI".
+    FILTER (str(?metric) = "Top-1 accuracy")
+}
+```

@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?paper orkgp:P31 [
+    orkgp:P32 ?benchmark
+  ];
+  orkgp:P29 [
+    rdfs:label ?paper_title
+  ].
+  ?benchmark orkgp:P2005 ?dataset.
+  ?cont orkgp:P31 ?paper;
+        orkgp:P32 ?benchmark;
+        orkgp:P29 ?paper_title;
+        orkgp:P2005 ?dataset;
+        orkgp:P5006 ?value;
+        orkgp:P5007 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?dataset rdfs:label "CommonsenseQA".
+}
+ORDER BY DESC(?score)
+```

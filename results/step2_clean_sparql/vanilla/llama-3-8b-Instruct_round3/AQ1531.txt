@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?model ?test_perplexity
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBestResult ?result.
+ ?result wdt:P4652 ?test_perplexity.
+ ?result wdt:P31 wd:Q1312356.  # WikiText-103 benchmark dataset
+ FILTER (?test_perplexity > 0).
+}
+```

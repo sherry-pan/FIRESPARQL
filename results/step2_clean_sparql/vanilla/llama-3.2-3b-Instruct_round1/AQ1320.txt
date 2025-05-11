@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:dataset "Amazon-2".
+    ?benchmark orkg:bestResult ?result.
+    ?result orkg:metric ?metric.
+    ?result orkg:value ?value.
+    FILTER (str(?metric) = "F1" || str(?metric) = "MRR" || str(?metric) = "ROUGE-N" || str(?metric) = "ROUGE-K")
+    FILTER regex(str(?value), "[0-9]+")
+}
+```

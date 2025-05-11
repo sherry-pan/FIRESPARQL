@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R76850 orkgp:P31 ?dataset.
+  ?dataset rdfs:label "MLDoc Zero-Shot German-to-French".
+  ?dataset orkgp:HAS_DATASET_OF ?dataset_of.
+  ?dataset_of orkgp:P31 ?cont.
+  ?cont orkgp:P36 ?eval.
+  ?eval orkgp:P37 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:value ?value.
+}
+ORDER BY DESC(?score)
+```

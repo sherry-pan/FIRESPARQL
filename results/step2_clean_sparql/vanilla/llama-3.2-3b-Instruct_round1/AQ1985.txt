@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a dbo:Paper.
+  ?source schema:topic "BART model";
+          ork:hasPaper ?paper.
+  ?paper schema:url ?url;
+         ork:hasCode ?code.
+  FILTER (lang(?paper) = "en")
+}
+GROUP BY ?paper ?code
+ORDER BY (COUNT(?paper) DESC)
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?value
+WHERE {
+    ?paper a orkg:Paper;
+           orkg:hasMetric ?metric;
+           orkg:hasValue ?value;
+           orkg:benchmark "OntoNotes".
+    ?metric rdfs:label "F1".
+    ?model orkg:performedOn ?paper.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

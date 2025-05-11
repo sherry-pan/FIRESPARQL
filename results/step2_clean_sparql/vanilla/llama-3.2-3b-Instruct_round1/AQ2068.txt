@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://purl.org/orkg/>
+PREFIX dcn: <http://purl.org/dcn/>
+PREFIX vocab: <http://purl.org/orkg/vocab/>
+
+SELECT ?paper ?title ?url
+WHERE {
+    ?paper a orkg:Paper;
+           vocab:hasCode ?code;
+           vocab:hasTitle ?title;
+           vocab:hasURL ?url.
+    ?code vocab:hasBenchmark ?benchmark.
+    ?benchmark vocab:hasModel dcn:DCN;
+               vocab:hasType vocab:benchmarking.
+    FILTER (STRLIKE(STR(?title), "DCN") || STRLIKE(STR(?title), "benchmarking"))
+}
+```

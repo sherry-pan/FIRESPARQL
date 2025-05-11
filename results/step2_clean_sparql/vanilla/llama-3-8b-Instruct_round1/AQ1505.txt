@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model
+WHERE {
+  ?paper a orkg:Paper;
+         dcterms:title ?title;
+         orkg:hasResult ?result.
+  ?result a orkg:Result;
+          orkg:hasMetric "Senseval 2";
+          orkg:hasScore ?score;
+          orkg:hasModel ?model;
+          orkg:hasDataset "Supervised: benchmark".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

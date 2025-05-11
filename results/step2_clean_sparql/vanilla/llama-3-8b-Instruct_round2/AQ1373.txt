@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledge.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?model ?value
+WHERE {
+  ?paper a orkg:Paper ;
+         dc:title ?title.
+  ?result a orkg:Result ;
+          foaf:target ?paper ;
+          orkg:metric ?metric ;
+          orkg:value ?value ;
+          orkg:benchmark ?benchmark ;
+          orkg:model ?model.
+  ?benchmark a orkg:Benchmark ;
+             dc:title "FSNS - Test".
+  FILTER(?metric = "Sequence error metric")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

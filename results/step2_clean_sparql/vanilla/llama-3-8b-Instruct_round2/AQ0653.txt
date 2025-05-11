@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?paper ?title ?id
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper dc:title ?title.
+    ?paper orkg:hasDatasetPublication ?dataset.
+    ?dataset orkg:datasetPublicationName "SciCite".
+    ?paper orkg:hasBenchmark ?benchmark.
+    FILTER(?benchmark != owl:nil).
+    ?paper orkg:hasIdentifier ?id.
+}
+```

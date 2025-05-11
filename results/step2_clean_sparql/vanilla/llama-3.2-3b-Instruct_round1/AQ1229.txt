@@ -1,0 +1,25 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX wot: <http://www.wot.org/ontologies/owlsuite#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset schema:name "Cart Pole (OpenAI Gym)".
+  ?dataset orkg:benchmarks ?benchmark.
+  ?benchmark schema:description "Cart Pole".
+  ?benchmark schema:benchmarkFor ?metric.
+  ?benchmark orkg:score ?score.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER (bc:contains(?benchmarkLabel, "benchmark result") && bc:contains(?benchmarkLabel, "highest"))
+}
+LIMIT 1
+```

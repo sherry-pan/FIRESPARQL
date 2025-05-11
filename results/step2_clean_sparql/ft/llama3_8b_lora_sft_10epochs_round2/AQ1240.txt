@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R155371 orkgp:compareContribution ?cont.
+  ?cont orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "Oxford-IIIT Pets"))
+  ?cont orkgp:P7009 ?eval.
+  ?eval orkgp:P431 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:P430 ?value.
+}
+ORDER BY DESC(?score)
+```

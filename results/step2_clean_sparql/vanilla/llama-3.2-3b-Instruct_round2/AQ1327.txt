@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX imdb: <http://www.openresearch.org/orkg/dataset/imdb/>
+
+SELECT ?metric ?value 
+WHERE {
+    ?s imdb:hasBenchmark ?b.
+    ?b imdb:hasMetric ?metric.
+    ?b imdb:hasValue ?value.
+    FILTER (?metric = "accuracy" OR ?metric = "F1-score" OR ?metric = "F1")
+    FILTER (regex(?value, "IMDb-M")) 
+}
+```

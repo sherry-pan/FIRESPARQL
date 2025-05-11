@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/api/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset orkg:datasetName "ANLI test dataset".
+  ?model orkg:score ?score.
+  ?model orkg:name ?modelLabel.
+  {
+    SELECT ?model (MAX(?score2) AS ?maxScore)
+    WHERE {
+      ?model orkg:benchmarkedOn ?benchmark.
+      ?benchmark orkg:dataset ?dataset.
+      ?dataset orkg:datasetName "ANLI test dataset".
+      ?model orkg:score ?score2.
+    }
+    GROUP BY ?model
+  }
+  FILTER (?score = ?maxScore)
+}
+```

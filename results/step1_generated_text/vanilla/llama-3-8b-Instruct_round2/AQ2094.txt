@@ -1,0 +1,18 @@
+Question:
+List the code links in papers that use the OTF spelling+lemma (single) model in any benchmark?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?paper?codeLink
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:usesModel?model.
+ ?model rdfs:label "OTF spelling+lemma (single)".
+ ?model orkg:usedInBenchmark?benchmark.
+ ?paper orkg:hasCodeLink?codeLink.
+  FILTER(?benchmark!= "None").
+}<|eot_id|>

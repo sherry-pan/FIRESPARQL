@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasMetric "Pearson Correlation".
+  ?model orkg:hasDataset "MedSTS benchmark dataset".
+  ?model orkg:hasScore ?score.
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX wmt2016: <http://wmt2016.org/wiki/Benchmark>
+SELECT ?metric ?value 
+WHERE {
+    ?benchmark wmt2016:partOf wmt2016:Benchmark_2016;
+               wmt2016:dataset wmt2016:Czech-English;
+               rdfs:label ?label.
+    FILTER (lang(?label) = 'en' || lang(?label) = 'cs').
+    BIND (STRBEFORE(?label, '') AS ?metric).
+    BIND (STRAFTER(?label, '') AS ?value).
+    FILTER (?value != '')
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

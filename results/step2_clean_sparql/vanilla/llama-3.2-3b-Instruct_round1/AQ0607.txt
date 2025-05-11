@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://orknlp.org/ork/ontology#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?paper ?title
+WHERE {
+    ?paper a ork:Paper.
+    ?paper schema:name ?title.
+    ?paper schema:abstract ?abstract.
+    ?abstract schema:contains ?benchmark.
+    ?benchmark dbpedia:dataset "Atari 2600 Bank Heist".
+    ?paper ork:paperID ?paperID.
+}
+```

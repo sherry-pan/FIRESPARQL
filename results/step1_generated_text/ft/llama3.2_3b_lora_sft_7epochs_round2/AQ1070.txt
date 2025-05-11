@@ -1,0 +1,15 @@
+Question:
+What is the highest benchmark result achieved on the FSNS - Test dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R110859 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label "FSNS - Test"^^xsd:string.
+        ?contrib orkgp:P32?eval.
+        ?eval orkgp:HAS_VALUE?value.
+         BIND(xsd:float(?value) AS?value).
+        ?value orkgp:P34?metric.
+        ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

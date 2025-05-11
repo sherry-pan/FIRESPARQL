@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont rdfs:label ?title.
+  FILTER(REGEX(?title, "benchmarking|model|Concept Mention Extraction"))
+  ?paper orkgp:P27 ?cont2.
+  ?cont2 rdfs:label ?code.
+  FILTER(?code != "https://github.com/huggingface/transformers/tree/main/src/transformers/models")
+}
+ORDER BY ?code
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+        orkg:hasBenchmarkingResult ?benchmarkingResult.
+  ?benchmarkingResult orkg:hasEvaluationMetric ?metric ;
+                      orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:name "ARC-PDN".
+  FILTER (?metric != "default")
+}
+```

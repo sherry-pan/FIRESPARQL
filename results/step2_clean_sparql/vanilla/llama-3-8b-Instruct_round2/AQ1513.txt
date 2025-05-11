@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasBenchmarkResult ?result.
+  ?result a orkg:BenchmarkResult ;
+          orkg:benchmarkDataset "ANLI" ;
+          orkg:metric "A2" ;
+          orkg:hasValue ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

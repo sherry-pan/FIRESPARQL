@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?title ?id
+WHERE {
+   ?paper a orkg:ResearchPaper.
+   ?paper orkg:hasBenchmark ?benchmark.
+   ?benchmark orkg:dataset <http://www.orkg.org/Dmlab-30>.
+   ?paper rdfs:label ?title.
+   ?paper orkg:hasIdentifier ?id.
+   FILTER (lang(?title) = "en").
+}
+```

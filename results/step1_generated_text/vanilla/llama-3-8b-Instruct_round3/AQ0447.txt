@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the CUB-200-2011 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/>
+    PREFIX bibo: <http://purl.org/ontology/bibo/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    SELECT?paperTitle?paperId
+    WHERE {
+       ?paper a bibo:AcademicPaper.
+       ?paper orkg:hasBenchmark?benchmark.
+       ?benchmark orkg:dataset?dataset.
+       ?dataset orkg:identifier "CUB-200-2011".
+       ?paper bibo:hasTitle?paperTitle.
+       ?paper bibo:identifier?paperId
+    }<|eot_id|>

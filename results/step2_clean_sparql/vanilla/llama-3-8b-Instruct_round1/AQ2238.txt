@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX orkg-ontology: <http://www.orkg.org/ontology/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:uses ?model.
+  ?model rdfs:label "MPAD-path model".
+  ?codeReference a orkg:CodeReference.
+  ?codeReference orkg:references ?paper.
+  ?codeReference orkg:hasType "code".
+}
+```

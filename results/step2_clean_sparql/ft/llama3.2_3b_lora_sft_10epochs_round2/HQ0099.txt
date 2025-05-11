@@ -1,0 +1,18 @@
+```sparql
+SELECT ?material ?material_label
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_label.
+  FILTER(REGEX(?benchmark_label, "piezoresistive"))
+  ?study orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_MATERIAL ?material.
+  ?material rdfs:label ?material_label.
+  ?study orkgp:HAS_CONTRIBUTION ?contrib.
+  ?contrib rdfs:label ?contrib_label.
+  FILTER(REGEX(?contrib_label, "time"))
+  ?contrib orkgp:HAS_PERFORMANCE ?performance.
+  ?performance orkgp:P30 ?time.
+}
+ORDER BY ASC(?time)
+LIMIT 1
+```

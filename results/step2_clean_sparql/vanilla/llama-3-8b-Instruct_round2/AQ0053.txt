@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:name "NYT29".
+  ?model rdfs:label ?modelLabel.
+  FILTER(lang(?modelLabel) = "en").
+}
+```

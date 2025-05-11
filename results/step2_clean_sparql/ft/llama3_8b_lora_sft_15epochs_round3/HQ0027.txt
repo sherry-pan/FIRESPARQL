@@ -1,0 +1,12 @@
+```sparql
+SELECT ?country
+WHERE {
+  orkgr:R44930 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15692 ?epi.
+  ?epi rdfs:label ?label.
+  FILTER(REGEX(?label, "overall prevalence of epilepsy is the"))
+  ?contrib orkgp:P37678 ?country.
+}
+ORDER BY DESC(?epi)
+LIMIT 1
+```

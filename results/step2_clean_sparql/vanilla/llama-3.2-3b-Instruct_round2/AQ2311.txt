@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?codeLink 
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:hasCode ?code.
+  ?code orkg:isCode ?codeLink.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label ?label.
+  FILTER (CONTAINS(?label, "POP3D"))
+}
+```

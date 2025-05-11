@@ -1,0 +1,20 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the TempEval-3 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://rdf.orkg.org/resource/>
+PREFIX orkg2: <http://rdf.orkg.org/object/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?metric
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:publishedOn?date.
+   ?paper orkg:dataset?dataset.
+   ?dataset orkg2:name "TempEval-3".
+   ?paper orkg:evaluationMetric?metric.
+    FILTER (?date >= "2010-01-01" &&?date <= "2022-12-31").
+    FILTER (?metric!= "NA").
+    ORDER BY?metric
+}<|eot_id|>

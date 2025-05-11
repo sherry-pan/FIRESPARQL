@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark rdf:type orkg:benchmark;
+               orkg:has_metric ?metric;
+               orkg:has_run ?run;
+               orkg:has_score ?score.
+    ?run orkg:has_dataset "DMControl500k".
+    FILTER (?benchmark = "Cheetah" && ?metric = <http://www.openresearch.org/orkg/metrics/benchmark_score> )
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

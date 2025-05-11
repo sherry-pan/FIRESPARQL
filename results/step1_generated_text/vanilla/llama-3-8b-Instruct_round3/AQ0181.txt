@@ -1,0 +1,23 @@
+Question:
+Could you provide a list of models that have been tested on the SST-2 Binary classification benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?model?modelLabel?benchmark?benchmarkLabel?result
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:testedOn?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+  FILTER (?benchmarkLabel = "SST-2 Binary classification benchmark"^^xsd:string).
+ ?model orkg:hasResult?result.
+ ?result rdfs:label?resultLabel.
+  FILTER (?resultLabel = "tested"^^xsd:string).
+  SERVICE orkg:instance?model {
+   ?model rdfs:label?modelLabel.
+  }
+}<|eot_id|>

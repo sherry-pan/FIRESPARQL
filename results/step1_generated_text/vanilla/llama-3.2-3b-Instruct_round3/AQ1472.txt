@@ -1,0 +1,29 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the TriviaQA dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX sparql: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX wot: <http://www.w3.org/ns/wot/>
+
+     SELECT?model?accuracy
+     WHERE {
+    ?model schema:description?d.
+    ?d schema:subject <http://dbpedia.org/ontology/TriviaQA>.
+    ?model rdfs:label?label.
+     FILTER (lang(?label) = 'en' AND?label LIKE '%Accuracy%' AND?label LIKE '%score%').
+    ?model schema:mainClass?class.
+    ?class rdfs:label?label.
+     FILTER (lang(?label) = 'en' AND?label LIKE '%model%' AND?label LIKE '%Accuracy%' AND?label LIKE '%score%').
+    ?model schema:mainClass wot:Type <http://www.w3.org/ns/wot/Model>.
+    ?model schema:description?d.
+    ?d schema:subject <http://dbpedia.org/ontology/TriviaQA>.
+    ?model rdfs:label?label.
+     FILTER (lang(?label) = 'en' AND?label LIKE '%Accuracy%' AND?label LIKE '%score%' AND?label LIKE '%top%' AND?label LIKE '%performing%').
+     }
+     GROUP BY?model
+     HAVING (COUNT(?

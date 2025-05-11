@@ -1,0 +1,21 @@
+Question:
+Can you provide links to code used in papers that benchmark the BERTwwm + SQuAD 2 model?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wem: <http://wemontology.org/ontology/>
+     PREFIX sqad: <http://schema.org/SQuAD2>
+     PREFIX bertwwm: <http://bertwwm.ontology.org/ontology/>
+
+     SELECT?paper?link
+     WHERE {
+      ?paper orkg:hasSource?source.
+      ?source wem:isBenchmarking?benchmark.
+      ?benchmark sqad:hasModel "BERTwwm + SQuAD 2".
+      ?paper wem:hasCode?code.
+      ?code wem:hasLink?link.
+       FILTER (CONTAINS(LCASE(?paper), "bertwwm")
+           AND CONTAINS(LCASE(?paper), "squad2"))
+     }
+     ```<|eot_id|>

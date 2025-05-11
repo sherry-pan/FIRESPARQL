@@ -1,0 +1,22 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     SELECT?model?f1score 
+     WHERE {
+    ?model schema:description?desc.
+    ?model schema:author?author.
+    ?model orkg:performance?f1score.
+    ?model orkg:benchmark "Natural Questions (long)".
+    ?model schema:label?modelLabel.
+     FILTER (?f1score >= (min(?f1score)))
+     FILTER (lang(?modelLabel) = "en")
+     }
+     ORDER BY DESC(?f1score) LIMIT 1<|eot_id|>

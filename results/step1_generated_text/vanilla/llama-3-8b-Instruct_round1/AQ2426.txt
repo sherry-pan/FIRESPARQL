@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the DY-MobileNetV3-Small model and include the links to their code?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?paperTitle?code
+WHERE {
+ ?paper a bibo:Article.
+ ?paper dc:subject?subject.
+ ?subject rdfs:label "DY-MobileNetV3-Small".
+ ?paper dc:hasPart?code.
+ ?code a schema:Code.
+ ?paper bibo:hasLink?link.
+ ?link rdfs:label?code.
+  FILTER(?paperTitle =?paper dc:title)
+}<|eot_id|>

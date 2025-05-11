@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgc:benchmarkedOn orkgd:PIQA;
+         orkgc:achieves ?metricAchiev;
+         orkgc:hasMetric ?metric.
+  ?metric a orkgc:Metric;
+          rdfs:label "Accuracy".
+  FILTER (?metricAchiev = MAX(?metricAchiev))
+}
+```

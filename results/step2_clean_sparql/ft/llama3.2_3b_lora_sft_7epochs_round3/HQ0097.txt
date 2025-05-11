@@ -1,0 +1,18 @@
+```sparql
+SELECT ?nanocarrier_labels ?nanocarrier_labels_labels
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_labels.
+  FILTER(REGEX(?problem_labels, "What are the (types of) nanocarriers that have a (therapeutic) effect?"))
+  ?model a orkgc:Model;
+         rdfs:label ?model_labels.
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_MODEL ?model;
+             rdfs:label ?model_labels.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_NANOCARRIER ?nanocarrier.
+  ?nanocarrier rdfs:label ?nanocarrier_labels.
+  ?nanocarrier orkgp:P31 ?types;
+               rdfs:label ?nanocarrier_labels_labels.
+}
+```

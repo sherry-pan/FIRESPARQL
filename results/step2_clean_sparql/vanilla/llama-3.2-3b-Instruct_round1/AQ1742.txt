@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+SELECT ?model
+WHERE {
+    ?model orkg:isTopModelOf ?topModel.
+    ?topModel orkg:isBenchmarkedOn <http://www.openresearchknowledgegraph.org/ontology/#CIFAR10_Sequential>.
+    ?topModel orkg:hasAccuracyScore ?accuracy.
+    ?accuracy orkg:hasUnit "Unpermuted Accuracy".
+    ?accuracy orkg:hasValue "???".
+    FILTER (?accuracy orkg:hasValue =~ "???").
+}
+```

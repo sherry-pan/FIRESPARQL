@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?benchmark ?benchmarkLabel ?result
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:testedOn ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER (?benchmarkLabel = "SST-2 Binary classification benchmark"^^xsd:string).
+  ?model orkg:hasResult ?result.
+  ?result rdfs:label "tested".
+  ?model rdfs:label ?modelLabel.
+}
+```

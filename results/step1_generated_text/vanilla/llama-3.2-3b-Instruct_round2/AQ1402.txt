@@ -1,0 +1,23 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the NYT-single dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?model?f1Score 
+     WHERE {
+    ?model a orkg:Model.
+    ?model schema:description?description.
+     FILTER (CONTAINS(STR(?description), 'NYT-single')).
+    ?model orkg:benchmark?benchmark.
+    ?benchmark schema:name?name.
+    ?benchmark schema:description?description.
+     FILTER (CONTAINS(STR(?description), 'F1-score')).
+    ?benchmark orkg:score?f1Score.
+     ORDER BY DESC(?f1Score)
+     LIMIT 1
+     }<|eot_id|>

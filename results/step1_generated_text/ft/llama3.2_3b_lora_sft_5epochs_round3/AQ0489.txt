@@ -1,0 +1,14 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SNLI dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+        ?dataset        a                orkgc:Dataset;
+                         rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "SNLI")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         orkgp:P31               ?cont;
+                        rdfs:label              ?paper_lbl.
+     }<|eot_id|>

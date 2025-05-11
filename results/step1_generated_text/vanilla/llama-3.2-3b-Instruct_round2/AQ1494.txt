@@ -1,0 +1,25 @@
+Question:
+What is the best performing model benchmarking the RotoWire (Content Ordering) dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://purl.org/vcard/>
+     PREFIX wikibase: <http://wikiba.se/ontology#>
+     SELECT?model?benchmark?metric
+     WHERE {
+     {
+    ?model rkg:isModel?modelLabel.
+    ?model rkg:benchmark?benchmark.
+    ?benchmark rkg:dataset "RotoWire (Content Ordering)".
+    ?benchmark rkg:metric "BLEU".
+    ?benchmark rkg:bestPerformingModel?bestModel.
+    ?bestModel rkg:benchmark?benchmark.
+     }
+     FILTER (REGEX(STR(?benchmark) "@(Content Ordering)")i)
+     ORDER BY DESC(?benchmark)<|eot_id|>

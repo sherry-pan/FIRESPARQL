@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Yelp-14 dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark wdt:P274?dataset.
+    ?dataset wdt:P31?datasetType.
+    ?datasetType rdfs:label "Yelp-14".
+    ?benchmark wdt:P273?metric.
+    ?metric rdfs:label?metricLabel.
+    ?benchmark wdt:P310?value.
+     FILTER (STR(?metricLabel = "Accuracy" OR STR(?metricLabel = "Precision" OR STR(?metricLabel = "Recall"))
+     AND STR(?value = "0.95" OR STR(?value = "0.92" OR STR(?value = "0.89"))
+     AND STR(?metricLabel = "Accuracy" OR STR(?metricLabel = "Precision" OR STR(?metricLabel = "Recall")))
+     )<|eot_id|>

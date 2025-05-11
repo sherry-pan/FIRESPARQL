@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+SELECT ?country ?prevalence
+WHERE {
+  ?country dbpedia:countryName ?name.
+  ?country orkg:hasStudy ?study.
+  ?study schema:description ?description.
+  FILTER CONTAINS(LCASE(?description), "epilepsy")
+  ?study orkg:hasData ?data.
+  ?data orkg:hasValue ?prevalence.
+}
+ORDER BY DESC(?prevalence)
+LIMIT 1
+```

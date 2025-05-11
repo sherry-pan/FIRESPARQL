@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P30_0001 ?title.
+  FILTER(REGEX(?title, "PEGASUS"))
+  ?paper orkgp:P31_0000 ?benchmark.
+  ?benchmark orkgp:P32_0000 ?environment.
+  ?environment rdfs:label ?env_label.
+  ?environment orkgp:P34_0001 ?code.
+  ?code rdfs:label ?code_label.
+  FILTER(REGEX(?code_label, "\.py$"))
+}
+```

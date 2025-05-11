@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orcg.org/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+SELECT ?p ?o
+WHERE {
+  ?p orkg:hasPaper ?paper.
+  ?paper schema:hasBody ?body.
+  ?body schema:hasText ?text.
+  ?text orkg:contains ?code.
+  ?code schema:hasCode ?codeReference.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:hasCode ?codeReference.
+  ?codeReference schema:usedFor ?usedFor.
+  ?usedFor orkg:usesStreetModel "true"^^xsd:boolean.
+}
+```

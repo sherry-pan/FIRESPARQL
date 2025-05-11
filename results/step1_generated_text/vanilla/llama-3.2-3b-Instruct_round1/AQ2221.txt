@@ -1,0 +1,33 @@
+Question:
+Provide a list of papers that have utilized the AlexNet, MultiGrasp model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX ork: <http://orkg.org/ontology/>
+     PREFIX ork: <http://orkg.org/ontology/2017/04/06>
+     PREFIX ork: <http://orkg.org/ontology/2019/03/15>
+     PREFIX ork: <http://orkg.org/ontology/2020/04/02>
+     SELECT?paper?title?link
+     WHERE {
+    ?paper ork:hasPaper?model.
+    ?paper ork:hasPaper?link.
+    ?paper ork:hasModel "AlexNet".
+    ?paper ork:hasModel "MultiGrasp".
+    ?paper ork:hasCode?code.
+    ?code ork:hasLicense "Open Source".
+     SERVICE ork:repo {
+     SELECT?link?title
+     WHERE {
+    ?code ork:hasLink?link.
+    ?link ork:hasTitle?title.
+     }
+     }
+     ORDER BY (DESC(?paper ork:hasCitedByCount))
+     LIMIT 10
+     ```
+      Note: This query is based on the assumption that the ORKG uses the following prefixes and namespaces:
+      - rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      - rdfs: <http://www.w3.org/2000/01/rdf-schema

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:benchmarkedOn ?dataset.
+    ?dataset rdfs:label "Atari 2600 Tutankham".
+    ?model orkg:score ?score.
+    FILTER NOT EXISTS {
+        ?model2 orkg:benchmarkedOn ?dataset.
+        ?model2 orkg:score ?score2.
+        FILTER(?score2 > ?score)
+    }
+}
+```

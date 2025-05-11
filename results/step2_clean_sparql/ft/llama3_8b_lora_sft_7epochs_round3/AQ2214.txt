@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, "All-attention network - 18 layers"))
+  ?benchmark orkgp:P5008 ?paper.
+  ?sourcecode ?predicate ?code.
+  ?cont ?predicate ?code.
+  ?cont ?property ?benchmark.
+  FILTER(REGEX(?property, "benchmarking"))
+}
+```

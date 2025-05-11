@@ -1,0 +1,23 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Seaquest dataset in terms of Score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/vocab#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX wgsn: <http://wgsn.dallitech.com/ontology/>
+     PREFIX vcref: <http://vcref.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?model?metric?score
+     WHERE {
+    ?model orkg:isBenchmarkFor?b.
+    ?b orkg:benchmarked?score.
+    ?score schema:description "Atari 2600 Seaquest".
+    ?model orkg:isBenchmarkFor?b.
+    ?b schema:description "Score".
+     FILTER (STRIKE?score)
+     }<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper dcterms:title ?title.
+  ?paper orkg:hasIdentifier ?id.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark dcterms:title "STL-10".
+  FILTER (lang(?title) = "en").
+}
+```

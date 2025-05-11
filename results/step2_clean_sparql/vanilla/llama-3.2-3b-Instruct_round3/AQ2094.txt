@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX otf: <http://purl.org/net/otf/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX vocab: <http://purl.org/vocab/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeLink
+WHERE {
+  ?paper schema:description ?description.
+  FILTER (REGEX(?description, "OTF spelling+lemma\\(single\\)", "i"))
+  ?paper otf:uses ?code.
+  ?code schema:description ?codeLink.
+  FILTER (REGEX(?codeLink, "http[s]?://[a-zA-Z0-9$-_@.&+!*\\(\\),%]+", "i"))
+}
+```

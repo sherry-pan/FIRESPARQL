@@ -1,0 +1,12 @@
+```sparql
+SELECT ?coolant
+WHERE {
+  orkgr:R7803 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31 ?has_problem.
+  ?has_problem orkgp:P32 ?coolant.
+  ?has_problem orkgp:P31 ?has_technology.
+  ?has_technology orkgp:P33 ?astrid_reactor.
+  ?astrid_reactor rdfs:label ?astrid_reactor_label.
+  FILTER(REGEX(STR(?astrid_reactor_label), "ASTRID"))
+}
+```

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+SELECT ?benchmarkScore ?metric 
+WHERE {
+  ?benchmarkScore orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:isBenchmarkFor ?dataset.
+  ?dataset orkg:hasDatasetName "Atari 2600 Ice Hockey".
+  FILTER (STR(?benchmarkScore) >= "0" && STR(?benchmarkScore) <= "1")
+}
+```

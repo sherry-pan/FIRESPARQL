@@ -1,0 +1,15 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT ?paper ?url 
+WHERE {
+  ?paper wdt:P275 ?paperModel. 
+  ?paperModel wdt:P164 ?code. 
+  ?code wdt:P306 ?url. 
+  FILTER (CONTAINS(LCASE(?paperModel), "kd-lstmreg") OR CONTAINS(LCASE(?paperModel), "kd-lstmreg model")) 
+}
+LIMIT 10
+```

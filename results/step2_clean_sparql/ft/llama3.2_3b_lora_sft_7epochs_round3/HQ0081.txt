@@ -1,0 +1,19 @@
+```sparql
+SELECT ?quantity
+WHERE {
+    ?crater a orkgc:Crater;
+            rdfs:label ?crater-label.
+    FILTER(REGEX(?crater-label, "Elorza"))
+    
+    ?material orkgp:HAS_CRATER ?crater;
+              orkgp:P32 ?composition.
+    
+    ?composition orkgp:HAS_MATTER ?matter;
+                 rdfs:label ?matter-label.
+                 
+    ?cont orkgp:HAS_MATTER ?matter;
+          orkgp:HAS_QUANTITY ?quantity.
+    
+    FILTER(REGEX(?matter-label, "iron oxide"))
+}
+```

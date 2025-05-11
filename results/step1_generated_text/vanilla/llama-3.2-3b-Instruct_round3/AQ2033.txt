@@ -1,0 +1,24 @@
+Question:
+List the code links in papers that use the Unsupervised NMT + weight-sharing model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX wot: <http://www.w3.org/ns/wot/>
+     PREFIX bio2vec: <http://www.openresearchknowledgegraph.org/bio2vec/>
+     PREFIX owl: <http://www.w3.org/ontology/>
+     SELECT?paper?codeLink
+     WHERE {
+    ?paper wot:isPartOf <http://purl.org/mendeley/references/1234567890>.
+    ?paper schema:author?author.
+    ?author rdfs:label?authorLabel.
+    ?author bio2vec:hasCode?code.
+    ?code rdfs:label?codeLabel.
+    ?paper wot:hasCode?code.
+    ?paper wot:code?codeLink.
+    ?code rdfs:label "Unsupervised NMT + weight-sharing".
+     FILTER (STRIKE?codeLabel "Unsupervised NMT + weight-sharing" i )
+     }<|eot_id|>

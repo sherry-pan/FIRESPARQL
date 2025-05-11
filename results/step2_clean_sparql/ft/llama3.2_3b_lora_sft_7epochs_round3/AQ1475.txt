@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+  
+  ?comparison a orkgp:Comparison;
+              rdfs:label ?comp_lbl.
+  FILTER (str(?comp_lbl) = "Story Cloze Test")
+  
+  ?comparison orkgp:has_value ?value.
+  ?value orkgp:has_model ?model.
+  ?model rdfs:label ?model_lbl.
+  ?model orkgp:has_accuracy ?accuracy.
+}
+ORDER BY DESC(xsd:float(?accuracy))
+LIMIT 1
+```

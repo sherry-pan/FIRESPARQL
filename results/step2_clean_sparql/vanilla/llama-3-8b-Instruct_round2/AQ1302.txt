@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:Paper;
+    schema:about orkg:Atari2600Tennis;
+    schema:hasMetric ?metric;
+    schema:hasScore ?score.
+  FILTER (?score > 0)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

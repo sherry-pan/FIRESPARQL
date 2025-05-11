@@ -1,0 +1,20 @@
+Question:
+Where can I find code references in papers that have used the SRU++ Base model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+        ?paper orkgp:P30?cont.
+        ?cont orkgp:P31?code.
+        ?paper orkgp:P23?benchmark.
+        ?benchmark orkgp:P5009?model.
+        ?model rdfs:label?model_lbl.
+         FILTER(REGEX(?model_lbl, "SRU++"))
+        ?paper orkgp:P32?comparison.
+         OPTIONAL {
+          ?comparison orkgp:P3344?eval_metric.
+          ?eval_metric rdfs:label?eval_lbl.
+         }
+         FILTER(REGEX(?eval_lbl, "accuracy"^^xsd:string))
+         BIND(xsd:string(?code) AS?code)
+     }<|eot_id|>

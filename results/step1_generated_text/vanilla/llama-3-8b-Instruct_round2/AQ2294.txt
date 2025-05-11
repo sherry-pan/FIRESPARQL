@@ -1,0 +1,16 @@
+Question:
+Provide a list of papers that have utilized the Duel hs model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+     PREFIX bibo: <http://purl.org/ontology/bibo/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?code
+     WHERE {
+      ?paper a orkg:ResearchEntity.
+      ?paper orkg:utilizes?model.
+      ?model owl:sameAs <http://www.openresearchknowledgegraph.org/Model/DuelHSModel>.
+      ?paper bibo:hasDocument?document.
+      ?document bibo:hasCode?code.
+       FILTER (?code!= "")
+     }<|eot_id|>

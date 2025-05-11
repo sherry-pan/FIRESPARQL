@@ -1,0 +1,14 @@
+```sparql
+PREFIX pd: <http://pnb.cse.chalmers.se/ontology/pdb/>
+PREFIX pn: <http://pnb.cse.chalmers.se/ontology/pn/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperTitle ?paperUrl
+WHERE {
+    ?paper pd:usesModel pn:PNDec.
+    ?paper wdt:P301 ?paperTitle.
+    ?paper wdt:P276 ?paperUrl.
+    ?benchmark rdfs:label ?benchmarkLabel.
+    FILTER (lcase(?benchmarkLabel) = "benchmarking")
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?bleu
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "WMT2014 German-English".
+  ?benchmark orkg:metric ?metric.
+  ?metric rdfs:label "BLEU".
+  ?benchmark orkg:result ?result.
+  ?result orkg:value ?bleu.
+}
+ORDER BY DESC(?bleu)
+LIMIT 1
+```

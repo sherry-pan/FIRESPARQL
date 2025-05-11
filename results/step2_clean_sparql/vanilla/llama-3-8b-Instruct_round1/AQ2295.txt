@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a orkg:ResearchEntity.
+  ?paper rdfs:label ?paperTitle.
+  ?paper orkg:utilizes ?model.
+  ?model rdfs:label "Prior Noop model".
+  ?paper orkg:hasCode ?code.
+  ?code schema:codeRepository ?codeLink.
+}
+```

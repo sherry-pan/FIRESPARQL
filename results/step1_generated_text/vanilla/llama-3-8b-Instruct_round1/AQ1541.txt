@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of Pearson Correlation metric on the MedSTS benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?pearsonCorrelation
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric owl:hasValue?metric.
+ ?metric rdfs:label "Pearson Correlation".
+ ?evaluation orkg:hasValue?pearsonCorrelation.
+ ?evaluation orkg:hasDataset orkg:MedSTS.
+ ?evaluation orkg:hasMetricValue?metricValue.
+  FILTER (?metricValue = xsd:decimal(?pearsonCorrelation) )
+  FILTER (?model orkg:hasBest?best.?best orkg:metric owl:hasValue?metric )
+}<|eot_id|>

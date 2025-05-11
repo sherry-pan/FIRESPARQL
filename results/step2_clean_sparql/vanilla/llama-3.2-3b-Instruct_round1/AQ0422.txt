@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wmt: <http://wmt18.wmt.eu/2016/eng-rom/>
+
+SELECT ?paper ?paperID
+WHERE {
+    ?paper wmt:hasBenchmark ?benchmark.
+    ?benchmark wmt:hasDataset <http://wmt18.wmt.eu/2016/eng-rom/>.
+    ?paper wmt:hasTitle ?title.
+    ?title rdfs:label ?paperID.
+    FILTER (lang(?paperID) = 'en')
+}
+```

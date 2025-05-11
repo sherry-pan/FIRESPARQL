@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?bleuScore
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:has_result ?result.
+   ?result orkg:has_metric ?metric.
+   ?metric schema:name "BLEU score".
+   ?metric orkg:has_value ?bleuScore.
+   ?result orkg:dataset ?dataset.
+   ?dataset schema:name "WMT2016 Romanian-English benchmark dataset".
+   ?dataset schema:dataset_for ?languagePair.
+   ?languagePair schema:fromLanguage "ro".
+   ?languagePair schema:toLanguage "en".
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

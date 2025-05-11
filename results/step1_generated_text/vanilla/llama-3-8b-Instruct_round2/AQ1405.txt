@@ -1,0 +1,16 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?modelLabel?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasEntityF1Score?score.
+ ?model orkg:hasBenchmark?benchmark.
+ ?benchmark schema:name "SciERC".
+  FILTER(?score > (SELECT MAX(?score2) {?model2 a orkg:Model ; orkg:hasEntityF1Score?score2 } ) )
+}<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the CINIC-10 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    SELECT?benchmark?metric?score
+    WHERE {
+     ?benchmark a orkg:Benchmark.
+     ?benchmark orkg:dataset <http://www.openresearchknowledge.org/resource/CINIC-10>.
+     ?benchmark orkg:metric?metric.
+     ?benchmark orkg:score?score.
+      FILTER (?metric = "CINIC-10" && isLiteral(?score) && xsd:float(?score) )
+      ORDER BY DESC(?score)
+      LIMIT 1
+    }<|eot_id|>

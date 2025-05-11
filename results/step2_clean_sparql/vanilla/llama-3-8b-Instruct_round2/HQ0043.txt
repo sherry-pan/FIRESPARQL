@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?variable (COUNT(?paper) AS ?count)
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasContribution ?contribution.
+  ?contribution orkg:hasVariable ?variable.
+  ?contribution orkg:isAbout orkg:AtmosphereModel.
+}
+GROUP BY ?variable
+ORDER BY DESC(?count)
+LIMIT 3
+```

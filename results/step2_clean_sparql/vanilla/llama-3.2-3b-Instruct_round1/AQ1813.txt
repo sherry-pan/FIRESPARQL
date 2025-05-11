@@ -1,0 +1,14 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX orkg: <http://orkg.org/ontology/>
+SELECT ?model ?metric ?value 
+WHERE {
+    ?model orkg:hasBenchmark "iNaturalist 2018".
+    ?model orkg:hasMetric ?metric.
+    ?metric orkg:hasUnit "Top-1 Accuracy".
+    ?metric orkg:hasValue ?value.
+    FILTER (STR(?value) ~ "^[0-9]+(\.[0-9]+)?$")
+}
+```

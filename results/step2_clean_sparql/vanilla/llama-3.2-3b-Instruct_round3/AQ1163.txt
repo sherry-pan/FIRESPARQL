@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:description "ARC".
+  ?benchmark rdfs:label ?benchmarkLabel.
+  ?benchmark orkg:hasResult ?result.
+  ?result orkg:metric ?metric.
+  ?result orkg:value ?value.
+  FILTER (strContains(STR(?benchmarkLabel), "ARC"))
+}
+```

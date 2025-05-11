@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?score ?metric
+WHERE {
+  ?result a orkg:Result.
+  ?result orkg:dataset orkg:Atari_2600_Wizard_of_Wor.
+  ?result orkg:metric ?metric.
+  ?result orkg:score ?score.
+  FILTER(?metric = "benchmark_score").
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

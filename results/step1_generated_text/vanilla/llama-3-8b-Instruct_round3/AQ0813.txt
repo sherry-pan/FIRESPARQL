@@ -1,0 +1,18 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SQuAD2.0 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    SELECT?metric
+    WHERE {
+     ?paper a orkg:Paper ;
+             orkg:hasPublicationDate?date.
+     ?paper orkg:hasResearchField orkg:ResearchField_Semantic_Question_Answering ;
+             orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:hasEvaluationMetric?metric.
+      FILTER (?date >= "2018-01-01"^^xsd:date &&?date <= "2022-12-31"^^xsd:date)
+      FILTER (str(?benchmark) = "SQuAD2.0")
+    }<|eot_id|>

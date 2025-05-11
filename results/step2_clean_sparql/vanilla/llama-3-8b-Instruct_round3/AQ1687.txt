@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <https://wifo5-03.uni-karlsruhe.de/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset <https://wifo5-03.uni-karlsruhe.de/orkg/dataset/AESLC>.
+  ?benchmark orkg:metric <https://wifo5-03.uni-karlsruhe.de/orkg/metric/ROUGE-1>.
+  ?benchmark orkg:result ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

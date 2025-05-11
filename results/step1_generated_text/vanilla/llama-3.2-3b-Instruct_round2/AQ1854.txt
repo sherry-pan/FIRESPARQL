@@ -1,0 +1,15 @@
+Question:
+What are the most commonly used benchmark datasets for the Joint Entity and Relation Extraction research field?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?dataset 
+     WHERE {
+    ?dataset skos:broader?b.
+    ?b skos:broader skos:Concept_00000023.
+    ?dataset skos:prefLabel?label.
+     FILTER (lang(?label) = "en" AND?label CONTAINS "Joint Entity and Relation Extraction" )
+     }
+     GROUP BY?dataset
+     HAVING (COUNT(?dataset) = (SELECT COUNT(DISTINCT?dataset) FROM {?dataset skos:broader?b.?b skos:broader skos:Concept_00000023. } ) )<|eot_id|>

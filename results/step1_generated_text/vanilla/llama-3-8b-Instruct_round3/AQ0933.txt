@@ -1,0 +1,19 @@
+Question:
+Can you list the metrics used to evaluate models on the Atari 2600 Zaxxon dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:evaluates?model.
+ ?model orkg:usesDataset?dataset.
+ ?dataset rdfs:label "Atari 2600 Zaxxon".
+ ?evaluation orkg:hasMetric?metric.
+  FILTER (?metric!= "undefined").
+}<|eot_id|>

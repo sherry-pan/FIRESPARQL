@@ -1,0 +1,24 @@
+Question:
+Can you provide links to code used in papers that benchmark the MFEC model?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?paper?paperUri?codeUri
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper dc:title?title.
+ ?paper orkg:hasCode?code.
+ ?code a orkg:Code.
+ ?code orkg:isUsedIn?paper.
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:benchmarksMFEC?model.
+ ?model a orkg:MFECModel.
+  FILTER (?title =~ "benchmark" )
+ ?paperUri <http://www.openresearchknowledgegraph.org/ontology/paperUri>?paper.
+ ?codeUri <http://www.openresearchknowledgegraph.org/ontology/codeUri>?code.
+}<|eot_id|>

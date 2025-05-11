@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmarkResult ?result.
+    ?result orkg:hasMetric ?metric.
+    ?result orkg:hasValue ?value.
+    ?benchmark orkg:hasDataset "Birdsnap".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

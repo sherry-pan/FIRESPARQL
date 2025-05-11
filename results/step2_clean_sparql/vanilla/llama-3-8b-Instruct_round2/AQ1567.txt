@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmark ?benchmark ;
+         orkg:dataset <https://orkg.org/dataset/conll++> ;
+         orkg:metric <https://orkg.org/metric/f1> ;
+         orkg:performance ?f1.
+}
+ORDER BY DESC(xsd:float(?f1))
+LIMIT 1
+```

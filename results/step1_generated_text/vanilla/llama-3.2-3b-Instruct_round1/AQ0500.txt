@@ -1,0 +1,20 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?title?id
+WHERE {
+ ?paper a dbo:ResearchPaper.
+ ?paper dcterms:topic "Computer Vision".
+ ?paper dbo:dataset "Penn Treebank (Character Level)".
+ ?paper dbo:hasBenchmark?benchmark.
+ ?benchmark dbo:benchmarkModel?model.
+ ?model dcterms:hasDataset?modelDataset.
+ ?modelDataset rdfs:label?title.
+ ?benchmark rdfs:label?benchmarkLabel.
+ ?benchmark rdfs:label?benchmarkLabel.
+ ?paper dbo:identifier?id.
+  FILTER (?benchmarkLabel = "Benchmark on Penn Treebank (Character Level)")
+}
+```<|eot_id|>

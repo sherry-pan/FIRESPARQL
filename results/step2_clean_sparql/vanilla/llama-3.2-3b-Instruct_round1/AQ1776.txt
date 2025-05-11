@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?benchmark
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasMetricValue ?value.
+  FILTER (STR(?metric) = "Number of params")
+  FILTER (isLiteral(?value))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

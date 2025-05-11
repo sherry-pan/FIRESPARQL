@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperUrl ?codeUrl
+WHERE {
+  ?paper a orkg:ResearchOutput.
+  ?paper bibo:isPartOf ?conference.
+  ?conference rdfs:label ?conferenceLabel.
+  FILTER (?conferenceLabel = "Benchmarking Fine-Grained Gating model").
+  ?paper orkg:hasCode ?code.
+  ?code rdfs:label ?codeLabel.
+  FILTER (?codeLabel = "Fine-Grained Gating model").
+  ?code orkg:hasLocation ?codeUrl.
+  ?paper orkg:hasLocation ?paperUrl.
+}
+```

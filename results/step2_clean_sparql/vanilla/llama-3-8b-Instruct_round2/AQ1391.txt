@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset ?dataset ;
+             orkg:metric ?metric ;
+             orkg:score ?score ;
+             orkg:hasBenchmark ?model.
+  ?dataset orkg:datasetName "ACE 2004".
+  ?metric orkg:metricName "RE+ Micro F1" ;
+          orkg:metricType owl:FunctionalProperty.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

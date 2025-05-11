@@ -1,0 +1,19 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikibase.org/schema/inference/ontology#>
+     SELECT?paper?paperId 
+     WHERE {
+      ?paper wdt:P3010 wdt:P279?class. 
+      ?class rdfs:label?label.
+       FILTER (STR(?label) = "Atari 2600 Defender" @en).
+      ?paper wdt:P3011?benchmark.
+      ?benchmark rdfs:label?title.
+      ?paper wdt:P106?paperId.
+       SERVICE wikibase:label {
+         bd:serviceParam wikibase:language "en".
+       }
+     }<|eot_id|>

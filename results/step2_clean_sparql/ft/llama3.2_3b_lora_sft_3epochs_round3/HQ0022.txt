@@ -1,0 +1,11 @@
+```sparql
+SELECT ?useCosineSimilarity
+WHERE {
+  ?paper rdfs:label ?title.
+  FILTER(REGEX(?title, "Disambiguating authors in citations on the web and authorship correlations", "i"))
+  ?paper orkgp:P32 ?author.
+  ?author orkgp:P34 ?value.
+  BIND(xsd:float(?value) AS ?useCosineSimilarity)
+  FILTER(?value = 1)
+}
+```

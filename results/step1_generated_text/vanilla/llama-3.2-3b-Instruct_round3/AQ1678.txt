@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the MLDoc Zero-Shot English-to-French dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/v1/>
+     SELECT?model 
+     WHERE {
+    ?model orkg:isTopPerformingModel?modelForDataset.
+    ?model orkg:dataset?dataset.
+    ?dataset orkg:datasetName "MLDoc Zero-Shot English-to-French".
+    ?model orkg:dataset?dataset.
+    ?model orkg:isBenchmarkedOn?benchmark.
+    ?benchmark orkg:benchmarkName "MLDoc Zero-Shot English-to-French".
+    ?model orkg:benchmarkAccuracy?accuracy.
+     ORDER BY?accuracy DESC
+     LIMIT 1
+     }<|eot_id|>

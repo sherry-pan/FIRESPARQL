@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluation ?evaluation.
+  ?evaluation orkg:dataset <http://dbpedia.org/resource/Yelp>.
+  ?evaluation orkg:metric "Accuracy".
+  ?evaluation orkg:value ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

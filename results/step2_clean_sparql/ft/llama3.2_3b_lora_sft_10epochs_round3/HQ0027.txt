@@ -1,0 +1,17 @@
+```sparql
+SELECT ?country
+WHERE {
+  orkgr:R69434 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15279 ?epi.
+  ?epi orkgp:P8116 ?country.
+  {
+    SELECT ?country (MAX(?epi) AS ?max_value)
+    WHERE {
+      orkgr:R69434 orkgp:compareContribution ?contrib.
+      ?contrib orkgp:P15279 ?epi.
+      ?epi orkgp:P8116 ?country.
+    }
+    GROUP BY ?country
+  }
+}
+```

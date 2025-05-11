@@ -1,0 +1,20 @@
+Question:
+Where can I find code references in papers that have used the AxCell model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?paper {
+    ?paper a orkg:Paper.
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasCodeReference?codeRef.
+    ?codeRef schema:description?description.
+    ?description contains "AxCell".
+     filter (lang(?description) = "en" )
+     }
+     LIMIT 10<|eot_id|>

@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the WMT2016 English-Russian dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wmt: <http://www.orkg.org/wmt/>
+
+SELECT?model?bleu
+WHERE {
+ ?model a wmt:Model.
+ ?model wmt:benchmarks?benchmark.
+ ?benchmark wmt:dataset wmt:WMT2016_english_russian.
+ ?benchmark wmt:metric wmt:BLEU.
+ ?benchmark wmt:result?bleu.
+  FILTER (?bleu = max(?bleu) )
+}<|eot_id|>

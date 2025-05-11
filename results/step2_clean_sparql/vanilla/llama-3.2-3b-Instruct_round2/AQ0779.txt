@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX pdft: <http://persistence.informatik.tu-berlin.de/ontologies/persistence_model#>
+PREFIX orkg: <http://persistence.informatik.tu-berlin.de/ontologies/orkg#>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:datasetName "Fashion-MNIST".
+    ?dataset schema:mainClass dbo:ImageDataset.
+    ?dataset pdft:datasetType pdft:ImageDatasetType.
+    ?dataset orkg:evaluationMetric ?metric.
+    ?metric rdfs:label ?value.
+    FILTER (STRLIKE(?value, "accuracy") || STRLIKE(?value, "loss") || STRLIKE(?value, "f1"))
+}
+```

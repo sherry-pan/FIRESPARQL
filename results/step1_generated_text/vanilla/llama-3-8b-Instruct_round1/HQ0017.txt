@@ -1,0 +1,14 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?location (COUNT(?study) as?count) 
+     WHERE {
+      ?study a orkg:Study.
+      ?study orkg:location?location.
+       FILTER (?location!= owl:nil) 
+       GROUP BY?location 
+       ORDER BY DESC(?count)
+     }<|eot_id|>

@@ -1,0 +1,33 @@
+Question:
+What is the highest benchmark result achieved on the STS Benchmark dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "STS Benchmark")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?paper        orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_MODEL         ?model.
+       OPTIONAL {?model      orkgp:HAS_SOURCE_CODE     ?source_code.}
+       OPTIONAL {?paper      orkgp:HAS_SOURCE_CODE     ?source_code.}
+       OPTIONAL {?paper      orkgp:HAS DESCRIPTION     ?description.}
+       OPTIONAL {?cont      orkgp:P31                   ?paper. 
+               ?cont      orkgp:P32                   ?contrib. 
+               ?contrib   orkgp:P27                   ?author. 
+               ?author    rdfs:label                  ?author_lbl.}
+       OPTIONAL {?eval          ?eval_p     ?value.}
+       OPTIONAL {?eval          ?eval_g     ?value.}
+       OPTIONAL {?eval          ?eval_d     ?value.}
+       OPTIONAL {?eval          ?eval_m     ?value.}
+       OPTIONAL {?eval          ?eval_p     ?value.}
+       OPTIONAL {?eval          ?eval_g     ?value.}
+       OPTIONAL {?eval          ?eval_d     ?value.}
+       OPTIONAL {?eval          ?eval_m     ?value.}
+     }
+     GROUP BY?metric?metric_lbl
+     ORDER BY DESC(?score)<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average)
+WHERE {
+    orkgr:R75383 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label "iNaturalist 2019"^^xsd:string.
+    ?contrib orkgp:P36 ?eval.
+    OPTIONAL {
+        ?eval orkgp:P34 ?metric.
+        ?metric rdfs:label ?metric_lbl.
+    }
+    FILTER(REGEX(?contrib, "inat2019"))
+}
+```

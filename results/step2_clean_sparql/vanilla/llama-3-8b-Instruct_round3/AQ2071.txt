@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:hasCode ?code;
+         schema:about ?topic;
+         orkg:benchmarks ?benchmarks.
+  ?topic a orkg:FGFineGrainedGateModel.
+  ?benchmarks schema:mentions ?code.
+  FILTER(LANG(?code) = "text/plain").
+}
+```

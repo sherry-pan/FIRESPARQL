@@ -1,0 +1,17 @@
+```sparql
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wmt: <http://www.orkg.org/wmt/>
+
+SELECT ?model ?bleu
+WHERE {
+  ?model a wmt:Model.
+  ?model wmt:benchmarks ?benchmark.
+  ?benchmark wmt:dataset wmt:WMT2016_english_russian.
+  ?benchmark wmt:metric wmt:BLEU.
+  ?benchmark wmt:result ?bleu.
+}
+ORDER BY DESC(?bleu)
+LIMIT 1
+```

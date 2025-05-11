@@ -1,0 +1,10 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkg:R155621 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P43135 ?metric.
+    ?metric rdfs:label ?metric_lbl;
+            orkgp:P43134 ?value.
+    FILTER(REGEX(?metric_lbl, "Supervised:"))
+}
+```

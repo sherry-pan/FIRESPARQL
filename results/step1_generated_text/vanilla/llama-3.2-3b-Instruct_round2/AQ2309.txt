@@ -1,0 +1,24 @@
+Question:
+List the code links in papers that use the A3C FF (1 day) hs model in any benchmark?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX q: <http://www.wikidata.org/entity/>
+     PREFIX wd: <http://www.wikidata.org/prop/direct/>
+
+     SELECT?paper?codeLink
+     WHERE {
+    ?paper wdt:P275?model.
+    ?paper wdt:P301 wd:Q34503.
+    ?paper wdt:P312?benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark wdt:P31?benchmarkType.
+    ?benchmarkType rdfs:label?benchmarkTypeLabel.
+    ?paper wdt:P162?code.
+    ?paper wtd:hasCode?code.
+    ?code wdt:P306?codeLink.
+     FILTER (STRIKE(?benchmarkTypeLabel) = "Benchmark") 
+     FILTER (STRIKE(?model = "A3C FF (1 day)")) 
+     }
+    <|eot_id|>

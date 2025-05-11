@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?value
+WHERE {
+    ?model orkg:dataset "iNaturalist 2018".
+    ?model orkg:benchmark ?benchmark.
+    ?benchmark orkg:metric ?metric.
+    ?benchmark orkg:metricValue ?value.
+    ?metric schema:name "Top-1 Accuracy".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

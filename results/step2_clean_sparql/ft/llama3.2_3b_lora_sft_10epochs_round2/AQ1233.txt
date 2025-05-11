@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R79457 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label "Walker, walk (DMControl500k)".
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:HAS_VALUE ?value.
+    BIND(xsd:float(?value) AS ?value)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

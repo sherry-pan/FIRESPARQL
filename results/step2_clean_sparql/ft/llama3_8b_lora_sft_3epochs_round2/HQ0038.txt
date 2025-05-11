@@ -1,0 +1,11 @@
+```sparql
+SELECT (AVG(?capacity_value) AS ?mean_capacity)
+WHERE {
+  orkgr:R110835 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43151 ?fuel.
+  ?fuel rdfs:label ?fuel_label.
+  FILTER(REGEX(?fuel_label, "carbon-based"))
+  ?contrib orkgp:P43152 ?capacity.
+  BIND(xsd:float(?capacity) AS ?capacity_value)
+}
+```

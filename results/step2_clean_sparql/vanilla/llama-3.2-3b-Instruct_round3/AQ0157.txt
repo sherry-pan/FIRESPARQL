@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model
+WHERE {
+    ?model schema:description "Model".
+    ?model schema:about ?dataset.
+    ?dataset schema:name "Penn Treebank"@en.
+    ?model rdfs:label ?modelLabel.
+    FILTER (lang(?modelLabel) = 'en')
+}
+```

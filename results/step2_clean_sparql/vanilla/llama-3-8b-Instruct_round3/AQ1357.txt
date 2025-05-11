@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:hasBenchmark ?benchmark;
+         orkg:hasDataset ?dataset.
+  ?benchmark a orkg:Benchmark;
+             orkg:hasMetric ?metric;
+             orkg:hasScore ?score.
+  ?dataset a orkg:Dataset;
+           rdfs:label "BUCC German-to-English dataset".
+}
+ORDER BY DESC(xsd:decimal(?score))
+LIMIT 1
+```

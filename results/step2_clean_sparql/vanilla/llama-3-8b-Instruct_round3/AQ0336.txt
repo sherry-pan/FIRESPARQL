@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model WHERE {
+   ?model a orkg:Model.
+   ?model orkg:testedOn ?dataset.
+   ?dataset a bibo:Dataset.
+   ?dataset schema:name "NLP-TDMS (Exp, arXiv only)".
+   ?model orkg:publishedIn ?paper.
+   ?paper a bibo:Article.
+   ?paper schema:inCollection bibo:JournalArticle.
+   FILTER (LANG(?paper) = "en")
+}
+```

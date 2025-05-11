@@ -1,0 +1,17 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX dc: <http://purl.org/dc/terms/>
+     PREFIX prov: <http://www.w3.org/ns/prov#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paperTitle?paperID
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper orkg:hasBenchmarkedModel?benchmarkedModel.
+      ?benchmarkedModel orkg:usedDataset?dataset.
+      ?dataset dc:title "Penn Treebank (Character Level)".
+      ?paper dc:title?paperTitle.
+      ?paper orkg:hasID?paperID.
+     }<|eot_id|>

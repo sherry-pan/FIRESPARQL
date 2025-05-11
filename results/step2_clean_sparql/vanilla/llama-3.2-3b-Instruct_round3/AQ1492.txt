@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wot: <http://www.w3.org/ns/wot/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model 
+WHERE {
+    ?model wot:performedBestOn ?metric.
+    ?metric rdfs:label ?label.
+    ?model schema:description ?description.
+    FILTER (CONTAINS(LCASE(STR(?description)), "rotowire (relation generation) benchmark")
+    AND CONTAINS(LCASE(STR(?label)), "precision"))
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?number_value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Atari 2600 Tennis".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric;
+          orkgp:HAS_VALUE ?value.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?value a orkgc:Value;
+         rdfs:label "top"^^<http://www.w3.org/2001/XMLSchema#string>;
+         orkgp:P32 ?cont;
+         orkgp:P431 ?number.
+  ?number rdfs:label ?number_lbl.
+  BIND(xsd:float(?number_lbl) AS ?number_value)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

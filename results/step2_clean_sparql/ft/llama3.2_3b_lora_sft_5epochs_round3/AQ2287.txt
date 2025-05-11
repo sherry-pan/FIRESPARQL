@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P30 ?cont.
+  ?cont orkgp:P31 ?benchmark.
+  ?benchmark orkgp:P7046 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "Pointer \\+ Coverage \\+ EntailmentGen \\+ QuestionGen"))
+  ?cont orkgp:P32 ?paper.
+  ?paper orkgp:P7045 ?code.
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:hasModel orkg:SwitchTransformer.
+  ?paper bibo:hasCode ?codeLink.
+  ?paper rdfs:label ?paperTitle.
+  FILTER(lang(?paperTitle) = "en").
+  FILTER(?codeLink != "").
+}
+```

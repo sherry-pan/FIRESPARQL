@@ -1,0 +1,26 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Double Dunk dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/> 
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+     PREFIX dbpedia: <http://dbpedia.org/ontology/> 
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+     SELECT?metric?value 
+     WHERE { 
+    ?benchmark a orkg:Benchmark. 
+     dbpedia:dataset?dataset. 
+     filter( str(?dataset) = "Atari 2600 Double Dunk" ). 
+    ?benchmark orkg:hasBenchmarkResult?result. 
+    ?result orkg:hasMetric?metric. 
+    ?result orkg:hasValue?value. 
+    ?metric rdfs:label?metricLabel. 
+     filter( str(?metricLabel) = "highest" ). 
+    ?benchmark orkg:hasMetric?metric. 
+    ?metric rdfs:label?metricLabel. 
+     filter( str(?metricLabel) = "value" ). 
+    ?result orkg:hasValue?value. 
+     filter( str(?value)!= "" ). 
+     }<|eot_id|>

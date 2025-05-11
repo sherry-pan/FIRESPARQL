@@ -1,0 +1,17 @@
+Question:
+What models are being evaluated on the TempEval-3 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT?model?modelLabel
+WHERE {
+ ?paper a orkg:Paper ;
+        orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasDataset?dataset.
+ ?dataset rdfs:label "TempEval-3".
+ ?model orkg:evaluatedBy?evaluation.
+ ?model rdfs:label?modelLabel.
+}<|eot_id|>

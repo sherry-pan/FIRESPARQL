@@ -1,0 +1,22 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+      ?papers rdf:type orkgc:Study.
+      ?papers rdfs:containing?locations.
+      ?locations rdf:location?location.
+      ?papers orkgp:P35?value.
+       BIND(
+         (SELECT?location
+          WHERE {
+           ?papers orkgp:P35?value.
+           ?value orkgp:HAS_VALUE?value_of_value.
+           ?value_of_value rdfs:label?location.
+          }
+        ) AS?percentage)
+       FILTER(?percentage > 0)
+       ORDER BY DESC(?percentage)
+       LIMIT 1
+     }<|eot_id|>

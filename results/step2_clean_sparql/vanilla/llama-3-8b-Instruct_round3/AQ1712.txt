@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+              orkg:hasDataset <http://openresearchknowledge.org/dataset/Atari_2600_Enduro> ;
+              orkg:hasResult ?result.
+   ?result a orkg:Result ;
+           orkg:hasScore ?score ;
+           orkg:hasModel ?model.
+   ?score a orkg:Score ;
+          rdfs:label ?scoreLabel.
+   FILTER (?scoreLabel = "Score")
+   ?model rdfs:label ?modelLabel.
+   FILTER (lang(?modelLabel) = "en")
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

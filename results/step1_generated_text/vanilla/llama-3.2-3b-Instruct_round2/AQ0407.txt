@@ -1,0 +1,16 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the SciERC dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://orcid.org/ork/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     SELECT?title?id WHERE {
+    ?p a ork:Paper.
+    ?p ork:hasTitle?title.
+    ?p ork:hasBenchmarkingDataset "SciERC".
+    ?p ork:hasBenchmarkingModel?m.
+    ?m ork:hasBenchmarkingDataset?d.
+    ?d rdfs:label?dLabel.
+    ?m ork:hasId?id.
+     FILTER (CONTAINS(LCASE(?dLabel), "sciERC") )
+     }<|eot_id|>

@@ -1,0 +1,18 @@
+Question:
+Where can I find code references in papers that have used the SemExp model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+     ?paper orkgp:P31?cont;
+             rdfs:label?paper_title.
+     ?cont orkgp:P5000?model.
+     ?model rdfs:label?model_name.
+      FILTER(REGEX(STR(?model_name), "SemExp"))
+     ?cont orkgp:P5001?code.
+     ?paper orkgp:P29?contrib.
+     ?contrib orkgp:P27?author.
+     ?author rdfs:label?author_name.
+      FILTER(REGEX(STR(?paper_title), "benchmarking"))
+      FILTER(REGEX(STR(?author_name), "your name"))
+     }<|eot_id|>

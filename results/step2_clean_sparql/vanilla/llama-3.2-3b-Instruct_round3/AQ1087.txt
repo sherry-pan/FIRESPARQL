@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a dbo:Dataset.
+  ?dataset dbr:datasetName "ACE 2004".
+  ?label skos:prefLabel ?metric.
+  ?metric rdfs:label ?value.
+  FILTER (lang(?value) = "en")
+}
+```

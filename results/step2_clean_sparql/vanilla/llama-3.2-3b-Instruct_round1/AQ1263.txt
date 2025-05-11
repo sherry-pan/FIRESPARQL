@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasMetricValue ?value.
+  ?benchmark orkg:hasDataset "Atari 2600 Seaquest".
+  ?benchmark orkg:hasTopScore ?topScore.
+  FILTER (STR(?topScore) = "top benchmark score")
+}
+```

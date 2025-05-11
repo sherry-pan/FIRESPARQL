@@ -1,0 +1,16 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?method?count 
+     WHERE {
+    ?method orkg:has_representation?representation.
+    ?method orkg:has_representation?representation.
+    ?representation orkg:has_common_usage?common_usage.
+    ?common_usage orkg:has_most_common?most_common.
+    ?most_common orkg:label?method.
+     FILTER (str(?method) = "Knowledge Representation")
+     GROUP BY?method
+     ORDER BY DESC(?count)
+     }<|eot_id|>

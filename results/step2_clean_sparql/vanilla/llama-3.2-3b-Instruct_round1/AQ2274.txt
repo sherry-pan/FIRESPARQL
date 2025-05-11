@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX cff: <http://www.w3.org/ns/cff#>
+
+SELECT ?paper WHERE {
+    ?paper a orkg:Papers.
+    ?paper schema:description ?description.
+    FILTER (contains(STR(?description), "PEGASUS model") && contains(STR(?description), "benchmarking"))
+    ?paper cff:code ?code.
+    FILTER (contains(STR(?code), "code reference") || contains(STR(?code), "reference") || contains(STR(?code), "bibliographic reference"))
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

@@ -1,0 +1,31 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ SELECT DISTINCT?lead_compound,?lead_compound_labels
+     WHERE {
+        ?compound       a            orkgc:Compound;
+                    rdfs:label      ?compound_labels.
+        ?compound       orkgp:P43076    ?lead_compound.
+        ?publication    orkgp:P43004    ?compound;
+                        orkgp:P43010    ?paper.
+        ?paper         orkgp:P43011    ?pubmed_citation.
+         FILTER(REGEX(?pubmed_citation, ".*CC000.*"))
+        ?paper         orkgp:P43013    ?doi.
+         FILTER(REGEX(?doi, "^10.1136/.*"))
+         BIND(xsd:integer(?paper @value as?paper_count) AS?paper_count)
+         BIND(xsd:integer(?paper_count) AS?count)
+        ?publication      orkgp:P43014    ?study.
+        ?study           orkgp:P43015    ?study_title.
+         BIND(xsd:string(?study_title @value as?study_title_labels)
+         AS?study_title_labels)
+         BIND(xsd:integer(?study_count) AS?study_count)
+         BIND(xsd:integer(?study_count) AS?study_count1)
+        ?study           orkgp:P43016    ?study_participant.
+        ?study_participant orkgp:P43017     ?study;
+                           rdfs:label      ?study_title_labels.
+         BIND(xsd:integer(?study_participant @value as?study_participant_count)
+         AS?study_participant_count)
+         BIND(xsd:integer(?study_participant_count) AS?study_participant_count1)
+        ?study_participant      orkgp:P43018     ?study_part.
+        ?study_part         rdfs:label      ?

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R84023 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P4318 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P4319 ?value.
+    FILTER(?value > 0)
+    ?contrib orkgp:P4300 ?dataset.
+    ?dataset rdfs:label "Walker, walk (DMControl500k)".
+}
+```

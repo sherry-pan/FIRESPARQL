@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R67585 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P37435 ?metric.
+    ?metric rdfs:label ?metric_lbl;
+           orkgp:P37433 ?value.
+    ?contrib orkgp:P36932 orkgp:P34941;
+            orkgp:P37434 ?dataset.
+    FILTER(?dataset = "WOS-46985")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

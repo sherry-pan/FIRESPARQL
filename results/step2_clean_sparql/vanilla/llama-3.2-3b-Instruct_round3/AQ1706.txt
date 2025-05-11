@@ -1,0 +1,15 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX wikibase: <http://wikibase.org/schema/0.5/>
+SELECT ?model
+WHERE {
+    ?model dbp:benchmark "Atari 2600 Asteroids".
+    ?model dbp:bestScore ?score.
+    ?model wikibase:label ?label.
+    FILTER (lang(?label) = "en")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

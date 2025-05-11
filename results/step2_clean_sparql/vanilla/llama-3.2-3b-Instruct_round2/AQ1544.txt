@@ -1,0 +1,18 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model 
+WHERE {
+  ?model schema:name ?name.
+  FILTER (REGEX(LOWER(?name), "f1", "i"))
+  ?model dbp:score ?score.
+  FILTER (?score >= 0.8 && ?score <= 1)
+  ?model rdfs:label ?model_label.
+  FILTER (REGEX(LOWER(?model_label), "best", "i"))
+  ?model dbp:author ?author.
+  ?author foaf:name ?author_name.
+}
+```

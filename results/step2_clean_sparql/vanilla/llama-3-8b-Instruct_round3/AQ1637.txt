@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX gym: <http://www.orkg.org/ontology/gym#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark a gym:CartPole.
+  ?model orkg:hasScore ?score.
+  ?model orkg:score ?score2.
+  FILTER (?score = ?score2).
+}
+```

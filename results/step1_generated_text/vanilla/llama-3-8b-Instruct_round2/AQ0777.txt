@@ -1,0 +1,17 @@
+Question:
+What are the metrics of evaluation over the Stanford Cars dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?metric?metricLabel
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label "Stanford Cars"@en.
+ ?dataset orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER(lang(?metricLabel) = "en")
+}<|eot_id|>

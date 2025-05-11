@@ -1,0 +1,22 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX ptc: <http://www.openresearch.org/ptc/>
+     PREFIX ork: <http://www.openresearch.org/ork/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     SELECT?title?id WHERE {
+    ?paper a ork:Paper.
+    ?paper schema:topic "Natural Language Processing".
+    ?paper schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasDataset <http://dbpedia.org/ontology/PennTreebank>.
+    ?benchmark schema:hasBenchmarkedModel?benchmarkedModel.
+    ?benchmarkedModel schema:hasBenchmark?benchmark.
+    ?benchmarkedModel schema:hasPaper?benchmarkedPaper.
+    ?benchmarkedPaper ptc:hasTitle?title.
+    ?benchmarkedPaper ptc:hasId?id.
+     }<|eot_id|>

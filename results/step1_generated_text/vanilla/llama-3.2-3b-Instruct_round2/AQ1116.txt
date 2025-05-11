@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+ PREFIX wmt: <http://www.wmt.info/linguistics/benchmarks#>
+     PREFIX wotsi: <http://wotsi.org/schema/1.1/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark wmt:dataset "WMT2016 Czech-English"@en.
+    ?benchmark wotsi:hasBenchmarkResult?result.
+    ?result wotsi:benchmark?benchmark.
+    ?result wotsi:metric?metric.
+    ?result wotsi:value?value.
+    ?result wotsi:bestResult?bestResult.
+    ?bestResult rdfs:label?metric.
+     FILTER (lang(?metric) = "en").
+     }<|eot_id|>

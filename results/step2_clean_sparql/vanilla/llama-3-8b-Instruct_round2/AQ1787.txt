@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         rdfs:label ?modelName.
+  ?benchmark a orkg:Benchmark ;
+             rdfs:label "Atari 2600 Yars Revenge".
+  ?experiment a orkg:Experiment ;
+              orkg:uses ?model ;
+              orkg:uses ?benchmark ;
+              orkg:hasScore ?score.
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

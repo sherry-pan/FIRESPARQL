@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/owl/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasName "ARC" ;
+           orkg:hasChallenge ?challenge.
+  ?challenge a orkg:Challenge ;
+             orkg:hasTopBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult a orkg:TopBenchmarkResult ;
+                   orkg:hasMetric ?metric ;
+                   orkg:hasValue ?value.
+  FILTER(?metric != owl:null && ?value != xsd:null).
+}
+```

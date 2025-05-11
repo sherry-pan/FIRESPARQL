@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?paper ?title ?code
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:hasTitle ?title;
+         orkg:hasUtilized ?utilization.
+  ?utilization orkg:hasModel "MMV TSM-50x2".
+  ?paper orkg:hasCitedBy ?citedPaper.
+  ?citedPaper orkg:hasCode ?code.
+  FILTER (lang(?title) = "en")
+}
+LIMIT 100
+```

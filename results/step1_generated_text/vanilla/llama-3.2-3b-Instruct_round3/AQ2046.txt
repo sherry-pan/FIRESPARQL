@@ -1,0 +1,18 @@
+Question:
+Where can I find code references in papers that have used the MMV model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/schema/orkg/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     SELECT?paper?reference 
+     WHERE {
+      ?paper schema:description?description.
+      ?paper schema:hasPart?reference.
+       FILTER (STRLIKE(STR(?description), "MMV model") AND STRLIKE(STR(?description), "benchmarking"))
+       SERVICE wikibase:label {
+         bd:serviceParam wikibase:language "[autolang:en]."
+       }
+     }<|eot_id|>

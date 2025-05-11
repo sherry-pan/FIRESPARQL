@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://or Kaggle.com/ontology#>
+PREFIX wdt: <http://www.w3.org/2004/02/sosql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/ontology/>
+PREFIX p: <http://purl.org/projects/CoQA/>
+SELECT ?metric ?value 
+WHERE {
+  ?benchmark a dbo:benchmark.
+  ?benchmark dbr:dataset "CoQA".
+  ?benchmark p:metric ?metric.
+  ?benchmark wdt:P301 ?value.
+  FILTER (CONTAINS(STR(?label), "highest benchmark result") || CONTAINS(STR(?label), "best result"))
+}
+```

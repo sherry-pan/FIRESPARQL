@@ -1,0 +1,16 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX orkg-gym: <http://openresearchknowledge.org/ontology/gym/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg-gym:LunarLanderBenchmark.
+  ?benchmark orkg:hasScore ?score.
+  ?benchmark orkg:hasScoreValue ?scoreValue.
+}
+ORDER BY DESC(xsd:float(?scoreValue))
+LIMIT 1

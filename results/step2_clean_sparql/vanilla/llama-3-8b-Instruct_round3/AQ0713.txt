@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://rdf.orkg.org/owl/orkg.owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+    ?paper a orkg:Paper;
+           orkg:hasEvaluationMetric ?metric;
+           orkg:hasDataset ?dataset.
+    ?dataset a orkg:Dataset;
+             rdfs:label "SciGEN"@en.
+    FILTER (?metric != "undefined" && !isLiteral(?metric))
+}
+```

@@ -1,0 +1,19 @@
+Question:
+Where can I find code references in papers that have used the 6-layer QRNN model for benchmarking purposes?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT?paper?paper_title?code_reference
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper dc:title?paper_title.
+ ?paper bibo:usesModel?model.
+ ?model rdfs:label "6-layer QRNN model".
+ ?paper bibo:usesForBenchmarking true.
+ ?paper bibo:hasCodeReference?code_reference.
+  FILTER(lang(?paper_title) = "en").
+}<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX ork: <http://ork.buffalo.edu/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?paper ?reference
+WHERE {
+  ?paper a ork:Paper.
+  ?paper ork:hasPaper ?benchmarkPaper.
+  ?benchmarkPaper ork:hasBenchmark ?benchmark.
+  ?benchmark ork:benchmarkFor ?benchmarkType.
+  ?benchmarkType ork:benchmarkTypeLabel "Benchmarking".
+  ?benchmark ork:hasBenchmarking ?benchmarking.
+  ?benchmarking ork:benchmarkingType "Code Reference".
+  ?benchmarking ork:hasCode ?code.
+  ?code ork:code "EfficientNetV2-L".
+}
+```

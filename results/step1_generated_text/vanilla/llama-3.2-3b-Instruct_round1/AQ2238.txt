@@ -1,0 +1,23 @@
+Question:
+Where can I find code references in papers that have used the MPAD-path model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX ps: <http://purl.org/project/semantic-publishing/1.1/>
+     PREFIX mpa: <http://mpad-path.org/1.0/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bio/ontology#>
+     SELECT?p?o 
+     WHERE {
+    ?paper a ps:Paper.
+    ?paper ps:hasBenchmark?benchmark.
+    ?benchmark a mpa:Benchmark.
+    ?benchmark mpa:uses?mpaModel.
+    ?mpaModel mpa:identifier "MPAD-path".
+    ?paper dbp:hasReference?reference.
+    ?reference a dbp:Reference.
+    ?reference dbp:contentUrl?o.
+     FILTER (strstartsWith(lcase(?o), "https://arxiv.org/abs/")) 
+     }<|eot_id|>

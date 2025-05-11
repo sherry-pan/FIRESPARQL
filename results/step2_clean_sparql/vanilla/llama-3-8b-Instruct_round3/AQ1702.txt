@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?dataset.
+  ?dataset a orkg:Dataset; rdfs:label "Atari 2600 Assault".
+  ?model orkg:score ?score.
+  FILTER NOT EXISTS {
+    ?model a orkg:Model.
+    ?model orkg:benchmarkedOn ?dataset.
+    ?dataset a orkg:Dataset; rdfs:label "Atari 2600 Assault".
+    ?model orkg:score ?otherScore.
+    FILTER(?otherScore > ?score)
+  }
+  ?model rdfs:label ?modelLabel.
+  FILTER (lang(?modelLabel) = "en").
+}
+```

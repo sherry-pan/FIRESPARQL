@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "DQN-PixelCNN")
+  ?model orkgp:HAS_DATASET ?dataset.
+  OPTIONAL {
+    ?dataset orkgp:HAS_SOURCE_CODE ?code.
+    ?code rdfs:label ?code_lbl.
+    FILTER (str(?code_lbl) = "code")
+  }
+}
+```

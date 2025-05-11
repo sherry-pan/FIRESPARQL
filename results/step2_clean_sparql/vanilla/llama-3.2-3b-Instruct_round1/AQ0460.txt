@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/>
+PREFIX wq: <http://orkg.org/schema/wq/1.0/>
+SELECT ?paper ?id
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasId ?id.
+  ?benchmarkedModel wq:hasDataset wq:WebQuestions.
+  ?title wq:hasBenchmarkedModel ?benchmarkedModel.
+  FILTER (regex(str(?title), "benchmarked") 
+    OR regex(str(?title), "model") 
+    OR regex(str(?title), "WebQuestions"))
+}
+```

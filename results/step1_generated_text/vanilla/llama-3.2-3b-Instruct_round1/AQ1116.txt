@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+ PREFIX wmt: <http://www.wikidata.org/entity/wiki/WMT2016>
+     PREFIX wmt2016: <http://wmt2016.org/wiki/Benchmark>
+     PREFIX wikibase: <http://wikibase.org/bnf/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark wmt2016:partOf wmt2016:Benchmark_2016;
+             wmt2016:dataset wmt2016:Czech-English;
+             rdfs:label?label.
+     FILTER (lang(?label) = 'en' OR lang(?label) = 'cs').
+     BIND (SUBSTRING(?label, 1, INSTR(?label,'') - 1) AS?metric).
+     BIND (SUBSTRING(?label, INSTR(?label,'') + 1) AS?value).
+     FILTER (SUBSTRING(?label, INSTR(?label,'') + 1)!= '')
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?paper ?title
+WHERE {
+    ?paper wdt:P1476 ?title.
+    ?paper wdt:P131 ?dataset.
+    FILTER (CONTAINS(LCASE(STR(?dataset)), "pubmedqa"))
+}
+```

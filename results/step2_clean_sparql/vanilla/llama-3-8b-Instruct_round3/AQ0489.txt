@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://schema.orkg.org/>
+PREFIX snli: <http://schema.orkg.org/dataset/snli/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasTitle ?title.
+  ?paper orkg:hasIdentifier ?id.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasDataset snli:SNLI.
+  ?paper orkg:hasBenchmark ?benchmark.
+  FILTER(LANG(?title) = "en")
+}
+```

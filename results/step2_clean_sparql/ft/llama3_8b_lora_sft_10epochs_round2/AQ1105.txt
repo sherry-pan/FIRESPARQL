@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value_float) AS ?score)
+WHERE {
+  orkg:R70692 orkgp:compareContribution ?cont.
+  ?cont orkgp:P43135 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "WMT2014 French-English"))
+  ?cont orkgp:P43133 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkgp:P43134 ?value.
+  BIND(xsd:float(?value) AS ?value_float)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

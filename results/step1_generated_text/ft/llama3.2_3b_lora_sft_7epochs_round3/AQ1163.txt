@@ -1,0 +1,31 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ARC (Challenge)?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153823 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?challenge.
+          ?challenge rdfs:label?challenge_lbl.
+          ?contrib orkgp:P36?metric;
+                  orkgp:HAS_DATASET?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+           FILTER(REGEX(STR(?dataset_lbl), "ARC"))
+          ?metric rdfs:label?metric_lbl.
+         }
+     UNION
+     {
+       orkgr:R153823 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P31?challenge.
+      ?challenge rdfs:label?challenge_lbl.
+      ?contrib orkgp:P36?metric;
+              orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "ARC"))
+      ?metric rdfs:label?metric_lbl.
+       BIND(xsd:float(?metric_lbl) AS?metric_lbl)
+       BIND(xsd:float(?metric) AS?metric)
+     }
+     GROUP BY?metric?metric_lbl
+     ORDER BY DESC(?score)<|eot_id|>

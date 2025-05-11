@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy 
+WHERE {
+    ?model orkg:isModel ?m.
+    ?m schema:benchmark "RACE".
+    ?m orkg:hasAccuracy ?accuracy.
+    ?accuracy schema:score "High".
+    FILTER (?accuracy > 0.8)
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

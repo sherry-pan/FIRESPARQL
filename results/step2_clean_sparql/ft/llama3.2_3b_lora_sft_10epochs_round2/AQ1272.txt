@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R75319 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31 ?dataset.
+  ?dataset rdfs:label "Atari 2600 Breakout"^^xsd:string.
+  ?contrib orkgp:P32 ?eval.
+  ?eval orkgp:P500 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?metric orkgp:P31 ?benchmark.
+  ?benchmark orkgp:P219 ?dataset.
+  ?dataset orkgp:P23730 ?cont.
+  ?cont rdfs:label ?value.
+  BIND(xsd:float(?value) AS ?value)
+}
+```

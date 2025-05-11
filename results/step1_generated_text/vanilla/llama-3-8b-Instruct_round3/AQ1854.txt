@@ -1,0 +1,21 @@
+Question:
+What are the most commonly used benchmark datasets for the Joint Entity and Relation Extraction research field?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?dataset?datasetLabel?paperCount
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset schema:name?datasetLabel.
+    ?dataset orkg:hasPaper?paper.
+    ?paper orkg:hasJournal?journal.
+    ?journal owl:sameAs <http://dbpedia.org/resource/Category:Journal_of_Natural_Language_Processing>.
+    ?dataset orkg:isUsedIn?researchField.
+    ?researchField owl:sameAs <http://dbpedia.org/resource/Category:Joint_Entity_and_Relation_Extraction>.
+    ?dataset orkg:hasPaperCount?paperCount.
+     FILTER (?paperCount > 10)
+     ORDER BY DESC(?paperCount)
+     LIMIT 10
+     }<|eot_id|>

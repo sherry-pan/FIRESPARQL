@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BUCC French-to-English?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX pq: <http://www.wikidata.org/prop/query/>
+     PREFIX q: <http://www.wikidata.org/entity/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark a pq:Benchmark.
+    ?benchmark wdt:P31?class.
+    ?benchmark pq:hasBenchmarkFor?dataset.
+    ?dataset wdt:P31?datasetClass.
+    ?dataset pq:hasDatasetFor?benchmark.
+    ?benchmark pq:hasMetric?metric.
+    ?benchmark pq:hasValue?value.
+    ?benchmark pq:dataset?dataset.
+    ?dataset wdt:P31?datasetClass.
+     FILTER ( CONTAINS(LCASE(?benchmark), "BUCC" ) AND CONTAINS(LCASE(?dataset), "French-to-English" ) )
+     }<|eot_id|>

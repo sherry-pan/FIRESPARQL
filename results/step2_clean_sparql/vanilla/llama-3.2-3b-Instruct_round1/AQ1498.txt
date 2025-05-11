@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ns#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?value
+WHERE {
+    ?model orkg:benchmark ?benchmark.
+    ?benchmark schema:name "PIQA".
+    ?model orkg:performance ?performance.
+    ?performance schema:mainMetric ?metric.
+    ?performance schema:metricValue ?value.
+    FILTER (STR(?metric) = "accuracy")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

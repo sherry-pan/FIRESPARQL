@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://rdf.openresearchknowledge.org/orkg/>
+
+SELECT ?dataset ?datasetLabel ?paper
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:category orkg:SentenceClassification.
+  ?dataset orkg:benchmarkedFor ?paper.
+  ?paper a orkg:ResearchPaper.
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER(lang(?datasetLabel) = "en")
+}
+```

@@ -1,0 +1,16 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R110918 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P43135?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?contrib orkgp:P43134?eval.
+          ?eval orkgp:HAS_VALUE?value.
+           FILTER(REGEX(?dataset_lbl, "Natural Questions (long)"))
+         }
+         ORDER BY DESC(?score)
+    <|eot_id|>

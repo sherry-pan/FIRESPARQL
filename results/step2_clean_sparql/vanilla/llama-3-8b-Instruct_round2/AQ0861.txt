@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?dataset a orkg:Dataset; 
+           orkg:hasName "ESC-50".
+  ?evaluation orkg:isAbout ?dataset.
+  FILTER(?metric != "undefined")
+}
+```

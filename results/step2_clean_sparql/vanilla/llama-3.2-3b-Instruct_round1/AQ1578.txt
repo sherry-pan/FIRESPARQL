@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+    ?model schema:dataset ?ds.
+    ?ds schema:potentialDataset "X-Sum"@en.
+    ?model orkg:hasBenchmark ?b.
+    ?b schema:metric ?m.
+    ?m schema:metricType "ROUGE"@en.
+    ?m schema:metricValue ?score.
+    FILTER (str(?m) = "ROUGE-2")
+}
+```

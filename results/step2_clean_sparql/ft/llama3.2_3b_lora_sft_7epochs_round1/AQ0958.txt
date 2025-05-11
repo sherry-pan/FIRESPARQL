@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average_value)
+WHERE {
+    orkgr:R84051 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label "Atari 2600 Tutankham"^^xsd:string.
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:P36 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P34 ?metric_value.
+    BIND(xsd:float(?metric_value) AS ?value)
+}
+ORDER BY DESC(?average_value)
+LIMIT 10
+```

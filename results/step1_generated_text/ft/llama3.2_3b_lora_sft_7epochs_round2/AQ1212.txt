@@ -1,0 +1,22 @@
+Question:
+What is the highest benchmark result achieved on the BC5CDR-chemical dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R8349 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P30?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?contrib orkgp:HAS_DATASET orkgp:HAS_DATASET_02523;
+                  orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "BC5CDR-chemical"))
+        ?contrib orkgp:P31?cont.
+        ?cont orkgp:HAS_DATASET orkgp:HAS_DATASET_02523.
+        ?cont orkgp:P32?eval.
+        ?eval orkgp:P30?metric.
+         BIND(xsd:float(?eval.value) AS?value)
+         BIND(xsd:string(?metric_lbl) AS?metric_lbl)
+     }
+     ORDER BY DESC(?score)
+     LIMIT 10<|eot_id|>

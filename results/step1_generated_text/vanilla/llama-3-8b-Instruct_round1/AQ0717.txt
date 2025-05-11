@@ -1,0 +1,18 @@
+Question:
+List the metrics that are used to evaluate models on the ART/CoreSC benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?metric
+WHERE {
+ ?metric a orkg:Metric.
+ ?metric rdfs:label?label.
+ ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset?dataset.
+ ?dataset a orkg:Dataset ;
+             orkg:hasName "ART/CoreSC".
+  FILTER (?label = "ART/CoreSC benchmark" ||?label = "ART CoreSC benchmark" ||?label = "ART/CoreSC" ||?label = "ART CoreSC")
+}<|eot_id|>

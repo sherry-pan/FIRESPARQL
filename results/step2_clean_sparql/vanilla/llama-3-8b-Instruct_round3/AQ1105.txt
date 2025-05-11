@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+           rdfs:label ?datasetLabel.
+  ?dataset orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset ?dataset ;
+            orkg:result ?result.
+  ?result orkg:metric ?metric ;
+          orkg:score ?score.
+  FILTER (?datasetLabel = "WMT2014 French-English").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

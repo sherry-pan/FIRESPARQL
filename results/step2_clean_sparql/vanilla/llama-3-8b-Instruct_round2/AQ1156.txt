@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?metric ?value
+WHERE {
+ ?paper a orkg:Paper ;
+        bibo:dataset ?dataset.
+ ?dataset a orkg:Dataset ;
+          dcterms:title "SQuAD2.0".
+ ?benchmark a orkg:Benchmark ;
+            orkg:metric ?metric ;
+            orkg:hasResult ?result.
+ ?result a orkg:Result ;
+         orkg:value ?value.
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?f1score 
+WHERE {
+    ?model orkg:performance ?f1score.
+    ?model orkg:benchmark "Natural Questions (long)".
+    ?model schema:label ?modelLabel.
+    FILTER (lang(?modelLabel) = "en")
+}
+ORDER BY DESC(?f1score) 
+LIMIT 1
+```

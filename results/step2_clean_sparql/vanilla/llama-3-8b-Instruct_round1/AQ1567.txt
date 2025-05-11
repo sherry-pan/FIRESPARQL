@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset orkg:CoNLL++.
+  ?benchmark orkg:metricValue ?f1.
+  ?benchmark orkg:metric ?metricClass.
+  ?metricClass rdfs:label "F1".
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

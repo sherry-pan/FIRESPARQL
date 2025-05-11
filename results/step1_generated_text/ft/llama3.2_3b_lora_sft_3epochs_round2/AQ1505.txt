@@ -1,0 +1,26 @@
+Question:
+Indicate the model that performed best in terms of Senseval 2 metric on the Supervised: benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "Senseval 2")
+              || str(?metric_lbl      = "Metric")
+              || str(?metric_lbl      = "F1"))
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       orkgp:HAS_EVALUATION    ?eval.
+      ?eval           orkgp:HAS_METRIC         ?metric;
+                       orkgp:HAS_VALUE         ?value.
+      ?value         orkgp:HAS_MODEL         ?model.
+      ?model        rdfs:label               ?model_lbl.
+       BIND(xsd:integer(?value) AS?value_lbl)
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?cont       orkgp:HAS_MODEL_EVALUATION ?model_eval.
+                ?model_eval      orkgp:HAS_VALUE         ?value.
+                ?model_eval      orkgp:HAS_METRIC         ?metric.
+                ?model_eval      rdfs:label               ?metric_lbl.}
+       BIND(xsd:integer(?model_lbl) AS?model_lbl)
+       ORDER BY DESC(?value_lbl)
+       LIMIT 1<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX d2rq: <http://www.w3.org/ns/d2rq/>
+
+SELECT ?model ?macsScore 
+WHERE {
+  ?model d2rq:hasBenchmark dbpedia:ImageNet.
+  ?model d2rq:hasScore dbpedia:MACs.
+  ?model rdfs:label ?modelLabel.
+  ?model d2rq:hasBestScore ?macsScore.
+  FILTER (CONTAINS(?modelLabel, "Model") && CONTAINS(?modelLabel, "achieved") && CONTAINS(?modelLabel, "highest") && CONTAINS(?modelLabel, "score") && CONTAINS(?modelLabel, "on") && CONTAINS(?modelLabel, "ImageNet") && CONTAINS(?modelLabel, "benchmark"))
+}
+```

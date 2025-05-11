@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+              orkg:hasBenchmarkScore ?score ;
+              orkg:hasBenchmarkMetric ?metric ;
+              orkg:hasDataset ?dataset.
+ ?dataset a orkg:Dataset ;
+             dcterms:title "Hendrycks Test".
+} ORDER BY DESC(?score) LIMIT 1
+```

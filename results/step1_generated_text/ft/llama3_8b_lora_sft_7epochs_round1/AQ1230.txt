@@ -1,0 +1,30 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Ball in cup, catch (DMControl100k) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Ball in cup, catch (DMControl100k)")
+       }
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+       OPTIONAL {?benchmark      orkgp:HAS_VALUE         ?value.
+                {
+                 ?value           orkgp:HAS_NUMBER        ?number.
+                }
+               ?number           orkgp:HAS_FLOAT_VALUE   ?float_value.
+               ?float_value      orkgp:HAS_VALUE         ?value2.
+               ?value2           orkgp:HAS_SCORE         ?score.
+               ?score            orkgp:HAS_VALUE         ?value3.
+               ?value3           orkgp:HAS_NUMBER        ?number2.
+               ?number2          orkgp:HAS_FLOAT_VALUE   ?float_value2.
+               ?float_value2     orkgp:P32               ?value.
+                }
+       }
+     }
+     ORDER BY DESC(?score)<|eot_id|>

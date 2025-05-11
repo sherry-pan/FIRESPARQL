@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:dataset "Cartpole, swingup (DMControl500k)".
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:metricValue ?value.
+  FILTER EXISTS {
+    ?benchmark schema:description ?desc.
+    FILTER CONTAINS(?desc, "highest benchmark result")
+  }
+}
+```

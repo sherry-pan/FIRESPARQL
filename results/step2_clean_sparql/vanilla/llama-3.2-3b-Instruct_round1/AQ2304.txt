@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ork: <https://orkg.org/schema/ork>
+PREFIX dmn: <https://orkg.org/schema/dmn/1.0>
+PREFIX ps: <https://orkg.org/schema/paperspace/1.0>
+
+SELECT ?p ?url
+WHERE {
+    ?p a ork:PaperspacePaper.
+    ?p ork:hasCode ?code.
+    ?code dmn:code "Rational DQN Average".
+    ?code ork:hasBenchmark ?benchmark.
+    ?benchmark a ork:Benchmark.
+    ?benchmark ps:hasLink ?link.
+    ?link a ork:Link.
+    ?link ork:target ?url.
+}
+```

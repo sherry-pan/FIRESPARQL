@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasResult ?result.
+  ?result a orkg:Result ;
+    orkg:hasMetric ?metric ;
+    orkg:hasScore ?score ;
+    orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset ;
+    rdfs:label "Gibson PointGoal Navigation".
+  FILTER (?metric = "highest")
+}
+```

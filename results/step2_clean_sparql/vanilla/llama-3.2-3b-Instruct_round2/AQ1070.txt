@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/OWL/>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasBenchmarkResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasValue ?value.
+  ?benchmark orkg:hasDataset "FSNS - Test".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

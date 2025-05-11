@@ -1,0 +1,32 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelName
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:name "Penn Treebank (Character Level)".
+  ?benchmark orkg:hasScore ?score.
+  ?model orkg:hasNumberOfParams ?params.
+  ?model orkg:hasName ?modelName.
+  FILTER (?score = 
+    SELECT max(?score2)
+    WHERE {
+      ?model2 a orkg:Model;
+        orkg:hasBenchmark ?benchmark2.
+      ?benchmark2 schema:name "Penn Treebank (Character Level)";
+        orkg:hasScore ?score2.
+    }
+  )
+  FILTER (?params = 
+    SELECT max(?params2)
+    WHERE {
+      ?model3 a orkg:Model;
+        orkg:hasBenchmark ?benchmark3.
+      ?benchmark3 schema:name "Penn Treebank (Character Level)";
+        orkg:hasNumberOfParams ?params2.
+    }
+  )
+}
+```

@@ -1,0 +1,23 @@
+Question:
+Provide a list of papers that have utilized the XLNet (base) model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    SELECT?paper?title?url 
+    WHERE {
+     ?paper a orkg:Paper.
+      orkg:hasCitation?citation.
+     ?citation orkg:isBasedOn?baseModel.
+     ?baseModel rdfs:label?baseModelLabel.
+      filter (strContains(?baseModelLabel, "XLNet (base)")).
+     ?paper orkg:hasLink?link.
+     ?link a orkg:CodeLink.
+     ?link orkg:linkTo?code.
+      filter (strContains(?code, "git")) 
+    }
+    ```<|eot_id|>

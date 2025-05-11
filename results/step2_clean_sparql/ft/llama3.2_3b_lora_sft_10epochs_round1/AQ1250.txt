@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R155849 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P34 ?evalSet;
+           orkgp:P31 ?eval.
+  ?eval orkgp:HAS_DATASET orkgp:P5019 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "MLDoc Zero-Shot German-to-French"))
+  ?eval orkgp:P32 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  ?metric ?eval ?value.
+  BIND(xsd:int(?value) AS ?value)
+}
+ORDER BY DESC(?score)
+```

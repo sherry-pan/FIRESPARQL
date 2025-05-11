@@ -1,0 +1,17 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?title ?paperId
+WHERE {
+  ?paper a dbo:ResearchPaper.
+  ?paper schema:hasTitle ?title.
+  ?paper schema:hasDataset ?dataset.
+  ?dataset schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset ?benchmarkDataset.
+  ?benchmarkDataset schema:identifier "SemEval-2018 Task 7".
+  ?paper rdfs:label ?paperId.
+  FILTER(LANG(?title) = "en")
+}
+```

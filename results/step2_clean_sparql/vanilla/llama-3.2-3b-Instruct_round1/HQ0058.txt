@@ -1,0 +1,27 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/schema/1.0/>
+PREFIX vcard: <http://purl.org/vcard/2.1/>
+
+SELECT ?s ?title ?algorithm ?features ?featuresLabel ?classification ?precision ?recall ?f1
+WHERE {
+    ?s orkg:hasStudy ?study.
+    ?study orkg:usesAlgorithm ?algorithm.
+    ?algorithm rdfs:label ?algorithmLabel.
+    ?algorithm orkg:features ?features.
+    ?features rdfs:label ?featuresLabel.
+    ?features orkg:features ?machineLearningFeatureBagOfWords.
+    ?machineLearningFeatureBagOfWords schema:description "machine learning feature bag of words".
+    ?study orkg:classification ?classification.
+    ?classification rdfs:label ?classificationLabel.
+    ?classification orkg:classification ?classificationAsFeatureRequest.
+    ?study orkg:precision ?precision.
+    ?study orkg:recall ?recall.
+    ?study orkg:f1 ?f1.
+    FILTER (str(?algorithmLabel) = "naive bayes" && str(?featuresLabel) = "machine learning feature bag of words")
+}
+```

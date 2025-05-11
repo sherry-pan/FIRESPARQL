@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocab/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value 
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:name "Atari 2600 Double Dunk".
+    ?dataset orkg:metrics ?metrics.
+    ?metrics orkg:metric ?metric.
+    ?metric rdfs:label ?metricLabel.
+    ?metric orkg:value ?value.
+    FILTER (REGEX(STR(?metricLabel), "Evaluation Metric", "i"))
+}
+```

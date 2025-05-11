@@ -1,0 +1,21 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the UCF101 (finetuned) dataset?
+
+Generated SPARQL:
+ ```
+SELECT?paper?title
+WHERE {
+ ?paper a schema:ResearchPaper.
+  schema:hasTitle?title.
+  schema:hasBenchmark?benchmark.
+ ?benchmark schema:hasDataset?dataset.
+ ?dataset schema:datasetName "UCF101".
+ ?benchmark schema:hasModel?model.
+ ?model schema:hasDataset?dataset.
+ ?dataset schema:datasetType "benchmarking".
+ ?model schema:hasFinetuning?finetuning.
+ ?finetuning schema:dataset?dataset.
+ ?finetuning schema:finetuningName "UCF101".
+  FILTER (CONTAINS(LCASE(?title), "UCF101") OR CONTAINS(LCASE(?title), "UCF101 (finetuned)"))
+}
+```<|eot_id|>

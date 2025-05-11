@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value WHERE {
+    ?related orkg:dataset "CoNLL++".
+    ?related orkg:benchmark ?benchmark.
+    ?benchmark orkg:metric ?metric.
+    ?benchmark orkg:value ?value.
+    FILTER (CONTAINS(LCASE(STR(?metric)), "top"))
+}
+```

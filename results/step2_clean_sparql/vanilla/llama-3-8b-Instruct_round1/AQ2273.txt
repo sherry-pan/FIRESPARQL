@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:usesModel orkg:AcrE.
+  ?paper bibo:isDocumentOf ?document.
+  ?document dc:identifier ?uri.
+  ?paper prov:wasGeneratedBy ?code.
+  ?code a schema:SoftwareSourceCode.
+}
+```

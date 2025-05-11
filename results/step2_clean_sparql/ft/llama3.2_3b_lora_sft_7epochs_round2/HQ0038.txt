@@ -1,0 +1,15 @@
+```sparql
+SELECT ?mean_value
+WHERE {
+  orkgr:R6384 orkgp:compareContribution ?cont.
+  ?cont orkgp:P31 ?fuel.
+  ?fuel rdfs:label ?fuel_label.
+  ?fuel orkgp:P31 ?category.
+  ?category rdfs:label ?category_label.
+  ?category orkgp:P5007 ?value.
+  BIND(xsd:float(?value) AS ?mean_value)
+  FILTER(REGEX(?fuel_label, "carbon-based", "i"))
+}
+ORDER BY ASC(?mean_value)
+LIMIT 10
+```

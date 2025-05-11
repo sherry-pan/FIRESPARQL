@@ -1,0 +1,24 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikiba.se/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?model 
+WHERE {
+  ?model skos:broader ?namespace.
+  ?namespace rdfs:label ?label.
+  ?model wikibase:abstraction ?abstraction.
+  ?abstraction wikibase:label ?abstractionLabel.
+  ?model rdfs:label ?modelLabel.
+  ?model foaf:mbox ?modelMbox.
+  FILTER (CONTAINS(?modelMbox, "FSNS-Test")).
+  ?model foaf:primaryTopic ?topic.
+  ?topic rdfs:label ?topicLabel.
+  ?topic wikibase:abstraction ?abstraction.
+  ?model wikibase:abstract ?abstract.
+  FILTER (CONTAINS(?abstract, "Sequence error metric")).
+}
+LIMIT 1
+```

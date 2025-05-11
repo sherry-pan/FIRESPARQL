@@ -1,0 +1,14 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikibase.org/bash#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper schema:description ?description.
+  ?paper schema:description ?code.
+  FILTER (CONTAINS(STR(?description), 'BiLSTM-Attention + ELMo') && CONTAINS(STR(?description), 'benchmark'))
+  BIND(REPLACE(STR(?description), '<br/>', '') AS ?description)
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset; 
+           rdfs:label "NYT-single".
+  ?benchmark a orkg:Benchmark; 
+             orkg:dataset ?dataset; 
+             orkg:metric ?metric; 
+             orkg:value ?value.
+  FILTER (?metric != "null" && ?value != "null")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

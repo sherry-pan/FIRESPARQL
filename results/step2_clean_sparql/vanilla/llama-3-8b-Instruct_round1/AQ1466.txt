@@ -1,0 +1,15 @@
+PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result dcterms:relation ?dataset.
+  ?dataset a schema:Dataset.
+  ?dataset schema:name "SQuAD1.1 dev benchmark dataset".
+  ?result orkg:hasMetricValue ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1

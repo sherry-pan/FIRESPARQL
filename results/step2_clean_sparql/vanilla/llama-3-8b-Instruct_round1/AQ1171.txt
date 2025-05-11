@@ -1,0 +1,14 @@
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasResult ?result.
+    ?result orkg:hasMetric ?metric.
+    ?result orkg:hasValue ?score.
+    ?benchmark orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/MultiNLI>.
+    FILTER (?metric = "Benchmark Score")
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1

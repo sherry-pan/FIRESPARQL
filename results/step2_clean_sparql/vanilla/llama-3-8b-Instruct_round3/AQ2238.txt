@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?paper ?paperTitle ?codeReference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:usedModel orkg:MPAD-path.
+  ?paper orkg:hasCodeReference ?codeReference.
+  ?codeReference orkg:referenceType "benchmarking".
+  FILTER(lang(?paperTitle) = "en").
+}
+```

@@ -1,0 +1,24 @@
+```
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model schema:name ?name.
+  ?model schema:description ?description.
+  ?model dbpedia:dataset "SST-5 Fine-grained classification".
+  ?model schema:accuracy ?accuracy.
+  FILTER (
+    STRLIKE(?description, "Accuracy") && 
+    STRLIKE(?description, "benchmark") && 
+    STRLIKE(?description, "SST-5") && 
+    STRLIKE(?description, "classification") && 
+    STRLIKE(?description, "Fine-grained")
+  )
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

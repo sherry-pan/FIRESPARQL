@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/api.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasUsedModel ?model.
+  ?model rdfs:label "AxCell".
+  ?paper orkg:hasCodeReference ?codeReference.
+  FILTER(?codeReference != "")
+}
+```

@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX curation: <http://purl.org/sparql/2012/02/n2/rdf-schema#>
+PREFIX conceptnet: <http://conceptnet.io/onto/2017/05/31/ontologies/conceptnet5/>
+PREFIX conceptnet5: <http://conceptnet.io/ontologies/conceptnet5/>
+
+SELECT ?paper ?title ?model
+WHERE {
+  ?paper a dbpedia:Paper.
+  ?paper dbpedia:references ?reference.
+  ?reference rdfs:label ?model.
+  ?paper dbpedia:hasBenchmarking ?benchmark.
+  ?benchmark rdfs:label "Concept Mention Extraction".
+  FILTER(lang(?model) = "en" || lang(?model) = "en-US")
+}
+```

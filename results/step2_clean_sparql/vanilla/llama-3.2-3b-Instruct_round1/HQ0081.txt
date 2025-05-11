@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://opendata.net/ontology/orkg#>
+
+SELECT ?quantity ?label
+WHERE {
+  ?location orkg:location "Elorza crater".
+  ?location orkg:contains ?oxide.
+  ?oxide a orkg:IronOxide.
+  ?oxide orkg:quantity ?quantity.
+  ?oxide rdfs:label ?label.
+  FILTER (lang(?label) = "en")
+}
+ORDER BY DESC(?quantity)
+LIMIT 1
+```

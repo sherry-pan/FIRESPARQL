@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orcg.org/vocabulary/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+SELECT ?model
+WHERE {
+  ?model orkg:hasDataset ?dataset.
+  ?dataset schema:description "Classical music".
+  ?dataset schema:datasetType "audio".
+  ?dataset schema:fileFormat "wav".
+  ?dataset schema:samplingRate 12;
+          schema:audibleDuration "5".
+  ?model rdfs:label ?modelLabel.
+  FILTER (CONTAINS(LCASE(?modelLabel), "model"))
+}
+```

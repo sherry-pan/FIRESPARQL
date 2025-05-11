@@ -1,0 +1,18 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the CoNLL 2012 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     SELECT?model?metric?score
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:benchmark dc:title "CoNLL 2012".
+    ?paper orkg:result?result.
+    ?result orkg:metric dc:title "F1".
+    ?result orkg:score?score.
+    ?result orkg:model?model.
+     FILTER (?model!= "ensemble").
+     FILTER (?score = MAX(?score) ).
+     }<|eot_id|>

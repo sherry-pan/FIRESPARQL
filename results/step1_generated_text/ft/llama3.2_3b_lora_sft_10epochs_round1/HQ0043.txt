@@ -1,0 +1,13 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ SELECT?variable, COUNT(?variable) AS frequency
+     WHERE {
+      ?paper rdf:type orkgc:Paper.
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?variable.
+       BIND(xsd:int(?variable) AS?variable)
+     }
+     GROUP BY?variable
+     ORDER BY DESC(COUNT(?variable)) LIMIT 3<|eot_id|>

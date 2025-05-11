@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+SELECT ?s ?p ?o 
+WHERE {
+    ?s orkg:hasStudy ?study.
+    ?study schema:description ?description.
+    ?study orkg:hasStudySubject ?subject.
+    ?subject schema:keywords ?k.
+    FILTER (REGEX(LOWER(?k), "children") || REGEX(LOWER(?k), "child"))
+}
+```

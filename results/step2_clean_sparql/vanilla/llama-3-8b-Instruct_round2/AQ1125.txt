@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:title ?title.
+  FILTER (?title = "Kinetics-600").
+  ?paper orkg:benchmark ?benchmark.
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:score ?score.
+  FILTER (?metric != "None" && ?score != "None").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

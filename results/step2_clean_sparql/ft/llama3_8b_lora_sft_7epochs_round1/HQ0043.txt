@@ -1,0 +1,15 @@
+```sparql
+SELECT ?variables ?variables_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "atmosphere")
+  ?paper orkgp:P31_ONT ?model;
+         orkgp:P29 ?has_variables.
+  ?has_variables orkgp:P5046 ?variables;
+                 orkgp:P5047 ?variables_lbl.
+}
+GROUP BY ?variables ?variables_lbl
+ORDER BY DESC(COUNT(?variables))
+LIMIT 3
+```

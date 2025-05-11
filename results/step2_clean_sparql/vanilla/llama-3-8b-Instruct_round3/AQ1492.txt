@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?precision
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_result <http://purl.org/orkg/evaluation/RotoWire_RelationGeneration>.
+  ?model orkg:has_metric/owl:hasValue ?metric.
+  ?metric rdfs:label ?metric_label.
+  FILTER (?metric_label = "Precision").
+  ?model orkg:has_value ?precision.
+}
+ORDER BY DESC(?precision)
+LIMIT 1
+```

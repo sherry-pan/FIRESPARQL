@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paperId ?title
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         orkg:hasBenchmark ?benchmark ;
+         schema:name ?title ;
+         orkg:hasId ?paperId.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset schema:name "NLP-TDMS".
+}
+```

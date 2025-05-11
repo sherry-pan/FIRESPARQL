@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R8341 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P4310 ?eval.
+    ?eval orkgp:P4311 ?value.
+    ?contrib orkgp:P1234 ?metric.  # Assuming P1234 is the correct predicate for metric
+    ?metric rdfs:label ?metric_lbl.
+    FILTER(REGEX(STR(?contrib), "Atari 2600 Star Gunner"))
+    FILTER(?value > 0)
+}
+```

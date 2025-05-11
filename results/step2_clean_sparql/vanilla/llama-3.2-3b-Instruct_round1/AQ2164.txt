@@ -1,0 +1,16 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?linkURL 
+WHERE {
+  ?p a schema:CreativeWork.
+  ?p schema:describes ?o.
+  ?o foaf:name "AWD-LSTM".
+  ?o schema:hasPart ?part.
+  ?part schema:description ?description.
+  ?description schema:contains ?link.
+  ?link schema:url ?linkURL.
+  FILTER (regex(str(?linkURL), "http://"))
+}
+```

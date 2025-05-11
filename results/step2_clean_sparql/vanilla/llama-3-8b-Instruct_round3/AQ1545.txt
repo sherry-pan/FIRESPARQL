@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper schema:publication/schema:volume "CoNLL 2012".
+  ?paper schema:metric ?metric.
+  ?metric schema:metricType "F1".
+  ?metric schema:metricValue ?f1.
+  ?paper schema:model ?model.
+  FILTER (?model != "baseline")
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

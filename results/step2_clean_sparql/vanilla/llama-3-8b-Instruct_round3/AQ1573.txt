@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1
+WHERE {
+   ?paper a orkg:Paper;
+           dcterms:title ?title;
+           orkg:hasResult ?result.
+   ?result a orkg:Result;
+           orkg:hasMetricValue ?f1;
+           orkg:hasMetric dcterms:title "F1"^^xsd:string;
+           orkg:hasDataset orkg:ShAReCLEFeHealth;
+           orkg:hasModel ?model.
+   FILTER (?title = "ShARe/CLEF eHealth corpus benchmark dataset")
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX wotsi: <http://wotsi.org/schema/1.1/>
+PREFIX wotsi_benchmarks: <http://wotsi.org/schema/1.1/Benchmarks/>
+PREFIX wotsi_metrics: <http://wotsi.org/schema/1.1/Metrics/>
+PREFIX wotsi_eval: <http://wotsi.org/schema/1.1/Evaluation/>
+
+SELECT ?metric
+WHERE {
+  ?benchmark wotsi_benchmarks:hasBenchmark "DMControl500k".
+  ?benchmark wotsi_metrics:hasMetric ?metric.
+  ?metric rdfs:label ?label.
+  FILTER (lang(?label) = "en")
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R75355 orkgp:compareContribution ?cont.
+  ?cont orkgp:P31 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?dataset orkgp:P35 ?eval.
+  ?eval orkgp:HAS_VALUE ?cont;
+        orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:P30 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  BIND(xsd:float(?value) AS ?value).
+  FILTER(REGEX(?benchmark_lbl, "Cartpole, swingup \\(DMControl500k\\)"))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

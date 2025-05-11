@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paperTitle ?paperID
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:hasBenchmarkedModel ?benchmarkedModel.
+ ?benchmarkedModel orkg:usesDataset ?dataset.
+ ?dataset rdfs:label "NCBI-disease".
+ ?paper dcterms:title ?paperTitle.
+ ?paper orkg:hasID ?paperID.
+}
+```

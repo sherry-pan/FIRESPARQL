@@ -1,0 +1,14 @@
+```sparql
+SELECT ?paper ?title
+WHERE {
+  ?paper a schema:ResearchPaper;
+         schema:hasTitle ?title;
+         schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset ?dataset;
+             schema:hasModel ?model.
+  ?dataset schema:datasetName "UCF101";
+           schema:datasetType "benchmarking".
+  ?model schema:hasFinetuning ?finetuning.
+  ?finetuning schema:finetuningName "UCF101".
+}
+```

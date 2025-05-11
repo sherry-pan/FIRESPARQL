@@ -1,0 +1,13 @@
+```sparql
+SELECT ?c
+WHERE {
+  orkgr:R155840 orkgp:compareContribution ?cont.
+  ?cont orkgp:P7048 ?knowledge_representations.
+  FILTER(REGEX(STR(?knowledge_representations), "ont"))
+  ?cont orkgp:P31 ?paper.
+  ?paper orkgp:P7048 ?knowledge_representations;
+         orkgp:P31 ?c.
+}
+ORDER BY DESC(COUNT(?knowledge_representations))
+LIMIT 1
+```

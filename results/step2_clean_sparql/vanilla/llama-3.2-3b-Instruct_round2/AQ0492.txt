@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?title ?id WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:hasBenchmark ?benchmark.
+   ?benchmark schema:hasDataset ?dataset.
+   ?dataset dbo:datasetName "enwik8".
+   ?paper orkg:hasTitle ?title.
+   ?paper orkg:hasID ?id.
+}
+```

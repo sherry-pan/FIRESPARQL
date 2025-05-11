@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model 
+WHERE {
+    ?model orkg:accuracy ?accuracy.
+    ?model orkg:dataset "Amazon benchmark".
+    FILTER (?accuracy = (SELECT MAX(?acc) 
+                         WHERE {
+                             ?m orkg:accuracy ?acc.
+                             ?m orkg:dataset "Amazon benchmark"
+                         }))
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX pd: <http://purl.org/podo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?model schema:description "SST-5 Fine-grained classification".
+    ?model orkg:hasModelEvaluation ?eval.
+    ?eval schema:score ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

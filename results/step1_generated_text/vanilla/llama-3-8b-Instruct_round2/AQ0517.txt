@@ -1,0 +1,14 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the DCASE dataset?
+
+Generated SPARQL:
+ PREFIX dcase: <http://purl.org/spar/dcase/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?paperId?title
+     WHERE {
+    ?paper a orkg:ResearchPaper;
+     orkg:hasPublicationTitle?title;
+     orkg:mentions?benchmark.
+    ?benchmark a dcase:DCASEBenchmark.
+     FILTER(?benchmark IN orkg:mentions?paper).
+     }<|eot_id|>

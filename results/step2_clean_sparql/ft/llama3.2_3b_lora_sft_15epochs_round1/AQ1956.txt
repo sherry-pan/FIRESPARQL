@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+    ?paper a orkgc:Paper;
+           rdfs:label ?paper_lbl.
+    FILTER(REGEX(?paper_lbl, "CATTS-XSUM"))
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:HAS_PAPER ?paper.
+    ?dataset orkgp:HAS_CONTEST ?cont;
+             orkgp:P32HAS_CODE_SOURCE ?code.
+}
+```

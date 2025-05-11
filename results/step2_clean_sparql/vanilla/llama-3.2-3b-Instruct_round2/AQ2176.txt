@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ontology#>
+PREFIX schema: <http://schema.org/>
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark schema:description ?description.
+  FILTER (CONTAINS(?description, "PAR Transformer Large") AND CONTAINS(?description, "benchmarking"))
+  ?paper orkg:has_code_reference ?codeReference.
+}
+```

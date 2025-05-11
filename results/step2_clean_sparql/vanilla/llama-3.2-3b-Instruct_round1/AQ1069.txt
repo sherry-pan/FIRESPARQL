@@ -1,0 +1,20 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c_wdt#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a schema:Dataset.
+  ?dataset schema:description ?description.
+  FILTER(CONTAINS(?description, 're17.zip')).
+  ?dataset wdt:P301 ?benchmark.
+  ?benchmark schema:description ?benchmarkDesc.
+  FILTER(CONTAINS(?benchmarkDesc, 'benchmark result')).
+  ?benchmark schema:mainEntity ?entity.
+  ?entity rdfs:label ?metric.
+  ?benchmark schema:mainScore ?score.
+  FILTER(STR(?score) = 'highest')
+}
+```

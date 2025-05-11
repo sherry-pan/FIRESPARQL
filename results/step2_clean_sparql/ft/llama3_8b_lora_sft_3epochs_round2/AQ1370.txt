@@ -1,0 +1,22 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?cont orkgp:P31 ?something;
+        rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "Nottingham"))
+  
+  ?cont orkgp:P5027 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "Nottingham"))
+
+  ?cont orkgp:P5028 ?value.
+  
+  OPTIONAL {
+    ?cont orkgp:P5029 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  
+  ?cont orkgp:P5030 ?benchmark.
+}
+ORDER BY DESC(?score)
+```

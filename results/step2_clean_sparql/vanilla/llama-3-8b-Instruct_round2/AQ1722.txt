@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmark ?benchmark.
+   ?benchmark dcterms:title "Atari 2600 Tutankham".
+   ?model orkg:score ?score.
+   ?model rdfs:label ?modelLabel.
+   FILTER (lang(?modelLabel) = "en").
+   FILTER NOT EXISTS {
+     ?otherModel orkg:benchmark ?benchmark.
+     ?otherModel orkg:score ?otherScore.
+     FILTER(?otherScore > ?score)
+   }
+}
+```

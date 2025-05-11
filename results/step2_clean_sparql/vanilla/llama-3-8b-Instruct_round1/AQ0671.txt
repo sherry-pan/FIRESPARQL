@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://wifo5-04.uni-kassel.de/orkg/resource/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paperId ?title
+WHERE {
+  ?paper orkg:hasResourceType orkg:ResearchPaper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "BUCC German-to-English".
+  ?paper dc:title ?title.
+  ?paper orkg:hasId ?paperId.
+  FILTER (?paperId != "")
+}
+```

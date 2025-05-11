@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?modelLabel
+WHERE {
+  ?model schema:description "Model"@en.
+  ?model schema:about <http://dbpedia.org/resource/QID/123456789>.
+  ?model schema:testedOn <http://dbpedia.org/resource/QID/567890123>.
+  FILTER(CONTAINS(LCASE(?modelLabel), "nyt29"))
+}
+LIMIT 10
+```

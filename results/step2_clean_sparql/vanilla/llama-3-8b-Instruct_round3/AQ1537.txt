@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX p: <http://www.openresearchknowledgegraph.org/resource/parameter/>
+PREFIX b: <http://www.openresearchknowledgegraph.org/resource/benchmark/>
+PREFIX d: <http://www.openresearchknowledgegraph.org/resource/dataset/>
+
+SELECT ?model ?name
+WHERE {
+  ?model a orkg:Model.
+  ?model p:NumberOfParams ?numParams.
+  ?model b:benchmark ?benchmark.
+  ?benchmark rdfs:label "Penn Treebank (Character Level)".
+  ?model p:Score ?score.
+  FILTER(?score = (SELECT MAX(?s) WHERE { ?m b:benchmark ?benchmark. ?m p:Score ?s }))
+  ?model rdfs:label ?name.
+}
+```

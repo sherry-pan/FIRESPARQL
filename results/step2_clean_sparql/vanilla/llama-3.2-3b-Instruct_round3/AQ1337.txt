@@ -1,0 +1,16 @@
+```sparql
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score 
+WHERE {
+  ?paper a ork:Paper;
+         schema:description ?description;
+         schema:benchmark ?benchmark.
+  FILTER (CONTAINS(STR(?description), "Paper Field") && CONTAINS(STR(?description), "benchmark"))
+  ?benchmark schema:metric ?metric;
+             schema:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

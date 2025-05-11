@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://purl.org/openresearchknowledgegraph/>
+SELECT ?dataset ?frequency
+WHERE {
+    ?dataset orkg:topic "Joint Entity and Relation Extraction".
+    ?dataset orkg:domain "Natural Language Processing".
+    ?dataset orkg:benchmark ?benchmark.
+    ?dataset orkg:benchmarkCount ?frequency.
+}
+GROUP BY ?dataset
+HAVING (COUNT(?benchmark) > 5)
+ORDER BY DESC(?frequency)
+```

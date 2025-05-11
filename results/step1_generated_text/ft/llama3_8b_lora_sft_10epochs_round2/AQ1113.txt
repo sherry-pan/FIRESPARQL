@@ -1,0 +1,23 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the IWSLT2015 German-English dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+         orkgr:R6948 orkgp:compareContribution?contrib.
+       } UNION {
+         orkgr:R8341 orkgp:compareContribution?contrib.
+       }
+      ?contrib orkgp:P4306?benchmark;
+                orkgp:P4313?metric.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(REGEX(STR(?benchmark_lbl), "IWSLT2015 German-English"))
+      ?contrib orkgp:HAS_VALUE?value.
+      ?value orkgp:P4310?metric;
+              orkgp:P4315?score_value.
+      ?metric rdfs:label?metric_lbl.
+       BIND(xsd:float(?score_value) AS?score)
+       ORDER BY DESC(?score)
+     }
+     LIMIT 1<|eot_id|>

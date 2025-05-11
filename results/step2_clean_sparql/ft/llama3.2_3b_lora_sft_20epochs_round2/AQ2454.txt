@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, "GPT-2 \\(small\\)"))
+  ?paper orkgp:P30 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:P31 ?code.
+  ?benchmark orkgp:P32 ?release.
+}
+```

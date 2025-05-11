@@ -1,0 +1,37 @@
+Question:
+Can you provide links to code used in papers that benchmark the ImageNet + iNat on WS-DAN model?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX bio: <http://example.org/bio/>
+    PREFIX wkm: <http://example.org/wkm/>
+    PREFIX cgit: <http://example.org/cgit/>
+    PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+    SELECT?p?o
+    WHERE {
+     ?paper a dbo:Paper.
+     ?paper dbpedia:hasSource?source.
+     ?source dbpedia:contains?link.
+     ?link rdfs:label?linkLabel.
+     ?link wkm:hasReference?ref.
+     ?ref rdfs:label?refLabel.
+     ?ref wkm:hasCode?code.
+     ?code wkm:hasPaper?paper.
+     ?paper wkm:hasBenchmark "ImageNet + iNat".
+     ?paper wkm:hasModel "WS-DAN".
+     ?paper wkm:hasLink?link.
+     ?paper foaf:givenName?given.
+     ?paper foaf:surname?surname.
+     ?given?givenLabel.
+     ?surname?surnameLabel.
+     ?link wkm:hasLabel?linkLabel.
+     ?link wkm:hasCode?code.
+     ?code wkm:hasPaper?paper.
+     ?paper wkm:hasBenchmark "ImageNet + iNat".
+     ?paper wkm:hasModel "WS-DAN".
+     

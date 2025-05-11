@@ -1,0 +1,17 @@
+Question:
+Could you provide a list of models that have been tested on the NYT29 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?modelLabel
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasEvaluation orkg:Evaluation.
+    ?evaluation orkg:hasBenchmark?benchmark.
+    ?benchmark schema:name "NYT29".
+    ?model orkg:hasEvaluation?evaluation.
+    ?model rdfs:label?modelLabel.
+     FILTER(lang(?modelLabel) = "en").
+     }<|eot_id|>

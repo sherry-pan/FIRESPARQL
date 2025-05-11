@@ -1,0 +1,15 @@
+Question:
+List the metrics that are used to evaluate models on the AG News benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?metric
+WHERE {
+ ?metric rdfs:label?label.
+  bd:dataset "AG News" rdfs:label "AG News".
+  bd:metric?metric.
+  FILTER (REGEX(STR(?metric), "^(Evaluation Metric|Accuracy|Precision|Recall|F1 Score|Mean Squared Error|Mean Absolute Error)$") && 
+         STR(?metric)!= "Mean Squared Error" && 
+         STR(?metric)!= "Mean Absolute Error")
+}
+```<|eot_id|>

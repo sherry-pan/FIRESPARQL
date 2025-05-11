@@ -1,0 +1,15 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the MPQA dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?title?id 
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper orkg:hasBenchmarkedModel?benchmarkedModel.
+      ?benchmarkedModel orkg:usedDataset?dataset.
+      ?dataset schema:name "MPQA".
+      ?paper orkg:hasTitle?title.
+      ?paper orkg:hasID?id.
+     }<|eot_id|>

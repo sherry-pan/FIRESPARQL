@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX bio2vec: <http://bio2vec.org/ontology/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?title ?id 
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper dbo:dataset "CUB-200-2011".
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark rdfs:label ?title.
+    ?paper orkg:id ?id
+}
+ORDER BY ?title
+LIMIT 10
+```

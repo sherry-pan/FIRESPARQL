@@ -1,0 +1,24 @@
+Question:
+What is the best performing model benchmarking the WMT2014 German-English dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bio/ontology#>
+     SELECT?model?metric?value
+     WHERE {
+    ?model schema:name?name.
+    ?model schema:description?description.
+    ?model dbpedia:dataset "WMT2014 German-English".
+    ?model schema:concept?concept.
+    ?concept schema:name "benchmarking".
+    ?concept rdfs:label "Model evaluation".
+    ?model schema:numeric "1".
+    ?model schema:numeric?value.
+    ?model schema:metric?metric.
+    ?metric schema:name "BLEU".
+     FILTER (STRONGER THAN (<,?value, 0.2))
+     }<|eot_id|>

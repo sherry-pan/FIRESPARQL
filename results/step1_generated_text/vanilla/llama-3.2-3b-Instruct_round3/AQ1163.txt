@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ARC (Challenge)?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wot: <http://www.wotnet.org/ontology/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/ontology/>
+
+     SELECT?metric?value
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark schema:description "ARC".
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark orkg:hasResult?result.
+    ?result orkg:metric?metric.
+    ?result orkg:value?value.
+     FILTER (strContains(STR(?benchmarkLabel), "ARC") )
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+Could you provide a list of models that have been tested on the RTE benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT?model?modelLabel
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasTestedOn?dataset.
+ ?dataset a orkg:Dataset.
+ ?dataset schema:name "RTE benchmark dataset".
+  SERVICE <https://api.orkg.org/sparql> {
+   ?model schema:name?modelLabel.
+  }
+}<|eot_id|>

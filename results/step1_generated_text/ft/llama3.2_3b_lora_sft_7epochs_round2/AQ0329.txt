@@ -1,0 +1,17 @@
+Question:
+Can you list the models that have been evaluated on the BUCC French-to-English dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "BUCC French-to-English")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+                  ?model      rdfs:label              ?model_lbl.}
+         FILTER(?model_lbl = "No model" OR?model_lbl = "BERT-base" OR?model_lbl = "BERT-large")
+        ?cont      orkgp:HAS_PAPER         ?paper.
+     }<|eot_id|>

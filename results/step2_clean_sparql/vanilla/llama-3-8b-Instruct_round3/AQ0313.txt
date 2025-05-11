@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://www.openresearchknowledge.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?modelLabel
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:evaluatedOn ?dataset.
+    ?dataset rdfs:label "5 seconds at 12 kHz".
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:domain orkg:ClassicalMusic.
+    ?model rdfs:label ?modelLabel.
+    FILTER (?modelLabel != "").
+}
+```

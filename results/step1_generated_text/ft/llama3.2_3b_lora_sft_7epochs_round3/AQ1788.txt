@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Montezuma's Revenge dataset in terms of Average Return (NoOp) metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Atari 2600 Montezuma's Revenge")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.
+                  ?model          rdfs:label              ?model_lbl.}
+        ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.}
+        ?model      rdfs:label              ?model_lbl.
+         BIND(xsd:float(?value) AS?value)
+         BIND(xsd:float(?value) AS?avg_return_noop)
+         ORDER BY DESC(?avg_return_noop)
+         LIMIT 1
+     <|eot_id|>

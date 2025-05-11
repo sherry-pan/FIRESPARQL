@@ -1,0 +1,21 @@
+Question:
+What is the highest benchmark result achieved on the IMDb-M dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://www.openresearch.org/orkg/>
+     PREFIX imdb: <http://www.openresearch.org/orkg/dataset/imdb/>
+     PREFIX imdb: <http://www.openresearch.org/orkg/dataset/imdb/>
+
+     SELECT?metric?value 
+     WHERE {
+        ?s imdb:hasBenchmark?b.
+        ?b imdb:hasMetric?metric.
+        ?b imdb:hasValue?value.
+        ?s imdb:hasBenchmark?b.
+        ?b imdb:hasMetric?metric.
+        ?b imdb:hasValue?value.
+         FILTER (?metric = "accuracy" OR?metric = "F1-score" OR?metric = "F1")
+         FILTER (regex(?value, "IMDb-M")) 
+     }
+     ```<|eot_id|>

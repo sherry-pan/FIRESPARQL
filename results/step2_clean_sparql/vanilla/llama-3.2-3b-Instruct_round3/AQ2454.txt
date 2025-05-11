@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowlegde.org/schema/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+    ?paper orkg:uses ?gpt2_model.
+    ?gpt2_model wdt:P279 wd:Q59476437.
+    ?paper wdt:P275/rdfs:label ?benchmarkLabel.
+    FILTER(LCASE(?benchmarkLabel) = "gpt-2 (small)").
+    ?paper orkg:code ?code.
+}
+```

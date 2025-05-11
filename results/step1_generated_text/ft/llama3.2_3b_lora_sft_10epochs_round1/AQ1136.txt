@@ -1,0 +1,26 @@
+Question:
+What is the top benchmark score and its metric on the Natural Questions (short) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R75366 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P32?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+        ?benchmark orkgp:P31?cont.
+        ?cont orkgp:P32?benchmark;
+                orkgp:HAS_VALUE?value.
+         BIND(xsd:int(?value) AS?value).
+         BIND(
+           IF(?value = "0.0"^^xsd:string,?metric_lbl,
+               CASE
+               WHEN?value = "0.03"^^xsd:string THEN?metric_lbl_1
+               WHEN?value = "0.029999999999999996"^^xsd:string THEN?metric_lbl_2
+               ELSE?metric_lbl
+               END
+           )
+           AS?metric_lbl)
+         FILTER(REGEX(STR(?metric_lbl), "Natural Questions (short)")
+         )
+         FILTER(?metric_lbl = "accuracy")
+     }<|eot_id|>

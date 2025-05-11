@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?model schema:description ?d.
+    ?d schema:subject <http://dbpedia.org/ontology/TriviaQA>.
+    ?model rdfs:label ?label.
+    FILTER (lang(?label) = 'en' && CONTAINS(LCASE(?label), "accuracy") && CONTAINS(LCASE(?label), "score") && CONTAINS(LCASE(?label), "top performing")).
+    ?model schema:mainClass ?class.
+}
+```

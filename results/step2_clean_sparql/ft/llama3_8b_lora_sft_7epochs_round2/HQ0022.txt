@@ -1,0 +1,27 @@
+```sparql
+SELECT ?answer WHERE {
+  ?paper orkgp:P31 ?cont;
+         rdfs:label ?paper_title.
+  FILTER(REGEX(?paper_title, "Disambiguating authors in citations on the web and authorship correlations"))
+  ?cont orkgp:P4004 ?sim.
+  ?sim orkgp:P34041 ?uses_cosine.
+  ?paper orkgp:P7038 ?has_method.
+  ?has_method orkgp:P4004 ?method_sim.
+  ?method_sim orkgp:P34041 ?method_uses_cosine.
+  ?paper orkgp:P7039 ?has_metric.
+  ?has_metric orkgp:P4004 ?metric_sim.
+  ?metric_sim orkgp:P34041 ?metric_uses_cosine.
+  BIND(
+    IF(?uses_cosine = "t"^^xsd:string,
+       "Yes",
+       IF(?method_uses_cosine = "t"^^xsd:string,
+          "Yes",
+          IF(?metric_uses_cosine = "t"^^xsd:string,
+             "Yes",
+             "No"
+          )
+       )
+    ) AS ?answer
+  )
+}
+```

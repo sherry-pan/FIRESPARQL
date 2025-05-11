@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         orkg:hasTitle ?title ;
+         orkg:hasId ?id ;
+         orkg:hasBenchmarkedModel ?benchmarkedModel.
+  ?benchmarkedModel orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "Yelp Binary classification dataset".
+}
+```

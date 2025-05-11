@@ -1,0 +1,16 @@
+Question:
+Could you provide a list of models that have been tested on the GENIA - LAS benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?name 
+     WHERE {
+    ?model schema:distribution?dist.
+    ?dist schema:identifier "https://example.org/models/".
+    ?dist schema:hasVersion?version.
+    ?version schema:hasTest?test.
+    ?test schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasDataset "GENIA-LAS".
+     FILTER (CONTAINS(Lowering(?benchmark), "genia-las") )
+     }<|eot_id|>

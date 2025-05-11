@@ -1,0 +1,24 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Sequential MNIST dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R75362 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P35?eval.
+          ?eval orkgp:P36?metric;
+                  orkgp:P37?value.
+           FILTER(REGEX(?metric, "M.*NIST"))
+          ?metric rdfs:label?metric_lbl.
+         }
+     UNION
+     {
+       orkgr:R75363 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P35?eval.
+      ?eval orkgp:P36?metric;
+              orkgp:P37?value.
+       FILTER(REGEX(?metric, "M.*NIST"))
+      ?metric rdfs:label?metric_lbl.
+     }
+     ORDER BY DESC(?score)<|eot_id|>

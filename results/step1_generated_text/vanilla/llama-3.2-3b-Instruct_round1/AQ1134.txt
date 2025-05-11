@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the Hendrycks Test dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/2016/12/orkg#>
+     SELECT?benchmarkScore?metric
+     WHERE {
+    ?benchmark?benchmarkName :label?benchmarkNameLabel.
+    ?benchmark :benchmarkScore?benchmarkScoreValue.
+    ?benchmark?benchmarkMetric?benchmarkMetricLabel.
+    ?benchmark :benchmarkMetric?metric.
+    ?benchmark :benchmarkTest?benchmarkTest.
+    ?benchmarkTest :benchmarkDataset "Hendrycks Test".
+    ?benchmark :benchmarkScore?benchmarkScore.
+    ?benchmarkScore?benchmarkMetric?metric.
+     FILTER (STRIKE?benchmarkScoreValue "not(contains(STRONGER THAN, 0.5))").
+     FILTER (STRIKE?metric "F1 score").
+     }<|eot_id|>

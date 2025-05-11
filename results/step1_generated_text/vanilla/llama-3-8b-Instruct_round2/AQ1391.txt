@@ -1,0 +1,24 @@
+Question:
+What is the best performing model benchmarking the ACE 2004 dataset in terms of RE+ Micro F1 metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model ;
+         orkg:hasBenchmark?benchmark.
+ ?benchmark a orkg:Benchmark ;
+             orkg:dataset?dataset ;
+             orkg:metric?metric ;
+             orkg:score?score.
+ ?dataset a orkg:Dataset ;
+           orkg:datasetName "ACE 2004".
+ ?metric a orkg:Metric ;
+           orkg:metricName "RE+ Micro F1" ;
+           orkg:metricType owl:FunctionalProperty.
+  FILTER (?score = max(?score))
+}<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?material ?responseTime
+WHERE {
+  ?material orkg:hasProperty ?property.
+  ?material orkg:hasValue "least response time".
+  ?property orkg:hasProperty ?subProperty.
+  ?material ?subProperty orkg:hasValue ?responseTime.
+  FILTER (REGEX(?responseTime, "^[0-9]+$") || REGEX(?responseTime, "^[0-9.]+$"))
+}
+```

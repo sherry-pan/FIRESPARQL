@@ -1,0 +1,30 @@
+Question:
+What is the top benchmark score and its metric on the Hutter Prize dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R75390 orkgp:compareContribution?cont.
+          ?cont orkgp:P31?dataset.
+          ?dataset rdfs:label "Hutter Prize"^^xsd:string.
+          ?cont orkgp:P36?eval.
+          ?eval orkgp:HAS_DATASET?dataset;
+                orkgp:P31?paper.
+          ?paper orkgp:P32?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?paper orkgp:HAS_VALUE?value.
+         }
+     UNION
+     {
+       orkgr:R75392 orkgp:compareContribution?cont.
+      ?cont orkgp:P31?dataset.
+      ?dataset rdfs:label "Hutter Prize"^^xsd:string.
+      ?cont orkgp:P36?eval.
+      ?eval orkgp:HAS_DATASET?dataset;
+            orkgp:P31?paper.
+      ?paper orkgp:P32?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?paper orkgp:HAS_VALUE?value.
+     }
+     ORDER BY DESC(?score)<|eot_id|>

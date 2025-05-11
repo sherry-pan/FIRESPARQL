@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?paper_title ?author ?code_reference ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dcterms:subject "All-attention network - 18 layers model".
+  ?paper dcterms:bibliographicCitation ?bibliographicCitation.
+  ?bibliographicCitation dcterms:hasPart ?code_reference.
+  ?code_reference a orkg:CodeReference.
+  ?code_reference dcterms:description ?code_link.
+  ?author foaf:name ?author_name.
+  ?paper dc:creator ?author.
+}
+```

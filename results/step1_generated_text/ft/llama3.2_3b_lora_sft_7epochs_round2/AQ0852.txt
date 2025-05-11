@@ -1,0 +1,14 @@
+Question:
+What are the metrics of evaluation over the OntoNotes dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?average_value)
+     WHERE {
+         orkgr:R153901 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label "OntoNotes"^^xsd:string.
+        ?contrib orkgp:P32?eval.
+        ?eval orkgp:P36?metric.
+        ?metric rdfs:label?metric_lbl.
+         FILTER(REGEX(?metric_lbl, "evalua"))
+     }<|eot_id|>

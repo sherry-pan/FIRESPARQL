@@ -1,0 +1,22 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bnns/>
+     SELECT?metric?value
+     WHERE {
+    ?metric schema:name "evaluation metric"@en.
+    ?metric schema:description "a measure of how well an agent performs"@en.
+    ?metric orkg:hasmetric " Atari 2600 Defender"@en.
+    ?metric orkg:hasmetric?metricValue.
+     FILTER (strstarts-with(?metricValue, "accuracy@en") OR 
+            strstarts-with(?metricValue, "loss@en") OR 
+            strstarts-with(?metricValue, "win@en") OR 
+            strstarts-with(?metricValue, "win rate@en") OR 
+            strstarts-with(?metricValue, "loss rate@en") )
+     }<|eot_id|>

@@ -1,0 +1,26 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Dmlab-30 dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?title?id
+    WHERE {
+     ?paper schema:about?paperID.
+      schema:about?paperID schema:creativeWork?work.
+      rdfs:label?title.
+     ?paper orkg:hasBenchmark?benchmark.
+     ?benchmark schema:about?benchmarkID.
+     ?benchmark dmlab:dataset?dataset.
+     ?benchmark dmlab:dataset?dataset dmlab:datasetID "DMLab-30".
+     ?paper orkg:hasIdentifier?id.
+      BIND(strcat(?id, " ",?title) as?result)
+    } 
+    FILTER(LANG(?title) = "en")
+    ```<|eot_id|>

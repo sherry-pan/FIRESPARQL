@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:dataset orkg:PIQA.
+  ?benchmark orkg:metric schema:Accuracy.
+  ?benchmark orkg:result ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WMT2016 German-English dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wos: <http://www.orkg.org/wos/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper wos:hasTitle?title.
+ ?paper wos:hasID?id.
+ ?paper wos:performedBenchmarkOn?benchmark.
+ ?benchmark wos:usedDataset wos:WMT2016_German_English.
+  FILTER (?paper a wos:ResearchPaper &&?benchmark a wos:Benchmark)
+}<|eot_id|>

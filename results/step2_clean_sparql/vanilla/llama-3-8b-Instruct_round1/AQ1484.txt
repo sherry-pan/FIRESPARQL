@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1_score
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:benchmarkedOn ?benchmark.
+    ?benchmark schema:name "Natural Questions (long)".
+    ?model orkg:metricValue ?f1_score.
+    FILTER(?f1_score = max(?f1_score))
+}
+```

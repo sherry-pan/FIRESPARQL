@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?paperTitle ?paperID
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasDataset ?dataset.
+  ?dataset dcterms:title "ShARe/CLEF eHealth corpus".
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasBenchmarkFor ?dataset.
+  ?paper orkg:hasTitle ?paperTitle.
+  ?paper orkg:hasID ?paperID.
+}
+```

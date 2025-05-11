@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasPublicationDate ?date.
+    ?paper orkg:mentions ?dataset.
+    ?dataset schema:name "MultiRC".
+    ?paper orkg:mentions ?metric.
+    FILTER (?date > "2015-01-01" && ?date < "2022-12-31").
+    ?metric a orkg:EvaluationMetric.
+}
+```

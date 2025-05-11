@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bc2gm: <http://www.openresearchknowledgegraph.org/ontology/bc2gm/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a bc2gm:Dataset;
+           bc2gm:benchmark ?benchmark.
+  ?benchmark bc2gm:metric ?metric;
+             bc2gm:value ?value.
+  FILTER (str(?dataset) = "BC2GM")
+}
+```

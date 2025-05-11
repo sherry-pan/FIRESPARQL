@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://semantic-web-journal.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?f1score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluation ?evaluation.
+  ?evaluation orkg:dataset <http://www.ling.upenn.edu/phono_attr/Treebank/>.
+  ?evaluation orkg:metric <http://purl.org/orkg/property/f1score>.
+  ?evaluation orkg:value ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

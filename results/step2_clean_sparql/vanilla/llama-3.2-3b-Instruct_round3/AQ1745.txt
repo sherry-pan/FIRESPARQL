@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/> 
+SELECT ?model ?f1Score 
+WHERE {
+    ?model orkg:hasDataset "BUCC Chinese-to-English".
+    ?model orkg:hasEvaluationResult ?f1Score.
+    FILTER(CONTAINS(LCASE(STR(?f1Score)), "f1"))
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

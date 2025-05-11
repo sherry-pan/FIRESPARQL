@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <https://wifo5-03.uni-kassel.de/orkg/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?code
+WHERE {
+    ?paper a bibo:Article.
+    ?paper orkg:benchmarks ?benchmarks.
+    ?benchmarks orkg:benchmarksFor ?comet_direct.
+    ?paper orkg:hasCode ?code
+    FILTER(?code != "")
+}
+```

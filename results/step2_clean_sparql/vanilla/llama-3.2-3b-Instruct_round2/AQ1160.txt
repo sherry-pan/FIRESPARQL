@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://purl.org/sawz/orkg/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value
+WHERE {
+  ?dataset a dbo:Dataset.
+  ?dataset schema:datasetType "RotoWire".
+  ?metric rdfs:label ?metricLabel.
+  ?metric schema:rankedList ?metricRankedList.
+  ?metricRankedList schema:mainEntity ?metricValue.
+  ?metricValue schema:value ?value.
+  FILTER (CONTAINS(LCASE(?metricLabel), "top benchmark result"))
+}
+```

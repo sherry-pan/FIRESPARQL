@@ -1,0 +1,20 @@
+Question:
+List the code links in papers that use the A3C-CTS model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?paper?codeLink
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:usesModel?model.
+ ?model rdfs:label "A3C-CTS".
+ ?paper orkg:usesBenchmark?benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+  FILTER (?benchmarkLabel!= "None" && lang(?benchmarkLabel) = "en").
+ ?paper orkg:codeLink?codeLink.
+}<|eot_id|>

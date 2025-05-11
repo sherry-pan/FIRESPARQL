@@ -1,0 +1,26 @@
+Question:
+What is the top benchmark score and its metric on the MAZEA dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+     PREFIX schema.org: <http://schema.org/>
+     SELECT?score?metric
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark schema:about?benchmarkDataset.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasScore?score.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasBenchmarkScore?benchmarkScore.
+    ?benchmarkScore orkg:hasDataset?benchmarkDataset.
+    ?benchmarkScore orkg:hasMetric?metric.
+    ?benchmarkScore schema:score?score.
+    ?benchmarkScore schema:scoreType?scoreType.
+    ?benchmarkScore schema:benchmark?benchmark.
+    ?benchmark orkg:dataset?benchmarkDataset.
+     FILTER (?benchmarkScore?benchmark.
+     FILTER (?benchmarkScore schema:scoreType = "benchmark".
+     FILTER (?benchmarkDataset = "MAZEA".
+     ORDER BY DESC(?benchmarkScore).
+     LIMIT 1)<|eot_id|>

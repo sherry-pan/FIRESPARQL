@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest Accuracy score on the SST-5 Fine-grained classification benchmark dataset?
+
+Generated SPARQL:
+ PREFIX pd: <http://purl.org/podo/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?model?accuracy
+     WHERE {
+    ?model schema:description "SST-5 Fine-grained classification".
+    ?model schema:description?d.
+     FILTER (CONTAINS(str(?d), "Accuracy") && CONTAINS(str(?d), "SST-5") && CONTAINS(str(?d), "Fine-grained"))
+    ?model orkg:hasModelEvaluation?eval.
+    ?eval schema:score?accuracy.
+     FILTER (CONTAINS(str(?accuracy), "highest") || CONTAINS(str(?accuracy), "best"))
+     }
+     ORDER BY DESC(?accuracy)
+     LIMIT 1<|eot_id|>

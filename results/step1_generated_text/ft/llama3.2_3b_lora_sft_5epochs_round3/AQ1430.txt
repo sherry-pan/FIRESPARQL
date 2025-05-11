@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+         BIND(xsd:int(?value) as?value_lbl).
+        ?benchmark      orkgp:HAS_MODEL         ?model.
+        ?model        rdfs:label              ?model_lbl.
+        ?model      rdfs:label              ?model_lbl.
+         BIND(xsd:int(?value_lbl) as?value).
+        ?model      orkgp:HAS_MODEL         ?model.
+        ?model      rdfs:label              ?model_lbl.
+         FILTER(?value_lbl > 34.32)
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the CoQA dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:dataset orkg:CoQA ;
+             orkg:result?result.
+ ?result a orkg:BenchmarkResult ;
+          orkg:metric?metric ;
+          orkg:value?value.
+  FILTER (?metric = "F1-score" ||?metric = "EM" ||?metric = "METEOR" ||?metric = "ROUGE-1" ||?metric = "ROUGE-2" ||?metric = "ROUGE-L" ||?metric = "BLEU-1" ||?metric = "BLEU-2" ||?metric = "BLEU-3" ||?metric = "BLEU-4")
+  FILTER (?value = max(?value))
+}<|eot_id|>

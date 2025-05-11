@@ -1,0 +1,14 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the PubMed 20k RCT benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?f1
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasBenchmark <http://id.crossref.org/doi/10.1186/1471-2105-12-15>.
+      ?model orkg:hasMetric schema:Precision.
+      ?model orkg:hasMetricValue?f1.
+       FILTER(?f1 = "F1"^^xsd:string).
+     }<|eot_id|>

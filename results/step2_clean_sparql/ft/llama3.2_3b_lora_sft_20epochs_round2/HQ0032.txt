@@ -1,0 +1,12 @@
+```sparql
+SELECT ?compound
+WHERE {
+  orkgr:R155372 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37578 ?lead.
+  ?lead rdfs:label ?lead_lbl.
+  FILTER(REGEX(?lead_lbl, "^most common "))
+  ?contrib orkgp:P41386 ?compound.
+}
+ORDER BY DESC(COUNT(?compound))
+LIMIT 1
+```

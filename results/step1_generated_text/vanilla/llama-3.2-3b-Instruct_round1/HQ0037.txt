@@ -1,0 +1,19 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/OWL/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX bio: <http://dbpedia.org/ontology/>
+
+     SELECT?person?count
+     WHERE {
+      ?person dbp:editor?article.
+      ?article dbp:editor?person.
+      ?article dbp:subject [rdfs:label "Coronavirus"].
+      ?person rdfs:label?name.
+       GROUP BY?person
+       HAVING (COUNT(?article) > 10)
+     }<|eot_id|>

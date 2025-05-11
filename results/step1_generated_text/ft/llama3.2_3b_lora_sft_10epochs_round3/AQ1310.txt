@@ -1,0 +1,16 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Boxing dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R8341 orkgp:compareContribution?c.
+        ?c orkgp:P32?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+        ?benchmark orkgp:P31?cont.
+        ?cont orkgp:P32?benchmark;
+              orkgp:P31?paper.
+        ?paper orkgp:P27?eval.
+        ?eval orkgp:P30?metric.
+         BIND(xsd:float(?metric) AS?value)
+     }<|eot_id|>

@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:hasDataset ?dataset.
+ ?dataset a orkg:MLDocDataset.
+ ?dataset orkg:hasLanguagePair "English-French".
+ ?benchmark orkg:hasMetric ?metric.
+ ?metric a orkg:AccuracyMetric.
+ ?benchmark orkg:hasValue ?accuracy.
+ ?model orkg:hasLabel ?modelLabel.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

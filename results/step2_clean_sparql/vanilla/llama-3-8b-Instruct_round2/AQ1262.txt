@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             rdfs:label ?benchmarkLabel.
+  FILTER (?benchmarkLabel = "AESLC").
+  ?benchmark orkg:hasResult ?result.
+  ?result rdfs:label ?metric ;
+          orkg:hasValue ?value.
+  FILTER (?metric = "top").
+}
+```

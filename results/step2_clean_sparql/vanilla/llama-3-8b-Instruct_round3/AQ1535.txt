@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?testPerplexity
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluatedOn ?dataset.
+  ?dataset a schema:Dataset; schema:name "WikiText-2".
+  ?model orkg:achieved ?testPerplexity.
+}
+ORDER BY DESC(?testPerplexity)
+LIMIT 1
+```

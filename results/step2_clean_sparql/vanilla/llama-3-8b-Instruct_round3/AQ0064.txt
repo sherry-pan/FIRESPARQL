@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset schema:name "SciERC".
+  SERVICE orkg:infer {
+    ?model orkg:hasLabel ?modelLabel.
+  }
+}
+```

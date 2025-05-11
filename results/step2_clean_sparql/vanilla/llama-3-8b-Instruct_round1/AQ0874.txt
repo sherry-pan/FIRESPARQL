@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?metric
+WHERE {
+  ?metric a orkg:Metric.
+  ?metric rdfs:label ?label.
+  FILTER (
+    CONTAINS(LCASE(?label), "ncbi disease") && 
+    CONTAINS(LCASE(?label), "benchmark") && 
+    CONTAINS(LCASE(?label), "model evaluation")
+  )
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX pq: <http://www.wikidata.org/prop/query/>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a pq:Benchmark.
+    ?benchmark pq:hasBenchmarkFor ?dataset.
+    ?benchmark pq:hasMetric ?metric.
+    ?benchmark pq:hasValue ?value.
+    FILTER(CONTAINS(LCASE(STR(?benchmark)), "bucc") && CONTAINS(LCASE(STR(?dataset)), "french-to-english"))
+}
+```

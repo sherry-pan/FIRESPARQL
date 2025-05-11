@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Softcite dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wsc: <http://www.wsc.org/ontology/>
+     PREFIX wso: <http://www.wso.org/ontology/>
+     PREFIX bio2s: <http://www.bio2s.org/ontology/>
+     SELECT?metric?score WHERE {
+    ?paper wso:relatedTo?dataset.
+    ?dataset wso:datasetName "Softcite".
+    ?paper wso:benchmark?benchmark.
+    ?benchmark wso:metric?metric.
+    ?benchmark wso:score?score.
+     FILTER (?metric = "Benchmark result"^^xsd:string)
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

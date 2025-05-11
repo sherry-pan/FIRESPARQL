@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "PIQA".
+  ?model orkg:metric ?metric.
+  ?metric rdfs:label "Accuracy".
+  ?model orkg:result ?result.
+  ?result orkg:value ?accuracy.
+  FILTER(?accuracy = xsd:decimal(max(?accuracy)))
+}
+```

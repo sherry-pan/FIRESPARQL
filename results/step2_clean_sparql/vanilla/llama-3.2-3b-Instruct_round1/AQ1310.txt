@@ -1,0 +1,16 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?metric ?value 
+WHERE { 
+  ?s dbo:about "Atari 2600 Boxing". 
+  ?s dbo:benchmark ?b. 
+  ?b dbo:metric ?metric. 
+  ?b dbo:value ?value. 
+  ?metric rdfs:label ?label. 
+  FILTER (LANG(?label) = 'en'). 
+  FILTER (datatype(?value) = xsd:decimal). 
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

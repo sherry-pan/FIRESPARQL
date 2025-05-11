@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper dc:title ?paperTitle.
+ ?paper orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:usesDataset ?dataset.
+ ?dataset rdfs:label "TREC-6".
+ ?paper orkg:hasId ?paperId.
+}
+```

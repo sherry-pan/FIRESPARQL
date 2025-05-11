@@ -1,0 +1,9 @@
+```sparql
+SELECT ?model 
+WHERE {
+  ?model wdt:P131 ?value.
+  FILTER(STR(?value) = "BERT" OR STR(?value) = "RoBERTa" OR STR(?value) = "Longformer" OR STR(?value) = "XLNet")
+  ?model wdt:P465 ?testPerplexity.
+  FILTER(CONTAINS(LCASE(?testPerplexity), "0.052") OR CONTAINS(LCASE(?testPerplexity), "0.047") OR CONTAINS(LCASE(?testPerplexity), "0.045"))
+}
+```

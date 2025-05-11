@@ -1,0 +1,27 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Freeway dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowlegde.org/ontology#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+     PREFIX wso: <http://www.w3.org/2003/01/wn/>
+     SELECT?metric?value
+     WHERE {
+    ?question "Atari 2600 Freeway" ^skos:prefLabel?q.
+    ?q rdfs:label?metric.
+    ?q dbp:dataset?dataset.
+    ?dataset owl:sameAs <http://dbpedia.org/resource/Atari_2600_Freeway>.
+    ?dataset dbp:benchmarkResult?result.
+    ?result owl:sameAs <http://dbpedia.org/resource/Atari_2600_Freeway#Benchmark>.
+    ?result wso:Sense1?sense.
+    ?sense rdfs:label?value.
+     FILTER(LCASE(?metric) = "highest benchmark result")
+     }
+     GROUP BY?metric
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

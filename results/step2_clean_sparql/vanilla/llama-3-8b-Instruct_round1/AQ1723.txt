@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?score
+WHERE {
+    ?benchmark orkg:dataset "Atari 2600 Tennis";
+               orkg:metric "Score";
+               orkg:hasResult ?score.
+    ?model a orkg:Model;
+           orkg:benchmarks ?benchmark.
+    FILTER (?score > 0).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

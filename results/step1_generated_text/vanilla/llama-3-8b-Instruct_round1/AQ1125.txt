@@ -1,0 +1,21 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Kinetics-600 dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://purl.org/orkg/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?score
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    rdfs:label?benchmarkLabel.
+ ?benchmarkLabel rdfs:label?benchmarkName.
+  FILTER (?benchmarkName = "Kinetics-600").
+ ?benchmark orkg:hasResult?result.
+ ?result orkg:hasMetric?metric.
+ ?result orkg:hasScore?score.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel = "highest" &&?score = xsd:float(max(?score2)).
+}<|eot_id|>

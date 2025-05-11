@@ -1,0 +1,23 @@
+Question:
+What is the highest benchmark result achieved on the NYT29 dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikibase.org/schema/ontology/>
+     SELECT?metric?value 
+     WHERE {
+    ?s orkg:isBenchmark?b.
+    ?b schema:description "New York Times 29".
+    ?b wikibase:label?bLabel.
+    ?b orkg:dataset "NYT29".
+    ?b orkg:metric?metric.
+    ?b wikibase:directlyRelated?bValue.
+    ?bValue schema:value?value.
+     FILTER (STRONGER THAN (STRONGER THAN (?bValue?bValue)?metric?value))
+     }
+     GROUP BY?metric?value
+     ORDER BY DESC
+    <|eot_id|>

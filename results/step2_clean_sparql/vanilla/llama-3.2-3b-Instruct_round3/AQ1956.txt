@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/schema/orkg#>
+PREFIX wdt: <http://www.wikidata.org/ontology/#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?paper ?citation
+WHERE {
+  ?paper schema:about <http://example.org/paper>.
+  FILTER(CONTAINS(LCASE(?paper), "catts-xsum"))
+  ?paper orkg:has_reference ?citation.
+  ?citation schema:has_citation ?citationText.
+  ?citationText schema:has_text ?text.
+  FILTER(CONTAINS(LCASE(?text), "benchmarking"))
+}
+```

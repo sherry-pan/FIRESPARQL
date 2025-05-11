@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset ;
+           rdfs:label ?dataset_label.
+  FILTER regex(?dataset_label, "Amazon-2", "i").
+  ?result a orkg:Result ;
+          orkg:dataset ?dataset ;
+          orkg:metric ?metric ;
+          orkg:value ?value ;
+          orkg:isBestResult true.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

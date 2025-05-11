@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label "Habitat 2020 Object Nav test-std".
+ ?dataset orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:usesMetric ?metric.
+ FILTER (str(?metric) != "undefined")
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX vocab: <http://purl.org/vocab/>
+
+SELECT ?metric
+WHERE {
+    ?metric rdfs:label ?metricLabel.
+    FILTER (CONTAINS(LCASE(?metricLabel), "evaluation metric")).
+}
+ORDER BY DESC(LEN(?metricLabel))
+LIMIT 5
+```

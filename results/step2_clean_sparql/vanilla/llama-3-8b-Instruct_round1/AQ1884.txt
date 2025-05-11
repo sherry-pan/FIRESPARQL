@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset ?datasetLabel
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset orkg:hasTopic orkg:Topic_Text_Summarization.
+  ?dataset orkg:isUsedFor orkg:Text_Summarization.
+  FILTER (?datasetLabel != "ORKG")
+}
+GROUP BY ?dataset ?datasetLabel
+ORDER BY DESC(COUNT(?dataset))
+```

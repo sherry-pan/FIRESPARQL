@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?experiment a orkg:Experiment ;
+              orkg:dataset <http://orkg.org/dataset/MLDoc_ZeroShot_English_to_Spanish> ;
+              orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric ;
+             orkg:hasValue ?value.
+  FILTER(?metric = "top" && ?value != "null")
+}
+```

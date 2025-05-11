@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+SELECT ?paper ?code
+WHERE {
+  ?paper schema:description ?description.
+  FILTER(contains(STR(?description), "BiT-M"))
+  ?paper dbo:benchmark ?benchmark.
+  ?benchmark schema:code ?code.
+}
+```

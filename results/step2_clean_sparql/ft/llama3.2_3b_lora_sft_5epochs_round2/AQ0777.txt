@@ -1,0 +1,11 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43178 ?eval.
+  ?eval orkgp:HAS_METRIC ?metric.
+  BIND(xsd:float(?metric) AS ?value).
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "Stanford Cars"))
+}
+```

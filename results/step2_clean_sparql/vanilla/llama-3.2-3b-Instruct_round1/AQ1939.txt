@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/schema/0.1/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper schema:description ?description.
+  FILTER(regex(?description, "Concept Mention Extraction model", "i"))
+  ?paper orkg:hasPaper ?codeReference
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?codeLink
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:usesModel orkg:DynamicCoattentionNetwork.
+    ?paper bibo:isPartOf ?benchmark.
+    ?codeLink a orkg:CodeLink.
+    ?codeLink orkg:belongsTo ?paper.
+    FILTER (?benchmark != orkg:None)
+}
+```

@@ -1,0 +1,17 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper ;
+         orkg:hasDataset?dataset.
+ ?dataset a orkg:Dataset ;
+          orkg:hasName "QNLI".
+ ?paper orkg:hasEvaluationMetric?metric.
+  FILTER(?metric!= "gold_standard")
+}<|eot_id|>

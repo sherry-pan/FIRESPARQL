@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark score and its metric on the CINIC-10 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?score?metric
+     WHERE {
+    ?paper a orkg:Paper ;
+     orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasScore?score ;
+     orkg:hasMetric?metric.
+    ?paper orkg:hasDataset?dataset.
+    ?dataset orkg:datasetName "CINIC-10".
+     FILTER(?metric = "Top Benchmark Score" ||?metric = "Top Score") }<|eot_id|>

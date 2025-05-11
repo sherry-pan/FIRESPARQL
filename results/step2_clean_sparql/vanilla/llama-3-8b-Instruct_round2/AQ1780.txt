@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <https://www.orkg.org/ontology/>
+SELECT ?model ?name ?top1_error_rate
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn <https://www.orkg.org/entity/Oxford-IIIT_Pets_Dataset>.
+  ?model orkg:metricValue ?top1_error_rate.
+  ?model orkg:hasMetric <https://www.orkg.org/ontology/Top-1_Error_Rate>.
+  ?model orkg:hasName ?name.
+}
+ORDER BY ?top1_error_rate
+LIMIT 1
+```

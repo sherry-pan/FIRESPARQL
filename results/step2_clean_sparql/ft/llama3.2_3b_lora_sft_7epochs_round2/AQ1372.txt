@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkg:R153800 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:P36 ?metric.
+    BIND(xsd:float(?metric) AS ?value)
+    FILTER(REGEX(?dataset_lbl, "DocRED \\(Human-annotated\\)"))
+    ?metric rdfs:label ?metric_lbl
+}
+```

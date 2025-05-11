@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX purl: <http://www.openresearchknowledgegraph.org/ontology/purl/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX bio: <http://schema.org/Benchmark>
+
+SELECT ?score ?metric
+WHERE {
+    ?benchmark a bio:Benchmark.
+    ?benchmark schema:description "Hutter Prize".
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasScore ?score.
+    ?metric schema:description "Top Benchmark Score".
+    ?score rdfs:label ?scoreLabel.
+    FILTER (STRLANG(?scoreLabel, "en"))
+}
+```

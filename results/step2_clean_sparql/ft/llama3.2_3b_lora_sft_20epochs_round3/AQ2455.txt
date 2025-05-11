@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         orkgp:P31 [ rdfs:label ?title ];
+         orkgp:P5009 [ orkgp:P7042 ?model ];
+         orkgp:P5042 [ orkgp:P7043 ?code ].
+  ?model rdfs:label ?model_labels.
+  FILTER(REGEX(STR(?model_labels), "XLNet \\(base\\)"))
+  ?paper orkgp:P5029 ?implementation.
+  ?implementation orkgp:P7038 ?code.
+  FILTER(REGEX(STR(?code), "https?://"))
+}
+```

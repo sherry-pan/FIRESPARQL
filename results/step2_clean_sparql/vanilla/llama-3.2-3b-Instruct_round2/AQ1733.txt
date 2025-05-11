@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?model ?score
+WHERE {
+  ?model rdfs:label ?label.
+  FILTER CONTAINS(LCASE(?label), "atari 2600 q*bert").
+  ?model dbp:dataset "Atari 2600 Q*Bert".
+  ?model schema:numeric ?score.
+}
+ORDER BY DESC(?score)
+```

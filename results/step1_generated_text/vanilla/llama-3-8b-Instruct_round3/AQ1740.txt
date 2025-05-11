@@ -1,0 +1,16 @@
+Question:
+Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://orkg.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?score
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:benchmarks?benchmarks.
+      ?benchmarks rdfs:label "Sequential MNIST".
+      ?benchmarks orkg:metric?metric.
+      ?metric rdfs:label "Permuted Accuracy".
+      ?benchmarks orkg:result?score.
+       FILTER (?score = MAX(?score))
+     }<|eot_id|>

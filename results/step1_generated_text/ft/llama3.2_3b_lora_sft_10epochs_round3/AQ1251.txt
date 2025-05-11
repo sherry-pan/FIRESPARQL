@@ -1,0 +1,33 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset MLDoc Zero-Shot English-to-Spanish?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R110951 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label "MLDoc Zero-Shot English-to-Spanish"^^xsd:string.
+          ?dataset orkgp:P31?paper.
+          ?paper orkgp:P32?eval.
+          ?eval orkgp:HAS_DATASET?dataset;
+                 orkgp:P31?paper.
+          ?eval orkgp:HAS_METRIC?metric.
+           BIND(xsd:float(?metric) AS?value).
+           IF(?metric = "accuracy"^^xsd:string
+               THEN?metric_lbl = "Accuracy"
+               ELSE IF(?metric = "F1"^^xsd:string THEN?metric_lbl = "F1"^^xsd:string
+                      ELSE IF(?metric = "ROUGE-N"^^xsd:string THEN?metric_lbl = "ROUGE-N"^^xsd:string
+                            ELSE IF(?metric = "ROUGE"^^xsd:string THEN?metric_lbl = "ROUGE"^^xsd:string
+                                  ELSE?metric_lbl =?metric^^xsd:string)
+               END
+           }
+         } UNION {
+           orkgr:R110951 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label "MLDoc Zero-Shot English-to-Spanish"^^xsd:string.
+          ?dataset orkgp:P31?paper.
+          ?paper orkgp:P32?eval.
+          ?eval orkgp:HAS_DATASET?dataset;
+                 orkgp:P31?paper.
+          ?eval orkg

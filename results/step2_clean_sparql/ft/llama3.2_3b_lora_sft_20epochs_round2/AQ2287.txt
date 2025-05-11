@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?rf.
+  ?rf orkgp:P4006 ?model.
+  ?model rdfs:label ?model_lbl.
+  ?model orkgp:P4007 ?benchmarking_parameters.
+  ?benchmarking_parameters rdfs:label ?benchmarking_parameters_lbl.
+  ?benchmarking_parameters orkgp:P4008 ?evaluator.
+  ?evaluator rdfs:label ?evaluator_lbl.
+  ?evaluator orkgp:P4009 ?code.
+  FILTER(
+    REGEX(STR(?model_lbl), "Pointer + Coverage + EntailmentGen + QuestionGen") &&
+    REGEX(STR(?benchmarking_parameters_lbl), "benchmarking") &&
+    REGEX(STR(?evaluator_lbl), "code")
+  )
+}
+```

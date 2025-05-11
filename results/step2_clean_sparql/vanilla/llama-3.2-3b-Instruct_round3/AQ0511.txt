@@ -1,0 +1,12 @@
+```sparql
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper rdf:type owl:Ontology.
+  ?paper rdfs:label ?title.
+  ?paper stsb:hasBenchmark ?benchmark.
+  ?benchmark stsb:hasDataset "STS Benchmark".
+  ?benchmark stsb:hasPaper ?paper.
+  ?paper stsb:hasID ?id.
+  FILTER(LANG(?title) = "" || LANGMATCHES(LANG(?title), "en"))
+}
+```

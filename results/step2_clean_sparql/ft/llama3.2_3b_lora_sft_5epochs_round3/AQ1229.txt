@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43134 ?dataset.
+  ?dataset rdfs:label "Cart Pole (OpenAI Gym)".
+  ?contrib orkgp:P43133 ?eval.
+  ?eval orkgp:P43135 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:P43132 ?value.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

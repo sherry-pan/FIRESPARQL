@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the WNLI dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX ork: <http://ork.org/ontology/>
+     PREFIX wnl: <http://www semantic-mapping.org/wnli/>
+     SELECT?metric?value
+     WHERE {
+    ?benchmark a ork:benchmark.
+    ?benchmark wnl:hasBenchmark?benchmark.
+    ?benchmark wnl:hasMetric?metric.
+    ?benchmark ork:hasResult?result.
+    ?result ork:hasValue?value.
+    ?result ork:hasMetric?metric.
+    ?benchmark wnl:hasDataset 'wnli'.
+    ?benchmark ork:hasBenchmark?benchmark.
+     FILTER (REGEX(?value, "^[0-9]+(\.[0-9]+)?$"))
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

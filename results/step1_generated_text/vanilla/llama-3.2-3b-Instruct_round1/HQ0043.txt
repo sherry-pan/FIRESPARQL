@@ -1,0 +1,21 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ PREFIX wot : <http://www.wot.org/ontologies/wot#>
+     PREFIX rdfs : <http://www.wot.org/ontologies/wot#>
+     PREFIX rdf : <http://www.wot.org/ontologies/wot#>
+     PREFIX xsd : <http://www.wot.org/ontologies/wot#>
+     PREFIX skos : <http://www.wot.org/ontologies/wot#>
+     PREFIX orkg : <http://example.org/orkg/>
+     SELECT?variable
+     WHERE {
+    ?variable orkg:hasModel?model.
+    ?model skos:broader?broadening.
+    ?broadening skos:broader?top.
+    ?top skos:broader?broadening.
+    ?broadening skos:broader?variable.
+     FILTER (COUNT(?variable) >= 3)
+     }
+     ORDER BY (COUNT(?variable) DESC)
+     LIMIT 3<|eot_id|>

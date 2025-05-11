@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasScore ?score.
+  ?benchmark orkg:hasMetric ?metric.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasName "Atari 2600 Alien".
+  ?benchmark orkg:hasDataset ?dataset.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

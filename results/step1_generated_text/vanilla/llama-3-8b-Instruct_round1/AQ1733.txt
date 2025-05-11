@@ -1,0 +1,26 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 Q*Bert benchmark dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://semantic-web-journal.org/orkg#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT?model?score
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper dc:title?title.
+   ?paper orkg:hasBenchmark?benchmark.
+   ?benchmark rdfs:label "Atari 2600 Q*Bert".
+   ?paper orkg:hasResult?result.
+   ?result orkg:hasScore?score.
+   ?result orkg:hasModel?model.
+   ?model rdfs:label?modelName.
+    FILTER (xsd:string(?modelName) = "some_model_name")
+    ORDER BY DESC(?score)
+    LIMIT 1
+}<|eot_id|>

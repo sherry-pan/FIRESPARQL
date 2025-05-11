@@ -1,0 +1,15 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "Tsetlin Machine"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+  ?code orkgp:P32 ?dataset.
+  ?dataset orkgp:P33 ?service.
+  ?service rdfs:label ?service_lbl.
+  FILTER(REGEX(?service_lbl, "benchmark"))
+}
+```

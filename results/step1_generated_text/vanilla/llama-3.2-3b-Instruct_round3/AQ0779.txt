@@ -1,0 +1,19 @@
+Question:
+What are the metrics of evaluation over the Fashion-MNIST dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?metric?value 
+     WHERE {
+    ?metric schema:description "Evaluation metrics".
+    ?metric schema:type schema:QuantitativeValue.
+    ?metric schema:hasUnit schema:UnitOfMeasurement.
+    ?metric schema:hasRange schema:Range.
+     FILTER (REGEX(?metric, ".*evaluation.*mnist.*metric", "i"))
+     }
+     ORDER BY (DESC(?metric))<|eot_id|>

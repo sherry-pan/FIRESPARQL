@@ -1,0 +1,22 @@
+Question:
+Can you provide links to code used in papers that benchmark the Multi-Perspective Matching (single model) model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX bibo: <http://purl.org/ontology/bibo/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     SELECT?paper?code?url
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper dcterms:hasPart?component.
+      ?component a orkg:Code.
+      ?component dcterms:isPartOf?paper.
+      ?paper dcterms:title?title.
+       FILTER (?title =~ "Multi-Perspective Matching".
+              ?paper orkg:hasMethod "single model".
+              ?component dcterms:type "benchmark".
+       ).
+      ?component bibo:uri?url.
+     }<|eot_id|>

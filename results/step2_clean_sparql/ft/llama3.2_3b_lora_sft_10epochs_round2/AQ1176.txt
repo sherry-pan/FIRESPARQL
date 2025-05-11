@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R78492 orkgp:compareContribution ?c.
+  ?c orkgp:P34 ?eval.
+  ?eval orkgp:P4354 ?value.
+  orkgp:P4314 orkgp:P4316 ?c;
+                orkgp:P4316 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "WNLI"))
+  ?metric rdfs:label ?metric_lbl.
+}
+```

@@ -1,0 +1,16 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Penn Treebank (Word Level) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paperTitle?paperId
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper orkg:hasBenchmark?benchmark.
+      ?benchmark rdfs:label?benchmarkLabel.
+       FILTER (STRSTARTS(?benchmarkLabel, "Penn Treebank (Word Level)"))
+      ?paper orkg:hasTitle?paperTitle.
+      ?paper orkg:hasId?paperId.
+     }<|eot_id|>

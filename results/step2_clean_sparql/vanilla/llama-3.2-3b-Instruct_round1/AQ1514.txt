@@ -1,0 +1,19 @@
+```sparql
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?model ?metric ?metricValue
+WHERE {
+  ?model ork:isBenchmarkFor ?benchmark.
+  ?benchmark dbr:ANLI.
+  ?benchmark ork:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  ?metric ork:hasValue ?metricValue.
+  ?metric skos:definition "A3".
+  FILTER (?metricValue > 0)
+}
+ORDER BY DESC(?metricValue)
+```

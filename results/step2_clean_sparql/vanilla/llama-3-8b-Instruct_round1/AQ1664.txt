@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?value
+WHERE {
+  ?model a orkg:Model.
+  ?model rdfs:label ?modelLabel.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:dataset ?dataset.
+  ?benchmark orkg:metricValue ?value.
+  ?dataset rdfs:label "CIFAR-10 Image Classification".
+  ?metric rdfs:label "Percentage error".
+}
+ORDER BY ASC(?value)
+LIMIT 1
+```

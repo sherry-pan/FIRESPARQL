@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:usesModel <http://www.orkg.org/resource/Model/Rainbow+SEER>.
+  ?paper bibo:hasCode ?codeLink.
+  ?codeLink a schema:Code.
+  SERVICE <http://www.orkg.org/sparql> {
+    ?paper schema:name ?paperTitle.
+  }
+}
+```

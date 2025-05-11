@@ -1,0 +1,10 @@
+```sparql
+SELECT ?sector_labels (COUNT(?energy_sector) AS ?count)
+WHERE {
+  ?paper orkgp:P27 ?energy_sector.
+  ?energy_sector rdfs:label ?sector_labels.
+}
+GROUP BY ?sector_labels
+HAVING (COUNT(?energy_sector) > 1)
+ORDER BY DESC(COUNT(?energy_sector))
+```

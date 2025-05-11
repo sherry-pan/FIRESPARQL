@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+    rdfs:label ?dataset_label ;
+    orkg:hasBenchmark ?benchmark.
+ ?benchmark a orkg:Benchmark ;
+    rdfs:label ?benchmark_label ;
+    orkg:hasEvaluationMetric ?metric.
+ FILTER (?dataset_label = "Gibson PointGoal Navigation" && ?benchmark_label = "Gibson PointGoal Navigation benchmark")
+}
+```

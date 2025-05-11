@@ -1,0 +1,26 @@
+Question:
+Can you list the models that have been evaluated on the PROTEINS dataset?
+
+Generated SPARQL:
+ PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX wkm: <http://www.w3.org/2016/6/wkm#>
+     PREFIX wkmr: <http://www.w3.org/2016/6/wkmr#>
+     PREFIX wkmv: <http://www.w3.org/2016/6/wkmv#>
+     PREFIX bio4r: <http://bio4r.org/ontology/>
+     PREFIX bio4rmodel: <http://bio4r.org/model/>
+     PREFIX bio4rdataset: <http://bio4r.org/dataset/>
+     PREFIX bio4rmodelEvaluation: <http://bio4r.org/modelEvaluation/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?modelLabel
+     WHERE {
+    ?model bio4r:hasModel?evaluation.
+    ?evaluation bio4rmodel:hasDataset?dataset.
+    ?dataset bio4rdataset:hasDataset?datasetLabel.
+    ?dataset dbpedia:datasetName "PROTEINS".
+    ?model rdfs:label?modelLabel.
+     FILTER (lang(?modelLabel) = "en")
+     }<|eot_id|>

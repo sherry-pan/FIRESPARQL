@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://orkg.org/ontology/>
+SELECT ?metric ?score 
+WHERE {
+    ?dataset a ork:Dataset.
+    ?dataset ork:name "Sequential MNIST".
+    ?benchmark a ork:Benchmark.
+    ?benchmark ork:dataset ?dataset.
+    ?benchmark ork:hasResult ?benchmark_result.
+    ?benchmark_result ork:metric ?metric.
+    ?benchmark_result ork:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+SELECT ?name ?metric ?value
+WHERE {
+    orkgr:R8342 orkgp:compareContribution ?cont.
+    ?cont orkgp:P31 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    BIND(?dataset_lbl s:translateStringAs ?dataset_lbl)
+    ?cont orkgp:P31 ?eval.
+    ?eval orkgp:P32 ?metric.
+    ?metric rdfs:label ?name.
+    BIND(xsd:int(?eval) as ?value)
+}
+ORDER BY DESC(?value)
+LIMIT 10
+```

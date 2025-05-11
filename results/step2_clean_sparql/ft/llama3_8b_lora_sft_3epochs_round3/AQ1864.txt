@@ -1,0 +1,15 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.  
+  FILTER (str(?problem_lbl) = "Common Sense Reasoning")
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:P31 ?paper.
+}
+ORDER BY ?dataset_lbl
+LIMIT 100
+```

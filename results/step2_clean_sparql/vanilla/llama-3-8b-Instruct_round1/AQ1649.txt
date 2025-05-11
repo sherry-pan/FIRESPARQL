@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?successScore
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:achievedOn ?benchmark.
+  ?benchmark dcterms:title "Habitat 2020 Object Nav test-std".
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasValue ?successScore.
+  ?result orkg:hasMetric ?metric.
+  ?metric a orkg:Metric.
+  ?metric orkg:name "SUCCESS".
+}
+ORDER BY DESC(?successScore)
+LIMIT 1
+```

@@ -1,0 +1,21 @@
+Question:
+What is the highest benchmark result achieved on the BC5CDR-chemical dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?dataset a orkg:Dataset ;
+          rdfs:label?datasetLabel.
+ ?dataset orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasResult?result.
+ ?result orkg:hasMetric?metric ;
+         orkg:hasValue?value.
+ ?dataset orkg:hasName "BC5CDR-chemical".
+  FILTER (?metric!= owl:undefined).
+  FILTER (?value = max(?value) ).
+}<|eot_id|>

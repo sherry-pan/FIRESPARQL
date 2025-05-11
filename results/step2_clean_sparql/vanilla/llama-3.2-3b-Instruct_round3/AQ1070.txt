@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX fsns: <http://fsns.org/vocab#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a fsns:Benchmark.
+  ?benchmark schema:description "FSNS - Test".
+  ?benchmark fsns:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult schema:hasValue ?value.
+  ?benchmarkResult fsns:hasMetric ?metric.
+}
+ORDER BY DESC(?value)
+```

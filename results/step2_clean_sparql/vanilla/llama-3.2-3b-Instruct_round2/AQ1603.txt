@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX v: <http://www.openresearchknowledgegraph.org/vocab#>
+
+SELECT ?model ?flops
+WHERE {
+  ?model orkg:has_contribution ?c.
+  ?c v:has_metric ?metric.
+  ?metric rdfs:label "FLOPS"@en.
+  ?metric v:has_value ?flops.
+  ?model orkg:has_dataset ?dataset.
+  ?dataset dbp:datasetName "CIFAR-100"@en.
+}
+ORDER BY DESC(?flops)
+LIMIT 1
+```

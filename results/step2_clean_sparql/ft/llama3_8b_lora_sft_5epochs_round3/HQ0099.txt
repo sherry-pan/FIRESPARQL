@@ -1,0 +1,17 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "response time")
+  ?record orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_METRIC ?metric;
+           orkgp:HAS_DATA ?data.
+  ?data orkgp:HAS_VALUE ?value.
+  ?cont orkgp:HAS_RECORD ?record;
+         orkgp:HAS_MATERIAL ?material.
+  ?material rdfs:label ?material_lbl.
+}
+ORDER BY ASC(?value)
+LIMIT 1
+```

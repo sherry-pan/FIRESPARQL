@@ -1,0 +1,19 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SciGEN dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?metric 
+     WHERE {
+     ?metric rdfs:label?label.
+      Filter (str.contains(translate(?label, 'Evaluation ','') && str.contains('metrics',?label) && str.contains('dataset',?label))
+      }
+      ORDER BY (length(str.lower(?label)))
+      LIMIT 1
+   <|eot_id|>

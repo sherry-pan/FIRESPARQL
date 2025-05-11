@@ -1,0 +1,14 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?value
+WHERE {
+  ?model schema:description "200k Short Texts for Humor Detection".
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:metric "F1-score".
+  ?benchmark orkg:bestOf ?best.
+  ?best orkg:benchmark ?benchmark.
+  ?benchmark schema:value ?value.
+}
+```

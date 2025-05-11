@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper rdfs:label ?title.
+ ?paper orkg:hasCode ?code.
+ ?paper orkg:hasModel ?model.
+ ?model rdfs:label "All-attention network - 18 layers".
+ ?model schema:usedForBenchmarking true.
+ FILTER (lang(?title) = "en")
+}
+```

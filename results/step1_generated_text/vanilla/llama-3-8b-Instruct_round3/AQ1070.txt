@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the FSNS - Test dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX fsns: <http://openresearchknowledge.org/ontology/fsns/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?metric?value
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+        orkg:hasResult?result.
+   ?result a orkg:BenchmarkResult ;
+        orkg:hasMetric?metric ;
+        orkg:hasValue?value.
+   ?benchmark orkg:hasDataset fsns:Test ;
+        orkg:hasResult?result.
+    FILTER (?metric!= "fsns:unknown" &&?value!= "fsns:unknown")
+}<|eot_id|>

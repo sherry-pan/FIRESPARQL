@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?score ?metric
+WHERE {
+    ?dataset rdfs:label "Atari 2600 Alien".
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasScore ?score;
+              orkg:hasMetric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

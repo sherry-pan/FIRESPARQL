@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R114361 orkgp:compareContributionTo ?contrib.
+  ?contrib orkgp:P4319 ?metric.
+  ?metric rdfs:label ?metric_lbl;
+          orkgp:P4318 ?value.
+  FILTER(REGEX(?metric_lbl, "Centipede"))
+  ?contrib orkgp:P4317 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(?dataset_lbl = "Atari 2600 Centipede")
+}
+```

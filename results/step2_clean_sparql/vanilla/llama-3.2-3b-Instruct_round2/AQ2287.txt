@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?reference 
+WHERE {
+    ?paper a orkg:Papers;
+           rdfs:label ?paperTitle;
+           orkg:hasReference ?reference.
+    ?reference schema:description ?description.
+    FILTER (CONTAINS(STR(?description), "Pointer + Coverage + EntailmentGen + QuestionGen") 
+            && CONTAINS(STR(?description), "benchmarking"))
+}
+GROUP BY ?paper ?paperTitle
+HAVING (COUNT(?reference) > 1)
+ORDER BY DESC(COUNT(?reference))
+```

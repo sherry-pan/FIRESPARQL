@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset rdfs:label "REDDIT-B".
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasValue ?value.
+    FILTER (STRLIKE(STR(?metric), "benchmark result") OR STRLIKE(STR(?metric), "metric value"))
+}
+```

@@ -1,0 +1,19 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the DRI Corpus dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX drio: <http://purl.org/orkg/datasets/DRI_Corpus>
+PREFIX orkg: <http://purl.org/orkg/>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper ;
+         orkg:hasEvaluationMetric?metric.
+ ?metric a schema:EvaluationMetric ;
+         rdfs:label?metricLabel.
+  FILTER (CONTAINS(LCASE(?metricLabel), "benchmarking") &&
+          CONTAINS(LCASE(?metricLabel), "DRI Corpus"))
+}<|eot_id|>

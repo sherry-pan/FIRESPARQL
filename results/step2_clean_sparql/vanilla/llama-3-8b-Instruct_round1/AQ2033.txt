@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:ResearchPaper;
+         schema:about ?topic;
+         schema:uses ?model;
+         schema:benchmarks ?benchmark.
+  ?topic owl:sameAs schema:UnsupervisedNMT.
+  ?model owl:sameAs schema:WeightSharingModel.
+  ?code_link a schema:CodeLink;
+             schema:references ?paper.
+}
+```

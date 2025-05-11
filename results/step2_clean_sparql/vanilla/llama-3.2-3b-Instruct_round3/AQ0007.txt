@@ -1,0 +1,16 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model pq:P5168 wd:Q1061063.
+  ?model wdt:P31 ?class.
+  ?model rdfs:label ?modelLabel.
+  FILTER (lang(?modelLabel) = 'en')
+}
+ORDER BY (len(?modelLabel))
+LIMIT 10
+```

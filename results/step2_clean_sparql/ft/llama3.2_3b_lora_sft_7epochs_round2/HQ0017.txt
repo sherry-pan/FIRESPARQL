@@ -1,0 +1,21 @@
+```sparql
+SELECT ?location WHERE {
+  {
+    SELECT ?location (COUNT(?location) AS ?count) WHERE {
+      ?paper a orkgc:Paper.
+      ?paper orkgp:P27 ?location.
+    }
+    GROUP BY ?location
+  }
+  {
+    SELECT MAX(?count) AS ?maxCount WHERE {
+      SELECT ?location (COUNT(?location) AS ?count) WHERE {
+        ?paper a orkgc:Paper.
+        ?paper orkgp:P27 ?location.
+      }
+      GROUP BY ?location
+    }
+  }
+  FILTER(?count = ?maxCount)
+}
+```

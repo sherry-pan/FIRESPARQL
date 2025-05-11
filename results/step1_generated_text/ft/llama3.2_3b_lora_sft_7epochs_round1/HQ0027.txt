@@ -1,0 +1,34 @@
+Question:
+For which country of study overall prevalence of epilepsy is the highest?
+
+Generated SPARQL:
+ SELECT?country?country_labels
+     WHERE {
+      ?condition       a            orkgc:Condition;
+                       rdfs:label      ?condition_labels.
+       FILTER (str(?condition_labels) = "epilepsy")
+      ?study          orkgp:HAS_DATASET       ?dataset.
+      ?dataset        orkgp:HAS_DATA         ?data.
+      ?data          orkgp:HAS_VALUE        ?value.
+      ?value         orkgp:P31             ?condition;
+                       orkgp:HAS_STUDY        ?study;
+                       orkgp:HAS_VALUE        ?value.
+      ?study         orkgp:P32             ?study_has_country;
+                       orkgp:P31             ?condition;
+                       orkgp:HAS_COUNTRY      ?country.
+      ?country      rdfs:label              ?country_labels.
+       FILTER (str(?country_labels) = "epilepsy")
+      ?country_has_cont     orkgp:P32           ?study_has_country.
+       ORDER BY DESC(?value)
+      ?value           orkgp:HAS_PREVALENCE   ?preva.
+      ?preva          rdfs:label              ?preva_labels.
+       BIND(xsd:float(?preva_labels) AS?preva)
+       BIND(xsd:float(?value) AS?value)
+       BIND(xsd:string(?country_labels) AS?country_labels)
+       BIND(xsd:string(?country) AS?country)
+       BIND(xsd:string(?preva_labels) AS?preva_labels)
+       BIND(xsd:string(?value) AS?value)
+       BIND(xsd:string(?country_has_cont) AS?country_has_cont)
+       BIND(xsd:string(?study_has_country) AS?study_has_country)
+       BIND(xsd:string(?condition) AS?condition)
+       BIND(xsd:string

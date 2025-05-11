@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CoNLL++?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CoNLL++")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval          orkgp:HAS_VALUE        ?value.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.}
+       IF(?metric         a                orkgp:Metric
+              OR?metric         a                rdfs:Label)
+       THEN
+        ?metric         rdfs:label          ?metric_lbl.
+       ENDIF
+     }<|eot_id|>

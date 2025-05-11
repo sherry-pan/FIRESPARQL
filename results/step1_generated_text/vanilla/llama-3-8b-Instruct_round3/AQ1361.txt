@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?score?metric
+WHERE {
+ ?result a orkg:Result ;
+          orkg:hasBenchmark?benchmark.
+ ?benchmark a orkg:Benchmark ;
+          orkg:hasDataset?dataset.
+ ?dataset a orkg:Dataset ;
+          orkg:name "ModelNet40".
+ ?result orkg:hasScore?score ;
+          orkg:hasMetric?metric.
+  FILTER (?metric = "top" &&?score!= "" )
+}<|eot_id|>

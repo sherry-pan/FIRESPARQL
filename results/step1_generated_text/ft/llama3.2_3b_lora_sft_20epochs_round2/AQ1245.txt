@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the AAPD dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R44981 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P43156?eval.
+      ?eval orkgp:HAS_VALUE?value.
+      ?value orkgp:HAS_METRIC?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "APD"))
+      ?contrib orkgp:P43155?conteval.
+      ?conteval orkgp:HAS_VALUE?value.
+      ?value orkgp:HAS_METRIC?metric.
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

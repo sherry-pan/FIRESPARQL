@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R154801 orkgp:compareContribution ?cont.
+    ?cont orkgp:P1524 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?cont orkgp:P3514 ?value.
+    FILTER(?metric_lbl = "F1")
+}
+ORDER BY DESC(?score)
+```

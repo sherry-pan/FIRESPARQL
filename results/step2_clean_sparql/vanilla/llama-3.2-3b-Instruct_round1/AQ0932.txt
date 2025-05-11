@@ -1,0 +1,29 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label "Evaluation metrics for Atari 2600 Berzerk".
+  ?metric schema:about <http://dbpedia.org/resource/Atari_2600_Berzerk>.
+  ?metric rdfs:comment "Common metrics used for this dataset".
+  FILTER (
+    CONTAINS(LCASE(?metric), "auc") OR
+    CONTAINS(LCASE(?metric), "accuracy") OR
+    CONTAINS(LCASE(?metric), "precision") OR
+    CONTAINS(LCASE(?metric), "recall") OR
+    CONTAINS(LCASE(?metric), "f1-score") OR
+    CONTAINS(LCASE(?metric), "mean squared error") OR
+    CONTAINS(LCASE(?metric), "mean absolute error") OR
+    CONTAINS(LCASE(?metric), "mean absolute percentage error") OR
+    CONTAINS(LCASE(?metric), "mean squared percentage error") OR
+    CONTAINS(LCASE(?metric), "roc-auc score") OR
+    CONTAINS(LCASE(?metric), "roc-f1 score") OR
+    CONTAINS(LCASE(?metric), "roc-precision") OR
+    CONTAINS(LCASE(?metric), "roc-recall")
+  )
+}
+```

@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark score and its metric on the Stanford Dogs dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c-wsdl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     SELECT?score?metric
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper schema:description?description.
+     FILTER (CONTAINS(Lower(?description), 'Stanford Dogs'))
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:name?metric.
+    ?benchmark schema:hasScore?score.
+     ORDER BY DESC(?score)
+     LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,17 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Atari 2600 Venture dataset?
+
+Generated SPARQL:
+ ```sparql
+SELECT?paper?title?id
+WHERE {
+ ?paper a vocab:ResearchPaper.
+  vocab:hasBenchmark?benchmark.
+ ?benchmark vocab:hasDataset?dataset.
+ ?dataset vocab:hasDatasetFor?datasetName.
+ ?dataset vocab:hasDatasetFor "Atari 2600 Venture".
+ ?benchmark vocab:hasTitle?benchmarkTitle.
+ ?paper vocab:hasTitle?benchmarkTitle.
+ ?paper vocab:hasId?paperId.
+}
+```<|eot_id|>

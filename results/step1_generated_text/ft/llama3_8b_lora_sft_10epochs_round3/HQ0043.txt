@@ -1,0 +1,55 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ SELECT?variables,?variables_labels
+     WHERE {
+      ?papers orkgp:P31?atmosphere_models.
+      ?atmosphere_models rdfs:label?atmosphere_models_labels. 
+       SELECT?variables,?variables_labels
+       WHERE {
+        ?atmosphere_models have_properies?properties.
+        ?properties rdfs:label?properties_labels. 
+         FILTER(REGEX(?properties_labels, "T"))
+        ?papers orkgp:P32?properties.
+        ?properties rdfs:label?properties_labels. 
+         SELECT?variables,?variables_labels
+         WHERE {
+          ?properties have_properies?values.
+          ?values rdfs:label?values_labels. 
+          ?papers orkgp:P30?variables.
+          ?variables rdfs:label?variables_labels.
+           BIND(xsd:int(?values_labels) AS?int_values_labels)
+           BIND(
+             IF(
+              ?int_values_labels = "0" 
+              , "T" 
+              , IF(
+                ?int_values_labels = "1" 
+                , "P" 
+                , IF(
+                  ?int_values_labels = "2" 
+                  , "H" 
+                  , "U"
+                 )
+               )
+             ) 
+             AS?sorted_values_labels
+           )
+           BIND(
+             CONCAT(
+               "[", 
+              ?sorted_values_labels, 
+               "]"
+               ) 
+               AS?variables_labels
+             )
+           }
+         ORDER BY DESC(MAX(xsd:int(?int_values_labels)))
+         RETURN?variables_labels
+         LIMIT 3
+       }
+     }
+     ORDER BY DESC(MAX(xsd:int(?int_values_labels)))
+     RETURN?variables_labels
+     LIMIT 3<|eot_id|>

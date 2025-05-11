@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX wkm: <http://www.wikidata.org/prop-datetime/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score 
+WHERE {
+  ?model wkm:hasBenchmark dbp:Atari_2600_Yars_Revenge.
+  ?model dbp:score ?score.
+  FILTER (xsd:integer(?score) > 0)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

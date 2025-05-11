@@ -1,0 +1,12 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:has_benchmark ?benchmark.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER(REGEX(STR(?benchmarkLabel), "Tsetlin Machine")
+         && REGEX(STR(?benchmarkLabel), "benchmark"))
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?code.
+  ?code rdfs:label ?codeLabel.
+}
+```

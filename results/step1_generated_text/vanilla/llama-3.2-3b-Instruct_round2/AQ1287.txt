@@ -1,0 +1,26 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset Atari 2600 Enduro?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c/widewebd#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+
+     SELECT?metric?value 
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark schema:description "Atari 2600 Enduro".
+    ?benchmark schema:mainEntity?game.
+    ?game orkg:hasTopBenchmarkResult?topBenchmark.
+    ?topBenchmark schema:mainEntity?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?metric rdfs:label?metricLabel.
+    ?topBenchmark schema:value?value.
+     }
+     GROUP BY?metric
+     ORDER BY (DESC?value)
+     LIMIT 1<|eot_id|>

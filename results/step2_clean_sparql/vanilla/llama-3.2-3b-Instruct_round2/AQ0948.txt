@@ -1,0 +1,15 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vocab: <http://www.mindswap.org/ukbb/vocab/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?label.
+  FILTER (REGEX(LOWER(?label), "evaluation metrics") ||
+          REGEX(LOWER(?label), "metrics used") ||
+          REGEX(LOWER(?label), "metrics"))
+  ?metric vocab:relatedTo dbpedia:Atari_2600_Skiing.
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title 
+WHERE {
+    ?paper schema:description ?description;
+           rdfs:label ?title;
+           orkg:has_benchmark ?benchmark.
+    FILTER(CONTAINS(str(?benchmark), "6-layer QRNN"))
+}
+```

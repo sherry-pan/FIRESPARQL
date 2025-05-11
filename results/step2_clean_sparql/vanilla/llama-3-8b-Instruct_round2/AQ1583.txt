@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:name "Yelp-5".
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation schema:hasScore ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

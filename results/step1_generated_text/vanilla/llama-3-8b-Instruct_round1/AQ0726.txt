@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?metricName?metricValue
+WHERE {
+ ?dataset a orkg:Dataset ;
+          orkg:hasDataFile <http://seel.cse.lsu.edu/data/re17.zip>.
+ ?dataset orkg:evaluation?evaluation.
+ ?evaluation orkg:metric?metric.
+ ?metric a orkg:Metric ;
+          rdfs:label?metricName.
+ ?metric orkg:hasValue?metricValue.
+}<|eot_id|>

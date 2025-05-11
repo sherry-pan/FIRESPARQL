@@ -1,0 +1,21 @@
+Question:
+What are the models that have been benchmarked on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/orcg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bio: <http://purl.org/midas/v1/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     SELECT?model
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark?benchmark.
+    ?benchmark schema:description?description.
+    ?description schema:mainEntity?entity.
+    ?entity schema:description?description.
+    ?description schema:mainEntityOfPage <http://www.ncbi.nlm.nih.gov/pubmed/XXXX>.
+    ?benchmark schema:dataset?dataset.
+    ?dataset schema:datasetType "Benchmarking on Automatically labeled Medline abstracts corpus".
+     }<|eot_id|>

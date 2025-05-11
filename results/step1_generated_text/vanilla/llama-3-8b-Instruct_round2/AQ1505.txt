@@ -1,0 +1,24 @@
+Question:
+Indicate the model that performed best in terms of Senseval 2 metric on the Supervised: benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?senseval2Score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasSenseval2Score?senseval2Score.
+ ?senseval2Score a owl:DataProperty.
+ ?senseval2Score rdfs:label?score.
+  FILTER (?score = "Supervised: benchmark"^^xsd:string).
+  FILTER (?senseval2Score >?bestScore).
+ ?bestScore a owl:DataProperty.
+ ?bestScore rdfs:label?bestScoreLabel.
+  FILTER (?bestScoreLabel = "best"^^xsd:string).
+ ?bestScore orkg:hasValue?bestValue.
+  FILTER (?bestValue <?senseval2Score).
+  FILTER (?model orkg:hasType "best"^^xsd:string).
+}<|eot_id|>

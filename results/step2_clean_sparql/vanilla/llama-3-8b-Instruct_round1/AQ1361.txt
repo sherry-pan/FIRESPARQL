@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://semantic-scholar.org/v1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         orkg:dataset <http://semantic-scholar.org/dataset/ModelNet40> ;
+         orkg:metric ?metric ;
+         orkg:score ?score.
+  FILTER(?metric = "benchmark_score")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric?description 
+     WHERE {
+    ?metric rkg:evaluatableFor?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:datasetName "Atari 2600 Defender".
+    ?metric rkg:metricFor?metric.
+    ?metric rkg:description?description.
+     FILTER (contains(str(?metric), "evaluation") && contains(str(?metric), "metric"))
+     }
+     GROUP BY?metric 
+     ORDER BY (count(?metric) DESC)<|eot_id|>

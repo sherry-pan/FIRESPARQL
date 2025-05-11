@@ -1,0 +1,22 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciCite dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX orkg: <http://orkg.org/ontology/>
+    
+    SELECT?paper?title?id
+    WHERE {
+     ?paper a orkg:Paper.
+      rdfs:label?title.
+      orkg:hasBenchmark?benchmark.
+     ?benchmark schema:dataset "SciCite".
+     ?benchmark orkg:hasPaper?paper.
+      BIND(STR(?title) AS?title)
+      BIND(STR(?paper) AS?id)
+    }
+    ```<|eot_id|>

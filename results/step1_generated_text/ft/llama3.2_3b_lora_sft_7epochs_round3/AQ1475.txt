@@ -1,0 +1,33 @@
+Question:
+Which model has achieved the highest Accuracy score on the Story Cloze Test benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Accuracy")
+         {
+           orkgp:Comparison      a                orkgp:Comparison;
+                             rdfs:label          ?comp_lbl.
+           FILTER (str(?comp_lbl) = "Story Cloze Test")
+          ?comparison      orkgp:has_comparison     ?comparison.
+          ?comparison      orkgp:has_value        ?value;
+                     orkgp:has_comparison     ?comparison.
+          ?value           orkgp:has_model         ?model.
+          ?model          rdfs:label                ?model_lbl.
+          ?model          orkgp:has_accuracy        ?accuracy.
+          ?accuracy      rdfs:label                ?accuracy_lbl.
+           FILTER (str(?accuracy_lbl) = "Accuracy")
+           BIND(xsd:float(?accuracy) AS?accuracy_value)
+           BIND(xsd:float(?accuracy_value) AS?accuracy_value_).
+           BIND(xsd:float(?accuracy_value_) AS?accuracy_value)
+          ?model      orkgp:has_model         ?model.
+           BIND(xsd:float(?accuracy_value_) AS?accuracy_value)
+           BIND(xsd:float(?accuracy_value) AS?accuracy_value_).
+           BIND(xsd:float(?accuracy_value_) AS?accuracy_value)
+           BIND(xsd:float(?accuracy_value) AS?accuracy_value_).
+           BIND(xsd:float(?accuracy_value) AS?accuracy_value_).
+           BIND(xsd:float(?accuracy_value) AS?accuracy_value_).
+           BIND(xsd:float(?accuracy_value) AS?accuracy_value_).
+           BIND(xsd:float(?accuracy_value) AS?accuracy

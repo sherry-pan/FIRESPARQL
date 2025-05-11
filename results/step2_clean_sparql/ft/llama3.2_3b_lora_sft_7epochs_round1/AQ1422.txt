@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "IWSLT2014 German-English")
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?metric;
+        orkgp:HAS_VALUE ?value.
+  ?value rdfs:label ?value_lbl.
+  ?model orkgp:HAS_EVALUATION ?eval;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value_lbl)
+LIMIT 1
+```

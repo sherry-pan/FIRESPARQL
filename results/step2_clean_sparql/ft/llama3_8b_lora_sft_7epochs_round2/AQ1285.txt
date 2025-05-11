@@ -1,0 +1,42 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?paper orkgp:P31 ?cont;
+         rdfs:label ?paper_title.
+  ?cont orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "Atari 2600 Freeway"))
+
+  OPTIONAL {
+    ?cont orkgp:HAS_VALUE ?value.
+    ?value rdfs:label ?value_lbl.
+    BIND(
+      IF(?value_lbl = "loss"^^<http://www.w3.org/2001/XMLSchema#float>,
+        "loss"^^<http://www.w3.org/2001/XMLSchema#float>,
+        IF(?value_lbl = "accuracy"^^<http://www.w3.org/2001/XMLSchema#float>,
+          "accuracy"^^<http://www.w3.org/2001/XMLSchema#float>,
+          "other"
+        )
+      ) AS ?metric
+    )
+    BIND(?value AS ?value_value)
+  }
+  BIND(
+    IF(BOUND(?value_value), ?value_value, 0^^<http://www.w3.org/2001/XMLSchema#float>)
+    AS ?final_value
+  )
+  BIND(
+    IF(BOUND(?value_value), "value"^^<http://www.w3.org/2001/XMLSchema#string>,
+      "metric"^^<http://www.w3.org/2001/XMLSchema#string>
+    )
+    AS ?final_metric
+  )
+  {
+    SELECT ?metric ?metric_lbl ?final_value
+    WHERE {
+      ?final_value a orkgp:Value;
+                   rdfs:label ?value_lbl.
+    }
+  }
+}
+```

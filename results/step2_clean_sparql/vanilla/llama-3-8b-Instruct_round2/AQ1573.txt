@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluation ?evaluation.
+  ?evaluation schema:dataset "ShARe/CLEF eHealth corpus benchmark".
+  ?evaluation orkg:metric "F1".
+  ?evaluation orkg:bestValue ?f1.
+  FILTER (?f1 > 0)
+}
+```

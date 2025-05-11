@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metric ?value
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "Supervised: dataset".
+  ?benchmark orkg:metric ?metric.
+  ?metric rdfs:label "SemEval 2013".
+  ?benchmark orkg:result ?result.
+  ?result orkg:metricValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

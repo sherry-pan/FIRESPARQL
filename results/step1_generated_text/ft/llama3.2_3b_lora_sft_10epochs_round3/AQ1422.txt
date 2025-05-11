@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of BLEU score metric on the IWSLT2014 German-English benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "IWSLT2014 German-English")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION    ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.}
+         OPTIONAL {?eval           orkgp:HAS_MODEL         ?model2.
+                 ?model          rdfs:label              ?model_lbl.}
+         BIND(if(?model,?model,?model2) AS?model)
+         ORDER BY DESC(?value)
+         LIMIT 1
+     }<|eot_id|>

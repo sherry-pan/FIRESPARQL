@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:ResearchArtifact ;
+         dc:title ?title ;
+         bibo:isBasedOn ?code.
+  ?code a bibo:Code ;
+        rdfs:label ?codeLabel.
+  FILTER (CONTAINS(LCASE(?title), "bart"))
+}
+```

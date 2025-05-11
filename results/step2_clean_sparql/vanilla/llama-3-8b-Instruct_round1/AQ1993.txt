@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:usesModel orkg:PNDec.
+  ?paper schema:mentionsCode ?codeReference.
+  FILTER (?codeReference != "" && lang(?codeReference) = "en")
+}
+```

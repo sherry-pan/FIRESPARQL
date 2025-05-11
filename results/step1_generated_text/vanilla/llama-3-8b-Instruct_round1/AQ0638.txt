@@ -1,0 +1,14 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the TREC-6 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paperTitle?paperID
+     WHERE {
+      ?paper a orkg:ResearchPaper ;
+             schema:name?paperTitle ;
+             orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:usesDataset?dataset.
+      ?dataset schema:name "TREC-6".
+     }<|eot_id|>

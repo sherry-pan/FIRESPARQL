@@ -1,0 +1,17 @@
+Question:
+Provide a list of benchmarked datasets related to the Scientific Results Extraction research area?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://purl.org/orkg/>
+
+     SELECT?dataset
+     WHERE {
+      ?dataset schema:description "Scientific Results Extraction".
+      ?dataset schema:topic "Scientific Results Extraction".
+      ?dataset orkg:isBenchmarked true.
+      ?dataset schema:relatedDataset?relatedDataset.
+      ?relatedDataset schema:description?d.
+       FILTER (STRFTIME(?d, '%b%Y') = '2019' || STRFTIME(?d, '%b%Y') = '2020' || STRFTIME(?d, '%b%Y') = '2021' )
+     }<|eot_id|>

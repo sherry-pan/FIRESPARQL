@@ -1,0 +1,29 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX dcat: <http://www.w3.org/ns/dcat/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX wdt: <http://dbpedia.org/properties/>
+     PREFIX wikibase: <http://wikibase.org/biodiversity/>
+
+     SELECT?metric?value
+     WHERE {
+      ?metric wdt:P31?class.
+      ?class rdfs:label?metricLabel.
+      ?metric dbr:dataset "ModelNet40".
+      ?metric wdt:P31?model.
+      ?model dcat:benchmark?benchmark.
+      ?benchmark rdfs:label?benchmarkLabel.
+      ?benchmark wdt:P306?benchmarkValue.
+       FILTER (STRLIKE(?benchmarkValue, "top")
+         && STRLIKE(?benchmarkLabel, "benchmark")
+         && STRLIKE(?benchmarkValue, "score")
+         && STRLIKE(?benchmarkLabel, "score"))
+       BIND(SUBSTR(?benchmarkValue, 1, INSTR(?benchmarkValue, " ") - 1) AS?value)
+     }<|eot_id|>

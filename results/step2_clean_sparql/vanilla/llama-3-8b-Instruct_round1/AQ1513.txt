@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarkedOn ?benchmark ;
+         orkg:hasScore ?score ;
+         orkg:hasLabel ?modelLabel.
+  ?benchmark a orkg:Dataset ;
+             rdfs:label "ANLI test dataset".
+  FILTER (?score = (
+    SELECT max(?score2)
+    WHERE {
+      ?model a orkg:Model ;
+             orkg:benchmarkedOn ?benchmark ;
+             orkg:hasScore ?score2.
+      ?benchmark a orkg:Dataset ;
+                 rdfs:label "ANLI test dataset".
+    }
+  ))
+}
+```

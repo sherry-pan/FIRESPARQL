@@ -1,0 +1,25 @@
+Question:
+Which model has achieved the highest SUCCESS score on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT?model?successScore
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:achievedOn?benchmark.
+ ?benchmark dcterms:title "Habitat 2020 Object Nav test-std".
+ ?benchmark orkg:dataset?dataset.
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:hasMetric?metric.
+ ?metric a orkg:Metric.
+ ?metric orkg:hasProperty?property.
+ ?property a orkg:Property.
+ ?property orkg:name "SUCCESS".
+ ?model orkg:hasResult?result.
+ ?result orkg:hasValue?successScore.
+  FILTER (?successScore = MAX(?successScore))
+}<|eot_id|>

@@ -1,0 +1,18 @@
+Question:
+Can you list the models that have been evaluated on the VTAB-1k dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX wot: <http://www.openresearchknowledgegraph.org/ontology/wot/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?modelLabel 
+     WHERE {
+    ?model wot:hasEvaluation wot:Evaluation.
+    ?model wot:hasDataset wot:Dataset.
+    ?model wot:hasDataset schema:datasetType schema:DatasetType "VTAB-1k".
+     FILTER (NOT?model wot:hasDataset schema:datasetType schema:DatasetType "VTAB-1k".)
+     }
+     GROUP BY?model 
+     HAVING (COUNT(?model) > 1) 
+     ORDER BY (COUNT(?model) DESC)<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX wikibase: <http://wikibase.org/bio/ontology/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?metric ?value
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset wikibase:label "WMT2014 German-English".
+  ?metric rdfs:label "BLEU".
+  ?model rdfs:label "best performing".
+}
+```

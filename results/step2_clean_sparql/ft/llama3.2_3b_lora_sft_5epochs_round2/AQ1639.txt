@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_EVALUATOR ?evaluator.
+    ?evaluator rdfs:label ?evaluator_lbl.
+    FILTER (str(?evaluator_lbl) = "Cheetah, run (DMControl500k)")
+    ?benchmark orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+    ?model orkgp:HAS_SCORE ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,23 @@
+Question:
+List the code links in papers that use the Unsupervised NMT + weight-sharing model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?code 
+    WHERE {
+     ?paper schema:about/ schema:CreativeWork.
+      schema:CreativeWork schema:author?author.
+     ?author schema:affiliation?affiliation.
+     ?affiliation schema:isPartOf?journal.
+     ?journal schema:hasPart?paper.
+     ?paper orkg:usesModel "Unsupervised NMT + weight-sharing".
+     ?paper orkg:hasCode?code.
+     ?code schema:code?code.
+      FILTER (CONTAINS(Lower(?code), "code") OR CONTAINS(Lower(?code), "github") OR CONTAINS(Lower(?code), "gitlab"))
+    } 
+    ```<|eot_id|>

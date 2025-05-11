@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX vocab: <http://example.org/orkg/vocab/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a vocab:Paper.
+  ?paper vocab:hasReference ?codeReference.
+  ?paper vocab:hasBenchmark vocab:PNDec.
+  ?codeReference vocab:hasCode ?code.
+  FILTER (lang(?paper) = 'en')
+}
+LIMIT 10
+```

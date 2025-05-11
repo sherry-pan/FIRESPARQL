@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orcid.org/ontology/orkg#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?b orkg:isBenchmarkResultFor ?q.
+    ?q orkg:hasDataset "Ball in cup, catch (DMControl500k)".
+    ?b orkg:hasMetric ?metric.
+    ?b orkg:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

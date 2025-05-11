@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+SELECT ?model ?score
+WHERE {
+  ?model orkg:hasResult ?result.
+  ?result orkg:hasDataset "Habitat 2020 Object Nav test-std benchmark".
+  ?result orkg:hasBenchmark "Object Nav".
+  ?result orkg:hasMetric "SUCCESS".
+  ?result orkg:hasValue ?score.
+  FILTER NOT EXISTS {
+    ?otherResult orkg:hasDataset "Habitat 2020 Object Nav test-std benchmark".
+    ?otherResult orkg:hasBenchmark "Object Nav".
+    ?otherResult orkg:hasMetric "SUCCESS".
+    ?otherResult orkg:hasValue ?otherScore.
+    FILTER(?otherScore > ?score)
+  }
+}
+```

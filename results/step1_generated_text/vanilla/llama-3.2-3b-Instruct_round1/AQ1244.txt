@@ -1,0 +1,17 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the DTD dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset dtd.
+    ?benchmark orkg:hasHighestResult?result.
+    ?result orkg:hasMetric?metric.
+    ?result orkg:hasScore?score.
+     FILTER (regex(str(?metric), "DTD") && regex(str(?score), "[0-9.]+"))
+     }<|eot_id|>

@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the Reacher, easy (DMControl100k) dataset in terms of Score metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                 rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl    = "Score")
+               || str(?metric_lbl    = "Accuracy")
+               || str(?metric_lbl    = "F1")
+               || str(?metric_lbl    = "Mean Squared Error"))
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+       OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.
+                ?model            a                orkgc:Model;
+                                   rdfs:label          ?model_lbl.}
+     }<|eot_id|>

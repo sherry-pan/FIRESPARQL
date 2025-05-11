@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the WMT2014 English-German dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX wmt: <http://wmt.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?metric?value
+WHERE {
+   ?publication a orkg:Publication;
+        orkg:hasResult?result;
+        wmt:dataset wmt:WMT2014_English-German.
+   ?result wmt:metric?metric;
+        wmt:value?value.
+    FILTER (?metric!= "translation edit rate").
+    FILTER (?value = MAX(?value)).
+}<|eot_id|>

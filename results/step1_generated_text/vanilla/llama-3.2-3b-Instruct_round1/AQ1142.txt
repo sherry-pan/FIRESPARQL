@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the CoQA dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://or Kaggle.com/ontology#>
+     PREFIX wdt: <http://www.w3.org/2004/02/sosql#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX p: <http://purl.org/projects/CoQA/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark a dbo:benchmark.
+    ?benchmark dbr:dataset "CoQA".
+    ?benchmark a p:benchmark.
+    ?benchmark rdfs:label?label.
+    ?benchmark wdt:P301?value.
+    ?benchmark rdfs:label?label.
+     FILTER (STRLike(STR(?label), "highest benchmark result") || STRLike(STR(?label), "best result"))
+     }<|eot_id|>

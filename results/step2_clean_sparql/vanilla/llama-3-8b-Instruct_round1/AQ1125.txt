@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://purl.org/orkg/ontology/>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             rdfs:label ?benchmarkName ;
+             orkg:hasResult ?result .
+  FILTER (?benchmarkName = "Kinetics-600").
+  ?result orkg:hasMetric ?metric ;
+          orkg:hasScore ?score .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

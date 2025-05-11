@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+    rdfs:label "Scholarly entity usage detection dataset"@en.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+    rdfs:label ?benchmarkLabel ;
+    orkg:hasMetric ?metric ;
+    orkg:hasScore ?score.
+  FILTER (?benchmarkLabel = "highest" && ?metric != "Time")
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?country ?country_label
+WHERE {
+  orkgr:R155621 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37578 ?epi.
+  ?epi rdfs:label ?epi_label.
+  FILTER(REGEX(?epi_label, "overall prevalence of epilepsy is the highest in "))
+  ?contrib orkgp:P37576 ?country.
+  ?country rdfs:label ?country_label.
+}
+ORDER BY DESC(MAX(xsd:float(?value)))
+LIMIT 1
+```

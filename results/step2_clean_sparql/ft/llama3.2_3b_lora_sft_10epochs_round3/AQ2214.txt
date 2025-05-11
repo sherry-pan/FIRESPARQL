@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+    ?paper orkgp:HAS_DATASET ?dataset.
+    FILTER(REGEX(STR(?dataset), "benchmarking"^^xsd:string))
+    ?paper orkgp:P32 ?cont.
+    ?cont orkgp:HAS_CODE ?code.
+    ?code rdfs:label ?code_labels.
+    FILTER(REGEX(STR(?code_labels), "All-attention network - 18 layers"^^xsd:string))
+}
+```

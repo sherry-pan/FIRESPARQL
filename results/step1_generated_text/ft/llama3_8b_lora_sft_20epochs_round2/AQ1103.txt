@@ -1,0 +1,16 @@
+Question:
+What is the highest benchmark result achieved on the WMT2016 English-Russian dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R153801 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P34?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(REGEX(STR(?benchmark_lbl), "WMT2016 English-Russian")
+      ?contrib orkgp:P3004?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?contrib orkgp:P5008?value.
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,24 @@
+Question:
+Which model has achieved the highest MACs score on the ImageNet benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                    rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "MACS")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ImageNet")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:HAS_METRIC        ?metric.
+         BIND(xsd:float(?value) AS?value)
+         BIND(if(?value = 0 then 0.0000 else if(?value = 1 then 1.0000 else if(?value = 2 then 2.0000 else if(?value = 3 then 3.0000 else if(?value = 4 then 4.0000 else if(?value = 5 then 5.0000 else if(?value = 6 then 6.0000 else if(?value = 7 then 7.0000 else if(?value = 8 then 8.0000 else if(?value = 9 then 9.0000 else 10.0000))))
+                       as?value)
+        ?cont      orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_MODEL        ?model.
+         BIND(xsd:string(?model) AS?model_lbl)
+         ORDER BY DESC(?value)
+         LIMIT 1<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "arXiv")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_SOURCE_PAPER ?paper.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark;
+         rdfs:label ?paper_lbl.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "benchmark")
+}
+```

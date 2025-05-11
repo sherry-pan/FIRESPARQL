@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?score?metric
+     WHERE {
+      ?publication a orkg:Publication.
+      ?publication orkg:hasResult?result.
+      ?result orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasScore?score.
+      ?benchmark orkg:hasMetric?metric.
+      ?dataset a orkg:Dataset ; 
+               orkg:name "MultiNLI".
+      ?benchmark orkg:evaluatedOn?dataset.
+       FILTER(?metric = "top" &&?dataset = "MultiNLI")
+     }<|eot_id|>

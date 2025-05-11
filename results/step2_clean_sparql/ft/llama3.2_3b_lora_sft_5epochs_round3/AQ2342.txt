@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper rdf:type orkgc:Paper.
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P15035 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "DQNMMCe\\+SR"))
+  ?cont orkgp:P15033 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(?code_lbl, "code"))
+}
+```

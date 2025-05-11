@@ -1,0 +1,17 @@
+Question:
+What data format does CHEMDNER corpus have?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX che: <http://chemdata.nncbc.org/che/>
+     SELECT?format 
+     WHERE {
+    ?item a dbo:Corpus.
+    ?item che:dataset "CHEMDNER".
+    ?item schema:description?d.
+    ?d schema:type?f.
+     FILTER (CONTAINS(LOWCASE(?f), "data format") AND NOT EXISTS ({?item rdfs:label?l.?l @EN "data format" }))
+     }<|eot_id|>

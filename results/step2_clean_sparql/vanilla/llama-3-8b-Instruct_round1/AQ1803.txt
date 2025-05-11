@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/owl/>
+
+SELECT ?model ?modelLabel ?top1Accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmarkedDataset ?benchmarkedDataset.
+  ?benchmarkedDataset rdfs:label "VTAB-1k".
+  ?benchmarkedDataset orkg:hasBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult orkg:hasTop1Accuracy ?top1Accuracy.
+  ?model orkg:hasName ?modelLabel.
+}
+ORDER BY DESC(?top1Accuracy)
+LIMIT 1
+```

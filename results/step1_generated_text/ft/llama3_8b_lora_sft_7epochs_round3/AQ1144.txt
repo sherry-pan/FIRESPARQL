@@ -1,0 +1,27 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CommonsenseQA?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+        ?paper orkgp:P31 [
+           orkgp:P32?benchmark
+         ];
+           orkgp:P29 [
+             rdfs:label?paper_title
+           ].
+        ?benchmark orkgp:P2005?dataset.
+        ?cont?orkgp_P31?paper.
+        ?cont?orkgpP32?benchmark.
+        ?cont?orkgpP29?paper_title.
+        ?cont?orkgpP2005?dataset.
+        ?cont orkgpP5006?value;
+               orkgpP5007?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+       FILTER(
+        ?dataset rdfs:label "CommonsenseQA"
+       )
+     }
+     ORDER BY DESC(?score)<|eot_id|>

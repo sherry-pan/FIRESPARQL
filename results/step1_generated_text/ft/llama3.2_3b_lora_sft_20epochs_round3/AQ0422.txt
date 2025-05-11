@@ -1,0 +1,14 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WMT2016 English-Romanian dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "WMT2016 English-Romanian")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+       ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       ?paper         rdfs:label              ?paper_lbl.
+      }<|eot_id|>

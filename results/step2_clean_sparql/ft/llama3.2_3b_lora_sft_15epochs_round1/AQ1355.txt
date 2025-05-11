@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?contrib orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?contrib orkgp:P4314 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P4315 ?value.
+  FILTER(REGEX(?dataset_lbl, "Sequential MNIST"))
+}
+ORDER BY DESC(?score)
+```

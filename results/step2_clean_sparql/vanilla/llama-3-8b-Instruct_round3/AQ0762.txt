@@ -1,0 +1,16 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/02/skos/core#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?metric
+WHERE {
+ ?article a orkg:Article.
+ ?article dct:title ?title.
+ ?article orkg:dataset orkg:WMT2014_French_English.
+ ?article orkg:evaluation_metric ?metric.
+ FILTER (?title = "WMT2014 French-English dataset" && ?metric a orkg:EvaluationMetric)
+}
+```

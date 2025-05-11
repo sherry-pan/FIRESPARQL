@@ -1,0 +1,28 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the TriviaQA dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?metric     a       orkgc:Metric;
+                  rdfs:label ?metric_lbl.
+      FILTER (str(?metric_lbl) = "Accuracy")
+      {
+        SELECT?model?model_lbl
+        WHERE {
+         ?dataset       a                orkgc:Dataset;
+                          rdfs:label      ?dataset_lbl.
+          FILTER (str(?dataset_lbl) = "TriviaQA")
+         ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_EVALUATION   ?eval.
+         ?eval           orkgp:HAS_VALUE        ?value;
+                          orkgp:HAS_METRIC        ?metric.
+         ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                        orkgp:HAS_MODEL         ?model.
+         ?model      rdfs:label              ?model_lbl.
+        }
+        ORDER BY DESC(?value)
+        LIMIT 1
+      }
+    }
+    }<|eot_id|>

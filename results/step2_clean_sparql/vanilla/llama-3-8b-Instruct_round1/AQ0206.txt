@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?modelLabel ?dataset ?benchmark ?result
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:testedOn ?dataset.
+   ?dataset dcterms:title "Habitat 2020 Object Nav test-std benchmark".
+   ?model orkg:evaluatedOn ?benchmark.
+   ?model orkg:hasResult ?result.
+   ?model orkg:label ?modelLabel.
+   FILTER (?modelLabel != "")
+}
+```

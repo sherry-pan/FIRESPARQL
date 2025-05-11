@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?dataset ?datasetLabel ?description
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset orkg:hasTopic orkg:ScientificResultsExtraction.
+  ?dataset orkg:hasBenchmark true.
+  ?dataset rdfs:comment ?description.
+  FILTER (lang(?description) = "en").
+}
+```

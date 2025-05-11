@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the WMT2016 English-Russian dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX wmt: <http://www.wmt.org/translation- evaluation/standards/>
+     PREFIX wsd: <http://www.wsd.uib.no/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     SELECT?metric?value
+     WHERE {
+    ?benchmark wmt:benchmark "WMT2016 English-Russian".
+    ?benchmark dcterms:description?description.
+     FILTER (STRLIKE(?description, "English-Russian") AND NOT (STRLIKE(?description, "Other") OR STRLIKE(?description, "Parallel") OR STRLIKE(?description, "Multi-parallel") OR STRLIKE(?description, "Multi-parallel with correct ordering") OR STRLIKE(?description, "Other")).
+    ?benchmark wmt:metric?metric.
+    ?benchmark dcterms:value?value.
+     ORDER BY DESC(?value).
+     LIMIT 1.
+     }
+    <|eot_id|>

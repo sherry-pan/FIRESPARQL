@@ -1,0 +1,19 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P30 ?algorithm.
+  ?algorithm rdfs:label ?algorithm_labels.
+  FILTER(REGEX(STR(?algorithm_labels), "naive bayes"))
+  ?papers orkgp:P31 ?feature.
+  ?feature rdfs:label ?feature_labels.
+  FILTER(REGEX(STR(?feature_labels), "bag of words"))
+  ?papers orkgp:P32 ?classification.
+  ?classification rdfs:label ?classification_labels.
+  FILTER(REGEX(STR(?classification_labels), "classify user feedback as feature request"))
+  ?papers orkgp:P33 ?metric.
+  ?metric orkgp:P34 ?precision.
+  ?metric orkgp:P34 ?recall.
+  ?metric orkgp:P34 ?f1.
+}
+```

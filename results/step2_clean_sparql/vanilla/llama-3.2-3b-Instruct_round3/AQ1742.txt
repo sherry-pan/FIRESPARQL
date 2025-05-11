@@ -1,0 +1,15 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model wdt:P31 wd:Q14647913;  # Model that benchmarks
+         wdt:P162 ?score.       # Connect model to score
+  ?score rdfs:label "Unpermuted Accuracy"@en;
+         wdt:P162 wd:Q14647914. # Unpermuted Accuracy on CIFAR-10
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

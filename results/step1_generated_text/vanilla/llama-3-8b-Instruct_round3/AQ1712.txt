@@ -1,0 +1,25 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Enduro dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?modelLabel
+WHERE {
+   ?model a orkg:Model ;
+           orkg:hasScore?score.
+   ?benchmark a orkg:Benchmark ;
+               orkg:hasDataset <http://openresearchknowledge.org/dataset/Atari_2600_Enduro> ;
+               orkg:hasResult?result.
+   ?result a orkg:Result ;
+           orkg:hasScore?score ;
+           orkg:hasModel?model.
+   ?score a orkg:Score ;
+           rdfs:label?scoreLabel.
+    FILTER (?scoreLabel = "Score" && xsd:float(?score) = max(?score) )
+   ?model rdfs:label?modelLabel.
+    FILTER (lang(?modelLabel) = "en")
+}<|eot_id|>

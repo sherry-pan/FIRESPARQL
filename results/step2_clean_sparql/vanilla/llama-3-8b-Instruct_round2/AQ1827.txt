@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?value
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasExperiment ?experiment.
+  ?experiment orkg:hasModel ?model.
+  ?experiment orkg:hasMetric ?metric.
+  ?experiment orkg:hasMetricValue ?value.
+  ?metric rdfs:label "Macro Recall".
+  ?dataset a orkg:Dataset; 
+           orkg:hasSource <http://arxiv.org/>; 
+           orkg:hasType "NLP-TDMS".
+  ?experiment orkg:hasDataset ?dataset.
+}
+```

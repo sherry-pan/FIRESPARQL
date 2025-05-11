@@ -1,0 +1,31 @@
+Question:
+Provide a list of papers that have utilized the MMV TSM-50x2 model and include the links to their code?
+
+Generated SPARQL:
+ ```
+PREFIX orkg: <http://purl.org/orch/orkg/>
+PREFIX bio: <http://purl.org/metadata/bio>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT?paper?code
+WHERE {
+ ?paper a orkg:Papers.
+ ?paper orkg:utilizes?utilization.
+ ?utilization orkg:utilizesModel?mmv.
+ ?mmv orkg:version "50x2".
+ ?paper orkg:hasCode?code.
+ ?code orkg:hasUrl?url.
+  FILTER (CONTAINS(LCASE(?url), "github.com")
+       OR CONTAINS(LCASE(?url), "gitlab.com")
+       OR CONTAINS(LCASE(?url), "git.io")
+       OR CONTAINS(LCASE(?url), "zenodo.org")
+       OR CONTAINS(LCASE(?url), "arxiv.org")
+       OR CONTAINS(LCASE(?url), "doi.org")
+       OR CONTAINS(LCASE(?url), "osf.io")
+       OR CONTAINS(LCASE(?url), "bioarch.org")
+       OR CONTAINS(LCASE(?url), "bioarxiv.org")
+       OR CONTAINS(LCASE(?url), "bioRxiv.org"))
+}
+```<|eot_id|>

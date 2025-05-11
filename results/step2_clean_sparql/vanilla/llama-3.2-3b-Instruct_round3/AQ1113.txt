@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/2019/03/07/orkg#>
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasResult ?result.
+  ?result orkg:hasScore ?score.
+  ?dataset orkg:hasName "IWSLT2015 German-English".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

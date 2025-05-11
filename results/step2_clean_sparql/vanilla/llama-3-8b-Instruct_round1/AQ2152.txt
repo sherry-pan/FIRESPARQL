@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT ?paper ?paperUrl ?codeReference
+WHERE {
+  ?paper a bibo:Article.
+  ?paper schema:about ?topic.
+  ?topic schema:name "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval.".
+  ?paper schema:hasPart ?codeReference.
+  ?codeReference a bibo:Code.
+  ?paper schema:hasPart ?paperUrl.
+  ?paperUrl a schema:WebPage.
+  FILTER(?paperUrl != "http://www.orkg.org/")
+}
+```

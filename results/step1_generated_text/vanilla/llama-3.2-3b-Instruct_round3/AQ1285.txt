@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Freeway dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+     PREFIX schema: <http://schema.org/> 
+     PREFIX ork: <http://openresearchknowledgegraph.org/ontology/> 
+     SELECT?metric?value 
+     WHERE { 
+    ?dataset a ork:Dataset.
+    ?dataset schema:description "Atari 2600 Freeway".
+    ?dataset schema:benchmark?benchmark.
+    ?benchmark schema:metric?metric.
+    ?benchmark schema:value?value.
+     FILTER (regex(str(?metric), "Freeway") && regex(str(?value), "[0-9]+")) 
+     ORDER BY DESC(?value) 
+     LIMIT 1 
+     }<|eot_id|>

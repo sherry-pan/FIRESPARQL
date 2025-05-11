@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasResult ?result.
+    ?result orkg:hasEvaluationMetric ?metric.
+    ?result rdfs:label ?label.
+    FILTER (?label = "Sequential CIFAR-10 dataset" && str(?metric) != "undefined").
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX kg: <http://data.openresearchknowledge.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a kg:Model.
+  ?model kg:hasScore ?score.
+  ?score kg:dataset kg:ImageNet.
+  ?score kg:metric kg:MACs.
+  ?score kg:value ?v.
+}
+ORDER BY DESC(?v)
+LIMIT 1
+```

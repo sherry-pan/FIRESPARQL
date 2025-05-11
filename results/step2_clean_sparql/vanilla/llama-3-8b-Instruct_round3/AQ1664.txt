@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:benchmark ?benchmark;
+         orkg:metric ?metric;
+         orkg:value ?metricValue.
+  ?benchmark a orkg:Benchmark;
+             orkg:dataset ?dataset.
+  ?dataset a orkg:Dataset;
+           dcterms:title ?datasetTitle.
+  ?metric a orkg:Metric;
+          dcterms:title ?metricTitle.
+
+  FILTER(?metricTitle = "Percentage error" && ?datasetTitle = "CIFAR-10 Image Classification")
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

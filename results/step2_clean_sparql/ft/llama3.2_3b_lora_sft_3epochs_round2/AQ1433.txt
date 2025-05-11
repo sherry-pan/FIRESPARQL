@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU score")
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WMT2016 English-German".
+  
+  ?model a orkgc:Model;
+         orkgc:evaluatedOn ?dataset;
+         orkgc:hasScore [ orkgc:metric ?metric;
+                          orkgc:value ?score ].
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

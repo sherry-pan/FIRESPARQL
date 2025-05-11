@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/orkg#>
+PREFIX wmt: <http://orkg.org/schema/wmt#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model
+WHERE {
+  ?model wmt:benchmark "WMT2016 English-German".
+  ?model wmt:best_benchmark "BLEU score".
+  ?model rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(?label), "best") AND CONTAINS(LCASE(?label), "model"))
+}
+```

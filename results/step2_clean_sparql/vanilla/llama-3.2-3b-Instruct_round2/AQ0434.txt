@@ -1,0 +1,18 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:Paper;
+         schema:description ?title;
+         orkg:hasId ?id.
+  ?benchmark schema:hasTopic "Stanford Cars";
+             schema:hasPaper ?paper.
+}
+ORDER BY ?title
+LIMIT 10
+```

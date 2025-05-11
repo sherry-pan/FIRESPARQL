@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?modelLabel ?publication ?publicationTitle
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:testedOn ?benchmark.
+  ?benchmark rdfs:label "RTE".
+  ?model orkg:hasPublication ?publication.
+  ?publication a dcterms:Document.
+  ?publication dcterms:title ?publicationTitle.
+  ?model rdfs:label ?modelLabel.
+}
+```

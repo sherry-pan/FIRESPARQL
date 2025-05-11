@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://semantic-mediawiki.org/swd/ORKG/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?code_link
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:uses_model orkg:DDQN-PC.
+  ?paper bibo:references ?benchmark.
+  ?paper schema:codeRepository ?code_link.
+  FILTER(?benchmark != "" && ?benchmark != "NA" && lang(?benchmark) = "en")
+}
+```

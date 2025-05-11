@@ -1,0 +1,16 @@
+Question:
+Can you list the metrics used to evaluate models on the DocRED (Human-annotated) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R155372 {
+         orkgrp:HAS_DATASET        a       orkgp:Dataset;
+                               rdfs:label      ?dataset_lbl.
+         orkgrp:HAS_EVALUATION    orkgrp:HAS_METRIC        orkgrp:HAS_VALUE;
+                             orkgrp:HAS_DATASET        orkgrp:HAS_DATASET         {
+           orkgrp:HAS_VALUE         orkgrp:HAS_METRIC   ?metric.
+          ?metric         rdfs:label      ?metric_lbl.}
+         orkgrp:HAS_DATASET        a       orkgp:Dataset;
+                               rdfs:label      ?dataset_lbl.       }
+     ORDER BY?metric_lbl<|eot_id|>

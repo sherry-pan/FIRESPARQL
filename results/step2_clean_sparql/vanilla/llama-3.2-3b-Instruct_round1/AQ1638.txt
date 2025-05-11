@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?score 
+WHERE {
+  ?model rdfs:label ?label.
+  ?model dbpedia:benchmark "Ball in cup, catch (DMControl100k)".
+  ?model dbpedia:score ?score.
+  FILTER (lang(?label) = "en")
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

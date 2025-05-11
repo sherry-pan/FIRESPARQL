@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://schema.orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:uses_model orkg:A3C_FF_hs_model.
+  ?paper bibo:hasCode ?code_link.
+  ?paper rdfs:label ?paper_title.
+  FILTER(lang(?paper_title) = "en").
+}
+```

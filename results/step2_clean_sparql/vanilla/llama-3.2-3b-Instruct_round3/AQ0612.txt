@@ -1,0 +1,16 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT ?paper ?paperId 
+WHERE {
+  ?paper wdt:P3010 ?benchmark.
+  ?benchmark rdfs:label ?label.
+  FILTER(STR(?label) = "Atari 2600 Defender"@en).
+  ?paper wdt:P106 ?paperId.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+```

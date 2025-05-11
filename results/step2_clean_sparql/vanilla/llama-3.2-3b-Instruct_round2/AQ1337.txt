@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orcg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:description "Benchmark for Paper Field".
+  ?benchmark orkg:hasMetric ?metric.
+  ?metric schema:description "Benchmark metric for Paper Field".
+  ?benchmark orkg:hasScore ?score.
+  ?benchmark schema:mainEntity ?main.
+  ?main schema:mainEntityOfPage ?page.
+  ?page schema:mainEntityOfPage ?dataset.
+  ?dataset schema:name "Paper Field".
+  FILTER (LOWER(?metric) = "highest")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

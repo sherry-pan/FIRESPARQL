@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paperTitle ?paperID
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper dc:title ?paperTitle.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:name "BUCC German-to-English dataset".
+  ?paper orkg:hasID ?paperID.
+}
+```

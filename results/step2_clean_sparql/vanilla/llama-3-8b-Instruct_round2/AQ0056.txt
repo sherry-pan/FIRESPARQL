@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmark ?dataset.
+ ?dataset dcterms:title "DuIE dataset".
+ SERVICE schema {
+   ?model schema:name ?modelLabel.
+ }
+}
+```

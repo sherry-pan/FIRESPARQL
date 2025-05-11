@@ -1,0 +1,18 @@
+```sparql
+SELECT ?contributor ?contributor_lbl
+WHERE {
+  ?paper rdf:type orkgc:Paper.
+  ?paper orkgp:P30 ?contributor.
+  ?contributor rdfs:label ?contributor_lbl.
+  
+  {
+    SELECT ?contributor (COUNT(?paper) AS ?contributor_cnt)
+    WHERE {
+      ?paper orkgp:P30 ?contributor.
+    }
+    GROUP BY ?contributor
+    ORDER BY DESC(?contributor_cnt)
+    LIMIT 10
+  }
+}
+```

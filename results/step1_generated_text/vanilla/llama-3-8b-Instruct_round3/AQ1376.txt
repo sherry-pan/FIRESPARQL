@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest F1 score score on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasResult?result.
+ ?result orkg:hasBenchmark "Penn Treebank".
+ ?result orkg:hasMetric "F1 score".
+ ?result orkg:hasValue?score.
+  FILTER (?score = xsd:decimal(?maxScore ).
+  FILTER (?maxScore = (SELECT MAX(?s) AS?maxScore
+                       {?model orkg:hasResult?result.
+                        ?result orkg:hasBenchmark "Penn Treebank".
+                        ?result orkg:hasMetric "F1 score".
+                        ?result orkg:hasValue?s } ) ). }<|eot_id|>

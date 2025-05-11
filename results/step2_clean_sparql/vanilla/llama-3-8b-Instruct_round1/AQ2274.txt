@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paper ?code_reference
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:uses_model "PEGASUS".
+  ?paper dc:references ?code_reference.
+  FILTER (?code_reference != "" && lang(?code_reference) = "en").
+}
+```

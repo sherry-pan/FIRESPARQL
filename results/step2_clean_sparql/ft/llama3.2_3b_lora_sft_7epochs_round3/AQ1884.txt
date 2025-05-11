@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "Text Summarization"))
+    ?dataset orkgp:HAS_DATASET ?cont.
+    ?cont orkgp:P32 ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER(REGEX(?benchmark_lbl, "dataset"))
+}
+```

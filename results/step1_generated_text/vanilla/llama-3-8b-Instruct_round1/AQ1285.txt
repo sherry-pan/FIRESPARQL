@@ -1,0 +1,21 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Freeway dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.com/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark dcterms:subject <http://www.openresearchknowledgegraph.com/Atari2600_Freeway>.
+ ?benchmark rdfs:label?label.
+  FILTER (?label = "Freeway").
+ ?benchmark orkg:hasResult?result.
+ ?result orkg:metric?metric.
+ ?result orkg:value?value.
+  FILTER (?metric!= "Unnamed: 0").
+  FILTER (?value = max(?value) ).
+}<|eot_id|>

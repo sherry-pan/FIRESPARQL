@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/schema/orkg/>
+SELECT ?metric ?value
+WHERE {
+  ?paper orkg:hasMetric ?metric.
+  ?metric orkg:hasValue ?value.
+  ?paper orkg:isAbout "Atari 2600 Frostbite".
+  ?metric rdfs:label ?label.
+  FILTER (?label = "Evaluation Metric" || ?label = "Evaluation Metric 2" || ?label = "Accuracy")
+}
+GROUP BY ?metric
+ORDER BY DESC(?value)
+```

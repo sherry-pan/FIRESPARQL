@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the NYT-single dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/1.0/>
+     PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_posix>
+     SELECT?model 
+     WHERE {
+      ?model orkg:hasBenchmark?benchmark.
+      ?benchmark wgs:lat?lat.
+      ?benchmark wgs:lon?lon.
+      ?benchmark orkg:dataset "nyt-single".
+      ?benchmark orkg:metric "f1".
+      ?benchmark orkg:hasResult?result.
+      ?result orkg:score?f1Score.
+      ?model orkg:hasResult?result.
+       FILTER (REGEX(str(?f1Score) "@[0-9]+([.][0-9]+)"))
+       ORDER BY?f1Score DESC
+       LIMIT 1
+     }<|eot_id|>

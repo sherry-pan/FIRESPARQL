@@ -1,0 +1,16 @@
+Question:
+List the code links in papers that use the GPT-2 (small) model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark rdfs:label?benchmark_label.
+       FILTER(REGEX(?benchmark_label, "GPT-2 (small)")
+               (?:[^\\s]+)
+               )
+      ?paper orkgp:P32?cont.
+      ?cont orkgp:HAS_CODE?code.
+     }
+     ORDER BY DESC(?cont)
+     LIMIT 10<|eot_id|>

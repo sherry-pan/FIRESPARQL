@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?definition
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers rdfs:label ?papers_labels.
+  FILTER(REGEX(?papers_labels, "Raman spectroscopy", "i"))
+  ?papers orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?definition.
+  ?definition rdfs:label ?definition_labels.
+  FILTER(REGEX(?definition_labels, "definition", "i"))
+}
+```

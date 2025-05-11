@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX wot: <http://www.wot.org/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset a orkg:Dataset;
+             orkg:name "Atari 2600 Double Dunk";
+             wot:hasBenchmark ?benchmark.
+    ?benchmark wot:hasMetric ?metric;
+               wot:hasValue ?value.
+    FILTER (CONTAINS(STR(?metric), "highest") OR 
+            CONTAINS(STR(?metric), "best") OR 
+            CONTAINS(STR(?metric), "top"))
+    FILTER (CONTAINS(STR(?value), "highest") OR 
+            CONTAINS(STR(?value), "best") OR 
+            CONTAINS(STR(?value), "top"))
+}
+```

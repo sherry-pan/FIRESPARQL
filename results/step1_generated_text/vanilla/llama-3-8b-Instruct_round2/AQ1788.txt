@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Montezuma's Revenge dataset in terms of Average Return (NoOp) metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model?modelLabel?avgReturn
+     WHERE {
+      ?model a orkg:Model.
+      ?model dbo:benchmark?benchmark.
+      ?benchmark orkg:dataset orkg:Atari2600MontezumasRevenge.
+      ?benchmark orkg:metric schema:AvgReturn.
+      ?benchmark orkg:metricValue?avgReturn.
+      ?model orkg:performance?performance.
+      ?performance orkg:metricValue?avgReturn.
+       FILTER(?avgReturn = (SELECT MAX(?x) AS max_avgReturn FROM {?model?modelLabel?avgReturn }))
+     }<|eot_id|>

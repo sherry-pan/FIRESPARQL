@@ -1,0 +1,16 @@
+```sparql
+SELECT ?ont ?ont_label
+WHERE {
+  {
+    SELECT ?ont ?ont_label (COUNT(?papers) AS ?ont_count)
+    WHERE {
+      ?ont a orkgc:KnowledgeRepresentation;
+           rdfs:label ?ont_label.
+      ?papers orkgp:P7046 ?ont.
+    }
+    GROUP BY ?ont ?ont_label
+    ORDER BY DESC(?ont_count)
+    LIMIT 1
+  }
+}
+```

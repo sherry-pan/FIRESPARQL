@@ -1,0 +1,22 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the ImageNet ReaL dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paperTitle?paperId
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:hasPublicationDate?publicationDate.
+ ?paper dc:title?paperTitle.
+ ?paper orkg:hasResearchArtifact?artifact.
+ ?artifact orkg:hasDataset?dataset.
+ ?dataset orkg:datasetName "ImageNet ReaL".
+ ?paper orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasBenchmarkModel true.
+ ?paper orkg:hasId?paperId.
+  FILTER (?publicationDate >= "2020-01-01"^^xsd:date).
+  FILTER (?evaluation!= owl:nil).
+}<|eot_id|>

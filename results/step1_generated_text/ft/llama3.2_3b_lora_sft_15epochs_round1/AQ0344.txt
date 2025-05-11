@@ -1,0 +1,15 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the SemEval-2018 Task 7 dataset dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "SemEval-2018 Task 7 dataset")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_SOURCE_CODE   ?code.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper        orkgp:P31               ?cont;
+                      rdfs:label              ?paper_lbl.
+      }<|eot_id|>

@@ -1,0 +1,27 @@
+Question:
+List the code links in papers that use the linear-chain CRFs model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX vcard: <http://www.w3.org/2006/02/vcard/rdf#>
+     PREFIX wikibase: <http://wikibase.org/ontology/>
+     SELECT?code
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasCode?code.
+    ?paper schema:hasTopic "Machine Learning".
+    ?paper schema:hasBenchmark?benchmark.
+    ?benchmark schema:hasType "benchmark".
+    ?benchmark schema:hasTopic "Machine Learning".
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark schema:hasModel?benchmarkModel.
+    ?benchmarkModel schema:hasModel "linear-chain CRFs".
+    ?benchmarkModel schema:hasBenchmark?benchmark.
+    ?benchmark?benchmarkdbpedia:hasPaper?paper.
+    ?code schema:hasCode?code.
+     }<|eot_id|>

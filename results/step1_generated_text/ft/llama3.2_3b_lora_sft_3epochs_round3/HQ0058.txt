@@ -1,0 +1,38 @@
+Question:
+What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words to classfy user feedback as feature request? 
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (AVG(?value) AS?value)
+     WHERE {
+      ?papers rdf:type orkgc:Paper.
+      ?papers orkgp:P31?cont.
+      ?cont orkgp:P32 [
+         orkgp:HAS_DATASET {
+           orkgp:HAS_DATASET?dataset.
+          ?dataset orkgp:P34 [
+             orkgp:P33 {
+              ?classifier orkgp:P41?algorithm.
+              ?algorithm rdfs:label?algorithm_lbl.
+               FILTER(REGEX(STR(?algorithm_lbl), "naive bayes"^^xsd:string))
+              ?classifier orkgp:P42 [
+                 orkgp:HAS_DATASET {
+                   orkgp:HAS_DATASET?dataset.
+                  ?dataset orkgp:P34 [
+                     orkgp:P33 {
+                      ?benchmark orkgp:P40?eval.
+                      ?eval orkgp:P41?classifier.
+                      ?classifier rdfs:label?classifier_lbl.
+                       FILTER(REGEX(STR(?classifier_lbl), "machine learning feature bag of words"^^xsd:string))
+                      ?eval orkgp:P43 [
+                         orkgp:P32 [
+                           orkgp:P29 {
+                            ?problem orkgp:P27?problem_lbl.
+                             FILTER(REGEX(STR(?problem_lbl), "classify user feedback as feature request"^^xsd:string))
+                            ?problem rdfs:label?problem_lbl.
+                            ?dataset orkgp:P33 {
+                               orkgp:P32 [
+                                 orkgp:P29 {
+                                   SELECT?metric?metric_lbl
+                                   WHERE {
+                                    ?paper orkgp:P27?problem.
+                                    ?problem rdfs:label

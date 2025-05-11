@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?accuracy
+WHERE {
+    ?model a orkg:Model ;
+           orkg:hasBenchmarkingResult ?benchmarkingResult.
+    ?benchmarkingResult a orkg:BenchmarkingResult ;
+                        orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/TriviaQA> ;
+                        orkg:metric schema:Accuracy ;
+                        orkg:value ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

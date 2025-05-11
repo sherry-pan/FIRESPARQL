@@ -1,0 +1,32 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the WMT2014 French-English dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "WMT2014 French-English")
+       }
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+       OPTIONAL {?benchmark      orkgp:HAS_VALUE         ?value.
+                {
+                 ?value           orkgp:HAS_NUMBER        ?number.
+                }
+               ?number           orkgp:HAS_FLOAT_VALUE   ?float_value.
+               ?float_value      orkgp:GET_FLOAT_VALUE   ?value_num.
+               ?value            orkgp:HAS_VALUE_LABEL    ?value_lbl.
+               ?value_lbl         rdfs:label               ?value_lbl_lbl.
+               ?value            orkgp:P32               ?value_p32;
+                                 orkgp:P33               ?value_p33.
+               ?value_p32         orkgp:HAS_DATASET        ?value_p32_dataset;
+                                   orkgp:P32               ?value_p32_p32.
+               ?value_p32_p32      orkgp:HAS_DATASET        ?value_p32_p32_dataset;
+                                    orkgp:P32               ?value_p32_p32_p32.
+               ?value_p32_p32_p32  orkgp:HAS_DATASET        ?value_p32_p32_p32_dataset;
+                                     orkgp:P32               ?value_p32_p32_p32_p32.
+               

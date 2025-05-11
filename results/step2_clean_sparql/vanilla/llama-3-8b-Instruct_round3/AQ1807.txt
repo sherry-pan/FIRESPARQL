@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?paper a orkg:ResearchPaper;
+         orkg:hasResult ?result;
+         orkg:hasMetric orkg:Accuracy;
+         orkg:hasValue ?accuracy;
+         orkg:hasBenchmark orkg:KuzushijiMNIST;
+         orkg:hasModel ?model.
+  FILTER NOT EXISTS {
+    ?paper a orkg:ResearchPaper;
+           orkg:hasResult ?result;
+           orkg:hasMetric orkg:Accuracy;
+           orkg:hasValue ?acc;
+           orkg:hasBenchmark orkg:KuzushijiMNIST;
+           orkg:hasModel ?model2.
+    FILTER (?acc > ?accuracy)
+  }
+}
+```

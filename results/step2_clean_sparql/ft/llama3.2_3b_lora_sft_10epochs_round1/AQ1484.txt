@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl;
+           orkgp:P34 ?benchmark.
+  FILTER (str(?dataset_lbl) = "Natural Questions (long)")
+  ?benchmark orkgp:P35 ?model;
+             orkgp:P36 ?score.
+  ?score orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?f1_score)
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?f1_score)
+LIMIT 1
+```

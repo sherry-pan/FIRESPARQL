@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Tennis dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?score?metric
+     WHERE {
+      ?benchmark a dbo:Benchmark.
+      ?benchmark dbpedia:dataset "Atari 2600 Tennis".
+      ?benchmark dbpedia:score?score.
+      ?benchmark schema:score?metric.
+       ORDER BY DESC(?score)
+       LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model
+WHERE {
+  ?model schema:abstract ?abstract.
+  ?model dbp:top1Accuracy ?accuracy.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark schema:dataset ?dataset.
+  ?dataset schema:datasetName "VTAB-1k".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

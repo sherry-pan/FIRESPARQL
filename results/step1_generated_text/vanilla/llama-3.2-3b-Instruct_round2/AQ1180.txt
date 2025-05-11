@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark score and its metric on the Hutter Prize dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?benchmarkScore?metric
+     WHERE {
+    ?benchmark?benchmarkName a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmarkScore?benchmarkScore.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasDataset "Hutter Prize".
+    ?benchmarkScore rdfs:label?benchmarkName.
+     FILTER (str(?benchmarkName) = "Hutter Prize")
+     ORDER BY?benchmarkScore DESC
+     LIMIT 1
+     }
+    <|eot_id|>

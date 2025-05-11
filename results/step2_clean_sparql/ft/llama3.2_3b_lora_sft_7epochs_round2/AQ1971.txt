@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model orkgp:P4014 ?crf_model.
+  ?crf_model rdfs:label ?crf_model_label.
+  FILTER(REGEX(?crf_model_label, "CRF with sentence expansion"))
+  ?paper orkgp:P27 ?code.
+}
+```

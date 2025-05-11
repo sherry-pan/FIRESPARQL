@@ -1,0 +1,18 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?problem
+WHERE {
+    ?problem schema:about ?p .
+    ?p schema:inTopicOf ?t .
+    ?t dcterms:subject <http://purl.org/dc/terms/subject> "Artificial Intelligence" .
+    ?t skos:broader <http://purl.org/dc/terms/subject> "Computing" .
+    ?t rdfs:label ?problem .
+    FILTER (lang(?problem) = 'en')
+}
+LIMIT 10
+```

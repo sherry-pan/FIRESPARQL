@@ -1,0 +1,22 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Error Rate score when benchmarked on the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?model?top1ErrorRate
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:top1ErrorRate?top1ErrorRate.
+    ?model orkg:benchmarkedOn?benchmark.
+    ?benchmark a dbpedia:Dataset.
+    ?benchmark dbpedia:datasetName "Oxford-IIIT Pets".
+    ?model orkg:performance?performance.
+    ?performance rdfs:label?top1ErrorRate.
+     FILTER (lang(?top1ErrorRate) = 'en')
+     }
+     LIMIT 1<|eot_id|>

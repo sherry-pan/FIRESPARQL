@@ -1,0 +1,17 @@
+Question:
+What are the metrics of evaluation over the OntoNotes dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "OntoNotes")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+         OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                 ?metric          rdfs:label              ?metric_lbl.}
+         FILTER (str(?metric_lbl) = "accuracy" OR str(?metric_lbl) = "F1" OR str(?metric_lbl) = "Precision" OR str(?metric_lbl) = "Recall" OR str(?metric_lbl) = "ROC-AUC" OR str(?metric_lbl) = "AP" OR str(?metric_lbl) = "R" OR str(?metric_lbl) = "H" OR str(?metric_lbl) = "F1-score")
+      }
+      ORDER BY DESC(?metric)
+      LIMIT 10<|eot_id|>

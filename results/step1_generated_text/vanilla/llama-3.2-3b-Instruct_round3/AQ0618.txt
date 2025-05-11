@@ -1,0 +1,19 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Atari 2600 Frostbite dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?title 
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper schema:hasBenchmark?benchmark.
+ ?benchmark schema:hasDataset "Atari 2600 Frostbite".
+ ?benchmark schema:hasTitle?title.
+  BIND(replace(str(?paper), '<http://example.org/orkg/', '') AS?paperID)
+}
+```<|eot_id|>

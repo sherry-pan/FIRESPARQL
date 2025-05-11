@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/2012/09/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper;
+         orkg:hasContribution ?contribution;
+         schema:hasUrl ?url.
+  ?contribution a <http://schema.org/A3CLSTMHSModel>;
+                orkg:hasCode ?code.
+  FILTER CONTAINS(str(?url), "https://github.com/")
+}
+LIMIT 100
+```

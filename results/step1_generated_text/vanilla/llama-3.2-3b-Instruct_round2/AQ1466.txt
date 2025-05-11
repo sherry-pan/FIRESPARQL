@@ -1,0 +1,39 @@
+Question:
+Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX wikibase: <http://wikibase.org/biolexio/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontologies/orkg#>
+
+     SELECT?model?f1score
+     WHERE {
+    ?model orkg:isQuestionAnswerable?qa.
+    ?qa schema:description?desc.
+    ?desc schema:mainEntity?entity.
+    ?entity schema:mainEntityOfPage?page.
+    ?page schema:description?desc.
+    ?desc schema:mainEntityOfPage?page.
+    ?page schema:description?desc.
+    ?desc schema:datePublished?date.
+    ?date schema:date?date.
+    ?model orkg:hasModel?model.
+    ?model schema:mainEntity?entity.
+    ?entity schema:mainEntityOfPage?page.
+    ?page schema:description?desc.
+    ?desc schema:datePublished?date.
+    ?date schema:date?date.
+    ?entity orkg:hasAnswer?answer.
+    ?answer schema:description?answer.
+    ?answer schema:answer?answer.
+    ?model orkg:hasAnswer?answer.
+    ?answer schema:answer?answer.
+    ?model schema:mainEntity?entity.
+    ?entity schema:mainEntityOfPage?page.
+    ?page schema:description?desc.
+    ?desc schema:datePublished?date.
+

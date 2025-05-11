@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocabulary/>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:dataset "CoQA".
+  ?benchmark orkg:hasBestResult ?bestResult.
+  ?bestResult orkg:hasMetric ?metric.
+  ?bestResult orkg:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

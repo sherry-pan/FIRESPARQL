@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/02-skos/core#>
+SELECT ?dataset (COUNT(?publication) AS ?count)
+WHERE {
+  ?dataset a orkg:BenchmarkDataset.
+  ?dataset skos:prefLabel ?label.
+  ?dataset dc:subject <http://www.openresearchknowledgegraph.org/researchField/TextSummarization>.
+  ?dataset orkg:usedIn ?publication.
+}
+GROUP BY ?dataset
+ORDER BY DESC(?count)
+LIMIT 10
+```

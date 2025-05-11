@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the SemExp model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+     SELECT?paper?code 
+     WHERE {
+    ?paper a orkg:Papers.
+    ?paper orkg:hasPaperPart?part.
+    ?part schema:hasPart?code.
+    ?paper orkg:usesModel?model.
+    ?model orkg:isBenchmarkModel "SemExp".
+     }
+     FILTER (lang(?paper) = "en")
+     LIMIT 100<|eot_id|>

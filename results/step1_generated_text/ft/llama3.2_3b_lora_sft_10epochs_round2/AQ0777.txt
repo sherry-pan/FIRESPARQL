@@ -1,0 +1,33 @@
+Question:
+What are the metrics of evaluation over the Stanford Cars dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?average)
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Stanford Cars")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+         OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                 ?metric          rdfs:label              ?metric_lbl.}
+         BIND(xsd:integer(?value) AS?value)
+         BIND(
+           if(?metric?metric_lbl     "Micro F1"  then?value         as "micro_F1" 
+           else 
+           (if(?metric?metric_lbl     "Macro F1"  then?value         as "macro_F1" 
+               else 
+               (if(?metric?metric_lbl     "Mean F1"   then?value         as "mean_F1" 
+                   else 
+                   (if(?metric?metric_lbl     "MCC"       then?value         as "MCC" 
+                       else 
+                       (if(?metric?metric_lbl     "R Squared"  then?value         as "R_Squared" 
+                           else 
+                           (if(?metric?metric_lbl     "Precision"   then?value         as "Precision" 
+                               else 
+                               (if(?metric?metric_lbl     "Recall"      then?value         as "Recall" 
+                                   else 
+                                   (if(?metric?metric_lbl     "Mean Squared Error" then?value         as "Mean_Squared_Error" 
+                                       else 
+                                       (if(?metric?metric_lbl     "Binary F1"   then?value         as "binary_F1" 
+

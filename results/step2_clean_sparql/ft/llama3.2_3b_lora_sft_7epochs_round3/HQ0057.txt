@@ -1,0 +1,14 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "dataset_.*"))
+  ?study orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:P31 ?study.
+  ?paper orkgp:P31 ?cont.
+  ?paper orkgp:HAS_SOURCE ?source.
+  ?source rdfs:label ?source_lbl.
+  FILTER(REGEX(?source_lbl, "dataset_.*"))
+}
+```

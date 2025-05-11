@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wds: <http://www.w3.org/2004/02/sosml#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value 
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:name "Atari 2600 Enduro".
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:dataset ?dataset.
+    ?benchmark orkg:metric ?metric.
+    ?benchmark orkg:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

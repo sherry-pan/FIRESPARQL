@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?value
+WHERE {
+    ?s a orkg:PropertyAssertion ;
+       orkg:subject ?entity ;
+       orkg:property orkg:mean_capacity ;
+       orkg:value ?value.
+    ?entity a orkg:Entity ;
+       rdfs:label ?label.
+    FILTER (str(?label) LIKE "%carbon-based fuel%")
+}
+```

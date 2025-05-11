@@ -1,0 +1,23 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the SemEval-2018 Task 7 dataset dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ora/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/properties/>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     SELECT?paper?paperTitle 
+     WHERE {
+    ?paper a ora:Paper.
+    ?paper ora:hasDataset schema:Dataset.
+    ?paper ora:hasDataset schema:Dataset ;
+           ora:hasBenchmark schema:Dataset.
+    ?paper ora:hasDataset dbpedia:SemEval-2018_Task_7.
+    ?paper ora:hasDataset?benchmark.
+    ?benchmark a ora:Benchmark.
+    ?benchmark ora:hasDataset?paper.
+    ?paper schema:title?paperTitle.
+     }<|eot_id|>

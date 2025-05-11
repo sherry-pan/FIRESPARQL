@@ -1,0 +1,30 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Sequential MNIST dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153801 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P32?eval.
+          ?eval orkgp:P5041?value.
+           FILTER(?value > 0)
+          ?eval orkgp:P31?class.
+          ?class rdfs:label?class_lbl.
+          ?contrib orkgp:P31?paper.
+          ?paper orkgp:P27?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+         }
+     UNION
+     {
+       orkgr:R153801 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P32?eval.
+      ?eval orkgp:P5042?value.
+       FILTER(?value > 0)
+      ?eval orkgp:P31?class.
+      ?class rdfs:label?class_lbl.
+      ?contrib orkgp:P31?paper.
+      ?paper orkgp:P27?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+     }
+     ORDER BY DESC(?score)<|eot_id|>

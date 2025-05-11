@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R155791 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P4310?metric.
+        ?metric rdfs:label?metric_lbl;
+                 orkgp:P4311?value.
+         FILTER(?metric = "set_expansion_loss")
+         FILTER(?value > 0)
+         orkgp:P4314?contrib?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(?dataset_lbl = "WMT2016 Czech-English")
+     }<|eot_id|>

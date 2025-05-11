@@ -1,0 +1,14 @@
+Question:
+What are the metrics of evaluation over the Hutter Prize dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Hutter Prize")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_EVALUATION   ?eval.
+         OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                 ?metric          rdfs:label              ?metric_lbl.}
+         FILTER(?metric_lbl         = "F1"         ||?metric_lbl         = "Precision"   ||?metric_lbl         = "Recall"      ||?metric_lbl         = "Accuracy"    ||?metric_lbl         = "ROUGE-N"     ||?metric_lbl         = "ROUGE-S"     ||?metric_lbl         = "BLEU"        ||?metric_lbl         = "BPC"         ||?metric_lbl         = "Heldberg"    ||?metric_lbl         = "Meteor"      ||?metric_lbl         = "Mean Average Precision" ||?metric_lbl         = "Mean Reciprocal Rank" ||?metric_lbl         = "Mean Reciprocal Order" ||?metric_lbl         = "ROUGE-L"     ||?metric_lbl         = "ROUGE-W"     ||?metric_lbl         = "RUBER"       ||?metric_lbl         = "Speed-Down"  ||?metric_lbl         = "Time"        ||?metric_lbl         = "Time per label" ||?metric_lbl         = "Time per word"  ||?metric_lbl         = "MC"          ||?metric_lbl         = "PPL"         ||?metric_lbl         = "SPR"         ||?metric_lbl         = "STO"        

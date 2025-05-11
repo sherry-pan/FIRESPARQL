@@ -1,0 +1,15 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX dmt: <http://purl.org/dc/terms/elements/1.1/>
+
+SELECT ?paper ?title ?code
+WHERE {
+  ?paper schema:about ?title.
+  ?paper schema:hasPart ?code.
+  ?code schema:hasPart ?benchmarking.
+  ?benchmarking schema:hasPart ?benchmarkingCode.
+  ?benchmarkingCode schema:hasPart ?dmt:CodeReference.
+  FILTER (CONTAINS(LCASE(?title), "deit-ti")).
+}
+LIMIT 10
+```

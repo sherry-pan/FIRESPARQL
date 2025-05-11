@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?b
+WHERE {
+  ?b wdt:P31 ?class.
+  ?class rdfs:subClassOf* wd:Q1456657.
+  ?class rdfs:label ?label.
+  ?b wdt:P1234 ?numQuestions.  # Assuming P1234 is the property for the number of questions.
+  
+  FILTER (STR(?label) = "Question Answering benchmarks" && ?numQuestions > 10000)
+}
+```

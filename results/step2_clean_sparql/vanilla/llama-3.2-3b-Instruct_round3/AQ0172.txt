@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?name 
+WHERE {
+  ?model schema:distribution ?dist.
+  ?dist schema:identifier "https://example.org/models/".
+  ?dist schema:hasVersion ?version.
+  ?version schema:hasTest ?test.
+  ?test schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset "GENIA-LAS".
+  FILTER (CONTAINS(LCASE(?benchmark), "genia-las"))
+}
+```

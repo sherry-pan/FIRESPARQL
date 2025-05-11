@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?paper.
+  ?paper orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P3376 ?model.
+  ?model orkgp:P3378 ?dataset.
+  ?dataset orkgp:P3749 ?dataset_labels.
+  ?dataset_labels rdfs:label ?dataset_labels_labels.
+  FILTER(REGEX(STR(?dataset_labels_labels), "ImageNet + iNat on WS-DAN"))
+  ?paper orkgp:P3748 ?code.
+}
+```

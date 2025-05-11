@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl 
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "seel.cse.lsu.edu/data/refsq17.zip")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    ?paper orkgp:HAS_BENCHMARK ?benchmark.
+    ?model orkgp:HAS_PAPER ?paper;
+           rdfs:label ?model_lbl.
+}
+```

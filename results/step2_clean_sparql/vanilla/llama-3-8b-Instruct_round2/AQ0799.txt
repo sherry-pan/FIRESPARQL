@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX coqa: <http://purl.org/coqa/ontology/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasResult ?result.
+  ?result a orkg:Result ;
+          orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (?metricLabel = "F1" || ?metricLabel = "EM" || ?metricLabel = "METEOR" || ?metricLabel = "ROUGE" || ?metricLabel = "BLEU")
+}
+```

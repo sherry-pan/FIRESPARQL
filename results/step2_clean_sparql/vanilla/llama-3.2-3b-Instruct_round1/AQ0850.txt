@@ -1,0 +1,19 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX tmp: <http://temporalevaluation.org/schema/1/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?metric 
+WHERE {
+  ?metric rdfs:label ?metricLabel.
+  ?metric schema:description ?metricDescription.
+  FILTER (CONTAINS(LCASE(?metricDescription), "tempeval-3") OR 
+          CONTAINS(LCASE(?metricDescription), "dataset"))
+  FILTER (CONTAINS(LCASE(?metricLabel), "evaluation") OR 
+          CONTAINS(LCASE(?metricLabel), "metric"))
+}
+LIMIT 10
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX wotx: <http://purl.org/wot/ontology/x>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?metric ?metricValue
+WHERE {
+  ?model wotx:benchmarkFor ?benchmark.
+  ?benchmark wotx:dataset "ACE 2004".
+  ?benchmark wotx:metric ?metric.
+  ?metric schema:name "RE+ Micro F1".
+  ?model wotx:performance ?performance.
+  ?performance schema:value ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

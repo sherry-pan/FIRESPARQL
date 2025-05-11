@@ -1,0 +1,21 @@
+Question:
+List the code links in papers that use the DocRED-BiLSTM model in any benchmark?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?paperCode
+    WHERE {
+     ?paper schema:hasBenchmark?benchmark.
+     ?benchmark schema:hasDataset?dataset.
+     ?dataset schema:hasCode?code.
+     ?paper schema:uses?model.
+     ?model rdfs:label "DocRED-BiLSTM".
+     ?paper rdf:type dbo:Paper.
+      FILTER (lang(?paper) = 'en')
+    }
+    ```<|eot_id|>

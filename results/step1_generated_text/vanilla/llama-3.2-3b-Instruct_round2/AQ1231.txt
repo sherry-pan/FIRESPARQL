@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark score and its metric on the Cheetah, run (DMControl500k) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearch.org/orkg/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX sparql: <http://www.w3.org/TR/xpath1.0/#xpath>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark "Cheetah" rdf:type orkg:benchmark.
+    ?benchmark orkg:has_metric?metric.
+    ?benchmark orkg:has_run?run.
+    ?run orkg:has_dataset "DMControl500k".
+    ?metric orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_score?score.
+     FILTER (?metric = <http://www.openresearch.org/orkg/metrics/benchmark_score> )
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

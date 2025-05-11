@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+   ?experiment a orkg:Experiment ;
+               orkg:dataset orkg:WMT2014_English_German ;
+               orkg:benchmarkResult ?result.
+   ?result a orkg:BenchmarkResult ;
+           orkg:metric ?metric ;
+           orkg:value ?value.
+   FILTER(?metric IN (orkg:BLEU, orkg:METEOR, orkg:CHRF, orkg:ROUGE))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

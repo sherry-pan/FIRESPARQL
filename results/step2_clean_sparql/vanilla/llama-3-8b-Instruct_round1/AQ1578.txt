@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/X-Sum>.
+  ?benchmark orkg:metric orkg:ROUGE-2.
+  ?benchmark orkg:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

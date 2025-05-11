@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the Amazon-2 dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R113772 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label "Amazon-2"^^xsd:string.
+          ?contrib orkgp:P36?eval.
+          ?eval orkgp:P31?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?eval orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value).
+         }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

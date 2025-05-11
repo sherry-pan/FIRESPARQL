@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark dcterms:title "Reacher, easy (DMControl500k)".
+  ?model orkg:hasScore ?score.
+  FILTER (?score = 
+    (SELECT MAX(?score2) WHERE {
+      ?model orkg:hasScore ?score2 
+    })
+  )
+}
+```

@@ -1,0 +1,23 @@
+Question:
+What is the top benchmark score and its metric on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+
+     SELECT?metric?score 
+     WHERE {
+    ?metric orkg:hasMetric?metricLabel.
+    ?metric orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "Automatically labeled Medline abstracts corpus".
+    ?benchmark orkg:hasMetric?metric.
+    ?metric orkg:hasScore?score.
+     FILTER (REGEX (STR(?metricLabel) "top" "i") && REGEX (STR(?score) "[0-9.]+") && REGEX (STR(?metricLabel) "[A-Z][a-z]*") )
+     }
+     LIMIT 1<|eot_id|>

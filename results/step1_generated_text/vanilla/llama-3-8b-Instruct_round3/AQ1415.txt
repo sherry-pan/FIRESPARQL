@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the 200k Short Texts for Humor Detection dataset in terms of F1-score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+    SELECT?model?f1Score
+    WHERE {
+     ?model a orkg:Model.
+     ?model orkg:benchmarks?benchmark.
+     ?benchmark orkg:dataset?dataset.
+     ?dataset orkg:name "200k Short Texts for Humor Detection".
+     ?benchmark orkg:metric "F1-score".
+     ?benchmark orkg:bestValue?f1Score.
+      FILTER (?f1Score = xsd:float(max(?f1Score)))
+    }<|eot_id|>

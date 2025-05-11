@@ -1,0 +1,16 @@
+Question:
+What is the highest benchmark result achieved on the WMT2014 English-German dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R76530 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P32?eval.
+        ?eval orkgp:HAS_DATASET?dataset.
+        ?dataset rdfs:label "WMT2014 English-German"^^xsd:string.
+        ?contrib orkgp:P31?cont.
+        ?cont orkgp:P32?eval.
+        ?eval orkgp:HAS_METRIC?metric.
+         BIND(xsd:float(?metric) AS?value)
+        ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

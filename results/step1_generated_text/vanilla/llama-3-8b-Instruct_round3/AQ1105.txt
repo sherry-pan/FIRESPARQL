@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the WMT2014 French-English dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?metric?score
+WHERE {
+ ?dataset a orkg:Dataset ;
+           rdfs:label?datasetLabel.
+ ?dataset orkg:benchmark?benchmark.
+ ?benchmark orkg:dataset?dataset ;
+           orkg:result?result.
+ ?result orkg:metric?metric ;
+         orkg:score?score.
+  FILTER (?datasetLabel = "WMT2014 French-English" &&?metric = "metric" &&?score = "score").
+}<|eot_id|>

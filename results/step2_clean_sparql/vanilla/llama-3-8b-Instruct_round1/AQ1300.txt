@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+    ?dataset a orkg:Dataset ;
+             orkg:hasName "Atari 2600 Ice Hockey" ;
+             orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasScore ?score ;
+               orkg:hasMetric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?score ?metric
+WHERE {
+  ?result a orkg:Result.
+  ?result orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset schema:name "Atari 2600 Alien".
+  ?result orkg:score ?score.
+  ?result orkg:metric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

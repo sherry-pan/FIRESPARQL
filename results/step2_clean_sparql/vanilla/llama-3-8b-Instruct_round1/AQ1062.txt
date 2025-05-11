@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkg-dataset: <http://www.openresearchknowledgegraph.org/dataset/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?dataset a orkg-dataset:AutomaticallyLabeledMedlineAbstractsCorpusDataset.
+  ?dataset orkg:benchmark_score ?score.
+  ?dataset orkg:benchmark_metric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

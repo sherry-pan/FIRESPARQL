@@ -1,0 +1,11 @@
+```sparql
+SELECT ?leadcompound
+WHERE {
+  orkgr:R155151 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37483 ?leadcompound.
+  ?contrib orkgp:P31 ?cont.
+  FILTER(REGEX(?cont, "^[0-9]+$"))
+}
+ORDER BY DESC(COUNT(?leadcompound))
+LIMIT 1
+```

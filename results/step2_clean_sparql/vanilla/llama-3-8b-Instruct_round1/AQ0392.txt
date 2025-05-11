@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:benchmarkedOn ?dataset.
+  ?dataset skos:prefLabel "Penn Treebank".
+  ?paper dc:title ?title.
+  ?paper orkg:hasId ?id.
+}
+```

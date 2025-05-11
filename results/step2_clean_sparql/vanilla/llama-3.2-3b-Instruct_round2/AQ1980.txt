@@ -1,0 +1,16 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wikibase: <http://wikiba.se/ontology/>
+
+SELECT ?paper ?title ?url
+WHERE {
+  ?paper schema:about ?title.
+  ?paper dbo:inLanguage "en".
+  ?paper dbo:hasPart ?code.
+  ?code schema:description "TCN model".
+  ?paper schema:about ?benchmark.
+  FILTER (regex(str(?benchmark), "benchmark") && regex(str(?benchmark), "TCN model"))
+}
+```

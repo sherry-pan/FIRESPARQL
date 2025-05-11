@@ -1,0 +1,12 @@
+```sparql
+SELECT ?location
+WHERE {
+    ?papers rdf:type orkgc:Study.
+    ?papers orkgp:P27 ?location.
+    ?location rdfs:label ?location_label.
+    FILTER(REGEX(?location_label, "^[^,]+"))
+}
+GROUP BY ?location
+ORDER BY DESC(COUNT(?location))
+LIMIT 1
+```

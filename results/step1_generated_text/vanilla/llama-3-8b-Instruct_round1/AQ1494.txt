@@ -1,0 +1,17 @@
+Question:
+What is the best performing model benchmarking the RotoWire (Content Ordering) dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ PREFIX orkg: <https://wifo5-03.uni-karlsruhe.de/orkg/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT?model?metricValue
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmarks?benchmark.
+   ?benchmark orkg:dataset <https://wifo5-03.uni-karlsruhe.de/orkg/resource/RotoWire_Content_Ordering>.
+   ?benchmark orkg:metric <https://wifo5-03.uni-karlsruhe.de/orkg/resource/BLEU>.
+   ?benchmark orkg:metricValue?metricValue.
+    FILTER (?metricValue = xsd:float("max") FILTER (?metricValue > 0.0 ) )
+}<|eot_id|>

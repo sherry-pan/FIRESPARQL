@@ -1,0 +1,19 @@
+```sparql
+PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX memen: <http://example.org/memen/>
+
+SELECT ?paper ?url ?codeLink
+WHERE {
+    ?paper a ork:Papers.
+    ?paper schema:description ?d.
+    ?d schema:contentUrl ?url.
+    ?paper ork:hasCode ?code.
+    ?code schema:description ?codeLink.
+    ?paper ork:hasUtilized ?utilization.
+    ?utilization a memen:MemenModel.
+    FILTER (CONTAINS(STR(?codeLink), "https://github.com/")) 
+}
+ORDER BY ?paper
+LIMIT 10
+```

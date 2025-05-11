@@ -1,0 +1,18 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://orkg.org/vocab/>
+
+SELECT ?metric ?value 
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmarkResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasValue ?value.
+  FILTER (?dataset orkg:name = "MLDoc Zero-Shot German-to-French")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

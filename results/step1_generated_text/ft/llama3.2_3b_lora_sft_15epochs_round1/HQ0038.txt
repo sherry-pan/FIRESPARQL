@@ -1,0 +1,12 @@
+Question:
+What is the mean capacity of a carbon-based fuel?
+
+Generated SPARQL:
+ SELECT (AVG(?capacity) AS?mean_capacity)
+     WHERE {
+         orkgr:R68051 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P43135?fuel.
+        ?fuel rdfs:label?fuel_labels.
+         BIND(xsd:float(?fuel_labels) AS?capacity).
+         FILTER(REGEX(?capacity, "carbon-based"))
+     }<|eot_id|>

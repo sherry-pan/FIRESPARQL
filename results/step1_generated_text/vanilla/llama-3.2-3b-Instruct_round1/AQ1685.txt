@@ -1,0 +1,30 @@
+Question:
+What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX cts: <http://www.w3.org/ns/cts/ctsi#>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX wikibase: <http://wikiba.se/ontology#>
+     SELECT?model?name
+     WHERE {
+    ?model wdt:P31 wd:Q15164621.
+    ?model schema:description "Top performing model".
+    ?model wdt:P1624?score.
+    ?score schema:scoreValue?value.
+    ?score rdfs:label "ROUGE-2 score"@en.
+    ?score cts:scoredOn wd:Q23623453.
+    ?score schema:scoreType "ROUGE-2"@en.
+    ?model schema:mainEntity?mainEntity.
+    ?mainEntity wdt:P31 wd:Q15164621.
+    ?mainEntity schema:description "CL-SciSumm"@en.
+    ?mainEntity rdfs:label "CL-SciSumm"@en.
+    ?model wdt:P1624?value.
+     FILTER (lang(?value) = "float"@en).
+     ORDER BY DESC(?value)
+     LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Up and Down dataset in terms of Score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/LinkedData/orkg/>
+     SELECT?model?score 
+     WHERE {
+    ?model orkg:isBenchmarkFor?benchmark.
+    ?benchmark orkg:hasDataset?dataset.
+    ?dataset orkg:hasMetric?metric.
+    ?metric orkg:hasMetricDefinition?metricDefinition.
+    ?metricDefinition orkg:hasMetricValue?score.
+    ?model orkg:hasBenchmarkingResult?result.
+    ?result orkg:hasMetric?metric.
+    ?result orkg:hasScore?score.
+    ?benchmark orkg:hasName "Atari 2600 Up and Down".
+     FILTER (CONTAINS(LCASE(?metricDefinition), "Score" ) AND 
+     CONTAINS(LCASE(?score), "best performing"))
+     }<|eot_id|>

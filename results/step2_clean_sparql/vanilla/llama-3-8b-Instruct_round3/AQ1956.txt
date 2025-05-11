@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?codeReference
+WHERE {
+ ?paper a bibo:Paper.
+ ?paper orkg:usedModel orkg:CATTS-XSUM.
+ ?paper dc:references ?codeReference.
+ FILTER(?codeReference != "" && LANG(?codeReference) = "en").
+}
+```

@@ -1,0 +1,16 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ SELECT DISTINCT?variable
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+       FILTER(REGEX(?model_lbl, "atmosphere"))
+      ?model    orkgp:compareContribution   ?contrib.
+      ?contrib   orkgp:P32   ?cont         ;
+                  rdfs:label   ?contrib_lbl.
+      ?cont         orkgp:variable   ?variable.
+       ORDER BY DESC(COUNT(?contrib))
+       LIMIT 3
+     }<|eot_id|>

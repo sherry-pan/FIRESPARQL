@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:hasResult ?result.
+ ?result orkg:evaluatedOn ?dataset.
+ ?dataset rdfs:label "Atari 2600 Berzerk dataset".
+ ?result orkg:usesMetric ?metric.
+ FILTER (?metric != orkg:defaultMetric).
+}
+```

@@ -1,0 +1,20 @@
+Question:
+Where can I find code references in papers that have used the STREET model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX orkg: <http://openresearchknowlegde.org/ontology/>
+     SELECT?paper?title?url 
+     WHERE {
+    ?paper orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_reference?ref.
+    ?ref dbpedia:URL?url.
+    ?benchmark rdfs:label?title.
+     FILTER (LOWER(?title) CONTAINS ("street") AND LOWER(?title) CONTAINS ("model"))
+     }
+     LIMIT 10<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasExperiment ?experiment.
+  ?experiment orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset schema:name "Yelp-5".
+  ?experiment orkg:hasMetric ?metric.
+  ?metric schema:name "Accuracy".
+  ?experiment orkg:hasValue ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

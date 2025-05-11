@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BC2GM?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?value 
+     WHERE {
+    ?benchmark a skos:Concept.
+    ?benchmark schema:description "Benchmark".
+    ?benchmark schema:dataset "BC2GM".
+    ?benchmark schema:hasBenchmarkResult?benchmarkResult.
+    ?benchmarkResult schema:metric?metric.
+    ?benchmarkResult schema:value?value.
+     FILTER (?benchmark = <http://purl.org/metrics/benchmark/BC2GM> )
+     ORDER BY DESC(?value) 
+     LIMIT 1
+     }
+    <|eot_id|>

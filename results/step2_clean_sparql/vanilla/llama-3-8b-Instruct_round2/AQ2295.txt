@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web.at/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:title ?title.
+  ?paper orkg:has_contribution ?contribution.
+  ?contribution orkg:utilized_model ?model.
+  ?model rdfs:label "Prior Noop model".
+  ?paper orkg:has_code ?code.
+  FILTER (?title != "")
+}
+```

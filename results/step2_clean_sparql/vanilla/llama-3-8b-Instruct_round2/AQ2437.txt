@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:hasMethod ?method.
+  ?method orkg:usesModel orkg:BiT-S.
+  ?method schema:codeRepository ?code.
+  FILTER (?code != "")
+}
+```

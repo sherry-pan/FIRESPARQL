@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/owl/>
+PREFIX skos: <http://www.w3.org/2004/02/02-skoscore#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarks ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset <http://rdf.orkg.org/orkg/DMControl100k> ;
+             orkg:metric skos:Score ;
+             orkg:result ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

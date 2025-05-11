@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paperID ?title 
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper schema:hasBenchmark ?benchmark.
+ ?benchmark schema:hasDataset "Atari 2600 Frostbite".
+ ?benchmark schema:hasTitle ?title.
+ BIND(replace(str(?paper), "http://example.org/orkg/", "") AS ?paperID)
+}
+```

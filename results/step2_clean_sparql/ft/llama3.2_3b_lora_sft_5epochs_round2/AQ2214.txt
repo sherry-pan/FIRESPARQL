@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+    ?paper rdf:type orkgc:Paper.
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+    ?cont orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+    FILTER(REGEX(?model_lbl, "All-attention network - 18 layers"))
+}
+```

@@ -1,0 +1,23 @@
+Question:
+What are the metrics of evaluation over the iNaturalist 2019 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/1.1/orkg#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:datasetName "iNaturalist 2019".
+    ?dataset orkg:metrics?metric.
+     SERVICE orkg:sparql 
+     { 
+     SELECT?metric 
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:datasetName "iNaturalist 2019".
+    ?metric orkg:metric?metricValue.
+     FILTER (bc:equals(?metricValue, "Accuracy") || bc:equals(?metricValue, "Precision") || bc:equals(?metricValue, "Recall") || bc:equals(?metricValue, "F1 Score") || bc:equals(?metricValue, "Mean Squared Error"))
+     }
+     }
+     LIMIT 5<|eot_id|>

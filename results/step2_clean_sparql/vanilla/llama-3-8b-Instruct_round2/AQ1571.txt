@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?model_name ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model rdfs:label ?model_name.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset rdfs:label "NCBI Disease dataset".
+  ?model orkg:evaluationMetric orkg:F1.
+  ?model orkg:evaluationScore ?f1.
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

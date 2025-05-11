@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P32 ?cont.
+  ?cont orkgp:P29 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "6-layer QRNN"))
+  ?cont orkgp:P30 ?paper.
+  ?paper orkgp:P27 ?code.
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

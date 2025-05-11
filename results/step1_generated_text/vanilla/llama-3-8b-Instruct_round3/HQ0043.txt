@@ -1,0 +1,19 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX orkg: <http://www.orkg.org/>
+     SELECT?var?count
+     WHERE {
+    ?var a orkg:Variable.
+    ?var rdfs:label?varLabel.
+    ?var orkg:hasModel?model.
+    ?model rdfs:label?modelLabel.
+     FILTER (?modelLabel = "atmosphere model" && lang(?varLabel) = "en").
+    ?var orkg:hasCount?count.
+     FILTER (?count > 2).
+     ORDER BY DESC(?count) LIMIT 3
+     }<|eot_id|>

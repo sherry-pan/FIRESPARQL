@@ -1,0 +1,15 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Freeway dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R155901 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P43156?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?contrib orkgp:P43157?value.
+         FILTER(?value > 0)
+         orkgp:P43156?metric?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+         BIND(f filtering(?benchmark_lbl = "Atari 2600 Freeway"^^xsd:string) AS?dataset_lbl)
+     }<|eot_id|>

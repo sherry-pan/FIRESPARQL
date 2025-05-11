@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?metric ?value 
+WHERE {
+  ?model orkg:benchmarkFor ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?benchmark orkg:metric ?metric.
+  ?dataset orkg:dataset "ImageNet 64x64".
+  ?model orkg:metric orkg:bitsPerDim ?value.
+}
+ORDER BY DESC(?value)
+```

@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the Multimodal PISA dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Multimodal PISA")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+                  ?model      rdfs:label              ?model_lbl.}
+     }<|eot_id|>

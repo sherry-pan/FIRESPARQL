@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?dataset ?datasetLabel ?paperCount
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset schema:name ?datasetLabel.
+    ?dataset orkg:isUsedIn ?researchField.
+    ?researchField owl:sameAs <http://dbpedia.org/resource/Category:Joint_Entity_and_Relation_Extraction>.
+    ?dataset orkg:hasPaperCount ?paperCount.
+    FILTER (?paperCount > 10)
+}
+ORDER BY DESC(?paperCount)
+LIMIT 10
+```

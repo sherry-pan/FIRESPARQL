@@ -1,0 +1,36 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?experiment a orkg:Experiment ;
+              orkg:hasResult ?result.
+  ?result a orkg:Result ;
+          orkg:hasMetric ?metric ;
+          orkg:hasValue ?value ;
+          orkg:hasDataset ?dataset.
+  ?dataset dc:title "CL-SciSumm".
+  ?metric orkg:name "ROUGE-2 score".
+  ?model a orkg:Model ;
+         orkg:hasExperiment ?experiment ;
+         orkg:hasResult ?result ;
+         orkg:hasLabel ?modelLabel.
+  
+  {
+    SELECT (MAX(?value) AS ?maxValue)
+    WHERE {
+      ?experiment a orkg:Experiment ;
+                  orkg:hasResult ?result.
+      ?result orkg:hasMetric ?metric ;
+              orkg:hasValue ?value ;
+              orkg:hasDataset ?dataset.
+      ?dataset dc:title "CL-SciSumm".
+      ?metric orkg:name "ROUGE-2 score".
+    }
+  }
+  
+  FILTER(?value = ?maxValue)
+}
+```

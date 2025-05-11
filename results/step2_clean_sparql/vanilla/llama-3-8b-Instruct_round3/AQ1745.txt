@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:evaluatedOn ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:datasetName "BUCC Chinese-to-English benchmark".
+  ?model orkg:evaluationMetric orkg:F1Score.
+  ?model orkg:evaluationValue ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

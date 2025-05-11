@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?bleuScore
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarks ?benchmark ;
+         orkg:metric ?metric ;
+         orkg:performance ?bleuScore ;
+         rdfs:label ?modelLabel.
+  ?benchmark a orkg:Benchmark ;
+              orkg:dataset <http://purl.org/spar/factbook/dataset/RotoWireContentOrdering>.
+  ?metric a orkg:Metric ;
+          rdfs:label "BLEU".
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

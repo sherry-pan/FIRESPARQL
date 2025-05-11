@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the CoNLL 2012 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?f1
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper schema:author?author.
+ ?paper schema:publication?publication.
+ ?publication schema:volume "CoNLL 2012".
+ ?paper schema:metric?metric.
+ ?metric schema:metricType "F1".
+ ?metric schema:metricValue?f1.
+ ?paper schema:model?model.
+  FILTER (?model!= "baseline" &&?f1 = max(?f1) )
+}<|eot_id|>

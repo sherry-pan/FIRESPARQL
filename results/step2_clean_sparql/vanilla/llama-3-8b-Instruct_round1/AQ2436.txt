@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/2019/06/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:benchmarks ?benchmark.
+  ?benchmark orkg:datasets ?dataset.
+  ?dataset rdfs:label "ImageNet".
+  ?dataset rdfs:label "iNat".
+  ?paper orkg:models ?model.
+  ?model rdfs:label "WS-DAN".
+  ?paper orkg:hasCode ?code.
+  ?code a schema:Code.
+}
+```

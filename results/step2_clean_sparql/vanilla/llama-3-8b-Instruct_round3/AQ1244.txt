@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Benchmark ;
+               orkg:hasResult ?result ;
+               orkg:hasDataset ?dataset.
+    ?result orkg:hasMetric ?metric ;
+            orkg:hasScore ?score.
+    ?dataset orkg:name "DTD".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

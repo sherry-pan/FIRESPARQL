@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R153801 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P43135 ?metric.
+    ?metric rdfs:label ?metric_lbl;
+            orkgp:P43134 ?value.
+    ?contrib orkgp:P3514 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    ?dataset_lbl orkgp:P3513 ?dataset_value.
+    FILTER(?dataset_value = "Atari 2600 Tennis")
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?evaluation orkgc:evaluatedOn "MLDoc Zero-Shot English-to-German benchmark"^^xsd:string;
+              orkgc:usesMetric ?metric;
+              orkgc:achievesResult ?result;
+              orkgc:performedBy ?model.
+  ?metric rdfs:label "Accuracy".
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?result)
+LIMIT 1
+```

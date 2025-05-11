@@ -1,0 +1,20 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the SciERC dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?paper?id
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasTitle?title.
+    ?title skos:prefLabel?titleLabel.
+    ?paper orkg:hasDataset?dataset.
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetName "SciERC".
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset?benchmarkDataset.
+    ?benchmarkDataset a orkg:Dataset.
+    ?benchmarkDataset orkg:hasDatasetName "SciERC".
+     }<|eot_id|>

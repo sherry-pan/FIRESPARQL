@@ -1,0 +1,24 @@
+Question:
+What are the metrics of evaluation over the Classical music, 5 seconds at 12 kHz dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?average)
+     WHERE {
+         orkgr:R44950 orkgp:compareContribution?contrib.
+        ?contrib orkgp:HAS_DATASET?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "Classical music, 5 seconds at 12 kHz"))
+        ?contrib orkgp:HAS_METRIC?metric.
+        ?metric rdfs:label?metric_lbl.
+         BIND(xsd:float(?value) AS?value)
+        ?value orkgp:P31?stat.
+        ?stat rdfs:label?stat_lbl.
+         BIND(xsd:float(?average) AS?average)
+         FILTER(?stat_lbl = "accuracy" ||?stat_lbl = "F1" ||?stat_lbl = "Precision" ||?stat_lbl = "recall")
+         {
+          ?contrib orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value)
+         }
+     }
+     ORDER BY DESC(?average)
+     LIMIT 10<|eot_id|>

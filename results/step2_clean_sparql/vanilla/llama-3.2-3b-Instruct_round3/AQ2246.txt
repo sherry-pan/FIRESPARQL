@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper a orkg:Paper;
+         schema:about ?paperID;
+         orkg:sacModel ?sacModel.
+  ?sacModel orkg:code ?code.
+  FILTER (CONTAINS(LCASE(STR(?paper)), "sac"))
+}
+```

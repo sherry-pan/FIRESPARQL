@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://rdf.or.kr/orkg#>
+
+SELECT ?metric ?value
+WHERE {
+   ?result a orkg:Result ;
+        orkg:hasBenchmark ?benchmark ;
+        orkg:hasMetric ?metric ;
+        orkg:hasValue ?value.
+   ?benchmark a orkg:Benchmark ;
+        orkg:hasDataset ?dataset.
+   ?dataset rdfs:label "BC2GM".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

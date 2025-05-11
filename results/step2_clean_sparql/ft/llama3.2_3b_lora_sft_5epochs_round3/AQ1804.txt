@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+             
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_MODEL ?model.
+        
+  ?model rdfs:label ?model_lbl;
+         a orkgp:Model;
+         orkgp:P32 ?cont.
+         
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+     
+  ?value orkgp:Value ?value_num.
+  FILTER (float(?value_num) > 0.5)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

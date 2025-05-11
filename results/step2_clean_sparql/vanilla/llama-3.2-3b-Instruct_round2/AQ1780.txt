@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:isTopModelFor ?benchmark.
+    ?benchmark orkg:isBenchmarkFor ?dataset.
+    ?benchmark schema:name "Oxford-IIIT Pets".
+    ?model orkg:hasTop1ErrorRate ?errorRate.
+    ?errorRate schema:minValue ?minTop1Error.
+}
+ORDER BY ?minTop1Error
+LIMIT 1
+```

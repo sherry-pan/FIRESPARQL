@@ -1,0 +1,13 @@
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+   ?dataset a orkg:Dataset ;
+        orkg:hasName "MLDoc Zero-Shot German-to-French" ;
+        orkg:hasBenchmark ?benchmark.
+   ?benchmark orkg:hasMetric ?metric ;
+        orkg:hasValue ?value.
+   FILTER (?metric = "top result" && ?value != "null")
+}

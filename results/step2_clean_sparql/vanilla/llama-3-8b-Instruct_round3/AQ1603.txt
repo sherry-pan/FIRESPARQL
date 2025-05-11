@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?flops
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper dcterms:title ?title.
+   ?paper orkg:hasResult ?result.
+   ?result a orkg:Result.
+   ?result orkg:metricValue ?flops.
+   ?result orkg:benchmark ?benchmark.
+   ?benchmark dcterms:title "CIFAR-100".
+   ?result orkg:metricName "FLOPS".
+   ?model a orkg:Model.
+   ?model orkg:hasResult ?result.
+}
+```

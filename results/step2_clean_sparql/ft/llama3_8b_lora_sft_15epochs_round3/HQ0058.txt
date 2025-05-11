@@ -1,0 +1,48 @@
+```sparql
+SELECT ?precision ?precision_lbl ?recall ?recall_lbl ?f1 ?f1_lbl
+WHERE {
+  {
+    orkgr:R7844 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R8342 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P34 ?algorithm.
+    ?algorithm rdfs:label ?algorithm_lbl.
+    FILTER(REGEX(?algorithm_lbl, "naive bayes"))
+    
+    ?contrib orkgp:P31 ?feature.
+    ?feature orkgp:P34 ?machine_learning_feature.
+    ?machine_learning_feature rdfs:label ?machine_learning_feature_lbl.
+    FILTER(REGEX(?machine_learning_feature_lbl, "bag of words"))
+    
+    ?contrib orkgp:P2004 ?evaluation.
+    ?evaluation orkgp:P2006 ?precision.
+    ?evaluation orkgp:P2007 ?recall.
+    ?evaluation orkgp:P2008 ?f1.
+    
+    OPTIONAL {
+      ?precision orkgp:P29 ?precision_value.
+      BIND(
+        IF(?precision_value > 0.5, "high", 
+           IF(?precision_value > 0.2, "medium", "low"))
+        AS ?precision_lbl
+      )
+    }
+    OPTIONAL {
+      ?recall orkgp:P28 ?recall_value.
+      BIND(
+        IF(?recall_value > 0.5, "high", 
+           IF(?recall_value > 0.2, "medium", "low"))
+        AS ?recall_lbl
+      )
+    }
+    OPTIONAL {
+      ?f1 orkgp:P29 ?f1_value.
+      BIND(
+        IF(?f1_value > 0.5, "high", 
+           IF(?f1_value > 0.2, "medium", "low"))
+        AS ?f1_lbl
+      )
+    }
+  }
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?model ?accuracy 
+WHERE {
+    ?model orkg:hasModel ?performance.
+    ?performance skos:prefLabel ?label.
+    ?performance orkg:hasAccuracy ?accuracy.
+    FILTER (
+        CONTAINS(LCASE(?label), "zero-shot english-german") &&
+        CONTAINS(LCASE(?label), "benchmark") &&
+        CONTAINS(LCASE(?label), "dataset") &&
+        CONTAINS(LCASE(?label), "accuracy")
+    )
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

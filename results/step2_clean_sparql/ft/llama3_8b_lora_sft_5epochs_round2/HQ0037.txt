@@ -1,0 +1,12 @@
+```sparql
+SELECT ?author
+WHERE {
+  ?contrib orkgp:P27 ?author.
+  ?contrib orkgp:P31 ?paper.
+  ?paper rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "coronavirus"))
+}
+GROUP BY ?author
+ORDER BY DESC(COUNT(?paper))
+LIMIT 1
+```

@@ -1,0 +1,23 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset RotoWire (Relation Generation)?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/sawz/orkg/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikibase.org/bash#>
+     SELECT?metric?value
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:relationGeneration?relationGeneration.
+    ?relationGeneration a orkg:RelationGeneration.
+    ?dataset a dbo:Dataset.
+    ?dataset schema:datasetType "RotoWire".
+    ?metric rdfs:label?metricLabel.
+    ?metric wikibase:rankedList?metricRankedList.
+    ?metricRankedList schema:mainEntity?metricValue.
+    ?metricValue schema:value?value.
+    ?dataset a wikibase:Dataset.
+     FILTER (CONTAINS(LCASE(?metricLabel), "Top Benchmark Result"))
+     }<|eot_id|>

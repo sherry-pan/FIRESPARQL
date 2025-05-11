@@ -1,0 +1,20 @@
+Question:
+List the code links in papers that use the Duel noop model in any benchmark?
+
+Generated SPARQL:
+PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper dc:references?benchmark.
+ ?benchmark rdfs:label?benchmark_label.
+  FILTER (?benchmark_label = "Duel noop model" ||?benchmark_label = "duel noop model" ||?benchmark_label = "Duel Noop Model").
+ ?paper orkg:uses_code?code_link.
+}<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://schema.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasBenchmark ?benchmark ;
+         orkg:hasDataset ?dataset.
+  ?benchmark orkg:hasMetric ?metric ;
+             orkg:hasScore ?score.
+  ?dataset rdfs:label "ImageNet V2".
+  FILTER (?metric = xsd:string("top benchmark score"))
+}
+```

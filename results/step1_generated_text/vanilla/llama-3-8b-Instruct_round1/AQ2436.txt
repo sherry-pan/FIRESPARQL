@@ -1,0 +1,25 @@
+Question:
+Can you provide links to code used in papers that benchmark the ImageNet + iNat on WS-DAN model?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semanticweb.org/orkg/2019/06/orkg#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wgs: <http://www.w3.org/2003/06/sw-vocab-status/wgs/>
+
+SELECT?paper?code
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark orkg:datasets?dataset.
+ ?dataset rdfs:label "ImageNet".
+ ?dataset rdfs:label "iNat".
+ ?paper orkg:models?model.
+ ?model rdfs:label "WS-DAN".
+ ?paper orkg:hasCode?code.
+  FILTER(?benchmark rdfs:label?benchmarkLabel.
+        str(?benchmarkLabel) = "benchmark".
+       ?code a schema:Code.
+        ). }<|eot_id|>

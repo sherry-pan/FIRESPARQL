@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R83401 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P43150 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P43151 ?value.
+    ?value rdfs:label ?value_lbl.
+    FILTER(REGEX(STR(?value_lbl), "Cartpole, swingup (DMControl500k)"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

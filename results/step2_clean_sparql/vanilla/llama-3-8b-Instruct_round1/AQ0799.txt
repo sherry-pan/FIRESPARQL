@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+    orkg:has_contribution ?contribution .
+  ?contribution orkg:evaluated_on orkg:CoQA ;
+    orkg:has_contribution_metric ?metric ;
+    rdfs:label ?label .
+  FILTER (?label = "CoQA benchmark dataset").
+}
+```

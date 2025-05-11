@@ -1,0 +1,16 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:dataset ?dataset.
+  ?dataset schema:datasetName "RotoWire (Content Ordering)".
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark schema:metric ?metric.
+  FILTER (STR(?metric) = "BLEU")
+}
+LIMIT 1
+```

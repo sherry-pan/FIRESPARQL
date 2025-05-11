@@ -1,0 +1,18 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX orkg: <http://www.openresearch.org/ontologies/orkg/>
+     SELECT?location 
+     WHERE {
+    ?study?location rdfs:label?label.
+    ?study orkg:hasLocation?location.
+    ?location dbo:population?population.
+     FILTER (STR(?population) > 0)
+     GROUP BY?location
+     ORDER BY COUNT(?population) DESC
+     LIMIT 1
+     }<|eot_id|>

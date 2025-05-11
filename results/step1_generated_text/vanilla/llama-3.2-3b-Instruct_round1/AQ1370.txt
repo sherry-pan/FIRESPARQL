@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Nottingham dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX ork: <http://opendata.eu/ork/>
+
+     SELECT?metric?score 
+     WHERE {
+        ?benchmark a ork:Benchmark.
+        ?benchmark ork:hasMetric?metric.
+        ?metric ork:hasScore?score.
+        ?benchmark ork:hasDataset "Nottingham".
+        ?benchmark rdfs:label?label.
+         FILTER (STRIKE?label "top" i).
+        ?score skos:prefLabel?topScore.
+     }<|eot_id|>

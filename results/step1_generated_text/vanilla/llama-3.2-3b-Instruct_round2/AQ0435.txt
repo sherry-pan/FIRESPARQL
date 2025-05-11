@@ -1,0 +1,22 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ImageNet 64x64 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX dbp-skos: <http://dbpedia.org/ontology/skos#>
+     PREFIX wdp: <http://dbpedia.org/2012/02/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper schema:description?description.
+     FILTER (contains(STR(?description), "ImageNet 64x64")).
+    ?paper wdp:hasBenchmark?benchmark.
+    ?benchmark dbp-skos:definition?benchmarkDefinition.
+    ?paper dbp-skos:notation?notation.
+    ?paper skos:prefLabel?paperTitle.
+    ?paper schema:identifier?paperId.
+     }<|eot_id|>

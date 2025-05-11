@@ -1,0 +1,18 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://orcg.org/ontology/>
+
+SELECT ?model ?f1score
+WHERE {
+  ?model orkg:contributed_to ?dataset.
+  ?dataset schema:datasetType "Penn Treebank".
+  ?model orkg:hasModelEvaluation ?evaluation.
+  ?evaluation schema:evaluationMetric "F1 score".
+  ?evaluation schema:evaluationValue ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

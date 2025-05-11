@@ -1,0 +1,15 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?concept?concept_lbl
+     WHERE {
+       orkgr:R155154 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P41379?representation.
+      ?representation rdfs:label?representation_lbl.
+       FILTER(REGEX(STR(?representation_lbl), "common", "i"))
+      ?contrib orkgp:P7034?concept.
+      ?concept rdfs:label?concept_lbl.
+     }
+     ORDER BY DESC(COUNT(?concept_lbl))
+     LIMIT 1<|eot_id|>

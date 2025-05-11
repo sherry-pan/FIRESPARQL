@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dataset: <http://rdf.orkg.org/dataset/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             rdfs:label ?label ;
+             orkg:dataset dataset:RotoWire ;
+             orkg:benchmarkResult ?result.
+  ?result orkg:metric ?metric ;
+          orkg:value ?value.
+  FILTER (?label = "Relation Generation" && ?metric = "Top Benchmark Result").
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric 
+WHERE {
+  ?metric rdfs:label ?l.
+  FILTER (regex(?l, "CommonsenseQA benchmark"))
+}
+GROUP BY ?metric 
+HAVING (count(?metric) > 1)
+ORDER BY (count(?metric) DESC)
+LIMIT 1
+```

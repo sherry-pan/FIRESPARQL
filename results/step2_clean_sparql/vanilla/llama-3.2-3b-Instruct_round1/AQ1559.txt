@@ -1,0 +1,10 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c-wsdl#>
+SELECT ?model ?accuracy
+WHERE {
+    ?model wdt:P301 ?model_label.
+    ?model wdt:P154 ?accuracy_sst5.
+    FILTER (STR(?accuracy_sst5) = "Accuracy").
+    FILTER (REGEX(STR(?accuracy_sst5), "SST-5"))
+}
+```

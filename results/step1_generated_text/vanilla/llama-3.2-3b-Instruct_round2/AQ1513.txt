@@ -1,0 +1,29 @@
+Question:
+What is the name of the top performing model in terms of A2 score when benchmarked on the ANLI test dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX bio2vec: <http://bio2vec.org/ontology/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX wkm: <http://www.wikidata.org/ontology/>
+     SELECT?model 
+     WHERE {
+      ?model rdfs:label?label.
+      ?model schema:description "Top performing model".
+      ?model orkg:benchmark?benchmark.
+      ?benchmark schema:mainEntity?entity.
+      ?entity schema:mainEntityOfPage?page.
+      ?page dbpedia:wikiPageID "Q12345678".
+      ?benchmark orkg:benchmarkingFramework "ANLI".
+      ?benchmark orkg:benchmarkingMetric "A2".
+      ?model rdfs:label?label.
+       filter (lang(?label) = "en")
+       filter (contains(str(?label), "model")
+       )
+     }<|eot_id|>

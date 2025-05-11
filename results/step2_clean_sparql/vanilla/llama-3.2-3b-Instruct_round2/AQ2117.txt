@@ -1,0 +1,13 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?reference
+WHERE {
+  ?paper schema:description ?description.
+  FILTER (CONTAINS(STR(?description), 'SRU++ Base') && CONTAINS(STR(?description), 'benchmarking'))
+  ?paper orkg:hasCode ?reference
+}
+```

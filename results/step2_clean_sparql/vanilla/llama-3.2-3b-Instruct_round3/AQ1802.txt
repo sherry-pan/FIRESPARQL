@@ -1,0 +1,13 @@
+```sparql
+PREFIX vocab: <http://purl.org/vocab/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?model vocab:hasBenchmark "Reuters En-De".
+    ?model vocab:hasAccuracy ?accuracy.
+    ?accuracy schema:numericValue ?numericValue.
+}
+ORDER BY DESC(?numericValue)
+LIMIT 1
+```

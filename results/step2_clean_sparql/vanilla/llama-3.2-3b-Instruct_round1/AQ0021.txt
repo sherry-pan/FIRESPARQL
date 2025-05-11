@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?model 
+WHERE {
+  ?model dbpedia:dataset "TDMSci".
+  ?model dbpedia:hasModel ?m.
+  ?m rdfs:label ?modelLabel.
+  FILTER (lang(?modelLabel) = "en")
+}
+ORDER BY DESC(?modelLabel)
+```

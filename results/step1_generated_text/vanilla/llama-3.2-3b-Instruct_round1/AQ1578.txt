@@ -1,0 +1,23 @@
+Question:
+What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?metric?score
+     WHERE {
+    ?model schema:abstract?a.
+    ?a schema:description?d.
+    ?d schema:potentialEvaluationMetric "ROUGE-2"@en.
+    ?model schema:dataset?ds.
+    ?ds schema:potentialDataset "X-Sum"@en.
+    ?model orkg:hasBenchmark?b.
+    ?b schema:metric?m.
+    ?m schema:metricType "ROUGE"@en.
+    ?m schema:metricValue?score.
+     filter (str(?m) = "ROUGE-2"@en)
+     }<|eot_id|>

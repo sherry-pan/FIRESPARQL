@@ -1,0 +1,32 @@
+Question:
+Indicate the model that performed best in terms of Pearson Correlation metric on the MedSTS benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Pearson Correlation")
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "MedSTS")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                        orkgp:HAS_METRIC         ?metric.
+         BIND(
+           if(?value = "0.955"^^xsd:string,
+               "Model not shown in the plot",
+              ?value            )
+           AS?score)
+        ?cont      orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_MODEL         ?model.
+         BIND(
+           if(?model_lbl = "No model"^^xsd:string,
+              ?model       as?model_lbl,
+              ?model_lbl  as?model_lbl)
+           AS?model_lbl)
+         BIND(xsd:integer(?score) AS?coefficient)
+         FILTER(?coefficient > 0.95)
+         ORDER BY DESC(?coefficient)
+         LIMIT 1<|eot_id|>

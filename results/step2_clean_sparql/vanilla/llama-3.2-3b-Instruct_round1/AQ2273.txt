@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:usesModel "AcrE".
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:hasLink ?link.
+  ?link rdfs:label ?linkLabel.
+  FILTER(LANG(?linkLabel) = 'en')
+}
+ORDER BY ?paper
+```

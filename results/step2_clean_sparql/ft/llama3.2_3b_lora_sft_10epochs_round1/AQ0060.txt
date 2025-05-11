@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "GAD")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:P31 ?test.
+    ?test rdfs:label ?test_lbl.
+    BIND(xsd:string(?test_lbl) AS ?model_lbl)
+    ?model orkgp:HAS_TEST ?test.
+}
+```

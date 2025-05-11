@@ -1,0 +1,18 @@
+Question:
+Provide a list of papers that have utilized the MEMEN model and include the links to their code?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paper?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:hasMethod?method.
+ ?method orkg:usesModel?model.
+ ?model rdfs:label "MEMEN".
+ ?paper orkg:hasCode?code.
+  FILTER lang(?code) = "text/plain".
+}<|eot_id|>

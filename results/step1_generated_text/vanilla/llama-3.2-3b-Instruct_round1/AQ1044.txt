@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Softcite dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     SELECT?metric?score 
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasMetric?metric.
+    ?benchmark schema:hasScore?score.
+    ?benchmark schema:hasDataset?dataset.
+    ?dataset rdfs:label "Softcite".
+     ORDER BY DESC(?score) 
+     LIMIT 1 
+     }<|eot_id|>

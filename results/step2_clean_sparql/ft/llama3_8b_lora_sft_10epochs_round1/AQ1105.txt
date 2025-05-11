@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R6388 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R6890 orkgp:compareContribution ?contrib.
+  }
+  ?contrib orkgp:P34831 ?benchmark;
+           orkgp:P34829 ?model.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "WMT2014 French-English"))
+  ?contrib orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P4310 ?metric.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "translate"))
+}
+ORDER BY DESC(?score)
+```

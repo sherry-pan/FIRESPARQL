@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX sac: <http://sac-model.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper rdfs:label ?paperTitle.
+    ?paper sac:utilizedSAC ?sacModel.
+    ?sacModel rdfs:label ?sacModelLabel.
+    ?sacModel schema:softwareCode ?codeLink.
+    FILTER (regex(?sacModelLabel, "SAC", "i"))
+}
+```

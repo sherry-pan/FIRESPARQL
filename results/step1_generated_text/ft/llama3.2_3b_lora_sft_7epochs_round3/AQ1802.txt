@@ -1,0 +1,26 @@
+Question:
+Which model has achieved the highest Accuracy score on the Reuters En-De benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Reuters En-De")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:P32               ?metric;
+                         orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?eval           orkgp:P31               ?comparison.
+                  ?comparison      orkgp:HAS_VALUE        ?value.
+                  ?comparison      rdfs:label              ?comparison_lbl.
+                   FILTER (str(?comparison_lbl) = "greater than")
+                   }
+         OPTIONAL {?eval           orkgp:P32               ?metric;
+                    orkgp:HAS_VALUE        ?value.
+                   ?metric      orkgp:HAS_MODEL     ?model.
+                   ?model      rdfs:label              ?model_lbl.}
+         BIND(xsd:int(?value) AS?value)
+         BIND(xsd:string(?metric) AS?metric)
+         ORDER BY DESC(?value)
+         LIMIT 1<|eot_id|>

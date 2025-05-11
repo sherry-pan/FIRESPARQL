@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (COUNT(?value) AS?number_of_data_points)
+     WHERE {
+         orkgr:R67593 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset orkgp:P32?dataset_label.
+         BIND(xsd:integer(?dataset_label) AS?metric_lbl)
+        ?contrib orkgp:P27?metric.
+        ?metric rdfs:label?metric_lbl.
+         FILTER(REGEX(?metric_lbl, "seel.cse.lsu.edu/data/re17.zip"))
+        ?contrib orkgp:P33?value.
+         BIND(xsd:float(?value) AS?value)
+     }
+     ORDER BY?number_of_data_points DESC
+     LIMIT 10<|eot_id|>

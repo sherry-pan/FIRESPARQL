@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocab#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?model 
+WHERE {
+    ?model schema:name ?name.
+    ?model wdt:P3017 ?score.
+    ?model wdt:P3016 "CL-SciSumm".
+    FILTER (REGEX(STR(?score), "ROUGE-2") && ?score > 0)
+}
+ORDER BY DESC(?score) 
+LIMIT 1
+```

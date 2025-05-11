@@ -1,0 +1,18 @@
+Question:
+Provide a list of papers that have utilized the Rainbow+SEER model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?title?link
+     WHERE {
+    ?paper orkg:utilized?model.
+    ?paper orkg:utilized?model ;
+       orkg:model?modelURI.
+    ?modelURI rdfs:label?model.
+     FILTER (CONTAINS(Lower(?model), "rainbow+seer").
+    ?paper orkg:code?link.
+     FILTER (CONTAINS(Lower(?link), "https://github.com/")) 
+     }<|eot_id|>

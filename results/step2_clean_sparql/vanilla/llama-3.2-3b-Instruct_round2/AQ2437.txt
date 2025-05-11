@@ -1,0 +1,23 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bio4x: <http://www.biopax.org/repositories/bio4x#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?link
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasUtilized ?utilization.
+    ?utilization a orkg:BiT-S.
+    ?utilization schema:url ?link.
+    ?paper schema:hasCode ?code.
+    ?code schema:code "https://github.com/your/ResNet.git".
+    ?paper orkg:hasTitle ?title.
+}
+LIMIT 10
+```

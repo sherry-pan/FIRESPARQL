@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?experiment a orkg:Experiment ;
+              orkg:hasModel ?model ;
+              orkg:hasMetric ?metric ;
+              orkg:hasBenchmark ?benchmark ;
+              orkg:hasResult ?result.
+
+  ?metric a orkg:Metric ;
+          rdfs:label "Accuracy".
+  
+  ?benchmark rdfs:label "MLDoc Zero-Shot English-to-German".
+  ?result orkg:hasValue ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

@@ -1,0 +1,27 @@
+Question:
+Provide a list of papers that have utilized the A3C LSTM hs model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX wkm: <http://www.wkm.io/ontology/>
+
+     SELECT?paper?code
+     WHERE {
+    ?paper a orkg:Paper.
+     orkg:hasAuthor?author.
+    ?author foaf:name?authorName.
+    ?paper schema:abstract?abstract.
+     filter regex(str(?abstract), "A3C LSTM hs").
+    ?paper orkg:hasCode?code.
+    ?code schema:code?code.
+     }
+     ORDER BY?paper
+     LIMIT 10
+     ```<|eot_id|>

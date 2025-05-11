@@ -1,0 +1,28 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?study ?precision ?recall ?f1
+WHERE {
+   ?study a orkg:Study.
+   ?study orkg:hasMethod ?method.
+   ?method orkg:hasAlgorithm ?algorithm.
+   ?algorithm orkg:name "Naive Bayes".
+   ?study orkg:hasFeature ?feature.
+   ?feature orkg:hasName "Bag of Words".
+   ?study orkg:hasTask ?task.
+   ?task orkg:hasTaskType "Classify user feedback as feature request".
+   ?study orkg:hasEvaluation ?evaluation.
+   ?evaluation orkg:hasMetric ?metric.
+   ?metric orkg:name ?metricName.
+   FILTER (?metricName = "Precision" || ?metricName = "Recall" || ?metricName = "F1").
+   ?evaluation orkg:hasValue ?value.
+   BIND (IF(?metricName = "Precision", xsd:float(?value), 0) AS ?precision)
+   BIND (IF(?metricName = "Recall", xsd:float(?value), 0) AS ?recall)
+   BIND (IF(?metricName = "F1", xsd:float(?value), 0) AS ?f1)
+}
+```

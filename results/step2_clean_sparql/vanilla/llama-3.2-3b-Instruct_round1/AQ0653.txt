@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?title ?id 
+WHERE {
+    ?paper schema:description ?description.
+    FILTER (REGEX (STR(?description), "SciCite", "i"))
+    ?paper schema:title ?title.
+    ?paper schema:identifier ?id.
+}
+LIMIT 10
+```

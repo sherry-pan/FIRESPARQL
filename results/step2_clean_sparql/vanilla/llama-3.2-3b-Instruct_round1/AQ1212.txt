@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?s orkg:hasBenchmarkResult ?benchmark.
+    ?benchmark orkg:hasDataset "BC5CDR-chemical".
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasValue ?value.
+    ?benchmark rdfs:label ?benchmarkLabel.
+    FILTER (CONTAINS(LCASE(?benchmarkLabel), "highest"))
+}
+```

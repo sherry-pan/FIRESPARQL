@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkg: <http://purl.org/orch/orkg/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:utilizes ?utilization.
+  ?utilization orkg:utilizesModel ?mmv.
+  ?mmv orkg:version "50x2".
+  ?paper orkg:hasCode ?code.
+  ?code orkg:hasUrl ?url.
+  FILTER (
+    CONTAINS(LCASE(?url), "github.com") ||
+    CONTAINS(LCASE(?url), "gitlab.com") ||
+    CONTAINS(LCASE(?url), "git.io") ||
+    CONTAINS(LCASE(?url), "zenodo.org") ||
+    CONTAINS(LCASE(?url), "arxiv.org") ||
+    CONTAINS(LCASE(?url), "doi.org") ||
+    CONTAINS(LCASE(?url), "osf.io") ||
+    CONTAINS(LCASE(?url), "bioarch.org") ||
+    CONTAINS(LCASE(?url), "bioarxiv.org") ||
+    CONTAINS(LCASE(?url), "biorxiv.org")
+  )
+}
+```

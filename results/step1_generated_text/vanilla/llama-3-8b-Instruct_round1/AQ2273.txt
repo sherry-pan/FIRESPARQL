@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the AcrE model and include the links to their code?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?code
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:usesModel orkg:AcrE.
+ ?paper bibo:isDocumentOf?document.
+ ?document dc:identifier?uri.
+ ?paper prov:wasGeneratedBy?code.
+ ?code a schema:SoftwareSourceCode.
+  FILTER (lang(?uri) = "en")
+}<|eot_id|>

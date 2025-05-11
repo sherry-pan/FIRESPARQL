@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label ?metric_lbl.
+    FILTER (str(?metric_lbl) = "Pre-Training Dataset")
+    ?result orkgc:resultHasBenchmark orkgc:HMDB51;
+            orkgc:resultHasModel ?model;
+            orkgc:resultHasMetric ?metric.
+    ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

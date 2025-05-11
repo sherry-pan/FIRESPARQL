@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasBenchmark ?benchmark ;
+         orkg:hasScore ?score.
+  ?benchmark a orkg:Atari2600FreewayBenchmark ;
+             dbo:dataset ?dataset.
+  ?dataset dc:title "Freeway".
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

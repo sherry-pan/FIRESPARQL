@@ -1,0 +1,14 @@
+```sparql
+SELECT ?paper ?link 
+WHERE {
+  ?paper a owl:NamedGraph.
+  ?paper rdfs:label ?label.
+  FILTER (CONTAINS(STR(?label), "FABIR") && CONTAINS(STR(?label), "benchmark") && CONTAINS(STR(?label), "model")).
+  SERVICE dfn:query { 
+    bd:serviceParam <http://example.org/sparql#> { 
+      ?paper wdt:P31 wd:Q5; 
+      wdt:P577 ?link 
+    } 
+  } 
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX wotc: <http://purl.org/wotc/wotc-models/>
+PREFIX wotd: <http://purl.org/wotd/wotd-models/>
+
+SELECT ?model ?score
+WHERE {
+  ?model wotc:hasMetric ?score.
+  FILTER (STR(?score) =~ "BLEU")
+  FILTER (CONTAINS(?score, "WMT2016 English-German") 
+      AND CONTAINS(?score, "benchmark dataset"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

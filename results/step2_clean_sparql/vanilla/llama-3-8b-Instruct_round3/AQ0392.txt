@@ -1,0 +1,14 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?title ?id
+WHERE {
+   ?paper a orkg:ResearchPaper.
+   ?paper orkg:hasBenchmark ?benchmark.
+   ?benchmark orkg:dataset ?dataset.
+   ?dataset rdfs:label "Penn Treebank".
+   ?paper orkg:hasTitle ?title.
+   ?paper orkg:hasID ?id.
+}

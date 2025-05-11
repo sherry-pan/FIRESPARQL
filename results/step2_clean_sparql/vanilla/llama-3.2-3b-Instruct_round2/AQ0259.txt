@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model 
+WHERE {
+  ?model a orkg:Model.
+  ?model rkg:evaluationOn ?eval.
+  ?eval rkg:dataset "Atari 2600 Solaris".
+  SERVICE orkg:query { 
+    ?model orkg:label ?label.
+    FILTER (lang(?label) = "en")
+  }
+}
+ORDER BY ASC(?model)
+```

@@ -1,0 +1,18 @@
+Question:
+Where can I find code references in papers that have used the DeiT-Ti model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?paper?code
+     WHERE {
+      ?paper a ork:Paper.
+      ?paper schema:hasPart?code.
+      ?paper schema:hasCitation?citation.
+      ?citation schema:hasCitation?citationRef.
+      ?citation schema:hasCitation?citationRef.
+      ?citationRef schema:hasBibliographicCitation "DeiT-Ti".
+      ?paper schema:hasBeenBenchmarkedBy?benchmark.
+      ?benchmark schema:hasBenchmarkingUseCase "benchmarking".
+     }<|eot_id|>

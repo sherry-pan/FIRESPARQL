@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ork: <http://orkg.org/ontology/>
+
+SELECT ?paper ?title ?link
+WHERE {
+  ?paper ork:hasModel "AlexNet".
+  ?paper ork:hasModel "MultiGrasp".
+  ?paper ork:hasCode ?code.
+  ?code ork:hasLicense "Open Source".
+  ?code ork:hasLink ?link.
+  ?link ork:hasTitle ?title.
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

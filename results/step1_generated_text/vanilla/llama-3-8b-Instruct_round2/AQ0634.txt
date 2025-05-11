@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Amazon-2 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+         orkg:hasTitle?title ;
+         orkg:hasID?id.
+ ?paper orkg:mentions?benchmark.
+ ?benchmark orkg:hasDataset?dataset.
+ ?dataset schema:name "Amazon-2".
+}<|eot_id|>

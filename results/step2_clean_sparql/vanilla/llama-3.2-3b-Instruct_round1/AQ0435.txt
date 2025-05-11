@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/orcg>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark schema:hasDataset ?dataset.
+    ?dataset schema:datasetType "ImageNet 64x64".
+    ?paper orkg:id ?id.
+    ?paper orkg:title ?title.
+    FILTER (?benchmark IS NOT NULL)
+}
+```

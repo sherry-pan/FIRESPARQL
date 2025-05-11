@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <https://wifo5-neo-project.org/orkg/>
+PREFIX wmt: <https://wifo5-neo-project.org/wmt/>
+SELECT ?model 
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasDataset wmt:WMT2016_English_German ;
+              orkg:hasMetric ?metric.
+  FILTER (?metric IN ("evaluation", "score", "system", "test"))
+}
+```

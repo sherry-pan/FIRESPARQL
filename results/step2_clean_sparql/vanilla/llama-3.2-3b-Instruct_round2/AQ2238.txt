@@ -1,0 +1,18 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dce: <http://dbpedia.org/ontology/>
+PREFIX mpa: <http://dbpedia.org/ontology/MPAD_path>
+
+SELECT ?p ?reference
+WHERE {
+  ?p a wdt:P31;
+     rdfs:label "code reference"@en;
+     dce:hasPaper ?paper.
+  ?paper mpa:hasBenchmarked ?benchmark.
+  ?benchmark mpa:usesMPADpath;
+            rdfs:label "MPAD-path"@en.
+  ?paper dce:hasCode ?code.
+  ?code dce:hasReference ?reference.
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?metricLabel
+WHERE {
+  ?dataset a orkg:Dataset ;
+           rdfs:label "Stanford Cars"@en.
+  ?dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER(LANG(?metricLabel) = "en")
+}
+```

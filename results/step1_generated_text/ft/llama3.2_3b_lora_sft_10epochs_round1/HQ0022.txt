@@ -1,0 +1,44 @@
+Question:
+Does paper "Disambiguating authors in citations on the web and authorship correlations" employe Cosine similarity?
+
+Generated SPARQL:
+ SELECT?similarities
+     WHERE {
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?author.
+      ?paper orkgp:P5004?author_name.
+      ?author rdfs:label?author_labels.
+      ?author orkgp:HAS_AUTHOR?author.
+      ?author orkgp:P5003?value;
+              rdfs:label?similarities.
+       FILTER(REGEX(STR(?author_labels), "Cosine ")
+      ?paper orkgp:P7034?papers_with_cosine_similarity.
+       BIND(
+         {
+           SELECT?similarities
+           WHERE {
+            ?papers_with_cosine_similarity a?papers_with_cosine_similarity.
+            ?papers_with_cosine_similarity orkgp:P7034?value.
+            ?value rdfs:label?similarities.
+           }
+         } AS?cosine_similarity)
+       FILTER(?similarities > 0.05)
+       FILTER(?similarities <= 1)
+       BIND(IF(?similarities = 1, 1,?similarities) AS?average_cosine_similarity)
+       BIND(AVG(?average_cosine_similarity) AS?average_similarities)
+       BIND(COUNT(?average_cosine_similarity) AS?number_of_papers)
+       BIND(
+         {
+           SELECT?similarities
+           WHERE {
+            ?papers_with_cosine_similarity a?papers_with_cosine_similarity.
+            ?papers_with_cosine_similarity orkgp:P7034?value.
+            ?value rdfs:label?similarities.
+           }
+         } AS?all_cosine_similarity)
+       FILTER(?all_cosine_similarity =?average_cosine_similarity)
+       BIND(
+         {
+           SELECT?similarities
+           WHERE {
+            ?papers_with_cosine_similarity a?papers_with

@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper schema:description ?desc.
+  FILTER (CONTAINS(STR(?desc), "Switch Transformer") AND CONTAINS(STR(?desc), "model")).
+  ?paper orkg:codeLink ?codeLink.
+}
+```

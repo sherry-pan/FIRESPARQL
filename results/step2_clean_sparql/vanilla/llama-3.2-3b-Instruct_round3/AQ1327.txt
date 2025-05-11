@@ -1,0 +1,13 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX imdb: <http://dbpedia.org/ontology/imdb>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a dbo:benchmark.
+  ?benchmark imdb:dataset "IMDb-M".
+  ?benchmark imdb:metric ?metric.
+  ?benchmark imdb:bestResult ?value.
+  FILTER (lang(?metric) = "en" AND lang(?value) = "en")
+}
+```

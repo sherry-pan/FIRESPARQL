@@ -1,0 +1,20 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SQuAD2.0 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "SQuAD2.0")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                ?metric          rdfs:label              ?metric_lbl.}
+       FILTER (str(?metric_lbl) = "F1", str(?metric_lbl) = "EM", 
+              str(?metric_lbl) = "P", str(?metric_lbl) = "ROUGE-N", 
+              str(?metric_lbl) = "ROUGE-L", str(?metric_lbl) = "BLEU", 
+              str(?metric_lbl) = "CIDEr", str(?metric_lbl) = "METEOR", 
+              str(?metric_lbl) = "METEOR (w/o spaces)", str(?metric_lbl) = "ROUGE-103", 
+              str(?metric_lbl) = "ROUGE-L (w/o spaces)")
+       }<|eot_id|>

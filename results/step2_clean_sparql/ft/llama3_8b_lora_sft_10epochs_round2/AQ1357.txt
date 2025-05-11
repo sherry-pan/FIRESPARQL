@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R6948 orkgp:compareContribution ?cont.
+  } UNION {
+    orkgr:R8314 orkgp:compareContribution ?cont.
+  }
+  ?dataset orkgp:P31 ?cont;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "BUCC German-to-English"))
+  ?cont orkgp:P8046 ?eval.
+  ?eval orkgp:P34 ?metric;
+        orkgp:HAS_VALUE ?value;
+        orkgp:P33 ?metric_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

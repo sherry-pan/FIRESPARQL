@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/>
+PREFIX gym: <http://purl.org/orkg/game/Gym/>
+PREFIX metric: <http://purl.org/orkg/metric/>
+
+SELECT ?metric ?score
+WHERE {
+  ?result a orkg:Result ;
+    orkg:dataset gym:CartPole ;
+    orkg:metric ?metric ;
+    orkg:score ?score.
+  FILTER (?metric = metric:BenchmarkResult)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

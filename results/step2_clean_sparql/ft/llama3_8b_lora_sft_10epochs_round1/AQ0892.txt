@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Habitat 2020 Object Nav test-std")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  OPTIONAL {
+    ?cont orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+  }
+}
+```

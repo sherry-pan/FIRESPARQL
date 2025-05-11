@@ -1,0 +1,18 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/orkg#>
+PREFIX cfp: <http://www.openresearchknowledge.org/ontology/cfp#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDuelNoop ?code.
+  ?benchmark schema:description ?benchmarkDescription.
+  FILTER (CONTAINS(LCASE(STR(?benchmarkDescription)), "duel noop") && (CONTAINS(LCASE(STR(?benchmarkDescription)), "benchmark") || CONTAINS(LCASE(STR(?benchmarkDescription)), "test")))
+}
+```

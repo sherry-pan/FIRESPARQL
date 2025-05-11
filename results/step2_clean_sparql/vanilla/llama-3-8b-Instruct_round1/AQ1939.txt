@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paper_title ?code_reference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper rdfs:label ?paper_title.
+  ?paper bibo:has_concept_mention ?concept_mention.
+  ?concept_mention owl:sameAs <http://www.semantic-web-journal.net/orkg/concept_mention_extraction_model>.
+  ?paper bibo:has_code_reference ?code_reference.
+  FILTER (?paper_title = "benchmarking purposes")
+}
+```

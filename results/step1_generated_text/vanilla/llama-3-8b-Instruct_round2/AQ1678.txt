@@ -1,0 +1,26 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the MLDoc Zero-Shot English-to-French dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?modelLabel?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmark?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:hasDataset?dataset.
+ ?dataset a orkg:Dataset.
+ ?dataset rdfs:label "MLDoc Zero-Shot English-to-French".
+ ?benchmark orkg:hasMetric?metric.
+ ?metric a orkg:Metric.
+ ?metric rdfs:label "Accuracy".
+ ?benchmark orkg:hasValue?value.
+ ?value a xsd:float.
+ ?model orkg:hasValue?value.
+  FILTER (?value = MAX(?value) )
+ ?model rdfs:label?modelLabel.
+}<|eot_id|>

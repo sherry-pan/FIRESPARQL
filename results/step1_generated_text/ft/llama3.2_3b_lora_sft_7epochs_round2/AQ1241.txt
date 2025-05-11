@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the CINIC-10 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R8346 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label "CINIC-10"^^xsd:string.
+        ?contrib orkgp:P36?eval.
+         OPTIONAL {?eval orkgp:P34?metric.}
+         OPTIONAL {?eval orkgp:P35?metric_lbl.}
+        ?eval orkgp:P32?value.
+         BIND(xsd:float(?value) AS?value)
+     }<|eot_id|>

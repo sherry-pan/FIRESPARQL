@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?rouge2
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmarks ?benchmark.
+   ?benchmark orkg:dataset <http://www.openresearchknowledgegraph.org/datasets/X-Sum>.
+   ?benchmark orkg:metric "ROUGE-2".
+   ?benchmark orkg:result ?rouge2.
+   ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?rouge2)
+LIMIT 1
+```

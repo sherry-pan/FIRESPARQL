@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model;
+         orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset;
+             orkg:metric ?metric;
+             orkg:result ?result.
+  ?dataset rdfs:label "Atari 2600 Up and Down".
+  ?metric rdfs:label "Score".
+  ?result orkg:value ?score.
+
+  ?model orkg:performance ?bestPerformance.
+  ?bestPerformance orkg:metric ?bestMetric;
+                   orkg:value ?bestScore.
+  ?bestMetric rdfs:label "Score".
+
+  FILTER(?score = ?bestScore).
+}
+```

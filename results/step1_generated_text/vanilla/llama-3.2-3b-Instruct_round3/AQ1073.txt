@@ -1,0 +1,22 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Pubmed dataset?
+
+Generated SPARQL:
+ ```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?metric?score 
+WHERE {
+ ?q orkg:hasBenchmark?b
+ ?b schema:dataset "Pubmed"
+ ?b schema:hasResult?r
+ ?r schema:hasMetric?metric
+ ?r schema:hasScore?score
+  ORDER BY DESC(?score)
+  LIMIT 1
+}
+```<|eot_id|>

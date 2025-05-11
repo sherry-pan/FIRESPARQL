@@ -1,0 +1,18 @@
+Question:
+What models are being evaluated on the ACL Anthology dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+     PREFIX pq: <http://www.wikidata.org/prop/direct/pq/>
+     PREFIX rdfs: <http://www.wikidata.org/prop/direct/rdfs/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     SELECT?model
+     WHERE {
+    ?model pq:evaluatedOn pq:Dataset <http://www.wikidata.org/entity/Q1061063>.
+    ?model wdt:P31?class.
+    ?class rdfs:label?modelLabel.
+     FILTER (lang(?modelLabel) = 'en')
+     }
+     ORDER BY (len(?modelLabel))
+     LIMIT 10<|eot_id|>

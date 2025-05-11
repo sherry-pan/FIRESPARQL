@@ -1,0 +1,16 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX ork: <https://orkg.org/schema/1.0/>
+
+SELECT ?paper ?title
+WHERE {
+  ?paper schema:hasTopic [
+    schema:keyword "Gibson PointGoal Navigation";
+    schema:keyword "benchmark"
+  ].
+  ?paper ork:hasTitle ?title.
+  FILTER (lang(?title) = "en")
+}
+ORDER BY DESC(?paper)
+LIMIT 10
+```

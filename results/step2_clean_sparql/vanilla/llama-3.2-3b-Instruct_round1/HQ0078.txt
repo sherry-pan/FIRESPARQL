@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology#>
+SELECT ?study ?location
+WHERE {
+  ?study a orkg:Study.
+  SERVICE dfn:query {
+    d2r:match(?study ?match).
+    ?match orkg:hasLocation ?location.
+    FILTER (STR(?match) = "maximal" AND ?match @type "geographic scale").
+  }
+}
+```

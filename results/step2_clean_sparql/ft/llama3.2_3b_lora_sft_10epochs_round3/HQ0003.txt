@@ -1,0 +1,27 @@
+```sparql
+SELECT ?method
+WHERE {
+  {
+    SELECT ?method (COUNT(?method) AS ?count)
+    WHERE {
+      ?paper rdf:type orkgc:Paper.
+      ?paper (orkgp:P30_0003 | orkgp:P31_0001) ?method.
+    }
+    GROUP BY ?method
+  }
+  {
+    SELECT (MAX(?count) AS ?maxCount)
+    WHERE {
+      {
+        SELECT ?method (COUNT(?method) AS ?count)
+        WHERE {
+          ?paper rdf:type orkgc:Paper.
+          ?paper (orkgp:P30_0003 | orkgp:P31_0001) ?method.
+        }
+        GROUP BY ?method
+      }
+    }
+  }
+  FILTER(?count = ?maxCount)
+}
+```

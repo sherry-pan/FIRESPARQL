@@ -1,0 +1,18 @@
+Question:
+What is the name of the top performing model in terms of NLL score when benchmarked on the Nottingham dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?nllScore?dataset
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasDataset?dataset.
+      ?benchmark orkg:hasMetric?metric.
+      ?metric schema:name "NLL".
+      ?benchmark orkg:hasValue?nllScore.
+      ?dataset schema:name "Nottingham dataset".
+       FILTER (?nllScore = FILTER (MAX(?nllScore)))
+     }<|eot_id|>

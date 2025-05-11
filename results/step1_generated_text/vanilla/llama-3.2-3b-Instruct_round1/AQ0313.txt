@@ -1,0 +1,20 @@
+Question:
+Can you list the models that have been evaluated on the Classical music, 5 seconds at 12 kHz dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orcg.org/vocabulary/orkg/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?dataset 
+     WHERE {
+      ?model orkg:hasDataset?dataset.
+      ?dataset schema:description "Classical music".
+      ?dataset schema:datasetType "audio".
+      ?dataset schema:fileFormat "wav".
+      ?dataset schema: samplingRate 12  ;
+       schema:audibleDuration "5" ;
+       schema:audioFormat "mono".
+      ?model rdfs:label?modelLabel.
+       FILTER (CONTAINS(Lower(?modelLabel), "model"))
+     }<|eot_id|>

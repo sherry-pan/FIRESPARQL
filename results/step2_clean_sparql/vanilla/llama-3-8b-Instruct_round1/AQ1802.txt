@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result schema:about "Reuters En-De benchmark dataset".
+  ?result orkg:hasMetric ?metric.
+  ?metric schema:name "Accuracy".
+  ?metric schema:value ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

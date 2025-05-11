@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://purl.org/sawz/ork/>
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a ork:Paper.
+  ?paper ork:hasBenchmark ?benchmark.
+  ?benchmark ork:hasObjectNetBenchmark ?benchmarkObjectNet.
+  ?benchmarkObjectNet ork:hasPaper ?benchmarkObjectNetPaper.
+  ?benchmarkObjectNetPaper ork:id ?id.
+  ?benchmarkObjectNetPaper ork:title ?title.
+  FILTER (CONTAINS(LCASE(?title), "objectnet"))
+}
+```

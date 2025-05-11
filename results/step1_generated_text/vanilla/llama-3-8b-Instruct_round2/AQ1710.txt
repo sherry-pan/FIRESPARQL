@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Freeway benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/ontology/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?score
+     WHERE {
+      ?paper a orkg:Paper ;
+             orkg:hasScore?score ;
+             orkg:hasResult?result.
+      ?result a orkg:Result ;
+             orkg:hasBenchmark orkg:Atari2600FreewayBenchmark ;
+             orkg:hasMetric dcterms:Score ;
+             orkg:hasValue?score.
+      ?paper orkg:wasGeneratedBy?model.
+       FILTER (?score = MAX(?score))
+     }<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paperTitle ?paperID
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         orkg:hasBenchmark ?benchmark ;
+         rdfs:label ?paperTitle ;
+         orkg:hasID ?paperID.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER(CONTAINS(LCASE(?benchmarkLabel), "pwc leaderboards (restricted) dataset")).
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a dbpedia:Dataset.
+  ?dataset dbpedia:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label ?label.
+  ?benchmark dbpedia:metric ?metric.
+  ?benchmark dbpedia:value ?value.
+  FILTER (STR(?label) = 'BC2GM')
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX docred: <http://www.docred.org/ontology/>
+PREFIX wikitext: <http://wikibase.org/schema/inference/wikibase#>
+
+SELECT ?codeLink
+WHERE {
+  ?paper schema:keywords ?keywords.
+  FILTER(CONTAINS(LCASE(?keywords), "docred-bilstm")).
+  ?paper schema:code ?code.
+  ?code schema:code ?codeLink.
+}
+```

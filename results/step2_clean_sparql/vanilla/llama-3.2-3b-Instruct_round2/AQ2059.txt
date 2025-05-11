@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper schema:about <http://www.openresearchknowledgegraph.org/papers/dqaxy9n6qj>.
+  ?paper orkg:uses ?code_link.
+  ?code_link schema:code ?code.
+  FILTER (REGEX(?code, "DrQA", "i"))
+}
+```

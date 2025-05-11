@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkg: <http://www.scholarge.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasScore ?score .
+  ?dataset a orkg:Dataset ;
+           orkg:name "Cart Pole (OpenAI Gym)" .
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset ?dataset ;
+             orkg:model ?model .
+  FILTER NOT EXISTS {
+    ?benchmark2 a orkg:Benchmark ;
+                orkg:dataset ?dataset ;
+                orkg:model ?model2 .
+    ?model2 orkg:hasScore ?score2 .
+    FILTER (?score2 > ?score)
+  }
+  SERVICE orkg:schema {
+    ?model orkg:name ?modelLabel .
+  }
+}
+```

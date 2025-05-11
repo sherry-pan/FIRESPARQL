@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEntityF1Score ?score.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:name "SciERC".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

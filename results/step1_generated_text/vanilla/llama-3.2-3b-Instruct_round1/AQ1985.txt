@@ -1,0 +1,23 @@
+Question:
+Provide a list of papers that have utilized the BART model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?paper?title?code 
+     WHERE {
+    ?paper a dbo:Paper.
+     schema:description?desc.
+     ork:hasSource?source.
+    ?source schema:topic "BART model".
+    ?source ork:hasPaper?paper.
+    ?paper schema:url?url.
+    ?paper schema:code?code.
+    ?paper ork:hasCode?code.
+     FILTER (lang(?paper) = "en")
+     }
+     GROUP BY?paper?title?code
+     ORDER BY (COUNT(?paper) DESC)<|eot_id|>

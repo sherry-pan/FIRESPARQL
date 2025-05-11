@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric 
+WHERE {
+    ?metric orkg:isMetricFor ?benchmark. 
+    ?benchmark orkg:isBenchmarkFor "VTAB-1k".
+    SERVICE orkg:sparqlService { 
+        ?metric orkg:hasName ?metricName. 
+        FILTER (lang(?metricName) = "en" || lang(?metricName) = "en-GB") 
+    }
+    FILTER (str(?metricName) IN ("accuracy", "f1-score", "f1-score macro", 
+          "f1-score weighted", "f1-score macro weighted", "auc", 
+          "roc-auc", "roc-auc macro", "roc-auc macro weighted"))
+}
+```

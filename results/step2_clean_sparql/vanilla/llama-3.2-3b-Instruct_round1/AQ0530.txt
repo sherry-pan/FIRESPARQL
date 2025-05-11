@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?paper ?paperId
+WHERE {
+    ?paper schema:description ?description.
+    ?paper schema:about ?paperId.
+    FILTER (CONTAINS(LCASE(?description), "bc5cdr-disease"))
+}
+GROUP BY ?paper ?paperId
+HAVING (COUNT(DISTINCT ?paperId) > 1)
+ORDER BY (COUNT(DISTINCT ?paperId) DESC)
+```

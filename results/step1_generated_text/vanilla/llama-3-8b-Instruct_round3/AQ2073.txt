@@ -1,0 +1,22 @@
+Question:
+Where can I find code references in papers that have used the BiDAF + Self Attention + ELMo model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bibo: <http://purl.org/ontology/bibo/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?codeReference
+     WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper bibo:hasAuthor?author.
+    ?author schema:affiliation?affiliation.
+    ?paper schema:about?topic.
+    ?topic owl:sameAs <http://www.wikidata.org/entity/Q10477>.
+    ?paper schema:hasPart?codeReference.
+    ?codeReference a schema:Code.
+    ?codeReference schema:isPartOf?paper.
+    ?paper orkg:hasMethod?method.
+    ?method owl:sameAs <http://www.wikidata.org/entity/Q5321429>.
+     FILTER (contains(?author, "BiDAF") && contains(?author, "Self Attention") && contains(?author, "ELMo"))
+     }<|eot_id|>

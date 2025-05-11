@@ -1,0 +1,26 @@
+Question:
+What are the models that have been benchmarked on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Automatically labeled Medline abstracts corpus")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.}
+       BIND(if(?model         is a array(), "unknown",?model         as?model_lbl)}
+       WITH?model       AS?contk
+       SELECT?model?model_lbl
+       WHERE {
+        ?contk         orkgp:HAS_MODEL         ?model;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           rdfs:label              ?eval_lbl.
+         BIND(xsd:string(?eval_lbl) as?eval_lbl_lbl)
+        ?contk          rdfs:label              ?contk_lbl.
+         BIND(xsd:string(?contk_lbl) as?contk_lbl_lbl)
+       }
+       ORDER BY DESC(?eval_lbl_lbl)
+       LIMIT 500<|eot_id|>

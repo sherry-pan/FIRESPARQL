@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_result ?result.
+  ?result orkg:has_metric "RE+ Micro F1 score".
+  ?result orkg:has_value ?score.
+  ?result orkg:has_dataset dbpedia:CoNLL04.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

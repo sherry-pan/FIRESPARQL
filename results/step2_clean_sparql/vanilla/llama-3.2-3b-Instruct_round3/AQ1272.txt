@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?score ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset schema:name "Atari 2600 Breakout".
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasScore ?score.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark schema:description "Top benchmark score".
+}
+```

@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the CATTS-XSUM model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+        ?paper    a            orkgc:Paper;
+                  rdfs:label   ?paper_lbl.
+         FILTER(REGEX(?paper_lbl, "CATTS-XSUM"))
+        ?benchmark      orkgp:HAS_BENCHMARK      ?benchmark.
+        ?cont         orkgp:HAS_BENCHMARK      ?benchmark;
+                      orkgp:HAS_PAPER        ?paper.
+        ?dataset       orkgp:HAS_CONTEST      ?cont;
+                        orkgp:P32HAS_CODE_SOURCE   ?code.
+         FILTER(SAME(?code,?code)
+                || REGEX(?code, "^http://example.org/resource/.*"))
+       }<|eot_id|>

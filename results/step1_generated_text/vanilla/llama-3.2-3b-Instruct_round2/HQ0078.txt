@@ -1,0 +1,19 @@
+Question:
+Where did the study with maximal geographic scale take place?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?study
+     WHERE {
+    ?study orkg:studyId?id.
+    ?id orkg:hasStudy?study.
+    ?study wgs:hasLocation?location.
+    ?location rdfs:label?label.
+     FILTER (STRLEN(?label) > 0 )
+     ORDER BY (COUNT(?study) DESC) 
+     LIMIT 1
+     }<|eot_id|>

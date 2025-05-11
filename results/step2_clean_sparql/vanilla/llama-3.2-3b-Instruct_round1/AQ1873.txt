@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ork: <http://orkg.org/ontology/ork/>
+
+SELECT ?dataset ?title
+WHERE {
+  ?dataset a ork:Dataset.
+  ?dataset ork:hasTopic ork:AudioClassification.
+  ?dataset dcterms:hasFormat dcterms:Text.
+  ?dataset rdfs:label ?title.
+  FILTER (lang(?title) = "en")
+}
+LIMIT 10
+```

@@ -1,0 +1,21 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Reacher, easy (DMControl100k) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT?title?id
+WHERE {
+ ?paper a bibo:Article.
+ ?paper dc:title?title.
+ ?paper orkg:dataset?dataset.
+ ?dataset rdfs:label "DMControl100k".
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark rdfs:label "Reacher".
+ ?paper orkg:doi?id.
+}<|eot_id|>

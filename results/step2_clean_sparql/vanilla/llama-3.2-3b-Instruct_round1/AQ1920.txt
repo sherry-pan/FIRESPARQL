@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX wot: <http://www.wotontology.org/ontology/>
+PREFIX rdfs: <http://www.wotontology.org/ontology/rdfs/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?url
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper wot:uses ?model.
+  ?model schema:description ?description.
+  ?description rdfs:label ?modelLabel.
+  ?paper wot:hasCode ?code.
+  ?paper schema:about ?paperID.
+  FILTER(STR(?modelLabel) = "Funnel Transformer")
+  ?paper schema:hasPart ?paperLink.
+  ?paperLink schema:contentURL ?url.
+}
+```

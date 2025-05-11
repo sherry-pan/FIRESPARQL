@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?value
+WHERE {
+  ?result a orkg:Result.
+  ?result orkg:dataset orkg:ImdbM.
+  ?result orkg:metric ?metric.
+  ?result orkg:value ?value.
+  FILTER (?metric = "benchmark_result")
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

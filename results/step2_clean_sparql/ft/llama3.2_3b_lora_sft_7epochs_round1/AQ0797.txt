@@ -1,0 +1,11 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(?value) AS ?number_of_evaluations)
+WHERE {
+    orkgr:R69354 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label "BioASQ"^^xsd:string.
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:P29 ?metric.
+    BIND(xsd:int(?metric) AS ?metric_lbl)
+}
+```

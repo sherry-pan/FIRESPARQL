@@ -1,0 +1,21 @@
+Question:
+What is the best performing model benchmarking the WMT2016 German-English dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ PREFIX wot: <http://www.wot.org/ontologies/wordnet>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontologies/orkg/>
+     PREFIX rdfs: <http://www.wot.org/ontologies/rdfs/>
+     PREFIX owl: <http://www.wot.org/ontologies/owl/>
+     SELECT?model?metric?bleuScore
+     WHERE {
+    ?model wot:hasBenchmark "WMT2016 German-English".
+    ?model schema:hasMetric?metric.
+    ?metric schema:hasMetricName "BLEU Score".
+    ?model orkg:hasResult?result.
+    ?result orkg:hasMetric?metric.
+    ?result orkg:hasScore?bleuScore.
+     FILTER (str(?metric = "BLEU Score").
+     FILTER (str(?bleuScore IS NUMERIC).
+     FILTER (str(?bleuScore > 0).
+     }<|eot_id|>

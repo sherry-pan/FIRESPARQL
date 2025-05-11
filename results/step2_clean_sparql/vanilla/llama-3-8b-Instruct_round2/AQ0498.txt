@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/entity/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper_title ?paper_id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset schema:name "WikiText-2".
+  ?paper orkg:title ?paper_title.
+  ?paper orkg:doi ?paper_id.
+}
+```

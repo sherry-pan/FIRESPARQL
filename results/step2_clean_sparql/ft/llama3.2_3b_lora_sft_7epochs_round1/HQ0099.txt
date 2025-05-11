@@ -1,0 +1,22 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+  ?measurement a orkgc:Measurement;
+               orkgp:P31 ?paper.
+  ?paper orkgp:P32 ?cont.
+  ?cont RDP2019:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?material.
+  ?material rdfs:label ?material_lbl.
+  ?measurement orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_MATERIAL ?material.
+  FILTER(REGEX(STR(?dataset), "RDP2019"))
+  ?paper orkgp:HAS_RESPONSE ?response.
+  ?response orkgp:HAS_MEASUREMENT ?measurement;
+            orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_float)
+  ?value rdfs:label ?value_lbl.
+  FILTER(REGEX(STR(?value_lbl), "response time"))
+}
+ORDER BY ?value_float
+LIMIT 1
+```

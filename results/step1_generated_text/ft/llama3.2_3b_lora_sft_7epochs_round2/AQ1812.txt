@@ -1,0 +1,25 @@
+Question:
+Which model has achieved the highest Percentage error score on the SVHN benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?metric     a       orkgc:Metric;
+                    rdfs:label ?metric_lbl.
+         FILTER (str(?metric_lbl) = "Percentage error")
+         {
+           orkgp:Comparison      a                orkgp:Comparison;
+                          orkgp:P32           ?compare;
+                          orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_METRIC       ?metric;
+                          orkgp:HAS_MODEL        ?model.
+          ?dataset       orkgp:HAS_EVALUATION   ?eval.
+          ?eval          orkgp:P31           ?cont.
+          ?cont         rdfs:label              ?cont_lbl.
+           FILTER (str(?cont_lbl) = "SVHN")
+          ?cont         orkgp:P32           ?compare.
+          ?compare      orkgp:P36           ?model.
+           BIND(xsd:float(?model_lbl     ?model) AS?model_lbl)
+         }
+     ORDER BY DESC(?model_lbl)
+     LIMIT 1<|eot_id|>

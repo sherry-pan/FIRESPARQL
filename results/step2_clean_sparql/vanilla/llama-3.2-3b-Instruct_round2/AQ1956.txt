@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX cat: <http://cat.ts.tsukuba.ac.jp/ontologies/ontology#>
+
+SELECT ?paper ?paperTitle ?reference
+WHERE {
+  ?paper a cat:Paper;
+         rdfs:label ?paperTitle.
+  ?benchmark schema:hasReference ?reference;
+             schema:hasKeyword "CATTS-XSUM";
+             schema:hasKeyword "benchmark".
+  ?paper cat:hasBenchmark ?benchmark.
+  FILTER (lang(?paperTitle) = "en")
+}
+```

@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the TempEval-3 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://semantic-scholar.org/orkg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     SELECT?title?id
+     WHERE {
+    ?paper a orkg:ResearchPaper ;
+     rdfs:label?title ;
+     dc:identifier?id.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:dataset?dataset.
+    ?dataset orkg:identifier "TempEval-3".
+     }<|eot_id|>

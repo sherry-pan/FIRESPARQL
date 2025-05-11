@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the ACE 2004 dataset in terms of RE+ Micro F1 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "ACE 2004")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:P32               ?metric.
+        ?metric         rdfs:label              ?metric_lbl.
+         FILTER (str(?metric_lbl) = "RE+ Micro F1")
+        ?benchmark      orkgp:HAS_MODEL         ?model.
+        ?model       rdfs:label              ?model_lbl.
+     }<|eot_id|>

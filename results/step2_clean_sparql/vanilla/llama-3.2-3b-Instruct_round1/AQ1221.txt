@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://purl.org/opendata/researcher-ontology.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:datasetTitle "Ball in cup, catch (DMControl500k)".
+  ?dataset orkg:benchmarkResults ?benchmark.
+  ?benchmark orkg:benchmarkMetric ?metric.
+  ?benchmark orkg:benchmarkValue ?value.
+  ?benchmark orkg:benchmarkResult "highest".
+  ?metric rdfs:label ?metricLabel.
+  FILTER (lang(?metricLabel) = "en")
+}
+ORDER BY DESC(?value)
+```

@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+    ?researcher a orkgc:Researcher;
+                rdfs:label ?researcher_lbl.
+    FILTER (str(?researcher_lbl) = "Text Summarization")
+    ?contrib orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark rdfs:label ?benchmark_lbl.
+    FILTER (?benchmark_lbl IN (
+        "Wasson et al. (2017) Abstract-Text Classification in NLP",
+        "Kocur and Strasiełek (2015) Neural Architectures for Text Summarization",
+        "Rajpurkar et al. (2016) SICK: Evaluating Active Reading Comprehension",
+        "Rajpurkar et al. (2017) SICK: Evaluating Active Reading Comprehension",
+        "Talukdar and Smith (2017) A Broad-Coverage and Deep-Coverage Benchmark and Dataset for Summarization",
+        "Zhang et al. (2017) Adversarial Training for NLP",
+        "Cai et al. (2018) Attention Is All You Need? Reevaluating the Representational Power of Self-Attention Models",
+        "Gehrmann et al. (2018) BERT, RoBERTa, and their Variants: A Study of Pattern and Generalization"
+        ))
+}
+```

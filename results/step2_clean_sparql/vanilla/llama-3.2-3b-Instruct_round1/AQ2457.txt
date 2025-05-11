@@ -1,0 +1,22 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://purl.org/metrics/papers/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?url
+WHERE {
+  ?paper dcat:hasMetadata ?metadata.
+  ?metadata dcterms:type ?type.
+  ?type schema:description "benchmarking".
+  ?paper p:hasCode ?code.
+  ?code schema:software ?software.
+  ?software dcat:hasVersion "COMET-Direct".
+  ?paper wdt:P577 ?url.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+```

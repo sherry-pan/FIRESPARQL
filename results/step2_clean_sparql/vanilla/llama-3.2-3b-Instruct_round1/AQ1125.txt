@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX schema: <http://schema.org/>
+SELECT ?metric ?score
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset schema:datasetName "Kinetics-600".
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:benchmarkMetric ?metric.
+    ?benchmark orkg:benchmarkScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

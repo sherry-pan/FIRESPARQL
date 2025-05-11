@@ -1,0 +1,30 @@
+Question:
+What are the metrics of evaluation over the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX pwc: <https://pwc.vlado.org/pwc/>
+     PREFIX wot: <http://www.wotsit.org/schema/2.1/>
+     PREFIX wotr: <http://www.wotsit.org/schema/1.1/>
+     PREFIX wots: <http://www.wotsit.org/schema/1.1/wots>
+     PREFIX wotm: <http://www.wotsit.org/schema/1.1/wotm>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?metric?value
+     WHERE {
+    ?pwc:Dataset <https://pwc.vlado.org/pwc/dataset/Leaderboards-restricted>.
+    ?pwc:Dataset wot:hasMetric?metric.
+    ?metric rdfs:label?metricLabel.
+    ?metric wotm:hasValue?value.
+    ?metric wotm:hasUnit?unit.
+    ?metric wotm:hasMetricType?metricType.
+    ?metric wotm:hasMetricName?metricName.
+    ?pwc:Dataset wot:hasDataset?dataset.
+    ?dataset wot:hasMetric?metric.
+    ?metric wotm:hasMetricName?metricName.
+     FILTER (CONTAINS(STR(?metricLabel), "Evaluation") || CONTAINS(STR(?metricName), "Evaluation"))
+     }
+     ORDER BY DESC(?metric)<|eot_id|>

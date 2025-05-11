@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the SAC model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX sac: <http://sac-model.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?paper?paperTitle?codeLink 
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper rdfs:label?paperTitle.
+    ?paper sac:utilizedSAC?sacModel.
+    ?sacModel rdfs:label?sacModelLabel.
+    ?sacModel schema:description?sacModelDescription.
+    ?sacModel schema:softwareCode?codeLink.
+     FILTER (regex(?sacModelLabel, "SAC")i)
+     }<|eot_id|>

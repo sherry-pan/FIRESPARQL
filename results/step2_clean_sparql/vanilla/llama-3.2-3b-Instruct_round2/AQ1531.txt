@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?model 
+WHERE {
+    ?model wdt:P31 wd:QMPdel.  # Assuming QMPdel is the direct class for Model
+    ?model wdt:P1084 ?testPerplexity.
+    ?model wdt:P4526 ?dataset. # Assuming P4526 for dataset linkage
+    ?dataset wdt:P31 wd:Q11769293. # Assuming Q11769293 is the ID for WikiText-103
+    ?dataset wdt:P4536 wd:Q7201391. # Assuming Q7201391 is the ID for the term 'perplexity'
+}
+ORDER BY ?testPerplexity
+LIMIT 1
+```

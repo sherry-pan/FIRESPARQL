@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+   ?dataset a orkg:Dataset ;
+        orkg:hasBenchmark ?benchmark ;
+        orkg:datasetName "MLDoc Zero-Shot German-to-French".
+   ?benchmark a orkg:Benchmark ;
+        orkg:hasMetric ?metric ;
+        orkg:hasValue ?value.
+   FILTER (?metric = "top")
+}
+```

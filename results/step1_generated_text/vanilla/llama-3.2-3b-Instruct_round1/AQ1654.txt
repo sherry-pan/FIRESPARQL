@@ -1,0 +1,17 @@
+Question:
+Indicate the model that performed best in terms of PARAMS metric on the FGVC Aircraft benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX fgvc: <http://www.robots.ox.ac.uk/~vgg/software/fgvc/>
+     SELECT?model?metric?value
+     WHERE {
+    ?model fgvc:AircraftBenchmark?metric.
+    ?metric orkg:metricName "PARAMS".
+    ?model orkg:metricValue?value.
+     FILTER (STRIKE?metric orkg:metricUnit "%".
+     FILTER (?metric orkg:metricName = "PARAMS".
+     ORDER BY DESC?value
+     LIMIT 1
+     }
+     }<|eot_id|>

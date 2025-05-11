@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric?
+
+Generated SPARQL:
+ PREFIX wot: <http://purl.org/wot/owlsim/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://purl.org/vcard/rdf/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/bibo/ontology/2>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     SELECT?model?metric?value 
+     WHERE {
+    ?model wot:hasBenchmark "ImageNet 64x64".
+    ?model orkg:hasMetric?metric.
+    ?metric schema:description?description.
+     FILTER (strContains(?description, "Bits per dim" ) AND strContains(?description, "model" ) )
+    ?model orkg:hasResult?result.
+    ?result schema:value?value.
+     FILTER (strContains(?value, "best performing" ) )
+     }<|eot_id|>

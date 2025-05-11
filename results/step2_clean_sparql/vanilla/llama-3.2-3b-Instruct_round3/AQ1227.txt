@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+
+SELECT ?metric ?value WHERE {
+  ?s orkg:dataset "Cartpole, swingup (DMControl500k)".
+  ?s orkg:benchmark ?benchmark.
+  ?benchmark orkg:metric ?metric.
+  ?benchmark orkg:value ?value.
+  FILTER (STRSTARTS(?metric, "highest") OR STRSTARTS(?metric, "best") OR STRSTARTS(?metric, "max"))
+}
+```

@@ -1,0 +1,17 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?variable (COUNT(?paper) as?count) 
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper orkg:hasContribution?contribution.
+      ?contribution orkg:hasVariable?variable.
+      ?contribution orkg:isAbout orkg:AtmosphereModel.
+       FILTER (?variable!= orkg:variable).
+       GROUP BY?variable
+       ORDER BY DESC(?count)
+       LIMIT 3
+     }<|eot_id|>

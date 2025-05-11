@@ -1,0 +1,23 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2014 French-English")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  FILTER (str(?metric_lbl) = "accuracy" OR
+          str(?metric_lbl) = "bleu" OR
+          str(?metric_lbl) = "chrf" OR
+          str(?metric_lbl) = "cer" OR
+          str(?metric_lbl) = "ppl" OR
+          str(?metric_lbl) = "rogev" OR
+          str(?metric_lbl) = "ter")
+}
+ORDER BY DESC(COUNT(?metric_lbl))
+LIMIT 10
+```

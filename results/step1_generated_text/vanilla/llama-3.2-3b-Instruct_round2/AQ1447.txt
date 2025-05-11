@@ -1,0 +1,22 @@
+Question:
+Indicate the model that performed best in terms of Pre-Training Dataset metric on the HMDB51 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX pd: <http://persistenceofmatters.org/pd/>
+     PREFIX wot: <http://persistenceofmatters.org/pd/wot/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://www.openresearchknowlegde.org/orkg/>
+     SELECT?model 
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:pretrainedOn?pretrainedOn.
+    ?pretrainedOn schema:dataset?dataset.
+    ?pretrainedOn orkg:benchmark?benchmark.
+    ?benchmark schema:description?desc.
+    ?desc schema:keyword "HMDB51".
+    ?model orkg:pretrainDatasetMetric?metric.
+    ?metric schema:keyword "Pre-Training Dataset".
+     FILTER (STRLIKE(?metric, "Pre-Training Dataset")).
+     }<|eot_id|>

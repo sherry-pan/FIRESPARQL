@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset orkg:ImageNetReaL.
+  ?benchmark orkg:metric orkg:Params.
+  ?benchmark orkg:metricValue ?metricValue.
+}
+ORDER BY DESC(xsd:decimal(?metricValue))
+LIMIT 1
+```

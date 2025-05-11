@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark score and its metric on the ImageNet V2 dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?score?metric 
+     WHERE {
+    ?benchmark a ork:Benchmark.
+    ?benchmark rdfs:label?label.
+    ?benchmark ork:dataset "ImageNet V2".
+    ?benchmark ork:score?score.
+    ?benchmark ork:metric?metric.
+    ?benchmark skos:broader?topBenchmark.
+    ?topBenchmark a ork:Benchmark.
+    ?topBenchmark skos:label?topLabel.
+    ?topBenchmark ork:score?topScore.
+    ?topBenchmark ork:metric?topMetric.
+     FILTER (str(?topScore) >?score)
+     }<|eot_id|>

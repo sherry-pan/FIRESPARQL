@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX fsns: <http://www.orkg.org/ontology/fsns#>
+
+SELECT ?model ?value
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:performanceOnDataset fsns:FSNSTestBenchmark.
+   ?model orkg:metric fsns:SequenceError.
+   ?model orkg:value ?value.
+   FILTER (datatype(?value) = xsd:decimal)
+}
+ORDER BY ?value
+LIMIT 1
+```

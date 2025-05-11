@@ -1,0 +1,16 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "piezoresistive"))
+  ?benchmark orkgp:Compare ?compare.
+  ?compare orkgp:Compare ?cont.
+  ?cont orkgp:P32 ?material.
+  ?material rdfs:label ?material_lbl.
+  ?material orkgp:P34 ?speed.
+  FILTER(REGEX(?speed, "response time"))
+}
+ORDER BY ?speed
+LIMIT 1
+```

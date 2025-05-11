@@ -1,0 +1,16 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX pop3d: <http://purl.org/pop3d/>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a schema:CreativeWork.
+  ?paper dcterms:subject ?subject.
+  FILTER(CONTAINS(?subject, "POP3D")).
+  ?paper pop3d:uses ?model.
+  ?model pop3d:hasBenchmark ?benchmark.
+  ?benchmark schema:hasPart ?benchmarkPaper.
+  ?benchmarkPaper schema:hasPart ?code_link.
+}
+```

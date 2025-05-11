@@ -1,0 +1,10 @@
+```sparql
+PREFIX wot: <http://www.wot.org/oagis/datamodel/1.2#>
+PREFIX funnelformer: <http://funnel-transformer.org/resource/>
+SELECT ?paper ?title ?code
+WHERE {
+  ?paper wot:utilizes funnelformer:FunnelTransformer.
+  SERVICE wikibase:label { ?paper wot:label ?title. }
+  BIND (URI(?paper) AS ?code)
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?country
+WHERE {
+  orkgr:R155551 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15016 ?epi.
+  ?epi rdfs:label ?epi_lbl.
+  FILTER(REGEX(STR(?epi_lbl), "prevalence"))
+  ?contrib orkgp:P31 ?country.
+  ?country rdfs:label ?country_lbl.
+  FILTER(REGEX(STR(?country_lbl), "country of "))
+}
+ORDER BY DESC(COUNT(?epi))
+LIMIT 1
+```

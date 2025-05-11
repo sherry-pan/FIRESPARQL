@@ -1,0 +1,15 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openeranknowledgegraph.org/ontology/>
+
+SELECT ?metric ?value 
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:dataset "MLDoc Zero-Shot English-to-Spanish".
+  ?benchmark orkg:hasMetric ?metric.
+  ?metric schema:description ?value.
+} ORDER BY DESC(?value) LIMIT 1
+```

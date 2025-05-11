@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/orkg/>
+PREFIX wos: <http://www.openresearch.kr/wos/>
+SELECT ?metric ?score
+WHERE {
+  wos:WOS-46985 orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasScore ?score.
+  FILTER(?metric = "Benchmark Score")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "WMT2016 Romanian-English")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper        orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper      rdfs:label              ?paper_lbl.
+      ?cont      orkgp:P31               ?paper.
+      ?cont      rdfs:label              ?model_lbl.
+      ?eval      orkgp:HAS_VALUE         ?value.
+       BIND(xsd:float(?value) AS?score)
+       ORDER BY DESC(?score)
+       LIMIT 1
+    <|eot_id|>

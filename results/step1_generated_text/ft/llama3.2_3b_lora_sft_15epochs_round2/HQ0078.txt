@@ -1,0 +1,20 @@
+Question:
+Where did the study with maximal geographic scale take place?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+         orkgr:R449290559 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P3740?location.
+         BIND(
+           {
+             SELECT MAX(?location) AS?max_location
+             WHERE {
+               orkgr:R449290559 orkgp:compareContribution?contrib.
+              ?contrib orkgp:P3740?location.
+              ?location rdfs:label?location_lbl.
+               FILTER(?location_lbl =?max_location)
+             }
+           }
+         ) AS?scale
+     }<|eot_id|>

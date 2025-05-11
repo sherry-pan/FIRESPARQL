@@ -1,0 +1,15 @@
+```sparql
+SELECT ?location
+WHERE {
+    orkgr:R44985 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P3605 ?location.
+    {
+        SELECT MAX(?location) AS ?max_location_value
+        WHERE {
+            orkgr:R44985 orkgp:compareContribution ?contrib_inner.
+            ?contrib_inner orkgp:P3605 ?location_inner.
+        }
+    }
+    FILTER(?location = ?max_location_value)
+}
+```

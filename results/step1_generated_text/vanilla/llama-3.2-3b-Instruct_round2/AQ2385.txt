@@ -1,0 +1,35 @@
+Question:
+Where can I find code references in papers that have used the EfficientNetV2-L model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bio2vec: <http://bio2vec.org/schema/1.1/>
+     PREFIX vgg: <http://example.org/vgg#>
+     PREFIX dli: <http://example.org/dli#>
+     PREFIX ont: <http://example.org/ont#>
+     SELECT?p?o 
+     WHERE {
+    ?paper a ora:Paper.
+    ?paper schema:description?desc.
+     FILTER (STRLEN(?desc) > 0).
+    ?paper dli:hasSource?source.
+    ?source schema:about?paper.
+    ?source schema:inLanguage "en".
+    ?source bio2vec:hasEntity?entity.
+    ?entity schema:abstract?abstract.
+    ?abstract bio2vec:hasLabel "EfficientNetV2-L".
+    ?paper vgg:hasModel?model.
+    ?model schema:description?modelDesc.
+    ?modelDesc schema:inLanguage "en".
+    ?model vgg:isBenchmarkedBy?benchmark.
+    ?benchmark schema:description?benchmarkDesc.
+    ?benchmark schema:inLanguage "en".
+    ?benchmark schema:about?paper.
+    ?benchmark schema:keywords?benchmarkKeywords.
+    ?benchmarkKeywords schema:contains?benchmarkKeyword.
+    ?benchmarkKeyword rdfs:label?benchmarkKeywordLabel.
+    ?benchmarkKeywordLabel

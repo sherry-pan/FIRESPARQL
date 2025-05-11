@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:utilizedModel ?utilizedModel.
+  ?utilizedModel orkg:version ?version.
+  ?version schema:description ?description.
+  FILTER (contains(STR(?description), "BCN+ELMo")).
+  ?paper schema:url ?code.
+}
+```

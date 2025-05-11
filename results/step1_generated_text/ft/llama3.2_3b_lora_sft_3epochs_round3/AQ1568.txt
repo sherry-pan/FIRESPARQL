@@ -1,0 +1,37 @@
+Question:
+Which model has achieved the highest F1 score on the CoNLL 2003 (English) benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CoNLL 2003 (English)")
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+          ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                  rdfs:label              ?dataset_lbl.
+          ?benchmark      orkgp:HAS_MODEL        ?model.
+          ?model      rdfs:label              ?model_lbl.
+          ?cont      orkgp:HAS_BENCHMARK     ?benchmark.
+          ?cont      orkgp:P32               ?eval.
+          ?eval      rdfs:label              ?metric_lbl.
+          ?metric      orkgp:HAS_VALUE        ?value.
+           BIND(xsd:float(?value) AS?value_float)
+          ?value      rdfs:label              ?metric_lbl.
+           BIND(xsd:float(?value_float) AS?score)
+          ?paper      orkgp:P31               ?cont.
+          ?paper      rdfs:label              ?paper_lbl.
+          ?paper      orkgp:HAS_MODEL        ?model.
+          ?paper      orkgp:P32               ?eval.
+           BIND(xsd:float(?score) AS?f1)
+           FILTER(REGEX(STR(?metric_lbl), "F1"))
+           ORDER BY DESC(?f1)
+           LIMIT 1
+       }
+       ORDER BY DESC(?f1)
+       LIMIT 1
+     }<|eot_id|>

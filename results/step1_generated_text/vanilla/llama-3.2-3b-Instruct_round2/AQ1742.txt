@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of Unpermuted Accuracy score when benchmarked on the Sequential CIFAR-10 dataset?
+
+Generated SPARQL:
+ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbpediaowl: <http://dbpedia.org/ontology/>
+     PREFIX wikibase: <http://wikibase.org/schema/mb/11>
+     SELECT?model?accuracy
+     WHERE {
+    ?model dbpediaowl:benchmark "Sequential CIFAR-10".
+    ?model dbpediaowl:score?accuracy.
+     FILTER (?accuracy >= ( SELECT MIN(?a) {?a dbpediaowl:score. } )
+     }
+     ORDER BY DESC(?accuracy)
+     LIMIT 1
+    <|eot_id|>

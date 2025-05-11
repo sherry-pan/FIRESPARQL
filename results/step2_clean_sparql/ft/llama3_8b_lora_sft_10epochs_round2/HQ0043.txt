@@ -1,0 +1,16 @@
+```sparql
+SELECT ?variables ?variables_labels
+WHERE {
+  ?papers orkgp:P31 ?atmosphere_models.
+  {
+    SELECT ?variables (COUNT(?variables) AS ?variable_counts)
+    WHERE {
+      ?atmosphere_models orkgp:P36 ?variables.
+      ?variables rdfs:label ?variables_labels.
+    }
+    GROUP BY ?variables ?variables_labels
+    ORDER BY DESC(?variable_counts)
+    LIMIT 3
+  }
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX wot: <http://purl.org/wot/>
+PREFIX vtab: <http://example.org/vtab/>
+
+SELECT ?model
+WHERE {
+  ?model wot:describes ?benchmark.
+  ?benchmark schema:description "VTAB-1k".
+  ?benchmark schema:dataset ?dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset skos:broader ?topBenchmark.
+  ?topBenchmark schema:score ?top1Accuracy.
+  ?model wot:top1Accuracy ?top1Accuracy.
+  FILTER (?top1Accuracy >= 0.9)
+}
+```

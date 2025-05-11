@@ -1,0 +1,11 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R51319 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P4318 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P4319 ?value.
+    ?value rdfs:label ?value_lbl.
+    FILTER(REGEX(?value_lbl, "Atari 2600 Seaquest"))
+}
+```

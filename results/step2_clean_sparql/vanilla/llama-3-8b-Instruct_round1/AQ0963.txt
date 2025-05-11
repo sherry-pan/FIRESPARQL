@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasTitle ?title.
+  ?title rdfs:label ?titleLabel.
+  FILTER regex(?titleLabel, "Atari 2600 Bowling").
+  ?paper orkg:hasEvaluationMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (?metricLabel IN ("Mean Absolute Error", "Mean Squared Error", "Root Mean Squared Error", "Mean Absolute Percentage Error", "Mean Squared Percentage Error", "Success Rate", "Reward", "Return", "Episode Length", "Game Length"))
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX kg: <http://orkg.org/>
+
+SELECT ?method (COUNT(?method) AS ?count)
+WHERE {
+  ?s a kg:KnowledgeRepresentationMethod.
+  ?s rdfs:label ?method.
+  FILTER (LANG(?method) = "en")
+}
+GROUP BY ?method
+ORDER BY DESC(?count)
+LIMIT 1
+```

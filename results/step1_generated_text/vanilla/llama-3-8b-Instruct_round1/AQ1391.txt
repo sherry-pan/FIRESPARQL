@@ -1,0 +1,20 @@
+Question:
+What is the best performing model benchmarking the ACE 2004 dataset in terms of RE+ Micro F1 metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/ontology/>
+PREFIX ace: <http://rdf.orkg.org/ontology/ace/>
+PREFIX benchmark: <http://rdf.orkg.org/ontology/benchmark/>
+PREFIX metric: <http://rdf.orkg.org/ontology/metric/>
+
+SELECT?model?modelLabel?f1
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmarks?benchmark.
+ ?benchmark ace:dataset ace:ACE_2004.
+ ?benchmark metric:metric metric:RE_Micro_F1.
+ ?benchmark orkg:bestPerforming?model.
+ ?model rdfs:label?modelLabel.
+  FILTER(?modelLabel =?bestModelLabel).
+  BIND(?f1 as?bestF1).
+}<|eot_id|>

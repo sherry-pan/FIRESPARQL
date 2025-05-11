@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology#>
+
+SELECT ?metric ?score 
+WHERE {
+    ?entity orkg:hasBenchmark ?benchmark.
+    ?benchmark schema:dataset "Scholarly entity usage detection dataset".
+    ?benchmark orkg:hasBestResult ?bestResult.
+    ?bestResult schema:hasMetric ?metric.
+    ?bestResult orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

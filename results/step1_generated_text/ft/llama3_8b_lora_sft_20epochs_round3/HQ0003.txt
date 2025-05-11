@@ -1,0 +1,24 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?concept?concept_label
+    WHERE {
+     ?concept       a            orkgc:KnowledgeRepresentationMethod;
+                      rdfs:label   ?concept_label.
+     ?occurrences  a                orkgc:Occurrence;
+                    orkgp:HAS_VALUE      ?value.
+     ?value         orkgp:HAS_DATATYPE   orkgc:integer;
+                     orkgp:HAS_VALUE      ?integer_value.
+      FILTER(REGEX(?concept_label, "ont"^^xsd:string))
+     ?cont       orkgp:HAS_KNOWLEDGE_REPRESENTATION_METHOD      ?concept.
+     ?paper      orkgp:P31           ?cont;
+                  orkgp:P29           ?occurrences.
+     ?paper      orkgp:P31           ?cont.
+     ?cont       orkgp:HAS_SOURCE        ?source.
+     ?source      rdfs:label            ?source_label.
+      FILTER(REGEX(?source_label, "ont"^^xsd:string))
+      FILTER(?integer_value = MAX(?integer_value))
+    }
+    ORDER BY DESC(?integer_value)
+    LIMIT 1<|eot_id|>

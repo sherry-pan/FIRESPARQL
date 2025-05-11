@@ -1,0 +1,24 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orcid.org/resource/orkg/>
+    PREFIX wot: <http://www.wot.org/ontology#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    SELECT?paper?title
+    WHERE {
+       ?paper orkg:hasBenchmark?benchmark.
+       ?benchmark wot:hasDataset?dataset.
+       ?dataset rdfs:label "Penn Treebank (Character Level)".
+       ?benchmark wot:hasModel?model.
+       ?paper orkg:hasTitle?title.
+       ?model orkg:hasDataset?dataset.
+       ?dataset wot:hasBenchmark?benchmark.
+       ?benchmark rdfs:label "Benchmark".
+       ?paper orkg:hasID?id.
+    } 
+    FILTER ( CONTAINS(Lower(?title), "Penn Treebank (Character Level)") )
+    ```<|eot_id|>

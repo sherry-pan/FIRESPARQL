@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperLink ?codeLink
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:usesModel orkg:A3C_FF_HS.
+ ?paper orkg:hasCode ?code.
+ ?code schema:codeRepository ?codeLink.
+ ?paper schema:hasUrl ?paperLink.
+ FILTER (?paperLink != ?codeLink).
+}
+```

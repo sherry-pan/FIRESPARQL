@@ -1,0 +1,16 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the WMT2014 English-German dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX wmt: <http://wmt18.w3.org/2018/dataset/wmt2018-2019/dataset/wmt2018-2019/>
+     PREFIX d2q: <http://d2q.org/d2q/>
+     SELECT?metric 
+     WHERE {
+    ?metric rdfs:label?metricLabel.
+     FILTER (REGEX(STR(?metricLabel) "evaluation metric" @i))
+    ?metric wmt:hasBenchmark?benchmark.
+     FILTER (STR(?benchmark) "WMT2014 English-German" @i)
+     }<|eot_id|>

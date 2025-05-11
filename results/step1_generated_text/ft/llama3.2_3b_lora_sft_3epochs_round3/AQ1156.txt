@@ -1,0 +1,13 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset SQuAD2.0?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "SQuAD2.0")
+       PROBABILITY_OF_ACCEPTANCE      ?metric      ?value.
+       BIND(xsd:int(?value) AS?value)
+     }
+     GROUP BY?metric?metric_lbl<|eot_id|>

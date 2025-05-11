@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper wdt:P302 ?code.
+  ?paper wdt:P138 ?benchmark.
+  ?benchmark wdt:P155 ?model.
+  ?model rdfs:label "Transformer-XL".
+  FILTER(EXISTS {
+    ?model wdt:P141 "12-layer"
+  })
+}
+```

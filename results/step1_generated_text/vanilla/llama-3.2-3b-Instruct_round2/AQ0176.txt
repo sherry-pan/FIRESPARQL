@@ -1,0 +1,18 @@
+Question:
+What models are being evaluated on the UrbanSound8k dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?model 
+     WHERE {
+      ?model orkg:dataset "UrbanSound8k".
+      ?model orkg:is_evaluated_on?model1.
+      ?model1 orkg:dataset?dataset.
+      ?dataset rdfs:label?datasetLabel.
+       FILTER (STRIKE?datasetLabel "UrbanSound8k"i )
+      ?model orkg:label?modelLabel.
+       FILTER (STRIKE?modelLabel?model )
+     }<|eot_id|>

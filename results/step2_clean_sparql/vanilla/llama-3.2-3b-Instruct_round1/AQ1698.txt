@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX wgs: <http://www.w3.org/2008/01/wsdl#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?metric
+WHERE {
+    ?model wgs:hasBenchmark ?benchmark.
+    ?benchmark schema:about "Atari 2600 Centipede".
+    ?benchmark schema:hasMetric ?metric.
+    ?benchmark schema:hasBestPerformingModel ?model.
+    ?model schema:hasScore ?score.
+    FILTER (?metric = "Score")
+}
+```

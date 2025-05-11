@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark orkg:Benchmark_1128.
+  ?model orkg:hasScore ?score.
+  ?score orkg:hasMetric orkg:Score_Metric.
+  ?score rdfs:label "Best".
+  ?model orkg:hasDataset orkg:Dataset_1128.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasName "Atari 2600 Tennis".
+  FILTER (str(?benchmark) = "Atari 2600 Tennis")
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn orkg:Stanford_Cars.
+  ?model orkg:metric owl:hasValue ?accuracy.
+  ?accuracy a orkg:Accuracy.
+  ?accuracy orkg:value ?value.
+  FILTER (?value = SELECT max(?value2) 
+                   WHERE {
+                     ?model2 a orkg:Model ; 
+                             orkg:benchmarkedOn orkg:Stanford_Cars ; 
+                             orkg:metric owl:hasValue ?accuracy2. 
+                     ?accuracy2 a orkg:Accuracy ; 
+                                orkg:value ?value2 
+                   })
+}
+```

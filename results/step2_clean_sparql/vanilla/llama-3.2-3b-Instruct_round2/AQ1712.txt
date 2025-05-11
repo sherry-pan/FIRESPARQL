@@ -1,0 +1,21 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model schema:description "Top performing model".
+  ?model schema:isDatasetOf <http://dbpedia.org/ontology/Atari_2600_Enduro>.
+  ?model dbpedia:score ?score.
+  FILTER NOT EXISTS {
+    ?otherModel dbpedia:score ?otherScore.
+    ?otherModel schema:isDatasetOf <http://dbpedia.org/ontology/Atari_2600_Enduro>.
+    FILTER(?otherScore > ?score)
+  }
+}
+```

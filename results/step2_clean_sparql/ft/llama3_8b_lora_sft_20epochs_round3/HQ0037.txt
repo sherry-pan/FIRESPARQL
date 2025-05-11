@@ -1,0 +1,14 @@
+```sparql
+SELECT ?contributor ?contributor_label
+WHERE {
+    ?papers rdf:type orkgc:Paper.
+    ?papers orkgp:P31 ?contributions.
+    ?contributions orkgp:P32 ?contributor.
+    ?contributions orkgp:P33 ?article_counts.
+    BIND(xsd:int(?article_counts) AS ?article_count)
+    ?contributor rdfs:label ?contributor_label.
+    FILTER(REGEX(STR(?contributor_label), "coronavirus", "i"))
+}
+ORDER BY DESC(MAX(?article_count))
+LIMIT 1
+```

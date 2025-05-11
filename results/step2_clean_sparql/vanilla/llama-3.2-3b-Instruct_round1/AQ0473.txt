@@ -1,0 +1,25 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wikibase: <http://wikibase.org/schema/0.5/>
+PREFIX orkg: <http://orcid.org/ontology/>
+
+SELECT ?paper ?title ?id 
+WHERE {
+  ?paper orkg:hasTopic ?topic.
+  ?topic skos:broader ?broader.
+  ?broader wikibase:label ?broaderLabel.
+  FILTER (lang(?broaderLabel) = 'en' OR lang(?broaderLabel) = 'en-US').
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER (lang(?benchmarkLabel) = 'en' OR lang(?benchmarkLabel) = 'en-US').
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset wikibase:label ?datasetLabel.
+  FILTER (lang(?datasetLabel) = 'en' OR lang(?datasetLabel) = 'en-US').
+  VALUES ?datasetLabel { "Rotowire (Content Selection)"@en }
+  ?paper rdfs:label ?title.
+  BIND(STRAFTER(STR(?paper), "/") AS ?id)
+}
+```

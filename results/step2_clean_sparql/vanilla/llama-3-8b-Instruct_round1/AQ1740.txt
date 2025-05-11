@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasResult ?result.
+    ?result orkg:hasMetric orkg:PermutedAccuracy.
+    ?result orkg:hasValue ?score.
+    ?result orkg:hasBenchmark ?benchmark.
+    ?benchmark rdfs:label "Sequential MNIST".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

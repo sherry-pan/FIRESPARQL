@@ -1,0 +1,14 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Reuters De-En dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?metric 
+     WHERE {
+    ?metric ork:isEvaluationMetricFor?dataset.
+    ?dataset ork:hasDataset?datasetLabel.
+    ?dataset ork:datasetLabel "Reuters De-En".
+    ?metric rdfs:label?metricLabel.
+     FILTER (STRIKE(?metricLabel, "Accuracy") OR STRIKE(?metricLabel, "F1-score") OR STRIKE(?metricLabel, "ROUGE-N") 
+     OR STRIKE(?metricLabel, "BLEU-score") OR STRIKE(?metricLabel, "PPLM-100") )
+     }<|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the ObjectNet dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/OWL/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:hasTopic "ObjectNet".
+    ?benchmark schema:hasBenchmarkFor?benchmark?benchmarkFor.
+    ?benchmarkFor a orkg:Paper.
+    ?benchmarkFor orkg:hasTitle?title.
+    ?benchmarkFor orkg:id?id.
+     }<|eot_id|>

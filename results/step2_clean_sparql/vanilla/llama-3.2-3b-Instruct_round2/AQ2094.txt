@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX otfschema: <http://example.org/otf-schema/>
+
+SELECT ?code
+WHERE {
+  ?p a orkg:Paper.
+  ?p orkg:usesModel ?model.
+  ?model otfschema:spelling+lemma ?spellingLemma.
+  ?p orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:code ?code.
+  FILTER (STRCONTAINS(?spellingLemma, "single"))
+}
+```

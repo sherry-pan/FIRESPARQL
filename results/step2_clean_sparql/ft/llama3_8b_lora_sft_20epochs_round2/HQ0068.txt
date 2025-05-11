@@ -1,0 +1,13 @@
+```sparql
+SELECT ?sectors ?sectors_labels (COUNT(?sectors) AS ?count)
+WHERE {
+  orkgr:R155445 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37041 ?energy_sect.
+  ?energy_sect rdfs:label ?energy_sect_labels.
+  ?contrib orkgp:P37042 ?sectors.
+  ?sectors rdfs:label ?sectors_labels.
+}
+GROUP BY ?sectors ?sectors_labels
+ORDER BY DESC(?count)
+LIMIT 10
+```

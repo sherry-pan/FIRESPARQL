@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SVHN")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?metric;
+        orkgp:HAS_VALUE ?value.
+  BIND(xsd:int(?value) AS ?percentage_error)
+  ?metric orkgp:HAS_MODEL ?model.
+  OPTIONAL {
+    ?model orkgp:P31 ?subclass.
+    ?subclass rdfs:label ?subclass_lbl.
+    FILTER (str(?subclass_lbl) = "SVHN")
+  }
+}
+ORDER BY DESC(?percentage_error)
+LIMIT 1
+```

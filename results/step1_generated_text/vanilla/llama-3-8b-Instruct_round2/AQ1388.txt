@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest RE+ Micro F1 score on the CoNLL04 benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:evaluation?evaluation.
+ ?evaluation orkg:dataset "CoNLL04".
+ ?evaluation schema:evaluationResult?score.
+ ?score schema:hasPart [ a schema:PropertyValue ; schema:value?value ].
+  FILTER (?value <http://www.w3.org/2001/XMLSchema#float> ).
+  FILTER (?score = (SELECT MAX(?score2) WHERE {?model orkg:evaluation?evaluation2.?evaluation2 orkg:dataset "CoNLL04".?evaluation2 schema:evaluationResult?score2 } ) ).
+}<|eot_id|>

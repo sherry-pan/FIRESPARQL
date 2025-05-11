@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl 
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ANLI")
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?evaluators.
+  ?evaluators orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?model_lbl)
+LIMIT 1
+```

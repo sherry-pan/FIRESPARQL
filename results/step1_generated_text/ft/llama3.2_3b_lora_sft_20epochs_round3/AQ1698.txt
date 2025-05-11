@@ -1,0 +1,34 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Centipede dataset in terms of Score metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                 rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl      = "Score")
+               || str(?metric_lbl      = "Average Score")
+               || str(?metric_lbl      = "Mean Score"))
+      ?dataset       orkgp:HAS_DATASET      ?dataset.
+      ?benchmark     orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont          orkgp:HAS_MODEL         ?model.
+      ?model         rdfs:label               ?model_lbl.
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?model      orkgp:HAS_DATASET      ?dataset.
+          ?dataset   orkgp:HAS_BENCHMARK     ?benchmark.
+          ?benchmark orkgp:HAS_EVALUATION   ?eval.
+          ?eval         orkgp:HAS_VALUE        ?value.
+          ?value         orkgp:HAS_METRIC        ?metric.
+          ?metric      rdfs:label              ?metric_lbl.
+           FILTER (str(?metric_lbl      = "Score")
+                   || str(?metric_lbl      = "Average Score")
+                   || str(?metric_lbl      = "Mean Score"))
+          ?model      rdfs:label               ?model_lbl.
+         }
+         ORDER BY DESC(?value)
+         LIMIT 1
+       }
+    <|eot_id|>

@@ -1,0 +1,30 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ SELECT?lead_compound, COUNT(?lead_compound) AS count
+     WHERE {
+      ?study      a            orkgc:Study;
+                  rdfs:label  ?study_label.
+       FILTER(REGEX(?study_label, "Efficacy of lead compounds"))
+      ?chem      orkgp:HAS_STUDY      ?study;
+                  orkgp:HAS_LEAD_COMPOUND  ?lead_compound.
+      ?lead_compound rdfs:label  ?lead_compound_label.
+       FILTER(REGEX(?lead_compound_label, "lead"))
+       {
+         SELECT?lead_compound, COUNT(?lead_compound) AS count
+         WHERE {
+          ?study      a            orkgc:Study;
+                     rdfs:label  ?study_label.
+           FILTER(REGEX(?study_label, "Efficacy of lead compounds"))
+          ?chem      orkgp:HAS_STUDY      ?study;
+                     orkgp:HAS_LEAD_COMPOUND  ?lead_compound.
+          ?lead_compound rdfs:label  ?lead_compound_label.
+           FILTER(REGEX(?lead_compound_label, "lead"))
+          ?compound orkgp:P5048?x. 
+           BIND(xsd:integer(?x) AS?count)
+         }
+         ORDER BY DESC(?count)
+         LIMIT 1
+       }
+    <|eot_id|>

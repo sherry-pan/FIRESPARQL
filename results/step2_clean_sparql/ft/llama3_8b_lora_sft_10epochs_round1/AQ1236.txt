@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R6941 orkgp:compareContribution ?cont.
+  } UNION {
+    orkgr:R8314 orkgp:compareContribution ?cont.
+  }
+  ?dataset orkgp:P31 ?cont;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "Gibson PointGoal"))
+  ?cont orkgp:P7049 ?eval.
+  ?eval orkgp:P7047 ?metric.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

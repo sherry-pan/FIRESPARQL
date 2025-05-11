@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/orkg/>
+SELECT ?paperId ?title WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasDatasetName "WikiText-2".
+  ?paper orkg:hasTitle ?title.
+  BIND(STRAFTER(STR(?paper), "/") AS ?paperId)
+}
+```

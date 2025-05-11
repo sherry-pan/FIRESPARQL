@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?accuracyScore
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark rdfs:label "RACE".
+  ?model orkg:score ?accuracyScore.
+  ?model orkg:hasBestScore ?accuracyScore.
+  ?model orkg:hasLabel ?modelLabel.
+  FILTER (?accuracyScore = "High"@en).
+  FILTER (str(?modelLabel) = "top performing model").
+}
+```

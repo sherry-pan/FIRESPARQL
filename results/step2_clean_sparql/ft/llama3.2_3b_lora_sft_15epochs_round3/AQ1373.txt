@@ -1,0 +1,37 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Sequence error")
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "FSNS - Test")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?value rdfs:label ?value_lbl.
+  BIND(?value_lbl AS ?cont)
+  
+  ?benchmark orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  
+  FILTER(?cont >= 0. && ?cont <= 1.)
+  
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?model orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:HAS_VALUE ?value.
+      ?value rdfs:label ?value_lbl.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value_lbl)
+    LIMIT 1
+  }
+}
+```

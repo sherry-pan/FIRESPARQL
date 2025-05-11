@@ -1,0 +1,16 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+
+SELECT ?model
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark dbo:benchmarkURI "https://www.kaggle.com/c/HMDB51".
+  ?benchmark orkg:hasPreTrainingMetric ?preTrainingMetric.
+  ?preTrainingMetric rdfs:label "Pre-Training Dataset".
+  ?preTrainingMetric orkg:hasBestPerformingModel ?model.
+}
+```

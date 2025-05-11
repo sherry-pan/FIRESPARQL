@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?bench a orkg:Benchmark;
+         orkg:hasResult ?result;
+         orkg:hasDataset ?dataset;
+         orkg:hasHighest ?result.
+  ?result orkg:hasMetric ?metric;
+          orkg:hasValue ?value.
+  ?dataset a orkg:Dataset;
+           rdfs:label "Atari 2600 Star Gunner".
+  FILTER (?metric != "Unknown").
+}
+```

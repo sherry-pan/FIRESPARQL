@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?lead_compound ?lead_compound_labels
+WHERE {
+  ?compound a orkgc:Compound;
+            rdfs:label ?compound_labels;
+            orkgp:P43076 ?lead_compound.
+  ?publication orkgp:P43004 ?compound;
+               orkgp:P43010 ?paper.
+  ?paper orkgp:P43011 ?pubmed_citation.
+  FILTER(REGEX(?pubmed_citation, ".*CC000.*"))
+  ?paper orkgp:P43013 ?doi.
+  FILTER(REGEX(?doi, "^10.1136/.*"))
+}
+```

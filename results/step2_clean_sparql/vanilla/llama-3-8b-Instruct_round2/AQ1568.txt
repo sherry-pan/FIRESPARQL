@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1score
+WHERE {
+    ?model a orkg:Model ;
+        schema:hasResult ?result.
+    ?result schema:hasBenchmark <http://dbpedia.org/resource/CoNLL_2003_English_benchmark> ;
+        schema:hasMetric schema:F1Score ;
+        schema:value ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

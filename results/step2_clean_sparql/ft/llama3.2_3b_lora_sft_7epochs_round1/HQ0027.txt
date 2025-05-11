@@ -1,0 +1,22 @@
+```sparql
+SELECT ?country ?country_labels
+WHERE {
+  ?condition a orkgc:Condition;
+             rdfs:label ?condition_labels.
+  FILTER (str(?condition_labels) = "epilepsy")
+  
+  ?study orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_DATA ?data.
+  ?data orkgp:HAS_VALUE ?value.
+  ?value orkgp:P31 ?condition;
+         orkgp:HAS_VALUE ?value.
+  ?study orkgp:P32 ?study_has_country;
+         orkgp:HAS_COUNTRY ?country.
+  ?country rdfs:label ?country_labels.
+
+  ?value orkgp:HAS_PREVALENCE ?preva.
+  ?preva rdfs:label ?preva_labels.
+  BIND(xsd:float(?preva_labels) AS ?preva)
+}
+ORDER BY DESC(?preva)
+```

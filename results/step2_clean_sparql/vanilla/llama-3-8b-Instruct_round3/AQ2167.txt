@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?code
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:usesModel orkg:LSTM.
+  ?paper bibo:inBenchmark ?benchmark.
+  ?code orkg:references ?paper.
+  FILTER (?benchmark != "None").
+  FILTER (?paper orkg:references "Bai et al., 2018").
+}
+```

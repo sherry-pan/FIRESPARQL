@@ -1,0 +1,20 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the NYT24 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+         dct:title?title ;
+         orkg:dataset?dataset.
+ ?dataset rdfs:label "NYT24".
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark orkg:benchmarkName?name.
+  FILTER (regex(?name, "NYT24", "i")).
+ ?paper orkg:hasId?id.
+}<|eot_id|>

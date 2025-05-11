@@ -1,0 +1,36 @@
+Question:
+What is the highest benchmark result achieved on the Cartpole, swingup (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Cartpole, swingup (DMControl500k)")
+       }
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval         orkgp:HAS_METRIC        ?metric.
+               ?metric         rdfs:label              ?metric_lbl.}
+      ?paper        orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_MODEL         ?model.
+       OPTIONAL {?model      orkgp:HAS_SOURCE_CODE   ?source_code.}
+       OPTIONAL {?paper      orkgp:HAS_AUTHOR        ?author.
+               ?author      rdfs:label              ?author_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_PUBLICATION    ?publication.
+               ?publication     orkgp:P31               ?date.
+               ?date           orkgp:HAS_TIME_VALUE     ?time_value.
+               ?time_value      orkgp:P32               ?date_value.}
+       BIND(
+         IF(?value_missing = "" &&?score_missing = ""
+           , "N/A"
+           , IF(?value_missing = "" && TREAT(?score AS xsd:float)
+              ,?score
+              , IF(TREAT(?value AS xsd:float) = TREAT(?score AS xsd:float)
+                 ,?value
+                 , "N/A")
+           )
+       ) AS?final_value
+       VALUES?value?value_list
+       VALUES?score?

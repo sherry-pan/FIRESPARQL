@@ -1,0 +1,23 @@
+Question:
+What is the highest benchmark result achieved on the FSNS - Test dataset, including the metric and its value?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX fsn: <http://purl.org/linked-data/fsn#>
+     PREFIX wsd: <http://purl.org/linked-data/wordnet#>
+     PREFIX wikibase: <http://wikibase.org/schema/0.5/>
+
+     SELECT?metric?value
+     WHERE {
+      ?benchmark a dbo:Benchmark.
+      ?benchmark fsn:hasBenchmarkResult?result.
+      ?result wsd:hasValue?value.
+      ?benchmark dbo:dataset fsn:hasDataset?dataset.
+      ?dataset wsd:datasetId "FSNS-Test".
+      ?benchmark dbo:bestResult?metric.
+       FILTER (?metric IS NOT NULL )
+     }
+     ```<|eot_id|>

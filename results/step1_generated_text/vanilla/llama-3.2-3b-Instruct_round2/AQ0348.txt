@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the SciREX dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX wdt: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?paper?title 
+     WHERE {
+      ?paper wdt:P306?benchmark.
+      ?benchmark wdt:P166?dataset.
+       filter(?dataset = "SciREX") 
+      ?paper wdt:P31?paperId.
+       SERVICE wikibase:label {
+         bd:serviceParam wikibase:language "en".
+       }
+     }<|eot_id|>

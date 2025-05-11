@@ -1,0 +1,22 @@
+Question:
+List the code links in papers that use the OTF spelling+lemma (single) model in any benchmark?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT?paper?paper_title?code_link
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:uses_model orkg:OTF_spellingLemma.
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark a bibo:Benchmark.
+ ?paper schema:hasPart?code.
+ ?code a bibo:Code.
+ ?code rdfs:label?code_link.
+  FILTER (?benchmark!= "none").
+  FILTER (?code_link!= "none").
+}<|eot_id|>

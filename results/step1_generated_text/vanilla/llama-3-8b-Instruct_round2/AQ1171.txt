@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://rdf.orkg.org/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?benchmarkScore?metric
+     WHERE {
+      ?paper a orkg:Paper ;
+             orkg:hasBenchmarkScore?benchmarkScore ;
+             orkg:hasBenchmarkDataset?dataset.
+      ?dataset rdfs:label "MultiNLI".
+      ?benchmarkScore orkg:hasMetric?metric.
+       FILTER (?metric = "score" ||?metric = "metric")
+     }
+     ORDER BY DESC(?benchmarkScore) LIMIT 1<|eot_id|>

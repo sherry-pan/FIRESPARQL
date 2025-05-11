@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://example.org/ork/>
+PREFIX schema: <http://schema.org/>
+SELECT ?paper ?title ?link
+WHERE {
+  ?paper a ork:Papers.
+  ?paper ork:hasModel ?model.
+  ?model rdfs:label "AcrE"@en.
+  ?paper schema:code ?link.
+  ?paper rdfs:label ?title.
+  FILTER (REGEX(?link, "github", "i"))
+}
+```

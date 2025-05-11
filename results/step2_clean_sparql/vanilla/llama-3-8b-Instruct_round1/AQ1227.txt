@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?metric ?value
+WHERE {
+  ?result a orkg:Result ;
+          orkg:dataset <http://schema.org/DMControl500k> ;
+          orkg:benchmark <http://schema.org/Cartpole> ;
+          orkg:metric ?metric ;
+          orkg:value ?value.
+  FILTER(?metric = "highest" && xsd:string(?value) != "")
+}
+```

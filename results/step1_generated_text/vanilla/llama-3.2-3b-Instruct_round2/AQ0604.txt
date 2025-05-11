@@ -1,0 +1,18 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Atari 2600 Venture dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/orkg>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper orkg:hasDataset?dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset?dataset.
+    ?benchmark orkg:hasTitle?benchmarkTitle.
+    ?benchmark orkg:hasID?benchmarkID.
+    ?dataset orkg:hasDataset?dataset.
+    ?dataset orkg:hasDataset?dataset.
+    ?paper orkg:hasID?paperID.
+    ?benchmark orkg:hasPaper?paper.
+     FILTER (REGEX(STR(?benchmarkID) "Venture"))
+     }<|eot_id|>

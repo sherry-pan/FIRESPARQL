@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasBenchmark ?benchmark ;
+           orkg:name "Atari 2600 Boxing".
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasMetric ?metric ;
+             orkg:hasValue ?value.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

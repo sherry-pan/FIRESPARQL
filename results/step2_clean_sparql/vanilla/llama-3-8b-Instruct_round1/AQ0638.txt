@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?paperTitle ?paperID
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         schema:name ?paperTitle ;
+         orkg:hasBenchmark ?benchmark ;
+         schema:identifier ?paperID.
+  ?benchmark orkg:usesDataset ?dataset.
+  ?dataset schema:name "TREC-6".
+}
+```

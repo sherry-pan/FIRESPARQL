@@ -1,0 +1,22 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Walker, walk (DMControl100k) dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <https://orcid.org/schema/orcid>
+     PREFIX wikibase: <http://wikibase.org/schema/ontology/>
+     
+     SELECT?paperTitle?paperId 
+     WHERE {
+      ?paper?paperId schema:description "Benchmarking models on the Walker, walk (DMControl100k) dataset".
+      ?paper schema:topic "Benchmarking models on the Walker, walk (DMControl100k) dataset"@en.
+      ?paper orkg:author?author.
+      ?author foaf:name?authorName.
+      ?paper orkg:identifier?paperId.
+       BIND(replace(str(?paperId), "ORCID", "") as?paperTitle)
+     }
+     FILTER( REGEX("Benchmarking models on the Walker, walk (DMControl100k) dataset", "i") )
+     LIMIT 10<|eot_id|>

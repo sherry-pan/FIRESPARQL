@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper dc:title ?title.
+  ?paper orkg:hasIdentifier ?id.
+  ?benchmark orkg:hasResearchPaper ?paper.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset bibo:identifier "Atari 2600 Venture".
+}
+```

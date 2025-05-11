@@ -1,0 +1,36 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset MLDoc Zero-Shot English-to-Spanish?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/vocabulary/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX q: <http://www.wikidata.org/entity/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric?value
+     WHERE {
+      ?q :P3125?metric. 
+      ?q wdt:P31?class.
+      ?class rdfs:label?label.
+       FILTER (CONTAINS(LCASE(?label), "MLDoc Zero-Shot English-to-Spanish")).
+      ?q wdt:P31?class.
+      ?class rdfs:label?label.
+      ?q schema:dataset?dataset.
+      ?dataset schema:hasBenchmark?benchmark.
+      ?benchmark schema:dataset?dataset.
+      ?benchmark schema:hasMetric?metric.
+      ?benchmark schema:hasValue?value.
+      ?benchmark schema:hasMetric?metric.
+      ?benchmark schema:hasValue?value.
+      ?benchmark schema:hasRank?rank.
+       FILTER (CONTAINS(LCASE(?label), "top") AND CONTAINS(LCASE(?rank), "1")).
+      ?benchmark schema:dataset?dataset.
+      ?benchmark schema:hasMetric?metric.
+      ?benchmark schema:hasValue?value.
+      ?benchmark schema:hasRank?rank.
+      ?benchmark schema:hasMetric?metric.
+      ?benchmark schema:hasValue?value.
+      ?benchmark schema:hasRank?rank.
+     }<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?dataset ?dataset_label
+WHERE {
+  ?research_field rdfs:label "Entity Disambiguation".
+  ?research_field orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_label.
+  ?cont orkgp:P32 ?research_field.
+  ?paper orkgp:P31 ?cont.
+  ?paper rdfs:label ?title.
+}
+GROUP BY ?dataset ?dataset_label
+ORDER BY DESC(COUNT(?paper))
+LIMIT 10
+```

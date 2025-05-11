@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?dataset 
+WHERE {
+  ?dataset skos:broader ?b.
+  ?b skos:broader skos:Concept_00000023.
+  ?dataset skos:prefLabel ?label.
+  FILTER (lang(?label) = "en" AND CONTAINS(?label, "Joint Entity and Relation Extraction"))
+}
+GROUP BY ?dataset
+HAVING (COUNT(?dataset) = (SELECT COUNT(DISTINCT ?dataset) WHERE {
+  ?dataset skos:broader ?b.
+  ?b skos:broader skos:Concept_00000023.
+}))
+```

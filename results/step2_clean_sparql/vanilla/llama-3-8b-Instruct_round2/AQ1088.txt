@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX ace: <http://www.orkg.org/ace/>
+PREFIX metric: <http://www.orkg.org/metric/>
+
+SELECT ?metric ?score
+WHERE {
+  ?publication a orkg:Publication;
+               orkg:dataset ace:ACE_2005;
+               orkg:hasBestResult ?result.
+  ?result orkg:metric ?metric;
+          orkg:score ?score.
+  FILTER (?metric = metric:BenchmarkResultMetric)
+}
+```

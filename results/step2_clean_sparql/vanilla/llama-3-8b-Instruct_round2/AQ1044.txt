@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?metric ?score
+WHERE {
+    ?paper a orkg:Paper ;
+           orkg:hasBenchmark ?benchmark.
+    ?benchmark a orkg:Benchmark ;
+               orkg:hasDataset ?dataset ;
+               orkg:hasResult ?result.
+    ?dataset a orkg:Dataset ;
+             orkg:name "Softcite".
+    ?result a orkg:Result ;
+            orkg:hasMetric ?metric ;
+            orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

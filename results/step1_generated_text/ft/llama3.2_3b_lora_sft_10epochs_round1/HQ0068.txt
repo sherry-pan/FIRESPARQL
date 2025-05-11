@@ -1,0 +1,20 @@
+Question:
+Which sectors are modeled as energy sectors and how often?
+
+Generated SPARQL:
+ SELECT?sector?frequency
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "energy", "i"))
+      ?contrib         orkgp:HAS_DATASET      ?dataset;
+                        orkgp:P32               ?paper.
+      ?paper          orkgp:HAS_SOURCE      ?source.
+      ?source        rdfs:label              ?source_lbl.
+       FILTER(REGEX(?source_lbl, "energy", "i"))
+      ?paper      orkgp:P31               ?sector.
+      ?sector     rdfs:label              ?sector_lbl.
+       FILTER(REGEX(?sector_lbl, "energy", "i"))
+      ?frequency orkgp:P32               ?sector;
+                  orkgp:COUNT           ?contrib.
+     }<|eot_id|>

@@ -1,0 +1,17 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model
+WHERE {
+    ?model rdfs:label ?label.
+    ?model schema:description "Atari 2600 Crazy Climber".
+    ?model schema:dataset ?dataset.
+    ?dataset schema:datasetType "benchmark".
+    ?dataset schema:metric ?metric.
+    ?metric schema:metricType "Score".
+    ?metric schema:bestModel ?bestModel.
+    FILTER (REGEX(?label, ".*Crazy Climber.*"))
+}
+```

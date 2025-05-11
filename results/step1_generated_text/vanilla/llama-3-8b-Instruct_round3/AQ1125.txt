@@ -1,0 +1,20 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Kinetics-600 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?score
+     WHERE {
+    ?paper a orkg:Paper ;
+     orkg:dataset?dataset ;
+     orkg:benchmarkResult?benchmarkResult.
+    ?dataset a orkg:Dataset ;
+     orkg:name "Kinetics-600".
+    ?benchmarkResult a orkg:BenchmarkResult ;
+     orkg:metric?metric ;
+     orkg:score?score.
+     FILTER(?metric = "metric" && datatype(?score) = xsd:float).
+     ORDER BY DESC(?score)
+     LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+    orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasResult ?result.
+  ?result a orkg:Result ;
+    orkg:hasMetric ?metric ;
+    orkg:hasScore ?score.
+  FILTER (?dataset = <http://rdf.openresearchknowledgegraph.org/dataset/NaturalQuestionsLong>)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

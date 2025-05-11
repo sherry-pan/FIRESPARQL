@@ -1,0 +1,19 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?paperTitle?paperID
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper dc:title?paperTitle.
+ ?paper dcterms:identifier?paperID.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:dataset?dataset.
+ ?dataset rdfs:label "ShARe/CLEF eHealth corpus".
+}<|eot_id|>

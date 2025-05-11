@@ -1,0 +1,26 @@
+Question:
+List the code links in papers that use the GPT-2 (small) model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://www.semanticdesktop.org/ontologies/ncalcore/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT?codeLink
+WHERE {
+ ?paper a bibo:Article.
+ ?paper dcterms:title?title.
+ ?paper orkg:usesModel?model.
+ ?model a orkg:Model.
+ ?model dcterms:title "GPT-2 (small)".
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark dcterms:title?benchmarkTitle.
+  FILTER (LANG(?title) = "en" && LANG(?benchmarkTitle) = "en").
+ ?codeLink a orkg:CodeLink.
+ ?codeLink orkg:partOf?paper.
+ ?codeLink orkg:uses?model.
+  FILTER (?codeLink NOT IN (?otherCodeLink ) ).
+}<|eot_id|>

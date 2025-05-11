@@ -1,0 +1,13 @@
+```sparql
+SELECT ?name
+WHERE {
+  ?contrib orkgp:compareContribution orkgr:R155540.
+  ?contrib orkgp:P27 ?cont.
+  ?cont orkgp:P3755 ?papers.
+  ?papers orkgp:P3756 ?authors.
+  ?authors rdfs:label ?name.
+  FILTER(REGEX(?name, "coronavirus"))
+}
+ORDER BY DESC(COUNT(?papers))
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset schema:name "Atari 2600 Centipede".
+  ?model orkg:metric ?metric.
+  ?metric schema:name "Score".
+  ?model orkg:performance ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

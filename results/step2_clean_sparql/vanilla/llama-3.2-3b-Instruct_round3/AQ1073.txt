@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?q orkg:hasBenchmark ?b .
+  ?b schema:dataset "Pubmed" .
+  ?b schema:hasResult ?r .
+  ?r schema:hasMetric ?metric .
+  ?r schema:hasScore ?score .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

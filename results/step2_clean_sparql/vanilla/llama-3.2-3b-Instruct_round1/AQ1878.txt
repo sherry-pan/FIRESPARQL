@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?dataset 
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasTopic "Robot Navigation".
+    ?benchmark skos:definition "Benchmarking in Robot Navigation".
+    FILTER EXISTS {
+        ?benchmark skos:broader ?benchmark1.
+    }
+}
+```

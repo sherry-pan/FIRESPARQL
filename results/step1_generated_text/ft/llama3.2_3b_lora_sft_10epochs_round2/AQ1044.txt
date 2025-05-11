@@ -1,0 +1,25 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Softcite dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R153801 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P31?dataset.
+          ?dataset rdfs:label "Softcite". 
+          ?dataset orkgp:P32?eval.
+          ?eval orkgp:P40067?value.
+          ?value orkgp:HAS_METRIC?metric.
+          ?metric rdfs:label?metric_lbl.
+         }
+     UNION
+     {
+       orkgr:R153801 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P31?dataset.
+      ?dataset rdfs:label "Softcite".
+      ?dataset orkgp:P40067?eval.
+      ?eval orkgp:HAS_METRIC?metric.
+      ?metric rdfs:label "f1". 
+     }
+     ORDER BY DESC(?score)<|eot_id|>

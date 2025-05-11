@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://openresearchknowledge.org/>
+
+SELECT ?metric
+WHERE {
+  ?article a orkg:Article ;
+           orkg:hasEvaluationMetric ?metric ;
+           dcterms:subject "MultiRC".
+  ?metric rdfs:label ?metricLabel.
+  FILTER (lang(?metricLabel) = "en")
+}
+```

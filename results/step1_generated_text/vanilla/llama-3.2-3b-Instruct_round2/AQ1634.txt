@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Lunar Lander (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <https://orcid.org/ontology/>
+     PREFIX wot: <https://wotchallenges.org/ontology/>
+     PREFIX bio2vec: <https://wotchallenges.org/ontology/bio2vec/>
+     SELECT?model?score
+     WHERE {
+    ?model schema:description?d.
+    ?d schema:dataset "Lunar Lander (OpenAI Gym)".
+    ?model schema:benchmark?b.
+    ?b schema:score?score.
+     ORDER BY DESC(?score)
+     LIMIT 1
+     }
+    <|eot_id|>

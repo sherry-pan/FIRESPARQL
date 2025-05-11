@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R155801 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R155802 orkgp:compareContribution ?contrib.
+  }
+  ?contrib orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(STR(?benchmark_lbl), "Ball in cup, catch \\(DMControl500k\\)")
+  )
+  ?contrib orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P4315 ?value.
+  OPTIONAL {
+    ?eval orkgp:P4316 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

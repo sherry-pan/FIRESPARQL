@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmarkedOn ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset skos:prefLabel "Atari 2600 Tutankham".
+  ?model orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

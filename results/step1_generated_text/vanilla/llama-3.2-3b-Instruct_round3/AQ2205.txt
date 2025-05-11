@@ -1,0 +1,19 @@
+Question:
+Can you provide links to code used in papers that benchmark the NASCell model?
+
+Generated SPARQL:
+ PREFIX wds: <http://www.w3.org/ns/wds>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX sparql: <http://www.w3.org/TR/sparql11/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     SELECT?paper?link 
+     WHERE {
+    ?paper a orkg:Paper.
+     rdfs:label?paperLabel.
+     orkg:hasPaper?hasPaper.
+    ?hasPaper orkg:hasCode?code.
+    ?code wds:hasLink?link.
+     FILTER (STRLIKE(STR(?paperLabel), "NASCell") AND STRLIKE(STR(?paperLabel), "benchmark"))
+     }<|eot_id|>

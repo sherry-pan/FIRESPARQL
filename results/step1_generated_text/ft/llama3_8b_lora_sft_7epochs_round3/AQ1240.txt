@@ -1,0 +1,38 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset Oxford-IIIT Pets?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       {
+        ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets")
+       }
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+       OPTIONAL {?benchmark      orkgp:HAS_VALUE         ?value.
+                {
+                 ?value            value:HAS_NUMBER       ?number.
+                }
+               ?number           value:HAS_DATATYPE      ?datatype.
+               ?datatype         rdfs:label              ?datatype_lbl.
+               ?value            value:HAS_VALUE         ?value2.
+               ?value2           value:HAS_UNIT          ?unit.
+               ?unit             rdfs:label              ?unit_lbl.
+               ?value            value:HAS_SOURCE        ?source.
+               ?source           rdfs:label              ?source_lbl.
+               ?value            orkgp:P32              ?cont.
+               ?cont            orkgp:P31              ?model.
+               ?model           rdfs:label              ?model_lbl.
+               ?value            orkgp:P33              ?comp.
+               ?comp            orkgp:P32              ?cont2.
+               ?cont2           orkgp:P31              ?model2.
+               ?model2          rdfs:label              ?model2_lbl.
+               ?value            orkgp:P34              ?alg.
+               ?alg            rdfs:label              ?alg_lbl.
+                }
+              }
+       ORDER BY DESC(?score

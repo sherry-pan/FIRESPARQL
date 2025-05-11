@@ -1,0 +1,30 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ SELECT?material?material_label
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_label.
+       FILTER (str(?dataset_label) = "Piezoresistive material")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_SOURCE_CODE   ?sourcecode.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:P32               ?evaluator_value.
+      ?eval        orkgp:HAS_DATASET      ?dataset;
+                    orkgp:HAS_EVALUATION    ?cont.
+       OPTIONAL {?eval           orkgp:HAS_VALUE        ?evaluator_value.}
+       OPTIONAL {?eval           orkgp:P31               ?cont.}
+      ?cont         rdfs:label              ?cont_label.
+       FILTER (str(?cont_label) = "response time")
+      ?cont         orkgp:P32               ?time.
+       OPTIONAL {?time           orkgp:HAS_VALUE        ?evaluator_value.}
+       OPTIONAL {?time           orkgp:P31               ?cont.}
+      ?material      orkgp:HAS_EVALUATION     ?eval.
+      ?material      rdfs:label              ?material_label.
+       BIND(xsd:float(?evaluator_value) AS?evaluator_value)
+       BIND(xsd:float(?time) AS?time)
+       BIND(xsd:string(?cont_label) AS?cont_label)
+       BIND(xsd:string(?material_label) AS?material_label)
+       BIND(xsd:string(?dataset_label) AS?dataset_label)
+       BIND(xsd:string(?sourcecode) AS?sourcecode)<|eot_id|>

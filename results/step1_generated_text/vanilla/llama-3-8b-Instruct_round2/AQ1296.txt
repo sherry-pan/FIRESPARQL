@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Wizard of Wor dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?score?metric
+WHERE {
+ ?publication a orkg:Publication.
+ ?publication dc:title?title.
+  FILTER (str(?title) = "Atari 2600 Wizard of Wor").
+ ?publication orkg:hasResult?result.
+ ?result orkg:hasScore?score.
+ ?result orkg:hasMetric?metric.
+ ?metric dc:title?metricTitle.
+  FILTER (str(?metricTitle) = "Benchmark Score").
+}<|eot_id|>

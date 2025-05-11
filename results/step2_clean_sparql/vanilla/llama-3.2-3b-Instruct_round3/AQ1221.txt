@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX wotb: <http://example.org/wotb/>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmarkResult ?result.
+    ?result wotb:hasMetric ?metric.
+    ?result wotb:hasValue ?value.
+    ?benchmark orkg:hasDataset "Ball in cup, catch (DMControl500k)".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

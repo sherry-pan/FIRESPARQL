@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Ice Hockey dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+     ?
+      orkgp:P31?cont;
+      rdfs:label?title.
+      FILTER(REGEX(STR(?title), "Atari 2600 Ice Hockey"))
+     ?cont orkgp:P5008?dataset;
+            orkgp:P5009?metric.
+     ?dataset rdfs:label?dataset_lbl.
+     ?cont orkgp:P5010?value.
+      BIND(xsd:float(MAX(?value)) AS?score)
+    }
+    ORDER BY DESC(?score)
+    LIMIT 1<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+List the code links in papers that use the Unsupervised NMT + weight-sharing model in any benchmark?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper schema:about?topic.
+ ?topic owl:sameAs schema:UnsupervisedNMT.
+ ?paper schema:uses?model.
+ ?model owl:sameAs schema:WeightSharingModel.
+ ?paper schema:benchmarks?benchmark.
+ ?code_link a schema:CodeLink.
+ ?code_link schema:references?paper.
+}<|eot_id|>

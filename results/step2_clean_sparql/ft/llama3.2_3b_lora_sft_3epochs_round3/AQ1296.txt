@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Atari 2600 Wizard of Wor".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?value a orkgp:Value;
+         orkgp:P32 ?metric.
+}
+```

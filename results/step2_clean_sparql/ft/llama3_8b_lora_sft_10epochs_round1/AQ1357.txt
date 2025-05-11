@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R155171 orkgp:compareContribution ?contrib.
+  } UNION {
+    orkgr:R153241 orkgp:compareContribution ?contrib.
+  }
+  ?contrib orkgp:P34 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "BUCC German-to-English"))
+  ?contrib orkgp:P7009 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:P7010 ?value.
+  BIND(xsd:float(?value) AS ?value)
+  ?contrib orkgp:P7011 ?direction.
+  FILTER(REGEX(?metric_lbl, "^[^_]+_") && ?direction != "direction" && ?direction != "both")
+}
+ORDER BY DESC(?score)
+```

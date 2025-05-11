@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:hasAuthor ?author.
+  ?author foaf:name ?name.
+  ?paper orkg:usesModel "GCN Hybrid".
+  ?paper orkg:benchmarks ?benchmark.
+  ?benchmark orkg:usesCode ?code.
+  FILTER (?name != "Unknown").
+}
+```

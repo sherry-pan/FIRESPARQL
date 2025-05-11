@@ -1,0 +1,31 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "Natural Questions (long)")
+         FOR?benchmark      IN?dataset      FILTER (str(?dataset_lbl) = "Natural Questions (long)")
+         FOR?model       IN?benchmark      FILTER (str(?benchmark_lbl) = "Natural Questions (long)")
+        ?model      orkgp:HAS_EVALUATION     ?eval.
+        ?eval      orkgp:P32               ?metric.
+         BIND(xsd:int(?metric_value) AS?metric_value)
+        ?metric      rdfs:label              ?metric_lbl.
+         BIND(xsd:int(?metric_value) AS?metric_value)
+         FILTER(?metric_lbl = "F1 score")
+        ?model      rdfs:label              ?model_lbl.
+         BIND(xsd:int(?metric_value) AS?metric_value)
+        ?model      orkgp:HAS_MODEL     ?model_n.
+         BIND(xsd:int(?model_n) AS?model_n)
+        ?model      rdfs:label              ?model_lbl.
+         BIND(xsd:int(?model_n) AS?model_n)
+        ?model      a                orkgp:Model.
+         BIND(xsd:int(?model_n) AS?model_n)
+        ?model      orkgp:P31               ?cont.
+        ?cont      rdfs:label              ?cont_lbl.
+         BIND(xsd:int(?cont_lbl) AS?cont_lbl)
+         BIND(xsd:int(?model_n) AS?model_n)
+        ?model      orkgp:HAS_DATASET     ?cont.
+         BIND(xsd:int(?cont_lbl) AS?

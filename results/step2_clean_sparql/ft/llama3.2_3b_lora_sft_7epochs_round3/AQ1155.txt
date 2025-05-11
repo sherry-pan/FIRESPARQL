@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    ?dataset rdfs:label "Natural Questions (long)"^^xsd:string.
+    ?cont orkgp:P31 ?dataset.
+    ?cont orkgp:P32 ?eval.
+    ?eval orkgp:P36 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?cont orkgp:P34 ?value.
+    BIND(xsd:float(?value) AS ?value)
+  }
+}
+```

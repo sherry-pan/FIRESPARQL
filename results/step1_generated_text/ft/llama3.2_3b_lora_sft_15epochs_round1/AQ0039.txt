@@ -1,0 +1,17 @@
+Question:
+Could you provide a list of models that have been tested on the seel.cse.lsu.edu/data/refsq17.zip benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "seel.cse.lsu.edu/data/refsq17.zip")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         rdfs:label              ?paper_lbl.
+        ?model        orkgp:HAS_PAPER        ?paper;
+                        rdfs:label              ?model_lbl.
+         FILTER(?model_lbl      = "Model")
+     }<|eot_id|>

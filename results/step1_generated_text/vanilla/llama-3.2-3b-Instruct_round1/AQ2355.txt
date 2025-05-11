@@ -1,0 +1,25 @@
+Question:
+Can you provide links to code used in papers that benchmark the BiLSTM-Attention + ELMo model?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX pbi: <http://pbi.bertelmann.de/ontology/>
+     SELECT?paper?code
+     WHERE {
+    ?paper a orkg:Papers.
+    ?paper orkg:hasCode?code.
+    ?paper schema:author?author.
+    ?author schema:affiliation?affiliation.
+    ?affiliation schema:hasCitation?citation.
+    ?citation schema:hasCitation?citationLink.
+    ?citation schema:hasText?citationText.
+    ?citationText schema:description?description.
+    ?description schema:contains?link.
+    ?link schema:target?linkTarget.
+     FILTER (CONTAINS(LCASE(?description), "bi-lstm-attention-elmo") 
+     AND CONTAINS(LCASE(?linkTarget), "github.com" ) 
+     AND CONTAINS(LCASE(?linkTarget), "code" ) )
+     }<|eot_id|>

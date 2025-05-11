@@ -1,0 +1,18 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Ohsumed dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://www.openresearch.org/ontology/ork>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?title?id
+     WHERE {
+    ?paper a ork:ResearchPaper.
+    ?paper ork:hasBenchmark?benchmark.
+    ?benchmark rdfs:label "Ohsumed".
+    ?paper ork:hasDataset?dataset.
+    ?dataset a ork:Dataset.
+    ?dataset rdfs:label "Ohsumed".
+    ?paper ork:id?id.
+    ?paper rdfs:label?title.
+     FILTER (REGEX (?title, "Ohsumed")i)
+     }<|eot_id|>

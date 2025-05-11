@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?dataset ?datasetLabel ?count
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  ?dataset owl:sameAs ?uri.
+  ?uri schema:about orkg:Entity_Disambiguation.
+  ?dataset orkg:has_paper ?paper.
+  ?paper orkg:has_citation ?citation.
+  ?citation orkg:has_count ?count.
+  FILTER (?count > 0).
+}
+ORDER BY DESC(?count)
+LIMIT 10
+```

@@ -1,0 +1,38 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.
+  FILTER(REGEX(?problem_lbl, "piezoresistive material"))
+  
+  ?model a orkgc:Model; rdfs:label ?model_lbl.
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_SOURCE_CODE ?sourcecode.
+  ?sourcecode orkgp:HAS_DATASET ?dataset.
+
+  OPTIONAL {
+    ?cont orkgp:HAS_SOURCE_CODE_VALUE ?sourcecodeval.
+  }
+  OPTIONAL {
+    ?cont orkgp:P32 ?constraint.
+    ?constraint orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_PROBLEM ?problem.
+  }
+  OPTIONAL {
+    ?cont orkgp:P31 ?assessment.
+    ?assessment orkgp:HAS_MODEL ?model.
+  }
+  OPTIONAL {
+    ?cont orkgp:HAS_RUN_VALUE ?runval.
+    ?runval orkgp:HAS_MODEL ?model.
+  }
+  OPTIONAL {
+    ?cont orkgp:P32 ?constraint.
+    ?constraint orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_MODEL ?model.
+  }
+}
+```

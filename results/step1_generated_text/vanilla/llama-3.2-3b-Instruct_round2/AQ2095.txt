@@ -1,0 +1,24 @@
+Question:
+Can you provide links to code used in papers that benchmark the Fine-Grained Gating model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX wot: <http://www.w3.org/ns/wot/>
+     PREFIX bio2vec: <http://purl.org/vocab/bio2vec/>
+     SELECT?paper?link
+     WHERE {
+    ?paper wot:involves?benchmark.
+    ?benchmark schema:description?description.
+    ?description schema:keywords "Fine-Grained Gating".
+    ?paper schema:hasPart?code.
+    ?code schema:description?codeDescription.
+    ?code wot:link?link.
+     FILTER (lang(?codeDescription) = "en")
+     }
+     GROUP BY?paper
+     HAVING (COUNT(DISTINCT?link) > 1)
+     ORDER BY COUNT(DISTINCT?link) DESC
+     LIMIT 10<|eot_id|>

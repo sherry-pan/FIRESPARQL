@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER (str(?paper_lbl) = "papers with the following code: Concept Mention Extraction")
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_SOURCE_CODE ?code.
+  ?code orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "Concept Mention Extraction")
+}
+```

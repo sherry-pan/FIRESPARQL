@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX wmt: <http://www.openresearchknowledgegraph.org/WMT/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+     SELECT?metric?value
+     WHERE {
+      ?dataset a wmt:Dataset ;
+                 wmt:datasetName "WMT2016 Czech-English".
+      ?result a wmt:Result ;
+              wmt:dataset?dataset ;
+              wmt:metric?metric ;
+              wmt:value?value.
+       FILTER (?result wmt:isBenchmarkResult = true).
+       FILTER (?result wmt:isTopResult = true).
+       FILTER (?dataset wmt:datasetName = "WMT2016 Czech-English").
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark orkg:dataset <http://www.ontologydesignpatterns.org/oc/oc/dataset/cartpole-openai-gym>.
+  ?benchmark orkg:score ?score.
+  {
+    SELECT (MAX(?s) as ?maxScore)
+    WHERE {
+      ?m a orkg:Model.
+      ?m orkg:benchmark/orkg:score ?s.
+    }
+  }
+  FILTER (?score = ?maxScore)
+}
+```

@@ -1,0 +1,18 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/properties/>
+PREFIX wikibase: <http://wikibase.org/bio/ontology#>
+SELECT ?dataset 
+WHERE {
+  ?dataset dbp:isBenchmark "true".
+  ?dataset dbp:researchTopic dbpedia:Text_Summarization.
+  ?dataset rdfs:label ?label.
+  FILTER (lang(?label) = "en")
+}
+GROUP BY ?dataset ?label 
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 5
+```

@@ -1,0 +1,23 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?model schema:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en').
+  ?model schema:description ?description.
+  FILTER (lang(?description) = 'en').
+  ?model orkg:has_result ?result.
+  ?result schema:description ?descrip.
+  FILTER (lang(?descrip) = 'en').
+  ?result orkg:has_dataset "Atari 2600 Montezuma's Revenge benchmark".
+  ?result orkg:has_metric "Score".
+  ?result orkg:has_result ?score.
+}
+ORDER BY DESC(?score)
+```

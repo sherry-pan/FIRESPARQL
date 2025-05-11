@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?title ?id
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:hasBenchmarkSTS ?benchmarkSTS.
+ ?benchmarkSTS orkg:hasTitle ?title.
+ ?benchmarkSTS orkg:hasID ?id.
+ FILTER(CONTAINS(STR(?benchmarkSTS), "STS Benchmark"))
+}
+```

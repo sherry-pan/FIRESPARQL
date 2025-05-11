@@ -1,0 +1,26 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the arXiv dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?paperId?title
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper schema:description?description.
+      ?paper schema:about <http://dbpedia.org/resource/ArXiv>.
+      ?paper schema:hasBenchmark?benchmark.
+      ?benchmark schema:hasDataset?dataset.
+      ?dataset schema:datasetType "dataset".
+      ?benchmark schema:hasBenchmarkFor?benchmarkFor.
+      ?benchmarkFor schema:dataset?dataset.
+      ?dataset schema:datasetType "dataset".
+      ?benchmarkFor a rkg:benchmark.
+      ?paper orkg:paperId?paperId.
+      ?paper rkg:title?title.
+       BIND(STR(?paperId) AS?id)
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+
+SELECT ?model ?metric ?value
+WHERE {
+    ?model schema:name ?modelName.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark schema:description "CoNLL++".
+    ?benchmark orkg:hasMetric ?metric.
+    ?metric schema:name "F1".
+    ?model orkg:hasBestPerformingMetric ?bestMetric.
+    ?bestMetric schema:name ?metricName.
+    FILTER(STRLIKE(STR(?metricName), ?modelName)).
+}
+```

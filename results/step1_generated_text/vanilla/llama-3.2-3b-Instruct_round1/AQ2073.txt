@@ -1,0 +1,22 @@
+Question:
+Where can I find code references in papers that have used the BiDAF + Self Attention + ELMo model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dc: <http://purl.org/dc/elements/1.1/>
+     PREFIX org: <http://openresearchknowledgegraph.org/ontologies/orkg/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+     SELECT?paper?codeReference
+     WHERE {
+    ?paper schema:description?description.
+     FILTER(contains(lower(?description), "BiDAF + Self Attention + ELMo")).
+    ?paper org:usedFor?benchmarkingPurpose.
+     FILTER(contains(lower(?benchmarkingPurpose), "benchmarking")).
+    ?benchmarkingPurpose schema:description?benchmarkingDescription.
+    ?codeReference schema:description?codeReferenceDescription.
+     FILTER(contains(lower(?codeReferenceDescription), "code reference")).
+     }<|eot_id|>

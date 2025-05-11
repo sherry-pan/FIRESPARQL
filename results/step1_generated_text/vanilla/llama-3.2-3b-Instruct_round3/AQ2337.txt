@@ -1,0 +1,26 @@
+Question:
+List the code links in papers that use the A3C-CTS model in any benchmark?
+
+Generated SPARQL:
+ PREFIX ork: <http://www.openresearch.org/ork/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?code
+     WHERE {
+    ?paper a ork:Papers.
+    ?paper schema:description?description.
+     WHERE {
+    ?paper schema:description?description.
+    ?paper ork:code?code.
+     FILTER (REGEX (?description @i "A3C-CTS" ) ) 
+     }
+     UNION
+    ?paper ork:code?code.
+     FILTER (REGEX (?description @i "A3C-CTS" ) ) 
+     }
+     GROUP BY?paper
+     HAVING (COUNT(?code) > 1)
+     ORDER BY DESC (COUNT(?code))
+     LIMIT 10<|eot_id|>

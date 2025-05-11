@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?problem ?problem_lbl
+WHERE {
+    ?domain a orkgc:Domain;
+            rdfs:label ?domain_lbl.
+    FILTER (str(?domain_lbl) = "Artificial Intelligence")
+    ?problem a orkgc:Problem;
+             rdfs:label ?problem_lbl.
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_PROBLEM ?problem;
+          orkgp:HAS_BENCHMARK ?benchmark.
+    ?cont orkgp:HAS_SOURCE_CODE ?source_code.
+    ?source_code orkgp:HAS_FILE ?file.
+}
+```

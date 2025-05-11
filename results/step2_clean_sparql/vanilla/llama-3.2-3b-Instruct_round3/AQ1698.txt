@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+    ?model orkg:isBenchmarkFor ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset orkg:hasMetric ?metric.
+    ?metric orkg:hasScore ?score.
+    ?dataset skos:prefLabel ?datasetLabel.
+    ?metric skos:prefLabel ?metricLabel.
+    FILTER (STR(?datasetLabel) = "Atari 2600 Centipede" && STR(?metricLabel) = "Score")
+}
+ORDER BY DESC(?score)
+```

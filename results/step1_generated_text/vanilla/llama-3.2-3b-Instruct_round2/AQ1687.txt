@@ -1,0 +1,25 @@
+Question:
+What is the best performing model benchmarking the AESLC dataset in terms of ROUGE-1 metric?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dctype: <http://purl.org/dc/types/group/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX aeslc: <http://orkg.org/ontology/aeslc/>
+     PREFIX rouge: <http://orkg.org/ontology/rouge/>
+
+     SELECT?model?metric?score 
+     WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark?benchmark.
+    ?benchmark a aeslc:Benchmark.
+    ?benchmark schema:name "AESLC".
+    ?benchmark aeslc:hasMetric?metric.
+    ?metric rdfs:label?metricLabel.
+    ?metric rdfs:label "ROUGE-1".
+    ?benchmark orkg:hasScore?score.
+     }<|eot_id|>

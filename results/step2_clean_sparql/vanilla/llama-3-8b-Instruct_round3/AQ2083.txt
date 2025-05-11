@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper schema:about "MEMEN".
+  ?paper schema:name ?paperTitle.
+  ?paper schema:hasPart ?code.
+  ?code schema:code ?codeLink.
+  FILTER(LANG(?paperTitle) = "en")
+}
+```

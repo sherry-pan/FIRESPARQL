@@ -1,0 +1,17 @@
+Question:
+What are the most commonly used benchmark datasets for the Joint Entity and Relation Extraction research field?
+
+Generated SPARQL:
+ SELECT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                      rdfs:label      ?problem_lbl.  
+       FILTER (str(?problem_lbl) = "Joint Entity and Relation Extraction")
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont           orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P32               ?problem.
+     }
+     ORDER BY DESC(COUNT(?problem))
+     GROUP BY?dataset?dataset_lbl<|eot_id|>

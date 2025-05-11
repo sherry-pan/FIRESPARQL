@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocabulary/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperID
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper schema:keywords ?keywords.
+  FILTER (contains(lcase(str(?keywords)), 'nyt24')).
+  ?paper schema:dataset ?dataset.
+  ?dataset schema:datasetType 'Benchmark'.
+  ?paper schema:identifier ?paperID.
+}
+```

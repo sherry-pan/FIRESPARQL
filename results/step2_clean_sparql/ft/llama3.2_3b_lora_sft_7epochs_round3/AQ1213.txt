@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R110998 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P43130 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?contrib orkgp:P43131 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "BC2GM", "i"))
+    ?contrib orkgp:P43129 ?value.
+    BIND(xsd:float(?value) AS ?value)
+}
+```

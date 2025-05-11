@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "VTAB-1k".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?benchmark a orkgc:Benchmark;
+                 rdfs:label "VTAB-1k";
+                 orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:HAS_MODEL ?model.
+      ?model rdfs:label ?model_lbl.
+      ?model orkgp:HAS_PARAMS_SCORE ?evalu.
+    }
+    ORDER BY DESC(?evalu)
+    LIMIT 1
+  }
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+           rdfs:label ?datasetLabel ;
+           orkg:hasMetrics ?metrics.
+ ?metrics rdfs:member ?metric.
+ ?metric rdfs:label ?metricLabel.
+ FILTER (str(?datasetLabel) = "DocRED (Human-annotated)" && str(?metricLabel) != "")
+}
+```

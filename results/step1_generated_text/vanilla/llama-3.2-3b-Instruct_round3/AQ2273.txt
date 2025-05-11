@@ -1,0 +1,25 @@
+Question:
+Provide a list of papers that have utilized the AcrE model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://orkg.org/ontology/orkg#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX vcard: <http://schema.org/VCard>
+     
+     SELECT?paper?title?code
+     WHERE {
+    ?paper a orkg:Papers.
+     orkg:utilizesAcreModel?paper.
+    ?paper schema:author?author.
+    ?author schema:hasVCard?vcard.
+    ?vcard schema:description?code.
+     SERVICE orkg:dataset { 
+    ?paper orkg:hasLink?link.
+    ?link schema:contentURL?linkURL.
+     FILTER (lang(?linkURL) = 'en')
+     }
+     } 
+     ```<|eot_id|>

@@ -1,0 +1,34 @@
+Question:
+Can you provide links to code used in papers that benchmark the Multi-Perspective Matching (single model) model?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c_wideweb_daml_1.0/widewebd#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX purl: <http://purl.org/dc/terms/>
+     PREFIX ork: <http://orcid.org/resource/>
+     SELECT?paper?url
+     WHERE {
+     -[:a wikibase:hasDocument?doc]. 
+     -[:a wikibase:hasCitation?citation]. 
+     -[:?citation schema:description?description]. 
+    ?description?descriptionLiteral. 
+    ?description rdfs:label?descriptionLiteral. 
+    ?descriptionLiteral schema:description?description. 
+    ?description schema:date?date. 
+    ?paper ork:hasCitation?citation. 
+    ?citation schema:date?date. 
+    ?citation schema:code "benchmark". 
+    ?paper ork:hasDocument?doc. 
+    ?doc schema:description?description. 
+    ?description schema:date?date. 
+    ?paper schema:description?description. 
+    ?description schema:description?descriptionLiteral. 
+    ?description rdfs:label?descriptionLiteral. 
+    ?paper schema:description?description. 
+    ?description owl:sameAs?url. 
+    ?url schema:description?descriptionLiteral. 
+    ?url schema:description?description. 
+     FILTER (STRIKE?descriptionLiteral "Multi-Perspective Matching (single model)"

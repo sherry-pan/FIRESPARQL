@@ -1,0 +1,19 @@
+```sparql
+SELECT ?country
+WHERE {
+    ?contrib orkgp:compareContribution orkgr:R110902.
+    ?contrib orkgp:P15678 ?epilepsyPrevalence.
+    ?epilepsyPrevalence orkgp:HAS_VALUE ?value.
+    ?value orkgp:HAS_COUNTRY ?country.
+    {
+        SELECT ?country (MAX(?v) AS ?maxValue)
+        WHERE {
+            ?contrib orkgp:compareContribution orkgr:R110902.
+            ?contrib orkgp:P15678 ?epilepsyPrevalence.
+            ?epilepsyPrevalence orkgp:HAS_VALUE ?v.
+        }
+        GROUP BY ?country
+    }
+    FILTER(?value = ?maxValue)
+}
+```

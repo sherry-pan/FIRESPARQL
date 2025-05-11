@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest F1 score score on the BUCC Chinese-to-English benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "BUCC Chinese-to-English")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         orkgp:HAS_MODEL         ?model.
+        ?model        rdfs:label              ?model_lbl.
+        ?eval         orkgp:P32               ?value.
+         FILTER(?value > 0.8)
+         BIND(xsd:float(?value) AS?range_value)
+         BIND(concat(?model_lbl, " ",?model_lbl) AS?model_lbl_short)
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

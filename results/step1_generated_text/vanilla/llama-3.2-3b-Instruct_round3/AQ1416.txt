@@ -1,0 +1,33 @@
+Question:
+What is the best performing model benchmarking the WMT2016 English-Russian dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ PREFIX wmt: <http://www.w3.org/ns/wmt>
+     PREFIX wot: <http://www.wot semanticshop.org/wot/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX wikibase: <http://wikibase.org/biodiversity/>
+     
+     SELECT?s?p?o 
+     WHERE {
+    ?s wot:relatedTo?model.
+    ?model schema:description?d.
+    ?d wmt:dataset "WMT2016 English-Russian".
+    ?model schema:mainClass?c.
+    ?c rdfs:label?label.
+    ?label rdfs:label?modelLabel.
+    ?model schema:mainClass rdfs:label?modelLabel.
+    ?s wot:hasBenchmark?b.
+    ?b schema:mainClass?benchmarkClass.
+    ?benchmarkClass schema:label?benchmarkLabel.
+    ?s wot:hasMetric?m.
+    ?m schema:mainClass?metricClass.
+    ?metricClass schema:label?metricLabel.
+    ?m schema:description?metricDesc.
+    ?metricDesc schema:name "BLEU score".
+    ?b schema:name "benchmarking".
+     FILTER (STRLEN(?modelLabel) > 0 AND STRLEN(?benchmarkLabel) > 0 AND STRLEN(?metricLabel) > 0)
+     }<|eot_id|>

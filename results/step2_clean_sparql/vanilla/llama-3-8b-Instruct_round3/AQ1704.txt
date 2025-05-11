@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?value
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:achievesScore ?score.
+  ?score orkg:score ?value.
+  ?dataset a orkg:Dataset;
+           orkg:benchmarkDataset "Atari 2600 River Raid".
+  ?dataset orkg:usedBy ?model.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

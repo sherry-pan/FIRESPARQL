@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://purl.org/sgen/ontology/> 
+SELECT ?metric 
+WHERE { 
+  ?metric orkg:isBenchmarkFor ?dataset. 
+  ?dataset orkg:isDatasetFor ?metric. 
+  ?metric rdfs:label ?label. 
+  FILTER (STRLIKE(STR(?label), "evaluation") AND STRLIKE(STR(?label), "metric")) 
+}
+```

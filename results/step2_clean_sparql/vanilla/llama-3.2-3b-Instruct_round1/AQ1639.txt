@@ -1,0 +1,19 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?score
+WHERE {
+    ?model schema:about ?benchmark ;
+           orkg:score ?score .
+    FILTER(?benchmark = <https://www.example.org/models/Model1> || 
+           ?benchmark = <https://www.example.org/models/Model2> || 
+           ...
+           ?benchmark = <https://www.example.org/models/ModelN>)
+}
+ORDER BY DESC(?score)
+```

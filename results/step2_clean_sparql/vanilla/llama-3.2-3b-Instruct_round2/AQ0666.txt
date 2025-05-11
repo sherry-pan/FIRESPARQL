@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:Paper;
+         rdfs:label ?title;
+         orkg:hasBenchmark ?benchmark.
+  ?benchmark dbpedia:benchmarkOn ?benchmarkOn.
+  FILTER (str(?benchmarkOn) = "ObjectNet").
+  BIND(STR(?paper) AS ?id).
+}
+```

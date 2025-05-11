@@ -1,0 +1,22 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX purl: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?p ?o
+WHERE {
+  ?p a schema:Question.
+  ?p wdt:P3014 "benchmark the FG fine-grained gate model".
+  ?o a schema:Paper.
+  ?o wdt:P162 ?q.
+  ?q schema:description ?d.
+  ?d rdfs:label ?o2.
+  FILTER (lang(?o2) = "en" && !isBlank(?o2))
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?metricName
+WHERE {
+  ?metric a orkg:Metric.
+  ?metric orkg:hasName ?metricName.
+  ?dataset a orkg:Dataset ;
+           orkg:hasName "Hutter Prize dataset" ;
+           orkg:usedIn ?metric.
+  FILTER (lang(?metricName) = "en")
+}
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX wot: <http://purl.org/wot/1.1/>
+PREFIX orkg: <http://orkg.org/schema/1.0/>
+PREFIX dblp: <http://dblp.acm.org/schema/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasModel ?model.
+  ?model wot:hasModel ?alexnet.
+  ?paper orkg:hasCode ?code.
+  ?paper dblp:author ?author.
+  ?author foaf:hasEmail ?email.
+  FILTER (CONTAINS(LCASE(?email), "alexnet") OR CONTAINS(LCASE(?email), "multi-grasp"))
+}
+```

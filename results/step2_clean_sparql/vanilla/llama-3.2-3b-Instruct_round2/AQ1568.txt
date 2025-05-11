@@ -1,0 +1,13 @@
+```sparql
+PREFIX dmt: <http://dbpedia.org/ontology/>
+SELECT ?model ?f1score
+WHERE {
+    ?model dmt:hasModel ?modelObject.
+    ?modelObject dmt:hasMetric ?metric.
+    ?metric rdfs:label ?f1score.
+    ?model dmt:hasDataset ?dataset.
+    ?dataset rdfs:label "CoNLL 2003 (English)"@en.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

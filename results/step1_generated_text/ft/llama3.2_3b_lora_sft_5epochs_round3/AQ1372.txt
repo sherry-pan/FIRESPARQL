@@ -1,0 +1,26 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset DocRED (Human-annotated)?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R155813 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P5049?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?contrib orkgp:P5048?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:HAS_VALUE?value.
+         } UNION {
+           orkgr:R155813 orkgp:compareContribution?contrib.
+          ?contrib orkgp:P5049?dataset.
+          ?dataset rdfs:label?dataset_lbl.
+          ?contrib orkgp:P5048?metric.
+          ?metric rdfs:label?metric_lbl.
+          ?contrib orkgp:HAS_VALUE?value.
+          ?value orkgp:HAS_METRIC_VALUE?metric_value.
+          ?metric_value rdfs:label?metric_lbl.
+         }
+     GROUP BY?metric_lbl
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

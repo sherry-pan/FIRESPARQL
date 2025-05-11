@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://purl.org/ontology/sio/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value
+WHERE {
+  ?s orkg:annotatedBy ?annotator.
+  ?s orkg:dataset "DocRED".
+  ?s orkg:benchmark ?metric ?value.
+  FILTER (?metric = "top")
+}
+GROUP BY ?metric ?value
+HAVING (COUNT(?s) > 1)
+```

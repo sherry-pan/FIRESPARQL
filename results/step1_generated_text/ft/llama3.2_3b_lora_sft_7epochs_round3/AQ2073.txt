@@ -1,0 +1,35 @@
+Question:
+Where can I find code references in papers that have used the BiDAF + Self Attention + ELMo model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?paper.
+      ?paper orkgp:P5005?model.
+      ?model orkgp:P5042?benchmark.
+      ?benchmark orkgp:P5045?eval.
+      ?eval orkgp:P5047?code.
+       FILTER(REGEX(STR(?code), "BiDAF + Self Attention + ELMo"))
+      ?contrib orkgp:P5024?paper_title.
+      ?paper orkgp:P31?contrib.
+      ?paper orkgp:P5003?dataset.
+       FILTER(REGEX(STR(?dataset), "benchmark"))
+      ?dataset rdfs:label?dataset_lbl.
+      ?code rdfs:label?code_lbl.
+       FILTER(?code_lbl =?code)
+       FILTER(?dataset_lbl = "benchmark")
+      ?model orkgp:P5025?paper_1.
+      ?paper_1 orkgp:P32?paper.
+       FILTER(REGEX(STR(?model), "BiDAF + Self Attention + ELMo"))
+      ?eval orkgp:P5048?cont.
+      ?cont orkgp:P5047?code.
+       FILTER(REGEX(STR(?code), "BiDAF + Self Attention + ELMo"))
+      ?cont orkgp:P5024?paper_2.
+      ?paper_2 orkgp:P31?contrib.
+      ?contrib orkgp:P5003?dataset.
+       FILTER(REGEX(STR(?dataset), "benchmark"))
+      ?dataset rdfs:label?dataset_lbl.
+      ?code rdfs:label?code_lbl.
+       FILTER(?code_lbl =?code)
+      

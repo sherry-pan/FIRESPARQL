@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model ;
+         orkg:benchmarkOn ?benchmark ;
+         orkg:hasTop1ErrorRate ?score.
+  ?benchmark a schema:Dataset ;
+             schema:name "Oxford-IIIT Pets".
+}
+ORDER BY ?score
+LIMIT 1
+```

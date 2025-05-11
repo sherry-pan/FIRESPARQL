@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Reuters De-En".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (?metric_lbl IN ("F1", "PPLR", "ROUGE-N", "BLEU", 
+                          "CIDEr", "METEOR", "ROUGE-L", "ALL-R", 
+                          "R@1", "R@5", "R@10"))
+}
+```

@@ -1,0 +1,34 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?method?method_lbl
+     WHERE {
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?approach.
+      ?approach rdfs:label?approach_lbl.
+       BIND(
+         {
+           SELECT?method?method_lbl
+           WHERE {
+            ?approach rdfs:label?approach_lbl.
+            ?approach orkgp:P32?method.
+           }
+         } 
+         AS?method_lbl
+       ) 
+       BIND(
+         {
+           SELECT (COUNT(?method) AS?count) 
+           WHERE {
+            ?contrib orkgp:P32?method.
+           }
+         } 
+         AS?counter
+       )
+       BIND(
+         IF(?counter["*"] = 101,?method_lbl,?approach_lbl) AS?ranked_method_lbl
+       )
+       ORDER BY DESC(?counter["*"])
+       LIMIT 1
+    <|eot_id|>

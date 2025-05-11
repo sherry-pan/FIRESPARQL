@@ -1,0 +1,26 @@
+Question:
+What is the best performing model benchmarking the WMT2014 German-English dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "WMT2014 German-English")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_VALUE        ?value;
+                         orkgp:HAS_METRIC        ?metric.
+        ?metric         orkgp:HAS_VALUE        ?value;
+                         rdfs:label              ?metric_lbl.
+        ?benchmark      orkgp:HAS_MODEL         ?model.
+        ?model      rdfs:label              ?model_lbl.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont         orkgp:HAS_MODEL         ?model.
+        ?cont         rdfs:label              ?cont_lbl.
+        ?cont         orkgp:HAS_EVALUATION   ?eval.
+         BIND(xsd:float(?value) AS?value)
+         BIND(xsd:float(?metric_lbl) AS?metric_lbl)
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

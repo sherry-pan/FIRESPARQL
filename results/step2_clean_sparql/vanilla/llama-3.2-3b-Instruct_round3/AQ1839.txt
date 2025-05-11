@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://opendata.museumsinsbesitz.de/ontology/orkg#>
+
+SELECT ?dataset
+WHERE {
+  ?dataset dbo:hasBenchmark ?benchmark.
+  ?benchmark schema:topic "Image Classification".
+  ?benchmark orkg:hasDataset ?dataset.
+}
+GROUP BY ?dataset
+HAVING (COUNT(?benchmark) > 1)
+ORDER BY DESC(COUNT(?benchmark))
+LIMIT 10
+```

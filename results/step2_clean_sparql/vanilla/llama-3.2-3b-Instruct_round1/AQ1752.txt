@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model
+WHERE {
+  ?model dbpedia:relatedTo ?model1.
+  ?model1 schema:description ?description.
+  ?description schema:mainEntityOfPage <http://dbpedia.org/ontology/Atari_2600_Montezuma%27s_Revenge>.
+  ?description schema:bestResult ?result.
+  ?result schema:rating ?rating.
+}
+ORDER BY DESC(?rating)
+LIMIT 1
+```

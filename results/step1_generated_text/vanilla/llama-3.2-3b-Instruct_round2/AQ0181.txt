@@ -1,0 +1,24 @@
+Question:
+Could you provide a list of models that have been tested on the SST-2 Binary classification benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?modelLabel
+     WHERE {
+    ?model schema:description "Binary classification".
+    ?model schema:topic "SST-2".
+    ?model wdt:P162?benchmark.
+    ?benchmark schema:hasBenchmark?benchmarkLabel.
+    ?benchmark schema:hasBenchmark?benchmark.
+    ?benchmark wdt:P31?benchmarkClass.
+    ?benchmarkClass schema:name "SST-2 Benchmark".
+    ?model schema:description "Binary classification".
+    ?model schema:topic "SST-2".
+    ?model wdt:P162 "https://www.openresearchknowledgegraph.org/ontology/orkg#SST-2".
+     FILTER (CONTAINS(LCASE(?benchmarkLabel), "SST-2"))
+     }
+     ORDER BY (?benchmarkLabel)<|eot_id|>

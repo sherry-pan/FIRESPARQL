@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocabulary/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX wkm: <http://www.w3.org/2013/12/openresearchknowledgegraph#>
+
+SELECT ?model ?score 
+WHERE {
+    ?model wkm:isBenchmarkFor ?benchmark.
+    ?benchmark dbp:Seaquest_2600 ?benchmarkLabel.
+    ?benchmark dbp:score ?score.
+    ?model rdfs:label ?modelLabel.
+    FILTER (
+        CONTAINS(LOWER(?benchmarkLabel), "atari 2600") &&
+        CONTAINS(LOWER(?benchmarkLabel), "seaquest")
+    )
+}
+```

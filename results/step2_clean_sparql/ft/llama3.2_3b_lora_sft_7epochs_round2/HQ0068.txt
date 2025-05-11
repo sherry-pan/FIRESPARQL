@@ -1,0 +1,10 @@
+```sparql
+SELECT ?sectors (COUNT(*) AS ?freq)
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P30/orkgp:P31 ?sectors.
+  ?sectors rdfs:label ?sectors_labels.
+  FILTER(REGEX(STR(?sectors_labels), "energy", "i"))
+}
+GROUP BY ?sectors
+```

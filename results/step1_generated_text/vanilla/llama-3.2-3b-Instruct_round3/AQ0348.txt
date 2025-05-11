@@ -1,0 +1,23 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the SciREX dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/property/>
+     PREFIX wikibase: <http://wikibase.org/proton/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?paperId?title
+     WHERE {
+    ?paper?paperId schema:about?paperTitle.
+    ?paper dbp:benchmark "SciREX".
+    ?paper dbpedia:hasTitle?paperTitle.
+     SERVICE wikibase:label {
+       bd:serviceParam wikibase:language "en".
+     }
+     }<|eot_id|>

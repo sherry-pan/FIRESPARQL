@@ -1,0 +1,23 @@
+Question:
+What is Raman spectroscopy?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?s?p?o 
+     WHERE {
+    ?s rdfs:label?l.
+     FILTER (lang(?l) = 'en').
+     {?s dbo:definition?o. }
+     WHERE {
+    ?s rdfs:label?l.
+     FILTER (lang(?l) = 'en').
+     BIND (STR(?l) AS?s)
+    ?s dbo:definition?o.
+     }
+     GROUP BY?s
+     HAVING (COUNT(?o) > 1)
+     ORDER BY (COUNT(?o) DESC)
+     LIMIT 1
+     }
+     BIND (CONCAT(?s, ":",?o) AS?answer)<|eot_id|>

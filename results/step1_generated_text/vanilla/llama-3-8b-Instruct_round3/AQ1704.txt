@@ -1,0 +1,19 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 River Raid benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    SELECT?model?score
+    WHERE {
+       ?model a orkg:Model.
+       ?model orkg:achievesScore?score.
+       ?score orkg:score?value.
+       ?dataset a orkg:Dataset ; 
+               orkg:benchmarkDataset "Atari 2600 River Raid".
+       ?dataset orkg:usedBy?model.
+        FILTER(?value = xsd:decimal(MAX(?value)))
+    }<|eot_id|>

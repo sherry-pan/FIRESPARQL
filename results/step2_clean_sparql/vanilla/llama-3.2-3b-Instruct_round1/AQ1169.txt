@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?value 
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:datasetName "Words in Context".
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:benchmarkDataset ?dataset.
+  ?benchmark orkg:benchmarkMetric ?metric.
+  ?benchmark orkg:benchmarkValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg_person: <http://rdf.or.kr/person/>
+
+SELECT ?person ?count
+WHERE {
+  ?person a orkg_person:Person.
+  ?person orkg_person:contributed_to ?article.
+  ?article rdfs:label ?title.
+  FILTER(CONTAINS(LCASE(?title), "coronavirus")).
+  ?person orkg_person:contributed_to_count ?count.
+  FILTER(?count = ?maxCount).
+  {
+    SELECT (MAX(?count2) AS ?maxCount)
+    WHERE {
+      ?p orkg_person:contributed_to_count ?count2.
+    }
+  }
+}
+```

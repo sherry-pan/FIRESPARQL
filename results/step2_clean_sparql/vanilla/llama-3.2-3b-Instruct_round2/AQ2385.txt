@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX bio2vec: <http://bio2vec.org/schema/1.1/>
+PREFIX vgg: <http://example.org/vgg#>
+PREFIX dli: <http://example.org/dli#>
+
+SELECT ?paper ?source
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dli:hasSource ?source.
+  ?source bio2vec:hasEntity ?entity.
+  ?entity schema:abstract ?abstract.
+  FILTER CONTAINS(?abstract, "EfficientNetV2-L").
+  ?paper vgg:hasModel ?model.
+  ?model vgg:isBenchmarkedBy ?benchmark.
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark dcterms:dataset "CoNLL++".
+    ?benchmark schema:average ?metric ?value.
+    FILTER (lang(?metric) = "en")
+}
+ORDER BY DESC(?value)
+```

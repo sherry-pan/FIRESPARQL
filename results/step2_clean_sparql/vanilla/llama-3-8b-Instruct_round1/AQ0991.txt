@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT ?metric
+WHERE {
+  ?article orkg:hasEvaluationMetric ?metric.
+  ?article orkg:isAbout "Reuters De-En".
+  ?metric rdfs:label ?metricLabel.
+  FILTER (lang(?metricLabel) = "en").
+  FILTER (?metricLabel =~ "^(Accuracy|Precision|Recall|F1-score|F1Measure|ROUGE|METEOR|BLEU|Perplexity)$")
+}
+```

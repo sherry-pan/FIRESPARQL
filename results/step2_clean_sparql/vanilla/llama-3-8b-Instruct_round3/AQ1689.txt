@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+   ?model a orkg:Model ;
+           orkg:benchmarkedDataset <http://orkg.org/dataset/Atari_2600_Seaquest> ;
+           orkg:metricValue ?score.
+   FILTER NOT EXISTS {
+      ?model2 a orkg:Model ;
+             orkg:benchmarkedDataset <http://orkg.org/dataset/Atari_2600_Seaquest> ;
+             orkg:metricValue ?score2.
+      FILTER (?score2 > ?score)
+    }
+}
+```

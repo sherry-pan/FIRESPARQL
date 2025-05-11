@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?link
+WHERE {
+    ?paper schema:description ?description.
+    FILTER(CONTAINS(LCASE(STR(?description)), 'memen single model')).
+    ?paper schema:softwareCode ?code.
+    ?code schema:description ?codeDescription.
+    FILTER(CONTAINS(LCASE(STR(?codeDescription)), 'benchmarking')).
+    ?code schema:softwareCode ?link.
+}
+```

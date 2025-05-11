@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:achievedScore ?score.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark schema:name "Ball in cup, catch (DMControl100k)".
+  ?model orkg:evaluatedOn ?benchmark.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

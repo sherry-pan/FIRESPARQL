@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmark ?benchmark.
+  ?benchmark dcterms:title "ImageNet 64x64".
+  ?benchmark orkg:metric ?metric.
+  ?metric dcterms:title "Bits per dim".
+  ?metric orkg:value ?metricValue.
+}
+ORDER BY DESC(xsd:float(?metricValue))
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?item a orkg:Benchmark.
+  ?item orkg:hasBenchmarkResult ?result.
+  ?result schema:description ?description.
+  FILTER (CONTAINS(STR(?description), "STS Benchmark") AND CONTAINS(STR(?description), "highest benchmark"))
+  ?result orkg:hasMetric ?metric.
+  ?metric schema:description ?metricDescription.
+  ?metric schema:value ?value.
+}
+ORDER BY DESC(?value)
+```

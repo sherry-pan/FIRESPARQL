@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX vocab: <http://schema.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark vocab:dataset "BUCC German-to-English".
+  ?benchmark orkg:hasHighestBenchmarkResult ?benchmarkResult.
+  ?benchmarkResult vocab:hasMetric ?metric.
+  ?benchmarkResult vocab:hasScore ?score.
+}
+ORDER BY DESC(?score)
+```

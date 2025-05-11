@@ -1,0 +1,14 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Double Dunk dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?avg_value)
+     WHERE {
+         orkgr:R53850 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P4319?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?contrib orkgp:P43120?value.
+         BIND(xsd:float(?value) AS?value)
+         FILTER(?metric_lbl = "evaluation")
+         FILTER(?value > 0)
+     }<|eot_id|>

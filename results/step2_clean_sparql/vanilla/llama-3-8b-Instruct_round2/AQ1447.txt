@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?value
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:performedBestOn ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:benchmarkDatasetHMDB51 true.
+  ?model orkg:usedFor ?metric.
+  ?metric a orkg:Metric.
+  ?metric orkg:metricName "Pre-Training Dataset".
+}
+```

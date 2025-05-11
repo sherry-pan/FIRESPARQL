@@ -1,0 +1,14 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?title ?id WHERE {
+  ?paper schema:hasPart <http://orkg.org/dataset/nyt24> .
+  ?paper schema:about ?benchmark .
+  ?paper wdt:P1476 ?title .
+  ?paper wdt:P212 ?id .
+  ?benchmark dcterms:title ?benchmarkLabel .
+  FILTER(CONTAINS(LCASE(STR(?benchmarkLabel)), "benchmark") && CONTAINS(LCASE(STR(?benchmarkLabel)), "nyt24"))
+}
+```

@@ -1,0 +1,27 @@
+Question:
+What is the name of the top performing model in terms of A2 score when benchmarked on the ANLI test dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel?score
+WHERE {
+ ?model a orkg:Model ;
+         orkg:benchmarkedOn?benchmark ;
+         orkg:hasScore?score.
+ ?benchmark a orkg:Dataset ;
+             rdfs:label "ANLI test dataset".
+ ?model orkg:hasLabel?modelLabel.
+  FILTER (?score = (
+    SELECT max(?score2) 
+    WHERE {
+     ?model a orkg:Model ;
+             orkg:benchmarkedOn?benchmark ;
+             orkg:hasScore?score2.
+     ?benchmark a orkg:Dataset ;
+                 rdfs:label "ANLI test dataset".
+    } 
+  ).
+}<|eot_id|>

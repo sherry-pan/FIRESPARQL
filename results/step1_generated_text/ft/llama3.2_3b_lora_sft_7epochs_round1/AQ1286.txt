@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Alien dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R78432 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P32?benchmark.
+        ?benchmark rdfs:label?benchmark_lbl.
+        ?contrib orkgp:HAS_DATASET?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "Atari 2600 Alien"))
+        ?contrib orkgp:HAS_EVALUATION?eval.
+        ?eval orkgp:P31?metric.
+        ?metric rdfs:label?metric_lbl.
+        ?eval orkgp:P32?benchmark.
+     }<|eot_id|>

@@ -1,0 +1,26 @@
+Question:
+What is the name of the top performing model in terms of Number of params score when benchmarked on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX p: <http://www.openresearchknowledgegraph.org/resource/parameter/>
+PREFIX b: <http://www.openresearchknowledgegraph.org/resource/benchmark/>
+PREFIX d: <http://www.openresearchknowledgegraph.org/resource/dataset/>
+
+SELECT?model?name
+WHERE {
+ ?model a orkg:Model.
+ ?model p:NumberOfParams?numParams.
+ ?model p:Score?score.
+ ?benchmark a b:Benchmark.
+ ?benchmark rdfs:label "Penn Treebank (Character Level)".
+ ?benchmark d:dataset?dataset.
+ ?dataset rdfs:label "Penn Treebank (Character Level)".
+ ?model b:benchmark?benchmark.
+ ?model p:Score?score.
+  FILTER(?score = (SELECT MAX(?s) FROM {?m p:Score?s }))
+ ?model rdfs:label?name.
+  FILTER(?numParams =?score)
+}<|eot_id|>

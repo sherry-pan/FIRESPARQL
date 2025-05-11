@@ -1,0 +1,13 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?maxScore
+WHERE {
+    ?model wdt:P31 wd:Q44492449.
+    ?model wdt:P1473 ?score.
+    FILTER (CONTAINS(LCASE(?score), "cheetah") && CONTAINS(LCASE(?score), "run") && CONTAINS(LCASE(?score), "dmcontrol500k"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

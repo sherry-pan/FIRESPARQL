@@ -1,0 +1,21 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX imdb: <https://example.org/imdb/>
+PREFIX orkg: <https://orcg.org/orcg/>
+
+SELECT ?metric ?value
+WHERE {
+  ?s imdb:hasBenchmark ?b.
+  ?b imdb:hasBenchmarkResult ?r.
+  ?r imdb:dataset ?d.
+  ?d imdb:identifier "IMDb-B".
+  ?r imdb:hasMetric ?m.
+  ?m rdfs:label ?metric.
+  ?r imdb:hasValue ?v.
+  ?v rdfs:label ?value.
+}
+ORDER BY DESC(?v)
+LIMIT 1
+```

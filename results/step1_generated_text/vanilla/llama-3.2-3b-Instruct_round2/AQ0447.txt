@@ -1,0 +1,21 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the CUB-200-2011 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/orcg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX dbr: <http://dbpedia.org/resource/>
+     PREFIX obo: <http://purl.org/obo/inchi/nomenclature#>
+     PREFIX bio: <http://purl.org/bio/obo/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://schema.org/>
+     PREFIX wgs: <http://www.w3.org/2006/03/wgs#>
+     SELECT?paper?title?id WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark dbo:dataset "CUB-200-2011".
+    ?paper orkg:hasId?id.
+    ?id schema:description?title.
+     }<|eot_id|>

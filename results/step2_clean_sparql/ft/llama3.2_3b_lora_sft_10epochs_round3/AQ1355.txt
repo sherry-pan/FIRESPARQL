@@ -1,0 +1,29 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    orkgr:R153801 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:P5041 ?value.
+    FILTER(?value > 0)
+    ?eval orkgp:P31 ?class.
+    ?class rdfs:label ?metric_lbl.
+    ?contrib orkgp:P31 ?paper.
+    ?paper orkgp:P27 ?dataset.
+    ?dataset rdfs:label "Sequential MNIST".
+  }
+  UNION
+  {
+    orkgr:R153801 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P32 ?eval.
+    ?eval orkgp:P5042 ?value.
+    FILTER(?value > 0)
+    ?eval orkgp:P31 ?class.
+    ?class rdfs:label ?metric_lbl.
+    ?contrib orkgp:P31 ?paper.
+    ?paper orkgp:P27 ?dataset.
+    ?dataset rdfs:label "Sequential MNIST".
+  }
+}
+ORDER BY DESC(?score)
+```

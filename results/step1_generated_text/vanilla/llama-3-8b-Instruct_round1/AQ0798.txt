@@ -1,0 +1,19 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the MultiRC dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?metric
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasPublicationDate?date.
+    ?paper orkg:hasTitle?title.
+    ?paper orkg:mentions?dataset.
+    ?dataset schema:name "MultiRC".
+    ?paper orkg:mentions?metric.
+     FILTER (?date > "2015-01-01" &&?date < "2022-12-31").
+     FILTER (?title =~ "MultiRC" ).
+    ?metric a orkg:EvaluationMetric.
+     }<|eot_id|>

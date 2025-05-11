@@ -1,0 +1,27 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX orkg: <http://orcg.org/ontology/>
+
+     SELECT?metric?score
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark schema:description "Benchmark for Paper Field".
+    ?benchmark orkg:hasMetric?metric.
+    ?metric schema:description "Benchmark metric for Paper Field".
+    ?benchmark orkg:hasScore?score.
+    ?benchmark schema:mainEntity?main.
+    ?main schema:type schema:Thing.
+    ?main schema:mainEntityOfPage?page.
+    ?page schema:mainEntityOfPage?dataset.
+    ?dataset schema:name "Paper Field".
+     FILTER (LOWER(?metric) = "highest") 
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

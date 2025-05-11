@@ -1,0 +1,20 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?title?id 
+     WHERE {
+    ?paper schema:description?description.
+    ?paper schema:keywords "benchmark".
+    ?paper orkg:dataset "BUCC German-to-English dataset".
+    ?paper schema:hasPart?paper_id.
+    ?paper orkg:paper?paper_id.
+    ?paper orkg:paper?paper.
+    ?paper schema:title?title.
+    ?paper schema:identifier?id.
+     }<|eot_id|>

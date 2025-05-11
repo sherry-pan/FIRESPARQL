@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset orkg:SequentialMNIST ;
+             orkg:metric ?metric ;
+             orkg:score ?score.
+  FILTER (datatype(?score) = xsd:integer)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

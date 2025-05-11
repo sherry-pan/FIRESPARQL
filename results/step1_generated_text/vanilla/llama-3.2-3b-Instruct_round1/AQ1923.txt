@@ -1,0 +1,22 @@
+Question:
+List the code links in papers that use the Long Short Transformer model in any benchmark?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX cts: <http://purl.org/core/cts/>
+     PREFIX longshort: <http://longshorttransformer.org/ontology#>
+     PREFIX ork: <http://openresearchknowledgegraph.org/ontology#>
+
+     SELECT?codeLink 
+     WHERE {
+       ?paper a ork:Papers.
+       ?paper cts:hasSource?source.
+       ?source dcterms:hasPart?benchmark.
+       ?benchmark rdfs:label?benchmarkLabel.
+       ?benchmark longshort:usesModel longshort:LongShortTransformer.
+       ?paper cts:hasCode?code.
+       ?code cts:hasLink?codeLink.
+        FILTER (str.contains(?benchmarkLabel, "benchmark") OR str.contains(?benchmarkLabel, "challenge"))
+     }<|eot_id|>

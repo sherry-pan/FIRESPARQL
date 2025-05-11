@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?average)
+WHERE {
+    orkgr:R67876 orkgp:compareContribution ?cont.
+    ?cont orkgp:P34 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?cont orkgp:P31 ?dataset.
+    ?dataset orkgp:P35 ?eval_set.
+    ?eval_set rdfs:label ?eval_set_lbl.
+    FILTER(REGEX(STR(?eval_set_lbl), "DuIE"))
+    ?cont orkgp:P36 ?value.
+    BIND(xsd:float(?value) AS ?value)
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX wmt: <http://www.w3.org/2015/02/wmt16>
+PREFIX wmt2016: <http://wmt2016.silkroadapp.com/ontology/>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark wmt:hasBenchmarkResult ?result.
+  ?result wmt2016:hasMetric ?metric.
+  ?result wmt2016:hasValue ?value.
+  ?benchmark wmt2016:hasDataset wmt2016:WMT2016-EN-RU.
+  FILTER(?metric = wmt:BLEU)
+}
+```

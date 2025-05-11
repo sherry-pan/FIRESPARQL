@@ -1,0 +1,13 @@
+```sparql
+PREFIX ork: <http://orcid.org/ork/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?title ?id WHERE {
+    ?p a ork:Paper.
+    ?p ork:hasTitle ?title.
+    ?p ork:hasBenchmarkingModel ?m.
+    ?m ork:hasBenchmarkingDataset ?d.
+    ?d rdfs:label ?dLabel.
+    ?m ork:hasId ?id.
+    FILTER (CONTAINS(LCASE(?dLabel), "scierc"))
+}
+```

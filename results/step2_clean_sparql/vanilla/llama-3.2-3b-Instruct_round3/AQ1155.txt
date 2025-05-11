@@ -1,0 +1,16 @@
+```sparql
+PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+SELECT ?metric ?score
+WHERE {
+  ?dataset a ork:Dataset;
+           ork:hasName "Natural Questions (long)";
+           ork:hasBenchmark ?benchmark.
+  ?benchmark a ork:Benchmark;
+             ork:hasMetric ?metric;
+             ork:hasScore ?score.
+  FILTER (lang(?metric) = "en")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

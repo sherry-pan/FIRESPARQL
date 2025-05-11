@@ -1,0 +1,17 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vocab: <https://example.org/vocab/>
+
+SELECT ?model
+WHERE {
+  ?model skos:broader ?concept.
+  ?concept rdfs:label ?label.
+  FILTER CONTAINS(?label, "top performing model")
+  ?model rdfs:label ?modelLabel.
+  ?model vocab:score ?score.
+  FILTER CONTAINS(?modelLabel, "Atari 2600 Assault")
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Publication.
+  ?paper orkg:hasResult ?result.
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasScore ?score.
+  ?result orkg:dataset dbpedia:Natural_Questions_(short).
+  ?result orkg:isTop true.
+  FILTER(?metric = "benchmark score").
+}
+```

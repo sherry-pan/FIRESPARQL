@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+PREFIX schema: <http://schema.org/>
+SELECT ?score ?metric
+WHERE {
+    ?benchmark orkg:hasScore ?score.
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasBenchmarkScore ?benchmarkScore.
+    ?benchmarkScore orkg:hasDataset "MAZEA".
+    ?benchmarkScore schema:scoreType "benchmark".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

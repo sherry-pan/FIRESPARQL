@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?flops
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:benchmarks ?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:dataset <http://www.openresearchknowledgegraph.org/resource/Oxford-IIIT_Pets>.
+    ?benchmark orkg:metric <http://www.openresearchknowledgegraph.org/resource/FLOPS>.
+    ?benchmark orkg:score ?flops.
+}
+ORDER BY DESC(xsd:integer(?flops))
+LIMIT 1
+```

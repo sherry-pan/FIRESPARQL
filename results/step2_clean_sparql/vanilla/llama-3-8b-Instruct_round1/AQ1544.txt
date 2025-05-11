@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX purl: <http://purl.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?f1
+WHERE {
+  ?model a orkg:Model.
+  ?model purl:benchmark orkg:OntoNotes.
+  ?model purl:metric orkg:F1.
+  ?model purl:score ?f1.
+}
+ORDER BY DESC(xsd:float(?f1))
+LIMIT 1
+```

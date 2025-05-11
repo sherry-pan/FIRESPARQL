@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?metric?score 
+     WHERE {
+    ?dataset a ork:Dataset.
+    ?dataset ork:name "Cart Pole (OpenAI Gym)".
+    ?benchmark a ork:Benchmark.
+    ?benchmark ork:dataset?dataset.
+    ?benchmark ork:metric?metric.
+    ?benchmark ork:score?score.
+     FILTER (regex(str(?metric), ".*benchmark.*")).
+     FILTER (regex(str(?score), ".*score.*")).
+     ORDER BY DESC(?score).
+     LIMIT 1
+     }<|eot_id|>

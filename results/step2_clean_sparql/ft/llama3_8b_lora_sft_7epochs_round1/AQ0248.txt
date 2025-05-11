@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Assault")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont ?benchmark.
+  ?model ?cont;
+         orkgp:P32 ?dataset;
+         orkgp:P31 ?model_lbl.
+}
+```

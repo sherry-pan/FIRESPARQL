@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "PIQA".
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_MODEL ?model.
+
+  ?model a orkgp:Model;
+         rdfs:label ?model_lbl.
+
+  ?value a orkgp:Value;
+         rdfs:label ?value_lbl.
+
+  BIND(xsd:decimal(?value_lbl) AS ?value_num)
+}
+ORDER BY DESC(?value_num)
+LIMIT 1
+```

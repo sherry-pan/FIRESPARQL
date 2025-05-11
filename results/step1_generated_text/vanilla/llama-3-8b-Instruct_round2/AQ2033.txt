@@ -1,0 +1,24 @@
+Question:
+List the code links in papers that use the Unsupervised NMT + weight-sharing model in any benchmark?
+
+Generated SPARQL:
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper a bibo:Article.
+ ?paper dc:title?title.
+ ?paper bibo:uses?model.
+ ?model rdfs:label "Unsupervised NMT + weight-sharing".
+ ?model bibo:uses?benchmark.
+ ?benchmark rdfs:label?benchmark_label.
+ ?code_link a orkg:CodeLink.
+ ?code_link bibo:references?paper.
+  FILTER (str(?benchmark_label) = "any benchmark")
+}<|eot_id|>

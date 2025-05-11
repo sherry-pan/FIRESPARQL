@@ -1,0 +1,18 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WMT2016 German-English dataset?
+
+Generated SPARQL:
+ PREFIX wmt: <http://www.wikidata.org/entity/wiki/Quiz/WMT2016>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     SELECT?paper?title?id 
+     WHERE {
+    ?paper wdt:P275?benchmark.
+    ?benchmark wdt:P147?wmt2016benchmark.
+    ?benchmark wmt:benchmark_for?paper.
+    ?paper wdt:P31?paperType.
+     FILTER (CONTAINS(LCASE(?paperType), "Paper").
+    ?paper wdt:P577?title.
+    ?paper wdt:P31?paperType.
+    ?paper wdt:P31?wmt2016benchmark.
+     FILTER (CONTAINS(LCASE(?paperType), "ResearchPaper").
+     }<|eot_id|>

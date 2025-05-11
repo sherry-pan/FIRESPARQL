@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX nlp: <http://www.orkg.org/nlp/>
+
+SELECT ?model ?metric ?value
+WHERE {
+  ?paper a orkg:Paper ;
+         dcterms:title ?title ;
+         nlp:metric ?metric ;
+         nlp:value ?value.
+  FILTER (?metric = "Macro Recall" && ?title = "NLP-TDMS (Exp, arXiv only) benchmark dataset" && ?value = "best")
+}
+```

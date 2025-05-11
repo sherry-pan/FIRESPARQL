@@ -1,0 +1,16 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX orkgmodel: <http://www.openresearchknowledgegraph.org/ontology/orkgmodel/>
+
+SELECT ?model
+WHERE {
+    ?model orkgmodel:isTopModel ?topModelRanking.
+    ?topModelRanking schema:description "Cart Pole (OpenAI Gym)".
+    ?model orkgmodel:score ?score.
+    ?score schema:score ?scoreValue.
+    FILTER (?scoreValue = max(?scoreValue))
+}
+```

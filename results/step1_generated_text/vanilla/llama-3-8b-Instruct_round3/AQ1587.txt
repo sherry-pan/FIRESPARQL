@@ -1,0 +1,36 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the PubMed 20k RCT benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX pmid: <http://www.openresearchknowledgegraph.org/pmids/>
+PREFIX rct: <http://www.openresearchknowledgegraph.org/ontology/research-objects/research-objects/>
+
+SELECT?model?f1
+WHERE {
+ ?study a rct:RandomizedControlledTrial ;
+        orkg:hasResult?result.
+ ?result orkg:hasMetric?metric ;
+        orkg:hasValue?f1.
+ ?metric orkg:hasName "F1" ;
+        orkg:hasUnit "" ;
+        orkg:hasUnitType "".
+ ?study orkg:usedModel?model.
+  FILTER (?study pmid:pmid20kRCT).
+  FILTER (?f1 = (SELECT MAX(?f1) AS?maxF1
+                  WHERE {
+                   ?study a rct:RandomizedControlledTrial ;
+                          orkg:hasResult?result.
+                   ?result orkg:hasMetric?metric ;
+                          orkg:hasValue?f1.
+                   ?metric orkg:hasName "F1" ;
+                          orkg:hasUnit "" ;
+                          orkg:hasUnitType "".
+                   ?study orkg:usedModel?model.
+                    FILTER (?study pmid:pmid20kRCT).
+                  }
+                )
+}
+ORDER BY DESC(?f1)
+LIMIT 1<|eot_id|>

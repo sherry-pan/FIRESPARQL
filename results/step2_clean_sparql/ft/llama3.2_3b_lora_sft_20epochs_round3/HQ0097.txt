@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?types ?types_labels
+WHERE {
+  orkgr:R155290 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37379 ?nanocarriers.
+  ?nanocarriers orkgp:P41306 ?properties.
+  ?properties rdfs:label ?properties_labels.
+  ?properties orkgp:P41307 ?types.
+  ?types rdfs:label ?types_labels.
+  FILTER(REGEX(?properties_labels, "therapeutic"))
+}
+```

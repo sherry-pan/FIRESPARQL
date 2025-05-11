@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.1/orkg#>
+PREFIX bc: <http://example.org/bc#> 
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:datasetName "iNaturalist 2019".
+  ?dataset orkg:metrics ?metric.
+  
+  {?metric orkg:metricValue "Accuracy"} 
+  UNION 
+  {?metric orkg:metricValue "Precision"} 
+  UNION 
+  {?metric orkg:metricValue "Recall"} 
+  UNION 
+  {?metric orkg:metricValue "F1 Score"} 
+  UNION 
+  {?metric orkg:metricValue "Mean Squared Error"}
+}
+LIMIT 5
+```

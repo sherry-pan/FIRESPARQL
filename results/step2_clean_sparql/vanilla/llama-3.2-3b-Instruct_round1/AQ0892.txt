@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX vocab: <http://www.openresearch.org/ontology/vocab/>
+SELECT ?metric
+WHERE {
+    ?metric vocab:relatedTo ?dataset.
+    ?dataset vocab:datasetName "Habitat 2020 Object Nav test-std".
+    FILTER (
+        STRLIKE(?metric, "accuracy") || 
+        STRLIKE(?metric, "f1 score") || 
+        STRLIKE(?metric, "mean squared error") || 
+        STRLIKE(?metric, "mean absolute error")
+    )
+}
+```

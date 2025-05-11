@@ -1,0 +1,19 @@
+```sparql
+PREFIX wdt: <http://www.w3.org/2000/01/w3c/wdt#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?title 
+WHERE {
+    ?model orkg:hasModelFor ?testDataset.
+    ?testDataset schema:hasVersion ?version.
+    ?version schema:hasVersionInfo ?versionInfo.
+    ?versionInfo schema:description ?description.
+    ?versionInfo schema:hasModel ?model.
+    ?model rdfs:label ?title.
+    FILTER (str(?title) = "BUCC Russian-to-English")
+}
+LIMIT 100
+```

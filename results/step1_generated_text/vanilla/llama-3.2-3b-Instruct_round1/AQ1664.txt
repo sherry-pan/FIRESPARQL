@@ -1,0 +1,21 @@
+Question:
+What is the best performing model benchmarking the CIFAR-10 Image Classification dataset in terms of Percentage error metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?metric?error
+     WHERE {
+      ?model orkg:isBenchmarkFor?benchmark.
+      ?benchmark orkg:dataset?dataset.
+      ?dataset a orkg:CIFAR10.
+      ?benchmark orkg:hasMetric?metric.
+      ?metric rdfs:label?metricLabel.
+       FILTER (STRIKE?metricLabel "Percentage error"i )
+      ?model orkg:hasModel?modelInstance.
+      ?modelInstance rdfs:label?modelLabel.
+       FILTER (STRIKE?modelLabel "Best performing"i )
+      ?error?error.
+      ?model orkg:hasError?error.
+       ORDER BY DESC(?error)
+     }<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://purl.org/linguistics/resources/orkg/>
+PREFIX wot: <http://www.wot-ontology.org/ontology/>
+PREFIX pwc: <http://purl.org/pwc/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?value 
+WHERE {
+    ?metric schema:description "Evaluation metric"@en.
+    ?metric pwc:leaderboard "PWC Leaderboards"@en.
+    ?metric rdfs:label ?metricLabel.
+    ?metric owl:equivalentTo ?equivalentMetric.
+    ?metric owl:comment ?comment.
+    ?metric schema:description ?value.
+    FILTER (REGEX(?metricLabel, ".*?evaluation.*?metric.*?", "i")) 
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R153847 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label "Natural Questions (short)"^^xsd:string.
+    ?contrib orkgp:P36 ?metric.
+    OPTIONAL {
+        ?metric orkgp:P32 ?evaluation.
+        ?evaluation orkgp:P34 ?value.
+    }
+    FILTER(?dataset = "Natural Questions (short)")
+}
+```

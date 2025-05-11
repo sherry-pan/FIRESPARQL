@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?title 
+WHERE {
+  ?model schema:description ?d.
+  ?model dbo:contributesTo dbpedia-owl:benchmark "Reuters RCV1/RCV2 English-to-German".
+  ?model schema:about ?title.
+  FILTER (lang(?title) = "en")
+}
+ORDER BY (length(?title))
+```

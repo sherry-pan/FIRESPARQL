@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paperId ?title
+WHERE {
+    ?paper a orkg:ResearchPaper;
+           dcterms:title ?title;
+           orkg:hasBenchmark ?benchmark;
+           orkg:benchmarkName "Reacher";
+           orkg:benchmarkDataset "DMControl100k";
+           orkg:isPartOf ?dataset.
+    ?dataset a orkg:Dataset.
+    FILTER(?benchmark != "None")
+}
+```

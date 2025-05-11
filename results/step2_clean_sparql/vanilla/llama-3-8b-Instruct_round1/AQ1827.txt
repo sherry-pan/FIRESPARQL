@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?value
+WHERE {
+   ?paper a orkg:ResearchPaper ;
+          orkg:relatedTo ?benchmark ;
+          orkg:hasResult ?result .
+   ?benchmark a orkg:Benchmark ;
+              orkg:hasName "NLP-TDMS" .
+   ?result a orkg:Result ;
+           orkg:hasMetric "Macro Recall" ;
+           orkg:hasValue ?value ;
+           orkg:hasModel ?model .
+   ?paper orkg:publishedOn/schema:date ?date .
+   BIND(year(?date) AS ?year)
+   FILTER (?year = 2022) 
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX cfrn: <http://cfrn.fr/cfrn/>
+
+SELECT ?paper ?code ?link
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:topic "CRF".
+  ?paper orkg:uses ?model.
+  ?model a orkg:Models;
+         orkg:name "sentence expansion";
+         orkg:code ?code.
+  ?paper orkg:provides ?link.
+}
+```

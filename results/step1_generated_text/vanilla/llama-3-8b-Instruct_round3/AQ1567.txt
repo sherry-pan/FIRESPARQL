@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the CoNLL++ dataset in terms of F1 metric?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/owl/orkg.owl#>
+PREFIX p: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?f1
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmarks?benchmark.
+ ?benchmark orkg:dataset <https://www.orkg.org/resource/conll++>.
+ ?benchmark orkg:metric "F1".
+ ?benchmark orkg:value?f1.
+  FILTER (?f1 = xsd:decimal(max(?f1)) )
+}<|eot_id|>

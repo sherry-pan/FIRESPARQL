@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.scholix.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:dataset orkg:BC5CDR-disease.
+  ?benchmark orkg:score ?score.
+  ?benchmark orkg:metric ?metric.
+  FILTER (datatype(?score) = xsd:integer)
+  FILTER (datatype(?metric) = xsd:string)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

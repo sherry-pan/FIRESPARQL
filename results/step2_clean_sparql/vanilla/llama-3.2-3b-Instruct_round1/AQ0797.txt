@@ -1,0 +1,14 @@
+```sparql
+PREFIX wds: <http://www.w3.org/2003/02/02/sparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbp: <http://dbpedia.org/ontology/>
+PREFIX curation: <http://purl.org/vocab/curation/>
+PREFIX bioasq: <http://bioasq.org/>
+
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?label.
+  FILTER (REGEX(LOWER(?label), "evaluation metric") && NOT EXISTS {?metric curation:annotator ?annotator})
+}
+```

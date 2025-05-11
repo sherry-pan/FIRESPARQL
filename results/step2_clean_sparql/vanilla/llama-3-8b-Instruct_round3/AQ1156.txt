@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <https://orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset; 
+           dcterms:title "SQuAD2.0".
+  ?benchmark a orkg:Benchmark; 
+             orkg:dataset ?dataset; 
+             orkg:result ?result.
+  ?result a orkg:Result; 
+          orkg:metric ?metric; 
+          orkg:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

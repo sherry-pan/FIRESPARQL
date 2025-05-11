@@ -1,0 +1,20 @@
+```sparql
+SELECT ?precision ?recall ?f1
+WHERE {
+  ?algorithm a orkgc:Algorithm;
+             rdfs:label ?algorithm_lbl.
+  FILTER (str(?algorithm_lbl) = "naive bayes")
+
+  ?dataset orkgp:HAS_ALGORITHM ?algorithm;
+           orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?precision;
+        orkgp:P33 ?recall;
+        orkgp:P34 ?f1.
+
+  ?dataset orkgp:HAS_DATASET ?ml_feature.
+  ?ml_feature rdfs:label "bag of words".
+  ?classification rdfs:label "classify user feedback as feature request".
+
+  FILTER(?precision > 0)
+}
+```

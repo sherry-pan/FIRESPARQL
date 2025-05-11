@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the Concept Mention Extraction model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+        ?paper orkgp:P30?cont.
+        ?cont orkgp:P31?model.
+        ?model rdfs:label?model_lbl.
+        ?model_lbl rdfs:label?model.
+         FILTER(REGEX(STR(?model), "Concept\\sMention\\sExtraction"))
+        ?paper orkgp:P32?cont. 
+        ?cont orkgp:P34?benchmark.
+        ?benchmark orkgp:P33?cont.
+        ?cont rdfs:label?cont.
+        ?cont orkgp:P33?code.
+     }<|eot_id|>

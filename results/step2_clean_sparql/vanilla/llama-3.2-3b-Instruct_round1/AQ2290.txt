@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?link
+WHERE {
+  ?paper wdt:P279* schema:CreativeWork.
+  ?paper dcterms:hasPart ?code.
+  ?code schema:software ?software.
+  ?software schema:url ?link.
+  ?paper schema:description ?description.
+  FILTER(CONTAINS(LCASE(?description), "gcn hybrid"))
+}
+```

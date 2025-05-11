@@ -1,0 +1,15 @@
+Question:
+What are the metrics of evaluation over the Fashion-MNIST dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?average)
+     WHERE {
+         orkgr:R75395 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+        ?dataset orkgp:P7034?eval_metric.
+        ?eval_metric rdfs:label?metric_lbl.
+        ?eval_metric orkgp:HAS_VALUE?value.
+         BIND(xsd:float(?value) AS?value)
+         FILTER(REGEX(?dataset_lbl, "Fashion-MNIST"))
+     }<|eot_id|>

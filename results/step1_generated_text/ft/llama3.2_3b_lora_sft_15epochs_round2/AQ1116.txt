@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R153801 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P4310?metric.
+        ?metric rdfs:label?metric_lbl;
+                orkgp:P4311?value.
+         FILTER(REGEX(?metric_lbl, "top-")
+                 && REGEX(?metric_lbl, "benchmark"))
+         FILTER(?metric_lbl(?value))
+         FILTER(?value > 0)
+         FILTER(STRLEN(?value) = 1)
+         FILTER(?contrib orkgp:P4309 "WMT2016 Czech-English")
+     }<|eot_id|>

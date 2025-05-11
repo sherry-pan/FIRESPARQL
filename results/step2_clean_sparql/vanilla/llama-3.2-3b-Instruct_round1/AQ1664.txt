@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?metric ?error
+WHERE {
+  ?model orkg:isBenchmarkFor ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset a orkg:CIFAR10.
+  ?benchmark orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (CONTAINS(LCASE(?metricLabel), "percentage error"))
+  ?model orkg:hasModel ?modelInstance.
+  ?modelInstance rdfs:label ?modelLabel.
+  FILTER (CONTAINS(LCASE(?modelLabel), "best performing"))
+  ?model orkg:hasError ?error.
+}
+ORDER BY DESC(?error)
+```

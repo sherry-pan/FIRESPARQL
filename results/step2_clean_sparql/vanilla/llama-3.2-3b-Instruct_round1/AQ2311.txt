@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX pop3d: <http://purl.org/linked-data/pop3d/>
+
+SELECT ?code 
+WHERE {
+  ?paper a dbo:BookChapter.
+  ?paper schema:about <http://purl.org/linked-data/pop3d/model>.
+  ?paper schema:hasPart ?benchmark.
+  ?benchmark schema:hasCode ?code.
+  ?benchmark pop3d:uses ?model.
+  FILTER (CONTAINS(LCASE(?benchmark), "pop3d") || CONTAINS(LCASE(?benchmark), "benchmark"))
+}
+LIMIT 10
+```

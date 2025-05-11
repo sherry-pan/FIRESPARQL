@@ -1,0 +1,22 @@
+Question:
+Where can I find code references in papers that have used the DeiT-Ti model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/orkg/>
+     PREFIX wkm: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paper?paperTitle?codeReference
+     WHERE {
+      ?paper a orkg:Paper.
+       orkg:hasReference?reference.
+      ?reference a orkg:CodeReference.
+      ?reference orkg:hasCode?code.
+      ?code orkg:hasSource?source.
+      ?source orkg:hasPaper?paper.
+      ?paper orkg:hasModel?model.
+      ?model orkg:hasModelName "DeiT-Ti".
+      ?paper orkg:hasBenchmarking?benchmark.
+      ?benchmark orkg:hasBenchmarkingMethod "benchmarking".
+      ?paper orkg:hasTitle?paperTitle.
+       FILTER(LANG(?paperTitle) = "en")
+     }<|eot_id|>

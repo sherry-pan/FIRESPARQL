@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         schema:about ?topic ;
+         schema:hasPart ?benchmark ;
+         schema:hasPart ?dataset.
+  ?benchmark schema:hasPart ?mlDoc.
+  ?dataset schema:name "MLDoc Zero-Shot English-to-Russian dataset".
+  ?paper schema:title ?title ;
+         orkg:paperId ?id.
+  FILTER (?topic = "Machine Learning" || ?topic = "Natural Language Processing")
+}
+```

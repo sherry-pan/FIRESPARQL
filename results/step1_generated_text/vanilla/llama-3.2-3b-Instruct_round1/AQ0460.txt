@@ -1,0 +1,17 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WebQuestions dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/1.0/>
+     PREFIX wq: <http://orkg.org/schema/wq/1.0/>
+     SELECT?paper?id
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasTitle?title.
+    ?title wq:hasBenchmarkedModel?benchmarkedModel.
+    ?benchmarkedModel wq:hasDataset wq:WebQuestions.
+    ?paper orkg:hasId?id.
+     FILTER (regex(str(?title), "benchmarked")
+      OR regex(str(?title), "model")
+      OR regex(str(?title), "WebQuestions"))
+     }<|eot_id|>

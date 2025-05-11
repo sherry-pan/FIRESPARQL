@@ -1,0 +1,26 @@
+Question:
+What is the best performing model benchmarking the WMT2016 English-Russian dataset in terms of BLEU score metric?
+
+Generated SPARQL:
+ PREFIX ork: <http://www.openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vcard: <http://schema.org/>
+
+     SELECT?model?metric?score
+     WHERE {
+     {
+    ?model schema:name?name.
+    ?model schema:description?description.
+    ?model ork:dataset "WMT2016 English-Russian".
+    ?metric schema:name "BLEU score".
+    ?metric schema:keyword "model benchmarking".
+    ?model ork:hasMetric?metric.
+    ?model ork:hasScore?score.
+     FILTER (STRIKE?score?score)
+     FILTER (STRIKE?metric "BLEU score")
+     FILTER (REGEX(?score, "[0-9.]+") && (LT(?score, 100) || EQ(?score, 100)))
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

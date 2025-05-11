@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the LayerNorm HM-LSTM model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper     a            orkgc:Paper;
+               rdfs:label      ?paper_title.
+       FILTER (str(?paper_title) = "LayerNorm HM-LSTM")
+      ?paper       orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_CODE         ?code.
+      ?benchmark   orkgp:HAS_EVALUATION     ?eval.
+      ?eval         orkgp:HAS_VALUE          ?value.
+      ?value       orkgp:HAS_METRIC          ?metric.
+      ?metric      rdfs:label              ?metric_label.
+       FILTER (str(?metric_label) = "benchmarking")
+     }<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?code_link
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:usesModel ?model.
+    ?model rdfs:label "DrQA".
+    ?paper orkg:benchmark ?benchmark.
+    ?benchmark rdfs:label ?benchmark_label.
+    FILTER (?benchmark_label IN ("GLUE", "SuperGLUE", "SearchQA", "NaturalQuestions", "HotpotQA", "TriviaQA", "WikiQA", "ReQA", "BioASQ", "TREC", "CSC", "DSTC", "WikiHop", "OpenBookQA", "MultiRC", "AdversarialQA", "QuAC", "e-SNLI", "MultiNLI", "SNLI", "ANLI"))
+    ?paper orkg:codeLink ?code_link.
+}
+```

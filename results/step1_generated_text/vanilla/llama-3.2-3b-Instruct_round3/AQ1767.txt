@@ -1,0 +1,24 @@
+Question:
+Indicate the model that performed best in terms of Accuracy metric on the Stanford Cars benchmark dataset?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c/damldc#WeightedDensity>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX bio2owl: <http://bio2owl.org/ontology/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+
+     SELECT?model 
+     WHERE {
+      ?model schema:description "Stanford Cars benchmark dataset".
+      ?model schema:description?d.
+      ?d schema:isDefinedBy?dataset.
+      ?dataset schema:description?datasetDescription.
+      ?dataset schema:description?datasetDescription.
+      ?dataset schema:mainClass?model.
+      ?model wdt:P31?class.
+      ?class rdfs:label?label.
+      ?label rdfs:label?model.
+      ?model schema:accuracy "0.95".
+       FILTER (regex(?model, "Stanford Cars"))
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?score
+WHERE {
+    ?model orkg:hasModel ?m.
+    ?m schema:description "DMControl500k".
+    ?m schema:benchmark "Reacher".
+    ?m schema:benchmark ?benchmark.
+    ?benchmark schema:score ?score.
+    FILTER (?benchmark = "Reacher, easy (DMControl500k)")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

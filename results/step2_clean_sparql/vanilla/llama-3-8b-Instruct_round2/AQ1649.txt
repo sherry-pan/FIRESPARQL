@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:dataset ?dataset.
+  ?dataset dc:title "Habitat 2020 Object Nav test-std benchmark".
+  ?result orkg:metricValue ?score.
+  ?result orkg:metric ?metric.
+  FILTER (?metric = owl:SUCCESS)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

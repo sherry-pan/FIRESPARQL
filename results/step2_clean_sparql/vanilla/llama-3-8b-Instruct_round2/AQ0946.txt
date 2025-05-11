@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper dcterms:subject ?topic.
+   ?topic owl:sameAs <https://www.orkg.org/entity/Q1011154>.
+   ?paper orkg:evaluates ?metric.
+   ?metric rdfs:label ?label.
+   FILTER (lang(?label) = "en").
+   FILTER (?metric != owl:nothing).
+}
+```

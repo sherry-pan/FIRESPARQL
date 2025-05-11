@@ -1,0 +1,19 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Yelp Binary classification dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?paper?paperId
+     WHERE {
+    ?paper a orkg:Paper.
+     orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "Yelp Binary Classification".
+    ?benchmark orkg:hasModel?model.
+    ?model orkg:hasDataset "Yelp Binary Classification".
+     SERVICE orkg:sparql {
+    ?paper orkg:hasTitle?title.
+    ?title orkg:contains "benchmark".
+     FILTER (CONTAINS(Lower(?title), "benchmark"))
+     }
+     FILTER ( EXISTS (?model) )
+     }<|eot_id|>

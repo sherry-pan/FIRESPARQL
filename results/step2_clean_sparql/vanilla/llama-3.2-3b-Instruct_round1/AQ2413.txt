@@ -1,0 +1,20 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX cvt: <http://cvt.ai/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?paper ?paperTitle ?code
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:utilizes ?model.
+    ?model a cvt:CvtModel.
+    ?model schema:description ?description.
+    FILTER (CONTAINS(?description, 'CvT-21 (384 res)'))
+    ?paper wdt:P301 ?code.
+    SERVICE wikibase:label {
+        bd:serviceParam wikibase:language 'en'.
+    }
+}
+```

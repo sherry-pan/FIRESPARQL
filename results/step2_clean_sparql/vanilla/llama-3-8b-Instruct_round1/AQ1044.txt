@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+
+SELECT ?metric ?score
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset ?dataset ;
+             orkg:hasMetric ?metric ;
+             orkg:hasScore ?score.
+  ?dataset rdfs:label "Softcite".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model 
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:PearsonCorrelation ?corr.
+  ?corr rdfs:label ?modelLabel.
+  FILTER (CONTAINS(STR(?modelLabel), "Pearson Correlation on MedSTS")
+    && CONTAINS(STR(?modelLabel), "best")
+    && CONTAINS(STR(?modelLabel), "model")
+  )
+}
+```

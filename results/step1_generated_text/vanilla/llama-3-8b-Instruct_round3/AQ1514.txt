@@ -1,0 +1,23 @@
+Question:
+What is the best performing model benchmarking the ANLI test dataset in terms of A3 metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?model?modelLabel?a3
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmarks?benchmark.
+   ?benchmark orkg:dataset?dataset.
+   ?dataset schema:name "ANLI".
+   ?benchmark orkg:metric?metric.
+   ?metric schema:name "A3".
+   ?benchmark orkg:performance?performance.
+   ?performance schema:value?a3.
+    FILTER(?a3 >= ALL (?bestA3)).
+   ?bestA3 a schema:Float.
+   ?bestA3 schema:value?bestA3Value.
+    FILTER(?a3 =?bestA3Value).
+}<|eot_id|>

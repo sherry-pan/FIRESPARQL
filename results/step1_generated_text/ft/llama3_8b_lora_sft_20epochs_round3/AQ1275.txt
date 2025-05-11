@@ -1,0 +1,16 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R8368 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P34?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(REGEX(?benchmark_lbl, "Atari 2600 Berzerk")
+      ?contrib orkgp:P2506?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?contrib orkgp:P2507?value.
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

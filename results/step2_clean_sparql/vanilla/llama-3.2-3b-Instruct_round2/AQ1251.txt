@@ -1,0 +1,19 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/schema/0.1/>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark schema:about <http://orkg.org/dataset/MLDoc-Zero-Shot-English-to-Spanish>.
+    ?benchmark orkg:hasResult ?result.
+    ?result schema:type orkg:ResultType.
+    ?result orkg:hasMetric ?metric.
+    ?result orkg:hasValue ?value.
+    ?metric rdfs:label ?metricLabel.
+    FILTER (STRLIKE(STR(?metricLabel), "top benchmark")i)
+}
+```

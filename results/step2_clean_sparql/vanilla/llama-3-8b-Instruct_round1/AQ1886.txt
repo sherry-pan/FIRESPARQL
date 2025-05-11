@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?dataset ?datasetLabel ?benchmark
+WHERE {
+   ?dataset a orkg:Dataset.
+   ?dataset rdfs:label ?datasetLabel.
+   ?dataset orkg:related_to ?researchArea.
+   ?researchArea rdfs:label "Sentence Classification".
+   ?dataset orkg:benchmark ?benchmark.
+   FILTER(LANG(?datasetLabel) = "en")
+}
+```

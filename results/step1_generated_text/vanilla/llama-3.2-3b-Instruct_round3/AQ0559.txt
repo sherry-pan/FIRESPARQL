@@ -1,0 +1,31 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the AAPD dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/ontology/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+    SELECT?paper?title?id
+    WHERE {
+     ?paper schema:about?paperID.
+      schema:description?description.
+      schema:keywords?keywords.
+      FILTER (contains(?keywords, 'AAPD')).
+      OPTIONAL {?paper schema:hasBenchmark?benchmark.
+        FILTER (?benchmark schema:hasDataset?dataset.
+          FILTER (?dataset schema:datasetName "AAPD").
+          FILTER (?benchmark schema:hasTitle?benchmarkTitle.
+            FILTER (?benchmarkTitle rdfs:label?title.
+              FILTER (lang(?title) = 'en').
+              FILTER (str(?title) = 'AAPD').
+              FILTER (str(?benchmarkTitle) = 'AAPD').
+              FILTER (?benchmarkTitle rdfs:label?benchmarkTitle.
+                FILTER (lang(?benchmarkTitle) = 'en').
+                FILTER (str(?benchmarkTitle) = 'AAPD').
+              ) ) ) ) )
+      }
+    }
+    ```<|eot_id|>

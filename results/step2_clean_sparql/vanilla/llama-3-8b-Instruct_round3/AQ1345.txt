@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+SELECT ?score ?metric
+WHERE {
+    ?paper a orkg:Paper ;
+        orkg:hasResult ?result.
+    ?result a orkg:Result ;
+        orkg:hasBenchmark ?benchmark ;
+        orkg:hasScore ?score ;
+        orkg:hasMetric ?metric.
+    ?benchmark a orkg:Benchmark ;
+        orkg:hasDataset ?dataset.
+    ?dataset a orkg:Dataset ;
+        schema:name "ImageNet V2".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

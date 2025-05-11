@@ -1,0 +1,14 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?paper ?paperId
+WHERE {
+  ?paper dbo:hasTitle "Frostbite".
+  ?paper orkg:hasDataset "Atari 2600 Frostbite".
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset "Atari 2600 Frostbite".
+  FILTER contains(str(?benchmark), "benchmark") 
+}
+```

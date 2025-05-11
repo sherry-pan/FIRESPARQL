@@ -1,0 +1,15 @@
+```sparql
+PREFIX wot: <http://purl.org/wot/owlsim/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?model ?metric ?value
+WHERE {
+  ?model wot:hasBenchmark "ImageNet 64x64".
+  ?model orkg:hasMetric ?metric.
+  ?metric schema:description ?description.
+  FILTER (CONTAINS(?description, "Bits per dim"))
+  ?model orkg:hasResult ?result.
+  ?result schema:value ?value.
+}
+```

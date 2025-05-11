@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?paper orkgp:P31 [
+    orkgp:P32 ?benchmark
+  ].
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "Walker, walk \\(DMControl500k\\)"))
+  ?paper orkgp:P29 ?cont.
+  ?cont orkgp:P2008 ?value.
+  OPTIONAL {
+    ?cont orkgp:P30 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+ORDER BY DESC(?score)
+```

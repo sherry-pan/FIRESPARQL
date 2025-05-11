@@ -1,0 +1,19 @@
+```sparql
+SELECT ?country ?country_labels
+WHERE {
+    ?data a orkgc:Data;
+          rdfs:label ?data_labels.
+    FILTER(REGEX(?data_labels, "epilepsy"))
+    
+    ?study orkgp:HAS_DATASET ?data;
+           orkgp:HAS_DATUM ?date.
+    
+    ?paper orkgp:HAS_STUDY ?study.
+    ?paper rdfs:label ?paper_labels.
+    
+    ?country orkgp:HAS_STUDY ?study;
+             rdfs:label ?country_labels.
+}
+ORDER BY DESC(?country_labels)
+LIMIT 1
+```

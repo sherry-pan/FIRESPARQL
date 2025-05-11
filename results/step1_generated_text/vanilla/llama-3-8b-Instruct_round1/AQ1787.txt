@@ -1,0 +1,29 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 Yars Revenge benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?model?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasExperiment?experiment.
+ ?experiment orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:name "Atari 2600 Yars Revenge".
+ ?experiment orkg:hasScore?score.
+ ?score a orkg:Score.
+  FILTER(?score >?otherScore.
+  FILTER(?otherScore in (
+    SELECT?score2
+    WHERE {
+     ?model2 a orkg:Model.
+     ?model2 orkg:hasExperiment?experiment2.
+     ?experiment2 orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:name "Atari 2600 Yars Revenge".
+     ?experiment2 orkg:hasScore?score2.
+     ?score2 a orkg:Score.
+    }
+  ))
+}<|eot_id|>

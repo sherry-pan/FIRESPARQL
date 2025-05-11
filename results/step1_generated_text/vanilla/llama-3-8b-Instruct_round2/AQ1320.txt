@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Amazon-2 dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX kg: <http://rdf.openresearchknowledgegraph.org/ontology/>
+PREFIX orkg: <http://rdf.openresearchknowledgegraph.org/>
+
+SELECT?metric?value
+WHERE {
+ ?paper kg:hasBenchmarkResult?benchmarkResult.
+ ?benchmarkResult kg:hasDataset?dataset.
+ ?dataset rdfs:label "Amazon-2".
+ ?benchmarkResult kg:hasMetric?metric.
+ ?benchmarkResult kg:hasValue?value.
+  FILTER (?dataset =?dataset &&?metric =?metric)
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

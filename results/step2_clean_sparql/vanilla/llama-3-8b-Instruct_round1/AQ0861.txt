@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?metric
+WHERE {
+    ?paper a orkg:Paper;
+           orkg:hasDataset orkg:ESC50;
+           dc:title ?title;
+           orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    FILTER (?title = "Benchmarking models on the ESC-50 dataset").
+}
+```

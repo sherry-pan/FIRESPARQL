@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?score ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+    rdfs:label ?datasetLabel.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasScore ?score ;
+    orkg:hasMetric ?metric.
+  FILTER (?datasetLabel = "Stanford Dogs dataset").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

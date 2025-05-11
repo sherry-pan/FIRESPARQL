@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?paperTitle ?paperID
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:dataset ?dataset.
+    ?dataset owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmedhealth/PMCH0011414>.
+    ?paper orkg:hasTitle ?paperTitle.
+    ?paper orkg:hasID ?paperID.
+    FILTER (?paperID != "")
+}
+```

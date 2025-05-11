@@ -1,0 +1,16 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R6759 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P4310?metric.
+        ?metric rdfs:label?metric_lbl;
+                orkgp:P4311?value.
+         FILTER(REGEX(?metric_lbl, "top-")
+                 && REGEX(?metric_lbl, "seel.cse.lsu.edu/data/re17.zip"))
+        ?contrib orkgp:P4312?challenge.
+        ?challenge rdfs:label?challenge_lbl.
+         BIND(xsd:int(?value) AS?value)
+     }<|eot_id|>

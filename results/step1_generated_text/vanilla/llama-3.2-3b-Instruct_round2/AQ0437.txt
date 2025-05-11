@@ -1,0 +1,21 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STL-10 dataset?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://example.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX wkm: <http://example.org/wkm/>
+
+     SELECT?paper?title?id
+     WHERE {
+    ?paper wkm:hasDataset "STL-10".
+    ?paper wkm:hasBenchmark?benchmark.
+    ?benchmark foaf:hasAuthor?author.
+    ?author wkm:hasPaper?paper.
+    ?paper wkm:title?title.
+    ?paper wkm:id?id
+     }
+     ```<|eot_id|>

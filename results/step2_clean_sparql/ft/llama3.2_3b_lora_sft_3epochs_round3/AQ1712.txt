@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Atari 2600 Enduro" ||
+            str(?dataset_lbl) = "AtariEnduro" ||
+            str(?dataset_lbl) = "Enduro" ||
+            str(?dataset_lbl) = "Atari 2600" ||
+            str(?dataset_lbl) = "Atari" ||
+            str(?dataset_lbl) = "2600" ||
+            str(?dataset_lbl) = "Enduro (Atari 2600)" ||
+            str(?dataset_lbl) = "Atari 2600 (Enduro)")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_VALUE ?value;
+          orkgp:HAS_MODEL ?model.
+    BIND(xsd:float(?value) AS ?value_lbl)
+    OPTIONAL { ?model rdfs:label ?model_lbl }
+}
+ORDER BY DESC(?value_lbl)
+LIMIT 1
+```

@@ -1,0 +1,28 @@
+```sparql
+SELECT ?material ?material_label
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label "piezoresistive material".
+  ?benchmark orkgp:HAS_PROBLEM ?problem;
+             orkgp:HAS_SOURCE_FILE ?source_file.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_SOURCE_FILE ?source_file.
+  ?source_file orkgp:HAS_CODE ?code.
+  ?code orkgp:HAS_MODEL ?model;
+        orkgp:HAS_DATASET ?dataset.
+  ?model rdfs:label ?model_label.
+  OPTIONAL {
+    ?model orkgp:HAS_EVALUATION ?evaluation.
+    ?evaluation rdfs:label "response time".
+    BIND(xsd:float(?evaluation) AS ?eval_value)
+  }
+  OPTIONAL {
+    ?cont orkgp:P32 ?constraint.
+    ?constraint rdfs:label "time".
+    BIND(xsd:int(?constraint) AS ?constraint_value)
+  }
+  BIND(xsd:float(coalesce(?eval_value, ?constraint_value)) AS ?response_time)
+}
+ORDER BY ?response_time
+LIMIT 1
+```

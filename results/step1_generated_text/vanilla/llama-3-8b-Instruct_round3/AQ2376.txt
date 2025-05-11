@@ -1,0 +1,17 @@
+Question:
+Provide a list of papers that have utilized the ANODE model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://schema.orkg.org/>
+     PREFIX code: <http://schema.orkg.org/code/>
+     PREFIX paper: <http://schema.orkg.org/paper/>
+     SELECT?paper?paper_title?code_link
+     WHERE {
+      ?paper a paper:Paper.
+      ?paper orkg:usesModel orkg:ANODE.
+      ?paper orkg:hasCode?code.
+      ?code code:codeLink?code_link.
+      ?paper paper:title?paper_title.
+       FILTER (?paper_title!= "")
+     }
+     ORDER BY?paper_title<|eot_id|>

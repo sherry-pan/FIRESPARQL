@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vocab: <http://www.wikidata.org/prop-dctypes/>
+
+SELECT ?paper ?paperLabel ?codeLink 
+WHERE {
+  ?paper wdt:P31 wd:Q13442814.  # Assuming Q13442814 is the item for 'scientific paper'
+  ?paper wdt:P106 wd:Q625978.  # Assuming Q625978 is the item for 'XLNet model'
+  ?paper wdt:P953 ?codeLink.   # Assuming P953 is the property for 'links to code'
+  ?paper rdfs:label ?paperLabel.
+
+  FILTER(CONTAINS(?paperLabel, "XLNet (base)"))
+  FILTER(CONTAINS(?codeLink, "https://github.com/"))
+}
+LIMIT 10
+```

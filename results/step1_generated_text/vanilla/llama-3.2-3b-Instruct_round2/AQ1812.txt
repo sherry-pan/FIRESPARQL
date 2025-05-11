@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest Percentage error score on the SVHN benchmark dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX owl: <http://www.w3.org/OWL/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?model?percentage 
+     WHERE {
+    ?model schema:description "Model"@en.
+    ?model schema:dataset "SVHN"@en.
+    ?model schema:performance "Percentage"@en.
+    ?model schema:performance?percentage.
+     FILTER (STR(?percentage) =~ "^\d+(\.\d+)?")
+     ORDER BY DESC(?percentage)
+     LIMIT 1
+     }
+    <|eot_id|>

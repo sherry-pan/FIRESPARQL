@@ -1,0 +1,12 @@
+```sparql
+SELECT ?country ?country_lbl
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15684 ?prevalence.
+  ?prevalence orkgp:HAS_VALUE ?value.
+  ?contrib orkgp:P37023 ?country.
+  ?country rdfs:label ?country_lbl.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+
+SELECT ?source ?codeRef
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasSource ?source.
+    ?source schema:description ?description.
+    ?description schema:mainText ?mainText.
+    ?mainText orkg:contains ?codeRef.
+    ?codeRef orkg:hasUsed ?usedModel.
+    ?usedModel orkg:hasBenchmarkingPurpose ?benchmarkingPurpose.
+    ?benchmarkingPurpose orkg:hasModel ?model.
+    ?model schema:alternateName "Pointer + Coverage + EntailmentGen + QuestionGen".
+    FILTER (CONTAINS(?description, "benchmarking"))
+}
+ORDER BY (LENGTH(?description))
+```

@@ -1,0 +1,15 @@
+Question:
+What are the metrics of evaluation over the PubMed 20k RCT dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?avg_value)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+           FILTER (str(?dataset_lbl) = "PubMed 20k RCT")
+          ?dataset       orkgp:HAS_DATASET      ?paper.
+          ?paper         orkgp:P32               ?eval_metric.
+          ?eval_metric   orkgp:HAS_VALUE        ?value.
+          ?value         rdfs:label              ?metric.
+          ?metric        orkgp:P31               ?metric_lbl.
+     }<|eot_id|>

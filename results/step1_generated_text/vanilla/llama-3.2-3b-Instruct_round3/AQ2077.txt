@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the MEMEN model and include the links to their code?
+
+Generated SPARQL:
+ ```
+PREFIX orkg: <http://orkg.org/schema/1.0/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/direct/>
+PREFIX q: <http://www.wikidata.org/entity/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT?paper?paperTitle?codeLink
+WHERE {
+ ?paper wdt:P275?paperModel.
+  FILTER (strContains(STR(?paperModel), "MEMEN")).
+ ?paper wdt:P242?codeLink.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+```<|eot_id|>

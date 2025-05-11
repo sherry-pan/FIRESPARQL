@@ -1,0 +1,14 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/ontology/orkg/>
+
+SELECT ?paper ?link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?code schema:code "resnet-152".
+  ?paper orkg:hasLink ?link.
+  FILTER (STRSTARTS(STR(?link), "http://arxiv.org/pdf/"))
+}
+LIMIT 10
+```

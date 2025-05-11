@@ -1,0 +1,22 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX dataset: <http://www.orkg.org/dataset/>
+
+SELECT ?metric ?value
+WHERE {
+    ?dataset a dataset:Dataset ;
+        rdfs:label ?datasetLabel.
+    FILTER (?datasetLabel = "AESLC"@en).
+    ?result a orkg:BenchmarkResult ;
+        orkg:dataset ?dataset ;
+        orkg:metric ?metric ;
+        orkg:value ?value.
+    OPTIONAL {
+        ?result orkg:metricType ?metricType.
+        FILTER (?metricType = "top"@en).
+    }
+}
+ORDER BY DESC(?value) 
+LIMIT 1
+```

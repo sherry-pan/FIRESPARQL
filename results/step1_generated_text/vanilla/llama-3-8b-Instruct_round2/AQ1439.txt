@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the ImageNet 64x64 dataset in terms of Bits per dim metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?model?metricValue
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmark?benchmark.
+ ?benchmark dcterms:title "ImageNet 64x64".
+ ?benchmark orkg:metric?metric.
+ ?metric dcterms:title "Bits per dim".
+ ?metric orkg:value?metricValue.
+  FILTER (?metricValue = FILTER (xsd:float(?metricValue) = MAX(?metricValue)) )
+}<|eot_id|>

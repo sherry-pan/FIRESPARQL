@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX dcb: <http://dbpedia.org/2012/02/druid/>
+     PREFIX wiki: <http://dbpedia.org/2012/02/druid/>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasDataset "MultiNLI".
+    ?benchmark orkg:hasScore?score.
+    ?metric rdfs:label?metricLabel.
+     FILTER (LOWER(?metricLabel) = "Benchmark Score" )
+     }<|eot_id|>

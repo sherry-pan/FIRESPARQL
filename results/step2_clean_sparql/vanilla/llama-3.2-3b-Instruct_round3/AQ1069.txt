@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?score 
+WHERE {
+  ?dataset a ora:Dataset.
+  ?dataset ora:hasDataFile ?file.
+  ?file ora:fileName "re17.zip".
+  ?file ora:hasBenchmark ?benchmark.
+  ?benchmark ora:hasMetric ?metric.
+  ?benchmark ora:hasScore ?score.
+  FILTER (LOWER(?dataset) = "seel.cse.lsu.edu/data/re17.zip")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

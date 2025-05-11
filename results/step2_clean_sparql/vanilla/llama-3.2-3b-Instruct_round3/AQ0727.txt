@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric 
+WHERE {
+  ?metric rdfs:label ?label.
+  ?metric schema:description ?description.
+  FILTER (CONTAINS(LCASE(?description), "fsns - test"))
+}
+ORDER BY (LENGTH(?description))
+LIMIT 10
+```

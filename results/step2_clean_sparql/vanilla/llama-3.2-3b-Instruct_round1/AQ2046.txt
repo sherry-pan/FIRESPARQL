@@ -1,0 +1,16 @@
+```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearch.org/orkg/>
+PREFIX orkg-ont: <http://openresearch.org/orkg/ontology/>
+
+SELECT ?codeRef
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark schema:hasModel "MMV".
+    ?paper orkg:hasCodeReference ?codeRef.
+    ?codeRef schema:description "Code reference".
+}
+```

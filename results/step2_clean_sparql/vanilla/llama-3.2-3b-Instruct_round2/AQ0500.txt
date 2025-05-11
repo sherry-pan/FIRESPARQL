@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/schema/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title 
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper schema:hasTitle ?title.
+    ?paper orkg:hasBenchmarkedOn ?benchmark.
+    ?benchmark schema:hasDataset ?dataset.
+    ?dataset schema:datasetType "Character Level".
+    ?dataset schema:datasetName "Penn Treebank".
+}
+LIMIT 100
+```

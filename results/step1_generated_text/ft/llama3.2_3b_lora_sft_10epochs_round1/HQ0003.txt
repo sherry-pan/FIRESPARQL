@@ -1,0 +1,44 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT?method, COUNT(?method) AS count
+     WHERE {
+       orkgr:R6942 orkgp:compareContribution?contrib.
+      ?contrib orkgp:P31?paper.
+      ?paper orkgp:P31?paper_15043?method.
+       BIND(
+         IF(
+          ?method rdfs:label?method_lbl,
+          ?method_lbl,
+          ?method
+         ) AS?method_lbl
+       ) AS?method_lbl
+       FILTER(REGEX(?method_lbl, "Knowledge representation"))
+      ?method orkgp:P32?cont.
+      ?cont orkgp:P31?paper_50080.
+       BIND(
+         IF(
+          ?paper_50080 rdfs:label?paper_50080_lbl,
+          ?paper_50080_lbl,
+          ?paper_50080
+         ) AS?paper_50080_lbl
+       ) AS?paper_50080_lbl
+       FILTER(REGEX(?paper_50080_lbl, "Knowledge representation"))
+      ?paper_50080 orkgp:P36?cont_1.
+      ?cont_1 orkgp:P31?paper_50081.
+       BIND(
+         IF(
+          ?paper_50081 rdfs:label?paper_50081_lbl,
+          ?paper_50081_lbl,
+          ?paper_50081
+         ) AS?paper_50081_lbl
+       ) AS?paper_50081_lbl
+       FILTER(REGEX(?paper_50081_lbl, "Knowledge representation"))
+      ?paper_50081 orkgp:P32?cont_2.
+      ?cont_2 orkgp:P31?paper_70032.
+       BIND(
+         IF(
+          ?paper_70032 rdfs:label?paper_70032_lbl,
+          ?paper_70032_lbl,
+          ?paper_700

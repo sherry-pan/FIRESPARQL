@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paper ?paper_title ?code_reference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dc:title ?paper_title.
+  ?paper orkg:used_model orkg:SemExp.
+  ?paper orkg:has_code_reference ?code_reference.
+  FILTER(lang(?paper_title) = "en").
+}
+```

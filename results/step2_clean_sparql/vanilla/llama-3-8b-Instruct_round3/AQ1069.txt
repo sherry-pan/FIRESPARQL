@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+    orkg:hasFile <http://seel.cse.lsu.edu/data/re17.zip> ;
+    orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasMetric ?metric ;
+    orkg:hasScore ?score.
+  FILTER (?dataset = <http://seel.cse.lsu.edu/data/re17.zip>)
+  FILTER (?metric != owl:nil)
+  FILTER (?score != owl:nil)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

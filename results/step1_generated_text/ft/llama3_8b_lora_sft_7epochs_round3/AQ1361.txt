@@ -1,0 +1,27 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ModelNet40")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?paper        orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      orkgp:HAS_MODEL         ?model.
+                ?model       orkgp:P32               ?arch.
+                ?arch         rdfs:label              ?arch_lbl.}
+       OPTIONAL {?paper     orkgp:HAS_DATASET        ?dataset2;
+                ?dataset2    rdfs:label              ?dataset2_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION     ?eval2.
+                 OPTIONAL {?eval2      orkgp:HAS_METRIC     ?metric2.
+                          ?metric2         rdfs:label         ?metric2_lbl.}}
+       OPTIONAL {?paper      orkgp:P31               ?year.
+                ?year         rdfs:label              ?year_lbl.}
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

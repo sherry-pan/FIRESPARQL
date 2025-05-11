@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest F1 score score on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+     SELECT?model?f1score 
+     WHERE {
+    ?model schema:description?description.
+    ?model orkg:dataset "Penn Treebank".
+    ?model orkg:method "Supervised Learning".
+    ?model orkg:metric "F1 Score".
+    ?model orkg:f1score?f1score.
+     FILTER (?f1score IS NUMERIC)
+     }
+     GROUP BY?model
+     ORDER BY DESC(?f1score)<|eot_id|>

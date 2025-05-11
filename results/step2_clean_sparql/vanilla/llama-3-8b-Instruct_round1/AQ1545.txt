@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?model ?f1
+WHERE {
+  ?paper a bibo:Article.
+  ?paper dc:title ?title.
+  ?paper orkg:hasResult ?result.
+  ?result a bibo:Result.
+  ?result orkg:metric "F1".
+  ?result orkg:value ?f1.
+  ?paper orkg:evaluatedOn ?benchmark.
+  ?benchmark dc:title "CoNLL 2012".
+  ?paper orkg:achievedBy ?model.
+  FILTER (LANG(?title) = "en").
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

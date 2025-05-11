@@ -1,0 +1,27 @@
+Question:
+Where can I find code references in papers that have used the PNDec model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/WDT#weight>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX pnb: <http://pnb.cse.chalmers.se/ontology/pnb/>
+     PREFIX pd: <http://pnb.cse.chalmers.se/ontology/pdb/>
+     PREFIX pn: <http://pnb.cse.chalmers.se/ontology/pn/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbp: <http://dbpedia.org/prop/direct/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX wikibase: <http://wikibase.org/biotime.org/>
+
+     SELECT?paper?paperTitle?paperUrl?benchmark
+     WHERE {
+    ?paper pd:usesModel pn:PNDec.
+    ?paper dbpedia:paper.
+    ?paper wdt:P301?paperTitle.
+    ?paper wdt:P276?paperUrl.
+    ?benchmark pn:benchmark.
+    ?benchmark dbpedia:benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+     FILTER (BCASE(?benchmarkLabel) = "benchmarking")
+     }<|eot_id|>

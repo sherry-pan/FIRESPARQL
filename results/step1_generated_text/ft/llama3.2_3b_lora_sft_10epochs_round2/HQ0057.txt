@@ -1,0 +1,20 @@
+Question:
+Where can all the data sets used in the compared studies be found?
+
+Generated SPARQL:
+ SELECT?rdfs_label
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                   rdfs:label      ?dataset_rdfs_label.
+         CONSTRAIN(?dataset_rdfs_label?dataset_rdfs_label).
+        ?study         orkgp:HAS_DATASET      ?dataset.
+        ?paper         orkgp:P31               ?study;
+                        orkgp:P32               ?cont.
+        ?cont          rdfs:label              ?cont_rdfs_label.
+         FILTER(REGEX(?cont_rdfs_label, "^\s*compare\s*")
+                || REGEX(?cont_rdfs_label, "^\s*evaluati\s*"))
+        ?cont          orkgp:P29               ?source.
+        ?source       rdfs:label              ?source_rdfs_label.
+         BIND(xsd:int(?source_rdfs_label) AS?rdfs_label)
+     }
+     ORDER BY?rdfs_label<|eot_id|>

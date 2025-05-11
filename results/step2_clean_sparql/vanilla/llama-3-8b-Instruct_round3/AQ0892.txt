@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:ResearchPaper;
+         dcterms:title ?title;
+         orkg:hasDataset ?dataset;
+         orkg:hasEvaluation ?evaluation.
+  ?dataset a orkg:Dataset;
+           dc:title "Habitat 2020 Object Nav test-std".
+  ?evaluation a orkg:Evaluation;
+              orkg:hasMetric ?metric.
+  FILTER (str(?title) = "Benchmarking models on the Habitat 2020 Object Nav test-std dataset" ||
+          regex(?title, "Benchmarking models on the Habitat 2020 Object Nav test-std dataset", "i")).
+}
+```

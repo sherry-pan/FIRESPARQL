@@ -1,0 +1,22 @@
+Question:
+What is the highest benchmark result achieved on the Amazon-2 dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?dataset a orkg:Dataset ;
+           rdfs:label?dataset_label.
+  FILTER regex(?dataset_label, "Amazon-2", "i").
+ ?result a orkg:Result ;
+           orkg:dataset?dataset ;
+           orkg:metric?metric ;
+           orkg:value?value.
+ ?result orkg:isBestResult true.
+  FILTER (?metric!= "author" &&?metric!= "year")
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

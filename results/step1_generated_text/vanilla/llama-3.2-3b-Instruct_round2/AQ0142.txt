@@ -1,0 +1,17 @@
+Question:
+Can you list the models that have been evaluated on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?model 
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasEvaluation?evaluation.
+      ?evaluation schema:evaluationType "evaluation".
+      ?evaluation schema:dataset "MultiNLI".
+      ?model orkg:hasEvaluation?evaluation.
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R11090004 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P15 ?metric.
+    ?metric rdfs:label ?metric_lbl;
+            orkgp:P16 ?value.
+    FILTER(?value > 0)
+    ?contrib orkgp:P3 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(?dataset_lbl = "BC5CDR-disease")
+}
+```

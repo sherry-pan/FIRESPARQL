@@ -1,0 +1,29 @@
+Question:
+Provide a list of papers that have utilized the XLNet (base) model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+     PREFIX owl: <http://www.w3.org/OWL/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX vocab: <http://www.wikidata.org/prop-dctypes/>
+     PREFIX wikibase: <http://wikibase.org/prop/dctypes/>
+     
+     SELECT?paper?paperLabel?codeLink 
+     WHERE {
+    ?paper dctype wikibase:SoftwareSourceCode.
+    ?paper vocab:hasCode?code.
+    ?code rdfs:label?codeLabel.
+    ?paper wdt:P301?code.
+    ?paper wdt:P106?author.
+    ?author wdt:P106?author.
+    ?paper rdfs:label?paperLabel.
+    ?paper wdt:P500?paperLabel.
+    ?paper vocab:hasAuthor?author.
+    ?author rdfs:label?authorLabel.
+    ?paper wdt:P500?paperLabel.
+    ?paper wdt:P31?paperType.
+     filter (contains(str(?paperType), "XLNet (base)") )
+     filter (contains(str(?code), "https://github.com/huawei-ai lab/xlnet-base.git") )
+     }
+     LIMIT 10<|eot_id|>

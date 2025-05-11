@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         dcterms:title ?title ;
+         orkg:hasBenchmarkedModel ?bm.
+  ?bm orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:id ?id ;
+           rdfs:label "ImageNet ReaL".
+}
+```

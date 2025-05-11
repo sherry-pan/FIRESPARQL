@@ -1,0 +1,26 @@
+Question:
+What are the metrics of evaluation over the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?avg_value)
+     WHERE {
+       {
+         a       orkgp:Dataset       ;
+                 rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "seel.cse.lsu.edu/data/re17.zip"))
+         orkgp:HAS_DATASET      ?dataset         ;
+                           HAS_EVALUATION     ?eval.
+        ?eval           orkgp:P32               ?metric.
+        ?metric      orkgp:HAS_VALUE        ?value.
+         BIND(xsd:float(?value) AS?value)
+       }
+     UNION
+     {
+       orkgp:HAS_DATASET      ?dataset         ;
+                           HAS_EVALUATION     ?eval.
+      ?eval           orkgp:P31               ?metric.
+      ?metric      orkgp:HAS_VALUE        ?value.
+       BIND(xsd:float(?value) AS?value)
+     }
+     ORDER BY DESC(?metric_lbl)
+     LIMIT 1<|eot_id|>

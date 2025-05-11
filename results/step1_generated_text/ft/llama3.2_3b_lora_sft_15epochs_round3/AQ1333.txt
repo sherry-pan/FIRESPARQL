@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the WOS-46985 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R6750 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P4319?metric.
+        ?metric rdfs:label?metric_lbl;
+                 orkgp:P4318?value.
+         FILTER(REGEX(?metric_lbl, "top"))
+        ?contrib orkgp:P4316?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "WOS-46985"))
+     }<|eot_id|>

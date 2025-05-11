@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of Sequence error metric on the FSNS - Test benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX ork: <http://orkg.org/ontology/>
+     SELECT?model
+     WHERE {
+    ?model ork:hasBestResult {
+      ?model ork:hasBenchmark "FSNS".
+      ?model ork:hasMetric "Sequence Error".
+      ?model ork:hasBestResult?bestResult.
+      ?bestResult ork:hasValue?value.
+       FILTER (?value >= ( SELECT MIN (?v )
+          {?model ork:hasBenchmark "FSNS".
+           ?model ork:hasMetric "Sequence Error".
+           ?model ork:hasBestResult?bestResult.
+           ?bestResult ork:hasValue?v } ) )
+     }
+     }<|eot_id|>

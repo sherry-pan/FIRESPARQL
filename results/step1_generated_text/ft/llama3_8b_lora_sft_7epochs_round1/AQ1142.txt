@@ -1,0 +1,31 @@
+Question:
+What is the highest benchmark result achieved on the CoQA dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CoQA")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+      ?paper        orkgp:HAS_BENCHMARK     ?benchmark;
+                     orkgp:HAS_SOURCE_CODE    ?source_code.
+       OPTIONAL {?paper      orkgp:HAS_SOURCE_REPO    ?source_repo.}
+       OPTIONAL {?paper      orkgp:HAS_PAPER_CODE      ?paper_code.}
+       OPTIONAL {?paper      orkgp:P31                   ?cont.}
+       OPTIONAL {?cont      orkgp:P30                   ?author.
+               ?author     foaf:givenName              ?author_given_name;
+                            foaf:familyName             ?author_family_name.}
+       OPTIONAL {?paper      orkgp:P30                   ?author.
+               ?author     foaf:givenName              ?author_given_name;
+                            foaf:familyName             ?author_family_name.}
+       OPTIONAL {?paper      orkgp:P29                   ?conf.
+               ?conf      rdfs:label                  ?conf_lbl.}
+       OPTIONAL {?paper      orkgp:P28                   ?year.
+               ?year      rdfs:label                  ?year_lbl.}
+       OPTIONAL {?paper      orkgp:P27                   ?journal.
+               ?journal  rdfs:label                  ?journal_lbl.}
+      ?cont       orkgp:P31                   ?

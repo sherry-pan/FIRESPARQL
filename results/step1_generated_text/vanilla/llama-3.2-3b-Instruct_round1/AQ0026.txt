@@ -1,0 +1,20 @@
+Question:
+Can you list the models that have been evaluated on the SciTLDR dataset?
+
+Generated SPARQL:
+ PREFIX ork: <http://example.org/ork/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model?title
+     WHERE {
+    ?model schema:about?modelURI.
+     schema:about?model schema:dataset "SciTLDR".
+    ?model schema:evaluatedModels?evaluatedModel.
+    ?evaluatedModel schema:evaluatedOn?modelURI.
+     SERVICE ork:run {
+    ?model ork:label?title.
+     }
+     }<|eot_id|>

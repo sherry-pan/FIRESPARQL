@@ -1,0 +1,22 @@
+Question:
+Can you provide links to code used in papers that benchmark the ImageNet + iNat on WS-DAN model?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.w3.org/2000/01/w3c_wsdc#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dctype: <http://purl.org/dc/terms/>
+
+     SELECT?paper?code
+     WHERE {
+    ?paper schema:description?description.
+     FILTER (contains(str(?description), "ImageNet + iNat on WS-DAN").
+    ?paper schema:rights [a schema:SoftwareSourceCode].
+    ?paper schema:rights?code.
+     }
+     GROUP BY?paper
+     HAVING (count(?code) > 1)
+     ORDER BY DESC
+     LIMIT 10
+    <|eot_id|>

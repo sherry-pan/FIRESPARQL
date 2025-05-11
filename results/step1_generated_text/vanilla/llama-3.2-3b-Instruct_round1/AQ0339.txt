@@ -1,0 +1,17 @@
+Question:
+Can you list the models that have been evaluated on the PROTEINS dataset?
+
+Generated SPARQL:
+ PREFIX wot: <http://purl.org/wot/models/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model 
+     WHERE {
+    ?model schema:description "PROTEINS".
+     SERVICE dfn:ProteinsDataset {
+     FILTER (CONTAINS(LCASE(?model) "proteins") OR CONTAINS(LCASE(?model) "protein"))
+     }
+     }<|eot_id|>

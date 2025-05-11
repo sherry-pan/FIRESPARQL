@@ -1,0 +1,22 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval;
+             orkgp:HAS_MODEL ?model.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P32 ?metric.
+  
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "FLOPS")
+  
+  BIND(xsd:float(?value) AS ?value_float)
+}
+ORDER BY DESC(?value_float)
+LIMIT 1
+```

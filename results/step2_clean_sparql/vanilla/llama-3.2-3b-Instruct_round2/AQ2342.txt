@@ -1,0 +1,17 @@
+```sparql
+PREFIX ork: <http://orion.inf.fu-cowi.de/ork/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX bio: <http://example.org/bio/>
+PREFIX dcn: <http://example.org/dcn/>
+PREFIX dqnmmcemeosr: <http://example.org/dqnmmcemeosr/>
+SELECT ?paper ?code WHERE {
+    ?paper a ork:Papers.
+    ?paper ork:hasReference ?ref.
+    ?ref dcn:hasUsed dqnmmcemeosr:DQNMMCeSR.
+    ?ref schema:hasPart ?reference.
+    ?reference schema:hasPart ?code.
+    FILTER (CONTAINS(STR(?paper), "benchmarking"))
+}
+```

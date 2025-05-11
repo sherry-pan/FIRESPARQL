@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/orkg/>
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label "Evaluation Metric".
+  ?metric orkg:isBenchmarkFor ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasDataset "MLDoc Zero-Shot English-to-Italian".
+  FILTER (strstarts(?metric, "Accuracy") OR strstarts(?metric, "F1-score") OR strstarts(?metric, "ROUGE") OR strstarts(?metric, "BLEU"))
+}
+```

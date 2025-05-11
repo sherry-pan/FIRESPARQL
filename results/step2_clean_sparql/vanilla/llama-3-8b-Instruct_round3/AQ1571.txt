@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?modelName ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarkedOn ?benchmark.
+  ?benchmark orkg:dataset <http://www.openresearchknowledge.org/dataset/NCBI_Disease>.
+  ?model orkg:hasEntityLevelF1Score ?f1Score.
+  ?model orkg:hasName ?modelName.
+  FILTER(lang(?modelName) = "en")
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

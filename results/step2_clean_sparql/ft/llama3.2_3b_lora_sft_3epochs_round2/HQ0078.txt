@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?location
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers rdfs:label ?title.
+  FILTER(REGEX(?title, "scale|geographic"))
+  ?papers orkgp:P32 ?cont.
+  ?cont orkgp:P31 ?location.
+}
+ORDER BY DESC(xsd:float(?location))
+LIMIT 1
+```

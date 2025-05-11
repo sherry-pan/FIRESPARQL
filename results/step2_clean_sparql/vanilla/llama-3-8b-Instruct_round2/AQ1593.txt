@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <https://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasMetric orkg:AccuracyMetric.
+ ?evaluation orkg:hasValue ?accuracy.
+ ?evaluation orkg:hasDataset ?dataset.
+ ?dataset orkg:name "PolyAI Reddit benchmark".
+ ?evaluation orkg:hasRankingMetric "1-of-100".
+ FILTER (?accuracy = xsd:float(?accuracy))
+}
+```

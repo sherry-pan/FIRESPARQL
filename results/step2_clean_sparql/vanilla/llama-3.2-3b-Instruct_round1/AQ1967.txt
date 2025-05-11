@@ -1,0 +1,15 @@
+```sparql
+PREFIX vocab: <http://purl.org/vocab/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperLabel ?codeLink
+WHERE {
+  ?paper vocab:hasCode ?code.
+  ?code schema:url ?codeLink.
+  ?paper vocab:hasUtilized ?flairtdm.
+  ?flairtdm vocab:hasModel ?flairtdmModel.
+  ?flairtdmModel vocab:hasName "Flair-TDM"@en.
+  ?paper rdfs:label ?paperLabel.
+}
+```

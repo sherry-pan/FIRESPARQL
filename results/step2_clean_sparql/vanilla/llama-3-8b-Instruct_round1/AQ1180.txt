@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?result a orkg:Result.
+  ?result orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasName "Hutter Prize dataset".
+  ?result orkg:hasScore ?score.
+  ?result orkg:hasMetric ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

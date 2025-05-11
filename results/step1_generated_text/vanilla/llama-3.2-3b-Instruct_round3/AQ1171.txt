@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/vocab/> 
+     PREFIX dbo: <http://dbpedia.org/ontology/> 
+     PREFIX schema: <http://schema.org/> 
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+     SELECT?metric?value 
+     WHERE { 
+    ?benchmark?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?metric schema:description?metricDescription.
+    ?metric schema:name?metricName.
+    ?benchmark orkg:hasBenchmarkResult?result.
+    ?result schema:description?resultDescription.
+    ?result orkg:hasMetric?metric.
+    ?result schema:value?value.
+    ?benchmark dbo:dataset "MultiNLI".
+    ?benchmark orkg:hasName "MultiNLI".
+     FILTER (str(?metricName) = "Top-1 accuracy" )
+     }<|eot_id|>

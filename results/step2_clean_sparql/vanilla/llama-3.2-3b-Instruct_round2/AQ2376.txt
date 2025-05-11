@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title ?code WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:utilizesModel orkg:ANODE.
+  ?paper schema:description ?title.
+  ?paper schema:code ?code.
+  FILTER (lang(?title) = 'en')
+}
+ORDER BY DESC (length(?title))
+```

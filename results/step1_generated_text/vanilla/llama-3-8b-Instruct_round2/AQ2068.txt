@@ -1,0 +1,18 @@
+Question:
+Where can I find code references in papers that have used the DCN model for benchmarking purposes?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paper?codeReference
+WHERE {
+ ?paper a bibo:Article.
+ ?paper owl:sameAs?orkgPaper.
+ ?orkgPaper orkg:hasMethod?method.
+ ?method orkg:usesModel "DCN".
+ ?method orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasCodeReference?codeReference.
+  FILTER(?codeReference!= "")
+}<|eot_id|>

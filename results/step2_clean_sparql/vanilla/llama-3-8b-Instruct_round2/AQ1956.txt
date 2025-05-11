@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/>
+PREFIX schema: <http://schema.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?paperTitle ?codeReference
+WHERE {
+  ?paper a bibo:Article.
+  ?paper schema:about orkg:CATTS-XSUM.
+  ?paper schema:codeReference ?codeReference.
+  FILTER (CONTAINS(LCASE(?codeReference), "benchmarking"))
+}
+```

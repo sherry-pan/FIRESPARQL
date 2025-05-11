@@ -1,0 +1,18 @@
+Question:
+Could you provide a list of models that have been tested on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model 
+     WHERE {
+    ?model orkg:hasBenchmark "NLP-TDMS (Exp, arXiv)".
+    ?model orkg:hasDataset "arXiv".
+     SERVICE orkg:sparql 
+     { 
+    ?model orkg:hasBenchmark?benchmark ;
+     a orkg:Model ;
+     rdfs:label?modelLabel.
+     FILTER (lang(?modelLabel) = "en").
+     }
+     }<|eot_id|>

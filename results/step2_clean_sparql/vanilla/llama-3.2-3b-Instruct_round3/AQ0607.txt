@@ -1,0 +1,15 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper schema:hasTitle ?title.
+  ?paper schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasDataset ?dataset.
+  ?dataset schema:hasName "Atari 2600 Bank Heist".
+  ?paper orkg:hasId ?id.
+}
+ORDER BY DESC(?id)
+LIMIT 10
+```

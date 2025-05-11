@@ -1,0 +1,20 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SNLI dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?title?id
+    WHERE {
+     ?paper schema:about?benchmark.
+     ?benchmark schema:keywords "SNLI".
+     ?paper schema:hasPart?researchPaper.
+     ?researchPaper schema:hasTitle?title.
+     ?paper orkg:id?id.
+    }
+    ```<|eot_id|>

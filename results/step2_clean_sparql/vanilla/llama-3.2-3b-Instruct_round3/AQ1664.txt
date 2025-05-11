@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ns#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?percentage_error 
+WHERE {
+  ?model dbpedia:dataset "CIFAR-10 Image Classification".
+  ?model orkg:metric "Percentage error".
+  ?model orkg:best_of ?best_model.
+  ?best_model orkg:percentage_error ?percentage_error.
+  FILTER (STRLIKE(?percentage_error, "^[0-9]+(\.[0-9]+)?$"))
+}
+```

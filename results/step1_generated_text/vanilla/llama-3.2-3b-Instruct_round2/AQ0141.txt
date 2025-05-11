@@ -1,0 +1,25 @@
+Question:
+Could you provide a list of models that have been tested on the RTE benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orcg.org/schema/ontologies/orcg#>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?modelLabel
+     WHERE {
+    ?model schema:description?d.
+    ?model schema:applicationArea?appArea.
+    ?model dbo:dataset?dataset.
+    ?model schema:benchmark?benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?benchmark schema:benchmark "RTE".
+    ?model schema:version?modelVersion.
+    ?model schema:description?d.
+     FILTER (?d = "models tested on RTE" ||?d = "models tested on the RTE benchmark" ||?d = "RTE benchmark dataset" ||?d = "RTE dataset")
+     }
+     GROUP BY?model
+     ORDER BY (?modelLabel)
+     LIMIT 10<|eot_id|>

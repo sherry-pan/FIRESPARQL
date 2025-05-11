@@ -1,0 +1,16 @@
+```sparql
+PREFIX ork: <http://orion.inf.ethz.ch/orion/ork/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a ork:Benchmark.
+  ?benchmark ork:dataset "WMT2016 English-Russian".
+  ?benchmark ork:metric ?metric.
+  ?benchmark ork:value ?value.
+  ?benchmark rdfs:label ?label.
+  FILTER (contains(?label, "WMT2016 English-Russian") || 
+          contains(?label, "WMT16 English-Russian") || 
+          contains(?label, "WMT2016 English-Rusian") || 
+          contains(?label, "WMT16 English-Rusian"))
+}
+```

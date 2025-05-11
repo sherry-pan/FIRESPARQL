@@ -1,0 +1,17 @@
+```sparql
+SELECT ?country ?country_label
+WHERE {
+  ?condition a orkgc:Condition;
+             rdfs:label ?condition_label.
+  FILTER (str(?condition_label) = "Epilepsy")
+  
+  ?study orkgp:HAS_DATASET ?dataset;
+         orkgp:P32 ?country.
+  
+  ?dataset orkgp:HAS_CONDITION ?condition.
+  
+  ?country rdfs:label ?country_label.
+}
+ORDER BY DESC(?prevalence)
+LIMIT 1
+```

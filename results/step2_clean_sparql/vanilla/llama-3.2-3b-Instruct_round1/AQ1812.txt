@@ -1,0 +1,13 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?percentageError
+WHERE {
+    ?model schema:about ?modelURI;
+           schema:hasPercentageError ?percentageError.
+    ?model schema:hasDataset ?dataset.
+    ?dataset schema:datasetType "SVHN".
+}
+ORDER BY DESC(?percentageError)
+LIMIT 1
+```

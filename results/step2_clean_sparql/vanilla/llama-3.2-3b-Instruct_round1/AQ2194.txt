@@ -1,0 +1,12 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?url
+WHERE {
+  ?paper schema:description ?description.
+  FILTER(CONTAINS(LCASE(STR(?description)), "adaptive input large")).
+  OPTIONAL {
+    ?paper schema:code ?url.
+  }
+}
+```

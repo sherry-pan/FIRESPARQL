@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:P32 ?eval.
+    ?eval rdfs:label ?eval_label.
+    ?eval_label rdfs:label ?eval_label_str.
+    ?eval ?evalc ?code.
+    FILTER(REGEX(?eval_label_str, "PAR Transformer Large"))
+    ?paper orkgp:P27 ?papercode.
+    ?papercode rdfs:label ?papercode_label.
+    FILTER(REGEX(?papercode_label, "benchmarking"))
+}
+```

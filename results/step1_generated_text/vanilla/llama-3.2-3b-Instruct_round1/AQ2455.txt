@@ -1,0 +1,16 @@
+Question:
+Provide a list of papers that have utilized the XLNet (base) model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+SELECT?paper?paperLink?codeLink
+WHERE {
+ ?paper a owl:Thing.
+ ?paper rdfs:label?label.
+  FILTER(BCD:contains(?label, 'XLNet (base)') OR BCD:contains(?label, 'XLNet base') OR BCD:contains(?label, 'XLNet-base')).
+ ?paper wdc:hasCode?code.
+ ?code wdc:hasRepository?repository.
+ ?repository wdc:hasCode?codeLink.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+```<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX wmt2016: <http://wmt2016.silmaril-research.ch/benchmarks/>
+
+SELECT ?model ?score
+WHERE {
+    ?model wmt2016:benchmarkedBy ?benchmark.
+    ?benchmark wmt2016:hasMetric ?metric.
+    ?benchmark dcterms:title "WMT2016 German-English".
+    ?benchmark wmt2016:hasDataset wmt2016:German-English.
+    ?model wmt2016:hasScore ?score.
+    ?metric owl:label "BLEU score"@en.
+}
+```

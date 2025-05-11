@@ -1,0 +1,22 @@
+Question:
+Name the datasets that have been used for benchmarking in the Image Classification research problem?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX dbr: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://opendata.museumsinsbesitz.de/ontology/orkg#>
+     SELECT?dataset
+     WHERE {
+    ?dataset dbr:hasBenchmark?benchmark.
+    ?benchmark schema:topic "Image Classification".
+    ?benchmark orkg:hasDataset?dataset.
+     FILTER (lang(?datasetLabel) = "en")
+     }
+     GROUP BY?dataset
+     HAVING (COUNT(?benchmark) > 1)
+     ORDER BY (COUNT(?benchmark) DESC)
+     LIMIT 10<|eot_id|>

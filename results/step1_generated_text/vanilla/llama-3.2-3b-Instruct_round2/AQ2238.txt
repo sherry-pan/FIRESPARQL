@@ -1,0 +1,33 @@
+Question:
+Where can I find code references in papers that have used the MPAD-path model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX dce: <http://dbpedia.org/ontology/>
+     PREFIX mpa: <http://dbpedia.org/ontology/MPAD_path>
+     PREFIX mpb: <http://dbpedia.org/ontology/MPB_path>
+     PREFIX dce: <http://dbpedia.org/ontology/>
+     SELECT?p?o
+     WHERE {
+    ?p a wdt:P31.
+    ?p a rdfs:label "code reference"@en.
+    ?p dce:hasPaper?paper.
+    ?paper mpa:hasBenchmarked?benchmark.
+    ?benchmark mpa:usesMPADpath.
+    ?benchmark rdfs:label "MPAD-path"@en.
+    ?paper dce:hasCode?code.
+    ?code dce:hasReference?reference.
+    ?reference dce:hasLink "https://example.com".
+    ?p rdfs:label "http://example.org/codes"@en.
+    ?p a rdfs:label "code reference"@en.
+    ?paper dce:hasSource?source.
+    ?source dce:hasLink "https://example.com".
+    ?paper dce:hasType?type.
+    ?type rdfs:label "paper"@en.
+    ?paper dce:hasAuthor?author.
+    ?author rdfs:label "author"@en.
+    ?paper dce:hasDate?date.
+

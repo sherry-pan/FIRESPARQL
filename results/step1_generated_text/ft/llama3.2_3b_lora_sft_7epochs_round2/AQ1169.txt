@@ -1,0 +1,25 @@
+Question:
+What is the top benchmark score and its metric on the Words in Context dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         {
+           orkgr:R110920 AS?dataset;
+           rdfs:label?dataset_lbl.
+           FILTER(REGEX(?dataset_lbl, "Words in Context"))
+          ?dataset orkgp:HAS_DATASET?cont.
+          ?cont orkgp:HAS_BENCHMARK?benchmark.
+          ?benchmark orkgp:HAS_VALUE?value.
+           BIND(xsd:float(?value) AS?value)
+         }
+         UNION
+         {
+           orkgr:R110920 AS?dataset;
+           rdfs:label?dataset_lbl.
+           FILTER(REGEX(?dataset_lbl, "Words in Context"))
+          ?dataset orkgp:HAS_DATASET?cont.
+          ?cont orkgp:HAS_METRIC?metric.
+          ?metric rdfs:label?metric_lbl.
+         }
+     }<|eot_id|>

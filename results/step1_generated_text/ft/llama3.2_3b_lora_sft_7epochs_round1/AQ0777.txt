@@ -1,0 +1,17 @@
+Question:
+What are the metrics of evaluation over the Stanford Cars dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (AVG(?value) AS?average_value)
+     WHERE {
+         orkgr:R155800 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+        ?dataset orkgp:P31?paper.
+        ?paper orkgp:P32?eval.
+        ?eval orkgp:P5007?metric.
+        ?metric rdfs:label?metric_lbl.
+         FILTER(REGEX(?metric_lbl, "Stanford Cars"))
+        ?value orkgp:P5006?metric.
+         BIND(xsd:float(?value) AS?value)
+     }<|eot_id|>

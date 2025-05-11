@@ -1,0 +1,25 @@
+Question:
+Provide a list of papers that have utilized the CL-Titles-Parser model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://orkg.org/schema/0.2/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+
+     SELECT?paper?paperTitle?codeLink
+     WHERE {
+    ?paper orkg:utilizes?code.
+    ?code schema:software "CL-Titles-Parser".
+    ?paper schema:description?paperDescription.
+    ?paper schema:code?code.
+     SERVICE wikibase:label {
+     bd:serviceParam wikibase:language "en".
+     }
+     } 
+     LIMIT 10
+     ```<|eot_id|>

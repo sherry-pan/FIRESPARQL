@@ -1,0 +1,28 @@
+Question:
+What quantity of iron oxide was discovered on Elorza crater?
+
+Generated SPARQL:
+ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX dbpedia_labels: <http://dbpedia.org/ontology/labs/>
+     PREFIX geo: <http://www.geonames.org/onto/geonames/>
+     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+     PREFIX orkg: <http://opendata.net/ontology/orkg#>
+     PREFIX orkg_labels: <http://opendata.net/ontology/orkg#>
+     SELECT?quantity?label?location 
+     WHERE {
+    ?location orkg:location "Elorza crater".
+    ?location orkg:contains?oxide.
+    ?oxide a orkg:IronOxide.
+    ?oxide orkg:quantity?quantity.
+    ?oxide rdfs:label?label.
+     FILTER (lang(?label) = "en")
+     }
+     GROUP BY?quantity?label
+     HAVING (COUNT(?quantity) > 1)
+     ORDER BY DESC(?quantity)
+     LIMIT 1<|eot_id|>

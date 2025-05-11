@@ -1,0 +1,12 @@
+```
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R110361 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P4314 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?contrib orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?dataset orkgp:P4315 ?value.
+}
+ORDER BY DESC(?score)
+```

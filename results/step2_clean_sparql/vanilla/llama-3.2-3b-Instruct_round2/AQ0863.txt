@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+
+SELECT ?metric
+WHERE {
+    ?metric orkg:is_evaluated_by ?benchmark.
+    ?benchmark orkg:has_evaluation_metric ?metric.
+    ?benchmark orkg:has_dataset "SST-5 Fine-grained classification dataset".
+    ?metric rdfs:label ?metricLabel.
+    FILTER (REGEX(?metricLabel, "Accuracy|F1-score|Precision|Recall|F1|Macro F1|AUC-ROC|AUC-PR"))
+}
+```

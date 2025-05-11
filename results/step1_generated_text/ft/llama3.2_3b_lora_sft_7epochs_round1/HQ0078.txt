@@ -1,0 +1,30 @@
+Question:
+Where did the study with maximal geographic scale take place?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+      ?study       a            orkgc:Study;
+                  rdfs:label      ?study_label.
+       FILTER(REGEX(?study_label, "scale"))
+      ?study       orkgp:HAS_DATASET      ?dataset.
+       OPTIONAL {
+        ?dataset       orkgp:HAS_SOURCE        ?source.
+        ?source       rdfs:label              ?source_label.
+         FILTER(REGEX(?source_label, "geographic"))
+       }
+      ?study       rdfs:label              ?study_label.
+       BIND(
+         IF(
+           (SELECT?location
+            WHERE {
+             ?study       orkgp:HAS_LOCATION     ?location.
+             ?location       rdfs:label          ?location_label.
+              FILTER(REGEX(?location_label, "location"))
+            }
+           ) AS?loc
+         ) AS?location
+       )
+       ORDER BY DESC(?study       orkgp:P35     ?study_count)
+       LIMIT 1
+     }<|eot_id|>

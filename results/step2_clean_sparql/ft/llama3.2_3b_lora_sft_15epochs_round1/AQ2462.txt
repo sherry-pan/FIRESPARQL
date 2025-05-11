@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?problem ?problem_lbl
+WHERE {
+  ?rf a orkgc:ResearchField;
+      rdfs:label ?rf_label.
+  FILTER (str(?rf_label) = "Artificial Intelligence")
+  ?paper orkgp:P30 ?rf;
+         orkgp:P31 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P35 ?problem.
+  ?problem orkgp:P351 ?problem_lbl.
+}
+```

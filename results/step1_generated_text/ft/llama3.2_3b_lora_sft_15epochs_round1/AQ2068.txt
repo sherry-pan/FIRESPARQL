@@ -1,0 +1,16 @@
+Question:
+Where can I find code references in papers that have used the DCN model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper    a            orkgc:Paper;
+               rdfs:label   ?paper_lbl.
+       FILTER(REGEX(?paper_lbl, "DCN"))
+      ?benchmark      orkgp:HAS_DATASET       ?dataset.
+      ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?model        rdfs:label              ?model_lbl.
+       FILTER(REGEX(?model_lbl, "DCN"))
+      ?paper      orkgp:HAS_SOURCE_CODE   ?code.
+     }<|eot_id|>

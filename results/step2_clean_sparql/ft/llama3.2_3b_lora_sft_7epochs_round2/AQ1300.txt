@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    orkgr:R75392 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset rdfs:label "Atari 2600 Ice Hockey"^^xsd:string.
+    ?contrib orkgp:P36 ?eval.
+    OPTIONAL {
+        ?eval orkgp:P32 ?metric.
+        ?metric rdfs:label ?metric_lbl.
+    }
+    ?eval orkgp:P30 ?value.
+    FILTER(REGEX(STR(?value), "^[0-9]+"))
+}
+```

@@ -1,0 +1,23 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://orkg.org/schema/orkg#>
+PREFIX orkg-papers: <http://orkg.org/schema/orkg/papers#>
+PREFIX orkg-models: <http://orkg.org/schema/orkg/models#>
+PREFIX orkg-results: <http://orkg.org/schema/orkg/results#>
+PREFIX orkg-concepts: <http://orkg.org/schema/orkg/concepts#>
+
+SELECT ?model ?paper ?link
+WHERE {
+    ?paper orkg:has_concept ?concept.
+    ?concept orkg:is_model_for ?model.
+    ?model orkg:has_benchmark ?benchmark.
+    ?benchmark schema:has_benchmarked ?benchmarked_model.
+    ?benchmarked_model orkg:is_benchmarked_by ?benchmark.
+    ?benchmark orkg:has_link ?link.
+    ?link schema:contentUrl ?linkUrl.
+    FILTER (CONTAINS(STR(?linkUrl), "T-ConvS2S") AND CONTAINS(STR(?linkUrl), "model"))
+}
+ORDER BY DESC(?link)
+```

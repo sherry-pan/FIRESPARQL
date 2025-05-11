@@ -1,0 +1,21 @@
+Question:
+Where can I find code references in papers that have used the SemExp model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.openresearchknowledge.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?codeReference
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper dcterms:hasPart?codeReference.
+ ?codeReference owl:property?property.
+ ?property schema:about schema:CodeReference.
+ ?paper orkg:hasModel?model.
+ ?model owl:sameAs schema:SemExp.
+ ?paper dcterms:isPartOf?benchmarking.
+ ?benchmarking owl:property?benchmarkingProperty.
+ ?benchmarkingProperty schema:about schema:Benchmarking.
+}<|eot_id|>

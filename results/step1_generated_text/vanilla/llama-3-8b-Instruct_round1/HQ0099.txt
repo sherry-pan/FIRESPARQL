@@ -1,0 +1,19 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?material 
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:hasResult?result.
+   ?result orkg:hasMeasurement?measurement.
+   ?measurement orkg:hasProperty orkg:responseTime.
+   ?measurement orkg:hasValue?value.
+    FILTER (?value = MIN(?value) ).
+   ?material orkg:isUsedIn?paper.
+    FILTER (!BOUND(?paper)).
+}<|eot_id|>

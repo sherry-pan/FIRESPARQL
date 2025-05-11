@@ -1,0 +1,27 @@
+Question:
+List the code links in papers that use the 12-layer Transformer-XL model in any benchmark?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wot: <http://www.w3.org/ns/wot/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+
+     SELECT?paper?code 
+     WHERE {
+      ?paper schema:author?author.
+      ?author schema:affiliation?affiliation.
+      ?paper schema:topic?topic.
+      ?topic schema:keywords?keyword.
+      ?keyword schema:description "Transformer-XL".
+      ?paper schema:benchmark?benchmark.
+      ?benchmark schema:code?code.
+      ?benchmark schema:benchmarkType "benchmark".
+      ?benchmark schema:version "1.0".
+      ?benchmark schema:benchmarkType "benchmark".
+       FILTER (regex(str(?benchmark), "Transformer-XL")).
+      ?paper orkg:uses?code.
+     }<|eot_id|>

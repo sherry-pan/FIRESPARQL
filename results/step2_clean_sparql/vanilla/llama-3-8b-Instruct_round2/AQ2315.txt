@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?code
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:usesModel "A3C LSTM hs model".
+  ?paper dc:hasIdentifier ?code.
+  FILTER regex(?code, "https?://", "i").
+}
+```

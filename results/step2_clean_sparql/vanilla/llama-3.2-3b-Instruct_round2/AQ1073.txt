@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://purl.org/seas/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/properties/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?metric ?score
+WHERE {
+    ?a a orkg:Answer.
+    ?a orkg:hasBenchmark ?b.
+    ?b orkg:hasDataset "Pubmed".
+    ?b orkg:hasMetric ?metric.
+    ?metric rdfs:label ?metricLabel.
+    ?b orkg:hasScore ?score.
+    FILTER(STR(?metricLabel) = "Benchmark").
+    FILTER(datatype(?score) = xsd:decimal || datatype(?score) = xsd:integer).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

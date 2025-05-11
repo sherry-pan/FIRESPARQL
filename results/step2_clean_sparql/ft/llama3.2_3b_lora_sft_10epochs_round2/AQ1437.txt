@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2016 Romanian-English")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_float)
+  ?assessment orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {?assessment orkgp:HAS_MODEL ?model.}
+  OPTIONAL {?model rdfs:label ?model_lbl.}
+}
+ORDER BY DESC(?value_float)
+LIMIT 1
+```

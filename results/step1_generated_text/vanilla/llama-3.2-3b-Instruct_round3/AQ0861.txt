@@ -1,0 +1,14 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the ESC-50 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+     SELECT?metric?metricLabel 
+     WHERE {
+    ?metric orkg:isBenchmarkFor?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:isDataset "ESC-50".
+    ?metric rdfs:label?metricLabel.
+     FILTER (STRLIKE(?metricLabel, "accuracy" ) OR STRLIKE(?metricLabel, "f1" ) OR STRLIKE(?metricLabel, "roc-auc" ) OR STRLIKE(?metricLabel, "ap" ) OR STRLIKE(?metricLabel, "ap50" ) )
+     }
+    <|eot_id|>

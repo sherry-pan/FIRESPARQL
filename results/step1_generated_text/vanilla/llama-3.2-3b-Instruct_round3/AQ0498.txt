@@ -1,0 +1,17 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WikiText-2 dataset?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?paper?title?id
+     WHERE {
+      ?paper a dbo:ResearchPaper.
+      ?paper dbo:hasTitle?title.
+      ?paper dbo:hasDataset?dataset.
+      ?dataset rdfs:label "WikiText-2".
+      ?dataset dbo:hasBenchmarkedModel?benchmarkedModel.
+      ?benchmarkedModel skos:broader dbo:DatasetBenchmarking.
+      ?paper skos:broader dbo:ModelBenchmarking.
+       SERVICE dbpedia-latest { bd:service?paper?title?id }
+     }<|eot_id|>

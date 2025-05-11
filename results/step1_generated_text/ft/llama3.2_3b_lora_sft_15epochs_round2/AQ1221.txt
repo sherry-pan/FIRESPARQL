@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Ball in cup, catch (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R113801 {
+           orkgr:Dataset       a                orkgr:Dataset;
+           rdfs:label          ?dataset_lbl     .
+           orkgr:Dataset       orkgp:P32       ?metric.
+           orkgr:Dataset       rdfs:label          ?metric_lbl.
+          ?dataset         orkgp:HAS_DATASET      ?dataset.
+          ?dataset         orkgp:HAS_BENCHMARK     ?benchmark.
+          ?benchmark      orkgp:P31               ?cont.
+          ?cont           orkgp:HAS_VALUE        ?value.
+           BIND(xsd:float(?value) AS?value).
+         }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

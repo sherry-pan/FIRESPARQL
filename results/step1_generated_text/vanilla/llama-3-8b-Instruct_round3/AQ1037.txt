@@ -1,0 +1,21 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?score
+WHERE {
+ ?dataset a orkg:Dataset ;
+    orkg:hasBenchmark?benchmark.
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasMetric?metric ;
+    orkg:hasScore?score.
+ ?benchmark orkg:datasetUsage?datasetUsage.
+ ?datasetUsage orkg:dataset?dataset ;
+    orkg:datasetName "Scholarly entity usage detection".
+  FILTER(?metric =?metric).
+  FILTER(?score =?score).
+}<|eot_id|>

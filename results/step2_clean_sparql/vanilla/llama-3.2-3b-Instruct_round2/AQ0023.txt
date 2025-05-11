@@ -1,0 +1,16 @@
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?title
+WHERE {
+  ?model a schema:Model.
+  ?model dbpedia:hasTestedOn dbpedia:SciCite.
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE]".
+    ?model rdfs:label ?title.
+  }
+}
+```

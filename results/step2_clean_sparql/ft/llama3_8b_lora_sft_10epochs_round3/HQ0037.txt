@@ -1,0 +1,12 @@
+```sparql
+SELECT ?contributor
+WHERE {
+  ?paper orkgp:compareContribution ?contrib.
+  ?paper orkgp:P31 ?contrib.
+  ?paper orkgp:P29 "coronavirus"^^xsd:string.
+  ?contrib orkgp:P27 ?contributor.
+}
+GROUP BY ?contributor
+ORDER BY DESC(COUNT(?paper))
+LIMIT 1
+```

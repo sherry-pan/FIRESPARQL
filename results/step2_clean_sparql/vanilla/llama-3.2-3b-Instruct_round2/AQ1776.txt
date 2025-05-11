@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/ontology/>
+
+SELECT ?model ?metric ?value
+WHERE {
+  ?model orkg:hasBenchmark "ImageNet".
+  ?model orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  ?metric orkg:hasValue ?value.
+  FILTER (STR(?metricLabel) = "Number of params" || 
+          STR(?metricLabel) = "Number of parameters")
+}
+ORDER BY DESC(?value)
+```

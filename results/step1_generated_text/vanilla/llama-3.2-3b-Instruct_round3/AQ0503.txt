@@ -1,0 +1,23 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the BIOSSES dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX wgsn: <http://www.wgsn.org/ontology/gnss/>
+     PREFIX wotsi: <http://www.wotsi.org/ontology/wotsi/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX bio2vec: <http://purl.org/bio2vec/>
+     PREFIX biosses: <http://purl.org/biosses/>
+
+     SELECT?paper?title?id 
+     WHERE {
+    ?paper wotsi:relatedTo?benchmark.
+    ?benchmark wgsn:benchmarkLabel "biosses".
+    ?paper wotsi:hasBenchmark?benchmark.
+    ?benchmark biosses:benchmarkId?id.
+    ?paper wotsi:hasTitle?title.
+     FILTER(lang(?title) = "en")
+     }
+     LIMIT 100<|eot_id|>

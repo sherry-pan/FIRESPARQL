@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset orkg:AESLC ;
+             orkg:bestResult ?result.
+  ?result a orkg:Result ;
+          orkg:metric ?metric ;
+          orkg:value ?value.
+  FILTER (?metric = "top benchmark result"^^xsd:string).
+}
+```

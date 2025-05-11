@@ -1,0 +1,17 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STL-10 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper dcterms:title?title.
+ ?paper orkg:hasIdentifier?id.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark dcterms:title "STL-10".
+  FILTER (lang(?title) = "en").
+}<|eot_id|>

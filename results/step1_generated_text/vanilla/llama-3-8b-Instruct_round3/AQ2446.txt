@@ -1,0 +1,20 @@
+Question:
+Provide a list of papers that have utilized the Shake-Shake (SAM) model and include the links to their code?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?paper_title?code_link
+WHERE {
+ ?paper a bibo:Article.
+ ?paper orkg:mentionsModel <http://openresearchknowledgegraph.org/ontology/ShakeShake>.
+ ?paper dc:hasFormat <http://purl.org/ontology/bibo/SourceCode>.
+ ?code <http://purl.org/ontology/bibo/hasPart>?paper.
+ ?code schema:codeRepository?code_link.
+ ?paper rdfs:label?paper_title.
+  FILTER LangMatches(Lang(?paper_title), "en").
+}<|eot_id|>

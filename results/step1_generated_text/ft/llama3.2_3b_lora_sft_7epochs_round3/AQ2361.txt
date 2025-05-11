@@ -1,0 +1,18 @@
+Question:
+List the code links in papers that use the BiT-M model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark rdfs:label?benchmark_label.
+       FILTER(REGEX(?benchmark_label, "BiT-M"))
+      ?paper orkgp:P32?cont.
+      ?cont orkgp:P31?model.
+      ?model rdfs:label?model_label.
+       FILTER(REGEX(?model_label, "BiT-M"))
+      ?paper orkgp:P32?cont.
+      ?cont orkgp:P33?code.
+      ?code rdfs:label?code
+     }
+     ORDER BY ASC(?code)<|eot_id|>

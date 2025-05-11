@@ -1,0 +1,17 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/wdt#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX purl: <http://www.openresearchknowledggraph.org/ontology/purl#>
+PREFIX kg: <http://www.openresearchknowledggraph.org/ontology/kg#>
+
+SELECT ?metric ?score
+WHERE {
+  ?item purl:hasBenchmark ?benchmark.
+  ?benchmark wdt:P3064 "Kinetics-600".
+  ?benchmark purl:hasMetric ?metric.
+  ?benchmark purl:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://openresearchknowledge.org/ontology#>
+PREFIX atari: <http://openresearchknowledge.org/ontology/atari#>
+PREFIX metrics: <http://purl.org/ontology/mo/>
+
+SELECT ?metric
+WHERE {
+  ?dataset a atari:AtariDataset ;
+           rdfs:label "Double Dunk".
+  ?dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER(?metric rdfs:subClassOf* metrics:Metric).
+}
+```

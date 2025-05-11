@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest Accuracy score on the SST-5 Fine-grained classification benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:benchmarks?benchmark.
+ ?benchmark orkg:dataset "SST-5 Fine-grained classification".
+ ?benchmark orkg:score?accuracy.
+  FILTER (?accuracy = MAX(?accuracy) )
+}<|eot_id|>

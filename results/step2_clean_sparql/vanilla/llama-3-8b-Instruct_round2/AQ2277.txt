@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperUrl ?codeUrl
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper schema:mentions ?model.
+  ?model schema:name "T-ConvS2S".
+  ?paper schema:url ?paperUrl.
+  ?paper schema:hasPart ?code.
+  ?code schema:isAccessibleThrough ?codeUrl.
+}
+```

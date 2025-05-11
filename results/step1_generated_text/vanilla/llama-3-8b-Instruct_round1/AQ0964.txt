@@ -1,0 +1,24 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 Battle Zone benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT?metric 
+WHERE {
+   ?paper a orkg:ResearchPaper;
+        orkg:hasBenchmark?benchmark.
+   ?benchmark a orkg:Benchmark;
+        orkg:hasDataset?dataset.
+   ?dataset a orkg:Dataset;
+        orkg:hasName "Atari 2600 Battle Zone".
+   ?metric a orkg:Metric;
+        orkg:usedToEvaluate?paper.
+    FILTER (?metric!= orkg:defaultMetric).
+    FILTER (?benchmark =?dataset).
+}<|eot_id|>

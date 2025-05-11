@@ -1,0 +1,16 @@
+```sparql
+SELECT ?amount
+WHERE {
+  ?crater a orkgc:Crater;
+          rdfs:label ?crater-label.
+  FILTER (str(?crater-label) = "Elorza crater")
+  ?materialization orkgp:HAS_CRATER ?crater;
+                   orkgp:HAS_METALLIZATION ?metallexp.
+  ?metallexp orkgp:P31 ?metal.
+  ?metal rdfs:label ?metal-label.
+  FILTER (str(?metal-label) = "iron oxide")
+  ?cont orkgp:HAS_METALLIZATION ?metallexp;
+        orkgp:P31 ?quantity.
+  ?quantity rdfs:label ?amount.
+}
+```

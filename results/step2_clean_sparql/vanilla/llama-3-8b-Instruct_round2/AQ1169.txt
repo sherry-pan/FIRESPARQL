@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?result a orkg:Result.
+  ?result orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "Words in Context".
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX vcard: <http://xmlns.com/vcard/3.0/>
+PREFIX ork: <http://orkg.org/ontology/orkg#>
+PREFIX temp: <http://orkg.org/ontology/TempEval3/>
+
+SELECT ?title ?id
+WHERE {
+    ?paper a ork:Paper.
+    ?paper rdfs:label ?title.
+    ?paper temp:includesBenchmark ?benchmark.
+    ?benchmark temp:dataset ?dataset.
+    ?dataset skos:prefLabel "TempEval-3".
+    ?paper ork:identifier ?id.
+    FILTER (CONTAINS(LCASE(?title), "benchmark"))
+}
+```

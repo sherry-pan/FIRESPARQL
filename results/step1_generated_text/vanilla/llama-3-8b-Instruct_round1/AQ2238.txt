@@ -1,0 +1,24 @@
+Question:
+Where can I find code references in papers that have used the MPAD-path model for benchmarking purposes?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX orkg-ontology: <http://www.orkg.org/ontology/>
+
+SELECT?paper?codeReference
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:hasPublicationDate?date.
+ ?paper orkg:hasTitle?title.
+ ?paper orkg:hasAbstract?abstract.
+ ?paper orkg:uses?model.
+ ?model rdfs:label "MPAD-path model".
+ ?model orkg:usedForBenchmarking?benchmark.
+ ?codeReference a orkg:CodeReference.
+ ?codeReference orkg:references?paper.
+ ?codeReference orkg:hasType "code".
+  FILTER (?date >= "2010-01-01" &&?date <= "2022-12-31")
+}<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:usesModel ?model.
+  ?model rdfs:label "A3C-CTS".
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label ?benchmark_label.
+  FILTER (?benchmark_label != "" && CONTAINS(?benchmark_label, "benchmark")).
+  ?paper orkg:hasCodeLink ?code_link.
+}
+```

@@ -1,0 +1,20 @@
+```sparql
+SELECT ?country ?country_label
+WHERE {
+  ?data a orkgc:Data;
+        rdfs:label ?data_label.
+  ?array a orkgp:Array;
+         orkgp:HAS_DATASET ?data;
+         rdfs:label ?array_label.
+  ?dataset orkgp:HAS_ARRAY ?array;
+           orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?value orkgp:P32 ?ratio;
+           orkgp:HAS_COUNTRY ?country.
+    BIND(xsd:float(?ratio) AS ?value_float)
+  }
+  BIND(IF(BOUND(?country), ?country, "") AS ?country_label)
+}
+ORDER BY DESC(?value_float)
+LIMIT 1
+```

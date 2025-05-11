@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontologies/orkg#>
+SELECT ?metric ?score
+WHERE {
+  ?metric schema:description "Benchmark score"@en.
+  ?metric orkg:hasMetricFor ?metricValue.
+  ?metricValue orkg:hasDataset "Atari 2600 Seaquest"@en.
+  ?metricValue schema:value ?score.
+  FILTER (lang(?score) = "en")
+}
+```

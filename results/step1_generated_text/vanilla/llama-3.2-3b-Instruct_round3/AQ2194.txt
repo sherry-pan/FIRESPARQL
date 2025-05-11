@@ -1,0 +1,27 @@
+Question:
+Provide a list of papers that have utilized the Adaptive Input Large model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX vocab: <http://purl.org/vocab/>
+
+     SELECT?paper?paperCode?codeLink
+     WHERE {
+      ?paper orkg:hasAdaptiveInputLargeModel?model.
+      ?model schema:description?description.
+      ?paper schema:description?description.
+      ?paper vocab:code?code.
+      ?paper vocab:code?paperCode.
+      ?model vocab:code?code.
+      ?code schema:code?codeLink.
+      ?paper orkg:hasCode?code.
+       SERVICE orkg:search {
+         dbr:Qid:paper?paper.
+       }
+     }
+     LIMIT 10
+     ```<|eot_id|>

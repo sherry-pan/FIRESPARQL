@@ -1,0 +1,15 @@
+```sparql
+PREFIX ork: <http://orKaggle.com/ork/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?paperId ?paperTitle
+WHERE {
+  ?paper ork:hasBenchmark ?benchmark.
+  ?benchmark ork:dataset "HoC".
+  ?paper ork:id ?paperId.
+  ?paper ork:title ?paperTitle.
+  FILTER(LANG(?paperTitle) = "en")
+}
+ORDER BY ?paperId
+LIMIT 10
+```

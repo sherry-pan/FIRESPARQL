@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasApplicationSchema orkg:Transformer.
+  ?paper orkg:hasSchemaVersion "Switch Transformer".
+  ?paper bibo:hasDocument ?doc.
+  ?doc bibo:hasCode ?codeLink.
+  OPTIONAL { ?paper bibo:hasTitle ?paperTitle. }
+  FILTER(LANG(?paperTitle) = "en").
+}
+```

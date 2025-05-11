@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgr:Dataset;
+           rdfs:label "Ball in cup, catch (DMControl500k)";
+           orkgp:P32 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

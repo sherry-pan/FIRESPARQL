@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX dmlab: <http://example.org/dmlab#>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper schema:about ?paperID.
+  ?paper rdfs:label ?title.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark dmlab:dataset ?dataset.
+  ?dataset dmlab:datasetID "DMLab-30".
+  ?paper orkg:hasIdentifier ?id.
+  FILTER(LANG(?title) = "en")
+}
+```

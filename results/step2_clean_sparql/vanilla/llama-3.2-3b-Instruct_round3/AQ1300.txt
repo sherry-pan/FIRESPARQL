@@ -1,0 +1,17 @@
+```sparql
+PREFIX ork: <http://example.org/ork/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://example.org/orkg/>
+
+SELECT ?score ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:dataset "Atari 2600 Ice Hockey".
+    ?benchmark orkg:score ?score.
+    ?benchmark orkg:metric ?metric.
+    ?benchmark orkg:topScore ?topScore.
+    FILTER (?score = ?topScore)
+}
+ORDER BY DESC(?score)
+```

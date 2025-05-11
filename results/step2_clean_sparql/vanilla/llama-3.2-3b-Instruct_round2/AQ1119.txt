@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/2015/01/orcg>
+SELECT ?score ?metric
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:name "Stanford Dogs".
+  ?benchmark orkg:hasScore ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

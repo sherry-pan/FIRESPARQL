@@ -1,0 +1,13 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?testPerplexity
+WHERE {
+    ?model wdt:P31 wd:Q1183543; # instance of language model
+           wdt:P276 wd:Q55067725; # on benchmark dataset WikiText-2
+           wdt:P4137 ?testPerplexity. # test perplexity
+}
+ORDER BY DESC(?testPerplexity)
+LIMIT 1
+```

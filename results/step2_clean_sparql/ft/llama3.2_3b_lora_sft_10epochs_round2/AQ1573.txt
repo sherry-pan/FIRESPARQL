@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?evaluation orkgp:HAS_DATASET ?dataset;
+                  orkgp:HAS_MODEL ?model;
+                  orkgp:HAS_METRIC "F1";
+                  orkgp:HAS_VALUE ?f1_value.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?f1_value)
+    LIMIT 1
+  }
+}
+```

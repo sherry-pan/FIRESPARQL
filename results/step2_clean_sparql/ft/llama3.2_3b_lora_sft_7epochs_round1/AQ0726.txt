@@ -1,0 +1,22 @@
+```sparql
+SELECT ?metric ?metric_lbl (AVG(?value) AS ?avg_value)
+WHERE {
+  {
+    ?dataset a orkgp:Dataset ;
+      rdfs:label ?dataset_lbl ;
+      orkgp:HAS_EVALUATION ?eval.
+    FILTER(REGEX(?dataset_lbl, "seel.cse.lsu.edu/data/re17.zip"))
+    ?eval orkgp:P32 ?metric.
+    ?metric orkgp:HAS_VALUE ?value.
+  }
+  UNION
+  {
+    ?dataset orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:P31 ?metric.
+    ?metric orkgp:HAS_VALUE ?value.
+  }
+  BIND(xsd:float(?value) AS ?value)
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+SELECT ?code_link
+WHERE {
+  ?paper a bibo:Article.
+  ?paper orkg:has_contribution ?contribution.
+  ?contribution orkg:uses_model ?model.
+  ?model rdfs:label "Long Short Transformer".
+  ?code_link a orkg:CodeLink;
+             orkg:references ?paper;
+             orkg:references ?benchmark.
+}
+```

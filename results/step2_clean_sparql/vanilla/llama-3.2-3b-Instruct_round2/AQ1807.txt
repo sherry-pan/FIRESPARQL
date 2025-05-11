@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?accuracy
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset orkg:kuzushiji-mnist.
+    ?model orkg:hasMetric ?metric.
+    ?metric rdfs:label "Accuracy"@en.
+    ?model orkg:hasBestScore ?accuracy.
+    ?benchmark schema:keywords "Kuzushiji-MNIST"@en.
+}
+```

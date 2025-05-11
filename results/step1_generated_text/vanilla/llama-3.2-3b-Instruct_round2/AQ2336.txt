@@ -1,0 +1,24 @@
+Question:
+Provide a list of papers that have utilized the DQN-PixelCNN model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+     PREFIX orkg: <http://orkg.org/schema/1.0/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?paper?paperTitle?codeLink
+     WHERE {
+    ?paper a orkg:Papers.
+     orkg:hasReference?reference.
+     schema:potentialAction schema:ask?question.
+    ?reference schema:question?question.
+    ?question orkg:hasAnswer?answer.
+    ?answer schema:answer?answerValue.
+    ?paper orkg:hasModel?model.
+    ?model orkg:hasCode?code.
+    ?code schema:code?codeLink.
+     FILTER (?question = "DQN-PixelCNN").
+     }
+     ```<|eot_id|>

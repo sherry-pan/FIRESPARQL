@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont;
+         rdfs:label ?paper_title.
+  ?cont orkgp:P3758 ?model.
+  ?model rdfs:label ?model_label.
+  FILTER(REGEX(?model_label, "GPT-2 \\(small\\)"))
+  ?cont orkgp:P5001 ?code.
+  ?cont orkgp:P5000 ?sourcecode.
+  ?sourcecode rdfs:label ?sourcecode_labels.
+  FILTER(REGEX(?sourcecode_labels, "benchmark"))
+}
+```

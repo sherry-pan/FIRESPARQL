@@ -1,0 +1,20 @@
+Question:
+Where can I find code references in papers that have used the LayerNorm HM-LSTM model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wot: <http://www.wot-ontology.org/ontology/>
+     PREFIX rdfs: <http://www.wot-ontology.org/rdfs/>
+     PREFIX owl: <http://www.wot-ontology.org/owl/>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX org: <http://org.wikipedia.org/ontology/>
+     SELECT?paper?paperTitle?codeReference 
+     WHERE {
+    ?paper a orkg:Paper.
+     rdfs:label?paperTitle.
+    ?paper orkg:hasCode?code.
+    ?code schema:description?description.
+     FILTER (REGEX(?description, "LayerNorm HM-LSTM model") OR REGEX(?description, "benchmarking"))
+     }<|eot_id|>

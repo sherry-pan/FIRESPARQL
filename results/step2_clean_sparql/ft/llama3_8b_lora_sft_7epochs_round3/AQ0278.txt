@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Battle Zone")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont ?benchmark.
+  ?model ?cont;
+         orkgp:P31 ?comparison;
+         orkgp:P32 ?model_lbl.
+  ?comparison orkgp:HAS_VALUE ?value.
+  ?paper ?cont;
+         orkgp:P29 ?value.
+}
+```

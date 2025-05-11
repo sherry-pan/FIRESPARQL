@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/Atari_2600_Up_and_Down>.
+  ?benchmark orkg:metric orkg:Score.
+  ?benchmark orkg:result ?score.
+  FILTER NOT EXISTS {
+    ?model2 a orkg:Model;
+    orkg:benchmarks ?benchmark2.
+    ?benchmark2 orkg:dataset <http://www.openresearchknowledgegraph.org/dataset/Atari_2600_Up_and_Down>.
+    ?benchmark2 orkg:metric orkg:Score.
+    ?benchmark2 orkg:result ?score2.
+    FILTER(?score2 > ?score)
+  }
+}
+```

@@ -1,0 +1,19 @@
+Question:
+Could you provide a list of models that have been tested on the RTE benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT?model?modelLabel?publication?publicationTitle
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:testedOn?benchmark.
+ ?benchmark rdfs:label "RTE".
+ ?model orkg:hasPublication?publication.
+ ?publication a dcterms:Document.
+ ?publication dcterms:title?publicationTitle.
+ ?model rdfs:label?modelLabel.
+}<|eot_id|>

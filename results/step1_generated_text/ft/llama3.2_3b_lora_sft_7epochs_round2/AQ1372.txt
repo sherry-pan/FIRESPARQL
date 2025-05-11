@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset DocRED (Human-annotated)?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R153800 orkgp:compareContribution?contrib.
+        ?contrib orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+        ?dataset orkgp:P31?dataset.
+        ?contrib orkgp:P32?eval.
+        ?eval orkgp:P36?metric.
+         BIND(xsd:float(?metric) AS?value)
+         FILTER(REGEX(?dataset_lbl, "DocRED (Human-annotated"))
+        ?metric rdfs:label?metric_lbl
+     }<|eot_id|>

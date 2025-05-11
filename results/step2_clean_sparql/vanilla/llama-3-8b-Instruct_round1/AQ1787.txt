@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasExperiment ?experiment.
+  ?experiment orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:name "Atari 2600 Yars Revenge".
+  ?experiment orkg:hasScore ?score.
+  FILTER NOT EXISTS {
+    ?otherModel a orkg:Model.
+    ?otherModel orkg:hasExperiment ?otherExperiment.
+    ?otherExperiment orkg:hasBenchmark ?benchmark.
+    ?otherExperiment orkg:hasScore ?otherScore.
+    FILTER(?otherScore > ?score)
+  }
+}
+```

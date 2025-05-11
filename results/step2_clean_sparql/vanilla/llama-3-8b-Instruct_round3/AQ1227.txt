@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?metric ?value
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper dcterms:title ?title.
+  FILTER (STRSTARTS(?title, "Cartpole, swingup (DMControl500k)")).
+  ?paper prov:wasGeneratedBy ?run.
+  ?run orkg:benchmarkResult ?result.
+  ?result orkg:metric ?metric.
+  ?result orkg:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

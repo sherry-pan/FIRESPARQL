@@ -1,0 +1,20 @@
+Question:
+What are the metrics of evaluation over the CommitmentBank dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+   ?dataset a orkg:Dataset ;
+        orkg:hasName "CommitmentBank".
+   ?evaluation a orkg:Evaluation ;
+        orkg:hasDataset?dataset ;
+        orkg:hasMetric?metric.
+   ?metric a orkg:Metric ;
+        rdfs:label?metricLabel.
+    FILTER (str(?metricLabel) = "metrics of evaluation" || str(?metricLabel) = "evaluation metrics" || str(?metricLabel) = "metrics")
+    OPTIONAL {?evaluation orkg:hasValue?value }
+}<|eot_id|>

@@ -1,0 +1,17 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?metric
+WHERE {
+  ?metric rdfs:label ?label.
+  FILTER (STR(?label) IN ("F1 score"@en, "Accuracy"@en, "Mean squared error"@en, 
+                          "Mean absolute error"@en, "Precision"@en, "Recall"@en, 
+                          "F2 score"@en, "Area under the ROC curve"@en, 
+                          "Area under the PR curve"@en, "Area under the confusion matrix"@en))
+}
+ORDER BY DESC(?metric)
+```

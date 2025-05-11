@@ -1,0 +1,21 @@
+Question:
+What models are being evaluated on the Atari 2600 Name This Game dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orcg.org/ontology#>
+     PREFIX owl: <http://www.w3.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasEvaluation?evaluation.
+      ?evaluation schema:dataset?dataset.
+      ?dataset schema:name "Atari 2600 Name This Game".
+      ?model orkg:hasDataset?dataset.
+      ?dataset schema:hasModel?model.
+      ?model skos:prefLabel?modelLabel.
+       FILTER (lang(?modelLabel) = "en")
+     }<|eot_id|>

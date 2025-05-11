@@ -1,0 +1,11 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?link
+WHERE {
+  ?paper schema:description ?description.
+  FILTER (contains(STR(?description), "KD-LSTMreg") && contains(STR(?description), "benchmark"))
+  ?paper schema:potentialOutput ?link.
+  FILTER (contains(STR(?link), "http://") && contains(STR(?link), "://"))
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasResult ?result.
+  ?result orkg:dataset orkg:ImageNet_V2.
+  ?result orkg:metric orkg:Top_1_Accuracy.
+  ?result orkg:value ?accuracy.
+} 
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

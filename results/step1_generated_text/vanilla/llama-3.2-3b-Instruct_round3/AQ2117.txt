@@ -1,0 +1,33 @@
+Question:
+Where can I find code references in papers that have used the SRU++ Base model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://purl.org/openresearchknowledgegraph/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX obo: <http://purl.org/obo/informatix/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?title?url
+     WHERE {
+    ?paper dbo:hasPaper?paper_ref.
+    ?paper_ref dbp:hasBenchmark?benchmark.
+    ?benchmark schema:topic "SRU++ Base".
+    ?benchmark schema:hasReference?benchmark_ref.
+    ?benchmark_ref rdfs:label?benchmark_ref_label.
+    ?benchmark_ref_label rdfs:label?benchmark_ref_label_label.
+    ?paper wdt:P301?benchmark_ref_label_label.
+    ?paper dbo:abstract?abstract.
+    ?abstract schema:hasText?abstract_text.
+    ?abstract_text rdfs:label?abstract_label.
+    ?paper dbo:abstract?abstract.
+    ?paper wdt:P301?benchmark_ref_label_label.
+    ?benchmark_ref_label rdfs:label?benchmark_ref_label_label.
+    ?paper wdt:P301?benchmark_ref.
+    ?benchmark_ref rdfs:label?benchmark_ref_label.
+    ?benchmark_ref rdfs:label?benchmark_ref_label_label.
+    ?paper wdt:P301?benchmark_ref_label.
+    ?benchmark_ref rdfs:label?benchmark_ref_label.
+    ?benchmark_ref schema:hasReference?benchmark

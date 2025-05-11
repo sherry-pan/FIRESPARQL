@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the WSC dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper schema:about orkg:WSC.
+ ?paper schema:hasPart?benchmark.
+ ?benchmark schema:name?benchmarkName.
+  FILTER(LANG(?benchmarkName) = "en").
+ ?paper schema:name?title.
+ ?paper orkg:hasIdentifier?id.
+}<|eot_id|>

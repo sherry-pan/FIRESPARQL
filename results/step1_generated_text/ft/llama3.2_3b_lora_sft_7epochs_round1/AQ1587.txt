@@ -1,0 +1,18 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the PubMed 20k RCT benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+        ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "PubMed 20k RCT")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         orkgp:P31              ?model.
+        ?model        rdfs:label              ?model_lbl.
+        ?eval         rdfs:label              ?eval_lbl.
+         BIND(xsd:int(?eval_lbl) as?eval)
+         FILTER(REGEX(?eval, "F1", "i"))
+     }<|eot_id|>

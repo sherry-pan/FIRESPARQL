@@ -1,0 +1,14 @@
+Question:
+What quantity of iron oxide was discovered on Elorza crater?
+
+Generated SPARQL:
+ SELECT?quantity
+     WHERE {
+      ?crater       a            orkgc:Crater;
+                  rdfs:label      ?crater_label.
+       FILTER (str(?crater_label) = "Elorza")
+      ?crater      orkgp:HAS_BED       ?bed.
+      ?bed         orkgp:P32           ?mineral.
+      ?mineral    rdfs:label              ?mineral_label.
+       BIND(xsd:float(?mineral_label) AS?quantity)
+     }<|eot_id|>

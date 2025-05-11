@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "PubMed 20k RCT")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_EVALUATION ?eval.
+    ?paper orkgp:HAS_BENCHMARK ?benchmark;
+           orkgp:P31 ?model.
+    ?model rdfs:label ?model_lbl.
+    ?eval rdfs:label ?eval_lbl.
+    BIND(xsd:int(?eval_lbl) as ?eval)
+    FILTER(REGEX(?eval, "F1", "i"))
+}
+```

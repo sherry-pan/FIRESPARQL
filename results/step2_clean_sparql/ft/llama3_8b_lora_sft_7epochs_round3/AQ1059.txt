@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R7062 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P31030 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(REGEX(?benchmark_lbl, "MAZEA"))
+  ?contrib orkgp:HAS_VALUE ?value.
+  ?value orkgp:P15184 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the ImageNet ReaL dataset in terms of Params metric?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://orkg.org/ontology/>
+     SELECT?model?metric?metricValue
+     WHERE {
+    ?model orkg:relatedTo?metric.
+    ?metric schema:description "Params".
+    ?model orkg:bestOf?bestModel.
+    ?bestModel orkg:metric?metric.
+    ?metric schema:description "Params".
+     FILTER (REGEX(str(?metric)="Params") AND REGEX(str(?metricValue)="[0-9]+"))
+     }
+     LIMIT 1<|eot_id|>

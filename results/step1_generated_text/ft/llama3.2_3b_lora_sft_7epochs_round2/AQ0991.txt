@@ -1,0 +1,20 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Reuters De-En dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                   rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Reuters De-En")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+               ?metric          rdfs:label              ?metric_lbl.}
+       FILTER (str(?metric_lbl) = "F1", str(?metric_lbl) = "PPLR", 
+              str(?metric_lbl) = "ROUGE-N", str(?metric_lbl) = "BLEU", 
+              str(?metric_lbl) = "CIDEr", str(?metric_lbl) = "METEOR", 
+              str(?metric_lbl) = "ROUGE-L", str(?metric_lbl) = "ALL-R", 
+              str(?metric_lbl) = "R@1", str(?metric_lbl) = "R@5", 
+              str(?metric_lbl) = "R@10")
+      }<|eot_id|>

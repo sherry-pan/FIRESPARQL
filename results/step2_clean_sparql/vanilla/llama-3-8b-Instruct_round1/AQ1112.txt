@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset <http://www.statmt.org/wmt14/translation-task.html> ;
+             orkg:metric ?metric ;
+             orkg:value ?value.
+  FILTER (?metric = "BLEU" || ?metric = "TER" || ?metric = "Meteor" || ?metric = "ROUGE").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

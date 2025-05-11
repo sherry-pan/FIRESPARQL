@@ -1,0 +1,18 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Battle Zone dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX dbpedia: <http://dbpedia.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?model?name
+     WHERE {
+    ?model dbpedia:hasModel?m.
+    ?m skos:broader http://dbpedia.org/ontology/Datasets#Atari_2600_Battle_Zone.
+    ?model rdfs:label?name.
+     }
+     GROUP BY?model?name
+     HAVING (COUNT(?model) > 1)
+     ORDER BY DESC(?model)<|eot_id|>

@@ -1,0 +1,15 @@
+Question:
+What types of nanocarriers do have therapeutic effect?
+
+Generated SPARQL:
+ SELECT?nanocarriers_labels
+     WHERE {
+        ?nanocarriers rdfs:label?nanocarriers_labels.
+        ?nanocarriers orkgp:HAS_THERAPEUTIC_EFFECT?has_therapeutic_effect.
+         BIND(
+           IF(?has_therapeutic_effect = "yes"^^xsd:string,?nanocarriers_labels, ""^^xsd:string) AS?nanocarriers_labels
+         )
+     }
+     FILTER(REGEX(STR(?nanocarriers_labels), "nanocarrier"))
+     ORDER BY DESC(?nanocarriers_labels)
+     LIMIT 10<|eot_id|>

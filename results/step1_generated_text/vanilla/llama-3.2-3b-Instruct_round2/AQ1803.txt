@@ -1,0 +1,31 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Accuracy score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model
+     WHERE {
+    ?model schema:abstract?abstract.
+    ?model dbp:top1Accuracy?accuracy.
+    ?model rkg:benchmark?benchmark.
+    ?benchmark schema:dataset?dataset.
+    ?dataset schema:datasetName "VTAB-1k".
+    ?model rkg:bestResult?result.
+    ?result schema:score?score.
+     FILTER (?score = "maxValue"^^xsd:float)
+     }
+     GROUP BY?model
+     HAVING (COUNT(?result) = (SELECT COUNT(DISTINCT?m
+     FROM?m?r WHERE {
+    ?m rkg:benchmark?r
+     AND?r schema:dataset?ds
+     AND?ds schema:datasetName "VTAB-1k"
+     AND?m schema:abstract?ab
+     AND?ab rdfs:label?model
+     })
+     ))<|eot_id|>

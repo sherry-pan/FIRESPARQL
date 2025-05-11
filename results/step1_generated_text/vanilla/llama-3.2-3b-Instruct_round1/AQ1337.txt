@@ -1,0 +1,17 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric?score?paper 
+     WHERE {
+    ?paper orkg:hasPaperField "Paper Field".
+    ?paper orkg:hasBenchmarkResult?benchmark.
+    ?benchmark wdt:P275?metric.
+    ?benchmark wdt:P31?benchmarkType.
+    ?benchmark wdt:P312?score.
+    ?metric rdfs:label?metricLabel.
+     FILTER (STRLIKE(?metricLabel, "benchmark result")).
+     }<|eot_id|>

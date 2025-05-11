@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/1.0/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?dataset
+WHERE {
+  ?dataset a orkg:BenchmarkFor.
+  ?dataset orkg:researchArea orkg:NaturalLanguageInference.
+  ?dataset orkg:isTypicallyUsedFor ?commonlyUsedFor.
+  ?commonlyUsedFor rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(?label), "commonly used")
+     AND CONTAINS(LCASE(?label), "benchmark")
+     AND CONTAINS(LCASE(?label), "dataset"))
+}
+```

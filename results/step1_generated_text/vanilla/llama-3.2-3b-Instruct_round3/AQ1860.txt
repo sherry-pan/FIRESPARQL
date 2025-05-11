@@ -1,0 +1,16 @@
+Question:
+Provide a list of benchmarked datasets related to the Reading Comprehension research area?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?dataset
+     WHERE {
+    ?dataset schema:description "Benchmarked dataset".
+    ?dataset schema:topic [skos:broader* or schema:about] <http://purl.org/net/ontolex/reading_comprehension>.
+    ?dataset schema:datasetType?datasetType.
+     FILTER (strlike(STR(?datasetType), "benchmarked"))
+     }
+     ORDER BY DESC<|eot_id|>

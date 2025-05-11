@@ -1,0 +1,15 @@
+Question:
+Indicate the model that performed best in terms of Test perplexity metric on the WikiText-103 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX wikitext: <http://example.org/wiki-text/>
+     SELECT?model 
+     WHERE {
+    ?model wikitext:hasText "perplexity metric".
+    ?model wikitext:hasBenchmark "WikiText-103".
+    ?model orkg:bestResult?bestResult.
+    ?bestResult orkg:metric "test perplexity".
+    ?model orkg:bestResult?result.
+     FILTER (STRLIKE(STR(?result), "^[0-9]+") )
+     }<|eot_id|>

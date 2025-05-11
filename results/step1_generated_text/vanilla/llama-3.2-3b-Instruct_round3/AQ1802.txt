@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Accuracy score on the Reuters En-De benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX vocab: <http://purl.org/vocab/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?accuracy 
+     WHERE {
+    ?model vocab:hasBenchmark vocab:benchmark "Reuters En-De".
+    ?model vocab:hasAccuracy?accuracy.
+    ?accuracy schema:numeric "Accuracy".
+     FILTER (regex(str(?accuracy) ".*" ".*" ".*" 1).
+     ORDER BY DESC(?accuracy)
+     LIMIT 1
+     }<|eot_id|>

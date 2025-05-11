@@ -1,0 +1,17 @@
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX orkg: <http://openeurope.org/orkg/>
+
+SELECT ?metric 
+WHERE {
+    ?metric rdfs:label "Atari 2600 Battle Zone Benchmark".
+    ?metric rdfs:label ?metricLabel.
+    ?metric orkg:hasMetric ?metricValue.
+    FILTER (str(?metricLabel) IN ("Accuracy", "Loss", "Test Loss", "Validation Loss", "Win Rate", "Win Percentage", "Episodes to Win", "Episodes to Lose", "Fails to Win", "Fails to Lose"))
+}
+LIMIT 10
+```

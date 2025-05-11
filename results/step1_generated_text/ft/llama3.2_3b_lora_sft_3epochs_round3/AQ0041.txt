@@ -1,0 +1,16 @@
+Question:
+What are the models that have been benchmarked on the FSNS - Test dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl      = "FSNS - Test")
+                || str(?dataset_lbl      = "FSNS - Test (Test Set)")
+                || str(?dataset_lbl      = "FSNS Test"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont         rdfs:label              ?model_lbl.
+        ?model       orkgp:P32               ?cont.
+     }<|eot_id|>

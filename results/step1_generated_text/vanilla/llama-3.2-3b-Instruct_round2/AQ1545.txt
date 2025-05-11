@@ -1,0 +1,25 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the CoNLL 2012 benchmark dataset?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+    SELECT?model?metric?metricValue
+    WHERE {
+     ?model schema:description "Model for CoNLL 2012".
+     ?model schema:mainClass dbpedia:Model.
+     ?model dbpedia:mainTopic dbpedia:Conll2012.
+     ?metric schema:name "F1 metric".
+     ?metric schema:description "Measure of model performance on the CoNLL 2012 task.".
+     ?metric schema:mainClass dbpedia:Conll2012Metric.
+     ?metric dbpedia:mainTopic dbpedia:Conll2012.
+      BIND(STR(?metricValue) AS?metricValue)
+      FILTER(CONTAINS(LCASE(?metricValue), "F1") AND EXISTS({?model?metric?metricValue}))
+    }
+    ORDER BY DESC(?metricValue)
+    LIMIT 1
+    ```<|eot_id|>

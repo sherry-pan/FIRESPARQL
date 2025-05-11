@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+
+SELECT ?title ?id
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper dbpedia:hasBenchmark ?benchmark.
+    ?benchmark dbpedia:usesDbpedia ?dataset.
+    ?dataset dbpedia:datasetURI "http://dbpedia.org/2015-04/ontology/Dbpedia".
+    SERVICE orkg:search {
+        SELECT ?paper ?title ?id 
+        WHERE {
+            ?paper orkg:hasResearchPaper ?rpaper.
+            ?rpaper orkg:hasTitle ?title.
+            ?rpaper orkg:hasId ?id.
+            FILTER (CONTAINS(LCASE(?title), "benchmark") && CONTAINS(LCASE(?id), "dbpedia"))
+        }
+    }
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/ontology/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?code ?paper
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:benchmarks ?benchmark.
+  ?benchmark owl:someValuesFrom orkg:MEMEN.
+  ?benchmark orkg:hasSingleModel true.
+  ?code rdf:type orkg:Code.
+}
+```

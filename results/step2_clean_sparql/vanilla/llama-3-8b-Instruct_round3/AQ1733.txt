@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?experiment a orkg:Experiment.
+  ?experiment orkg:benchmark ?benchmark.
+  ?benchmark dc:title "Atari 2600 Q*Bert".
+  ?result a orkg:Result.
+  ?result orkg:experiment ?experiment.
+  ?result orkg:score ?score.
+  ?result orkg:model ?model.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

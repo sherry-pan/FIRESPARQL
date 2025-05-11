@@ -1,0 +1,19 @@
+Question:
+List the metrics that are used to evaluate models on the enwik8 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/owl/orkg.owl#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    
+    SELECT?metric
+    WHERE {
+     ?paper a orkg:Paper ;
+        orkg:hasEvaluationMetric?metric.
+     ?evaluationMetric a orkg:EvaluationMetric ;
+        orkg:isUsedFor?benchmark.
+     ?benchmark a orkg:Benchmark ;
+        rdfs:label?benchmarkLabel.
+      FILTER (?benchmarkLabel = "enwik8" ).
+    }<|eot_id|>

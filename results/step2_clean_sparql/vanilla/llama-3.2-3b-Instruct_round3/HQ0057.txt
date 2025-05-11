@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?s ?label
+WHERE {
+    ?s orkg:isDataSubsetOf ?s1.
+    ?s1 schema:alternateOf ?s2.
+    ?s2 dbo:identifier ?s3.
+    ?s3 schema:description ?label.
+    FILTER (lang(?label) = "en")
+}
+```

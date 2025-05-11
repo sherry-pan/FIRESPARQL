@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/vocabulary/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric ?value
+WHERE {
+  ?q wdt:P31 ?class.
+  ?class rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(?label), "mldoc zero-shot english-to-spanish")).
+  ?q schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasMetric ?metric.
+  ?benchmark schema:hasValue ?value.
+  ?benchmark schema:hasRank ?rank.
+  FILTER (LCASE(?rank) = "1").
+}
+```

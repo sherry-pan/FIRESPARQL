@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?f1score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:benchmarks ?benchmark.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset dbo:name "NYT-single".
+  ?benchmark orkg:metric ?metric.
+  ?metric dbo:name "F1 score".
+  ?benchmark orkg:result ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

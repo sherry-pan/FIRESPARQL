@@ -1,0 +1,20 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(?paper_lbl, "DCN"))
+  
+  ?paper orkgp:P31 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "DCN"))
+  
+  ?paper orkgp:P32 ?benchmark.
+  ?benchmark orkgp:P33 ?evaluator.
+  ?evaluator rdfs:label ?evaluator_lbl.
+  FILTER(REGEX(?evaluator_lbl, "benchmarking"))
+  
+  ?benchmark orkgp:P34 ?cont.
+  ?cont orkgp:P35 ?code.
+}
+```

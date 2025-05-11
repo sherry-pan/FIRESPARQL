@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the REDDIT-B dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.de/ontology/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?benchmark?metric?value
+     WHERE {
+    ?result a orkg:Result ;
+     orkg:dataset <http://www.openresearchknowledgegraph.de/dataset/REDDIT-B> ;
+     orkg:metric?metric ;
+     orkg:value?value.
+    ?result orkg:hasBestValue?value.
+     FILTER (?metric!= owl:nothing).
+     ORDER BY DESC(?value)
+     LIMIT 1
+     }<|eot_id|>

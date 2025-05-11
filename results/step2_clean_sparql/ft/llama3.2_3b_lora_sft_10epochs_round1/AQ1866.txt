@@ -1,0 +1,13 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?rf a orkgc:ResearchField;
+      rdfs:label ?rf_label.
+  FILTER(REGEX(?rf_label, "Natural Language Inference"))
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  ?rf orkgc:hasDataset ?dataset.
+}
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 10
+```

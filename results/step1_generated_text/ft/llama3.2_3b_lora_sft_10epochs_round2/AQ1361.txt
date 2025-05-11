@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+         orkgr:R8341 orkgp:compareContribution?c.
+        ?c orkgp:P31?dataset.
+        ?dataset rdfs:label?dataset_lbl.
+         BIND(replace(str(?dataset_lbl), "&", " ") AS?dataset_lbl_lbl).
+        ?c orkgp:P36?eval.
+         BIND(xsd:int(?eval) AS?value).
+         BIND(xsd:string(?eval) AS?metric).
+         BIND(xsd:string(?metric_lbl) AS?metric_lbl)
+     }<|eot_id|>

@@ -1,0 +1,35 @@
+Question:
+What are the most commonly used benchmark datasets for the Natural Language Inference research field?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+        ?rf       a            orkgc:ResearchField;
+                   rdfs:label      ?rf_lbl.
+         FILTER (str(?rf_lbl) = "Natural Language Inference")
+        ?paper    orkgp:HAS_DATASET      ?dataset.
+        ?dataset      orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark      rdfs:label              ?benchmark_lbl.
+        ?cont         orkgp:P31               ?paper;
+                       orkgp:HAS_BENCHMARK     ?benchmark.
+        ?cont         rkgp:P32               ?rf;
+                       orkgp:P31               ?paper.
+        ?cont         rkgp:HAS_SOURCE        ?source.
+        ?source      orkgp:P31               ?paper;
+                     rkgp:P32               ?rf.
+        ?paper      orkgp:P27               ?cont.
+        ?cont      a                orkgp:Paper.
+        ?dataset      orkgp:P31               ?cont;
+                       rkgp:P32               ?rf.
+        ?benchmark      orkgp:P27               ?cont.
+        ?cont      rkgp:P32               ?rf.
+        ?cont      orkgp:P31               ?paper.
+        ?cont      orkgp:P27               ?benchmark.
+        ?cont      orkgp:HAS_SOURCE        ?source.
+        ?source      rkgp:P31               ?paper;
+                     orkgp:P32               ?rf.
+        ?cont      orkgp:P32               ?rf.
+        ?cont      orkgp:P31               ?paper.
+        ?cont      orkgp:P27               ?benchmark.
+        ?cont      rkgp:P32               ?rf.
+        ?cont      orkgp:P

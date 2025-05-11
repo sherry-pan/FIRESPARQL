@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperTitle ?code ?codeRepository
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper schema:about orkg:MFEC.
+  ?paper schema:mentions ?code.
+  ?code schema:codeRepository ?codeRepository.
+  ?paper schema:name ?paperTitle.
+  FILTER(LANG(?paperTitle) = "en").
+}
+```

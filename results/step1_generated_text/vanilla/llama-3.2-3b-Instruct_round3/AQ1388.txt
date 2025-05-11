@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest RE+ Micro F1 score on the CoNLL04 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     PREFIX sparql: <http://www.w3.org/TR/xpath2/2006/02/xpath2-overview.html#namespace-mapping>
+     PREFIX orkg: <http://orkg.org/schema/2010/06/orkg#>
+     SELECT?model?repmicrof1
+     WHERE {
+    ?model orkg:has_model?modelId.
+    ?model orkg:has_result?result.
+    ?result orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_dataset "CoNLL04".
+    ?result orkg:has_metric?metric.
+    ?metric rdfs:label "RE+ Micro F1".
+    ?result orkg:has_value?repmicrof1.
+     }<|eot_id|>

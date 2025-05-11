@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ShARe/CLEF eHealth corpus")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont        ?benchmark
+      ?contrib      orkgp:HAS_CONTRIBUTION    ?cont.
+      ?cont         orkgp:HAS_MODEL          ?model.
+      ?model        rdfs:label              ?model_lbl.
+     }<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://rdf.orkg.org/orkg#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?a3
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:benchmarks ?benchmark.
+   ?benchmark orkg:dataset ?dataset.
+   ?dataset schema:name "ANLI".
+   ?benchmark orkg:metric ?metric.
+   ?metric schema:name "A3".
+   ?benchmark orkg:performance ?performance.
+   ?performance schema:value ?a3.
+}
+ORDER BY DESC(?a3)
+LIMIT 1
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperLabel ?codeLink
+WHERE {
+    ?paper schema:about ?model.
+    ?model wdt:P2750 ?modelName.
+    FILTER(CONTAINS(LCASE(?modelName), "switch transformer")).
+    ?paper schema:code ?codeLink.
+} 
+```

@@ -1,0 +1,16 @@
+Question:
+What are the most commonly used benchmark datasets for the Entity Disambiguation research field?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?dataset
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset rdfs:label?label.
+    ?dataset orkg:hasField orkg:benchmark.
+    ?dataset orkg:fieldOfStudy orkg:Entity_Disambiguation.
+     FILTER(LANG(?label) = "en" && STRSTARTS(STR(?label), "Benchmark"))
+     ORDER BY DESC(count(?dataset)) LIMIT 10
+     }<|eot_id|>

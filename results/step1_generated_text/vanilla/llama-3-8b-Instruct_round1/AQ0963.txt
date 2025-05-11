@@ -1,0 +1,19 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Bowling dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper ;
+        orkg:hasTitle?title.
+ ?title rdfs:label?titleLabel.
+  FILTER regex(?titleLabel, "Atari 2600 Bowling").
+ ?paper orkg:hasEvaluationMetric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel IN ("Mean Absolute Error", "Mean Squared Error", "Root Mean Squared Error", "Mean Absolute Percentage Error", "Mean Squared Percentage Error", "Success Rate", "Reward", "Return", "Episode Length", "Game Length"))
+}<|eot_id|>

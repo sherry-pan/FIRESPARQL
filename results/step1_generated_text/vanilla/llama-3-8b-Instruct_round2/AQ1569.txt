@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT?model?f1
+WHERE {
+ ?paper a orkg:Publication.
+ ?paper orkg:hasMetricValue?metricValue.
+ ?metricValue orkg:metricName "F1".
+ ?metricValue orkg:hasValue?f1.
+ ?paper orkg:usesModel?model.
+  FILTER(?model orkg:usesDataset "BC5CDR-disease").
+  FILTER(?f1 = xsd:float("best").
+}<|eot_id|>

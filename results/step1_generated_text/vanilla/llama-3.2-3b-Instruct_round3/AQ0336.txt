@@ -1,0 +1,20 @@
+Question:
+Could you provide a list of models that have been tested on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX dbp: <http://dbpedia.org/ontology/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?title 
+     WHERE {
+    ?model schema:description?description.
+    ?model schema:topic?topic.
+    ?model schema:related?related.
+    ?related schema:topic?topic.
+    ?related schema:description?description.
+     FILTER (STRONG CONTAINS (STRONG CONTAINS ("NLP-TDMS (Exp)"@en),?description) OR 
+       STRONG CONTAINS ("NLP-TDMS (Exp)"@en,?topic) OR STRONG CONTAINS ("NLP-TDMS (Exp)"@en,?related))
+    ?model schema:hasModel?model
+     }<|eot_id|>

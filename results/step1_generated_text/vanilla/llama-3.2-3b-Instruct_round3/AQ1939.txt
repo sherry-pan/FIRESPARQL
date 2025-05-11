@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the Concept Mention Extraction model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+     PREFIX orkg: <http://openresearchknowledgegraph.org/orkg/>
+     SELECT?paper?codeReference
+     WHERE {
+    ?paper schema:hasPart?codeReference.
+    ?paper schema:hasPart?benchmarkingPaper.
+    ?benchmarkingPaper schema:hasPart?benchmarkingBenchmark.
+    ?benchmarkingBenchmark schema:hasPart?benchmarkingExperiment.
+    ?benchmarkingExperiment schema:hasKeyword "Concept Mention Extraction".
+     FILTER (STRDEXISTS(?benchmarkingExperiment?benchmarkingExperiment))
+     }<|eot_id|>

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+   ?dataset a orkg:Dataset ;
+            orkg:hasBenchmark ?benchmark ;
+            rdfs:label "REDDIT-B".
+   ?benchmark a orkg:Benchmark ;
+              orkg:hasResult ?result.
+   ?result orkg:hasMetric ?metric ;
+           orkg:hasValue ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

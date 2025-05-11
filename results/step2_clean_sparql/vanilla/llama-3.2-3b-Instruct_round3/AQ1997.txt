@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+    ?paper orkg:hasTableSequence ?t1.
+    ?t1 orkg:hasCode ?code.
+    ?paper wdt:P275 ?paperTitle.
+    ?paper wdt:P31 ?paperType.
+    ?paper orkg:hasLink ?codeLink.
+    FILTER (str(?paperType) = 'paper')
+}
+```

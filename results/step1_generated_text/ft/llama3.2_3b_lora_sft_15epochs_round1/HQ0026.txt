@@ -1,0 +1,15 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ SELECT DISTINCT?benchmark
+     WHERE {
+        ?problem       a            orkgc:Problem;
+                   rdfs:label      ?problem_lbl.
+         FILTER (str(?problem_lbl) = "QA benchmarks incorporating more than 10000 questions.")
+        ?dataset        orkgp:HAS_DATASET      ?dataset.
+        ?cont          orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_PROBLEM      ?problem;
+                        orkgp:HAS_BENCHMARK     ?benchmark.
+         FILTER(SUBSTR(?benchmark, -3) >= "10000")
+     }<|eot_id|>

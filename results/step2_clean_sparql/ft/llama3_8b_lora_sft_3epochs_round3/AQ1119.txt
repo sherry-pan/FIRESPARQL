@@ -1,0 +1,18 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?cont orkgp:P31 ?paper;
+        orkgp:P34 ?dataset;
+        orkgp:P36 ?value.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Stanford Dogs")
+  BIND(xsd:float(?value) AS ?float_value)
+  BIND(IF(?value > 0, ?float_value, 0) AS ?value)
+  OPTIONAL {
+    ?cont orkgp:P33 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

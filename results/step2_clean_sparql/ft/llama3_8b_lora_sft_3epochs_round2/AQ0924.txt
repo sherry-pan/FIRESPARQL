@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric_labels
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_labels.
+  FILTER (str(?dataset_labels) = "Atari 2600 Double Dunk")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_labels.
+  }
+}
+```

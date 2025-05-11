@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (COUNT(?value) AS ?number_of_data_points)
+WHERE {
+    orkgr:R67593 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P31 ?dataset.
+    ?dataset orkgp:P32 ?dataset_label.
+    BIND(xsd:integer(?dataset_label) AS ?dataset_label)
+    ?contrib orkgp:P27 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    FILTER(REGEX(?dataset_label, "seel.cse.lsu.edu/data/re17.zip"))
+    ?contrib orkgp:P33 ?value.
+}
+ORDER BY DESC(?number_of_data_points)
+LIMIT 10
+```

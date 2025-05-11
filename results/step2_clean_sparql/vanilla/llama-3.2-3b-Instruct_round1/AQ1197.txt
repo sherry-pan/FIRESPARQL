@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX wot: <http://www.wot.org/ontologies/wot#>
+SELECT ?metric ?value
+WHERE {
+    ?item orkg:hasBenchmark ?benchmark.
+    ?benchmark wot:hasMetric ?metric.
+    ?benchmark wot:hasValue ?value.
+    ?benchmark orkg:hasDataset "STS Benchmark".
+    FILTER (STRLIKE(STR(?metric), "STS Benchmark") || STRLIKE(STR(?metric), "STS Benchmark "))
+}
+```

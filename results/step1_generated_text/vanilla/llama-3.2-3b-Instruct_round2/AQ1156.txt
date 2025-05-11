@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset SQuAD2.0?
+
+Generated SPARQL:
+ PREFIX dbo: <http://dbpedia.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX wikibase: <http://wikibase.org/bash#>
+     PREFIX sio: <http://silver.io/ontology#>
+     PREFIX sparql: <http://www.w3.org/TR/xpath1-binary/#xpath2>
+     PREFIX sq: <http://spinalinq.org/ns/squad#>
+     SELECT?metric?value 
+     WHERE {
+    ?dataset a sq:SquadDataset.
+    ?dataset sq:benchmark?benchmark.
+    ?benchmark sq:metric?metric.
+    ?benchmark sq:value?value.
+    ?dataset sq:benchmark?benchmark.
+    ?benchmark sq:dataset?dataset.
+     FILTER (?metric = "top" AND?dataset = "SQuAD2.0" )
+     }<|eot_id|>

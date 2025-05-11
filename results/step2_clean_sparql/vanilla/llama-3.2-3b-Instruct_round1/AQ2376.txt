@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wikibase: <http://wikibase.org/schema/ontology/>
+PREFIX wkg: <http://www.wikidata.org/ontology/wiki/>
+
+SELECT ?paper ?title ?link
+WHERE {
+  ?paper wkg:usesAnode ?anode.
+  ?anode wkg:hasCode ?code.
+  ?code wkg:hasRepository ?repo.
+  ?repo wkg:hasLink ?link.
+  SERVICE wikibase:label { ?paper wkg:label ?title. }
+  FILTER (CONTAINS(LCASE(?title), "anode") AND CONTAINS(LCASE(?title), "model"))
+}
+```

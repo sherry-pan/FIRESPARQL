@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label "Ball in cup, catch (DMControl100k)".
+  ?model orkg:hasScore ?score.
+  ?score a owl:Quantity.
+  ?score orkg:unit "Score".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+    orkgr:R153846 orkgp:compareContribution ?contrib.
+    ?contrib orkgp:P35524 ?eval.
+    ?eval orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:P3376 ?benchmark.
+    ?benchmark orkgp:P35148 ?cont.
+    ?cont orkgp:P35163 ?evalu.
+    ?evalu a orkgp:Evaluation ;
+           rdfs:label ?eval_lbl.
+    ?contrib orkgp:P3364 ?model.
+    ?model rdfs:label ?model_lbl.
+    FILTER(REGEX(?eval_lbl, "Percentage error"))
+}
+```

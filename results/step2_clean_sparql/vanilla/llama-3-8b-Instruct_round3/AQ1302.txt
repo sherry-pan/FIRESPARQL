@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?article a orkg:Article ;
+           orkg:hasBenchmark ?benchmark ;
+           orkg:hasDataset ?dataset.
+  ?benchmark orkg:hasMetric ?metric ;
+             orkg:hasScore ?score.
+  ?dataset rdfs:label "Atari 2600 Tennis".
+}
+ORDER BY DESC(?score) 
+LIMIT 1
+```

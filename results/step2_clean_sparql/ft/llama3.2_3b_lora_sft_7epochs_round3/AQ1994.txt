@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label "HRLRE".
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
+  OPTIONAL {
+    ?cont orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_VALUE ?value.
+    FILTER(?value > 0)
+  }
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?title
+WHERE {
+  ?paper schema:keywords "PWC Leaderboards (restricted)".
+  ?paper schema:hasBenchmark ?benchmark.
+  ?benchmark schema:hasTitle ?title.
+  ?benchmark schema:hasDataset ?dataset.
+  ?dataset schema:datasetType "benchmark".
+}
+ORDER BY DESC(?paper)
+```

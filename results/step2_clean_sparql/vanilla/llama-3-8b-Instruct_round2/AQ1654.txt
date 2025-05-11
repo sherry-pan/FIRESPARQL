@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <https://w3id.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/TR/1999/PR-rdf-schema-19990303#>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasMetric ?metric.
+  ?metric dcterms:title "PARAMS".
+  ?metric orkg:hasValue ?metricValue.
+  ?paper orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label "FGVC Aircraft".
+  ?evaluation orkg:hasMetricValue ?metricValue.
+  ?model orkg:hasPaper ?paper.
+}
+```

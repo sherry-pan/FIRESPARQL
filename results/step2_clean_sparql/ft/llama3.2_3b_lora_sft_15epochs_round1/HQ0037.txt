@@ -1,0 +1,18 @@
+```sparql
+SELECT ?author
+WHERE {
+  {
+    SELECT ?author (COUNT(?paper) AS ?paperCount)
+    WHERE {
+      ?paper a orkgc:Paper ;
+             rdfs:label ?title ;
+             orkgp:P31 ?contrib .
+      FILTER(REGEX(?title, "coronavirus"))
+      ?contrib orkgp:P32 ?author .
+    }
+    GROUP BY ?author
+  }
+}
+ORDER BY DESC(?paperCount)
+LIMIT 1
+```

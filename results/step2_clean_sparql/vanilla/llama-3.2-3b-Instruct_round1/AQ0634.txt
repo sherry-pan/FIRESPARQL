@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ns#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paperId 
+WHERE {
+    ?paper schema:hasTitle ?title.
+    ?paper schema:hasDescription ?description.
+    FILTER(CONTAINS(LCASE(?description), 'amazon-2')).
+    ?paper schema:hasBenchmark ?benchmark.
+    ?benchmark schema:hasDataset ?dataset.
+    ?dataset schema:datasetName "Amazon-2".
+    ?paper orkg:hasPaperId ?paperId.
+}
+```

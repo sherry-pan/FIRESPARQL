@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the Large mLSTM model and include the links to their code?
+
+Generated SPARQL:
+ ```sparql
+    PREFIX orkg: <http://orkg.org/ontology/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?paper?title?link
+    WHERE {
+     ?paper orkg:utilizes?model.
+     ?model schema:description "Large mLSTM".
+     ?paper schema:hasCode?code.
+     ?code schema:code?link.
+      FILTER (lang(?paper) = "en")
+    }
+    ```
+    
+    Note: This query assumes that the ORKG uses the schema.org vocabulary for describing papers and code. It also assumes that the model description is in English and the papers and code are also in English. The query retrieves the titles and links of papers that utilize the Large mLSTM model, along with their corresponding code links.<|eot_id|>

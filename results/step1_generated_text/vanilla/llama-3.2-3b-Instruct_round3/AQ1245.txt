@@ -1,0 +1,36 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the AAPD dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?metric?score
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetType orkg:AAPD.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasScore?score.
+    ?benchmark orkg:hasHighestResult?highest.
+    ?highest a orkg:BenchmarkResult.
+    ?highest orkg:hasMetric?metric.
+    ?highest orkg:hasScore?score.
+     FILTER (?metric = "your_metric" )
+     }
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetType orkg:AAPD.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?benchmark orkg:hasScore?score.
+    ?benchmark orkg:hasHighestResult?highest.
+    ?highest a orkg:BenchmarkResult.
+    ?highest orkg:hasMetric?metric.
+    ?highest orkg:hasScore?score.
+     FILTER (?metric = "your_metric" )
+     }
+     GROUP BY?metric?score
+     ORDER BY?score DESC
+     LIMIT 1<|eot_id|>

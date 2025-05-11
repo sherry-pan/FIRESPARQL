@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?model ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:name "Atari 2600 Montezuma's Revenge".
+  ?experiment a orkg:Experiment ;
+              orkg:hasModel ?model ;
+              orkg:hasBenchmark ?benchmark ;
+              orkg:metricValue ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

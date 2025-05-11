@@ -1,0 +1,16 @@
+Question:
+Could you provide a list of models that have been tested on the SciERC benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/>
+     PREFIX schema: <http://schema.org/>
+     SELECT?model?modelLabel
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasEvaluation orkg:Evaluation.
+      ?evaluation orkg:hasDataset schema:Dataset.
+      ?dataset schema:name "SciERC".
+       SERVICE orkg:infer {
+        ?model orkg:hasLabel?modelLabel.
+       }
+     }<|eot_id|>

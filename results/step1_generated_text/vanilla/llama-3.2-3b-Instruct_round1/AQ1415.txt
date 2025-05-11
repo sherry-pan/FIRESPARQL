@@ -1,0 +1,16 @@
+Question:
+What is the best performing model benchmarking the 200k Short Texts for Humor Detection dataset in terms of F1-score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?f1score 
+     WHERE {
+      ?model wdt:P31 wd:Q3439169.
+      ?model wdt:P131?benchmark.
+      ?benchmark rdfs:label "200k Short Texts for Humor Detection".
+      ?benchmark wdt:P162?f1score.
+      ?f1score wdt:P3007 "F1-score".
+       FILTER (REGEX(LCASE(?f1score) "f1-score") && REGEX(LCASE(?f1score) ".*"))
+     }<|eot_id|>

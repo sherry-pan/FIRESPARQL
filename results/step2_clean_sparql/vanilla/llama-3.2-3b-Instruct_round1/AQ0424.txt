@@ -1,0 +1,13 @@
+```sparql
+PREFIX wmt: <http://wmt2014.de/wmt14/>
+PREFIX wikibase: <http://wikibase.org/wiki/>
+SELECT ?paper ?title 
+WHERE {
+    ?paper wmt:hasBenchmark ?benchmark.
+    ?benchmark wikibase:label ?label.
+    FILTER (lang(?label) = 'en' AND CONTAINS(?label, 'WMT2014 German-English'))
+    ?paper wikibase:label ?title.
+    FILTER (lang(?title) = 'en')
+}
+LIMIT 100
+```

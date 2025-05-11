@@ -1,0 +1,20 @@
+Question:
+List the code links in papers that use the A3C FF (1 day) hs model in any benchmark?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.openresearchknowledge.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT?paper?code_link
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:usesModel?model.
+ ?model rdfs:label "A3C FF (1 day) hs model".
+ ?paper orkg:benchmarks?benchmark.
+ ?benchmark rdfs:label?benchmark_label.
+  FILTER (?benchmark_label!= "" && lang(?benchmark_label) = "en").
+ ?paper orkg:hasCodeLink?code_link.
+}<|eot_id|>

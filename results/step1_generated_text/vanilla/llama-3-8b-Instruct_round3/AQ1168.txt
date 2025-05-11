@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the Supervised: dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?dataset a orkg:Dataset ;
+           dcterms:title "Supervised".
+ ?benchmark a orkg:Benchmark ;
+           orkg:dataset?dataset ;
+           orkg:result?result.
+ ?result rdfs:label?metric ;
+           orkg:value?value.
+  FILTER (?metric!= "null" &&?value!= "null")
+}<|eot_id|>

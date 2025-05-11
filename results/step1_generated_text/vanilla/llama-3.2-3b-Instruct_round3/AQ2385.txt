@@ -1,0 +1,27 @@
+Question:
+Where can I find code references in papers that have used the EfficientNetV2-L model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX ork: <http://ork.buffalo.edu/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?paper?reference 
+     WHERE {
+    ?paper a ork:Paper.
+    ?paper ork:hasPaper?benchmarkPaper.
+    ?benchmarkPaper ork:hasBenchmark?benchmark.
+    ?benchmark ork:benchmarkFor?benchmarkType.
+    ?benchmark ork:benchmarkType?benchmarkType.
+    ?benchmarkType ork:benchmarkTypeLabel "Benchmarking".
+    ?benchmark ork:hasBenchmarking?benchmarking.
+    ?benchmarking ork:benchmarkingType "Code Reference".
+    ?benchmarking ork:hasCode?code.
+    ?benchmarking ork:hasBenchmarking?benchmarking.
+    ?benchmarking ork:benchmarkingType "Code Reference".
+    ?benchmarking ork:hasCode?code.
+    ?benchmarking ork:hasCode?benchmarkingCode.
+    ?benchmarkingCode ork:code "EfficientNetV2-L".
+    ?benchmarking ork:benchmarking?benchmark.
+    ?benchmark ork:benchmarkFor?benchmarkType.
+     }<|eot_id|>

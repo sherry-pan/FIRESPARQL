@@ -1,0 +1,28 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+     PREFIX dcterms: <http://purl.org/dc/terms/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?metric?score 
+     WHERE {
+    ?dataset a schema:Dataset.
+    ?dataset schema:name "Atari 2600 Berzerk".
+    ?benchmark a schema:Benchmark.
+    ?benchmark schema:dataset?dataset.
+    ?benchmark schema:metric?metric.
+    ?benchmark schema:score?score.
+    ?benchmark schema:dataset?dataset.
+    ?benchmark schema:benchmarkOf?benchmarkingEvent.
+    ?benchmarkingEvent schema:benchmark?benchmark.
+    ?benchmarkingEvent schema:name "Atari 2600 Berzerk".
+    ?benchmarkingEvent schema:metric?metric.
+    ?benchmarkingEvent schema:score?score.
+     FILTER (lang(?metric) = "en")
+     FILTER (lang(?score) = "en")
+     }<|eot_id|>

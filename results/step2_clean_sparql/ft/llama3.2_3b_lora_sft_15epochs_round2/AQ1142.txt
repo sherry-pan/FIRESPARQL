@@ -1,0 +1,10 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    ?property orkgr:HAS_DATASET orkgr:R3309.
+    ?property ?metric ?value.
+    ?metric rdfs:label ?metric_lbl.
+    BIND(xsd:int(?value) AS ?value)
+}
+ORDER BY DESC(?score)
+```

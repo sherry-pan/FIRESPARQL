@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledge.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark "MedSTS".
+  ?evaluation orkg:hasMetric "Pearson Correlation".
+  ?evaluation orkg:hasValue ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

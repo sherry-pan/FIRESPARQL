@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkg: <http://rdf.or.kr/ontology/>
+PREFIX wos: <http://rdf.or.kr/resource/WOS/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:dataset wos:WOS-5736 ;
+             orkg:metric ?metric ;
+             orkg:result ?value.
+  {
+    SELECT ?metric (MAX(?v) AS ?value) 
+    WHERE {
+      ?benchmark a orkg:Benchmark ;
+                 orkg:dataset wos:WOS-5736 ;
+                 orkg:metric ?metric ;
+                 orkg:result ?v.
+    }
+    GROUP BY ?metric
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```
