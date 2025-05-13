@@ -1,0 +1,15 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the STEM-ECR v1.0 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R6908 orkgp:prepare_dataset_29137 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P71068?reporting_level.
+       FILTER(REGEX(?reporting_level, "full"))
+      ?dataset orkgp:P71075?eval.
+      ?eval rdfs:label?eval_lbl.
+       FILTER(REGEX(?eval_lbl, "Accuracy|Recall|micro-F1|macro-F1"))
+      ?eval orkgp:P71079?recall.
+      ?recall rdfs:label?metric_lbl.
+     }<|eot_id|>

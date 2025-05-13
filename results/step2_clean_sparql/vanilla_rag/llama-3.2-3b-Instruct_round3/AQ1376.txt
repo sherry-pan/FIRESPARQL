@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?microF1
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMethod ?method.
+  ?method orkg:hasMicroF1 ?microF1.
+  ?dataset orkg:hasTitle "Penn Treebank".
+}
+ORDER BY DESC(?microF1)
+LIMIT 1
+```

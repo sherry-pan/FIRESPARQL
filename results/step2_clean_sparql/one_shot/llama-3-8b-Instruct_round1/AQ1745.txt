@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/ontology/contributions#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "F1 score".
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label "BUCC Chinese-to-English benchmark".
+  
+  ?contribution orkgc:usesDataset ?dataset;
+                orkgc:achieves ?metric;
+                orkgc:usedBy ?model.
+
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

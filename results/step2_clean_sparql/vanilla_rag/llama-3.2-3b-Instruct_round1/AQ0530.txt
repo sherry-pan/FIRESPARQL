@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?title ?id
+WHERE {
+    ?paper orkg:HAS_DATASET ?dataset.
+    ?dataset orkg:has_dataset ?datasetBC5CDR.
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:has_benchmark ?benchmarkBC5CDR.
+    ?paper orkg:CSVW_Titles ?title.
+    ?paper orkg:CSVW_Name ?id.
+    FILTER (regex(str(?title), "BC5CDR-disease"))
+}
+```

@@ -1,0 +1,27 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label "Habitat 2020 Object Nav test-std".
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Habitat 2020 Object Nav test-std".
+  
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P34 ?cont.
+  
+  ?model orkgp:P31 ?cont;
+         rdfs:label ?model_lbl.
+  
+  ?success orkgp:P34 ?eval;
+           orkgp:P20027 ?value.
+  
+  ?value orkgp:P20028 ?score.
+  FILTER (str(?score) = "success")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

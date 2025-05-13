@@ -1,0 +1,14 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "ImageNet", "i"))
+  ?eval orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

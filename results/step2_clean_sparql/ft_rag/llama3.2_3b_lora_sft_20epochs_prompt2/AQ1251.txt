@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  orkgr:R155777 orkgp:HAS_BENCHMARK ?bmark.
+  ?bmark orkgp:P71071 ?knowledge;
+         orkgp:P71092 ?uncertainty.
+  FILTER(?uncertainty = "0")
+  
+  ?bmark orkgp:P31 ?cont.
+  ?cont rdfs:label ?title;
+        orkgp:P5002 ?eval;
+        orkgp:P5001 ?method;
+        orkgp:P5003 ?metric ?value.
+        
+  FILTER(REGEX(STR(?metric), "top"))
+}
+```

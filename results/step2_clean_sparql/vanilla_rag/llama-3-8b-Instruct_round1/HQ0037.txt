@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?author (COUNT(?article) AS ?count)
+WHERE {
+  ?article orkg:has_author ?author.
+  ?article orkg:has_property ?property.
+  ?property orkg:property_iri "http://orkg.org/orkg/predicate/CSVW_Number".
+  ?property orkg:has_value ?count.
+}
+GROUP BY ?author
+ORDER BY DESC(?count)
+LIMIT 1
+```

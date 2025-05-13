@@ -1,0 +1,28 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL++"
+      || str(?dataset_lbl) = "CoNLL++ (small)"
+      || str(?dataset_lbl) = "CoNLL++ (medium)"
+      || str(?dataset_lbl) = "CoNLL++ (large)")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  OPTIONAL {?eval orkgp:P71080 ?micro_f1.}
+  OPTIONAL {?eval orkgp:P71082 ?macro_f1.}
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_METHOD ?method.
+  OPTIONAL {?method rdfs:label ?method_lbl.}
+  BIND(xsd:float(?micro_f1) AS ?micro_f1)
+  BIND(xsd:float(?macro_f1) AS ?macro_f1)
+  BIND(IF(?micro_f1 > ?macro_f1, ?micro_f1, ?macro_f1) AS ?f1)
+  FILTER(?f1 = 0.998)
+  ?model orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_VALUE ?value.
+    ?value orkgp:P70059 ?model_lbl.
+  }
+}
+```

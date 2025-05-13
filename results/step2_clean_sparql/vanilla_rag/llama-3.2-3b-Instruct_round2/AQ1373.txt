@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?model
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasTrainingSet ?trainingSet.
+  ?trainingSet orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:name "FSNS-Test".
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER (?metric = "Sequence error")
+}
+```

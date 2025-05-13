@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?paper.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P4039 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P4038 ?code.
+  ?code orkgp:P4037 ?method.
+  FILTER(REGEX(STR(?method), "BiDAF + Self Attention + ELMo"))
+}
+```

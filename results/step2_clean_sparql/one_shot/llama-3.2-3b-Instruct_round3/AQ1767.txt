@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy (%)")
+  
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Stanford Cars")
+      
+      ?benchmark orkgp:HAS_DATASET ?dataset;
+                 orkgp:HAS_EVALUATION ?eval.
+      
+      ?eval orkgp:HAS_MODEL ?model;
+            rdfs:label ?model_lbl.
+      
+      ?eval orkgp:HAS_METRIC ?metric_val.
+      
+      FILTER NOT EXISTS {
+        ?other_model orkgp:HAS_EVALUATION ?other_eval.
+        ?other_eval orkgp:HAS_METRIC ?other_metric_val.
+        FILTER(?other_metric_val > ?metric_val)
+      }
+    }
+  }
+}
+```

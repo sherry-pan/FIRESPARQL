@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?code ?link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_IMPLEMENTATION ?impl.
+  ?impl orkg:HAS_CODE ?code.
+  ?paper orkg:HAS_BENCHMARK ?bench.
+  ?bench orkg:HAS_LINK ?link.
+  FILTER (CONTAINS(STR(?bench), "BiT-M") AND CONTAINS(STR(?bench), "ResNet"))
+}
+```

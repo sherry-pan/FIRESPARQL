@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasDataset ?dataset1.
+  FILTER (str.contains(URI(?dataset1), "BUCC") && str.contains(URI(?dataset1), "Russian-to-English"))
+  ?dataset1 orkg:hasMetric ?metric.
+  ?metric orkg:value ?value.
+}
+```

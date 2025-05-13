@@ -1,0 +1,12 @@
+```sparql
+SELECT ?papers ?papers_lbl
+WHERE {
+  ?papers orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?papers.
+  ?papers orkgp:HAS_BENCHMARK ?benchmark.
+  FILTER(REGEX(?benchmark, "Atari 2600 Bank Heist"))
+  ?cont orkgp:P5002 ?eval.
+  ?eval orkgp:P5040 ?number.
+  BIND(xsd:int(?number) AS ?papers_lbl)
+}
+```

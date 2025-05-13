@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?name
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:P71081 ?accuracy.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset csvw:Name "RACE".
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation csvw:Name ?name.
+  FILTER (?accuracy = "High"^^xsd:string).
+}
+```

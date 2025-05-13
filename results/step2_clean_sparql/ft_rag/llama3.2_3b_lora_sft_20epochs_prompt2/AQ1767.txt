@@ -1,0 +1,14 @@
+```sparql
+SELECT ?approach ?eval_value
+WHERE {
+  ?eval orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?cont.
+  ?cont orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P1503 ?model.
+  ?model orkgp:P1502 ?eval_value.
+  FILTER(REGEX(?eval_value, "1"))
+  ?cont orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?approach.
+}
+```

@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest Accuracy score on the Story Cloze Test benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:P71081?accuracy.
+ ?model orkg:P97142?method.
+ ?method orkg:P71075?evaluation.
+ ?evaluation orkg:P71086?storyClozeTest.
+  FILTER (?storyClozeTest = <http://orkg.org/orkg/evaluation/Evaluation_1234567890>.
+          ?accuracy >?prevAccuracy.
+           FILTER (!BOUND(?prevAccuracy) ||?accuracy >?prevAccuracy).
+  ORDER BY DESC(?accuracy)
+  LIMIT 1
+}<|eot_id|>

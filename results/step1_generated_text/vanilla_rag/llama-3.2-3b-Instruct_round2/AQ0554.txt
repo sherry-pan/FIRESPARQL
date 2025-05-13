@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX wdt: <http://www.wikidata.org/property/>
+
+     SELECT?paperId?title 
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "Oxford-IIIT Pets".
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasValue?value.
+    ?benchmark orkg:hasPaper?paper.
+    ?paper orkg:titles?title.
+     }
+     }<|eot_id|>

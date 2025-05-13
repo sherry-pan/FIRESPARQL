@@ -1,0 +1,43 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Tennis benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Atari 2600 Tennis")
+              || str(?dataset_lbl      = "Atari 2600 Tennis (test)"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:P71075          ?value.
+       OPTIONAL {?eval           orkgp:P71081          ?accuracy.
+                ?accuracy           rdfs:label              ?accuracy_lbl.}
+       OPTIONAL {?eval           orkgp:P71079          ?recall.
+                ?recall           rdfs:label              ?recall_lbl.}
+       OPTIONAL {?eval           orkgp:P71080          ?micro_f1.
+                ?micro_f1           rdfs:label              ?micro_f1_lbl.}
+       OPTIONAL {?eval           orkgp:P71082          ?macro_f1.
+                ?macro_f1           rdfs:label              ?macro_f1_lbl.}
+       OPTIONAL {?eval           orkgp:P71083          ?F1.
+                ?F1           rdfs:label              ?F1_lbl.}
+       OPTIONAL {?eval           orkgp:P71084          ?mAP.
+                ?mAP           rdfs:label              ?mAP_lbl.}
+       OPTIONAL {?eval           orkgp:P71085          ?MACE.
+                ?MACE           rdfs:label              ?MACE_lbl.}
+       OPTIONAL {?eval           orkgp:P71087          ?PMAE.
+                ?PMAE           rdfs:label              ?PMAE_lbl.}
+       OPTIONAL {?eval           orkgp:P71088          ?RAME.
+                ?RAME           rdfs:label              ?RAME_lbl.}
+       OPTIONAL {?eval           orkgp:P71089          ?RASE.
+                ?RASE           rdfs:label              ?RASE_lbl.}
+       OPTIONAL {?eval           orkgp:P71090          ?SAME.
+                ?SAME           rdfs:label              ?SAME_lbl.}
+       OPTIONAL {?eval           orkgp:P71076          ?model.
+                ?model           rdfs:label              ?model_lbl.}
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P7107           ?cont.
+       {
+        ?cont         orkgp:HAS_MODEL         ?model.
+        ?model         rdfs:label              ?model_lbl.}
+     }<|eot_id|>

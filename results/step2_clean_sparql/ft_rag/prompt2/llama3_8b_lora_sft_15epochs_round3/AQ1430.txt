@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+  
+  ?evaluation a orkgc:Evaluation.
+  
+  ?cont orkgp:HAS_EVALUATION ?evaluation;
+        orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_METHOD ?method.
+  
+  ?method orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  
+  ?evaluation orkgp:HAS_VALUE ?value.
+  ?value orkgp:P34 ?metric.
+  
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

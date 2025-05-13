@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:Evaluation ?evaluation.
+    ?evaluation orkg:Metric ?metric.
+    ?benchmark orkg:Score ?score.
+    FILTER (?metric = "Accuracy" OR ?metric = "F1" OR ?metric = "Recall")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

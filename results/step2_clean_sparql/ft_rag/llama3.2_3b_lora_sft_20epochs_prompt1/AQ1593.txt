@@ -1,0 +1,14 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:P71075 orkgp:P71081.
+  ?model rdfs:label ?model_lbl.
+  ?evaluation orkgp:P71075 orkgp:P71081.
+  ?evaluation rdfs:label ?evaluation_lbl.
+  FILTER(?evaluation_lbl = "1-of-100 Accuracy")
+  ?evaluation orkgp:P31 orkgp:P31 ?dataset.
+  ?dataset orkgp:P71086 ?training_set.
+  ?training_set rdfs:label ?training_set_lbl.
+  FILTER(REGEX(?training_set_lbl, "PolyAI Reddit"))
+}
+```

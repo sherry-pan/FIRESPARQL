@@ -1,0 +1,29 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+       orkgr:R155801 (
+         orkgp:Location;
+           rdfs:label?location
+       )
+       orkgp:Location a orkgp:Location;
+                 rdfs:label?location
+       FILTER(REGEX(STR(?location), "city"))
+       UNION
+       orkgp:Location a orkgp:Location;
+                  rdfs:label?location
+       FILTER(REGEX(STR(?location), "country"))
+       UNION
+       orkgp:Location a orkgp:Location;
+                  rdfs:label?location
+       FILTER(REGEX(STR(?location), "geographical region"))
+       UNION
+       orkgp:Location a orkgp:Location;
+                  rdfs:label?location
+       FILTER(REGEX(STR(?location), "location"))
+     }
+     GROUP BY?location
+     ORDER BY DESC(COUNT(?location))
+     LIMIT 1<|eot_id|>

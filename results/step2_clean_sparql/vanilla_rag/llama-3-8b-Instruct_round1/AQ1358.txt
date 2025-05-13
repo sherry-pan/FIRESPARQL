@@ -1,0 +1,14 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX example: <http://example.org/ontology/>
+
+SELECT ?metric_name ?result_value
+WHERE {
+  ?benchmark schema:identifier "BUCC French-to-English" .
+
+  ?benchmark example:hasResult ?result .
+  ?result example:metricName ?metric_name ;
+          example:metricValue ?result_value .
+
+} ORDER BY DESC(?result_value) LIMIT 1
+```

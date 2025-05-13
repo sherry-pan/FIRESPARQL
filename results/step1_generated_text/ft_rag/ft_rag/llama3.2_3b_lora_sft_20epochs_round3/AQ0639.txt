@@ -1,0 +1,19 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Ohsumed dataset?
+
+Generated SPARQL:
+ SELECT?title?number
+     WHERE {
+       orkgr:R44980 orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "Ohsumed"))
+      ?benchmark orkgp:P30?paper.
+      ?paper orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "Ohsumed"))
+      ?paper orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P40035?number.
+       BIND(xsd:integer(?number) AS?number)
+      ?paper orkgp:CSVW_Titles?title.
+       BIND(xsd:string(?title) AS?title)
+     }<|eot_id|>

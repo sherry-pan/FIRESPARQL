@@ -1,0 +1,16 @@
+Question:
+Where can I find code references in papers that have used the All-attention network - 18 layers model for benchmarking purposes?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?paper?codeReference
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_METHOD orkg:All-attention_network_18_layers.
+ ?paper orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_CODE_REFERENCE?codeReference.
+  FILTER(LANG(?codeReference) = "text/plain" || LANG(?codeReference) = "text/x-python" || LANG(?codeReference) = "text/x-java" || LANG(?codeReference) = "text/x-c++")
+}<|eot_id|>

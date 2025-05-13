@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the Words in Context dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?benchmarkScore?metric 
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetForBenchmark orkg:WordsInContext.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasMetric?metric.
+    ?benchmark orkg:hasBenchmarkScore?benchmarkScore.
+     FILTER (?metric IN (orkg:Recall orkg:micro-F1 orkg:Accuracy orkg:macro-F1) )
+     FILTER (?evaluation orkg:hasReportingLevel "Dataset" )
+     }<|eot_id|>

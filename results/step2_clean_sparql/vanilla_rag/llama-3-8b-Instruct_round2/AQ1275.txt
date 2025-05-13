@@ -1,0 +1,12 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasEvaluation ?evaluation;
+             orkg:hasMethod "Atari 2600 Berzerk".
+  ?evaluation orkg:hasMetric ?metric ;
+              orkg:hasScore ?score.
+  FILTER(?metric = "highest")
+}

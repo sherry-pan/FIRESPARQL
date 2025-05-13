@@ -1,0 +1,15 @@
+Question:
+List the metrics that are used to evaluate models on the NCBI Disease benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R155290  orkgr:HAS_DATASET       a            orkgp:Dataset;
+                  rdfs:label              ?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "NCBI Disease"))
+      ?dataset       orkgr:HAS_BENCHMARK      orkgp:Benchmark;
+                      orkgp:P32               ?benchmark.
+      ?benchmark    orkgp:HAS_METRIC         orkgp:Metric;
+                      orkgp:P31               ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+     }<|eot_id|>

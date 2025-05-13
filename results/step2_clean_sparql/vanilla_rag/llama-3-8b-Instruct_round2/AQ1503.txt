@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web.at/orkg/ontology#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?metric ?value
+WHERE {
+   ?model a orkg:Model ;
+          orkg:hasBenchmark ?benchmark ;
+          orkg:hasDataset "Supervised".
+   ?benchmark orkg:hasEvaluation ?evaluation.
+   ?evaluation orkg:hasMetric ?metric.
+   ?metric orkg:hasValue ?value.
+   FILTER (?metric IN ("Accuracy", "micro-F1", "macro-F1", "Recall", "NDCG@10")).
+}
+```

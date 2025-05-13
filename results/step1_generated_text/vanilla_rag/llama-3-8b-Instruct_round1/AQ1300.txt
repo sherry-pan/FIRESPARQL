@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Ice Hockey dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX csvw: <http://www.w3.org/ns/csvw#>
+     SELECT?benchmark?metric?score
+     WHERE {
+      ?benchmark a orkg:Benchmark ;
+                 orkg:hasDataset?dataset.
+      ?dataset a orkg:Dataset ;
+                 orkg:name "Atari 2600 Ice Hockey".
+      ?benchmark orkg:hasEvaluation?evaluation.
+      ?evaluation csvw:value?score.
+      ?evaluation orkg:metric?metric.
+       FILTER (?metric!= "none")
+       ORDER BY DESC(?score)
+       LIMIT 1
+     }<|eot_id|>

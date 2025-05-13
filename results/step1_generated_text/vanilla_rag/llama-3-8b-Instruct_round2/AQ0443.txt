@@ -1,0 +1,15 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the UCF101 (finetuned) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+
+SELECT?paperTitle?paperID
+WHERE {
+ ?paper orkg:HAS_BENCHMARK?benchmarking.
+ ?paper orkg:HAS_DATASET orkg:UCF101.
+ ?paper orkg:HAS_METHOD?method.
+  FILTER (?method = "finetuned").
+ ?paper orkg:CSVW_Titles?paperTitle.
+ ?paper orkg:CSVW_Number?paperID.
+}<|eot_id|>

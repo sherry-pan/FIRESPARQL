@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value WHERE {
+  ?result rdf:type dbo:BenchmarkResult .
+  ?result dbo:dataset dbr:WMT2014_English-GermanDataset .
+  ?result dbo:benchmarkMetric ?metric .
+  ?result dbo:value ?value .
+}
+ORDER BY DESC(xsd:decimal(?value))
+LIMIT 1
+```

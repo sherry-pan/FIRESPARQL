@@ -1,0 +1,86 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R44980 orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P31?cont.
+      ?cont orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+       FILTER(REGEX(?dataset_lbl, "NYT-single"))
+      ?eval orkgp:P33?metric.
+      ?metric rdfs:label?metric_lbl
+      ?eval orkgp:P32?value.
+       BIND(xsd:float(?value) AS?value)
+      ?cont orkgp:HAS_TRAINING_SET?training.
+      ?training orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_VALIDATION_SET?validation.
+      ?validation orkgp:P31?cont2.
+      ?cont2 orkgp:P33?metric2.
+      ?metric2 sameAs?metric.
+      ?cont orkgp:P32?value2.
+       BIND(xsd:float(?value2) AS?value)
+       FILTER(?metric_lbl = "Recall" ||?metric_lbl = "Micro-F1" ||?metric_lbl = "Accuracy" ||?metric_lbl = "Macro-F1")
+      ?cont orkgp:P34?cont3.
+      ?cont3 orkgp:HAS_REFERENCE_SYSTEM?reference.
+      ?reference rdfs:label?reference_lbl.
+       FILTER(REGEX(?reference_lbl, "T5-base") || REGEX(?reference_lbl, "T5-large"))
+      ?cont orkgp:P35?cont4.
+      ?cont4 orkgp:HAS_MODEL?model.
+       BIND(xsd:float(?model) AS "model_value")
+      ?cont orkgp:P36?cont5.
+      ?cont5 orkgp:HAS_MODEL?model.
+      ?cont orkgp:P36?metric3.
+      ?metric3 sameAs?metric.
+      ?cont orkgp:P37?cont6.
+      ?cont6 orkgp:HAS_MODEL?model.
+       BIND(xsd:float(?model) AS "model_value")
+       FILTER(REGEX(?metric_lbl, "F1"))
+      ?cont orkgp:P33?value3.
+       BIND(xsd:float(?value3) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value4.
+       BIND(xsd:float(?value4) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value5.
+       BIND(xsd:float(?value5) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value6.
+       BIND(xsd:float(?value6) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value7.
+       BIND(xsd:float(?value7) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value8.
+       BIND(xsd:float(?value8) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value9.
+       BIND(xsd:float(?value9) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value10.
+       BIND(xsd:float(?value10) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value11.
+       BIND(xsd:float(?value11) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value12.
+       BIND(xsd:float(?value12) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value13.
+       BIND(xsd:float(?value13) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value14.
+       BIND(xsd:float(?value14) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value15.
+       BIND(xsd:float(?value15) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value16.
+       BIND(xsd:float(?value16) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value17.
+       BIND(xsd:float(?value17) AS?value)
+       FILTER(?metric_lbl = "F1")
+      ?cont orkgp:P33?value18.
+       BIND(x

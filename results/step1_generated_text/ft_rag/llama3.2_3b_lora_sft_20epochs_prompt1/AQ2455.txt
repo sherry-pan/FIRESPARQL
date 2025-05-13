@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the XLNet (base) model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P34?implementation.
+       FILTER(REGEX(?implementation, "XLNet (base)")
+       &&?implementation?property_iri?value.)
+      ?paper orkgp:P35?eval.
+      ?eval orkgp:P31?cont.
+      ?cont orkgp:P34?implementation.
+       OPTIONAL {
+        ?implementation?property_iri?value.
+           FILTER(REGEX(?value, "code"))
+       }
+      ?paper orkgp:P36?code.
+     }<|eot_id|>

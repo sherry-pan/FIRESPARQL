@@ -1,0 +1,12 @@
+```sparql
+SELECT ?model WHERE {
+  ?evaluation ex:performedOn ex:Atari2600MontezumasRevenge ;
+              ex:evaluatedModel ?model ;
+              ex:Score ?score .
+  FILTER NOT EXISTS {
+    ?otherEvaluation ex:performedOn ex:Atari2600MontezumasRevenge ;
+                     ex:Score ?otherScore .
+    FILTER(?otherScore > ?score)
+  }
+}
+```

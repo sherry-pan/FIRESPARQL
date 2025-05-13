@@ -1,0 +1,19 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the AAPD dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_title
+     WHERE {
+       orkgr:R44985 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+       FILTER(REGEX(?benchmark, "AAPD"))
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_BENCHMARK?benchmark.
+       OPTIONAL {
+        ?paper orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_BENCHMARK?benchmark.
+       }
+      ?paper orkgp:HAS_TITLE?title.
+       BIND(xsd:string(?title) AS?paper_title)
+     }<|eot_id|>

@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R15562162 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?metric.
+  OPTIONAL {?metric orkgp:LABEL ?metric_lbl.}
+  OPTIONAL {?eval orkgp:P71079 ?value.}
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

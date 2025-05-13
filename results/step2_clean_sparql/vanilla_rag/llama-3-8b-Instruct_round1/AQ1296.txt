@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?benchmark ?metric ?score
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:has_dataset orkg:Atari_2600_Wizard_of_Wor.
+ ?benchmark orkg:evaluation ?evaluation.
+ ?evaluation csvw:value ?score.
+ ?evaluation csvw:metric ?metric.
+ FILTER (?metric = "top benchmark score" || ?metric = "top score" || ?metric = "best score")
+}
+ORDER BY DESC(?score) LIMIT 1
+```

@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/ontology/contributions#>
+PREFIX orkgp: <http://www.semanticweb.org/orkg/ontology/performances#>
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+  ?performance a orkgp:Performance;
+               orkgp:dataset ?dataset;
+               orkgp:metric ?metric;
+               orkgp:value ?value;
+               orkgp:model ?model.
+  ?model rdfs:label ?model_lbl.
+  ?dataset rdfs:label "Kuzushiji-MNIST".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

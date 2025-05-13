@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evalu;
+        orkgp:P43144 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "BLEU"))
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  ?dataset orkgp:P31 ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER(?benchmark_lbl = "WMT2016 English-German")
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value rdfs:label ?value_lbl.
+  FILTER(REGEX(?value_lbl, "best"))
+  ?cont orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

@@ -1,0 +1,15 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WebQuestions dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?paperTitle?paperID
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:CSVW_Titles?paperTitle.
+ ?paper csvw:CSVW_Name?paperID.
+ ?benchmark orkg:HAS_BENCHMARK?paper.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/WebQuestions>.
+}<|eot_id|>

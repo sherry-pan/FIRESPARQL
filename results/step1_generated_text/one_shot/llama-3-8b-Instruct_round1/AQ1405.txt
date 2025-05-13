@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkgc: <http://orkg.org/collection/>
+PREFIX orkgp: <http://orkg.org/property/>
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Entity F1")
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "SciERC")
+     ?benchmark     

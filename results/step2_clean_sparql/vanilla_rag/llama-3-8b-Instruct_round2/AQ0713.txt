@@ -1,0 +1,12 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT ?evaluationMetric
+WHERE {
+  ?paper orkg:HAS_EVALUATION ?evaluationMetric.
+  ?evaluationMetric rdfs:label ?metricLabel.
+  FILTER (?metricLabel IN ("Accuracy", "Recall", "micro-F1", "macro-F1"))
+  FILTER (?paper orkg:HAS_BENCHMARK <http://orkg.org/orkg/resource/SciGEN>)
+}
+```

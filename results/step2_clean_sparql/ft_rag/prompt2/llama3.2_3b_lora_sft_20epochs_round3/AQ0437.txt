@@ -1,0 +1,12 @@
+```sparql
+SELECT ?paper ?paper_title
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "STL-10")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?eval orkgp:HAS_EVALUATION ?benchmark.
+  ?paper orkgp:HAS_EVALUATION ?eval;
+         rdfs:label ?paper_title.
+}
+```

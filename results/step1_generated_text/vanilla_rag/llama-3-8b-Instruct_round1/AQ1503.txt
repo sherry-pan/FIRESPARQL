@@ -1,0 +1,31 @@
+Question:
+What is the best performing model benchmarking the Supervised: dataset in terms of SemEval 2013 metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://data.orkg.org/api/v1/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl>
+
+SELECT?model?accuracy?microF1?macroF1?recall?ndcg10
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:usesMetric orkg:Accuracy.
+ ?evaluation orkg:usesMetric orkg:MicroF1.
+ ?evaluation orkg:usesMetric orkg:MacroF1.
+ ?evaluation orkg:usesMetric orkg:Recall.
+ ?evaluation orkg:usesMetric orkg:NDCG@10.
+ ?evaluation orkg:hasValue?accuracy.
+ ?evaluation orkg:hasValue?microF1.
+ ?evaluation orkg:hasValue?macroF1.
+ ?evaluation orkg:hasValue?recall.
+ ?evaluation orkg:hasValue?ndcg10.
+  FILTER(?model orkg:hasDataset "Supervised".
+ ?model orkg:hasTrainingSet "Supervised".
+ ?model orkg:hasValidationSet "Supervised".
+ ?model orkg:hasEvaluationMetric "Accuracy".
+ ?model orkg:hasEvaluationMetric "MicroF1".
+ ?model orkg:hasEvaluationMetric "MacroF1".
+ ?model orkg:hasEvaluationMetric "Recall".
+ ?model orkg:hasEvaluationMetric "NDCG@10".
+}<|eot_id|>

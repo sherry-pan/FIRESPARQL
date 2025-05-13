@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model 
+WHERE {
+  ?model orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_dataset "VTAB-1k".
+  ?benchmark orkg:has_params ?params.
+  FILTER (STRCONTAINS(?params, "Params score") && STRCONTAINS(?params, "top performing"))
+}
+```

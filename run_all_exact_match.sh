@@ -46,13 +46,15 @@
 
 
 # --------------->for vanilla models<----------------
-OUTPUT_CSV="exact_match_summary_vanilla.csv"
+OUTPUT_CSV="results/step3_sparql_running_against_orkg/exact_match_summary_vanilla_rag.csv"
 > $OUTPUT_CSV  # Empty it first
 
 # Define model variants, epochs, and rounds
 models=(
     "llama-3.2-3b-Instruct"
     "llama-3-8b-Instruct"
+    # "llama3.2_3b_lora_sft_20epochs"
+    # "llama3_8b_lora_sft_15epochs"
 )
 
 rounds=(
@@ -65,7 +67,8 @@ rounds=(
 for model in "${models[@]}"; do
   for round in "${rounds[@]}"; do
     model_id="${model}_${round}"
-    csv_path="results/step3_sparql_running_against_orkg/vanilla/${model_id}/sparql_results.csv"
+    # the csv path for all sparql execution results
+    csv_path="results/step3_sparql_running_against_orkg/vanilla_rag/${model_id}/sparql_results.csv"
 
     if [ -f "$csv_path" ]; then
       echo "Processing $csv_path ..."

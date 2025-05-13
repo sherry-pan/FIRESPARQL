@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_value
+WHERE {
+  orkgr:R6898 orkgp:HAS_BENCHMARK {
+    orkgp:HAS_EVALUATION {
+      orkgp:EVALUATION_METRIC ?metric.
+      orkgp:EVALUATION_METRIC_VALUE ?metric_value.
+    }
+    orkgp:BEST_RESULT {
+      orkgp:EVALUATION_METRIC_VALUE ?metric_value.
+    }
+    FILTER(?metric = "Cartpole, swingup (DMControl500k)")
+  }
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

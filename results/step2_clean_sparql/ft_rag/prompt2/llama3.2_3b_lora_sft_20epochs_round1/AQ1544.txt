@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "OntoNotes"
+         || str(?dataset_lbl) = "OntoNotes-SNLI"
+         || str(?dataset_lbl) = "OntoNotes-SNLI-1.0")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71080 ?micro_f1.
+  ?cont orkgp:P97135 ?matching_strategy.
+  ?model rdfs:label ?model_lbl.
+  BIND(IF(?matching_strategy = "macro"^^xsd:string, ?micro_f1, NULL) AS ?micro_f1_label)
+  FILTER(?micro_f1_label = 1)
+}
+ORDER BY DESC(?micro_f1_label)
+LIMIT 1
+```

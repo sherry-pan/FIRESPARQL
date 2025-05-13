@@ -1,0 +1,24 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl;
+               orkgp:HAS_BENCHMARK ?benchmark.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Asteroids")
+      
+      ?benchmark orkgp:P32 ?evaluation.
+      ?evaluation orkgp:P431 ?metric;
+                  orkgp:HAS_VALUE ?value.
+      BIND(xsd:float(?value) AS ?metric_value)
+      
+      OPTIONAL {?metric orkgp:HAS_MODEL ?model}
+      OPTIONAL {?model rdfs:label ?model_lbl}
+    }
+  }
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

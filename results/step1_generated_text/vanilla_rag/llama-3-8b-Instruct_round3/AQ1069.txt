@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the seel.cse.lsu.edu/data/re17.zip  dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX seel: <http://seel.cse.lsu.edu/data/>
+
+SELECT?metric?score
+WHERE {
+ ?dataset a orkg:Dataset ;
+           orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:evaluation?metric ;
+              orkg:score?score.
+ ?evaluation orkg:dataset seel:re17.zip.
+  FILTER (?metric IN (orkg:Recall, orkg:Accuracy, orkg:micro-F1, orkg:macro-F1) )
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

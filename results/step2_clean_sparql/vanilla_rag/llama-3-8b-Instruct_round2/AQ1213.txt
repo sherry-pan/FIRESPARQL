@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/BC2GM>.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:HAS_VALUE ?value.
+  FILTER(?evaluation orkg:IS_TOP_BENCHMARK = true)
+}
+```

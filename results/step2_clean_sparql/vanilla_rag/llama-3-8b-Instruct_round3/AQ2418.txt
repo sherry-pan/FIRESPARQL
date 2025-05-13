@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_MODEL <http://orkg.org/orkg/entity/ResNet-152_SAM>.
+ ?paper orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_IMPLEMENTATION ?code.
+ FILTER(lang(?code) = "code").
+}
+```

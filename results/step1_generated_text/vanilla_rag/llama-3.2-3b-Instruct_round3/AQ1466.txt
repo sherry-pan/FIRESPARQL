@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?f1score
+     WHERE {
+      ?model orkg:has_method?m.
+      ?m orkg:has_benchmark?benchmark.
+      ?benchmark orkg:has_evaluation?evaluation.
+      ?evaluation orkg:has_f1_score?f1score.
+       FILTER (bnode(?benchmark) = "SQuAD1.1")
+       ORDER BY (?f1score DESC)
+       LIMIT 1
+     }<|eot_id|>

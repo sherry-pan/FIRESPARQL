@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:HAS_EVALUATION ?evaluation ;
+             orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:DATASET_NAME "BUCC German-to-English".
+  ?evaluation orkg:HAS_METHOD ?method;
+              csvw:CSVW_Value ?score.
+  ?method csvw:CSVW_Property ?metric.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

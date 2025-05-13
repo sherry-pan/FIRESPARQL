@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Boxing dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?paper orkg:has_dataset <http://orkg.org/dataset/Atari_2600_Boxing>.
+ ?paper orkg:has_benchmark?benchmark.
+ ?benchmark orkg:evaluation?evaluation.
+ ?evaluation orkg:metric?metric.
+ ?evaluation orkg:value?value.
+  FILTER (?metric =?value)  // Assuming metric and value are the same
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

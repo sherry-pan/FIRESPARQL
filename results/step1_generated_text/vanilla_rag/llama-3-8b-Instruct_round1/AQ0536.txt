@@ -1,0 +1,19 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Walker, walk (DMControl100k) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?paperTitle?paperId
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:has_dataset?dataset.
+ ?dataset orkg:label "Walker, walk (DMControl100k)".
+ ?paper orkg:has_benchmark?benchmark.
+ ?benchmark orkg:evaluation?evaluation.
+ ?evaluation orkg:has_result?result.
+ ?result orkg:has_metric?metric.
+  FILTER(?metric = "benchmark" ||?metric = "evaluation").
+ ?paper orkg:title?paperTitle.
+ ?paper orkg:doi?paperId.
+}<|eot_id|>

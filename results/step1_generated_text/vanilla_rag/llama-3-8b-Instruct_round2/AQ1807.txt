@@ -1,0 +1,25 @@
+Question:
+Indicate the model that performed best in terms of Accuracy metric on the Kuzushiji-MNIST benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/pav/>
+
+SELECT?model
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation p:Accuracy.
+ ?evaluation orkg:hasMethod?method.
+ ?method orkg:hasModel?model.
+ ?evaluation orkg:hasDataset <http://orkg.org/orkg/dataset/Kuzushiji-MNIST>.
+  FILTER (?evaluation orkg:hasEvaluation?accuracy.
+          ?accuracy a p:Value.
+          ?accuracy p:hasValue?value.
+           FILTER (?value >?bestValue).
+          ?bestValue = (SELECT max(?value) AS?bestValue
+                         FROM {?evaluation orkg:hasEvaluation?evaluation2.
+                              ?evaluation2 p:hasValue?value2.
+                               FILTER (?value2 IS NOT NULL) }
+                         GROUP BY?evaluation2)
+           )
+}<|eot_id|>

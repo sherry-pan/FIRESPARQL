@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_IMPLEMENTATION ?code.
+  ?benchmark rdfs:label ?benchmark_label.
+  FILTER(CONTAINS(str(?benchmark_label), "MFEC"))
+}
+```

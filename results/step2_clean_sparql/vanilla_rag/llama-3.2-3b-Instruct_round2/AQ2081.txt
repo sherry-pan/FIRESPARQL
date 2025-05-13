@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper_link ?code
+WHERE {
+    ?paper orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_code ?code.
+    ?benchmark orkg:has_method ?method.
+    FILTER (STRLIKE(?method, "BiDAF + Self Attention + ELMo") && STRLIKE(?method, "single model")).
+    BIND(IRI(CONCAT("http://orkg.org/orkg/paper/", STR(?paper))) AS ?paper_link).
+}
+```

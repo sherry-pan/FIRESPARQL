@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?dataset
+WHERE {
+  ?dataset orkg:has_dataset ?dataset_benchmark.
+  ?dataset_benchmark orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  FILTER (CONTAINS(LCASE(STR(?evaluation)), "common sense reasoning"))
+}
+```

@@ -1,0 +1,24 @@
+Question:
+Can you list the models that have been evaluated on the STS Benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl        = "STS Benchmark")
+               && has_dataset       ?dataset       && has_evaluation     ?eval)
+      ?eval           orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION  ?eval;
+                      rdfs:label          ?eval_lbl.
+      ?approach      orkgp:HAS_EVALUATION  ?eval;
+                    orkgp:HAS_METHOD     ?method.
+      ?method      rdfs:label              ?method_lbl.
+       OPTIONAL {
+        ?approach       rdfs:label              ?approach_lbl. 
+       }
+      ?model      orkgp:HAS_APPROACH     ?approach.
+       OPTIONAL {
+        ?model      rdfs:label              ?model_lbl. 
+       }
+     }<|eot_id|>

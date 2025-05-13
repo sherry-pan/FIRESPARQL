@@ -1,0 +1,21 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Error Rate score when benchmarked on the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/ontology/>
+    PREFIX csvw: <http://orkg.org/orkg/predicate/>
+
+    SELECT?model?name
+    WHERE {
+     ?model csvw:HAS_EVALUATION?evaluation.
+     ?evaluation csvw:has_metric?metric.
+     ?metric csvw:has_value?value.
+     ?model csvw:HAS_DATASET?dataset.
+     ?dataset csvw:name "Oxford-IIIT Pets".
+     ?model csvw:HAS_BENCHMARK?benchmark.
+     ?benchmark csvw:has_metric?metric.
+     ?model csvw:HAS_NAME?name.
+      FILTER (?metric = "Top-1 Error Rate" &&?value = MIN(?values) )
+      BIND (COLLECT(DISTINCT?name) as?top_model_name)
+    }
+   <|eot_id|>

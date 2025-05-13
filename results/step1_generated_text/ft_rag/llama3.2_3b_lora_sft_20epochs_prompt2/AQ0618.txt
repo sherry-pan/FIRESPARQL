@@ -1,0 +1,15 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Atari 2600 Frostbite dataset?
+
+Generated SPARQL:
+ SELECT?title?number
+     WHERE {
+       orkgr:R44978 orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "Atari 2600 Frostbite"))
+      ?benchmark orkgp:P7043?eval.
+      ?eval orkgp:HAS_EVALUATION?evaluationalist.
+      ?evaluationalist orkgp:P7042?number.
+      ?paper orkgp:P7044?title.
+      ?number orkgp:HAS_PAPER?paper.
+     }<|eot_id|>

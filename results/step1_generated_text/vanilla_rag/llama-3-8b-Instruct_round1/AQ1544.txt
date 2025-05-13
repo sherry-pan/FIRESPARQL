@@ -1,0 +1,24 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the OntoNotes benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT?model?modelLabel?f1Metric
+    WHERE {
+     ?paper a orkg:Paper.
+     ?paper orkg:hasEvaluationResult?evaluationResult.
+     ?evaluationResult orkg:hasMetric?metric.
+     ?metric orkg:hasValue?f1Value.
+     ?metric a schema:PropertyValue ; 
+             orkg:hasProperty orkg:P71080.
+     ?model orkg:hasPaper?paper ; 
+             orkg:hasEvaluationResult?evaluationResult.
+     ?model orkg:hasLabel?modelLabel.
+      FILTER (?f1Value = (SELECT max(?f1Value) 
+                         FROM {?evaluationResult2 orkg:hasMetric?metric2 ; 
+                              ?metric2 orkg:hasProperty orkg:P71080 ; 
+                              ?metric2 orkg:hasValue?f1Value2 } 
+                         GROUP BY?metric2 ) ).
+    }<|eot_id|>

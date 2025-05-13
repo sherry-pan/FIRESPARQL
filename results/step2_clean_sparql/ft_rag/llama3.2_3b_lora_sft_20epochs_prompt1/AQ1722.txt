@@ -1,0 +1,15 @@
+```sparql
+SELECT ?name WHERE {
+  ?model orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P43147 ?value.
+  ?value orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Atari 2600 Tutankham"))
+  ?evaluation orkgp:P43146 ?cont.
+  ?cont orkgp:P43147 ?value.
+  ?value orkgp:HAS_VALUE ?value_lbl.
+  ?model rdfs:label ?name
+}
+ORDER BY DESC(?value_lbl)
+LIMIT 1
+```

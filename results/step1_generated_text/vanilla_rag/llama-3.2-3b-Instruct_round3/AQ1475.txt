@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest Accuracy score on the Story Cloze Test benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?model?accuracy
+     WHERE {
+    ?model orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasAccuracy?accuracy.
+    ?model orkg:method?method.
+    ?method orkg:hasTrainingSet?trainingSet.
+    ?trainingSet orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:benchmarkPlane "Story Cloze Test".
+     FILTER(?accuracy > (SELECT?maxAccuracy FROM {
+    ?model orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasAccuracy?accuracy.
+     }) )
+     }<|eot_id|>

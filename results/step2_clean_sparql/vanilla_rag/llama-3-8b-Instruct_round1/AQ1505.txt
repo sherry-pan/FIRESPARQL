@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?evaluation
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation .
+  ?evaluation orkg:HAS_METRIC ?metric .
+  ?metric orkg:HAS_NAME "Senseval 2" .
+  ?model orkg:HAS_BENCHMARK ?benchmark .
+  ?benchmark orkg:HAS_NAME "Supervised" .
+  
+  FILTER NOT EXISTS {
+    ?other_model orkg:HAS_EVALUATION ?other_evaluation .
+    ?other_evaluation orkg:HAS_METRIC ?other_metric .
+    ?other_metric orkg:HAS_NAME "Senseval 2" .
+    ?other_model orkg:HAS_BENCHMARK ?benchmark .
+    ?benchmark orkg:HAS_NAME "Supervised" .
+    FILTER (?other_evaluation > ?evaluation)
+  }
+}
+```

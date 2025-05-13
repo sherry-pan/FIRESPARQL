@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.
+  FILTER (str(?problem_lbl) = "Fine-Grained Image Classification")
+  ?benchmark orkgp:HAS_PROBLEM ?problem.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+}
+ORDER BY ?dataset_lbl
+```

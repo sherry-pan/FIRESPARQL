@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of PARAMS metric on the FGVC Aircraft benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl        = "FGVC Aircraft")
+              && has_benchmark      ?benchmark)
+      ?benchmark      orkgp:HAS_EVALUATION     ?eval;
+                      orkgp:P32               ?cont;
+                      orkgp:P31               ?evaluer.
+      ?eval         orkgp:HAS_VALUE         ?value;
+                     orkgpHAS_METRIC        ?metric.
+      ?metric      orkgp:P200           ?cont;
+                   orkgp:P200          ?param;
+                   rdfs:label              ?metric_lbl.
+      ?cont      orkgp:HAS_MODEL         ?model.
+      ?model    rdfs:label              ?model_lbl.
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?titles ?number
+WHERE {
+  ?papers orkgp:HAS_BENCHMARK orkgr:R44985.
+  ?papers rdfs:label ?titles.
+  ?papers orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:PWC_Leaderboards_restricted_Evaluation rdfs:label ?eval_labels.
+  FILTER(REGEX(?eval_labels, "eval"))
+  ?papers orkgp:HAS_NUMBER ?number.
+}
+ORDER BY ASC(?number)
+LIMIT 100
+```

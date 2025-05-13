@@ -1,0 +1,12 @@
+```sparql
+SELECT ?title ?identifier
+WHERE {
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "DBpedia"))
+  ?paper orkgp:HAS_PUBLICATION ?publication.
+  ?publication rdfs:label ?title.
+  ?paper orkgp:HAS_ID ?identifier.
+}
+```

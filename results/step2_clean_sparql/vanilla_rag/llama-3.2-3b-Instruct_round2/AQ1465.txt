@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?metric 
+WHERE {
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    FILTER (bc:label(?metric) = "Accuracy" &&
+           bc:label(?evaluation) = "CommonsenseQA")
+}
+```

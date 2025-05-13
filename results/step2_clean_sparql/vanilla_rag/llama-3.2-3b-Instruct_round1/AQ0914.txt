@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+    ?metric orkg:hasBenchmark "Barabasi-Albert".
+    ?metric orkg:label ?label.
+    FILTER (CONTAINS(LCASE(?label), "metric") OR CONTAINS(LCASE(?label), "evaluation"))
+}
+GROUP BY ?metric
+HAVING (COUNT(?metric) > 1)
+```

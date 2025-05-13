@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgc: <http://openresearchknowledge.org/codelists/Dataset>
+PREFIX orkgp: <http://openresearchknowledge.org/properties/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?paper ?paper_title ?benchmark
+WHERE {
+  ?paper a orkgc:ResearchPaper;
+         rdfs:label ?paper_title;
+         orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_DATASET <http://example.org/dataset/arxiv>.
+}
+```

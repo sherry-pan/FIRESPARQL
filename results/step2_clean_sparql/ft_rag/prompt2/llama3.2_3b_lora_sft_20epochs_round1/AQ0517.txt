@@ -1,0 +1,11 @@
+```sparql
+SELECT ?papers ?papers_lbl
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(STR(?dataset), "DCASE"))
+  ?papers http://orkg.org/orkg/predicate/CSVW_Titles ?papers_lbl.
+}
+```

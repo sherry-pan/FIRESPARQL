@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model
+WHERE {
+  ?model orkg:hasEvaluation orkg:Accuracy ?accuracy.
+  ?model orkg:hasTrainingSet ?trainSet.
+  ?trainSet orkg:hasDataset ?dataset.
+  ?dataset orkg:hasKnowledgeGraph ?graph.
+  ?graph orkg:hasModel ?model.
+  ?model orkg:method ?method.
+  FILTER (str(?method) = "CommonsenseQA" AND str(?accuracy) = "best")
+}
+```

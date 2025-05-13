@@ -1,0 +1,28 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?metric?score 
+     WHERE {
+    ?s orkg:hasBenchmarkResult?b.
+    ?b orkg:hasMetric?metric.
+    ?b orkg:hasScore?score.
+    ?s orkg:hasDataset?ds.
+    ?ds orkg:hasTrainingSet?train.
+    ?ds orkg:hasValidationSet?val.
+    ?train orkg:hasEvaluation?e.
+    ?e orkg:hasMetric?m.
+    ?m orkg:label "Benchmark Result".
+     FILTER (?m = "Scholarly entity usage detection".
+     AND?m = "Benchmark Result".
+     AND?m = "Recall".
+     AND?m = "micro-F1".
+     AND?m = "Accuracy".
+     AND?m = "macro-F1".
+     AND?m = "hasEvaluation".
+     AND?m = "hasTrainingSet".
+     AND?m = "hasValidationSet".
+     AND?m = "hasScore".
+     }
+     LIMIT 1<|eot_id|>

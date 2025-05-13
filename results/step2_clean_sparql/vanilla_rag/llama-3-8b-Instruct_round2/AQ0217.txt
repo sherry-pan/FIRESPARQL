@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model;
+         orkg:hasBenchmark ?benchmark;
+         orkg:hasDataset ?dataset;
+         orkg:hasMethod ?method;
+         orkg:hasImplementation ?implementation.
+  ?benchmark rdfs:label ?benchmarkLabel.
+  FILTER (?benchmarkLabel = "Reuters RCV1/RCV2 English-to-German benchmark dataset").
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER (?datasetLabel = "Reuters RCV1/RCV2 dataset").
+}
+```

@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the MultiNLI dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?model
+WHERE {
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_DATASET <http://multinli.com/>.
+ ?evaluation orkg:HAS_METHOD?method.
+  FILTER (str(?method)!= "null")
+}
+ORDER BY?model<|eot_id|>

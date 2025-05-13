@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Dataset;
+               orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric;
+                orkg:hasScore ?score.
+    FILTER (rdfs:label(?benchmark) = "Atari 2600 Berzerk")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset; rdfs:label "ImageNet 64x64".
+  ?benchmark has_dataset ?dataset.
+  ?evaluation orkgp:HAS_DATASET ?dataset; orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?metric; orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_float)
+  ?metric orkgp:P31 ?cont; rdfs:label ?metric_lbl.
+  FILTER (?metric_lbl = "Bits per dim")
+  ?model orkgp:P31 ?cont; rdfs:label ?model_lbl.
+}
+```

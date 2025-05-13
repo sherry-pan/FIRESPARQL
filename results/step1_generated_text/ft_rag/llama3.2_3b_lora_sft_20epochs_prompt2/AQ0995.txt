@@ -1,0 +1,27 @@
+Question:
+What are the metrics of evaluation over the PubMed 20k RCT dataset?
+
+Generated SPARQL:
+ SELECT?evaluators?evaluators_labels
+     WHERE {
+       orkgr:R6898 orkgp:HAS_EVALUATION?evaluators.
+      ?evaluators rdfs:label?evaluators_labels.
+       FILTER(REGEX(?evaluators_labels, "20k"))
+      ?evaluators orkgp:P71079?recalls.
+      ?recalls rdfs:label?recalls_labels.
+       OPTIONAL {
+        ?evaluators orkgp:P71081?accuracies.
+        ?accuracies rdfs:label?accuracies_labels.
+       }
+       OPTIONAL {
+        ?evaluators orkgp:P71080?micro_f1.
+        ?micro_f1 rdfs:label?micro_f1_labels.
+       }
+       OPTIONAL {
+        ?evaluators orkgp:P71082?macro_f1.
+        ?macro_f1 rdfs:label?macro_f1_labels.
+       }
+      ?evaluators orkgp:HAS_BENCHMARK?benchmarks.
+      ?benchmarks rdfs:label?benchmarks_labels.
+       FILTER(REGEX(?benchmarks_labels, "PubMed"))
+     }<|eot_id|>

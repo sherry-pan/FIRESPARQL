@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:has_dataset ?dataset.
+    ?dataset orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:evaluation ?evaluation.
+    ?evaluation orkg:value ?score.
+    FILTER (str(?score) > "0").
+    ?benchmark orkg:task ?task.
+    FILTER (?task = "Ball in cup, catch").
+    ?dataset orkg:label ?datasetLabel.
+    FILTER (str(?datasetLabel) = "DMControl100k").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

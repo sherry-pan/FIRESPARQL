@@ -1,0 +1,24 @@
+```sparql
+SELECT ?method ?method_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "Natural Questions \\(long\\)"))
+
+  ?benchmark orkgp:HAS_BENCHMARK ?benchmark;
+             orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:P71080 ?micro_f1;
+        orkgp:P71082 ?macro_f1.
+  
+  ?micro_f1 orkgp:HAS_VALUE ?micro_value.
+  ?macro_f1 orkgp:HAS_VALUE ?macro_value.
+  
+  ?benchmark orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?method_lbl.
+  
+  FILTER(?micro_value > ?macro_value)
+}
+```

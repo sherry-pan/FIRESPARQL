@@ -1,0 +1,19 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STL-10 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:CSVW_Titles?title.
+ ?paper csvw:CSVW_Name?name.
+ ?paper csvw:CSVW_Number?id.
+ ?paper orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET?dataset.
+ ?dataset orkg:STL10?stl10.
+  FILTER (?stl10 = "STL-10")
+}
+<|eot_id|>

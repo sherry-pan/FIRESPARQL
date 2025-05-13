@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasBenchmark ?hasBenchmark.
+  ?hasBenchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:csvwValue ?value ;
+              orkg:csvwNumber ?number.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:label "Ball in cup, catch (DMControl500k)".
+}
+ORDER BY DESC(?number)
+LIMIT 1
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?name
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK orkg:Penn_Treebank_Character_Level.
+  ?evaluation orkg:Number ?score.
+  ?model orkg:Name ?name.
+  FILTER (?score = (SELECT MAX(?score2) WHERE {
+    ?model orkg:Number ?score2.
+  }))
+}
+```

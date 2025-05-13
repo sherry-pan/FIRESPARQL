@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?modelLabel ?rouge1Score
+WHERE {
+  ?benchmark a orkg:HasBenchmark.
+  ?benchmark orkg:has_dataset <http://orkg.org/dataset/AESLC>.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:evaluation_metric "ROUGE-1".
+  ?evaluation orkg:evaluation_score ?rouge1Score.
+  ?benchmark orkg:compared_with ?model.
+  ?model orkg:has_method ?method.
+  ?method orkg:label ?modelLabel.
+}
+ORDER BY DESC(?rouge1Score)
+LIMIT 1
+```

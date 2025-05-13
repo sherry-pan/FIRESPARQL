@@ -1,0 +1,15 @@
+Question:
+What is the highest benchmark result achieved on the Amazon-2 dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/Amazon-2>.
+ ?benchmark orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:metric?metric.
+ ?evaluation orkg:value?value.
+  FILTER (?evaluation = (SELECT MAX(?evaluation) WHERE {?benchmark orkg:hasBenchmark?evaluation } ) )
+}<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+SELECT ?author
+WHERE {
+  ?contrib orkgp:P31 orkg:R110932;
+           orkgp:P27 ?author.
+  ?paper orkgp:P31 ?contrib;
+         orkgp:P29 ?date;
+         orkgp:P23123 ?number.
+  FILTER(?date >= "2020"^^xsd:string)
+}
+GROUP BY ?author
+ORDER BY DESC(COUNT(?paper))
+LIMIT 1
+```

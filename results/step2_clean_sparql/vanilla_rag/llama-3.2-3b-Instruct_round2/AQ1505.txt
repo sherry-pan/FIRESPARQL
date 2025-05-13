@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?metric ?metric_value 
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:COMPARED_WITH ?best_model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_Metric ?metric.
+  ?metric orkg:HAS_NAME "Senseval 2".
+  ?model orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:HAS_BENCHMARK "Supervised".
+  ?best_model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_Metric ?metric.
+  ?metric orkg:HAS_NAME "Senseval 2".
+  ?best_model orkg:HAS_METHOD ?method.
+}
+GROUP BY ?model
+HAVING (COUNT(?metric) = 1)
+```

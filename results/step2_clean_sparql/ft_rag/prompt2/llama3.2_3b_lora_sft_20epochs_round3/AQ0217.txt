@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Reuters RCV1/RCV2"
+          || str(?dataset_lbl) = "Reuters RCV2")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?eval;
+        orkgp:HAS_IMPLEMENTATION ?impl.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?eval_lbl)
+  OPTIONAL {
+    ?cont orkgp:HAS_METHOD ?method.
+    ?method rdfs:label ?method_lbl.
+    BIND(xsd:string(?method_lbl) AS ?model_lbl)
+  }
+}
+```

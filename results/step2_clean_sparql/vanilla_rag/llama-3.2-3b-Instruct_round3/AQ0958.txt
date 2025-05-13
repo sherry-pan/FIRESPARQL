@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?dataset orkg:datasetName "Atari 2600 Tutankham".
+  ?metric rdfs:label ?metricLabel.
+  FILTER (CONTAINS(?metricLabel, "Accuracy") || CONTAINS(?metricLabel, "Recall") || CONTAINS(?metricLabel, "micro-F1") || CONTAINS(?metricLabel, "macro-F1"))
+}
+```

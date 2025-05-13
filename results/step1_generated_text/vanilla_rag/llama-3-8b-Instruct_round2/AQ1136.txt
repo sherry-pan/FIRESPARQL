@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark score and its metric on the Natural Questions (short) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?score
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:has_dataset orkg:Dataset_Natural_Questions_short.
+ ?benchmark orkg:has_evaluation?evaluation.
+ ?evaluation orkg:has_metric?metric.
+ ?evaluation orkg:has_score?score.
+  FILTER (?score >= ALL (?score2?benchmark2.?benchmark2 orkg:has_dataset orkg:Dataset_Natural_Questions_short.?evaluation2 orkg:has_metric?metric2.?evaluation2 orkg:has_score?score2 ) )
+}<|eot_id|>

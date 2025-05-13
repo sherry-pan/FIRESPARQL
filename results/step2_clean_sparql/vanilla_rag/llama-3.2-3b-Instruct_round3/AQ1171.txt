@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?benchmark orkg:hasScore ?score.
+    FILTER (strstarts(str(?metric), "http://orkg.org/orkg/predicate/") && 
+            (contains(str(?metric), "_F1") || contains(str(?metric), "_Accuracy")))
+    FILTER (strstarts(str(?benchmark), "http://orkg.org/orkg/predicate/") &&
+            (contains(str(?benchmark), "P71079") || contains(str(?benchmark), "P71075")))
+}
+```

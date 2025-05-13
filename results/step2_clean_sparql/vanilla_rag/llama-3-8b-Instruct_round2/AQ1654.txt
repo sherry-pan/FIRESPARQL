@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX param: <http://orkg.org/orkg/property/>
+
+SELECT ?model
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/dataset/FGVC_Aircraft>.
+  ?evaluation param:HAS_VALUE ?value.
+  ?evaluation param:HAS_UNIT ?unit.
+  FILTER (?unit = "PARAMS")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

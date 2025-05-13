@@ -1,0 +1,16 @@
+Question:
+List the metrics that are used to evaluate models on the ImageNet 64x64 benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX p: <http://orkg.org/orkg/predicate/>
+
+SELECT?metric
+WHERE {
+ ?dataset a orkg:Dataset ; 
+           orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:usesMetric?metric.
+  FILTER (?dataset orkg:hasProperty orkg:datasetName "ImageNet 64x64" && 
+            ?metric a orkg:Metric && 
+            ?metric orkg:hasProperty p:benchmarkDataset?dataset)
+}<|eot_id|>

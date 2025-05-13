@@ -1,0 +1,17 @@
+```
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX bench: <http://benchmarking.org/model#>
+PREFIX metric: <http://metric.org/metric#>
+
+SELECT ?model ?top1Accuracy
+WHERE {
+    ?model rdf:type bench:Model .
+    ?model dcterms:conformsTo <http://benchmarking.org/dataset/iNaturalist2018> .
+    ?model bench:hasPerformance ?performance .
+    ?performance metric:hasMetric metric:Top1Accuracy .
+    ?performance metric:value ?top1Accuracy .
+}
+ORDER BY DESC(?top1Accuracy)
+LIMIT 1
+```

@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasResult ?result.
+  ?result orkg:sequenceError ?metricValue.
+  ?evaluation orkg:hasTrainingSet ?dataset.
+  ?dataset orkg:knowledgeGraphName "FSNS - Test".
+  {
+    SELECT (MAX(?metricValue) AS ?maxMetricValue)
+    WHERE {
+      ?evaluation orkg:hasResult ?result.
+      ?result orkg:sequenceError ?metricValue.
+    }
+  }
+  FILTER (?metricValue = ?maxMetricValue)
+}
+```

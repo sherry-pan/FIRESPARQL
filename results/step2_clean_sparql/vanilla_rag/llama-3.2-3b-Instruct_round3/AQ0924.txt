@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric 
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?dataset orkg:label "Atari 2600 Double Dunk".
+  FILTER (STR(?metric) = "Recall" || STR(?metric) = "micro-F1" || STR(?metric) = "Accuracy" || STR(?metric) = "macro-F1")
+}
+```

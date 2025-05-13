@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?code.
+  ?code orkgp:P50134 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "OTF spelling+lemma"))
+  ?cont orkgp:P50133 ?eval.
+  ?eval orkgp:P5040 ?benchmark.
+}
+LIMIT 1
+```

@@ -1,0 +1,36 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciCite dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?benchmark.
+      ?benchmark orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "SciCite"))
+      ?benchmark orkgp:HAS_BENCHMARK?benchmark_lbl.
+       OPTIONAL {
+        ?benchmark orkgp:P31?cont2.
+        ?cont2 orkgp:P31?paper.
+        ?paper orkgp:HAS_METHOD?method.
+       }
+       OPTIONAL {
+        ?paper orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:HAS_DATASET?dataset_lbl.
+         FILTER(?dataset_lbl = "SciCite")
+       }
+       OPTIONAL {
+        ?paper orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P31?dataset_lbl.
+         FILTER(?dataset_lbl = "SciCite")
+       }
+      ?paper orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31?dataset_lbl.
+       FILTER(?dataset_lbl = "SciCite")
+      ?paper orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:Titles?benchmark_lbl.
+       BIND(xsd:string(?benchmark_lbl) AS?paper_lbl)
+     }
+     ORDER BY DESC(?benchmark_lbl)
+     LIMIT 10<|eot_id|>

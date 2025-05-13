@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?method ?implementation
+WHERE {
+  ?method a orkgc:Method;
+          rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "CommonsenseQA"))
+  
+  ?dataset orkgp:HAS_EVALUATION ?eval;
+           orkgp:HAS_MODEL ?model.
+  ?model orkgp:HAS_IMPLEMENTATION ?implementation.
+}
+```

@@ -1,0 +1,35 @@
+Question:
+List the code links in papers that use the linear-chain CRFs model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper a orkgc:Paper.
+      ?paper orkgp:P31 [
+         rdfs:label?title.
+       ];
+        orkgp:HAS_BENCHMARK {
+         ?benchmark orkgp:P32 [
+            rdfs:label?benchmark_lbl.
+          ];
+          orkgp:P5049?eval.
+        }
+        orkgp:P5048 {
+          FILTER(REGEX(STR(?eval), "HAS_DATASET AND evaluation = \"Evaluation\""))
+        }
+       ?eval orkgp:P5047 [
+          orkgp:P5046?approach.
+        ];
+       ?approach rdfs:label?approach_lbl.
+        FILTER(REGEX(STR(?approach_lbl), "linear-chain CRFs"))
+       ?approach orkgp:P5048?eval2.
+        FILTER(?eval =?eval2)
+        orkgp:P5049?eval3.
+       ?eval3 orkgp:HAS_DATASET?dataset.
+       ?dataset orkgp:HAS_IMPLEMENTATION?implementation.
+       ?implementation orkgp:P31 [
+          rdfs:label?code.
+        ]
+      }
+      ORDER BY DESC(COUNT(?code))
+      LIMIT 1<|eot_id|>

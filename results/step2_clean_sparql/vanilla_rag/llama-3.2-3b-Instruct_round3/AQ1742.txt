@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?accuracy
+WHERE {
+    ?model orkg:hasDataset ?dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasValue ?accuracy.
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric "Unpermuted Accuracy"^^xsd:string.
+    ?model orkg:Name ?model_name.
+    FILTER (?model_name = "top performer").
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

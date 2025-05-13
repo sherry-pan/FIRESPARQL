@@ -1,0 +1,13 @@
+```sparql
+SELECT ?country
+WHERE {
+  orkgr:R110872 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37141 ?country.
+  ?contrib orkgp:P97104 ?methods.
+  ?methods rdfs:label ?methods_labels.
+  ?contrib orkgp:PXXXX ?prevalence.  # Assuming PXXXX is the correct property for prevalence
+  FILTER(REGEX(?methods_labels, "epilepsy"))
+}
+ORDER BY DESC(xsd:float(?prevalence))
+LIMIT 1
+```

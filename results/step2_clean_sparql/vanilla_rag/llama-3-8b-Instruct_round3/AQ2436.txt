@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_DATASET ?dataset.
+ ?dataset schema:name ?dataset_name.
+ FILTER(?dataset_name IN ("ImageNet", "iNat"))
+ ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+ ?implementation orkg:HAS_CODE ?code_link.
+}
+```

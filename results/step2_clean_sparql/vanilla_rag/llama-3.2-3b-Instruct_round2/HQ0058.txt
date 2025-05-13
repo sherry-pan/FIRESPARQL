@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?study ?precision ?recall ?micro_f1
+WHERE {
+  ?study orkg:usedMethod orkg:NaiveBayes.
+  ?study orkg:feature orkg:BagOfWords.
+  ?study orkg:classificationSystem orkg:userFeedbackAsFeatureRequest.
+  ?study orkg:precision ?precision.
+  ?study orkg:recall ?recall.
+  ?study orkg:microF1 ?micro_f1.
+}
+FILTER (?precision > 0 && ?recall > 0 && ?micro_f1 > 0)
+```

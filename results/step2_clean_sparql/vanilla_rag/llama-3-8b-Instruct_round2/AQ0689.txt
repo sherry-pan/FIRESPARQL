@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT DISTINCT ?metric
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasEvaluation ?hasEvaluation.
+  ?hasEvaluation orkg:hasMetric ?metric.
+  ?evaluation orkg:dataset <http://orkg.org/orkg/resource/STEM-ECR_v1.0>.
+  FILTER(?metric != orkg:reportingLevel && ?metric != orkg:usingAnOntology && ?metric != orkg:classificationSystem && ?metric != orkg:ARepresentativeSelectionOfKeywords && ?metric != orkg:validationSet && ?metric != orkg:#AcceptedSubmission && ?metric != orkg:#RejectedSubmission && ?metric != orkg:matchingStrategy && ?metric != orkg:SplittingTechnique && ?metric != orkg:LessonLearned)
+}
+```

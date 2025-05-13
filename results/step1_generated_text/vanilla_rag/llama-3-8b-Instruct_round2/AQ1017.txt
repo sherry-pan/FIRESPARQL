@@ -1,0 +1,19 @@
+Question:
+Can you list the metrics used to evaluate models on the BUCC Russian-to-English dataset?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/api/v1.0/>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?metric?metricValue
+WHERE {
+ ?model orkg:evaluation orkg:hasMetric?metric.
+ ?metric rdfs:label?metricLabel.
+ ?evaluation orkg:hasDataset orkg:BUCC_Russian-to-English.
+ ?evaluation orkg:hasMetric?metric.
+ ?metric orkg:hasValue?metricValue.
+  FILTER (LANG(?metricLabel) = "en" && LANG(?metricValue) = "en" )
+}<|eot_id|>

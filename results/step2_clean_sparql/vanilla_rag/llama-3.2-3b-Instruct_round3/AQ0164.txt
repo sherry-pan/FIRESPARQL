@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model
+WHERE {
+  ?model orkg:HAS_EVALUATION ?e.
+  ?e orkg:HAS_DATASET <http://orkg.org/orkg/dataset/TempEval-3>.
+  ?model orkg:HAS_METHOD ?m.
+  ?m rdfs:label ?modelLabel.
+  FILTER (STRLIKE(STR(?modelLabel), "model") || STRLIKE(STR(?modelLabel), "approach"))
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?metric
+WHERE {
+  ?metric orkg:isMetricFor ?dataset.
+  FILTER(?dataset = "TDM Tagged Corpus").
+  FILTER(?metric orkg:isMetricType "accuracy" || 
+         ?metric orkg:isMetricType "recall" || 
+         ?metric orkg:isMetricType "macro-F1" || 
+         ?metric orkg:isMetricType "micro-F1" || 
+         ?metric orkg:isMetricType "NDCG@10")
+}
+```

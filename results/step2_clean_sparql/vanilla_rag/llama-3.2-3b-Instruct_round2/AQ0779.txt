@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?metricLabel 
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDataset "Fashion-MNIST".
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:evaluationMetric ?metric.
+    ?metric orkg:metricName ?metricLabel.
+    FILTER (STRLIKE(STR(?metricLabel), "accuracy") OR 
+            STRLIKE(STR(?metricLabel), "loss") OR 
+            STRLIKE(STR(?metricLabel), "f1-score") OR 
+            STRLIKE(STR(?metricLabel), "precision") OR 
+            STRLIKE(STR(?metricLabel), "recall"))
+}
+GROUP BY ?metric
+HAVING (COUNT(?metric) > 1)
+```

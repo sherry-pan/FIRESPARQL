@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark orkg:hasBenchmark ?dataset.
+    ?dataset orkg:hasDataset "WOS-5736".
+    ?benchmark orkg:evaluation ?evaluation.
+    ?evaluation orkg:evaluationMetric ?metric.
+    ?benchmark orkg:value ?value.
+    ?benchmark orkg:number ?number.
+    FILTER (?number >= ?value)
+}
+```

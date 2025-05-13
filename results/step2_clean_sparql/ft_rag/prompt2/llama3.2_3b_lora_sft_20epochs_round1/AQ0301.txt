@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WOS-11967".
+  ?eval has_dataset ?dataset;
+        has_method ?method.
+  ?method a orkgc:Method.
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         has_approach/rdfs:label ?method_lbl.
+  FILTER (str(?method_lbl) = str(?model_lbl))
+}
+```

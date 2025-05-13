@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value 
+WHERE {
+  ?m orkg:HAS_DATASET "http://orkg.org/orkg/dataset/BUCC-French-English".
+  ?m orkg:HAS_EVALUATION ?e.
+  ?e orkg:CSVW_Value ?value.
+  ?m orkg:HAS_METHOD ?mt.
+  ?mt rdfs:label ?metric.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

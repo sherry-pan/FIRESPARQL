@@ -1,0 +1,21 @@
+Question:
+What models are being evaluated on the Atari 2600 Solaris dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?eval       a                orkgc:Evaluation;
+                  rdfs:label      ?eval_lbl.
+         FILTER (str(?eval_lbl) = "Atari 2600 Solaris")
+        ?eval       orkgp:P34   ?dataset.
+        ?dataset   orkgp:HAS_DATASET      ?dataset_lbl.
+         OPTIONAL {
+          ?dataset       orkgp:P34               ?model.
+          ?model          rdfs:label              ?model_lbl.}
+        ?eval       orkgp:P504              ?approach.
+        ?approach    orkgp:P504               ?method.
+        ?method    rdfs:label              ?method_lbl.
+         FILTER(REGEX(?method_lbl, "eval"))
+       }
+     ORDER BY DESC(COUNT(?model_lbl))
+     LIMIT 1<|eot_id|>

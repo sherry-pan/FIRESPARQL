@@ -1,0 +1,18 @@
+```sparql
+PREFIX ex: <http://example.org/schema#>
+
+SELECT ?model
+WHERE {
+  ?evaluation ex:benchmark "CoNLL 2012" ;
+              ex:metric "F1" ;
+              ex:score ?score ;
+              ex:model ?model .
+  
+  FILTER NOT EXISTS {
+    ?otherEvaluation ex:benchmark "CoNLL 2012" ;
+                     ex:metric "F1" ;
+                     ex:score ?otherScore .
+    FILTER (?otherScore > ?score)
+  }
+}
+```

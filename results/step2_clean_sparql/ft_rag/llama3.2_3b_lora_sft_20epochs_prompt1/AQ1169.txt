@@ -1,0 +1,24 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R155561 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P3102 ?benchmark.
+  ?benchmark orkgp:P3103 ?eval.
+  {
+    ?eval ?metric ?value.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  UNION
+  {
+    ?eval ?metric ?value.
+    ?eval orkgp:P71068 ?reporting_level.
+    ?reporting_level rdfs:label ?reporting_level_lbl.
+    FILTER(REGEX(?reporting_level_lbl, "full"))
+    ?eval orkgp:P71075 ?has_eval.
+    ?has_eval orkgp:P31 ?eval2.
+    ?eval2 ?metric ?value.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+ORDER BY DESC(?value)
+```

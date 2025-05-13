@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?evalu) AS ?score)
+WHERE {
+  orkgr:R155801 orkgp:P71075 ?evalu.
+  ?evalu ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(
+    ?metric = "Accuracy" || 
+    ?metric = "Recall" || 
+    ?metric = "macro-F1" || 
+    ?metric = "micro-F1"
+  )
+}
+```

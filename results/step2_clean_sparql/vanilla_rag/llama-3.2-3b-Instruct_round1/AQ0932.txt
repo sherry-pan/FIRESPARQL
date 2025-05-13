@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric 
+WHERE {
+  ?metric orkg:hasEvaluation ?e.
+  ?e orkg:label "Atari 2600 Berzerk".
+  FILTER (CONTAINS(LCASE(?metric), "accuracy") OR 
+          CONTAINS(LCASE(?metric), "recall") OR 
+          CONTAINS(LCASE(?metric), "micro-f1") OR 
+          CONTAINS(LCASE(?metric), "macro-f1"))
+}
+```

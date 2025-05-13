@@ -1,0 +1,39 @@
+Question:
+What is the name of the top performing model in terms of Accuracy (High) score when benchmarked on the RACE dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "RACE")
+        {
+          SELECT?model?model_lbl
+          WHERE {
+           ?dataset       a                orkgc:Dataset;
+                            orkgp:HAS_DATASET      ?cont.
+           ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                          orkgp:P71081          ?eval.
+           ?eval         orkgp:P31               ?evaluator;
+                          rdfs:label              ?eval_lbl.
+            OPTIONAL {?eval         orkgp:HAS_EVALUATION     ?evaluatio.
+                     ?evaluatio          orkgp:P31               ?evaluator.
+                     ?evaluatio          rdfs:label              ?eval_lbl.}
+            OPTIONAL {?cont         orkgp:HAS_EVALUATION     ?eval.
+                     ?eval          orkgp:P31               ?evaluator;
+                                    rdfs:label              ?eval_lbl.}
+            OPTIONAL {?cont         orkgp:HAS_METHOD        ?method.
+                     ?method         rdfs:label              ?method_lbl.}
+            OPTIONAL {?cont         orkgp:HAS_IMPLEMENTATION ?impl.
+                     ?impl           orkgp:P31               ?evaluator;
+                                    rdfs:label              ?eval_lbl.}
+            OPTIONAL {?cont         orkgp:HAS_APPROACH      ?approach.
+                     ?approach       rdfs:label              ?approach_lbl.}
+           ?model      orkgp:HAS_DATASET      ?cont.
+           ?model      orkgp:HAS_METHOD        ?method.
+           ?model      orkgp:HAS_IMPLEMENTATION ?impl.
+           ?model      orkgp:HAS_APPROACH      ?approach.
+           ?model      rdfs:label              ?model_lbl.}
+        }
+      ORDER BY DESC(?eval_lbl)
+      LIMIT 1<|eot_id|>

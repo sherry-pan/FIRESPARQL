@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (STR(?dataset_lbl) = "CommonsenseQA")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P71075 ?metric.
+  ?metric orkgp:P71081 ?accuracy.
+  ?accuracy rdfs:label ?accuracy_lbl.
+  OPTIONAL {
+    ?eval orkgp:P71145 ?model.
+    ?model rdfs:label ?model_lbl.
+  }
+}
+ORDER BY DESC(?accuracy_lbl)
+LIMIT 1
+```

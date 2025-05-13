@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?FLOPS
+WHERE {
+    ?evaluation orkg:hasDataset orkg:hasDataset ?dataset.
+    ?evaluation orkg:hasMethod ?method.
+    ?method orkg:methodFLOPS ?FLOPS.
+    ?evaluation orkg:hasDataset ?dataset.
+    ?evaluation orkg:hasModel ?model.
+    FILTER (isNumeric(?FLOPS))
+}
+```

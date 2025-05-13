@@ -1,0 +1,18 @@
+```
+PREFIX : <http://example.org/ns#>
+SELECT ?modelName WHERE {
+  ?evaluation :evaluatedOn :VTAB-1k ;
+               :model ?model ;
+               :metric :Top1Accuracy ;
+               :score ?score .
+  ?model :name ?modelName .
+  
+  FILTER NOT EXISTS {
+    ?otherEvaluation :evaluatedOn :VTAB-1k ;
+                      :metric :Top1Accuracy ;
+                      :score ?otherScore .
+    FILTER(?otherScore > ?score)
+  }
+}
+LIMIT 1
+```

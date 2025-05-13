@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkgr: <http://openresearchknowledgegraph.org/resource/>
+PREFIX orkgp: <http://openresearchknowledgegraph.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?author ?author_label
+WHERE {
+  {
+    SELECT ?author (COUNT(DISTINCT ?article) as ?maxArticles)
+    WHERE {
+      ?article orkgp:hasContribution/orkgp:P36090 ?author.
+      ?article orkgp:about orkgr:coronavirus.
+    }
+    GROUP BY ?author
+    ORDER BY DESC(?maxArticles)
+    LIMIT 1
+  }
+  ?author rdfs:label ?author_label.
+}
+```

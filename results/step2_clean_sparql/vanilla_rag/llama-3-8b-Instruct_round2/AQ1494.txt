@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?bleuScore
+WHERE {
+   ?model orkg:HAS_BENCHMARK ?benchmark.
+   ?benchmark orkg:HAS_EVALUATION ?evaluation.
+   ?evaluation orkg:HAS_METRIC "BLEU".
+   ?model orkg:HAS_DATASET ?dataset.
+   ?dataset orkg:LABEL "RotoWire".
+   ?model orkg:HAS_IMPLEMENTATION ?implementation.
+   ?implementation orkg:HAS_METRIC ?bleuScore.
+   FILTER(datatype(?bleuScore) = xsd:integer)
+}
+ORDER BY DESC(?bleuScore)
+```

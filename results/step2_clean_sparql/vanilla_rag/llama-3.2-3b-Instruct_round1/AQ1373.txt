@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model
+WHERE {
+  ?model orkg:hasEvaluation ?evaluations.
+  ?evaluations orkg:hasTrainingSet ?trainset.
+  ?trainset orkg:hasValidationSet ?validationset.
+  ?model orkg:hasMethod ?method.
+  ?method orkg:hasSequenceError ?seqError.
+  FILTER (?seqError = "FSNS - Test"^^xsd:string)
+}
+```

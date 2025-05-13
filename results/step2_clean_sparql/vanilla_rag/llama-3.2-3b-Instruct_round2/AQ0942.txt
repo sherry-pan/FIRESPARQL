@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric (COUNT(?metric) AS ?count)
+WHERE {
+  ?s orkg:hasEvaluation ?e.
+  ?e orkg:label "Evaluation metrics"@en.
+  ?s orkg:hasMetric ?metric.
+  ?metric orkg:label ?m.
+  FILTER (STRREGEX(STR(?m), "Recall|micro-F1|Accuracy|macro-F1|Avg Characters|Avg words|Avg Entity|Avg Concept|Avg Length"))
+}
+```

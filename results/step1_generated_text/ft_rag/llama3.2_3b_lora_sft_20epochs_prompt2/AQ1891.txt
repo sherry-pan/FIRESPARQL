@@ -1,0 +1,35 @@
+Question:
+What are the most commonly used benchmark datasets for the Entity Disambiguation research field?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                  rdfs:label      ?problem_lbl.  
+         FILTER (str(?problem_lbl) = "Entity Disambiguation")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark      orkgp:HAS_EVALUATION    ?eval.
+        ?eval           orkgp:HAS_VALUE         ?value.
+         BIND(xsd:float(?value) AS?average_usage)
+        ?cont         orkgp:HAS_DATASET      ?dataset.
+        ?cont         orkgp:HAS_EVALUATION    ?eval.
+        ?eval           orkgp:HAS_VALUE         ?value.
+         BIND(xsd:float(?value) AS?usage_count)
+        ?method        orkgp:HAS_IMPLEMENTATION ?impl;
+                        orkgp:HAS_DATASET      ?dataset.
+        ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark      orkgp:HAS_EVALUATION    ?eval.
+        ?eval           orkgp:HAS_VALUE         ?value.
+         BIND(xsd:float(?value) AS?average_impl)
+        ?problem       orkgp:HAS_METHOD        ?method.
+        ?method        orkgp:HAS_IMPLEMENTATION ?impl.
+        ?impl           orkgp:HAS_DATASET      ?dataset.
+        ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark      orkgp:HAS_EVALUATION    ?eval.
+        ?eval           orkgp:HAS_VALUE         ?value.
+         BIND(xsd:float(?value) AS?average_impl)
+         FILTER(?average_impl > 0.5 &&?average_usage > 0.5)
+       }
+     ORDER BY DESC(?average_usage)
+     LIMIT 1<|eot_id|>

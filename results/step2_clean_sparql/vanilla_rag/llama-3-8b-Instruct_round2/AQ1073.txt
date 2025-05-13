@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:benchmark ;
+             orkg:has_evaluation ?evaluation ;
+             orkg:dataset "Pubmed".
+  ?evaluation rdfs:label ?metric ;
+              orkg:score ?score ;
+              orkg:dataset "Pubmed".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

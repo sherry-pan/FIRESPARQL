@@ -1,0 +1,13 @@
+```sparql
+SELECT ?paper ?paper_lbl ?id
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  FILTER(?dataset = "ObjectNet")
+  ?benchmark orkgp:HAS_BENCHMARK ?eval.
+  ?eval orkgp:P43131 ?paper.
+  ?paper rdfs:label ?paper_lbl.
+  ?paper orkgp:P12345 ?id. # Assuming orkgp:P12345 is the property for ID
+}
+```

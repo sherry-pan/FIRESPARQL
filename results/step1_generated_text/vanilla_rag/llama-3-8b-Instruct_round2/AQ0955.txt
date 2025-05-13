@@ -1,0 +1,19 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?evaluationMetric?value
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+         orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?evaluationMetric.
+ ?evaluationMetric a owl:DatatypeProperty ;
+                  rdfs:label?evaluationMetricLabel.
+  FILTER (CONTAINS(LCASE(?evaluationMetricLabel), "atari 2600 defender") || CONTAINS(LCASE(?evaluationMetricLabel), "defender")).
+ ?evaluationMetric rdfs:range xsd:float.
+ ?evaluationMetric?value.
+}<|eot_id|>

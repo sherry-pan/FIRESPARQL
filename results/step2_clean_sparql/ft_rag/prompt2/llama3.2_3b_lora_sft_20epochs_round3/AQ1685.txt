@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?benchmark a orkgc:Dataset ;
+             rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "CL-SciSumm")
+  ?benchmark orkgp:P32 ?cont ;
+             orkgp:P31 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?eval_lbl ;
+        orkgp:P3027 ?evaluation.
+  ?evaluation orkgp:HAS_VALUE ?value ;
+              rdfs:label ?eval_lbl.
+  ?value orkgp:HAS_DATASET ?dataset ;
+         orkgp:HAS_BENCHMARK ?benchmark ;
+         orkgp:HAS_METHOD ?cont.
+  ?cont orkgp:HAS_MODEL ?model ;
+        rdfs:label ?model_lbl.
+}
+```

@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric (COUNT(*) AS count)
+WHERE {
+  ?metric orkg:hasBenchmark orkg:hasEvaluation.
+}
+GROUP BY ?metric
+HAVING (COUNT(*) >= 1)
+ORDER BY DESC(COUNT(*))
+```

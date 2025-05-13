@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 [
+    orkgp:P2005 ?approach
+  ].
+  ?approach orkgp:P2006 ?model.
+  ?model orkgp:P2004 ?implementation.
+  ?implementation rdfs:label ?implementation_labels.
+  FILTER(REGEX(STR(?implementation_labels), "CRF with sentence expansion"))
+  ?papers orkgp:P2007 ?eval.
+  ?eval orkgp:P2008 ?code.
+  ?code rdfs:label ?code_labels.
+  FILTER(REGEX(STR(?code_labels), "https?://"))
+}
+```

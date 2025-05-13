@@ -1,0 +1,19 @@
+Question:
+Where can I find code references in papers that have used the Past Decode Reg. + AWD-LSTM-MoS + dyn. eval. model for benchmarking purposes?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?paper?codeReference
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_IMPLEMENTATION?implementation.
+ ?implementation rdfs:label?modelName.
+  FILTER (CONTAINS(Lower(?modelName), "past decode reg") &&
+          CONTAINS(Lower(?modelName), "awd-lstm-mos") &&
+          CONTAINS(Lower(?modelName), "dyn eval")).
+ ?paper orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_CODE_REFERENCE?codeReference.
+}<|eot_id|>

@@ -1,0 +1,21 @@
+```sparql
+SELECT ?material ?material_lbl
+WHERE {
+  ?eval a orkgc:Evaluation;
+        rdfs:label ?eval_lbl;
+        orkgp:P43179 ?response_time.
+  FILTER (str(?eval_lbl) = "least response time")
+  ?material orkgp:P43178 ?eval;
+            a orkgc:Material;
+            rdfs:label ?material_lbl.
+  OPTIONAL {
+    ?material orkgp:P43176 ?mesh.
+  }
+  ?benchmark orkgp:P43180 ?eval;
+             orkgp:P43181 ?constant.
+  BIND(xsd:float(?constant) AS ?constant)
+  FILTER(?constant = "1")
+  ORDER BY ASC(?response_time)
+  LIMIT 1
+}
+```

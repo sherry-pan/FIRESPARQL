@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the Walker, walk (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?metricValue
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:hasBenchmark?walkerWalk.
+ ?walkerWalk a orkg:WalkerWalk.
+ ?walkerWalk orkg:dataset "Walker, walk (DMControl500k)".
+ ?walkerWalk orkg:evaluation?evaluation.
+ ?evaluation orkg:metric?metric.
+ ?evaluation orkg:metricValue?metricValue.
+  FILTER (?metric = "highest benchmark result" &&?metricValue = MAX(?metricValue))
+}
+ORDER BY DESC(?metricValue) LIMIT 1<|eot_id|>

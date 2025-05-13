@@ -1,0 +1,15 @@
+Question:
+Where can I find code references in papers that have used the PNDec model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX w3c: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?paper?code
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasImplementation?implementation.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:method?method.
+     FILTER (CONTAINS(LCASE(?method), "PNDec").
+    ?paper orkg:hasCode?code.
+     }<|eot_id|>

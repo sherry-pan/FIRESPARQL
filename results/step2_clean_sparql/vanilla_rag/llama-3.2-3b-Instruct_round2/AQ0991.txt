@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric (COUNT(*) as ?count)
+WHERE {
+    ?evaluation orkg:hasMetric ?metric.
+    FILTER (bif:label(?metric) = "Recall" OR bif:label(?metric) = "Accuracy" OR bif:label(?metric) = "micro-F1" OR bif:label(?metric) = "macro-F1")
+}
+GROUP BY ?metric
+HAVING (COUNT(*) >= 1)
+```

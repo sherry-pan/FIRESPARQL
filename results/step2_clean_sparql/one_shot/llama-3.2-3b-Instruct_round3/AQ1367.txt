@@ -1,0 +1,24 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset ;
+           rdfs:label "REDDIT-B".
+  ?benchmark orkgp:HAS_DATASET ?dataset ;
+             orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  OPTIONAL {
+    ?benchmark orkgp:HAS_RESULT ?result.
+    ?result orkgp:HAS_METRIC ?metric ;
+            orkgp:HAS_VALUE ?value.
+  }
+  FILTER (str(?metric) = "accuracy" ||
+          str(?metric) = "f1" ||
+          str(?metric) = "f2" ||
+          str(?metric) = "f3" ||
+          str(?metric) = "f4" ||
+          str(?metric) = "f5" ||
+          str(?metric) = "f6")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

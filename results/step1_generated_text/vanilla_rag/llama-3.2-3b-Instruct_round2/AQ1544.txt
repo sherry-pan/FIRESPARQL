@@ -1,0 +1,17 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the OntoNotes benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+     SELECT?model 
+     WHERE {
+      ?model orkg:hasMicroF1?microF1.
+      ?model orkg:hasMacroF1?macroF1.
+      ?model orkg:hasMatchingStrategy?matchingStrategy.
+      ?model orkg:hasAcceptedSubmission?acceptedSubmission.
+      ?model orkg:hasRejectedSubmission?rejectedSubmission.
+       FILTER (?microF1 >=?macroF1)
+       FILTER (MAX(?microF1,?macroF1) = MAX(?acceptedSubmission,?rejectedSubmission))
+       FILTER (MAX(?microF1,?macroF1) =?model)
+     }<|eot_id|>

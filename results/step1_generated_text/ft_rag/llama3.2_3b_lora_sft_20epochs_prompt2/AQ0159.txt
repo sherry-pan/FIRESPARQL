@@ -1,0 +1,16 @@
+Question:
+What models are being evaluated on the MedSTS dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "MedSTS")
+               || str(?dataset_lbl    = "MedSTS test"))
+      ?evaluation       orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION      ?eval.
+      ?paper         orkgp:HAS_EVALUATION      ?eval.
+      ?eval         orkgp:P32               ?model.
+      ?model      rdfs:label              ?model_lbl.
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+Question:
+Can you list the metrics used to evaluate models on the TSE-NER dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R70642 orkgp:evaluate {
+         rdfs:label?label.
+         orkgp:P43179?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+       FILTER(REGEX(STR(?metric), "F1"^^xsd:string))
+       orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark rdfs:label?benchmark_lbl.
+       FILTER(?benchmark_lbl = "TSE-NER")
+     }<|eot_id|>

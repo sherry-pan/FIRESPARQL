@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?approach
+WHERE {
+  ?evaluation a orkg:Evaluation ;
+              orkg:HAS_DATASET <http://orkg.org/orkg/resource/dataset/RotoWire> ;
+              orkg:HAS_APPROACH ?approach ;
+              orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:METRIC ?metric.
+  ?metric rdfs:label "Precision".
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

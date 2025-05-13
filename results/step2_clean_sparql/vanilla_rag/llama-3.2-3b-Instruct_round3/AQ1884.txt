@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?dataset 
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label ?label.
+  FILTER (CONTAINS(LCASE(?label), 'text summarization') || CONTAINS(LCASE(?label), 'summarization'))
+}
+```

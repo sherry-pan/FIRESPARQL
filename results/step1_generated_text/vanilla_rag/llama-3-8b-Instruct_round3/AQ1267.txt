@@ -1,0 +1,15 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Double Dunk dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:evaluation?metric ;
+    csvw:value?value.
+  FILTER (?metric = "Atari 2600 Double Dunk" &&?benchmark ORKG:BenchmarkResultType = "highest")
+}<|eot_id|>

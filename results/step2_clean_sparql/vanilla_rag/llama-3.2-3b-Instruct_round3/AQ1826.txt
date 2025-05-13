@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?macroPrecision
+WHERE {
+    ?model orkg:hasMacroPrecision ?macroPrecision.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset orkg:hasDatasetForNLP-TDMS ?datasetNLP-TDMS.
+    ?datasetNLP-TDMS orkg:hasMetric ?metric.
+    ?metric orkg:label "Macro Precision"@en.
+    ?datasetNLP-TDMS orkg:hasValue ?macroPrecision.
+}
+ORDER BY DESC(?macroPrecision)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+PREFIX orkgc: <http://schema.orkg.org/collection/>
+PREFIX orkgp: <http://schema.orkg.org/property/>
+
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1")
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?

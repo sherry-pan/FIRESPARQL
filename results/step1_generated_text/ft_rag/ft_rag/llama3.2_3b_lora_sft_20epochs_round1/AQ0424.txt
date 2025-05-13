@@ -1,0 +1,36 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the WMT2014 German-English dataset?
+
+Generated SPARQL:
+ SELECT?title?paper_id
+     WHERE {
+       orkgr:R155561 orkgp:HAS_BENCHMARK {
+         rdfs:label?title.
+         orkgp:P31 [
+           orkgp:P31?contrib.
+           orkgp:HAS_DATASET {
+             rdfs:label?dataset.
+           }
+           FILTER(REGEX(STR(?dataset), "WMT2014 German-English"))
+         ]
+       }
+       orkgp:P31?contrib.
+      ?contrib orkgp:HAS_EVALUATION {
+         orkgp:P31?eval.
+         rdfs:label?eval_label.
+         FILTER(REGEX(STR(?eval_label), "WMT2014 German-English"))
+       }
+      ?contrib orkgp:HAS_METHOD {
+         rdfs:label?method.
+       }
+      ?paper orkgp:P31?contrib.
+      ?paper orkgp:P31?eval.
+      ?eval orkgp:P31?eval2.
+      ?eval2 rdfs:label?eval_label.
+       FILTER(REGEX(STR(?eval_label), "WMT2014 German-English"))
+      ?contrib orkgp:HAS_BENCHMARK {
+         rdfs:label?title.
+       }
+       BIND(?title AS?title)
+       BIND(?contrib AS?paper_id)
+     }<|eot_id|>

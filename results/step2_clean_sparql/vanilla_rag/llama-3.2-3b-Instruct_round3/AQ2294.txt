@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasCode ?code.
+  ?paper orkg:hasMethod ?method.
+  ?method orkg:hasImplementation ?implementation.
+  FILTER (STRLIKE(STR(?implementation), "Duel hs") AND STRLIKE(STR(?dataset), "Duel"))
+}
+```

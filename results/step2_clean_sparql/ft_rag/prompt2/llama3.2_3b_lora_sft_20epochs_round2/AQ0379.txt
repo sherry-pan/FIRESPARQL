@@ -1,0 +1,16 @@
+```sparql
+SELECT ?title ?paper_id
+WHERE {
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?paper.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  FILTER(REGEX(?benchmark, "NLP-TDMS"))
+  ?paper orkgp:P5009 ?benchmark.
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?paper orkgp:HAS_ID ?paper_id.
+  ?paper orkgp:HAS_TITLE ?paper_title.
+  BIND(?paper_title AS ?title)
+}
+ORDER BY ASC(?title)
+```

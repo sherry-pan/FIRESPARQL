@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:P37530 ?implementation
+  ];
+  orkgp:P37529 [
+    orkgp:HAS_METHOD ?method
+  ].
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(STR(?method_lbl), "A3C LSTM hs"))
+  ?implementation orkgp:HAS_CODE ?code
+}
+```

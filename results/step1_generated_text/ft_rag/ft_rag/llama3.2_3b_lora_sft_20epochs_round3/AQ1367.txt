@@ -1,0 +1,24 @@
+Question:
+What is the highest benchmark result achieved on the REDDIT-B dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "REDDIT-B"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_BENCHMARK     ?bm.
+        ?bm           orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?bm      orkgp:HAS_METRIC        ?metric.
+                  ?metric  rdfs:label              ?metric_lbl.}
+         OPTIONAL {?bm      orkgp:HAS_EVALUATION     ?eval.
+                  ?eval      orkgp:HAS_VALUE        ?value.
+                  ?eval      orkgp:HAS_EVALUATION_METRIC  ?metric.
+                  ?eval      orkgp:HAS_EVALUATION_VALUE?eval_value.
+                   FILTER(?eval_value =?value)}
+        ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+                  ?eval      orkgp:HAS_EVALUATION_METRIC  ?metric.
+                  ?eval      orkgp:HAS_EVALUATION_VALUE?eval_value.
+                   FILTER(?eval_value =?value)}
+     }<|eot_id|>

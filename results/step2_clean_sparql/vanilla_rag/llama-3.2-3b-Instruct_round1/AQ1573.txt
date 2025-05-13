@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?model (MAX(?f1) AS ?best_f1)
+WHERE {
+  ?model orkg:hasEvaluation ?e.
+  ?e orkg:hasTrainingSet ?trainSet.
+  ?trainSet orkg:hasDataset ?dataset.
+  ?dataset skos:prefLabel ?name.
+  FILTER (STR(?name) = "ShARe/CLEF eHealth corpus").
+  ?model orkg:method ?m.
+  ?m orkg:hasEvaluation ?em.
+  ?em orkg:microF1 ?f1.
+}
+GROUP BY ?model
+ORDER BY DESC(?best_f1)
+LIMIT 1
+```

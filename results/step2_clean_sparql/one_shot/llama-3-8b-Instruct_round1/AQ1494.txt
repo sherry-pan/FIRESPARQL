@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgc: <http://schema.orkg.org/crossontology/Concept#>
+PREFIX orkgp: <http://schema.orkg.org/project/Property#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl ?score
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "RotoWire (Content Ordering)";
+           orkgp:benchmarkedBy ?benchmark.
+  ?benchmark orkgp:hasModel ?model;
+             orkgp:hasScore ?score;
+             orkgp:usesMetric orkgc:BLEU.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

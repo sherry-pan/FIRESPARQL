@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX wmt: <http://wmt.org/>
+
+SELECT?method
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_EVALUATION?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel = "BLEU score").
+ ?evaluation orkg:HAS_DATASET wmt:WMT2014_English-German.
+ ?evaluation orkg:HAS_METHOD?method.
+ ?method rdfs:label?methodName.
+  FILTER (?methodName = "model with highest BLEU score").
+  ORDER BY DESC(?metric)
+  LIMIT 1
+}<|eot_id|>

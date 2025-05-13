@@ -1,0 +1,15 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+SELECT ?modelName
+WHERE {
+  ?benchmark a schema:Benchmark ;
+             schema:dataset <http://example.org/datasets/Atari-2600-Seaquest> ;
+             schema:evaluation ?evaluation .
+  ?evaluation schema:metric <http://example.org/metrics/Score> ;
+              schema:value ?score ;
+              schema:model ?model .
+  ?model schema:name ?modelName .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

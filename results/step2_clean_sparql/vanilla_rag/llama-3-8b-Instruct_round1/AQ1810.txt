@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?modelLabel ?params
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_METHOD ?method.
+ ?method orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/ImageNet_ReaL>.
+ ?evaluation orkg:HAS_METRIC ?metric.
+ ?metric orkg:CSVW_Number ?params.
+ FILTER (?metric = "Params").
+ ?model rdfs:label ?modelLabel.
+ FILTER (LANG(?modelLabel) = "en").
+}
+```

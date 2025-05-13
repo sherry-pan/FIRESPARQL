@@ -1,0 +1,30 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model_name
+WHERE {
+  ?model orkg:HAS_DATASET csvw:Sequential_CIFAR-10.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_TYPE orkg:EvaluationMetric.
+  ?evaluation orkg:HAS_NAME "Unpermuted Accuracy".
+  ?evaluation orkg:HAS_VALUE ?accuracy.
+  
+  ?model orkg:HAS_BENCHMARK "top-performing".
+  
+  FILTER(datatype(?accuracy) = xsd:float)
+  
+  {
+    SELECT (max(?accuracy_value) as ?max_accuracy)
+    WHERE {
+      ?model orkg:HAS_EVALUATION ?evaluation.
+      ?evaluation orkg:HAS_VALUE ?accuracy_value.
+    }
+  }
+  
+  FILTER(?accuracy = ?max_accuracy)
+  
+  ?model orkg:NAME ?model_name.
+}
+```

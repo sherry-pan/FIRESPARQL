@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Publication.
+  ?paper orkg:HAS_METHOD ?method.
+  ?method rdfs:label ?method_label.
+  FILTER (?method_label = "AlexNet" || ?method_label = "MultiGrasp").
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation rdfs:label ?implementation_label.
+  FILTER (?implementation_label = "Code" || ?implementation_label = "Implementation" || ?implementation_label = "Repository" || ?implementation_label = "Link").
+  ?implementation orkg:HAS_CODE ?code.
+}
+```

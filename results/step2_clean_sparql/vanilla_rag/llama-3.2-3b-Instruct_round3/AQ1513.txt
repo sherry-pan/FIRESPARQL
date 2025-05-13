@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:hasImplementation ?imptn.
+    ?imptn orkg:hasMethod ?method.
+    ?imptn orkg:hasDataset ?dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?eval.
+    ?eval orkg:hasScore ?score.
+    ?eval orkg:hasDatasetName "ANLI test".
+    ?eval orkg:hasMetric "A2".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

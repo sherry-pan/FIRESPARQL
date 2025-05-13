@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkgp:Benchmark ;
+             rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "Gibson PointGoal Navigation")
+  ?benchmark orkgp:HAS_RESULT ?result.
+  ?result orkgp:HAS_VALUE ?score;
+          orkgp:HAS_BEST_OF ?bestResult.
+  ?bestResult orkgp:HAS_Metric ?metric;
+              orkgp:HAS_VALUE ?bestScore.
+}
+ORDER BY DESC(?bestScore)
+```

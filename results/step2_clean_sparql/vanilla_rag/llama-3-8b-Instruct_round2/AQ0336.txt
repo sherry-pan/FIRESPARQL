@@ -1,0 +1,12 @@
+PREFIX orkg: <http://purl.org/orkg/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT DISTINCT ?model ?model_label ?evaluation ?evaluation_label
+WHERE {
+   ?model a orkg:Model.
+   ?model orkg:hasBenchmark ?benchmark.
+   ?benchmark orkg:hasEvaluation ?evaluation.
+   ?evaluation schema:name ?evaluation_label.
+   ?model orkg:hasClasses ?classes.
+   ?classes schema:name ?model_label.
+}

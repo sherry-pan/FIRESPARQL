@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?score
+WHERE {
+   ?benchmark a orkg:Benchmark ;
+               orkg:HAS_DATASET orkg:Softcite ;
+               orkg:HAS_EVALUATION ?evaluation.
+   ?evaluation orkg:HAS_METHOD ?method ;
+               csvw:values ?metric.
+   ?metric csvw:CSVW_Name ?name ;
+           csvw:CSVW_Value ?score.
+   FILTER (?name = "highest benchmark result" && isLiteral(?score) && (datatype(?score) = xsd:float || datatype(?score) = xsd:integer))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

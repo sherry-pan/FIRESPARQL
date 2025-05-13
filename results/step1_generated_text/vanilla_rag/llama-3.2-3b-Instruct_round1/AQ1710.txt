@@ -1,0 +1,15 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Freeway benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?Score 
+     WHERE {
+    ?model rdfs:label?modelLabel.
+    ?model orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "Atari 2600 Freeway".
+    ?benchmark orkg:evaluation?evaluation.
+    ?evaluation orkg:Score?Score.
+     FILTER (CONTAINS(?modelLabel, "best") OR CONTAINS(?modelLabel, "top") OR CONTAINS(?modelLabel, "highest")) 
+     }<|eot_id|>

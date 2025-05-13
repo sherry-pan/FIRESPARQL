@@ -1,0 +1,24 @@
+```sparql
+SELECT ?modelName
+WHERE {
+  ?evaluation a ex:Evaluation ;
+              ex:dataset ex:Atari2600Assault ;
+              ex:score ?score ;
+              ex:model ?model .
+
+  ?model ex:name ?modelName .
+
+  {
+    SELECT ?model (MAX(?score) AS ?maxScore)
+    WHERE {
+      ?evaluation a ex:Evaluation ;
+                  ex:dataset ex:Atari2600Assault ;
+                  ex:score ?score ;
+                  ex:model ?model .
+    }
+    GROUP BY ?model
+  }
+  
+  FILTER(?score = ?maxScore)
+}
+```

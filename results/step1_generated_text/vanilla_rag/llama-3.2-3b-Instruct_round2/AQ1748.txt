@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of NLL score when benchmarked on the Nottingham dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT?model (label as string)
+WHERE {
+ ?model orkg:HAS_METHOD orkg:method?method.
+ ?method orkg:HAS_EVALUATION orkg:evaluation?evaluation.
+ ?evaluation orkg:HAS_DATASET orkg:dataset?dataset.
+ ?dataset orkg:HAS_NAME orkg:Name "Nottingham".
+ ?model orkg:HAS_EVALUATION?evaluation.
+  BIND((?evaluation orkg:HAS EVALUATION orkg:evaluation) as?nll) 
+  FILTER(?nll = "min")
+}<|eot_id|>

@@ -1,0 +1,16 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the ObjectNet dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasDataset?dataset.
+ ?dataset orkg:datasetName "ObjectNet".
+ ?paper csvw:titles?title.
+ ?paper csvw:number?id.
+}<|eot_id|>

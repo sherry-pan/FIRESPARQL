@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?eval a orkgc:Evaluation;
+        rdfs:label ?eval_lbl;
+        orkgp:HAS_DATASET ?dataset.
+  FILTER (str(?eval_lbl) = "Accuracy")
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P4317 ?model.
+  ?model rdfs:label ?model_lbl.
+  ?eval orkgp:P4318 ?accuracy.
+  FILTER (?accuracy = "0.990")
+}
+```

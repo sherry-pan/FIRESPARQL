@@ -1,0 +1,21 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Ball in cup, catch (DMControl100k) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?score
+WHERE {
+   ?dataset a orkg:Dataset ;
+              orkg:hasBenchmark?benchmark.
+   ?benchmark orkg:hasEvaluation?evaluation.
+   ?evaluation orkg:metric?metric ;
+               orkg:score?score.
+    FILTER(?dataset = <http://orkg.org/orkg/dataset/DMControl100k> &&?metric =?score).
+    FILTER(LANGUAGE(?score) = 'en' ||!bound(?score)).
+    FILTER(?score >?previousScore)
+    GROUP BY?metric?score
+    ORDER BY DESC(?score)
+    LIMIT 1
+}<|eot_id|>

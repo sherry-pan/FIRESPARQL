@@ -1,0 +1,13 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Double Dunk dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?eval_value) AS?score)
+     WHERE {
+       orkgr:R6898 orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_VALUE?value.
+       BIND(xsd:float(?value) AS?eval_value)
+      ?eval orkgp:P43131?metric.
+      ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

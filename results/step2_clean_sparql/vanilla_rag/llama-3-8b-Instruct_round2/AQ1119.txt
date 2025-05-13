@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?benchmark ?metric ?score
+WHERE {
+ ?evaluation a orkg:Evaluation ;
+    orkg:HAS_DATASET <http://orkg.org/orkg/entity/Stanford_Dogs> ;
+    orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METHOD ?metric.
+ ?evaluation orkg:HAS_SCORE ?score.
+}
+```

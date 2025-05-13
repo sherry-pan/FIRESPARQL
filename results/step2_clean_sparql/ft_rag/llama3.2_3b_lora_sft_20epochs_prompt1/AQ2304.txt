@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "Rational DQN Average")
+  
+  ?benchmark orkgp:HAS_BENCHMARK ?event.
+  OPTIONAL {
+    ?event orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_CODE ?code. 
+  }
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_MODEL ?model.
+  }
+}
+```

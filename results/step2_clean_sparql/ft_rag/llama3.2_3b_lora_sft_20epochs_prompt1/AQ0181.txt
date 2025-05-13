@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model `http://orkg.org/orkg/predicate/HAS_DATASET` ?dataset .
+  ?dataset rdfs:label ?dataset_lbl .
+  FILTER(REGEX(?dataset_lbl, "SST-2"))
+  
+  ?model `http://orkg.org/orkg/predicate/HAS_EVALUATION` ?eval .
+  ?eval `http://orkg.org/orkg/predicate/HAS_METHOD` ?method .
+  ?method rdfs:label ?method_lbl .
+  
+  ?eval `http://orkg.org/orkg/predicate/HAS_MODEL` ?model .
+  ?model rdfs:label ?model_lbl .
+}
+```

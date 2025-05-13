@@ -1,0 +1,76 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the ARC-PDN dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R155801 {
+         orkgp:HAS_EVALUATION?eval.
+        ?eval orkgp:P43131?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+       orkgr:R155801 {
+         orkgp:HAS_BENCHMARK?benchmark.
+        ?benchmark orkgp:P43124?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+       orkgp:P43131?metric?eval.
+       orkgp:P43124?metric?benchmark.
+       orkgp:P43124?benchmark?cont.
+      ?cont orkgp:P43129?eval.
+      ?eval rdfs:label?eval_lbl.
+       FILTER(REGEX(?eval_lbl, "Recall", "i"))
+       FILTER(REGEX(?eval_lbl, "Accuracy", "i"))
+       FILTER(REGEX(?eval_lbl, "F1", "i"))
+       FILTER(REGEX(?eval_lbl, "NDCG@10", "i"))
+       FILTER(REGEX(?eval_lbl, "Quantitative methods", "i"))
+       FILTER(REGEX(?eval_lbl, "has uncertainty value", "i"))
+       FILTER(REGEX(?eval_lbl, "has uncertainty unit", "i"))
+       FILTER(REGEX(?eval_lbl, "reference system", "i"))
+       FILTER(REGEX(?eval_lbl, "classification system", "i"))
+       FILTER(REGEX(?eval_lbl, "reporting level", "i"))
+       FILTER(REGEX(?eval_lbl, "method", "i"))
+       FILTER(REGEX(?eval_lbl, "has dataset", "i"))
+       FILTER(REGEX(?eval_lbl, "has training set", "i"))
+       FILTER(REGEX(?eval_lbl, "has validation set", "i"))
+       FILTER(REGEX(?eval_lbl, "has classes", "i"))
+       FILTER(REGEX(?eval_lbl, "number of type", "i"))
+       FILTER(REGEX(?eval_lbl, "property of the dataset", "i"))
+       FILTER(REGEX(?eval_lbl, "tabular dataset", "i"))
+       FILTER(REGEX(?eval_lbl, "dataset annotation type", "i"))
+       FILTER(REGEX(?eval_lbl, "split into", "i"))
+       FILTER(REGEX(?eval_lbl, "lesson learned", "i"))
+       FILTER(REGEX(?eval_lbl, "Aligned with FAIR principles", "i"))
+       FILTER(REGEX(?eval_lbl, "# core participant", "i"))
+       FILTER(REGEX(?eval_lbl, "# table", "i"))
+       FILTER(REGEX(?eval_lbl, "# column", "i"))
+       FILTER(REGEX(?eval_lbl, "# row", "i"))
+       FILTER(REGEX(?eval_lbl, "# classes", "i"))
+       FILTER(REGEX(?eval_lbl, "# entity", "i"))
+       FILTER(REGEX(?eval_lbl, "# avg row", "i"))
+       FILTER(REGEX(?eval_lbl, "# avg column", "i"))
+       FILTER(REGEX(?eval_lbl, "# CEA target", "i"))
+       FILTER(REGEX(?eval_lbl, "# CTA target", "i"))
+       FILTER(REGEX(?eval_lbl, "# CPA target", "i"))
+       FILTER(REGEX(?eval_lbl, "# accepted submission", "i"))
+       FILTER(REGEX(?eval_lbl, "# rejected submission", "i"))
+       FILTER(REGEX(?eval_lbl, "# poster", "i"))
+       FILTER(REGEX(?eval_lbl, "column entity annotation", "i"))
+       FILTER(REGEX(?eval_lbl, "column type annotation", "i"))
+       FILTER(REGEX(?eval_lbl, "column property annotation", "i"))
+       FILTER(REGEX(?eval_lbl, "matching strategy", "i"))
+       FILTER(REGEX(?eval_lbl, "system module", "i"))
+       FILTER(REGEX(?eval_lbl, "table selection technique", "i"))
+       FILTER(REGEX(?eval_lbl, "label generation technique", "i"))
+       FILTER(REGEX(?eval_lbl, "spliting technique", "i"))
+       FILTER(REGEX(?eval_lbl, "city", "i"))
+       FILTER(REGEX(?eval_lbl, "method", "i"))
+       FILTER(REGEX(?eval_lbl, "PM25_prcnt_change", "i"))
+       FILTER(REGEX(?eval_lbl, "co-located with", "i"))
+       FILTER(REGEX(?eval_lbl, "# DBpedia properties", "i"))
+       FILTER(REGEX(?eval_lbl, "# Schema.org property", "i"))
+       FILTER(REGEX(?eval_lbl, "# schema.org class", "i"))
+       FILTER(REGEX(?eval_lbl, "# CTA participant", "i"))
+       FILTER(?eval_lbl = "Evaluation"^^xsd:string)
+       FILTER(?metric!= "hasEvaluation"^^xsd:string)
+     }<|eot_id|>

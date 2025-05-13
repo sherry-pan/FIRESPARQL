@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R44985 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?cont;
+        orkgp:P71079 ?recall;
+        orkgp:P71081 ?accuracy.
+  ?cont orkgp:P71080 ?micro_f1.
+  ?cont orkgp:P71082 ?macro_f1.
+  ?cont orkgp:P97142 ?method.
+  BIND(xsd:float(?macro_f1) AS ?metric_lbl)
+  BIND(xsd:float(?recall) AS ?recall_lbl)
+  BIND(xsd:float(?accuracy) AS ?accuracy_lbl)
+  BIND(xsd:float(?micro_f1) AS ?micro_f1_lbl)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

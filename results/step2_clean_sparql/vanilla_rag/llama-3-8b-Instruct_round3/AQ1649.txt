@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?method
+WHERE {
+  ?method a orkg:Method ;
+          orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET ?dataset ;
+              orkg:HAS_BENCHMARK ?benchmark.
+  ?dataset orkg:benchmarkName "Habitat 2020 Object Nav test-std".
+  ?benchmark orkg:metric "SUCCESS" ;
+             orkg:score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

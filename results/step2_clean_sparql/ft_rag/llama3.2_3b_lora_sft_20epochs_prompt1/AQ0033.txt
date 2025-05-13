@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (STR(?dataset_lbl) = "Automatically labeled Medline abstracts corpus"
+          || STR(?dataset_lbl) = "Medline"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled)"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v2))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v3))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v4))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v5))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v6))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v7))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v8))"
+          || STR(?dataset_lbl) = "Medline (Automatically labeled (v9))"
+          || STR(?dataset_lbl) = "Automatically labeled Medline"
+          || STR(?dataset_lbl) = "Automatically labeled")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?model orkgp:HAS_METHOD ?method;
+         orkgp:HAS_EVALUATION ?eval;
+         rdfs:label ?model_lbl.
+}
+```

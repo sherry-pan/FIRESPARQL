@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?score) AS ?score)
+WHERE {
+  orkgr:R44992 orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_METRIC ?metric.
+  ?evaluation orkgp:HAS_SCORE ?score.
+  ?metric rdfs:label ?metric_lbl.
+  ?benchmark orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(STR(?dataset), "Kinetics-600"))
+}
+```

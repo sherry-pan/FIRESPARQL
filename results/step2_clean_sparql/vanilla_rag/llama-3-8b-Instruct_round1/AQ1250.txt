@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_DATASET <http://example.org/datasets/MLDoc_Zero-Shot_German-to-French>.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:table ?table.
+  ?table csvw:row ?row.
+  ?row csvw:cell ?cell.
+  ?cell csvw:value ?value.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER (?metric = "top benchmark result" || ?metric = "best result" || ?metric = "highest score" || ?metric = "best score").
+  FILTER (isLiteral(?value)).
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

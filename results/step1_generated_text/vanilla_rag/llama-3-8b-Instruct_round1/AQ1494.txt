@@ -1,0 +1,27 @@
+Question:
+What is the best performing model benchmarking the RotoWire (Content Ordering) dataset in terms of BLEU metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel?bleuScore
+WHERE {
+ ?model a orkg:Method.
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation rdfs:label?evaluationLabel.
+  FILTER (?evaluationLabel = "BLEU".
+ ?model orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label "RotoWire (Content Ordering)".
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+  FILTER (?benchmarkLabel = "best".
+ ?model orkg:HAS_IMPLEMENTATION?implementation.
+ ?implementation rdfs:label?implementationLabel.
+ ?model orkg:HAS_METHOD?method.
+ ?method rdfs:label?methodLabel.
+ ?evaluation orkg:HAS_SCORE?bleuScore.
+  FILTER (?bleuScore >?bestBleuScore).
+  BIND (MAX(?bleuScore) as?bestBleuScore)
+}
+ORDER BY DESC(?bleuScore)<|eot_id|>

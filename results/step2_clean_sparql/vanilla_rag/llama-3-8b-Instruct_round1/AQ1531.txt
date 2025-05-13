@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?testPerplexity
+WHERE {
+  ?evaluation a orkg:Evaluation ;
+    orkg:HAS_BENCHMARK orkg:WikiText-103 ;
+    orkg:HAS_METRIC "test perplexity" ;
+    orkg:HAS_RESULT ?result.
+  ?result orkg:HAS_MODEL ?model ;
+    orkg:HAS_PERFORMANCE ?testPerplexity.
+  ?model a orkg:Model ;
+    rdfs:label ?modelLabel.
+}
+ORDER BY ?testPerplexity
+LIMIT 1
+```

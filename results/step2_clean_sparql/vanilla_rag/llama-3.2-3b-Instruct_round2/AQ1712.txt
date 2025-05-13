@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_dataset ?dataset.
+  ?dataset orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:has_score ?score.
+  FILTER (?dataset = <https://orkg.org/orkg/dataset/Atari_2600_Enduro>)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

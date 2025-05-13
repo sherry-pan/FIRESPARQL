@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R15580002 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?dataset.
+  ?dataset orkgp:P71086 ?train.
+  ?train orkgp:P71096 ?valid.
+  ?valid orkgp:P70074 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  BIND(
+    IF(?metric = "macro-F1", "F1", IF(?metric = "Accuracy", "Accuracy", ?metric_lbl))
+  AS ?metric_lbl
+  )
+}
+```

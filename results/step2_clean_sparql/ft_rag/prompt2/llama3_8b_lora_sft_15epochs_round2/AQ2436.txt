@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "ImageNet + iNat on WS-DAN")
+  
+  ?benchmark orkgp:HAS_MODEL ?model.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?code orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:P31 ?cont.
+}
+```

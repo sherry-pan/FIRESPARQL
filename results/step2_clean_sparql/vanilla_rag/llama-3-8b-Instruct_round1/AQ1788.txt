@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?averageReturn
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET orkg:Atari_2600_Montezuma's_Revenge.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC orkg:Average_Return_NoOp.
+  ?evaluation orkg:HAS_VALUE ?averageReturn.
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?averageReturn)
+LIMIT 1
+```

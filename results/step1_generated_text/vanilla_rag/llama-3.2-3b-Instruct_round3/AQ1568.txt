@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest F1 score on the CoNLL 2003 (English) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?f1score 
+     WHERE {
+     {
+    ?model orkg:HAS_METHOD?method.
+    ?method orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_DATASET?dataset.
+    ?dataset orkg:HAS_EVALUATION?evaluation.
+    ?evaluation orkg:HAS_PARAMETER?f1score.
+     FILTER (str(?f1score) = "F1 score")
+     }
+     ORDER BY DESC(?f1score)
+     LIMIT 1<|eot_id|>

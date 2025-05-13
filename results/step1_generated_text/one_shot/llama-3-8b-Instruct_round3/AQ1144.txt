@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CommonsenseQA?
+
+Generated SPARQL:
+PREFIX orkgc: <http://schema.orkg.org/click/1.1/>
+PREFIX orkgp: <http://schema.orkg.org/participation/1.1/>
+
+SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+WHERE {
+  {
+    SELECT?metric?metric_lbl?value
+    WHERE {
+     ?dataset a orkgc:Dataset;
+               rdfs:label?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "CommonsenseQA")
+     ?benchmark orkgp:HAS_DATASET?dataset;
+                 orkgp

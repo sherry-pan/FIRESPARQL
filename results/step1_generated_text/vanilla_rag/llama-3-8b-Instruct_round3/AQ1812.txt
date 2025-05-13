@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Percentage error score on the SVHN benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?percentageError
+WHERE {
+ ?evaluation orkg:HAS_EVALUATION?evaluationValue.
+ ?evaluation orkg:HAS_METHOD?model.
+ ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/dataset/SVHN>.
+ ?evaluation orkg:HAS_ERROR?percentageError.
+  FILTER (xsd:decimal(?percentageError) &&?percentageError > 0).
+  ORDER BY DESC(?percentageError)
+  LIMIT 1
+}<|eot_id|>

@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Assault dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?model_name
+WHERE {
+ ?model orkg:HAS_DATASET <http://orkg.org/dataset/Atari_2600_Assault>.
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_SCORE?score.
+ ?model csvw:CSVW_Name?model_name.
+  FILTER (?score = MAX(?score) )
+}
+ORDER BY DESC(?score) LIMIT 1<|eot_id|>

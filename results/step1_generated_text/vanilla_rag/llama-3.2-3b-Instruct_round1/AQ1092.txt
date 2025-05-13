@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+     PREFIX wgsn: <http://www.w3.org/2008/01/owls#owl>
+     SELECT?metric?value
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasDatasetInstance?instance.
+    ?instance orkg:datasetInstanceHasEvaluation?evaluation.
+    ?evaluation orkg:hasMetric?metric.
+    ?metric orkg:hasValue?value.
+    ?dataset orkg:hasDatasetInstance?instance.
+    ?instance orkg:datasetInstanceHasValidationSet?validationSet.
+    ?validationSet orkg:hasDatasetInstance?instance.
+    ?dataset orkg:hasReferenceSystem?referenceSystem.
+    ?referenceSystem a wgsn:ReferenceSystem.
+     FILTER (str(?metric) = "Recall" OR str(?metric) = "Micro-F1" OR str(?metric) = "Accuracy" OR str(?metric) = "Macro-F1" )
+     FILTER (str(?metric) = "Recall" OR str(?metric) = "Micro-F1" OR str(?metric) = "Accuracy" OR str(?metric) = "Macro-F1" )
+     }<|eot_id|>

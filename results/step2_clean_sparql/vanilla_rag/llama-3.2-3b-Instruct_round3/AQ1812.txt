@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?model ?percentageError
+WHERE {
+  ?model orkg:hasDataset ?dataset.
+  ?dataset orkg:hasMethod ?method.
+  ?method orkg:hasApproach ?approach.
+  ?approach orkg:hasImplementation ?implementation.
+  ?implementation orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasPercentageError ?percentageError.
+  FILTER (STRSTARTS(STR(?dataset), 'http://www.image-net.org/svhn/'))
+}
+ORDER BY DESC(?percentageError)
+LIMIT 1
+```

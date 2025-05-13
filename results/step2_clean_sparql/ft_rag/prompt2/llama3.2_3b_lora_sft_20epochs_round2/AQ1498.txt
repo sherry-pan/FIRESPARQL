@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PIQA")
+  ?benchmark orkgp:has_dataset ?dataset;
+             orkgp:has_evaluation ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P71081 ?metric.
+  ?metric orkgp:P31 orkgp:Accuracy;
+          rdfs:label ?metric_lbl.
+  ?model orkgp:HAS_MODEL ?benchmark;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

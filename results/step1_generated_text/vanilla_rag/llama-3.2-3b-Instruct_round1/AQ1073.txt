@@ -1,0 +1,15 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Pubmed dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmark?b benchmark.
+    ?b orkg:hasEvaluation?e.
+    ?e orkg:evaluation?metric.
+    ?e orkg:score?score.
+     FILTER (str(?metric) = "benchmark" AND str(?score) = "max")
+     }
+     LIMIT 1<|eot_id|>

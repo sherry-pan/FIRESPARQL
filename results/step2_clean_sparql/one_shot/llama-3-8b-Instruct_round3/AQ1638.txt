@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Ball in cup, catch (DMControl100k)")
+      ?benchmark orkgc:Benchmark;
+                 orkgc:hasDataset ?dataset;
+                 orkgc:isAchievedBy ?model.
+      ?model rdfs:label ?model_lbl;
+             orkgc:hasScore ?score.
+      ?score orkgc:hasMetric ?metric;
+             orkgc:hasValue ?value.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

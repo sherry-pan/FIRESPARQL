@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the WSC dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_id?paper_title
+    WHERE {
+     ?paper       orkgp:HAS_BENCHMARK   ?benchmark.
+     ?benchmark   orkgp:HAS_DATASET      ?dataset.
+     ?dataset     orkgp:HAS_DATASET      ?dataset.
+     ?dataset     rdfs:label              ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "WSC")
+     ?paper       orkgp:HAS_MODEL         ?model.
+     ?model      rdfs:label              ?model_lbl.
+     ?paper       rdfs:label              ?paper_title.
+      FILTER (str(?paper_title)!= "")
+    }<|eot_id|>

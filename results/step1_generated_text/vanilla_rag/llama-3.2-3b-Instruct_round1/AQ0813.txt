@@ -1,0 +1,16 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SQuAD2.0 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric
+     WHERE {
+      ?metric orkg:HAS_DATASET?dataset.
+      ?dataset orkg:HAS_EVALUATION?evaluation.
+      ?evaluation a orkg:EvaluationMetric.
+       FILTER (bnode(?metric) = "SQuAD2.0" OR?metric orkg:HAS_BENCHMARK?benchmark.
+              ?benchmark orkg:has benchmark "SQuAD2.0".
+              ?benchmark orkg:has metric?metric.
+              ?metric rdfs:label?metricLabel.
+               FILTER (?metricLabel = "Accuracy" OR?metricLabel = "macro-F1" OR?metricLabel = "Recall"))
+     }<|eot_id|>

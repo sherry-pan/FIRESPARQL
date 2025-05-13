@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:HAS_METHOD ?method ;
+         orkg:HAS_IMPLEMENTATION ?implementation.
+  ?method rdfs:label ?methodLabel.
+  FILTER (str(?methodLabel) = "A3C LSTM hs model").
+  ?implementation rdfs:label ?implementationLabel.
+  FILTER (str(?implementationLabel) = "code" || str(?implementationLabel) = "repository" || str(?implementationLabel) = "link").
+  ?implementation orkg:HAS_URL ?code.
+}
+```

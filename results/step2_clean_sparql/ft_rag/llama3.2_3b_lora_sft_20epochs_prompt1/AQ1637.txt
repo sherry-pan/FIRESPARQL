@@ -1,0 +1,17 @@
+```sparql
+SELECT ?name
+WHERE {
+  orkgr:R83502 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P33 ?score.
+  ?score orkgp:HAS_VALUE ?number.
+  ?number orkgp:HAS_DATUM ?datum.
+  ?datum rdfs:label ?number_label.
+  FILTER(REGEX(?number_label, "^[0-9.]+$"))
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P37530 ?model.
+  ?model rdfs:label ?name.
+  FILTER(?number > 0.9)
+}
+```

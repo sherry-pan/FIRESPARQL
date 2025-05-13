@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/terms/>
+
+SELECT ?metric ?metricLabel ?evaluation
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?metric.
+  ?metric a orkg:Metric.
+  ?metric orkg:LABEL ?metricLabel.
+  FILTER(?metricLabel IN ("Accuracy", "Recall", "macro-F1", "micro-F1"))
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:HAS_OBJECTNET orkg:ObjectNet.
+}
+```

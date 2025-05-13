@@ -1,0 +1,21 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Reuters-21578 dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?benchmark.
+      ?benchmark orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "Reuters-21578"))
+      ?benchmark orkgp:HAS_BENCHMARK?benchmark_lbl.
+      ?benchmark orkgp:P31?paper.
+      ?paper orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31?dataset_lbl.
+      ?dataset_lbl rdfs:label?dataset_lbl.
+      ?paper orkgp:HAS_BENCHMARK?benchmark_lbl.
+       FILTER(REGEX(?benchmark_lbl, "has^benchmark"))
+      ?paper orkgp:HAS_BENCHMARK?has_benchmark.
+       BIND(xsd:integer(?has_benchmark) AS?paper_lbl)
+     }
+     ORDER BY ASC(?paper_lbl)<|eot_id|>

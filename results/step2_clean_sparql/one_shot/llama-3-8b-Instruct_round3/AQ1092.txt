@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkgc: <http://purl.org/orkg/categorization/>
+PREFIX orkgp: <http://purl.org/orkg/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?metric ?metric_lbl ?value
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "NYT-single")
+      ?benchmark orkgp:hasMetric ?metric;
+                 orkgp:hasValue ?value.
+      ?metric rdfs:label ?metric_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

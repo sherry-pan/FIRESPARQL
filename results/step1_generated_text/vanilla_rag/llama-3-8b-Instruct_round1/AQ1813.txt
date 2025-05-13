@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the iNaturalist 2018 dataset in terms of Top-1 Accuracy metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel?top1Accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_METHOD?method.
+ ?method orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label "iNaturalist 2018".
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?metric rdfs:label "Top-1 Accuracy".
+ ?evaluation orkg:HAS_RESULT?result.
+ ?result orkg:HAS_VALUE?top1Accuracy.
+  FILTER (?top1Accuracy >?bestTop1Accuracy).
+  ORDER BY DESC(?top1Accuracy)
+  LIMIT 1
+}<|eot_id|>

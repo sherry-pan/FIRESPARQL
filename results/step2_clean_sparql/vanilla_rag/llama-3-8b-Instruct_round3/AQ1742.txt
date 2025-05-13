@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?name ?accuracy
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation .
+  ?evaluation orkg:HAS_VALUE ?accuracy .
+  ?model orkg:HAS_DATASET <http://orkg.org/orkg/CSVW_Dataset/Sequential_CIFAR-10> .
+  ?model orkg:CSVW_Name ?name .
+  FILTER (?evaluation orkg:CSVW_Type = "Evaluation" && ?evaluation orkg:CSVW_Metric = "Unpermuted Accuracy") .
+  FILTER NOT EXISTS {
+    ?otherEvaluation orkg:HAS_VALUE ?otherAccuracy .
+    ?otherEvaluation orkg:HAS_VALUE ?accuracy .
+    ?otherEvaluation orkg:CSVW_Type = "Evaluation" .
+    ?otherEvaluation orkg:CSVW_Metric = "Unpermuted Accuracy" .
+    FILTER (?otherAccuracy > ?accuracy)
+  }
+}
+```

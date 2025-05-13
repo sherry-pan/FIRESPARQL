@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?problem ?problem_lbl
+WHERE {
+  ?paper orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?problem.
+  FILTER(REGEX(STR(?problem), "Artificial Intelligence"))
+  OPTIONAL {
+    ?problem orkgp:P33 ?eval.
+    ?eval orkgp:P34 ?dataset.
+    ?dataset orkgp:P35 ?method.
+    ?method orkgp:P36 ?approach.
+  }
+  ?problem rdfs:label ?problem_lbl.
+}
+```

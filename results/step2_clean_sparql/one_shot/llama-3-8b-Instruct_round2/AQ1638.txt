@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Ball in cup, catch (DMControl100k)")
+
+  ?benchmark orkg:someProperty ?score;
+             orkg:anotherProperty ?model.
+  ?model rdfs:label ?model_lbl.
+
+  # Assuming the highest score is required, an ORDER BY clause and LIMIT clause would typically be used to find the highest score.
+  ORDER BY DESC(?score)
+  LIMIT 1
+}
+```

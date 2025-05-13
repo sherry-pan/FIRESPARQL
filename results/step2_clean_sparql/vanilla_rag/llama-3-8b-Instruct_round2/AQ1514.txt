@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?metricValue
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/ANLI_test_dataset>.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC_NAME "A3".
+  ?evaluation orkg:HAS_METRIC_VALUE ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

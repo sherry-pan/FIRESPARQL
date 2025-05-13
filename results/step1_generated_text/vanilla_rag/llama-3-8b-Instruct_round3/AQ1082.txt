@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the NYT29 dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:HAS_DATASET orkg:NYT29.
+ ?benchmark orkg:HAS_BENCHMARK?result.
+ ?result orkg:METRIC?metric.
+ ?result orkg:VALUE?value.
+  FILTER (?metric = "best" ||?metric = "highest").
+  FILTER (?value >?previousValue).
+  BIND (?previousValue as?previousValue).
+  FILTER (?previousValue IS NULL ||?value >?previousValue).
+}<|eot_id|>

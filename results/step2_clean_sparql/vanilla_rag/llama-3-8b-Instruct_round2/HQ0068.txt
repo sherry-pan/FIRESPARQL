@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?sector (COUNT(?sector) AS ?frequency)
+WHERE {
+  ?s orkg:sector ?sector.
+  ?s orkg:energy true.
+  FILTER (?s orkg:frequency > 0)
+}
+GROUP BY ?sector
+```

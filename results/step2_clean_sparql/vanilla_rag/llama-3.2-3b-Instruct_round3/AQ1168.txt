@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value
+WHERE {
+    ?s orkg:hasBenchmark ?b.
+    ?b orkg:hasDataset ?d.
+    ?d orkg:hasMetric ?m.
+    ?m orkg:metric ?metric.
+    ?m orkg:metricValue ?value.
+    FILTER(?d = "Supervised:")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

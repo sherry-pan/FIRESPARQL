@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://purl.org/csw/property/>
+
+SELECT ?benchmark ?metric ?value 
+WHERE {
+    ?benchmark orkg:hasBenchmark ?b.
+    ?b orkg:hasEvaluation ?e.
+    ?e csvw:value ?value.
+    ?benchmark orkg:hasMethod ?m.
+    ?m orkg:hasValue ?metric.
+    FILTER(?metric = "Atari 2600 Star Gunner")
+}
+```

@@ -1,0 +1,14 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the arXiv dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+       orkgr:R155621 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P32?cont.
+      ?cont orkgp:HAS_PAPER?paper.
+      ?paper orkgp:HAS_TITLE?title.
+       FILTER(REGEX(?title, "arXiv"))
+      ?paper_lbl:sameAs?paper.
+     }<|eot_id|>

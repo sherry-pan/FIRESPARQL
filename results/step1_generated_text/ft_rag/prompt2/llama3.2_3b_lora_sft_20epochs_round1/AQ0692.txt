@@ -1,0 +1,95 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the ARC-PDN dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl = "ARC-PDN")
+               && str(?dataset_lbl!= "test")
+               && str(?dataset_lbl!= "dev"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?evaluation    orkgp:P31               ?eval;
+                      orkgp:P200               ?metric.
+      ?metric         rdfs:label              ?metric_lbl.
+       OPTIONAL {
+        ?eval           orkgp:HAS_EVALUATION     ?evaluations.
+        ?evaliations      orkgp:P431               ?metric.
+       }
+       OPTIONAL {
+        ?benchmark      orkgp:HAS_METHOD         ?method.
+        ?method         rdfs:label                ?method_lbl.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_TRAIN_SET        ?training;
+                        orkgp:HAS_VALIDATION_SET     ?validation.
+        ?training      orkgp:P231               ?metric.
+        ?validation    orkgp:P232               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_CLASS         ?classes;
+                        orkgp:HAS_TYPE         ?type.
+        ?type          rdfs:label                ?number_of_type_lbl.
+         BIND(xsd:integer(?number_of_type_lbl) AS?number_of_type)
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P431               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark    orkgp:P200               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P200               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P31               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P431               ?evaluations;
+                       orkgp:P200               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P200               ?metric;
+                       orkgp:P431               ?evaluations.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P31               ?metric;
+                       orkgp:P431               ?evaluations.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P200               ?metric;
+                       orkgp:P31               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P431               ?evaluations;
+                       orkgp:P200               ?metric.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P200               ?metric;
+                       orkgp:P431               ?evaluations.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P31               ?metric;
+                       orkgp:P431               ?evaluations.
+       }
+       OPTIONAL {
+        ?dataset      orkgp:HAS_EVALUATION     ?eval.
+        ?eval          orkgp:P200               ?metric;
+                       orkgp:P31               ?metric.
+       }
+    }
+    ORDER BY DESC(COUNT(?metric_lbl))
+    LIMIT 1<|eot_id|>

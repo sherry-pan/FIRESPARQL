@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?implementation
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:has_dataset ?dataset.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_metric ?metric.
+    ?metric rdfs:label "BLEU score"@en.
+    ?benchmark orkg:has_method ?model.
+    ?model orkg:has_implementation ?implementation.
+    ?dataset rdfs:label "WMT2016 German-English"@en.
+}
+GROUP BY ?model
+ORDER BY DESC (COUNT(?benchmark))
+LIMIT 1
+```

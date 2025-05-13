@@ -1,0 +1,14 @@
+```sparql
+SELECT ?compound
+WHERE {
+  ?leadCompound a orkgp:LeadCompound;
+                rdfs:label ?compound.
+  ?leadCompound orkgp:P41337 ?evaluation.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark.
+  ?evaluation orkgp:AFFECTS ?effects.
+  ?effects rdfs:label ?compound.
+}
+GROUP BY ?compound
+ORDER BY DESC(COUNT(?compound))
+LIMIT 1
+```

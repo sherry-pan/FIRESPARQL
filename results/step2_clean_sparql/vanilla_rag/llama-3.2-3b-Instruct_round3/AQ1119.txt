@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?benchmark ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  FILTER(STRSTARTS(STR(?dataset), "http://orkg.org/orkg/dataset/stanford_dogs"))
+  ?benchmark orkg:HAS_BENCHMARK ?benchmarkScore.
+  ?benchmarkScore orkg:HAS_EVALUATION ?benchmarkScoreEvaluation.
+  ?benchmarkScoreEvaluation orkg:HAS_METHOD ?benchmarkMetric.
+  ?benchmarkMetric rdfs:label ?metric.
+}
+ORDER BY DESC(?benchmarkScore)
+```

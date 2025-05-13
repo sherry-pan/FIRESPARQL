@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?percentageError
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:HAS_VALUE ?percentageError.
+  ?model orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:label "CIFAR-10".
+  FILTER(?metric = "percentage error")
+}
+ORDER BY ?percentageError
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the enwik8 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?title?id
+     WHERE {
+    ?paper orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_DATASET "enwik8".
+    ?paper orkg:CSVW_Titles?title.
+    ?paper orkg:HAS_ID?id.
+     FILTER (STRLIKE(STR(?title), "enwik8") || STRLIKE(STR(?id), "enwik8"))
+     }<|eot_id|>

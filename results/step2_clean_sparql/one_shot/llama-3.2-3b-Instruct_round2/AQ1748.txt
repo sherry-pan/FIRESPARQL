@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "NLL")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Nottingham")
+      ?benchmark a orkgc:Benchmark;
+                 orkgc:evaluatedOn ?dataset;
+                 orkgc:model ?model;
+                 orkgc:score ?score;
+                 orkgc:metric ?metric.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY ASC(?score)
+    LIMIT 1
+  }
+}
+```

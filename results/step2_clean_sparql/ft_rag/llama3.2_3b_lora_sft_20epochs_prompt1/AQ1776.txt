@@ -1,0 +1,26 @@
+```sparql
+SELECT ?implementation ?implementation_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "ImageNet".
+
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_EVALUATION ?eval.
+
+  ?eval orkgp:HAS_NUMBER ?number.
+
+  ?number orkgp:HAS_NUMBER_OF_PARAMS ?params.
+
+  ?implementation a orkgp:Implementation;
+                  rdfs:label ?implementation_lbl.
+
+  FILTER NOT EXISTS {
+    ?otherEval orkgp:HAS_NUMBER ?otherNumber.
+    ?otherNumber orkgp:HAS_NUMBER_OF_PARAMS ?otherParams.
+    ?otherParams orkgp:HAS_VALUE ?otherValue.
+    ?params orkgp:HAS_VALUE ?value.
+    ?otherParams orkgp:HAS_VALUE ?otherValue.
+    FILTER (?otherValue > ?value)
+  }
+}
+```

@@ -1,0 +1,20 @@
+```sparql
+SELECT ?metric ?metric_value
+WHERE {
+  ?contrib orkgp:P31 ?contrib.
+  ?eval orkgp:P32 {
+    orkgp:P34 ?eval.
+  } ?eval orkgp:P35 ?metric.
+  ?eval orkgp:P5043 ?benchmark;
+        orkgp:P5042 "Walker, walk (DMControl500k)"^^xsd:string.
+  ?benchmark orkgp:P5044 ?cont.
+  ?cont orkgp:P33 ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "^[^,]+"))
+  ?cont orkgp:P33 ?eval2.
+  ?eval2 orkgp:P5040 ?metric2.
+  ?metric2 orkgp:P5045 ?metric_value.
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

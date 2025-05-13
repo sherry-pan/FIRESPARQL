@@ -1,0 +1,23 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?city?country?geographical_region?location
+     WHERE {
+    ?study orkg:has_study?s.
+    ?s orkg:has_location?loc.
+    ?loc orkg:is_of_type orkg:City.
+    ?loc orkg:has_property?prop.
+    ?prop orkg:has_value "most common".
+    ?s orkg:has_property?prop.
+    ?prop orkg:has_value?city.
+    ?s orkg:has_property?prop.
+    ?prop orkg:has_value?country.
+    ?s orkg:has_property?prop.
+    ?prop orkg:has_value?geographical_region.
+    ?s orkg:has_property?prop.
+    ?prop orkg:has_value?location.
+     GROUP BY?city?country?geographical_region?location
+     ORDER BY (COUNT(?city) DESC)
+     }<|eot_id|>

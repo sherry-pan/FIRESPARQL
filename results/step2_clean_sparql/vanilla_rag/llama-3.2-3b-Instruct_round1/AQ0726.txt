@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric 
+WHERE {
+  ?dataset orkg:HAS_DATASET "http://seel.cse.lsu.edu/data/re17.zip".
+  ?dataset orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER (STR(?metric) = "Accuracy"^^xsd:string || 
+          STR(?metric) = "macro-F1"^^xsd:string || 
+          STR(?metric) = "micro-F1"^^xsd:string)
+}
+```

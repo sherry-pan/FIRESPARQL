@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Macro Precision".
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?metric;
+        orkgp:P2008 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?model_lbl)
+LIMIT 1
+```

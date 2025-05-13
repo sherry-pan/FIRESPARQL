@@ -1,0 +1,17 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?title?id 
+     WHERE {
+    ?paper orkg:hasDataset?dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?benchmark orkg:hasBenchmarkModel?model.
+    ?model orkg:hasTitle?title.
+    ?model orkg:number?id.
+     FILTER (STRLIKE(?dataset, "Penn Treebank (Character Level)") || 
+            STRLIKE(?evaluation, "benchmark")).
+     }
+    <|eot_id|>

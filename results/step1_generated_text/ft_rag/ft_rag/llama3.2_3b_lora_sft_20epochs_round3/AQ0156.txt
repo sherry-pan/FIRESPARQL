@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the enwiki8 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?model `hasEvaluation` orkgp:evaluationsce:eval110430.
+      ?evaluationsce:eval110430 `has dataset` orkgp:datasetssc2008.
+      ?dataset `rdfs:label`?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "enwiki8"))
+      ?model `HAS_METHOD` orkgp:P31?method.
+      ?method `rdfs:label`?method_lbl.
+      ?model `rdfs:label`?model_lbl.
+     }
+     ORDER BY?model_lbl<|eot_id|>

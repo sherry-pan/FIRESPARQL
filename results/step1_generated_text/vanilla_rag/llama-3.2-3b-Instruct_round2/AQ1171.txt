@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+     SELECT?benchmark?metric 
+     WHERE {
+      ?benchmark a orkg:Dataset.
+      ?benchmark orkg:hasEvaluation?evaluation.
+      ?evaluation orkg:hasMetric?metric.
+      ?benchmark orkg:hasDataset "MultiNLI".
+      ?metric rdfs:label?label.
+       FILTER (strcontains(?label, "Recall" ) OR strcontains(?label, "F1" ) OR strcontains(?label, "Accuracy" ) )
+     }
+     GROUP BY?benchmark
+     ORDER BY (count(?metric) DESC)<|eot_id|>

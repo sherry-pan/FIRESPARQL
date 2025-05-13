@@ -1,0 +1,22 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  orkgr:R6908 orkgp:compareContribution {
+    orkgp:P71080 (?valueMicro).
+    BIND(xsd:float(?valueMicro) AS ?micro_F1)
+  }
+  orkgr:R6908 orkgp:compareContribution {
+    orkgp:P71082 (?valueMacro).
+    BIND(xsd:float(?valueMacro) AS ?macro_F1)
+  }
+  BIND(
+    IF(
+      ?macro_F1 > ?micro_F1,
+      ?macro_F1,
+      ?micro_F1
+    ) AS ?best_F1
+  )
+  ?model orkgp:P97135 ?best_F1 .
+  ?model rdfs:label ?model_lbl
+}
+```

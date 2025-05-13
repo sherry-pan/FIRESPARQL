@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+  ?model orkg:has_dataset ?dataset.
+  ?dataset orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_score ?score.
+  ?benchmark orkg:has_method ?method.
+  FILTER (str(?method) = "Cart Pole").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

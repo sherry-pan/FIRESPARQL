@@ -1,0 +1,28 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset Atari 2600 Enduro?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+       orkgr:R39014 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_VALUE?value.
+       BIND(
+         IF(?eval:HAS_METRIC?metric,?metric, "Unknown")
+         AS?metric
+       ) AS?metric_and_value.
+       BIND(
+         IF(?eval:HAS_VALUE?value,?value, "Unknown")
+         AS?value
+       ) AS?value
+       BIND(
+         CONCAT(
+          ?metric_and_value, " ",?value
+         )
+         AS?final_value
+       )
+       FILTER(REGEX(?final_value, "^" & "top" & " " & "eval" & " " & "\d+\.\d+"))
+     }
+     ORDER BY DESC(?final_value)
+     LIMIT 1<|eot_id|>

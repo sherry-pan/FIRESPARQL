@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "DocRED-BiLSTM")
+  ?event orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_MODEL ?model.
+  ?model orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:HAS_SOURCE_CODE ?code.
+}
+```

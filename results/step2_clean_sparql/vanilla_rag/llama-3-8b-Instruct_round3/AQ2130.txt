@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_METHOD ?method.
+ ?method rdfs:label ?methodName.
+ FILTER (?methodName = "Large mLSTM").
+ ?paper orkg:HAS_CODE ?code.
+ ?code rdfs:label ?codeLabel.
+ FILTER (strstarts(?codeLabel, "https://") || strstarts(?codeLabel, "git@github.com")).
+ ?paper orkg:TITLE ?paperTitle.
+ FILTER (?paperTitle != "" && ?codeLabel != "").
+ BIND (concat("https://", ?paperTitle, "#", ?codeLabel) AS ?codeLink).
+}
+```

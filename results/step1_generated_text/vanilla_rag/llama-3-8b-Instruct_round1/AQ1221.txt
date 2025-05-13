@@ -1,0 +1,23 @@
+Question:
+What is the highest benchmark result achieved on the Ball in cup, catch (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset <http://orkg.org/orkg/dataset/Ball_in_cup_DMControl500k> ;
+             orkg:hasEvaluation?evaluation.
+
+ ?evaluation orkg:hasMetric?metric ;
+             csvw:value?value.
+
+  FILTER (?metric = (SELECT?m WHERE {
+   ?benchmark orkg:hasBenchmark?m.
+   ?m csvw:number?n.
+    ORDER BY DESC(?n)
+    LIMIT 1
+  }))
+}<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?score ?method WHERE {
+    ?s orkg:hasBenchmark ?b.
+    ?b orkg:evaluation ?e.
+    ?b orkg:metric ?metric.
+    ?b orkg:score ?score.
+    ?b orkg:method ?method.
+    FILTER (?metric = "bleu" AND ?e = "IWSLT2015")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WikiText-2 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:titles?title.
+ ?paper csvw:Number?id.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasDataset <http://orkg.org/orkg/resource/WikiText-2>.
+ ?benchmark orkg:hasEvaluation?evaluation.
+}<|eot_id|>

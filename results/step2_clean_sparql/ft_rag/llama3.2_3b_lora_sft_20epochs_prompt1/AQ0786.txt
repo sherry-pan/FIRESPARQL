@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgp:P71080 ?evaluation.
+  ?evaluation rdfs:label ?metric_lbl.
+  orkgp:apply_filter_1525972904109 orkgp:P71075 ?benchmark.
+  ?benchmark rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "UCF101 \\(finetuned\\)"))
+}
+ORDER BY ?metric_lbl
+LIMIT 1
+```

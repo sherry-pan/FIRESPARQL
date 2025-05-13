@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgc: <http://www.scai.fraunhofer.org/orkg/concept/>
+PREFIX orkgp: <http://www.scai.fraunhofer.org/orkg/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1 entity level score")
+  ?benchmark orkgp:hasDataset orkgc:NCBI_Disease;
+             orkgp:hasModel ?model;
+             orkgp:hasScore ?score.
+  ?model rdfs:label ?model_lbl.
+  FILTER NOT EXISTS {
+    ?benchmark2 orkgp:hasDataset orkgc:NCBI_Disease;
+                orkgp:hasScore ?score2.
+    FILTER (?score2 > ?score)
+  }
+}
+```

@@ -1,0 +1,18 @@
+Question:
+Could you provide a list of models that have been tested on the SST-2 Binary classification benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER(REGEX(?dataset_lbl, "SST-2"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?evaluation    orkgp:HAS_EVALUATION   ?evaluation.
+      ?cont          orkgp:HAS_EVALUATION   ?evaluation.
+      ?cont          rdfs:label              ?cont_lbl.
+      ?model         orkgp:HAS_METHOD        ?method;
+                      rdfs:label              ?model_lbl.
+      ?method        orkgp:HAS_BENCHMARK     ?benchmark.
+     }<|eot_id|>

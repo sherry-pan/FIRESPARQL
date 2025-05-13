@@ -1,0 +1,16 @@
+Question:
+Provide a list of papers that have utilized the AlexNet, MultiGrasp model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?paper?title?codeLink
+     WHERE {
+     {
+    ?paper orkg:HAS_PUBLICATION?pub.
+    ?pub orkg:HAS_METHOD "AlexNet".
+    ?pub orkg:HAS_METHOD "MultiGrasp".
+    ?paper orkg:HAS_IMPLEMENTATION?code.
+     BIND(STR(?code) AS?codeLink).
+     }
+     FILTER (CONTAINS(LCASE(?paper), "alexnet") OR CONTAINS(LCASE(?paper), "multi-grasp"))
+     ORDER BY DESC(?paper)<|eot_id|>

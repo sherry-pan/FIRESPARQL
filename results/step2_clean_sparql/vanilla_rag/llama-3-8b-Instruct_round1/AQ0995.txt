@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?evaluation ?recall ?accuracy ?macroF1 ?microF1 ?hasBenchmark
+WHERE {
+ ?dataset a orkg:PubMed20kRCTDataset.
+ ?dataset orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METRIC ?metric.
+ ?metric a orkg:Recall ; orkg:HAS_VALUE ?recall.
+ ?metric a orkg:Accuracy ; orkg:HAS_VALUE ?accuracy.
+ ?metric a orkg:MacroF1 ; orkg:HAS_VALUE ?macroF1.
+ ?metric a orkg:MicroF1 ; orkg:HAS_VALUE ?microF1.
+ ?dataset orkg:HAS_BENCHMARK ?hasBenchmark.
+}
+```

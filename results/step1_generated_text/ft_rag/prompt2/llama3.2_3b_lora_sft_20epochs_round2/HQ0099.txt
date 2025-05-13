@@ -1,0 +1,17 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ SELECT?material?material_lbl
+     WHERE {
+      ?eval       a            orkgc:Evaluation;
+                  rdfs:label ?eval_lbl.
+        FILTER (str(?eval_lbl) = "least response time")
+       ?eval       orkgp:P43179    ?response_time.
+       ?material   orkgp:P43178    ?eval;
+                    orkgp:HAS_METHOD  ?method;
+                    orkgp:HAS_BENCHMARK  ?benchmark.
+        BIND(xsd:float(?response_time) AS?response_time)
+       ?material       orkgp:HAS_MESH      ?mesh;
+                        rdfs:label              ?material_lbl.
+     }<|eot_id|>

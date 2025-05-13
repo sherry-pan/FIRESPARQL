@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?paper orkgp:P31 [
+    orkgp:P2006 [
+      rdfs:label ?title
+    ];
+    orkgp:P32 [
+      orkgp:P2005 [
+        rdfs:label ?title;
+        orkgp:P3549 ?dataset
+      ];
+      orkgp:P3548 ?benchmark
+    ]
+  ];
+  ?benchmark orkgp:P2007 ?eval.
+  FILTER(REGEX(STR(?eval), "eval"))
+  ?dataset rdfs:label ?dataset_lbl.
+}
+```

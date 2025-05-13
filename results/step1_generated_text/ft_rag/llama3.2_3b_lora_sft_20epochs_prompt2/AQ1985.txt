@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the BART model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?implementation.
+      ?implementation orkgp:P5047?code.
+      ?paper orkgp:HAS_METOD?method.
+       FILTER(REGEX(?method, "BART"))
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P33?eval.
+      ?eval orkgp:P5048?HAS_EVALUATION
+      ?HAS_EVALUATION rdfs:label?eval.
+      ?eval orkgp:P33?benchmark.
+      ?benchmark rdfs:label?benchmark.
+       FILTER(REGEX(?benchmark, "eval"))
+     }<|eot_id|>

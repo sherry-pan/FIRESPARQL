@@ -3,7 +3,7 @@
 MODELS=(
     # "llama3.2_3b_lora_sft_7epochs"
     # "llama3.2_3b_lora_sft_10epochs"
-    # "llama3.2_3b_lora_sft_15epochs"
+    # "llama3.2_3b_lora_sft_20epochs"
     # "llama3_8b_lora_sft_7epochs"
     # "llama3_8b_lora_sft_10epochs"
     # "llama3_8b_lora_sft_15epochs"
@@ -11,8 +11,8 @@ MODELS=(
     "llama-3-8b-Instruct"
 )
 
-INPUT_DIR="results/step1_generated_text/vanilla"
-OUTPUT_DIR="results/step2_clean_sparql/vanilla"
+INPUT_DIR="results/step1_generated_text/vanilla_rag"
+OUTPUT_DIR="results/step2_clean_sparql/vanilla_rag"
 ROUNDS=(
     "round1"
     "round2"

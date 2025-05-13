@@ -1,0 +1,13 @@
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/api/v1.0/>
+
+SELECT ?metric ?metricValue
+WHERE {
+  ?evaluation orkg:hasDataset orkg:BUCC_Russian-to-English.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  ?metric orkg:hasValue ?metricValue.
+  FILTER (LANG(?metricLabel) = "en" && LANG(?metricValue) = "en")
+}
+```

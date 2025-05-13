@@ -1,0 +1,12 @@
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_COMPONENT ?component.
+  ?component rdfs:label ?label FILTER(?label IN ("BiDAF", "Self Attention", "ELMo")).
+  ?paper orkg:HAS_IMPLEMENTATION ?code.
+}

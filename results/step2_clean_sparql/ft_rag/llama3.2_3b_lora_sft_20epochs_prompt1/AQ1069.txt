@@ -1,0 +1,38 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?score) AS ?benchmark_result)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "seel.cse.lsu.edu/data/re17.zip")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?evaluation.
+  
+  OPTIONAL {
+    ?evaluation orkgp:P71075 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  
+  ?evaluation orkgp:P71079 ?recall;
+              orkgp:P71081 ?accuracy.
+  
+  OPTIONAL {
+    ?evaluation orkgp:P71080 ?micro_f1.
+    ?micro_f1 rdfs:label ?micro_f1_lbl.
+  }
+  
+  OPTIONAL {
+    ?evaluation orkgp:P71082 ?macro_f1;
+                orkgp:P71080 ?micro_f1.
+  }
+  
+  OPTIONAL {
+    ?evaluation orkgp:P71082 ?macro_f1;
+                orkgp:P97142 ?method.
+    ?method rdfs:label ?method_lbl.
+  }
+  
+  ?evaluation orkgp:P71082 ?macro_f1.
+  BIND(xsd:float(?macro_f1) AS ?score)
+}
+```

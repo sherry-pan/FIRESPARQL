@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+  ?model orkgp:P4006 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P43131 ?code.
+  FILTER(REGEX(STR(?model_lbl), "Dynamic Coattention Networks \\(single model\\)"))
+}
+```

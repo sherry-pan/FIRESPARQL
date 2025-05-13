@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:HAS_IMPLEMENTATION ?impl;
+    orkgp:P5043 ?code
+  ].
+  FILTER(REGEX(STR(?impl), "Funnel Transformer"))
+}
+ORDER BY ?title
+```

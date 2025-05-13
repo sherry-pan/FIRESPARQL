@@ -1,0 +1,14 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX bc5cdr: <http://www.orkg.org/bc5cdr/>
+
+SELECT?model?f1
+WHERE {
+ ?model a orkg:Model ;
+         orkg:evaluatedOn bc5cdr:BC5CDR-disease ;
+         orkg:metricValue?f1.
+  FILTER (?f1 = xsd:float("bestF1Value") ||?f1 = xsd:float("bestF1Score"))
+}<|eot_id|>

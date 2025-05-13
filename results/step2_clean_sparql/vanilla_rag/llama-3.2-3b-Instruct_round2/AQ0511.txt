@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:CSVW_Name ?dataset_name.
+  FILTER (STR(?dataset_name) = "STS Benchmark").
+  ?paper orkg:CSVW_Titles ?title.
+  ?paper orkg:HAS_ID ?id.
+}
+```

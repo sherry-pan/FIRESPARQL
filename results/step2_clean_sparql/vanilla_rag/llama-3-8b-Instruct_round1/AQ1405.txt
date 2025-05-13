@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric a owl:DatatypeProperty.
+  ?metric orkg:propertyIRI ?propertyIRI.
+  FILTER(?propertyIRI = orkg:P71080 || ?propertyIRI = orkg:P71082).
+  ?evaluation orkg:hasValue ?score.
+  ?evaluation orkg:hasKnowledgeGraph ?knowledgeGraph.
+  ?knowledgeGraph orkg:knowledgeGraphName "SciERC".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

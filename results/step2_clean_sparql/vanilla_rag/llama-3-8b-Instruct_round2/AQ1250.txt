@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET/orkg:MLDocZeroShotGermanToFrench ;
+    orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:values ?value ;
+    csvw:property ?metric.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

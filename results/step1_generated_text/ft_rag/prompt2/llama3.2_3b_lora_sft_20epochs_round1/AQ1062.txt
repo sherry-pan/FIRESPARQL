@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R155621 orkgp:apply {
+         orkgp:process {
+           orkgp:run {
+             orkgp:HAS_EVALUATION?eval.
+            ?eval orkgp:P70402?metric.
+             BIND(xsd:float(?metric) AS?value)
+           }
+         }
+       }
+       FILTER(?metric = "Accuracy")
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

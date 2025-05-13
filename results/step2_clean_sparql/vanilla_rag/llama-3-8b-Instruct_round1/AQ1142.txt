@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX coqa: <http://example.org/coqa/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:HAS_EVALUATION ?evaluation ;
+             orkg:HAS_DATASET coqa:CoQA .
+  ?evaluation orkg:METRIC ?metric ;
+              orkg:VALUE ?value .
+  FILTER(?metric = "Highest Value")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

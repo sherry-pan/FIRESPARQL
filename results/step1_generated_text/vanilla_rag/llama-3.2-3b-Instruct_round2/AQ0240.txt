@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Ms. Pacman dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?model?method?dataset
+     WHERE {
+      ?model orkg:has_evaluation?evaluation.
+      ?evaluation orkg:has_dataset?dataset.
+      ?model orkg:has_method?method.
+      ?dataset orkg:has_benchmark "Atari 2600 Ms. Pacman"^^xsd:string.
+      ?model orkg:has_approach?approach.
+      ?approach orkg:has_implementation?implementation.
+       FILTER (CONTAINS(LCASE(?dataset), "atari 2600 pacman"))
+     }<|eot_id|>

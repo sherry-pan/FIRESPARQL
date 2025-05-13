@@ -1,0 +1,38 @@
+Question:
+Which model has achieved the highest SUCCESS score on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                 rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl) = "SUCCESS")
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?model    a                orkgc:Model;
+                     rdfs:label      ?model_lbl.
+          ?model     has_evaluation    ?eval.
+          ?eval       has_value        ?value.
+          ?value      has_metric        ?metric.
+          ?metric      rdfs:label        ?metric_lbl.
+           FILTER (str(?metric_lbl) = "SUCCESS")
+          ?cont         has_dataset      ?dataset.
+          ?dataset      has_benchmark    ?benchmark.
+          ?benchmark    has_result        ?result.
+          ?result      has_value        ?value;
+                        has_compare      ?compare.
+          ?compare      rdfs:label        ?compare_lbl.
+           FILTER (str(?compare_lbl) = "max")
+          ?model      orkgp:HAS_WINNER     ?winner.
+           OPTIONAL {
+            ?winner      has_value      ?value.
+           }
+           IF(?value =?compare_lbl "max") THEN
+             BIND(xsd:int(?value) AS?success_score)
+           END
+         }
+       }
+     }
+     ORDER BY DESC(?success_score)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset orkgr:HAS_DATASET orkgp:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "NCBI Disease"))
+  ?dataset orkgr:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+```

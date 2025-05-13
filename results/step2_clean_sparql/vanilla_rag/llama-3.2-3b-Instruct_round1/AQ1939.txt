@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?codeReference
+WHERE {
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasImplementation ?implementation.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasImplementation ?codeReference.
+    FILTER ("conceptMentionExtraction" IN ?benchmark)
+}
+```

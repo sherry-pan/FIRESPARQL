@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasDataset ?zaxxon_dataset.
+  ?zaxxon_dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER (str.contains(?zaxxon_dataset, 'Atari 2600 Zaxxon') || str.contains(?zaxxon_dataset, 'Zaxxon'))
+}
+```

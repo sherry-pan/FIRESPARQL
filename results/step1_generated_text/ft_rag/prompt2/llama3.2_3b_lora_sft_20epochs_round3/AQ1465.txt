@@ -1,0 +1,29 @@
+Question:
+Indicate the model that performed best in terms of Accuracy metric on the CommonsenseQA benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "CommonsenseQA")
+               || str(?dataset_lbl      = "CoSQA"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                       orkgp:P71075         ?metric.
+      ?metric         orkgp:HAS_VALUE        ?value;
+                       rdfs:label              ?metric_lbl.
+      ?metric         orkgp:P71081          ?num_labels.
+       FILTER(?num_labels = 1)
+      ?eval           orkgp:P97123          ?cont;
+                       orkgp:P97126          ?split.
+      ?cont         orkgp:HAS_VALUE        ?value;
+                      rdfs:label              ?cont_lbl.
+      ?cont         rdfs:label              ?cont_lbl.
+      ?eval           orkgp:P97124          ?cont;
+                       orkgp:P97140          ?split;
+                       orkgp:P71067          ?data_split.
+      ?dataset       orkgp:HAS_MODEL         ?model.
+      ?model        rdfs:label              ?model_lbl.
+     }<|eot_id|>

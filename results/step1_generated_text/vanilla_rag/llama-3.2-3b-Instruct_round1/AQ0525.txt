@@ -1,0 +1,16 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the NCBI-disease dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?title?id
+     WHERE {
+    ?paper orkg:has_dataset orkg:has_dataset?dataset.
+    ?dataset orkg:has_name "NCBI-disease"@en.
+    ?paper orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_evaluation orkg:has_evaluation?evaluation.
+    ?paper orkg:CSVW_Titles?title.
+    ?paper orkg:CSVW_Name?id.
+     FILTER (STR(?id) =~ "^\d+$")
+     }
+    <|eot_id|>

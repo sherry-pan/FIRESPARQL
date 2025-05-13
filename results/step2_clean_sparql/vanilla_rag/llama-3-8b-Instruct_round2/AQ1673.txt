@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric orkg:Accuracy.
+  ?evaluation orkg:hasResult ?result.
+  ?result orkg:value ?accuracy.
+  ?model orkg:hasDataset orkg:MLDoc_Zero-Shot_English-to-German_benchmark.
+  ?model orkg:method ?method.
+  FILTER (?method != "Evaluation" && ?method != "Implementation")
+  FILTER (?accuracy > 0)
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

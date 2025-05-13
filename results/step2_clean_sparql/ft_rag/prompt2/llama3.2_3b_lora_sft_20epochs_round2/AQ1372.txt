@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "DocRED (Human-annotated)".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark.
+  ?metric a orkgp:Metric;
+          orkgp:HAS_METRIC ?evaluation.
+  ?evaluation orkgp:HAS_VALUE ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

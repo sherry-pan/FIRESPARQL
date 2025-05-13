@@ -1,0 +1,23 @@
+Question:
+What are the models that have been benchmarked on the Atari 2600 Road Runner dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Road Runner")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont         orkgp:HAS_EVALUATION   ?eval;
+                      orkgp:HAS_METHOD      ?method.
+       ?approach     rdfs:label              ?approach;
+                      orkgp:HAS_METHOD      ?method.
+        OPTIONAL {?approach       orkgp:HAS_DATASET      ?dataset.}
+        OPTIONAL {?eval         orkgp:HAS_DATASET      ?dataset.}
+        OPTIONAL {?cont         orkgp:HAS_DATASET      ?dataset.}
+       ?model      orkgp:HAS_EVALUATION   ?eval.
+       ?model      rdfs:label              ?model_lbl.
+      }
+     ORDER BY?model_lbl<|eot_id|>

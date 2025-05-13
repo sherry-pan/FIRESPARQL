@@ -1,0 +1,14 @@
+```sparql
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?metric ?score WHERE {
+  ?result a obo:SIO_000772 ; 
+          obo:SIO_000300 ?score ;
+          obo:BFO_0000050 ?evaluation .
+  ?evaluation dcterms:subject <http://example.org/dataset/Pubmed> ;
+              obo:OBI_0001937 ?metric .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

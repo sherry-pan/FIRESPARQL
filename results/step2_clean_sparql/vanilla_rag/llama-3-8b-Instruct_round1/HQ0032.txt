@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?compound (COUNT(?evaluation) AS ?count)
+WHERE {
+  ?compound a orkg:Compound.
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?compound.
+}
+GROUP BY ?compound
+ORDER BY DESC(?count)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX vtab: <http://example.org/vtab#>
+
+SELECT ?modelName
+WHERE {
+  ?benchmark a vtab:Benchmark ;
+             vtab:dataset vtab:VTAB-1k ;
+             vtab:top1Accuracy ?top1Accuracy ;
+             vtab:model ?model .
+
+  ?model schema:name ?modelName .
+}
+ORDER BY DESC(?top1Accuracy)
+LIMIT 1
+```

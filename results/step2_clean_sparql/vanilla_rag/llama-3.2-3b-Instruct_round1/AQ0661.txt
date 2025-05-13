@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?title ?id WHERE {
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_DATASET "ImageNet ReaL".
+    ?paper orkg:HAS_METHOD ?method.
+    ?method orkg:HAS_Evaluation ?evaluation.
+    ?paper orkg:CSVW_Value ?id.
+    FILTER (?benchmark a orkg:Benchmark).
+    FILTER (?benchmark orkg:hasBenchmarkModel ?model).
+    BIND (concat(?id, " ") AS ?title).
+}
+```

@@ -1,0 +1,28 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R6898 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P3109?benchmark.
+      ?benchmark orkgp:P3108?eval.
+       SELECT?metric?metric_lbl
+       WHERE {
+        ?eval orkgp:P31?cont;
+                orkgp:P31?eval2.
+        ?cont orkgp:HAS_EVAL?eval.
+        ?eval orkgp:P45009?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+       UNION
+       SELECT?metric?metric_lbl
+       WHERE {
+        ?eval orkgp:P31?cont;
+                orkgp:P31?eval2.
+        ?cont orkgp:HAS_EVAL?eval.
+        ?eval orkgp:P45010?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+     }
+     GROUP BY?metric?metric_lbl<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation schema:code ?code.
+  FILTER regex(str(?method), "C51 noop")
+}
+```

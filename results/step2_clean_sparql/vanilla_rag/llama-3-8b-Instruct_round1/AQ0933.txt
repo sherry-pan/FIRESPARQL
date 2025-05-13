@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT ?metric
+WHERE {
+ ?paper a orkg:Paper ;
+        orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasMetric ?metric.
+ ?metric orkg:label ?metricLabel.
+  FILTER (?metricLabel = "Recall" || ?metricLabel = "Accuracy" || ?metricLabel = "micro-F1" || ?metricLabel = "macro-F1").
+ ?evaluation orkg:relatedTo ?dataset.
+ ?dataset orkg:label "Atari 2600 Zaxxon".
+}
+```

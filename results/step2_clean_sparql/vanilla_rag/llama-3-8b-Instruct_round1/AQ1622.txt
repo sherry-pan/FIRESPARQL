@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?macsScore
+WHERE {
+  ?model orkg:HAS_BENCHMARK <http://orkg.org/orkg/resource/ImageNet>.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:HAS_VALUE ?macsScore.
+  FILTER (?metric = "MACs" && isLiteral(?macsScore))
+}
+ORDER BY DESC(?macsScore)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+Question:
+Provide a list of papers that have utilized the Duel hs model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label   ?model_lbl.
+        FILTER (str(?model_lbl) = "Duel hs")
+       ?benchmark    orkgp:HAS_BENCHMARK   ?cont          
+       ?cont        orkgp:HAS_EVALUATION   ?eval         
+       ?eval         orkgp:HAS_DATASET     ?dataset       ;
+                      orkgp:P31           ?dataset_lbl    .
+       ?dataset      orkgp:HAS_DATASET     ?code        .
+       ?cont         orkgp:HAS_METHOD     ?method       ;
+                      orkgp:HAS_IMPLEMENTATION ?implementation
+       ?implementation orkgp:HAS_SOURCE_CODE   ?code        .
+      }<|eot_id|>

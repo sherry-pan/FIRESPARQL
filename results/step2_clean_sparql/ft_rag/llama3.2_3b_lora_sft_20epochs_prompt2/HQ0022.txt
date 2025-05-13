@@ -1,0 +1,23 @@
+```sparql
+SELECT ?uses_cosine
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ] ;
+  orkgp:P32 [
+    orkgp:P5049 ?eval
+  ] ;
+  orkgp:P5048 ?approach.
+  
+  ?approach rdfs:label ?approach_labels.
+  FILTER(REGEX(STR(?approach_labels), "Cosine"))
+  
+  ?eval orkgp:P5047 ?method.
+  ?method rdfs:label ?method_labels.
+  FILTER(REGEX(STR(?method_labels), "employe"))
+  
+  BIND(IF(?method_labels = "Cosine similarity", "yes", "no") AS ?uses_cosine)
+}
+ORDER BY DESC(?uses_cosine)
+LIMIT 1
+```

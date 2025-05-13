@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric
+WHERE {
+    ?s orkg:HAS_EVALUATION ?e.
+    ?e orkg:label ?label.
+    FILTER (regex(?label, "recall", "i") || regex(?label, "accuracy", "i") || regex(?label, "f1", "i") || regex(?label, "benchmark", "i"))
+    ?s orkg:HAS_BENCHMARK ?b.
+}
+```

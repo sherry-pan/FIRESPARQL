@@ -1,0 +1,16 @@
+Question:
+Where can I find code references in papers that have used the MMV model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paper?code
+     WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_dataset?dataset.
+    ?dataset orkg:has_implementation?implementation.
+    ?implementation orkg:has_method?method.
+    ?method orkg:has_code_reference?code.
+     FILTER (strLike(STR(?benchmark), "MMV") OR strLike(STR(?method), "MMV"))
+     }<|eot_id|>

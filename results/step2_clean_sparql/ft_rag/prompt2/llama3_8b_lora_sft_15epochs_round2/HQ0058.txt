@@ -1,0 +1,25 @@
+```sparql
+SELECT ?precision ?precision_lbl ?recall ?recall_lbl ?f1 ?f1_lbl
+WHERE {
+  orkgr:R69445 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P71094 ?classification.
+  ?classification rdfs:label ?classification_lbl.
+  FILTER(REGEX(?classification_lbl, "user feedback as feature requests", "i"))
+  ?contrib orkgp:P97142 ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "naive bayes", "i"))
+  ?contrib orkgp:P71064 ?feature.
+  ?feature rdfs:label ?feature_lbl.
+  FILTER(REGEX(?feature_lbl, "bag of words", "i"))
+  ?contrib orkgp:P71080 ?micro_f1.
+  ?micro_f1 rdfs:label ?f1_lbl.
+  BIND(xsd:float(?f1_lbl) AS ?f1)
+  ?contrib orkgp:P71079 ?recall_value.
+  ?recall_value rdfs:label ?recall_lbl.
+  BIND(xsd:float(?recall_lbl) AS ?recall)
+  ?contrib orkgp:P71078 ?precision_value.
+  ?precision_value rdfs:label ?precision_lbl.
+  BIND(xsd:float(?precision_lbl) AS ?precision)
+}
+ORDER BY DESC(?f1)
+```

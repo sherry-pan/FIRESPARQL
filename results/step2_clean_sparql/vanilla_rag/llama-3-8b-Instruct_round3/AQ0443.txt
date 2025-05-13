@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT ?title ?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:CSVW_Titles ?title.
+ ?paper csvw:CSVW_Number ?id.
+ ?paper orkg:HAS_BENCHMARK true.
+ ?paper orkg:HAS_DATASET orkg:UCF101.
+ ?paper orkg:HAS_METHOD ?method.
+ FILTER (?method = "finetuned").
+ ?paper orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_IMPLEMENTATION ?implementation.
+ FILTER (?implementation = "finetuned").
+}
+```

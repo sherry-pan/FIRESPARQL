@@ -1,0 +1,24 @@
+Question:
+Can you list the metrics used to evaluate models on the MUTAG dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R6908 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P71075?eval.
+      ?eval orkgp:P31?cont.
+      ?cont orkgp:P31?eval2.
+      ?eval2 rdfs:label?metric_lbl.
+      ?eval2 orkgp:P71081?accuracy.
+      ?accuracy rdfs:label?accuracy_lbl.
+       FILTER(REGEX(?accuracy_lbl, "Acc"))
+      ?eval2 orkgp:P71079?recall.
+      ?recall rdfs:label?recall_lbl.
+       FILTER(REGEX(?recall_lbl, "Recall"))
+      ?eval2 orkgp:P71080?micro_f1.
+      ?micro_f1 rdfs:label?micro_f1_lbl.
+       FILTER(REGEX(?micro_f1_lbl, "micro-F1"))
+      ?eval2 orkgp:P71082?macro_f1.
+      ?macro_f1 rdfs:label?macro_f1_lbl.
+       FILTER(REGEX(?macro_f1_lbl, "macro-F1"))
+     }<|eot_id|>

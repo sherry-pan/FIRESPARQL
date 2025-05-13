@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?name
+WHERE {
+  ?model orkg:has_dataset ?dataset.
+  ?dataset orkg:has_method ?method.
+  ?method orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_implementation ?impl.
+  ?impl orkg:has_name ?name.
+  FILTER (?benchmark orkg:has_dataset "TriviaQA" &&
+          ?benchmark orkg:has_evaluation orkg:Accuracy &&
+          ?evaluation orkg:has_score ?accuracy).
+}
+ORDER BY DESC(?accuracy)
+```

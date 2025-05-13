@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?evaluation orkg:hasValue ?value.
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset orkg:hasDataset "WNLI".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

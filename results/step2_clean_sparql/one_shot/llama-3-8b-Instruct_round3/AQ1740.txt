@@ -1,0 +1,21 @@
+```
+PREFIX benchmark: <http://example.org/benchmark/>
+PREFIX dataset: <http://example.org/dataset/>
+PREFIX evaluation: <http://example.org/evaluation/>
+PREFIX model: <http://example.org/model/>
+PREFIX metric: <http://example.org/metric/>
+
+SELECT ?model_name
+WHERE {
+  ?evaluation a evaluation:Evaluation .
+  ?evaluation evaluation:dataset dataset:SequentialMNIST .
+  ?evaluation evaluation:model ?model .
+  ?model model:name ?model_name .
+  ?evaluation evaluation:metric ?metric .
+  ?metric a metric:PermutedAccuracy .
+  ?evaluation evaluation:score ?score .
+}
+
+ORDER BY DESC(?score)
+LIMIT 1
+```

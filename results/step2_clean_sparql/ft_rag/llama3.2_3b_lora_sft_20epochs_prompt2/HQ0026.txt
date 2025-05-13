@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?benchmark ?benchmark_lbl
+WHERE {
+  ?benchmark orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation a orkgc:Evaluation;
+              rdfs:label ?evaluation_lbl;
+              ?property ?number_of_questions.
+  FILTER(?number_of_questions > 10000)
+  FILTER(REGEX(?evaluation_lbl, "number of questions"))
+  ?benchmark rdfs:label ?benchmark_lbl.
+}
+```

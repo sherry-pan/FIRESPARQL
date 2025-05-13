@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/terms/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METHOD ?method.
+  ?evaluation orkg:HAS_DATASET <http://orkg.org/dataset/SST-5_Fine-grained_classification_benchmark>.
+  ?evaluation p:71081 ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

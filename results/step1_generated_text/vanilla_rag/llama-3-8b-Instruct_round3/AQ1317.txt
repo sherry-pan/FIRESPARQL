@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the Atari 2600 Star Gunner dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+    SELECT?metric?value
+    WHERE {
+     ?benchmark a orkg:Benchmark ;
+        orkg:HAS_BENCHMARK?evaluation.
+     ?evaluation a orkg:Evaluation ;
+        orkg:HAS_METHOD?method ;
+        csvw:CSVW_Value?value.
+      FILTER (?evaluation?orkg:HAS_DATASET "Atari 2600 Star Gunner".
+      FILTER (?evaluation?orkg:HAS_BENCHMARK_RESULT?result.
+      FILTER (?result?orkg:HAS_METRIC?metric.
+      FILTER (?result?orkg:HAS_VALUE?value.
+      FILTER (?metric?orkg:HAS_MAX_VALUE?value.
+    }<|eot_id|>

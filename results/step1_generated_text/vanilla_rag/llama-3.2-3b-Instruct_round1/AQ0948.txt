@@ -1,0 +1,18 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Skiing dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric
+     WHERE {
+      ?dataset a orkg:Dataset.
+      ?dataset orkg:hasDataset?skiing_dataset.
+      ?metric orkg:hasEvaluation?metric.
+      ?metric orkg:hasBenchmark?benchmark.
+       FILTER (bif:label(?benchmark) = "Atari 2600 Skiing" )
+      ?benchmark orkg:hasMethod?method.
+      ?metric orkg:hasEvaluation?skiing_metric.
+      ?skiing_metric orkg:hasEvaluation?skiing_metric.
+      ?metric rdfs:label?metricLabel.
+       FILTER (str:contains(?metricLabel, "Recall") OR str:contains(?metricLabel, "micro-F1") OR str:contains(?metricLabel, "macro-F1") OR str:contains(?metricLabel, "Accuracy") OR str:contains(?metricLabel, "NDCG@10"))
+     }<|eot_id|>

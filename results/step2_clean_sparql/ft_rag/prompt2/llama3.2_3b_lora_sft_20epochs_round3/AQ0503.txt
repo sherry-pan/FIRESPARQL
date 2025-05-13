@@ -1,0 +1,15 @@
+```sparql
+SELECT ?paper ?paper_title
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BIOSSES")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:BENCHMARK ?benchmark;
+              orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:HAS_EVALUATION ?eval;
+         rdfs:label ?paper_title.
+}
+ORDER BY ASC(?paper_title)
+LIMIT 10
+```

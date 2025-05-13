@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_lbl.
+  FILTER(REGEX(STR(?paper_lbl), "Semantic Role Labeling", "i"))
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+}
+ORDER BY ?dataset_lbl
+```

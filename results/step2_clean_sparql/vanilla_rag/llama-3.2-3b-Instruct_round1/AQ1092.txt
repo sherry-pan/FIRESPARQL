@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.openresearch.org/ontology/orkg/>
+PREFIX wgsn: <http://www.w3.org/2008/01/owls#owl>
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset;
+           orkg:hasDatasetName "NYT-single".
+  ?dataset orkg:hasDatasetInstance ?instance.
+  ?instance orkg:datasetInstanceHasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric;
+              orkg:hasValue ?value.
+  FILTER (str(?metric) IN ("Recall", "Micro-F1", "Accuracy", "Macro-F1"))
+}
+```

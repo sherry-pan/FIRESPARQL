@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper_title ?paper_id
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         orkg:has_dataset ?dataset ;
+         orkg:has_benchmark ?benchmark ;
+         orkg:has_id ?paper_id.
+  ?dataset rdfs:label "Walker, walk (DMControl100k)".
+  ?benchmark orkg:evaluates ?model.
+  ?model rdfs:label ?paper_title.
+}
+```

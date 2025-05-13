@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark ?score ;
+    orkg:hasEvaluation ?evaluation ;
+    orkg:hasDataset orkg:NottinghamDataset ;
+    orkg:hasMethod ?metric.
+  ?evaluation rdfs:label ?evaluationLabel.
+  FILTER (?evaluationLabel = "top benchmark score" || ?evaluationLabel = "top score")
+}
+```

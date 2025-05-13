@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+    ?benchmark orkg:has_dataset <http://example.org/CL-SciSumm>.
+    ?benchmark orkg:has_method ?method.
+    ?method orkg:has_score ?score.
+    ?model orkg:has_method ?method.
+    FILTER (STR(?score) = "ROUGE-2").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

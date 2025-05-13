@@ -1,0 +1,24 @@
+```
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX ex: <http://example.org/>
+
+SELECT ?model
+WHERE {
+  ?evaluation ex:performedOn dbr:CoNLL_2012 ;
+              ex:evaluationMetric ex:F1 ;
+              ex:model ?model ;
+              ex:score ?score .
+  
+  {
+    SELECT (MAX(?score) AS ?maxScore)
+    WHERE {
+      ?evaluation ex:performedOn dbr:CoNLL_2012 ;
+                  ex:evaluationMetric ex:F1 ;
+                  ex:score ?score .
+    }
+  }
+  
+  FILTER(?score = ?maxScore)
+}
+```

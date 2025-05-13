@@ -1,0 +1,18 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+
+SELECT ?metric ?value WHERE {
+  ?benchmark wdt:P31 wd:Q91740402;
+             wdt:P2770 wd:Q105447703;
+             wdt:P10866 ?dataset.
+
+  ?dataset wdt:P2770 wd:Q105469774.
+
+  ?result pq:P708 ?metric;
+          pq:P1114 ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

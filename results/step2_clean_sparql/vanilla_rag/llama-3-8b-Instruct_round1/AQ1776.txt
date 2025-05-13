@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?benchmark ?evaluation ?params
+WHERE {
+  ?model orkg:HAS_DATASET orkg:ImageNet.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark csvw:Number ?params.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:metric "Number of params".
+  FILTER(xsd:integer(?params))
+}
+```

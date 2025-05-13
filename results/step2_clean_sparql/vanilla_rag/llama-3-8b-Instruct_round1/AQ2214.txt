@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_METHOD ?method.
+  ?method orkg:label "All-attention network - 18 layers".
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark schema:hasEvaluation ?evaluation.
+  ?evaluation schema:hasCodeReference ?codeReference.
+}
+```

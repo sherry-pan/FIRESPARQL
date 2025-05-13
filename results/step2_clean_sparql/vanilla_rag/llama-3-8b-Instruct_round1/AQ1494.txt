@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?bleuScore
+WHERE {
+  ?model a orkg:Method.
+  ?model rdfs:label ?modelLabel.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation rdfs:label "BLEU".
+  ?evaluation orkg:HAS_SCORE ?bleuScore.
+  ?model orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "RotoWire (Content Ordering)".
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

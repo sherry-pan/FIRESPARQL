@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?
+
+Generated SPARQL:
+PREFIX orkgc: <http://www.scholink.org/orkg/concept/>
+PREFIX orkgp: <http://www.scholink.org/orkg/property/>
+
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1 entity level score")
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a

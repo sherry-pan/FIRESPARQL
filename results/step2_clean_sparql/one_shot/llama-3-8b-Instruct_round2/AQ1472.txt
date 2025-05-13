@@ -1,0 +1,14 @@
+```
+SELECT ?modelName
+WHERE {
+  ?benchmark a dbo:Benchmark ;
+             dbo:testedOn dbr:TriviaQA ;
+             dbo:hasResult ?result .
+  ?result dbo:hasMetric dbr:Accuracy ;
+          dbo:score ?score .
+  ?model dbo:hasBenchmark ?benchmark ;
+         rdfs:label ?modelName .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

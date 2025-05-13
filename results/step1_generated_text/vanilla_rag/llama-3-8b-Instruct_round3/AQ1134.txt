@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Hendrycks Test dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX p: <http://orkg.org/orkg/predicate/>
+
+SELECT?metric?score
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation p:HAS_BENCHMARK?benchmark.
+ ?benchmark p:HAS_DATASET?dataset.
+ ?dataset p:NAME "Hendrycks Test".
+ ?evaluation p:HAS_SCORE?score.
+ ?evaluation p:HAS_METRIC?metric.
+  FILTER(?metric = p:P71081 ||?metric = p:P71082)
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

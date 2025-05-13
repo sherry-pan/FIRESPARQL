@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label "BiT-M".
+  ?eval orkgp:HAS_CODE ?code;
+        orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_DATASET ?files.
+  ?files orkgp:HAS_FILE ?file.
+  ?file orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl orkgp:HAS_SOURCE_CODE ?code.
+  ?code orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_MODEL ?model.
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  FILTER(REGEX(?model, "CATTS-XSUM"))
+  ?model orkgp:P34 ?benchmark.
+  ?has_benchmark orkgp:P35 ?eval.
+  FILTER(REGEX(?eval, "benchmark"))
+  ?eval orkgp:P33 ?code.
+  ?code rdfs:label ?code
+}
+```

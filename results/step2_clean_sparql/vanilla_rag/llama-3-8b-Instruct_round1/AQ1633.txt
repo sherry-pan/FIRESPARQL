@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Method.
+  ?model orkg:hasBenchmark <http://orkg.org/orkg/benchmark/DMControl500k>.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasValue ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

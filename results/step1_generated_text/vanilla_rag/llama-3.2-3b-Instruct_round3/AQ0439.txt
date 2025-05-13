@@ -1,0 +1,16 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Kinetics-600 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?title?id
+     WHERE {
+      ?paper orkg:has_dataset?dataset.
+      ?dataset orkg:has_evaluation?evaluation.
+      ?evaluation orkg:has_dataset?dataset.
+      ?paper orkg:has_evaluation?evaluation.
+      ?paper orkg:CSVW_Titles?title.
+      ?paper orkg:CSVW_Number?id.
+       FILTER (CONTAINS(LCASE(?dataset), "Kinetics-600") )
+       FILTER (CONTAINS(LCASE(?evaluation), "benchmark") )
+     }<|eot_id|>

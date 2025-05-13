@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?paper orkgp:P30 ?contrib.
+  ?contrib orkgp:P31 ?research_field.
+  ?research_field rdfs:label ?research_field_lbl.
+  FILTER(REGEX(STR(?research_field_lbl), "Scientific Results Extraction"))
+  ?paper orkgp:P2008 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+}
+```

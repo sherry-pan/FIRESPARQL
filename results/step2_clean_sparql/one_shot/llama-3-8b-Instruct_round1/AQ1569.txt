@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1")
+
+  ?result orkgp:hasMetricValue ?metric;
+          orkgp:onDataset ?dataset;
+          orkgp:computedByModel ?model.
+  
+  ?model rdfs:label ?model_lbl.
+  
+  ?dataset rdfs:label "BC5CDR-disease".
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

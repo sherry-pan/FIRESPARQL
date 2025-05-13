@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX fsns: <http://fsns.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?sequenceError
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric orkg:hasValue ?sequenceError.
+  ?evaluation orkg:hasDataset fsns:FSNS-Test.
+  ?evaluation orkg:metricType orkg:SequenceError.
+}
+ORDER BY ?sequenceError
+LIMIT 1
+```

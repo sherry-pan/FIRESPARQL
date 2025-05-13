@@ -1,0 +1,88 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "BC5CDR-disease")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+       ?eval           orkgp:HAS_VALUE        ?value.
+        OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                 ?metric           rdfs:label              ?metric_lbl.}
+        OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.
+                 ?model          rdfs:label              ?model_lbl.}
+       ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+        OPTIONAL {?cont      orkgp:HAS_MODEL         ?model.
+                 ?model          rdfs:label              ?model_lbl.}
+       ?cont         orkgp:HAS_VALUE        ?value.
+        OPTIONAL {?cont      orkgp:HAS_METRIC        ?metric.
+                 ?metric           rdfs:label              ?metric_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.}
+        OPTIONAL {
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           orkgp:HAS_MODEL         ?model.
+           ?model           rdfs:label              ?model_lbl.}
+        OPTIONAL {
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           orkgp:HAS_MODEL         ?model.
+           ?model           rdfs:label              ?model_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_MODEL         ?model.
+           ?model           rdfs:label              ?model_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_LABEL         ?label.
+            FILTER(?label = "F1")
+           ?cont         orkgp:HAS_MODEL         ?model.
+           ?model           rdfs:label              ?model_lbl.}
+        OPTIONAL {
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.
+           ?eval           orkgp:HAS_LABEL         ?label.
+            FILTER(?label = "F1")
+           ?eval           orkgp:HAS_MODEL         ?model.
+           ?model           rdfs:label              ?model_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_MODEL         ?model.
+           ?model           orkgp:HAS_LABEL         ?label.
+            FILTER(?label = "Accuracy")
+           ?cont         orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.
+           ?cont         orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_MODEL         ?model.
+           ?model           orkgp:HAS_LABEL         ?label.
+            FILTER(?label = "Recall")
+           ?cont         orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.}
+        OPTIONAL {
+           ?eval           orkgp:HAS_VALUE        ?value.
+           ?value           orkgp:HAS_METRIC        ?metric.
+           ?metric           rdfs:label              ?metric_lbl.
+           ?cont         orkgp:HAS_VALUE        ?value.
+           

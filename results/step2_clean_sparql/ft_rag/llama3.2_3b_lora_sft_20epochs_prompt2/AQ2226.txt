@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "XLNet-Large")
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark;
+           orkgp:P31 ?cont.
+  ?cont orkgp:P31 ?paper.
+  ?paper orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl rdfs:label ?code.
+}
+```

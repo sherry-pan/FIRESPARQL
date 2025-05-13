@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?score
+WHERE {
+  orkgr:R155092 orkgp:compareContribution ?cont.
+  ?cont orkgp:P70031 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P70028 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "F1"))
+  ?evaluation orkgp:P70029 ?score.
+  FILTER(?score = "0.9636363636363636")
+}
+```

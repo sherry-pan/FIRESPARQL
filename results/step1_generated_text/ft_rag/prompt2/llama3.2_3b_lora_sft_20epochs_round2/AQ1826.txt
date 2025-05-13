@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of Macro Precision metric on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "NLP-TDMS (Exp, arXiv only)")
+               && "evaluations"   ?evaluations)
+      ?evaluations orkgp:HAS_DATASET      ?dataset;
+                  orkgp:P71082        ?macro_F1.
+      ?macro_F1 rdfs:label              ?macro_F1_lbl.
+       BIND(xsd:float(?macro_F1_lbl)   AS?macro_Precision)
+      ?cont         orkgp:P97135        ?matching_strategy;
+                     orkgp:P97142        ?method.
+       BIND(xsd:string(?method)      AS?model_lbl)
+       FILTER(?macro_Precision = 1)
+     }<|eot_id|>

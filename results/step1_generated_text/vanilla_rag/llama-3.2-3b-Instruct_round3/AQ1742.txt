@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of Unpermuted Accuracy score when benchmarked on the Sequential CIFAR-10 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?accuracy
+     WHERE {
+    ?model orkg:hasDataset?dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasValue?accuracy.
+    ?model orkg:hasEvaluation?evaluation.
+     FILTER (?evaluation orkg:hasMetric "Unpermuted Accuracy"^^xsd:string).
+     FILTER (?accuracy > (SELECT?accuracy2 FROM {?model2 orkg:hasEvaluation?evaluation2.?evaluation2 orkg:hasMetric "Unpermuted Accuracy"^^xsd:string } LIMIT 1) ).
+    ?model orkg:Name?model_name.
+     FILTER (?model_name = "top performer").
+     }<|eot_id|>

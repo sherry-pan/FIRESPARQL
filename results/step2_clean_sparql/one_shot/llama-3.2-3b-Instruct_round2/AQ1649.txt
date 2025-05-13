@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "SUCCESS".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "Habitat 2020 Object Nav test-std".
+      ?benchmark orkgp:hasModel ?model.
+      ?model rdfs:label ?model_lbl;
+             orkgc:hasMetric ?metric.
+    }
+    ORDER BY DESC(?metric)
+    LIMIT 1
+  }
+}
+```

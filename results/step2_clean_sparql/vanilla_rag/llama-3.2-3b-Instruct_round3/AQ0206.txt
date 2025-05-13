@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?modelLabel
+WHERE {
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    FILTER (CONTAINS(STR(?dataset), "Habitat 2020 Object Nav") && 
+            CONTAINS(STR(?dataset), "test-std"))
+}
+LIMIT 10
+```

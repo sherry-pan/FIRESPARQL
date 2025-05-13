@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?method
+WHERE {
+  ?evaluation a orkg:Evaluation ;
+              orkg:HAS_METHOD ?method ;
+              orkg:HAS_DATASET <http://orkg.org/orkg/resource/AmazonBenchmark> ;
+              orkg:HAS_METRIC ?metric ;
+              orkg:HAS_METRIC_VALUE ?metricValue.
+  FILTER (?metric = "Accuracy"^^xsd:string)
+}
+ORDER BY DESC(xsd:float(?metricValue))
+LIMIT 1
+```

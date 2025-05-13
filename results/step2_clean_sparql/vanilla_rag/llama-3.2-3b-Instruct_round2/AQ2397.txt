@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper orkg:has_method orkg:DeiT-Ti.
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_dataset ?dataset.
+  ?dataset orkg:has_reference ?codeReference.
+  ?paper orkg:has_implementation ?implementation.
+  ?implementation orkg:has_code ?code.
+  FILTER (STRLIKE(STR(?code), 'DeiT-Ti'))
+}
+```

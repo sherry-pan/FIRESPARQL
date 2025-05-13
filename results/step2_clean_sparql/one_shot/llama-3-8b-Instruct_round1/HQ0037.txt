@@ -1,0 +1,24 @@
+```sparql
+SELECT ?author ?author_label
+WHERE {
+  ?contrib orkgp:compareContribution ?author.
+  ?author rdfs:label ?author_label.
+  {
+    SELECT ?author (COUNT(?article) as ?count)
+    WHERE {
+      ?contrib orkgp:P36092 ?article.
+      ?article orkgp:P36088 ?author.
+    } 
+    GROUP BY ?author
+  }
+  FILTER NOT EXISTS {
+    SELECT ?author (COUNT(?article) as ?count2)
+    WHERE {
+      ?contrib orkgp:P36092 ?article.
+      ?article orkgp:P36088 ?author.
+    }
+    GROUP BY ?author
+    HAVING(?count2 > ?count)
+  }
+}
+```

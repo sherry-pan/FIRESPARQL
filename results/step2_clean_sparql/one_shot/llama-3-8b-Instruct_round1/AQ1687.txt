@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX benchmark: <http://example.org/benchmark#>
+PREFIX model: <http://example.org/model#>
+
+SELECT ?modelName
+WHERE {
+  ?model rdf:type model:Model .
+  ?model benchmark:onDataset <http://example.org/dataset/AESLC> .
+  ?model benchmark:metric <http://example.org/metric/ROUGE-1> .
+  ?model benchmark:score ?score .
+}
+
+ORDER BY DESC(?score)
+LIMIT 1
+```

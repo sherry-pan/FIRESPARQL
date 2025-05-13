@@ -1,0 +1,17 @@
+Question:
+What is the best performing model benchmarking the CIFAR-10 Image Classification dataset in terms of Percentage error metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "CIFAR-10")
+               && has_dataset       ?dataset)
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_EVALUATION   ?benchmark;
+                      orkgp:P32               ?cont;
+                      orkgp:P31               ?model.
+      ?model          rdfs:label              ?model_lbl.
+     }<|eot_id|>

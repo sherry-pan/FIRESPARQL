@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  FILTER(REGEX(?eval, "ANODE"))
+  ?cont orkgp:P35 ?method.
+  FILTER(?method = "ANODE")
+  ?paper orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl rdfs:label ?code.
+}
+```

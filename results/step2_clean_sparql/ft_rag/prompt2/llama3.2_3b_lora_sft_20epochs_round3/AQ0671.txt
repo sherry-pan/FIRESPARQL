@@ -1,0 +1,12 @@
+```sparql
+SELECT ?titles ?number
+WHERE {
+  ?paper orkgp:P32 ?benchmark.
+  ?benchmark orkgrp:HAS_BENCHMARK_VALUE "T"^^xsd:string.
+  ?dataset orkgrp:HAS_BENCHMARK ?benchmark.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "BUCC German-to-English"))
+  ?paper orkgp:P5042 ?titles.
+  ?paper orkgp:P5041 ?number.
+}
+```

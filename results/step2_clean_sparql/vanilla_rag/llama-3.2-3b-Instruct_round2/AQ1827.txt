@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?macroRecall 
+WHERE {
+    ?model orkg:hasMethod ?method.
+    ?model orkg:hasDataset ?dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMacroF1 ?macroRecall.
+    FILTER (?benchmark orkg:hasDataset "NLP-TDMS"^^xsd:string).
+    FILTER (?macroRecall > 0).
+}
+```

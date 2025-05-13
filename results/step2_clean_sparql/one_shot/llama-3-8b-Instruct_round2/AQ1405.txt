@@ -1,0 +1,20 @@
+```sparql
+PREFIX bench: <http://example.org/benchmark#>
+PREFIX model: <http://example.org/model#>
+
+SELECT ?modelName
+WHERE {
+  ?model a model:Model ;
+         model:hasBenchmark bench:SciERC ;
+         model:entityF1 ?f1Score .
+
+  FILTER NOT EXISTS {
+    ?altModel a model:Model ;
+              model:hasBenchmark bench:SciERC ;
+              model:entityF1 ?altF1Score .
+    FILTER(?altF1Score > ?f1Score)
+  }
+
+  ?model model:name ?modelName .
+}
+```

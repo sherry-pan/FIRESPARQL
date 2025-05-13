@@ -1,0 +1,21 @@
+```sparql
+SELECT ?method ?method_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "HMDB51")
+  {
+    SELECT ?method ?method_lbl
+    WHERE {
+      ?dataset orkgp:HAS_DATASET ?cont.
+      ?cont orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:P32 ?metric.
+      ?metric rdfs:label ?metric_lbl.
+      ?model orkgp:HAS_METHOD ?method.
+      ?method rdfs:label ?method_lbl.
+    }
+    ORDER BY DESC(?metric_lbl)
+    LIMIT 1
+  }
+}
+```

@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?dataset (COUNT(*) as ?count)
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:has_dataset ?dataset1.
+  ?dataset1 orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_benchmark ?benchmark.
+  ?benchmark rdfs:label ?label.
+  FILTER (
+    str(?label) = "Entity Disambiguation" ||
+    str(?label) = "Entity Disambiguation Benchmark" ||
+    str(?label) = "Wikipedia Disambiguation" ||
+    str(?label) = "DBpedia Disambiguation"
+  )
+}
+GROUP BY ?dataset
+HAVING (COUNT(*) >= 2)
+```

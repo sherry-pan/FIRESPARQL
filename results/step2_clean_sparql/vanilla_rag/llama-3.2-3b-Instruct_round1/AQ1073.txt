@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmark ?b.
+    ?b orkg:hasEvaluation ?e.
+    ?e orkg:evaluation ?metric.
+    ?e orkg:score ?score.
+    FILTER (str(?metric) = "benchmark")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

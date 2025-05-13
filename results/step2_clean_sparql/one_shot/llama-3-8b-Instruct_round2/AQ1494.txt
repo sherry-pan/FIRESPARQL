@@ -1,0 +1,20 @@
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX : <http://example.org/ns#>
+
+SELECT ?model ?bleuScore
+WHERE {
+  ?test a :BenchmarkingTest ;
+        :benchmarkedOn :RotoWire_Content_Ordering_Dataset ;
+        :testModel ?model ;
+        :hasMetric [
+          a :Metric ;
+          rdfs:label "BLEU" ;
+          :metricValue ?bleuScore 
+        ].
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

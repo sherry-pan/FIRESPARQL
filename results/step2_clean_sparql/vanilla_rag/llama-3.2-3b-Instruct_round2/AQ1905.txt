@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?dataset
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_APPROACH ?approach.
+  FILTER (strlike(iri(?benchmark), "http://orkg.org/orkg/predicate/*") OR 
+          strlike(iri(?method), "http://orkg.org/orkg/predicate/*") OR 
+          strlike(iri(?approach), "http://orkg.org/orkg/predicate/*"))
+}
+```

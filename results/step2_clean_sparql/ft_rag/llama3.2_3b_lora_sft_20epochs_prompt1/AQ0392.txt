@@ -1,0 +1,12 @@
+```sparql
+SELECT ?paper ?paper_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "Penn Treebank"))
+  ?paper orkgp:HAS_DATASET ?dataset;
+         orkgp:HAS_BENCHMARK ?benchmark.
+  ?dataset rdfs:label ?dataset_lbl.
+  BIND(CONCAT(STR(?paper), " ", ?dataset_lbl) AS ?paper_lbl)
+}
+```

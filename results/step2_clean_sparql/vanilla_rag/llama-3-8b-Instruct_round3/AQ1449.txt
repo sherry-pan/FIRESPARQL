@@ -1,0 +1,16 @@
+```
+SELECT ?modelName WHERE {
+  ?entry wdt:P31 wd:Q120500604;  # Instance of Benchmarking entry
+         wdt:P2773 wd:Q105709309; # Evaluated on RACE dataset
+         wdt:P4532 ?accuracy.     # Accuracy (high)
+  ?model wdt:P31 wd:Q11660;        # Instance of Machine Learning Model
+         rdfs:label ?modelName.
+  FILTER(NOT EXISTS {
+    ?otherEntry wdt:P31 wd:Q120500604;
+                wdt:P2773 wd:Q105709309;
+                wdt:P4532 ?otherAccuracy.
+    FILTER(?otherAccuracy > ?accuracy)
+  })
+}
+LIMIT 1
+```

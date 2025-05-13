@@ -1,0 +1,14 @@
+Question:
+Which sectors are modeled as energy sectors and how often?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?sector?frequency
+     WHERE {
+    ?s orkg:sector?sector.
+    ?s orkg:energy?energy.
+    ?s orkg:frequency?frequency.
+     FILTER (?energy = "energy" ||?energy = "energy-sector" ||?energy = "sector-energy")
+     GROUP BY?sector
+     HAVING COUNT(?frequency) > 1
+     }<|eot_id|>

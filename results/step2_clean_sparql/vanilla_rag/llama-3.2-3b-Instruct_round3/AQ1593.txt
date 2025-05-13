@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:hasEvaluation ?eval.
+  ?eval orkg:hasEvaluationMetric ?metric.
+  ?metric rdfs:label "1-of-100 Accuracy"@en.
+  ?eval orkg:hasMetricValue ?accuracy.
+  ?model orkg:hasTrainingSet ?dataset.
+  ?dataset rdfs:label "PolyAI Reddit"@en.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

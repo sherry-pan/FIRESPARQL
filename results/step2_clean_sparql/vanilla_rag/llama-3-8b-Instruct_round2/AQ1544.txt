@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:dataset orkg:OntoNotes.
+  ?benchmark orkg:evaluationMetric orkg:F1.
+  ?benchmark orkg:evaluationMetricValue ?f1Value.
+  ?model orkg:hasLabel ?modelLabel.
+  {
+    SELECT ?maxF1Value
+    WHERE {
+      ?b orkg:evaluationMetricValue ?maxF1Value.
+    }
+    ORDER BY DESC(?maxF1Value)
+    LIMIT 1
+  }
+  FILTER (?f1Value = ?maxF1Value)
+}
+```

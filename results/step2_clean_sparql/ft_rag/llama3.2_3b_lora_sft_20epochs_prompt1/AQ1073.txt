@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R44985 orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P43149 ?evaluation.
+  ?evaluation orkgp:HAS_VALUE ?value.
+  BIND(
+    IF(?metric = "F1"^^xsd:string, "F1", 
+      IF(?metric = "PPL"^^xsd:string, "PPL", 
+        IF(?metric = "MRC"^^xsd:string, "MRC", "Unknown")
+      )
+    ) AS ?metric_lbl
+  )
+}
+```

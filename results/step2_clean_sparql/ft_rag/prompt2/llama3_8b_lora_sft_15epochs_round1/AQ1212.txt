@@ -1,0 +1,27 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?final_value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "BC5CDR-chemical".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?evaluation.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?value a orkgc:Value;
+         orkgp:HAS_DATATYPE ?datatype.
+  OPTIONAL {
+    ?value orkgp:HAS_NUMBER ?number.
+  }
+  OPTIONAL {
+    ?value orkgp:HAS_STRING ?string.
+  }
+  BIND(
+    IF(BOUND(?number), ?number, IF(BOUND(?string), ?string, ?value)) AS ?final_value
+  )
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

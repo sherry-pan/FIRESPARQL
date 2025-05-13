@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX bioasq: <http://bioasq.org/ontology/>
+
+SELECT ?metric ?metricLabel
+WHERE {
+  ?metric a orkg:evaluationMetric.
+  ?metric bioasq:hasDataset <http://bioasq.org/dataset>.
+  ?metric orkg:hasMethod ?method.
+  ?method orkg:hasMetric ?metric.
+  FILTER (?metric = "Recall" || ?metric = "micro-F1" || ?metric = "Accuracy" || ?metric = "macro-F1")
+}
+```

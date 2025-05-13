@@ -1,0 +1,17 @@
+```sparql
+SELECT ?modelName
+WHERE {
+  ?model ex:evaluatedOn <http://example.org/dataset/MLDoc_Zero-Shot_English-to-French> ;
+         ex:hasAccuracyScore ?accuracyScore ;
+         ex:hasName ?modelName .
+  
+  {
+    SELECT (MAX(?accuracyScore) AS ?maxAccuracyScore)
+    WHERE {
+      ?model ex:evaluatedOn <http://example.org/dataset/MLDoc_Zero-Shot_English-to-French> ;
+             ex:hasAccuracyScore ?accuracyScore .
+    }
+  }
+  FILTER(?accuracyScore = ?maxAccuracyScore)
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?metric ?metricValue 
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:COMPARED_WITH ?bestModel.
+  ?bestModel orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  FILTER (?metric = "Senseval 2" AND ?dataset = "Supervised").
+}
+```

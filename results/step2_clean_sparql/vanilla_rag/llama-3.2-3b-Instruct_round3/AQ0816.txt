@@ -1,0 +1,21 @@
+```
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX vocab: <http://example.org/vocab/>
+
+SELECT ?metric 
+WHERE {
+  ?metric rdfs:label ?label.
+  FILTER (
+    CONTAINS(LCASE(?label), "recall") || 
+    CONTAINS(LCASE(?label), "accuracy") || 
+    CONTAINS(LCASE(?label), "f1") || 
+    CONTAINS(LCASE(?label), "avg entity") || 
+    CONTAINS(LCASE(?label), "avg words") || 
+    CONTAINS(LCASE(?label), "avg characters") || 
+    CONTAINS(LCASE(?label), "avg length") || 
+    CONTAINS(LCASE(?label), "avg concept")
+  )
+}
+```

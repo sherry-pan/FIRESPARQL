@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?event.
+  ?event orkgp:P15030 ?benchmark.
+  FILTER(REGEX(?benchmark, "MPAD-path")) 
+  ?cont orkgp:HAS_IMPLEMENTATION ?implementation.
+  FILTER(REGEX(?implementation, "code")) 
+  ?implementation orkgp:P37587 ?code.
+}
+```

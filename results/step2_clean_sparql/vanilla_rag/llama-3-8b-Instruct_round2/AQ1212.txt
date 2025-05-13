@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset orkg:BC5CDR-chemical ;
+             orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric ;
+              csvw:value ?value.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

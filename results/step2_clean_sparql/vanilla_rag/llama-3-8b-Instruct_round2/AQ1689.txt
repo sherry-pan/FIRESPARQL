@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?score
+WHERE {
+  ?benchmark a orkg:HAS_BENCHMARK.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC orkg:SCORE.
+  ?evaluation orkg:HAS_MODEL ?model.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:label "Atari 2600 Seaquest".
+  ?evaluation orkg:HAS_SCORE ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

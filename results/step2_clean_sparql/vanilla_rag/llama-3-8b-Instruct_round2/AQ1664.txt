@@ -1,0 +1,15 @@
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?percentageError
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:HAS_VALUE ?percentageError.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:LABEL "CIFAR-10".
+  ?evaluation orkg:HAS_METRIC_TYPE orkg:PERCENTAGE_ERROR.
+  FILTER (?percentageError != xsd:float("inf"))
+}
+ORDER BY ?percentageError
+LIMIT 1

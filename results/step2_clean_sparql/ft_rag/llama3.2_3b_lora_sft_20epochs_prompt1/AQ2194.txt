@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:P37530 ?implementation.
+    ?implementation orkgp:HAS_SOURCE ?source.
+    ?source orkgp:HAS_CODE ?code
+  ].
+  FILTER(REGEX(STR(?title), "Adaptive Input Large"))
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paperTitle ?codeReference
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMethod ?method.
+  ?method orkg:hasImplementation ?codeReference.
+  ?paper rdfs:label ?paperTitle.
+  FILTER (CONTAINS(LCASE(?paperTitle), "dcn") && CONTAINS(LCASE(?codeReference), "benchmark"))
+}
+```

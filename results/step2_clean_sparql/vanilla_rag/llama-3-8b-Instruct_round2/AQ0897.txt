@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:BenchmarkDataset ;
+           orkg:hasBenchmark "Oxford-IIIT Pets" ;
+           orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METHOD ?method ;
+             orkg:HAS_METRIC ?metric.
+ FILTER (?metric != orkg:Accuracy && ?metric != orkg:Recall && ?metric != orkg:macro-F1 && ?metric != orkg:micro-F1 && ?metric != orkg:NDCG@10)
+}
+```

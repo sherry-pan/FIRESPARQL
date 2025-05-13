@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark_result orkg:HAS_DATASET "CommonsenseQA".
+    ?benchmark_result orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:CSVW_Value ?value.
+    ?benchmark_result orkg:HAS_BENCHMARK ?metric.
+    FILTER(STR(?metric) = "top" && STR(?value) = "benchmark result")
+}
+```

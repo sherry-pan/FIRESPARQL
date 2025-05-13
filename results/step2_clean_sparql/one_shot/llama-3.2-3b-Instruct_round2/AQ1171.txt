@@ -1,0 +1,16 @@
+```
+SELECT ?benchmark ?metric
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl;
+             orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval;
+             orkgp:HAS_METRIC ?metric.
+  
+  ?eval orkgp:HAS_VALUE ?value.
+  
+  FILTER (str(?benchmark_lbl) = "MultiNLI")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

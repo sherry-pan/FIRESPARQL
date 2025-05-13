@@ -1,0 +1,69 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the ACE 2005 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ACE 2005")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_RECALL        ?recall.
+              ?recall          orkgp:HAS_VALUE          ?value
+                                   and?value             a                orkgv:Float.
+             }
+       OPTIONAL {?eval           orkgp:HAS_ACCURACY      ?accuracy.
+               ?accuracy      orkgp:HAS_VALUE          ?value
+                                    and?value             a                orkgv:Float.
+              }
+       OPTIONAL {?eval           orkgp:HAS_MACRO_F1       ?macro_f1.
+               ?macro_f1      orkgp:HAS_VALUE          ?value
+                                    and?value             a                orkgv:Float.
+              }
+       OPTIONAL {?eval           orkgp:HAS_MICRO_F1      ?micro_f1.
+               ?micro_f1      orkgp:HAS_VALUE          ?value
+                                    and?value             a                orkgv:Float.
+              }
+       OPTIONAL {
+         SELECT?value
+         WHERE {
+          ?eval           orkgp:HAS_MICRO_F1      ?micro_f1.
+          ?micro_f1      orkgp:HAS_VALUE          ?value
+                           and?value             a                orkgv:Float.
+         }
+         ORDER BY DESC(?value)
+         LIMIT 1
+       }
+       OPTIONAL {
+         SELECT?value
+         WHERE {
+          ?eval           orkgp:HAS_MACRO_F1       ?macro_f1.
+          ?macro_f1      orkgp:HAS_VALUE          ?value
+                           and?value             a                orkgv:Float.
+         }
+         ORDER BY DESC(?value)
+         LIMIT 1
+       }
+       OPTIONAL {
+         SELECT?value
+         WHERE {
+          ?eval           orkgp:HAS_ACCURACY      ?accuracy.
+          ?accuracy      orkgp:HAS_VALUE          ?value
+                           and?value             a                orkgv:Float.
+         }
+         ORDER BY DESC(?value)
+         LIMIT 1
+       }
+       OPTIONAL {
+         SELECT?value
+         WHERE {
+          ?eval           orkgp:HAS_RECALL        ?recall.
+          ?recall          orkgp:HAS_VALUE          ?value
+                             and?value             a                orkgv:Float.
+         }
+         ORDER BY DESC(?value)
+         LIMIT 1
+       }
+     }
+     ORDER BY DESC(?score)<|eot_id|>

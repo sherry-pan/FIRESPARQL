@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?code.
+  ?code orkgp:P5009 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "GPT-2 \\(small\\)"))
+  ?paper orkgp:P5008 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P5007 ?cont2.
+  ?cont2 orkgp:P31 ?code2.
+  FILTER(?code = ?code2)
+}
+```

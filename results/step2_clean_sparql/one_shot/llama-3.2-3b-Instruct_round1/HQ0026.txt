@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?benchmark ?benchmark_lbl
+WHERE {
+  ?benchmark a orkgc:Dataset;
+             rdfs:label ?benchmark_lbl;
+             orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        rdfs:label ?cont_lbl.
+  ?paper orkgp:P31 ?cont.
+  
+  FILTER (str(?cont_lbl) = "QA Benchmark")
+}
+GROUP BY ?benchmark ?benchmark_lbl
+HAVING (COUNT(?paper) > 10000)
+```

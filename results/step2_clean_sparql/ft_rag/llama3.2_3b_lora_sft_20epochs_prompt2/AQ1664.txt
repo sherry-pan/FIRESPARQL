@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CIFAR-10")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:P31 ?dataset;
+        orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P32 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  BIND(IF(?metric_lbl = "Percentage error", ?value, 0) AS ?percentage_error)
+  ?cont orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?percentage_error)
+LIMIT 1
+```

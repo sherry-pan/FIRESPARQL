@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:metric ?metric ;
+             orkg:value ?value.
+  FILTER (?dataset = <http://orkg.org/orkg/dataset/Atari_2600_Freeway>)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

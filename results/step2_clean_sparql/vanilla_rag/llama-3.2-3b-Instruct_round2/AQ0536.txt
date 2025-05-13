@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?paper_id ?title 
+WHERE {
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset orkg:hasName "Walker, walk (DMControl100k)".
+    ?benchmark orkg:hasMethod ?method.
+    ?method orkg:hasImplementation ?implementation.
+    ?implementation orkg:hasApproach ?approach.
+    ?approach rdfs:label ?title.
+    ?paper orkg:hasId ?paper_id.
+    FILTER (STR(?paper_id) != "http://orkg.org/orkg/predicate/undefined")
+}
+LIMIT 10
+```

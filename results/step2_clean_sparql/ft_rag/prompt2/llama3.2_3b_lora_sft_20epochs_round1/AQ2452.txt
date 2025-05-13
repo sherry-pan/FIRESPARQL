@@ -1,0 +1,18 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper a orkgr:Paper;
+         orkgr:has_dataset ?dataset.
+  ?dataset rdfs:label ?dataset_label.
+  ?paper orkgr:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgr:P32 orkgr:HAS_EVALUATION.
+  ?benchmark rdfs:label ?benchmark_label.
+  ?benchmark orkgr:HAS_METHOD ?method.
+  ?method rdfs:label ?method_label.
+  ?method orkgr:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgr:HAS_CODE ?code.
+  ?implementation rdfs:label ?implementation_label.
+  ?code orkgr:HAS_SOURCE_CODE ?source_code.
+  FILTER(REGEX(STR(?dataset_label), "AxCell"))
+}
+```

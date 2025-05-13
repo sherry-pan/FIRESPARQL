@@ -1,0 +1,15 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+     SELECT?compound (COUNT(?evaluation) AS?count)
+     WHERE {
+      ?compound a orkg:Compound.
+      ?evaluation orkg:HAS_EVALUATION?compound.
+       FILTER (?evaluation!=?compound).
+       GROUP BY?compound
+       ORDER BY DESC(?count)
+     }<|eot_id|>

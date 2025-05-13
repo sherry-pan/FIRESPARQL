@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?modelLabel ?evaluationValue
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset <http://orkg.org/orkg/resource/WMT2014_German_English>.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric "BLEU".
+  ?evaluation orkg:value ?evaluationValue.
+  FILTER(?evaluationValue = 
+    MAX(?value)
+  )
+  SERVICE orkg:label {
+    ?model rdfs:label ?modelLabel
+  }
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasTrainingSet ?trainingSet.
+  ?trainingSet orkg:hasMetric ?metric.
+  ?benchmark skos:prefLabel ?benchmarkLabel.
+  ?metric skos:prefLabel ?metricLabel.
+  FILTER (CONTAINS(LCASE(?benchmarkLabel), "atari 2600 tennis") &&
+          CONTAINS(LCASE(?metricLabel), "score"))
+}
+```

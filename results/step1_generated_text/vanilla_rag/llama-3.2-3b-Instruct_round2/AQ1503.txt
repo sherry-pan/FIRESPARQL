@@ -1,0 +1,22 @@
+Question:
+What is the best performing model benchmarking the Supervised: dataset in terms of SemEval 2013 metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearch.org/ontology/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     SELECT?model?modelLabel?metric 
+     WHERE {
+    ?model orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "Supervised".
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasEvaluationMetric?metric.
+    ?metric rdfs:label?metricLabel.
+    ?model orkg:hasImplementation?implementation.
+    ?benchmark orkg:hasMethod?method.
+    ?method rdfs:label?methodLabel.
+    ?model orkg:hasApproach?approach.
+    ?benchmark orkg:hasTrainingSet?trainingSet.
+    ?benchmark orkg:hasValidationSet?validationSet.
+    ?model orkg:hasLabel?modelLabel.
+     FILTER (str(?metricLabel = "SemEval 2013").
+     }<|eot_id|>

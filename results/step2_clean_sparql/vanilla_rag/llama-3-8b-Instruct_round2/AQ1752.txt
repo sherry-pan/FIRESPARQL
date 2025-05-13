@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?score
+WHERE {
+  ?evaluation a orkg:Evaluation ;
+              orkg:hasBenchmark <http://orkg.org/orkg/benchmark/Atari_2600_Montezumas_Revenge> ;
+              orkg:hasDataset <http://orkg.org/orkg/dataset/Atari_2600_Montezumas_Revenge> ;
+              orkg:hasMethod ?method ;
+              orkg:hasScore ?score.
+  ?method orkg:hasModel ?model.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

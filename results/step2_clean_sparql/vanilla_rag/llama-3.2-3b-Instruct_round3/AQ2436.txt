@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_implementation ?impl.
+  ?impl orkg:has_benchmark "ImageNet + iNat on WS-DAN".
+  ?impl orkg:has_dataset "ImageNet".
+  ?impl orkg:has_dataset "iNat".
+  ?impl orkg:has_code ?code.
+  FILTER (STRSTARTS(STR(?code), "https://") || STRSTARTS(STR(?code), "github.com/") || STRSTARTS(STR(?code), "gitlab.com/") || STRSTARTS(STR(?code), "bitbucket.org/"))
+}
+```

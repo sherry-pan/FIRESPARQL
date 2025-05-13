@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model ?name WHERE {
+    ?model orkg:has_benchmark <http://orkg.org/orkg/benchmark/Penn_Treebank_Character_Level>.
+    ?model orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_score ?evaluationScore.
+    ?evaluationScore orkg:has_number ?numParams.
+    ?model orkg:has_name ?name.
+}
+ORDER BY DESC(?numParams)
+LIMIT 1
+```

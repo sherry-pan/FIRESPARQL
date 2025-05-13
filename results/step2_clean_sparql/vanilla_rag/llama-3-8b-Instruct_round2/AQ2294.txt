@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_method ?method.
+  ?method orkg:method_detailed_description ?description.
+  FILTER regex(?description, "Duel hs model", "i").
+  ?paper orkg:has_implementation ?implementation.
+  ?implementation orkg:implementation_code ?code.
+}
+```

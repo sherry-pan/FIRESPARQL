@@ -1,0 +1,13 @@
+Question:
+What are the metrics of evaluation over the BioASQ dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric 
+     WHERE {
+      ?metric a orkg:EvaluationMetric.
+      ?metric orkg:hasDataset BioASQ.
+      ?metric orkg:hasBenchmark?benchmark.
+      ?benchmark rdfs:label?label.
+       FILTER (STRLIKE(STR(?label), "recall|micro-F1|accuracy|macro-F1") )
+     }<|eot_id|>

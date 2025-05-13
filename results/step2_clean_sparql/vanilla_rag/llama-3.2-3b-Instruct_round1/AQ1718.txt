@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?metric
+WHERE {
+    ?model orkg:hasMethod ?method.
+    ?model orkg:hasDataset ?dataset.
+    ?dataset orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasMetric ?metric.
+    FILTER (STRLIKE(STR(?metric), "Atari 2600 Up and Down")).
+    FILTER (STRLIKE(STR(?metric), "Score"))
+}
+```

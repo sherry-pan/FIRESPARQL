@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?benchmark ?metric
+WHERE {
+    ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/dataset/ModelNet40> .
+    ?benchmark orkg:HAS_BENCHMARK ?benchmarkScore .
+    ?benchmarkScore orkg:HAS_METRIC ?metric .
+    FILTER (strlike(STR(?metric), "accuracy") || strlike(STR(?metric), "f1-score") || strlike(STR(?metric), "precision") || strlike(STR(?metric), "recall")) 
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value 
+WHERE {
+  ?benchmark orkg:has_benchmark ?gameBenchmark.
+  ?gameBenchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_value ?value.
+  ?gameBenchmark orkg:has_method ?method.
+  FILTER (?metric = "atari_2600_star_gunner").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_METHOD ?method.
+ ?method rdfs:label ?methodLabel.
+  FILTER (?methodLabel = "MMV TSM-50x2 model").
+ ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+ ?implementation rdfs:label ?implementationLabel.
+  FILTER (?implementationLabel = "code" || ?implementationLabel = "implementation").
+ ?implementation orkg:HAS_CODE ?code.
+  FILTER (?code != "").
+}
+```

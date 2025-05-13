@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R15556192 orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P32?cont.
+      ?cont orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P31?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(?metric_lbl = "Recall" ||?metric_lbl = "Micro-F1" ||?metric_lbl = "Accuracy" ||?metric_lbl = "Macro-F1")
+      ?cont orkgp:P43135?value.
+       FILTER(?value > 0)
+     }<|eot_id|>

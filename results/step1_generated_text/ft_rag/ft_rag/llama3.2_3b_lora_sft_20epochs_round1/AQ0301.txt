@@ -1,0 +1,86 @@
+Question:
+What models are being evaluated on the WOS-11967 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "WOS-11967")
+               && has_evaluation           ?eval)
+      ?eval           has_dataset        ?dataset;
+                      has_method         ?method.
+      ?method        rdfs:label          ?method_lbl.
+      ?model         has_implement        ?implementation;
+                      has_approach       ?approach.
+      ?approach      rdfs:label          ?approach_lbl.
+       SELECT?model?model_lbl
+       WHERE {
+        ?model       a                orkgc:Model;
+                       rdfs:label      ?model_lbl.
+         FILTER (str(?model_lbl          =?approach_lbl          &&?approach_lbl          =?method_lbl          &&?method_lbl          =?eval_lbl          &&?eval_lbl           = "eval"           && has_dataset           ?dataset           && str(?dataset           = "WOS-11967"))
+       }
+       UNION
+       SELECT?model       a                orkgc:Model;
+                     rdfs:label      ?model_lbl.
+        ?model         has_implement        ?implementation;
+                        has_approach       ?approach.
+        ?approach      rdfs:label          ?approach_lbl.
+        ?method        a                orkgc:Method;
+                          rdfs:label          ?method_lbl.
+        ?eval           has_dataset        ?dataset;
+                          has_method         ?method.
+         FILTER (str(?dataset_lbl      = "WOS-11967"
+                   &&?method_lbl          =?approach_lbl          &&?approach_lbl          =?eval_lbl          &&?eval_lbl           = "eval")
+       }
+       UNION
+       SELECT?model       a                orkgc:Model;
+                     rdfs:label      ?model_lbl.
+        ?model         has_implement        ?implementation;
+                        has_approach       ?approach.
+        ?approach      rdfs:label          ?approach_lbl.
+        ?method        a                orkgc:Method;
+                          rdfs:label          ?method_lbl.
+        ?eval           has_dataset        ?dataset;
+                          has_method         ?method.
+         FILTER (str(?dataset_lbl      = "WOS-11967"
+                   &&?eval_lbl           = "eval"           && has_dataset           ?dataset           &&?method_lbl          =?approach_lbl          &&?approach_lbl          =?method_lbl)
+       }
+       UNION
+       SELECT?model       a                orkgc:Model;
+                     rdfs:label      ?model_lbl.
+        ?model         has_implement        ?implementation;
+                        has_approach       ?approach.
+        ?approach      rdfs:label          ?approach_lbl.
+        ?method        a                orkgc:Method;
+                          rdfs:label          ?method_lbl.
+        ?eval           has_dataset        ?dataset;
+                          has_method         ?method.
+         FILTER (str(?dataset_lbl      = "WOS-11967"
+                   &&?eval_lbl           = "eval"           && has_dataset           ?dataset           &&?method_lbl          =?approach_lbl          && str(?approach_lbl          =?method_lbl))
+       }
+       UNION
+       SELECT?model       a                orkgc:Model;
+                     rdfs:label      ?model_lbl.
+        ?model         has_implement        ?implementation;
+                        has_approach       ?approach.
+        ?approach      rdfs:label          ?approach_lbl.
+        ?method        a                orkgc:Method;
+                          rdfs:label          ?method_lbl.
+        ?eval           has_dataset        ?dataset;
+                          has_method         ?method.
+         FILTER (str(?dataset_lbl      = "WOS-11967"
+                   &&?eval_lbl           = "eval"           && has_dataset           ?dataset           && str(?method_lbl          =?approach_lbl          &&?approach_lbl          =?method_lbl          && str(?approach_lbl          =?method_lbl))
+       }
+       UNION
+       SELECT?model       a                orkgc:Model;
+                     rdfs:label      ?model_lbl.
+        ?model         has_implement        ?implementation;
+                        has_approach       ?approach.
+        ?approach      rdfs:label          ?approach_lbl.
+        ?method        a                orkgc:Method;
+                          rdfs:label          ?method_lbl.
+        ?eval           has_dataset        ?dataset;
+                          has_method         ?method.
+         FILTER (str(?dataset_lbl      = "WOS-11967"
+                   &&?eval_lbl           = "eval"           && has_dataset           ?dataset           && str(?method_lbl          =?approach_lbl          && str(?approach_lbl          =?method_lbl          && str(?approach_lbl

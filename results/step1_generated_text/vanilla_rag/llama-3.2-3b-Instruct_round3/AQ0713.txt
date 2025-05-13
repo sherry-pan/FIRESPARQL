@@ -1,0 +1,38 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SciGEN dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric
+     WHERE {
+    ?metric orkg:HAS_EVALUATION?evaluation.
+     FILTER (bc:label(?evaluation) = "evaluation metrics" @en)
+     }
+     OPTIONAL {?metric orkg:HAS_METHOD?method.
+     FILTER (bc:label(?method) = "evaluation metrics" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_EVALUATION?evaluation.
+     FILTER (bc:label(?evaluation) = "accuracy" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_EVALUATION?evaluation.
+     FILTER (bc:label(?evaluation) = "recall" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_EVALUATION?evaluation.
+     FILTER (bc:label(?evaluation) = "micro-F1" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_EVALUATION?evaluation.
+     FILTER (bc:label(?evaluation) = "macro-F1" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_METHOD?method.
+     FILTER (bc:label(?method) = "accuracy" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_METHOD?method.
+     FILTER (bc:label(?method) = "recall" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_METHOD?method.
+     FILTER (bc:label(?method) = "micro-F1" @en) }
+     UNION
+     OPTIONAL {?metric orkg:HAS_METHOD?method.
+     FILTER (bc:label(?method) = "macro-F1" @en) }
+     }
+     RETURNING?metric<|eot_id|>

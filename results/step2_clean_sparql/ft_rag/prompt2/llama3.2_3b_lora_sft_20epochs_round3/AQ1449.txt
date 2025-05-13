@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "RACE".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?model orkgp:HAS_DATASET ?cont;
+             rdfs:label ?model_lbl.
+      ?cont orkgp:HAS_BENCHMARK ?benchmark;
+            orkgp:P71081 ?eval.
+      ?eval orkgp:P31 ?evaluator;
+            rdfs:label ?eval_lbl.
+    }
+    ORDER BY DESC(?eval_lbl)
+    LIMIT 1
+  }
+}
+```

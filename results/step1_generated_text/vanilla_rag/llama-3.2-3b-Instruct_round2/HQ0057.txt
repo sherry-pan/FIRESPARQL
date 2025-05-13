@@ -1,0 +1,23 @@
+Question:
+Where can all the data sets used in the compared studies be found?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?location 
+     WHERE {
+    ?study a orkg:Study.
+    ?study orkg:has_dataset?dataset.
+    ?dataset orkg:has_data?data.
+    ?data orkg:data?data_location.
+    ?study orkg:has_evaluation?evaluation.
+    ?evaluation orkg:has_data?data.
+    ?data orkg:data?data_location.
+    ?study orkg:has_method?method.
+    ?method orkg:has_data?data.
+    ?data orkg:data?data_location.
+    ?study orkg:has_implementation?implementation.
+    ?implementation orkg:has_data?data.
+    ?data orkg:data?data_location.
+     FILTER (strlike(?data_location, 'https://*') )
+     }
+    <|eot_id|>

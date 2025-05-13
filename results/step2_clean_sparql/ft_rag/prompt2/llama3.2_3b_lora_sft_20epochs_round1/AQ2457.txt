@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "COMET - Direct")
+  
+  ?benchmark orkgp:HAS_BENCHMARK ?eval;
+             orkgp:HAS_EVALUATION ?eval2.
+             
+  ?eval orkgp:HAS_IMPLEMENTATION ?implementation;
+        orkgp:HAS_METHOD ?method.
+        
+  ?implementation orkgp:HAS_SOURCE_CODE ?code.
+}
+```

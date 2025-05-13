@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "Multi-Perspective Matching (single model)")
+  ?benchmark orkgp:HAS_BENCHMARK ?model;
+             orkgp:P32 ?cont;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METHOD ?method;
+        orkgp:HAS_IMPLEMENTATION ?code.
+  ?method orkgp:HAS_SOURCE_CODE ?code.
+}
+```

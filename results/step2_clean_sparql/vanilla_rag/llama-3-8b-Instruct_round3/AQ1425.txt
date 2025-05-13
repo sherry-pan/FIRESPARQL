@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?bleuScore
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/WMT2014_German_English>.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:metric orkg:BLEU.
+  ?evaluation orkg:score ?bleuScore.
+  SERVICE orkg:label { ?model rdfs:label ?modelLabel }
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the AESLC dataset in terms of ROUGE-1 metric?
+
+Generated SPARQL:
+PREFIX orkgc: <http://purl.org/orkg/concepts/>
+PREFIX orkgp: <http://purl.org/orkg/properties/>
+
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "ROUGE-1")
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER

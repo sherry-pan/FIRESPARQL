@@ -1,0 +1,15 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+    orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+  FILTER (?dataset rdfs:label = "QNLI".
+          ?metric rdfs:label IN ("Accuracy", "Recall", "macro-F1", "micro-F1"))
+}<|eot_id|>

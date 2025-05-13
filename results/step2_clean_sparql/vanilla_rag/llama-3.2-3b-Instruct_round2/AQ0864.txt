@@ -1,0 +1,31 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric 
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmark ?benchmark_benchmark.
+    ?benchmark_benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    FILTER (
+        CONTAINS(LCASE(?metric), "accuracy") ||
+        CONTAINS(LCASE(?metric), "f1") ||
+        CONTAINS(LCASE(?metric), "precision") ||
+        CONTAINS(LCASE(?metric), "recall") ||
+        CONTAINS(LCASE(?metric), "f1-score") ||
+        CONTAINS(LCASE(?metric), "roc-auc") ||
+        CONTAINS(LCASE(?metric), "ap") ||
+        CONTAINS(LCASE(?metric), "auc") ||
+        CONTAINS(LCASE(?metric), "fbeta") ||
+        CONTAINS(LCASE(?metric), "mean-average-precision") ||
+        CONTAINS(LCASE(?metric), "mean-precision") ||
+        CONTAINS(LCASE(?metric), "mean-recall") ||
+        CONTAINS(LCASE(?metric), "mean-recall-score") ||
+        CONTAINS(LCASE(?metric), "mean-roc-auc") ||
+        CONTAINS(LCASE(?metric), "roc-auc-score") ||
+        CONTAINS(LCASE(?metric), "average-precision") ||
+        CONTAINS(LCASE(?metric), "average-precision-score") ||
+        CONTAINS(LCASE(?metric), "average-recall") ||
+        CONTAINS(LCASE(?metric), "average-recall-score")
+    )
+}
+```

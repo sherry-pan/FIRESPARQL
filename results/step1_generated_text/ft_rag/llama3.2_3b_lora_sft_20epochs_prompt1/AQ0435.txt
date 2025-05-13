@@ -1,0 +1,29 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ImageNet 64x64 dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ImageNet 64x64")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION     ?eval.
+      ?eval           orkgp:HAS_DATASET      ?dataset.
+       OPTIONAL {
+        ?eval           orkgp:P32               ?cont;
+                         rdfs:label              ?eval_lbl.
+         FILTER (str(?eval_lbl) = "accuracy")
+       }
+       OPTIONAL {
+        ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                       orkgp:HAS_DATASET      ?dataset;
+                       rdfs:label              ?cont_lbl.
+         FILTER (str(?cont_lbl) = "ImageNet 64x64")
+       }
+       OPTIONAL {
+        ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+        ?paper         orkgp:HAS_DATASET      ?dataset.
+        ?paper         rdfs:label              ?paper_lbl.
+       }
+     }<|eot_id|>

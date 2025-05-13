@@ -1,0 +1,14 @@
+Question:
+Which sectors are modeled as energy sectors and how often?
+
+Generated SPARQL:
+ SELECT?sector?frequency
+     WHERE {
+      ?s a ora:Resource.
+      ?s ora:sector?sector.
+       WHERE {
+        ?sector ora:energy?energy.
+        ?sector ora:frequency?frequency.
+       }
+       FILTER (regex(str(?sector), "energy") && regex(str(?frequency), "[0-9]+"))
+     }<|eot_id|>

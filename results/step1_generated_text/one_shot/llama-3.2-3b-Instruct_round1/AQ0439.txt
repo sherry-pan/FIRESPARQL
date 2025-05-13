@@ -1,0 +1,18 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Kinetics-600 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_id?paper_lbl
+    WHERE {
+     ?benchmark orkgp:HAS_DATASET?dataset;
+                 orkgp:HAS_EVALUATION?eval.
+     ?dataset a orkgc:Dataset;
+               rdfs:label?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Kinetics-600")
+     ?paper orkgp:HAS_BENCHMARK?benchmark.
+     ?paper orkgp:HAS_MODEL?model.
+     ?model rdfs:label?model_lbl.
+     ?paper orkgp:ID?paper_id.
+     ?eval orkgp:HAS Paper?paper.
+    }
+    Note: I made some adjustments to the query to make it more readable. The original query may not be grammatically correct, but it should be syntactically correct.<|eot_id|>

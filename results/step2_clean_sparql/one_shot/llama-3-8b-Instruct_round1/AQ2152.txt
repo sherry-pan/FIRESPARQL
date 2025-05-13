@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/ontologies/orkg-core#>
+PREFIX orkgp: <http://www.semanticweb.org/orkg/ontologies/orkg-publications#>
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+    rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval")
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+    orkgp:HAS_MODEL ?model;
+    orkgp:HAS_SOURCE_CODE ?code.
+}
+```

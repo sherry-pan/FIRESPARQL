@@ -1,0 +1,16 @@
+Question:
+What are the most commonly used benchmark datasets for the Joint Entity and Relation Extraction research field?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT?dataset?datasetLabel
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label?datasetLabel.
+  FILTER (?datasetLabel!= "null")
+  ORDER BY DESC (COUNT(?benchmark))
+}<|eot_id|>

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  FILTER (strcontains(str(?dataset), "Atari_2600_Frostbite")).
+  ?paper orkg:CSVW_Titles ?title.
+  ?paper orkg:CSVW_Number ?id.
+}
+```

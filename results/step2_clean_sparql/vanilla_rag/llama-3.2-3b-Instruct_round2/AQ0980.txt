@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric 
+WHERE {
+  ?metric orkg:hasBenchmark "Yelp-5".
+  ?metric orkg:label ?label.
+  FILTER (LOWER(?label) = "recall" OR LOWER(?label) = "accuracy" OR 
+          LOWER(?label) = "macro-f1" OR LOWER(?label) = "micro-f1" OR 
+          LOWER(?label) = "ndcg@10")
+}
+```

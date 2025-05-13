@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset 
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:HAS_DATASET ?dataset_uri.
+ ?dataset_uri orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark rdfs:label ?benchmark_label.
+ FILTER (CONTAINS(str(?benchmark_label), "Reading Comprehension")).
+}
+```

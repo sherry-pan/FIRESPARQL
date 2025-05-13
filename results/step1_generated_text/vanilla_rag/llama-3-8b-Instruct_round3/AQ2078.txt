@@ -1,0 +1,23 @@
+Question:
+Can you provide links to code used in papers that benchmark the BiDAF + Self Attention + ELMo (ensemble) model?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT?paper?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METHOD?method.
+ ?method orkg:HAS_COMPONENT?component.
+ ?component rdfs:label "BiDAF" || "Self Attention" || "ELMo".
+ ?paper orkg:HAS_IMPLEMENTATION?code.
+  FILTER (?evaluation orkg:HAS_BENCHMARK?benchmark.
+         ?benchmark rdfs:label?dataset.
+         ?dataset schema:about?dataset.
+         ?dataset schema:code?code.
+          FILTER (str(?dataset) LIKE "%benchmark%"))
+}<|eot_id|>

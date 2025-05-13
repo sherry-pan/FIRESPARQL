@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?country ?prevalence 
+WHERE {
+  ?study orkg:QuantitativeMethods ?quantitativeMethods ;
+         orkg:matchingStrategy ?matchingStrategy ;
+         orkg:method ?studyMethod ;
+         orkg:country ?country ;
+         orkg:prevalence ?prevalence .
+  FILTER (str(?matchingStrategy) = "comparative" || str(?matchingStrategy) = "population") 
+  FILTER (str(?studyMethod) = "epidemiological" || str(?studyMethod) = "surveys") 
+}
+ORDER BY DESC(?prevalence)
+LIMIT 1
+```

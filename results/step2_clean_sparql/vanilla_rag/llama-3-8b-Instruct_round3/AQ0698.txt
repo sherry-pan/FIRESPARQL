@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://data.orkg.org/api/v1/ontology/>
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:evaluationMetric ?metric.
+  FILTER (?metric IN ("Accuracy", "F1-score", "Macro F1-score", "Micro F1-score", "NDCG@10", "Avg Accuracy", "Avg F1", "Avg Recall", "Avg Entities", "Avg Length"))
+}
+```

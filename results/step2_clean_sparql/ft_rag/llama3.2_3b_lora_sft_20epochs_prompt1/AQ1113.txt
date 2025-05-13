@@ -1,0 +1,24 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?score) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "IWSLT2015 German-English")
+  
+  ?benchmark orkgp:HAS_BENCHMARK ?benchmark;
+             orkgp:HAS_DATASET ?dataset.
+  
+  ?evaluation orkgp:HAS_EVALUATION ?evaluation.
+  
+  ?metric orkgp:P31 ?property;
+          rdfs:label ?metric_lbl.
+  
+  ?benchmark orkgp:P31 ?method;
+             orkgp:METRIC ?metric.
+  
+  ?evaluation orkgp:P31 ?evaluation;
+              orkgp:HAS_VALUE ?value.
+  
+  BIND(xsd:float(?value) AS ?score)
+}
+```

@@ -1,0 +1,16 @@
+Question:
+Could you provide a list of models that have been tested on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?benchmark     a                orkgc:Benchmark;
+                      rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "Habitat 2020 Object Nav test-std")
+      ?dataset      orkgp:HAS_BENCHMARK      ?benchmark.
+      ?cont        orkgp:HAS_DATASET        ?dataset.
+      ?cont        orkgp:HAS_EVALUATION     ?eval.
+      ?eval        orkgp:HAS_VALUE          ?value.
+      ?model       orkgp:P32               ?cont.
+      ?model       rdfs:label              ?model_lbl.
+     }<|eot_id|>

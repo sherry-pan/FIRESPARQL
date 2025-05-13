@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?codeURI
+WHERE {
+  ?paper orkg:HAS_METHOD orkg:Adaptive_Input_Large.
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation a orkg:CodeRepository.
+  ?implementation orkg:hasLink ?link.
+  ?link orkg:hasURI ?codeURI.
+  FILTER (strcontains(str(?codeURI), "https://github.com/"))
+}
+```

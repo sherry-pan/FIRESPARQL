@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest Accuracy score on the Reuters En-De benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasAccuracy?accuracy.
+ ?model orkg:method?method.
+ ?model orkg:hasDataset orkg:ReutersEnDeBenchmark.
+ ?model orkg:hasBenchmark orkg:ReutersEnDeBenchmark.
+  FILTER (?accuracy = MAX(?accuracy) )
+}<|eot_id|>

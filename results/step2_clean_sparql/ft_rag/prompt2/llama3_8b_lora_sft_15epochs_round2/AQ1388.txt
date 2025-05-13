@@ -1,0 +1,34 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "CoNLL04".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_NUMBER ?number.
+  ?model orkgp:P32 ?cont;
+         rdfs:label ?model_lbl.
+  ?compare orkgp:P31 ?cont;
+           orkgp:P32 ?implementation.
+  ?implementation orkgp:P36 ?model.
+  FILTER(xsd:float(?number) = ?value)
+  FILTER(?number = MAX(?value2)
+    WHERE {
+      ?eval2 orkgp:P31 ?compare;
+             orkgp:HAS_VALUE ?value2;
+             orkgp:HAS_NUMBER ?number2.
+      ?compare orkgp:P32 ?cont3.
+      ?cont3 orkgp:HAS_DATASET ?dataset4;
+            orkgp:HAS_BENCHMARK ?benchmark4;
+            orkgp:HAS_EVALUATION ?eval3.
+      ?eval3 orkgp:HAS_VALUE ?value3;
+             orkgp:HAS_NUMBER ?number3.
+      FILTER(xsd:float(?number3) = ?value3)
+    }
+  )
+}
+ORDER BY DESC(?number)
+LIMIT 1
+```

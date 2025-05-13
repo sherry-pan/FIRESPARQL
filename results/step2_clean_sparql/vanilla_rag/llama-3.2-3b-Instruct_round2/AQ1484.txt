@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?f1
+WHERE {
+  ?model orkg:has_method ?m.
+  ?m orkg:has_dataset ?ds.
+  ?ds orkg:has_benchmark ?b.
+  ?b orkg:evaluation ?e.
+  ?e orkg:evaluation_micro_f1 ?f1.
+}
+ORDER BY DESC(?f1)
+LIMIT 1
+```

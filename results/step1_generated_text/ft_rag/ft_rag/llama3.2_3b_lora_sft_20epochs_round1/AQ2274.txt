@@ -1,0 +1,17 @@
+Question:
+Where can I find code references in papers that have used the PEGASUS model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?eval.
+      ?eval orkgp:HAS_EVALUATION?eval_eval.
+      ?eval_eval orkgp:HAS_METHOD?method.
+      ?method rdfs:label?method_label.
+       FILTER(REGEX(?method_label, "PEGASUS"))
+      ?eval orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_IMPLEMENTATION?implementation.
+      ?implementation orkgp:P31?cont.
+      ?cont orkgp:P31?code.
+     }<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?dataset
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?eval.
+  ?eval orkg:hasMethod ?method.
+  ?method a orkg:EntityDisambiguationMethod.
+  ?method orkg:hasImplementation ?impl.
+  ?impl orkg:hasDataset ?dataset.
+  FILTER (?dataset rdfs:label = "Benchmark Dataset")
+}
+```

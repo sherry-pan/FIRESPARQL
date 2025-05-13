@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://www.semantic-web-journal.net/orkg/ontologies/corpus/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SciGEN")
+  ?evaluation orkgc:performedOn ?dataset;
+              orkgc:usesMetric ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+```

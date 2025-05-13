@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX shc: <http://www.shared-clef-ehealth.org/ontology/>
+
+SELECT ?model ?modelLabel ?f1Score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation shc:hasMetric ?metric.
+  ?metric a orkg:MicroF1.
+  ?evaluation orkg:hasResult ?result.
+  ?result shc:value ?f1Score.
+  ?model orkg:method ?method.
+  ?method rdfs:label ?modelLabel.
+  ?evaluation orkg:hasTrainingSet shc:ShARe/CLEF-eHealth-corpus.
+}
+ORDER BY DESC(?f1Score) LIMIT 1
+```

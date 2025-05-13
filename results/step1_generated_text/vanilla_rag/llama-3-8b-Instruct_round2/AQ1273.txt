@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Centipede dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?score?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:hasEvaluation?metric ;
+    orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/Atari_2600_Centipede> ;
+    orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:hasScore?score.
+  FILTER (?metric = "top" &&?dataset = <http://orkg.org/orkg/dataset/Atari_2600_Centipede>)
+}<|eot_id|>

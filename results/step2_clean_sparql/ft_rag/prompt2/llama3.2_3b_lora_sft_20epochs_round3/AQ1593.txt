@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "PolyAI Reddit".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P71081 ?accuracy.
+  ?accuracy rdfs:label "1-of-100 Accuracy".
+  OPTIONAL {
+    ?eval orkgp:P97142 ?method.
+    ?method rdfs:label ?model_lbl.
+    ?model rdfs:label ?model_lbl.
+  }
+}
+```

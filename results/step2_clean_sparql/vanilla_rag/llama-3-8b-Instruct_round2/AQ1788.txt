@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?modelLabel ?evaluation ?evaluationValue
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation dcterms:title ?evaluationTitle.
+  ?evaluation dcterms:hasPart ?metric.
+  ?metric dcterms:title "Average Return (NoOp)".
+  ?model orkg:HAS_DATASET ?dataset.
+  ?dataset dcterms:title "Atari 2600 Montezuma's Revenge".
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation dcterms:title ?modelLabel.
+  FILTER (?evaluationTitle = "Best Performing Model")
+}
+```

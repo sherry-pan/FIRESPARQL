@@ -1,0 +1,68 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R15562162 orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P71075?dataset.
+      ?dataset orkgp:HAS_TRAINING_SET?training.
+      ?training orkgp:HAS_EVALUATION?eval.
+       OPTIONAL {?eval orkgp:P71079?value.}
+       OPTIONAL {?eval orkgp:P71080?value80.}
+       OPTIONAL {?eval orkgp:P71081?value81.}
+       OPTIONAL {?eval orkgp:P71082?value82.}
+       OPTIONAL {?eval orkgp:P71086?training_labels.}
+       OPTIONAL {?eval orkgp:P71096?validation_labels.}
+       BIND(
+         IF(
+          ?eval orkgp:P71079?value,
+           xsd:float(?value),
+           xsd:float(?value80)
+         ) AS?value
+       )
+       BIND(
+         IF(
+          ?eval orkgp:P71080,
+           xsd:float(?value),
+           xsd:float(?value81)
+         ) AS?value80
+       )
+       BIND(
+         IF(
+          ?eval orkgp:P71081,
+           xsd:float(?value),
+           xsd:float(?value81)
+         ) AS?value81
+       )
+       BIND(
+         IF(
+          ?eval orkgp:P71082,
+           xsd:float(?value),
+           xsd:float(?value82)
+         ) AS?value82
+       )
+       BIND(
+         IF(
+          ?eval orkgp:P71086,
+           xsd:float(?training_labels),
+           xsd:string("N/A"^^xsd:string)
+         ) AS?training_labels
+       )
+       BIND(
+         IF(
+          ?eval orkgp:P71096,
+           xsd:float(?validation_labels),
+           xsd:string("N/A"^^xsd:string)
+         ) AS?validation_labels
+       )
+       BIND(
+         IF(
+          ?eval orkgp:P71075,
+          ?metric_lbl,
+           xsd:string("N/A"^^xsd:string)
+         ) AS?metric_lbl
+       )
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

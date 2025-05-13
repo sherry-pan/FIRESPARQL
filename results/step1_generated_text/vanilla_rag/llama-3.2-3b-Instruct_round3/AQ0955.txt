@@ -1,0 +1,17 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Defender dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT?metric (COUNT(*) as?count)
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:HAS_EVALUATION?evaluation.
+ ?evaluation a orkg:EvaluationMetric.
+ ?evaluation orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:HAS_METRIC?metric.
+  FILTER (?metric IN ["Accuracy", "Recall", "macro-F1", "micro-F1"])
+}
+    <|eot_id|>

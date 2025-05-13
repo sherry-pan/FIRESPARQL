@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationResult.
+  ?evaluationResult orkg:HAS_SCORE ?score.
+  ?evaluationResult orkg:HAS_METRIC ?metric.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "ImageNet V2".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

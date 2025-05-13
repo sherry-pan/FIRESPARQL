@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?modelLabel ?benchmark
+WHERE {
+  ?model orkg:has_dataset ?dataset.
+  ?dataset orkg:has_benchmark ?benchmark.
+  ?model orkg:has_evaluation ?evaluation.
+  FILTER (STRSTARTS(?benchmark, "BUCC"))
+}
+ORDER BY DESC(?model)
+LIMIT 10
+```

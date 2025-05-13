@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "FSNS - Test" || str(?dataset_lbl) = "FSNS" || str(?dataset_lbl) = "SNS")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        rdfs:label ?eval_lbl.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

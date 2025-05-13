@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_method ?method.
+  FILTER (bc:contains(?method, 'Duel noop') || bc:contains(?method, 'duel noop') || bc:contains(?method, 'duelnoop')).
+  ?paper orkg:has_implementation ?code.
+}
+```

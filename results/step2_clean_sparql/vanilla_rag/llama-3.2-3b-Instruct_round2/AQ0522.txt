@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?title ?paperId
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "MPQA".
+  ?paper orkg:hasId ?paperId.
+  ?paper orkg:hasTitle ?title.
+  FILTER (STRSTARTS(STR(?paperId), "PAPER-"))
+}
+LIMIT 100
+```

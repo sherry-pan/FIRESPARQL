@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Up and Down dataset in terms of Score metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "Atari 2600 Up and Down")
+               &&?dataset       a                orkgc:Dataset)
+      ?benchmark      orkgc:HAS_DATASET      ?dataset;
+                      orkgc:HAS_EVALUATION      ?eval.
+      ?eval           orkgc:HAS_VALUE        ?value.
+       OPTIONAL {?eval           orkgc:HAS_METRIC        ?metric.
+                ?metric          rdfs:label              ?metric_lbl.}
+      ?cont         orkgc:HAS_BENCHMARK     ?benchmark;
+                      orkgc:HAS_MODEL         ?model.
+       OPTIONAL {?model      rdfs:label              ?model_lbl.}
+     }<|eot_id|>

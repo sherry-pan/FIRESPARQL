@@ -1,0 +1,40 @@
+Question:
+Can you provide links to code used in papers that benchmark the KD-LSTMreg model?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?papers rdfs:label?papers_labels.
+       FILTER(REGEX(?papers_labels, "KD-LSTMreg"))
+      ?papers orkgp:P31?cont.
+      ?cont orkgp:P34?eval.
+      ?eval orkgp:HAS_BENCHMARK?benchmark.
+       OPTIONAL {
+        ?benchmark orkgp:P4009?code.
+       }
+       UNION {
+        ?cont orkgp:P34?eval.
+        ?eval orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P4009?code.
+       }
+       UNION {
+        ?cont orkgp:P34?eval.
+        ?eval orkgp:HAS_EVALUATION?evaluations.
+        ?evaluations orkgp:P43131?code.
+       }
+       UNION {
+        ?cont orkgp:P34?eval.
+        ?eval orkgp:HAS_METHOD?method.
+        ?method orkgp:P4009?code.
+       }
+       UNION {
+        ?cont orkgp:P34?eval.
+        ?eval orkgp:HAS_APPROACH?approach.
+        ?approach orkgp:P4009?code.
+       }
+       UNION {
+        ?cont orkgp:P34?eval.
+        ?eval orkgp:HAS_MESH?mesh.
+        ?mesh orkgp:P4009?code.
+       }
+     }<|eot_id|>

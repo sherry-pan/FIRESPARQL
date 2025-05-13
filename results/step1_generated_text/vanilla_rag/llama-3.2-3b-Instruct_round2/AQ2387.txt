@@ -1,0 +1,19 @@
+Question:
+Can you provide links to code used in papers that benchmark the BiT-M (ResNet) model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?paper?code 
+     WHERE {
+      ?paper orkg:HAS_IMPLEMENTATION?code.
+      ?paper orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark a orkg:Benchmark.
+      ?benchmark orkg:HAS_CODE?benchmarkCode.
+      ?benchmark orkg:HAS_METHOD?method.
+      ?method orkg:HAS_URL?url.
+       WHERE {
+        ?paper a orkg:Paper.
+        ?paper orkg:HAS_BENCHMARK?benchmark.
+         FILTER (CONTAINS(str(?benchmark), 'BiT-M (ResNet)')
+       }
+     }<|eot_id|>

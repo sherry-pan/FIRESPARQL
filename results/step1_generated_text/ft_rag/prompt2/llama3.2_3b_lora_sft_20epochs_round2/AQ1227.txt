@@ -1,0 +1,39 @@
+Question:
+What is the highest benchmark result achieved on the Cartpole, swingup (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_value
+     WHERE {
+       orkgr:R6898 orkgp:HAS_BENCHMARK {
+         orkgp:HAS_EVALUATION {
+           orkgp:EVALUATION_METRIC?metric.
+           orkgp:EVALUATION_METRIC_VALUE?value.
+         }
+         orkgp:METRIC?metric.
+         orkgp:METRIC_VALUE?value.
+       }
+       FILTER(?metric = "Cartpole, swingup (DMControl500k)")
+       SELECT?metric?metric_value
+       WHERE {
+         orkgr:R6898 orkgp:HAS_BENCHMARK {
+           orkgp:HAS_EVALUATION {
+             orkgp:EVALUATION_METRIC?metric.
+             orkgp:EVALUATION_METRIC_VALUE?value.
+           }
+           FILTER(?metric = "Cartpole, swingup (DMControl500k)")
+          ?metric?value.
+           OPTIONAL {
+             orkgp:BEST_RESULT?best_value. 
+           }
+         }
+        ?value?metric.
+         IF(?value =?best_value, THEN
+           SELECT?metric?metric_value
+           WHERE {
+            ?metric?value.
+           }
+         )
+       }
+     }
+     ORDER BY DESC(?metric_value)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?benchmark a ex:Benchmark ;
+             ex:dataset ex:Atari2600Seaquest ;
+             ex:metric ex:Score ;
+             ex:performance ?score ;
+             ex:model ?model .
+  
+  FILTER NOT EXISTS {
+    ?otherBenchmark a ex:Benchmark ;
+                    ex:dataset ex:Atari2600Seaquest ;
+                    ex:metric ex:Score ;
+                    ex:performance ?otherScore ;
+                    ex:model ?otherModel .
+    FILTER(?otherScore > ?score)
+  }
+}
+```

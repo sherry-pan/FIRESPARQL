@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:has_method ?method.
+    ?method orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_dataset ?dataset.
+    ?dataset orkg:has_dataset "Atari 2600 Yars Revenge".
+    ?benchmark orkg:evaluation ?score.
+    FILTER (REGEX(str(?score), "^[0-9\\.]+$")).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

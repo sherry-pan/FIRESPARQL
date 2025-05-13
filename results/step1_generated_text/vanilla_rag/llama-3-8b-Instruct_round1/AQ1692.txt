@@ -1,0 +1,18 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Crazy Climber benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?method?score
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_DATASET orkg:Atari_2600_Crazy_Climber.
+ ?evaluation orkg:HAS_METHOD?method.
+ ?evaluation orkg:HAS_EVALUATION?evaluationResult.
+ ?evaluationResult csvw:CSVW_Value?score.
+  FILTER (?score >?otherScore).
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

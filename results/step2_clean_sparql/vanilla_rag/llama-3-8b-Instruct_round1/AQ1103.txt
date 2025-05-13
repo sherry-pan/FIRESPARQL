@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+ ?benchmark orkg:has_dataset <http://orkg.org/dataset/WMT2016_English-Russian>.
+ ?benchmark orkg:has_benchmark ?result.
+ ?result orkg:metric ?metric.
+ ?result orkg:value ?value.
+ FILTER (?metric = "BLEU" || ?metric = "METEOR" || ?metric = "ROUGE" || ?metric = "TER").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

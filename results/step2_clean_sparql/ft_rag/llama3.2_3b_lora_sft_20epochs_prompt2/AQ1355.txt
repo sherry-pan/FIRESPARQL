@@ -1,0 +1,11 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  orkgr:R44985 orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P43149 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  ?evalu orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?score)
+  FILTER(REGEX(STR(?metric), "MNIST"))
+}
+```

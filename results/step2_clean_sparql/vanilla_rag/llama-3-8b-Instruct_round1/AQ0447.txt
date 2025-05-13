@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT ?paper_title ?paper_id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:HAS_TITLE ?paper_title.
+  ?paper orkg:NUMBER ?paper_id.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark csvw:Evaluation ?evaluation.
+  FILTER(?evaluation = "CUB-200-2011")
+}
+```

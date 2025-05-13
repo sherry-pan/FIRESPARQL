@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasEvaluation ?metric.
+  ?metric a orkg:Metric.
+  ?dataset a orkg:Dataset;
+           orkg:hasName "Atari 2600 Double Dunk".
+  ?evaluation orkg:hasTrainingSet ?dataset.
+  ?metric rdfs:label ?metricLabel.
+  FILTER (?metricLabel IN ("Recall", "micro-F1", "Accuracy", "macro-F1"))
+  BIND (?metric AS ?value)
+}
+```

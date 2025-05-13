@@ -1,0 +1,21 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ SELECT?method?method_lbl
+     WHERE {
+      ?model    a            orkgc:Model;
+                 rdfs:label ?model_lbl.
+       FILTER(REGEX(?model_lbl, "Natural Questions (long)"))
+      ?benchmark    orkgp:HAS_BENCHMARK       ?benchmark.
+      ?benchmark    orkgp:HAS_DATASET         ?dataset.
+      ?dataset    orkgp:HAS_EVALUATION     ?eval.
+      ?eval        orkgp:P71080              ?micro_f1.
+      ?eval        orkgp:P71082              ?macro_f1.
+      ?micro_f1   orkgp:HAS_VALUE           ?value.
+      ?value       rdfs:label                 ?value_lbl.
+      ?model      orkgp:HAS_EVALUATION     ?eval;
+                    orkgp:HAS_VALUE           ?value.
+       FILTER(?macro_f1 =?eval               &&?micro_f1 =?eval               &&?value_lbl = "1.00")
+      ?model      rdfs:label                 ?method_lbl.
+     }<|eot_id|>

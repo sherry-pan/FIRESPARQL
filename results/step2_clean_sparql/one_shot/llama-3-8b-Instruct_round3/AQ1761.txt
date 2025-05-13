@@ -1,0 +1,19 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?evaluation a :Evaluation ;
+              :isEvaluationOf ?model ;
+              :onBenchmark :Amazon ;
+              :hasMetric :Accuracy ;
+              :score ?score .
+  
+  FILTER NOT EXISTS {
+    ?otherEvaluation a :Evaluation ;
+                     :isEvaluationOf ?otherModel ;
+                     :onBenchmark :Amazon ;
+                     :hasMetric :Accuracy ;
+                     :score ?otherScore .
+    FILTER (?otherScore > ?score)
+  }
+}
+```

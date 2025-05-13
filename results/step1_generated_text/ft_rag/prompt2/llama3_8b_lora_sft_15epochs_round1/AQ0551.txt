@@ -1,0 +1,22 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Dmlab-30 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Dmlab-30")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper         orkgp:P31               ?cont;
+                      orkgp:P28              ?author.
+      ?paper         orkgp:P31               ?cont2;
+                      orkgp:P29              ?paper_title.
+      ?paper         orkgp:P31               ?cont3;
+                      orkgp:P27              ?paper.
+      ?paper         orkgp:P51027            ?paper_number.
+      ?paper         orkgp:P53027            ?paper_title.
+      ?paper_title  rdfs:label              ?paper_lbl.
+      ?author       rdfs:label              ?author_lbl.
+     }<|eot_id|>

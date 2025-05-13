@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?model 
+WHERE {
+  ?benchmark dbo:dataset dbr:BUCC_Chinese_to_English_benchmark_dataset .
+  ?benchmark dbo:highestScore ?highestScore .
+  ?highestScore dbo:scoreType dbr:F1_score .
+  ?highestScore dbo:scoreValue ?value .
+  ?model dbo:achievedScore ?highestScore .
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

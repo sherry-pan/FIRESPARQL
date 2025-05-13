@@ -1,0 +1,17 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the WMT2014 French-English dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?score
+     WHERE {
+       orkgp:P71076 a orkgp:Dataset;
+               rdfs:label "WMT2014 French-English"^^xsd:string.
+       orkgp:P71100 orkgp:P71080?evalU;
+                 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P71076?plane.
+      ?plane orkgp:P71102?metric.
+      ?evalU orkgp:P71100?benchmark;
+               orkgp:P71080?score.
+       FILTER(REGEX(STR(?metric), "eval"))
+       FILTER(?score > 0)
+     }<|eot_id|>

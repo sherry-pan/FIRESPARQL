@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?benchmark ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:has_benchmark_result ?benchmark_result.
+  ?benchmark_result orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_method ?method.
+  FILTER(STR(?metric) = "DTD").
+  ?benchmark_result orkg:has_metric ?metric.
+  ?benchmark_result orkg:has_score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:EvaluationType "BenchmarkResult".
+    ?benchmark orkg:hasMetric ?metric.
+    ?benchmark orkg:hasScore ?score.
+    ?benchmark orkg:numberOfType "Natural Questions (long)".
+    FILTER (?metric = "Accuracy" OR ?metric = "F1" OR ?metric = "Recall")
+}
+```

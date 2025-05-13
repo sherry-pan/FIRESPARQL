@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?title ?id WHERE {
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_DATASET "WLPC".
+    ?paper orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:CSVW_Titles ?title.
+    ?paper orkg:CSVW_Number ?id.
+    FILTER (?benchmark IS NOT NULL && ?evaluation IS NOT NULL && ?title IS NOT NULL && ?id IS NOT NULL)
+}
+```

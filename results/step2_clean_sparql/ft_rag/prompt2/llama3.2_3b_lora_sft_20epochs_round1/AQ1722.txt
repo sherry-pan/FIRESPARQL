@@ -1,0 +1,18 @@
+```sparql
+SELECT ?name
+WHERE {
+  orkgr:R8342 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P34 ?score.
+  ?model orkgp:P31 ?classification.
+  ?classification rdfs:label ?name.
+  FILTER(REGEX(STR(?dataset), "Atari 2600 Tutankham"))
+  OPTIONAL {
+    ?model orkgp:P33 ?cont.
+    ?cont orkgp:P32 ?eval2.
+    ?eval2 orkgp:P34 ?score2.
+    FILTER(xsd:float(?score) <= xsd:float(?score2))
+  }
+  FILTER(!BOUND(?score2))
+}
+```

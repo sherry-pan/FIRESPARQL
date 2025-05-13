@@ -1,0 +1,25 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the Stanford Cars dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Stanford Cars")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_BENCHMARK     ?benchmark.
+        SELECT?paper?paper_lbl
+        WHERE {
+          ?benchmark      orkgp:HAS_PAPER       ?paper.
+          ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+           OPTIONAL {
+            ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+           }
+          ?paper         rdfs:label              ?paper_lbl.
+         }
+         OPTIONAL {
+          ?benchmark      orkgp:HAS_DATASET      ?dataset.
+         }
+         FILTER(REGEX(?dataset_lbl, "Cars"))
+       }<|eot_id|>

@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "BC5CDR-disease")
+      ?benchmark orkgp:hasModel ?model;
+                 rdfs:label ?model_lbl;
+                 orkgp:hasMetricResult ?metric_result.
+      ?metric_result orkgp:hasMetric ?metric;
+                     orkgp:hasValue ?value.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

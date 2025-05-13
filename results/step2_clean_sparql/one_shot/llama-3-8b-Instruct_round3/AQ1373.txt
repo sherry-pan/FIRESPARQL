@@ -1,0 +1,25 @@
+```
+PREFIX : <http://example.org/schema#>
+SELECT ?model
+WHERE {
+  ?evaluation a :Evaluation ;
+              :metric :SequenceErrorMetric ;
+              :benchmark "FSNS - Test" ;
+              :model ?model ;
+              :score ?score.
+  
+  {
+    SELECT ?model (MIN(?score) as ?minScore)
+    WHERE {
+      ?evaluation a :Evaluation ;
+                  :metric :SequenceErrorMetric ;
+                  :benchmark "FSNS - Test" ;
+                  :model ?model ;
+                  :score ?score.
+    }
+    GROUP BY ?model
+  }
+  
+  FILTER(?score = ?minScore)
+}
+```

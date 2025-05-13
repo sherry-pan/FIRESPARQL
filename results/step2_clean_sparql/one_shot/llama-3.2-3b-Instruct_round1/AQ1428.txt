@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU")
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2016 German-English")
+  
+  ?benchmark orkgc:benchmarks ?dataset;
+             orkgc:usesModel ?model.
+  ?model rdfs:label ?model_lbl;
+         orkgc:hasPerformance ?performance.
+  ?performance orkgc:achievedMetric ?metric;
+               orkgc:metricValue ?metric_value.
+  
+  {
+    SELECT ?model (MAX(?metric_value) as ?best_metric_value)
+    WHERE {
+      ?benchmark orkgc:benchmarks ?dataset;
+                 orkgc:usesModel ?model.
+      ?performance orkgc:achievedMetric ?metric;
+                   orkgc:metricValue ?metric_value.
+    }
+    GROUP BY ?model
+  }
+  FILTER(?metric_value = ?best_metric_value)
+}
+```

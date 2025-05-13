@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Enduro")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?cont;
+        orkgp:HAS_VALUE ?value.
+  
+  BIND(xsd:float(?value) AS ?value)
+  
+  ?model orkgp:HAS_METHOD ?method.
+  OPTIONAL {
+    ?method rdfs:label ?method_lbl.
+    BIND(?method_lbl AS ?model_lbl)
+  }
+}
+```

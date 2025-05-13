@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the WNLI dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?evaluation orkg:hasValue?value.
+ ?evaluation orkg:hasDataset?dataset.
+ ?dataset orkg:hasDataset "WNLI".
+  FILTER (?evaluation orkg:hasMetric &&?evaluation orkg:hasValue &&?evaluation orkg:hasDataset?dataset)
+  FILTER (?value > ALL (?value2?evaluation2 ) WHERE {?evaluation2 orkg:hasMetric?metric2.?evaluation2 orkg:hasValue?value2.?evaluation2 orkg:hasDataset?dataset. })
+}
+ORDER BY DESC(?value) LIMIT 1<|eot_id|>

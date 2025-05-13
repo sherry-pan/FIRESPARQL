@@ -1,0 +1,14 @@
+Question:
+What is the highest benchmark result achieved on the CoQA dataset, including the metric and its value?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?metric?value WHERE {
+    ?b orkg:hasBenchmark?bBenchmark.
+    ?b orkg:hasDataset "CoQA".
+    ?b orkg:hasEvaluation?e.
+    ?e orkg:hasMetric?metric.
+    ?b orkg:hasValue?value.
+     FILTER (?metric = <http://orkg.org/orkg/metric/accuracy> OR?metric = <http://orkg.org/orkg/metric/f1> OR?metric = <http://orkg.org/orkg/metric/mcc>)
+     FILTER (?value > (SELECT?value FROM?b WHERE {?b orkg:hasBenchmark?bBenchmark AND?b orkg:hasDataset "CoQA" AND?b orkg:hasEvaluation?e AND?e orkg:hasMetric?metric AND?e orkg:hasValue?value }).{?value})
+     }<|eot_id|>

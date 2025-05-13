@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Permuted Accuracy".
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Sequential MNIST".
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_MODEL ?model.
+  
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

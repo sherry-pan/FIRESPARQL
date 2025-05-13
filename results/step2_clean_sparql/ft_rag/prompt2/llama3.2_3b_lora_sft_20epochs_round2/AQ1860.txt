@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title;
+    orkgp:P32 [
+      orkgp:HAS_DATASET ?dataset;
+      orkgp:HAS_BENCHMARK ?benchmark
+    ]
+  ].
+  ?benchmark orkgp:P5003 ?eval.
+  FILTER(REGEX(?eval, "Reading Comprehension"))
+  BIND(xsd:string(?title) AS ?dataset_lbl)
+}
+```

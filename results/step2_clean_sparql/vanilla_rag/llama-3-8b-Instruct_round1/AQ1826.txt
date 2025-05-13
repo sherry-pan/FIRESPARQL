@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?macroPrecision
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_experiment ?experiment.
+  ?experiment dcterms:identifier "NLP-TDMS (Exp, arXiv only)".
+  ?experiment orkg:has_result ?result.
+  ?result orkg:metric orkg:P71082 ?macroPrecision.
+}
+ORDER BY DESC(?macroPrecision)
+LIMIT 1
+```

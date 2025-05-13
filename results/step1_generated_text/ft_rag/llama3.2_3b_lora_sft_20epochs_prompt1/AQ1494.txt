@@ -1,0 +1,28 @@
+Question:
+What is the best performing model benchmarking the RotoWire (Content Ordering) dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl        = "RotoWire (Content Ordering)")
+               && has_dataset       ?dataset       && has_benchmark   ?benchmark)
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P32               ?eval.
+      ?eval         orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+      ?metric      rdfs:label              ?metric_lbl.
+       OPTIONAL {
+        ?eval           orkgp:HAS_MODEL         ?model.
+        ?model        rdfs:label              ?model_lbl. 
+       }
+      ?cont         orkgp:P31               ?implementation;
+                      orkgp:HAS_MODEL         ?model.
+      ?implementation      orkgp:HAS_DATASET        ?dataset.
+      ?value         orkgp:HAS_METRIC         ?metric.
+      ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

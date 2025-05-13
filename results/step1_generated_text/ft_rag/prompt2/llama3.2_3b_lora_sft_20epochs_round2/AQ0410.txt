@@ -1,0 +1,21 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the NYT24 dataset?
+
+Generated SPARQL:
+ SELECT?title?id
+     WHERE {
+       orkgr:R155621 {
+         rdfs:label?title.
+         orkgp:HAS_BENCHMARK?benchmark.
+        ?benchmark orkgp:HAS_DATASET?dataset.
+         FILTER(REGEX(STR(?dataset), "NYT24"))
+        ?dataset rdfs:label?dataset_lbl.
+         FILTER(?dataset_lbl = "NYT24")
+        ?benchmark orkgp:P32?contrib.
+        ?contrib orkgp:P31?paper.
+        ?paper rdfs:label?title.
+        ?paper orkgp:P7043?eval.
+        ?eval orkgp:P7042?benchmark.
+         FILTER(?benchmark = "containing"^^xsd:string)
+       }
+     }<|eot_id|>

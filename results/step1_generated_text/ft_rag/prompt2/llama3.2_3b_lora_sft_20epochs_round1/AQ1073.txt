@@ -1,0 +1,14 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Pubmed dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R69042 orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P43135?eval.
+      ?eval orkgp:HAS_EVALUATION?evaluation.
+      ?evaluation orkgp:P43133?value.
+       FILTER(REGEX(?metric_lbl, "metric"^^xsd:string))
+      ?metric rdfs:label?metric_lbl.
+       FILTER(?metric = "F1"^^xsd:string)
+     }<|eot_id|>

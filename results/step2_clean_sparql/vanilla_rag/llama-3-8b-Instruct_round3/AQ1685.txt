@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://example.org/schema#>
+
+SELECT ?modelName
+WHERE {
+    ?model ex:benchmarkedOn ex:CL-SciSumm ;
+           ex:hasPerformance ?performance .
+    ?performance ex:metric "ROUGE-2" ;
+                 ex:score ?score .
+    ?model rdfs:label ?modelName .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

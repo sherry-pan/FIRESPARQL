@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?benchmarkResult.
+  ?benchmarkResult orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:CSVW_Value ?value.
+  ?evaluation csvw:CSVW_Number ?metric.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  FILTER (?dataset = "STS Benchmark").
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

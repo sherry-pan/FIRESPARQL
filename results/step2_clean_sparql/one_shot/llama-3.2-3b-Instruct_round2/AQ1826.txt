@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Macro Precision".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "NLP-TDMS (Exp, arXiv only)".
+      ?model a orkgc:Model;
+             rdfs:label ?model_lbl;
+             orkgc:evaluatedOn ?dataset;
+             orkgc:hasMetric ?metric.
+    }
+  }
+}
+```

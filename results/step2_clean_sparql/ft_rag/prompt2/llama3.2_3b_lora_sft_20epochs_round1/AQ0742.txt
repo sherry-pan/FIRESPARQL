@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  orkgr:R70671 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P71075 ?eval.
+  ?eval orkgp:P30923 ?metric.
+  BIND(
+    IF(?metric = "macro-F1"^^xsd:string, "macro-F1", 
+    IF(?metric = "Accuracy"^^xsd:string, "Accuracy", 
+    IF(?metric = "Recall"^^xsd:string, "Recall", "micro-F1")))
+    AS ?metric_lbl
+  ) 
+}
+```

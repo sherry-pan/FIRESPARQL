@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model orkgp:P31 ?cont.
+  ?cont orkgp:P43129 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(STR(?dataset), "Multimodal PISA"))
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  ?evalu orkgp:P43128 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

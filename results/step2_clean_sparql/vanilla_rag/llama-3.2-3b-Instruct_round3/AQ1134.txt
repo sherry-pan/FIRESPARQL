@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?benchmark ?metric
+WHERE {
+  ?benchmark a orkg:benchmark;
+             orkg:has_dataset "Hendrycks Test";
+             rdfs:label ?label.
+  FILTER (STR(?label) IN ("Top Benchmark Score", "Top Score", "Top Metric", "Top Metric Score", "Top Score Metric"))
+  ?benchmark orkg:has_metric ?metric.
+}
+```

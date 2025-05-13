@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?title ?id 
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset "http://example.org/dataset/MLDoc".
+    ?paper orkg:titles ?title.
+    ?paper orkg:number ?id.
+    FILTER(REGEX(str(?title), ".*MLDoc.*Zero-Shot.*English-to-Russian.*"))
+}
+```

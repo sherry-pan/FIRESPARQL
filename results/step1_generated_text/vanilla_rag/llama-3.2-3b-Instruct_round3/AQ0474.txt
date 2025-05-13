@@ -1,0 +1,17 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the RotoWire (Relation Generation) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX sparql: <http://www.w3.org/TR/sparql1/#>
+
+     SELECT?paper?title?id 
+     WHERE {
+      ?paper orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasDataset "RotoWire".
+      ?benchmark orkg:evaluation?evaluation.
+      ?evaluation rdfs:label?title.
+      ?paper orkg:id?id.
+     }<|eot_id|>

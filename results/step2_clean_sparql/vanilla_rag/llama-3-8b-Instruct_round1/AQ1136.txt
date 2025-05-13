@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:has_dataset orkg:Dataset_Natural_Questions_Short.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:metric ?metric.
+  ?evaluation orkg:score ?score.
+  FILTER(?score > 0).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

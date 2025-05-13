@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model_name
+WHERE {
+  ?benchmark a orkg:Benchmark;
+             orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_dataset ?dataset;
+              csvw:value ?score;
+              orkg:has_method ?method.
+  ?dataset orkg:dataset_name "Atari 2600 Enduro".
+  ?method orkg:method_name ?model_name.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

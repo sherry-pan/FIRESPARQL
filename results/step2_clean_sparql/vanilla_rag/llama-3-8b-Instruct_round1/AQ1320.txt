@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasDataset <http://orkg.org/dataset/Amazon-2> ;
+    orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric ?metric ;
+    orkg:value ?value.
+}
+ORDER BY DESC(?value) LIMIT 1
+```

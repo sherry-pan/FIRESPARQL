@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgr:R6898 orkgp:apply ?apply.
+  ?apply orkgp:predict ?pred;
+         orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71079 ?value;
+        ?value ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "Evaluation"))
+}
+```

@@ -1,0 +1,15 @@
+Question:
+What is the emergency type of AMBER Alert?
+
+Generated SPARQL:
+PREFIX orkgc: <http://schema.orkg.org/click/click#>
+PREFIX orkgp: <http://schema.orkg.org/predicate/property/>
+
+SELECT DISTINCT?emergencyType?emergencyType_lbl
+WHERE {
+ ?alert       a                orkgc:Alert;
+                  rdfs:label      ?alert_lbl.
+  FILTER (str(?alert_lbl) = "AMBER Alert")
+ ?alert       orkgp:HAS_EMERGENCY_TYPE ?emergencyType.
+  OPTIONAL {?emergencyType  rdfs:label              ?emergencyType_lbl.}
+}<|eot_id|>

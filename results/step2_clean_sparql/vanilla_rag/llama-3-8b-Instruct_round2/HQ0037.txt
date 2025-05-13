@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?author (COUNT(?article) AS ?articleCount)
+WHERE {
+  ?article a orkg:Article.
+  ?article orkg:contributed_by ?author.
+} 
+GROUP BY ?author
+ORDER BY DESC(?articleCount) 
+LIMIT 1
+```

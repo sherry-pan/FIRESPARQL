@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?evaluatio_value) AS ?score)
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Stanford Dogs")
+    ?benchmark orkgp:HAS_DATASET ?dataset;
+               orkgp:HAS_BENCHMARK ?benchmark;
+               orkgp:HAS_EVALUATION ?evaluatio.
+    ?evaluatio orkgp:HAS_VALUE ?evaluatio_value;
+               rdfs:label ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    ?benchmark orkgp:HAS_METHOD ?method.
+    ?method rdfs:label ?evaluatio_lbl.
+    FILTER(?evaluatio_lbl = "accuracy")
+}
+```

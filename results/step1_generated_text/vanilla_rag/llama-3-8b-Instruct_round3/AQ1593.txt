@@ -1,0 +1,19 @@
+Question:
+Indicate the model that performed best in terms of 1-of-100 Accuracy metric on the PolyAI Reddit benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:P97142?method.
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation?accuracy.
+ ?evaluation orkg:P71081?accuracy.
+ ?evaluation orkg:P71086?dataset.
+ ?dataset orkg:P71081 "PolyAI Reddit benchmark dataset".
+  FILTER(?accuracy = 1/100)
+  FILTER(?method =?model) 
+}<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model `http://orkg.org/orkg/predicate/HAS_DATASET` ?dataset.
+  ?dataset `http://orkg.org/orkg/predicate/HAS_BENCHMARK` ?benchmark.
+  ?benchmark `http://orkg.org/orkg/predicate/HAS_EVALUATION` ?eval.
+  ?eval `http://orkg.org/orkg/predicate/HAS_VALUE` ?value.
+  ?value `http://orkg.org/orkg/predicate/HAS_METRIC` ?metric.
+  ?metric `http://orkg.org/orkg/predicate/HAS_NAME` ?name.
+  ?model `http://orkg.org/orkg/predicate/HAS_LABEL` ?model_lbl.
+  FILTER(?metric = "SUCCESS" && ?name = "Object Nav")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

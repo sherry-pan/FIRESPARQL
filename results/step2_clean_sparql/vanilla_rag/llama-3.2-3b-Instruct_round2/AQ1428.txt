@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?method ?benchmark
+WHERE {
+  ?benchmark a orkg:benchmark.
+  ?benchmark orkg:has_dataset ?dataset.
+  ?dataset orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_evaluation_metric "BLEU".
+  ?benchmark orkg:has_method ?method.
+  FILTER (STRLIKE(?benchmark, "WMT2016") && STRLIKE(?method, "model"))
+}
+```

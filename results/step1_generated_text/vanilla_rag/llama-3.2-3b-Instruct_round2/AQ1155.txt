@@ -1,0 +1,20 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://example.org/orkg/>
+     PREFIX w3c: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?metric?score 
+     WHERE {
+    ?benchmark a orkg:Dataset.
+     orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:Evaluation (P71075).
+    ?evaluation orkg:Metric?metric.
+    ?benchmark orkg:Score?score.
+    ?benchmark orkg:HasTrainingSet?trainingSet.
+    ?trainingSet orkg:HasValidationSet?validationSet.
+    ?benchmark orkg:Metric?metric.
+    ?benchmark orkg:Method?method.
+     FILTER (?metric = "Natural Questions (long)" AND?metric = "F1")
+     FILTER (?score > ALL (?benchmark1 orkg:Score?score1. ))
+     }<|eot_id|>

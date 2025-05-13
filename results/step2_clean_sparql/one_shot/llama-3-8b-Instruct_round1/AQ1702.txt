@@ -1,0 +1,19 @@
+```sparql
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+
+SELECT ?modelName WHERE {
+  ?model wd:Q7371522 ?dataset;
+         p:P1082 ?performanceStmt.
+  ?performanceStmt ps:P1082 ?score;
+                    pq:P4745 wd:Q31052472. # Atari 2600 Assault dataset
+  
+  OPTIONAL {
+    ?model wdt:P1476 ?modelName.
+  }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

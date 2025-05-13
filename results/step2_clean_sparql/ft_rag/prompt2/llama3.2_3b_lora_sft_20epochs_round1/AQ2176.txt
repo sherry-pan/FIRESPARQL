@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  FILTER(REGEX(?benchmark, "PAR Transformer Large"))
+  ?cont orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "benchmarking"))
+  ?cont orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "PAR Transformer Large"))
+  ?cont orkgp:HAS_APPROACH ?approach.
+  ?approach rdfs:label ?approach_lbl.
+  FILTER(REGEX(?approach_lbl, "code"))
+  ?implementation orkgp:P31 ?code.
+}
+```

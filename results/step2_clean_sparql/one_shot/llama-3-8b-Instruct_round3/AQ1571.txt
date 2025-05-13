@@ -1,0 +1,26 @@
+```sparql
+PREFIX orkgc: <http://www.scholink.org/orkg/concept/>
+PREFIX orkgp: <http://www.scholink.org/orkg/property/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1 entity level score")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "NCBI Disease".
+      ?evaluation orkgp:usesDataset ?dataset;
+                  orkgp:evaluatesModel ?model;
+                  orkgp:hasMetricValue ?metricValue.
+      ?metricValue orkgp:forMetric ?metric;
+                   orkgp:hasValue ?value.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

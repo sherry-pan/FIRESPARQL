@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wmt: <http://wmt.org/>
+
+SELECT ?model
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_DATASET wmt:WMT2014_English-German.
+ ?evaluation orkg:HAS_EVALUATION ?bleuScore.
+ ?evaluation orkg:HAS_METHOD ?model.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+Question:
+What is the best performing model benchmarking the RotoWire (Content Ordering) dataset in terms of BLEU metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?model?metric
+     WHERE {
+    ?model orkg:has_dataset "RotoWire (Content Ordering)".
+    ?model orkg:has_method?method.
+    ?method orkg:has_evaluation?evaluation.
+    ?evaluation orkg:has_metric?metric.
+     FILTER (?metric = "BLEU" &&?evaluation :has_score?score).
+     FILTER (?score IS NUMERIC).
+     ORDER BY DESC(?score).
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?method ?method_lbl
+WHERE {
+  ?method a orkgc:Method;
+          rdfs:label ?method_lbl.
+  ?paper orkgp:HAS_METHOD ?method;
+         orkgp:HAS_PAPER_COUNT ?count.
+  FILTER (?count = MAX (?count))
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.
+  FILTER (str(?problem_lbl) = "Knowledge Representation")
+}
+```

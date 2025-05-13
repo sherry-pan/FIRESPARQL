@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?percentageError
+WHERE {
+  ?evaluation orkg:HAS_METHOD ?model.
+  ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/dataset/SVHN>.
+  ?evaluation orkg:HAS_ERROR ?percentageError.
+}
+ORDER BY DESC(xsd:decimal(?percentageError))
+LIMIT 1
+```

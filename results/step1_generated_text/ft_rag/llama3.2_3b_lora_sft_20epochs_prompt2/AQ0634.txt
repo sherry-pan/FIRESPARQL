@@ -1,0 +1,22 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Amazon-2 dataset?
+
+Generated SPARQL:
+ SELECT?papers?papers_lbl
+     WHERE {
+      ?papers orkgp:P31?contrib.
+      ?contrib orkgp:P32?papers.
+      ?papers orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "Amazon-2"))
+      ?papers orkgp:HAS_BENCHMARK?benchmark.
+       OPTIONAL {
+        ?benchmark orkgp:HAS_BENCHMARK_VALUE?value.
+       }
+       BIND(xsd:integer(?value) AS?benchmark_lbl)
+      ?papers orkgp:HAS_BENCHMARK?benchmark
+       OPTIONAL {
+        ?benchmark orkgp:P31?cont.
+        ?cont orkgp:P31?papers.
+       }
+       BIND(xsd:integer(?papers) AS?papers_lbl)
+     }<|eot_id|>

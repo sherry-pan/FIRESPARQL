@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation csvw:CSVW_Value ?score.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:HAS_LANGUAGE_PAIR "de-en".
+  ?dataset orkg:HAS_DATASET_NAME "BUCC".
+  FILTER(?score != "undefined")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

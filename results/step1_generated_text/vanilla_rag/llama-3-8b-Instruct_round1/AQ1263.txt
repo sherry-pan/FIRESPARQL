@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Seaquest dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+     SELECT?metric?score
+     WHERE {
+      ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/Atari_2600_Seaquest_Dataset>;
+         orkg:HAS_EVALUATION?evaluation.
+      ?evaluation orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg:HAS_METRIC?metric ;
+         orkg:HAS_SCORE?score.
+       FILTER(?metric IN (orkg:Accuracy, orkg:Macro-F1, orkg:Micro-F1))
+       ORDER BY DESC(?score)
+       LIMIT 1
+     }<|eot_id|>

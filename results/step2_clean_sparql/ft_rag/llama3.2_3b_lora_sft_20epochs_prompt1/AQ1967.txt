@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:HAS_METHOD [
+      rdfs:label ?method
+    ];
+    orkgp:HAS_IMPLEMENTATION [
+      orkgp:P31 [
+        rdfs:label ?code
+      ]
+    ]
+  ]
+  FILTER(REGEX(STR(?method), "Flair-TDM"))
+  FILTER(STRLEN(?code) > 0)
+}
+```

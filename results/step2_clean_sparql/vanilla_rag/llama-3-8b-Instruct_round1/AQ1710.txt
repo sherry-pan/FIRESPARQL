@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_benchmark orkg:Atari_2600_Freeway.
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:has_method ?model.
+  ?evaluation orkg:has_result ?result.
+  ?result orkg:has_metric dcterms:Score.
+  ?result orkg:has_value ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

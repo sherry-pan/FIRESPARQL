@@ -1,0 +1,12 @@
+```sparql
+SELECT ?paperTitle ?paperID
+WHERE {
+  ?paperID orkgp:HAS_BENCHMARK ?benchmark .
+  ?benchmark orkgp:P32 [
+    rdfs:label ?label
+  ] .
+  FILTER(REGEX(STR(?label), "Reacher, easy (DMControl100k)"))
+  ?paperID rdfs:label ?paperTitle .
+}
+ORDER BY ASC(?paperTitle)
+```

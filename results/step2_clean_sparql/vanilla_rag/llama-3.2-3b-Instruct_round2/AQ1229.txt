@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score ?method WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric ?metric.
+  ?evaluation orkg:score ?score.
+  ?benchmark orkg:method ?method.
+  FILTER (
+    CONTAINS(STR(?metric), "Cart Pole") ||
+    CONTAINS(STR(?metric), "OpenAI Gym") ||
+    CONTAINS(STR(?metric), "CartPole") ||
+    CONTAINS(STR(?metric), "CartPole-v1") ||
+    CONTAINS(STR(?metric), "CartPole-v2")
+  )
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

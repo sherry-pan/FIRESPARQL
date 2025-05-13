@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?sector (COUNT(?frequency) AS ?frequencyCount)
+WHERE {
+  ?s orkg:sector ?sector.
+  ?s orkg:energy ?energy.
+  ?s orkg:frequency ?frequency.
+  FILTER (?energy = "energy" || ?energy = "energy-sector" || ?energy = "sector-energy")
+}
+GROUP BY ?sector
+HAVING COUNT(?frequency) > 1
+```

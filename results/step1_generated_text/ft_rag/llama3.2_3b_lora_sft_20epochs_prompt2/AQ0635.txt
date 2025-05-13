@@ -1,0 +1,24 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the DBpedia dataset?
+
+Generated SPARQL:
+ SELECT?title?identifier
+     WHERE {
+       orkgr:R44980 orkgp:HAS_BENCHMARK;
+                 rdfs:label?title.
+       orkgr:R44980 orkgp:HAS_DATASET;
+                  orkgp:P31?dataset.
+       FILTER(REGEX(?dataset, "DBpedia"))
+      ?dataset orkgp:P5009?publication.
+       OPTIONAL {
+        ?publication orkgp:P7040?number.
+         FILTER(?number = "12345"^^xsd:int)
+       }
+      ?publication orkgp:P5015?event.
+       OPTIONAL {
+        ?event orkgp:P5043?date.
+         FILTER(REGEX(?date, "2022-01-01"^^xsd:string))
+       }
+       BIND(xsd:int(?number) AS?number)
+       BIND(xsd:string(?date) AS?date)
+     }<|eot_id|>

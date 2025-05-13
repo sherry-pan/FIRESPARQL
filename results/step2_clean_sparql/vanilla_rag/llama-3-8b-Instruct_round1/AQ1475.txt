@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric orkg:hasValue ?accuracy.
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasLabel "Story Cloze Test".
+  ?metric orkg:hasProperty orkg:P71081.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

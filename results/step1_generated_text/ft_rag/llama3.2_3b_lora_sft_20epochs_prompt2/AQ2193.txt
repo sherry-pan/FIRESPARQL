@@ -1,0 +1,20 @@
+Question:
+Can you provide links to code used in papers that benchmark the Transformer-XL Base model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "Transformer-XL Base")
+      ?benchmark    orkgp:HAS_BENCHMARK       ?event.
+      ?cont         orkgp:HAS_BENCHMARK     ?event;
+                     orkgp:HAS_EVALUATION   ?eval.
+      ?eval          orkgp:HAS_VALUE        ?value.
+      ?value         orkgp:HAS_DATASET       ?dataset;
+                      orkgp:HAS_METHOD        ?method;
+                      orkgp:HAS_MODEL         ?model.
+      ?method      orkgp:HAS_IMPLEMENTATION   ?impl;
+                    orkgp:HAS_SOURCE_CODE     ?code.
+      ?dataset         orkgp:HAS_BENCHMARK     ?event.
+     }<|eot_id|>

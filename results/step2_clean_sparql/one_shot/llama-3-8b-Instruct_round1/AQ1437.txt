@@ -1,0 +1,14 @@
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <http://example.org/>
+
+SELECT ?model
+WHERE {
+  ?model ex:achieved ?score .
+  ?score ex:dataset ex:WMT2016Romanian-English ;
+         ex:BLEUScore ?bleu .
+}
+ORDER BY DESC(xsd:float(?bleu))
+LIMIT 1
+```

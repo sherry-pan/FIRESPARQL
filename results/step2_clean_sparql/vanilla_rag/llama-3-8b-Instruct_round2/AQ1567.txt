@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?model ?f1
+WHERE {
+  ?model orkg:HAS_DATASET orkg:CoNLL++.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC p:micro-F1.
+  ?evaluation orkg:HAS_VALUE ?f1.
+  ?evaluation orkg:HAS_METRIC p:macro-F1.
+  ?evaluation orkg:HAS_VALUE ?macro_f1.
+  FILTER (?f1 > ?macro_f1).
+}
+```

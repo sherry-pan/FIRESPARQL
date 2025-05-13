@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "AWD-LSTM")
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_IMPLEMENTATION ?impl;
+        orkgp:HAS_SOURCE_CODE ?code.
+  ?eval orkgp:HAS_EVALUATION ?eval;
+        rdfs:label ?eval_lbl.
+  FILTER (str(?eval_lbl) = "benchmark")
+}
+```

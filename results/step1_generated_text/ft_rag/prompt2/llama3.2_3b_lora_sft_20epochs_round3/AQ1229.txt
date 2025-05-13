@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R78002 orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P70402?metric.
+       BIND(xsd:int(?metric) AS?value)
+       OPTIONAL {?eval orkgp:P70404?micro_f1.
+               ?micro_f1 rdfs:label?micro_f1_lbl.
+                BIND(xsd:int(?micro_f1) AS?micro_f1_value)}
+       OPTIONAL {?eval orkgp:P70403?macro_f1.
+               ?macro_f1 rdfs:label?macro_f1_lbl.
+                BIND(xsd:int(?macro_f1) AS?macro_f1_value)}
+       OPTIONAL {?eval orkgp:HAS_METHOD?method.
+               ?method rdfs:label?method_lbl}
+       FILTER(?metric = "Accuracy")
+     }<|eot_id|>

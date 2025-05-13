@@ -1,0 +1,23 @@
+Question:
+What are the metrics of evaluation over the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric (COUNT(*) AS "count") {
+    ?s orkg:HAS_EVALUATION?e.
+    ?s orkg:HAS_BENCHMARK?b.
+    ?s orkg:HAS_DATASET?d.
+    ?e orkg:label?label.
+    ?b orkg:label?benchmark.
+    ?d orkg:label?dataset.
+     WHERE {
+    ?s orkg:HAS_EVALUATION?e.
+    ?e orkg:label?label.
+    ?s orkg:HAS_BENCHMARK?b.
+    ?b orkg:label?benchmark.
+    ?s orkg:HAS_DATASET?d.
+    ?d orkg:label?dataset.
+     FILTER (STRLIKE(?label, "PWC Leaderboards (restricted)") || STRLIKE(?benchmark, "PWC Leaderboards (restricted)") || STRLIKE(?dataset, "PWC Leaderboards (restricted)"))
+     }
+     GROUP BY?s
+     HAVING (COUNT(*) >= 1)<|eot_id|>

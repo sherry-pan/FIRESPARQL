@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score ?method
+WHERE {
+  ?s orkg:hasEvaluation ?e.
+  ?e orkg:metric ?metric.
+  ?e orkg:score ?score.
+  ?e orkg:method ?method.
+  FILTER (CONTAINS(LCASE(?metric), "cart pole"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

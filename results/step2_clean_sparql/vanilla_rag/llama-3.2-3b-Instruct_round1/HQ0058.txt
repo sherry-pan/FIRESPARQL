@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?s ?metric
+WHERE {
+  ?s a orkg:Study.
+  ?s orkg:hasMethod ?method.
+  ?method orkg:uses ?algorithm.
+  ?algorithm orkg:hasLabel "Naive Bayes".
+  ?algorithm orkg:uses ?feature.
+  ?feature orkg:hasName "Bag of Words".
+  ?s orkg:hasClassification ?classification.
+  ?classification orkg:hasLabel "user feedback as feature requests".
+  ?s orkg:hasMetric ?metric.
+  VALUES ?metricLabel { "precision" "recall" "macro-F1" "micro-F1" }
+  ?metric orkg:hasLabel ?metricLabel.
+}
+```

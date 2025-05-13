@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?score ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark ;
+        orkg:hasEvaluation ?evaluation ;
+        orkg:hasDataset <http://orkg.org/orkg/dataset/Atari_2600_Centipede>.
+    ?evaluation orkg:hasScore ?score ;
+        orkg:hasEvaluationMetric ?metric.
+    FILTER (?metric = "top")
+}
+```

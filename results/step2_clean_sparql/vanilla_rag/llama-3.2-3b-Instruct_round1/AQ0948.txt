@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasDataset ?skiing_dataset.
+  ?metric orkg:hasEvaluation ?skiing_metric.
+  ?benchmark orkg:hasMethod ?method.
+  FILTER (bif:label(?benchmark) = "Atari 2600 Skiing" )
+  ?metric rdfs:label ?metricLabel.
+  FILTER (str:contains(?metricLabel, "Recall") OR str:contains(?metricLabel, "micro-F1") OR str:contains(?metricLabel, "macro-F1") OR str:contains(?metricLabel, "Accuracy") OR str:contains(?metricLabel, "NDCG@10"))
+}
+```

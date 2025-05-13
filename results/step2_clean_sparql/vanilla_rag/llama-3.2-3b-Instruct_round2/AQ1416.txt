@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model
+WHERE {
+    ?benchmark orkg:has_dataset <http://orkg.org/orkg/ontology/has_dataset#WMT2016_English-Russian>.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:evaluation_metric "BLEU score".
+    ?model orkg:has_method ?benchmark.
+}
+ORDER BY DESC(?evaluation)
+LIMIT 1
+```

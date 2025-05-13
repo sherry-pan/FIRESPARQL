@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_METHOD ?method.
+  ?method rdfs:label "DY-MobileNetV3-Small".
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation rdfs:label ?code_link.
+  FILTER (lang(?code_link) = "text/html" || lang(?code_link) = "text/plain")
+}
+```

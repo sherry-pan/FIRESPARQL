@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric ?metricLabel
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasTrainingSet ?trainingSet.
+  ?trainingSet orkg:hasDataset ?dataset.
+  ?dataset orkg:hasName "Stanford Cars".
+  ?evaluation orkg:usesMetric ?metric.
+  ?metric orkg:hasLabel ?metricLabel.
+  FILTER (?metricLabel IN ("Recall", "Accuracy", "macro-F1", "micro-F1"))
+}
+```

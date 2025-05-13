@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkgc: <http://www.scai.fraunhofer.org/orkg/concept/>
+PREFIX orkgp: <http://www.scai.fraunhofer.org/orkg/property/>
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label ?metric_lbl.
+    FILTER (str(?metric_lbl) = "ROUGE-2")
+    SELECT ?model ?model_lbl
+    WHERE {
+        ?dataset a orkgc:Dataset;
+                 rdfs:label "CL-SciSumm".
+        ?result a orkgc:ExperimentResult;
+                orkgp:hasMetric ?metric;
+                orkgp:hasModel ?model;
+                orkgp:hasDataset ?dataset;
+                orkgp:hasScore ?score.
+        ?model rdfs:label ?model_lbl.
+    } 
+    ORDER BY DESC(?score)
+    LIMIT 1
+}
+```

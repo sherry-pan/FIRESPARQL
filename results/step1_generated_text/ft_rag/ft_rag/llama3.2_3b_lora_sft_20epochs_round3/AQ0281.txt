@@ -1,0 +1,24 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Boxing dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "Atari 2600 Boxing")
+               || str(?dataset_lbl    = "AtariBoxing"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?eval.
+      ?eval          orkgp:HAS_EVALUATION    ?evaluation.
+       OPTIONAL {
+        ?eval           orkgp:HAS_VALUE        ?value.
+         BIND(xsd:float(?value) AS?value)
+       }
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:HAS_EVALUATION    ?eval.
+       OPTIONAL {
+        ?cont         orkgp:HAS_MODEL         ?model.
+        ?model        rdfs:label              ?model_lbl.
+       }
+     }<|eot_id|>

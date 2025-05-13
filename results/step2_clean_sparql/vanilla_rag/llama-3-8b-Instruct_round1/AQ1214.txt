@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?metric.
+  ?evaluation orkg:HAS_DATASET orkg:CoNLL++.
+  ?evaluation csvw:CSVW_Value ?value.
+  ?evaluation csvw:CSVW_Name ?metricName.
+  FILTER (?metricName = "Top benchmark result")
+}
+```

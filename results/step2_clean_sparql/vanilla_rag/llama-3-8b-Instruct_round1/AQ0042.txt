@@ -1,0 +1,11 @@
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?modelLabel ?approach
+WHERE {
+ ?model a orkg:Method.
+ ?model orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/dataset/MNIST>.
+ ?model orkg:HAS_APPROACH ?approach.
+ SERVICE orkg:label { ?model rdfs:label ?modelLabel. }
+}

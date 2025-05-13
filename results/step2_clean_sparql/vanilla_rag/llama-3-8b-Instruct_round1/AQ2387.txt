@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_IMPLEMENTATION ?code.
+  FILTER (strstarts(str(?code), "https://github.com/") || strstarts(str(?code), "https://gitlab.com/") || strstarts(str(?code), "https://bitbucket.org/"))
+}
+```

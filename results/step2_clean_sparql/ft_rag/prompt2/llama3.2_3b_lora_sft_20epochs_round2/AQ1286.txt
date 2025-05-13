@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6908 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?eval orkgp:HAS_PROPERTY ?property.
+  ?property orkgp:PROPERTY_NAME ?metric.
+  ?property orkgp:PROPERTY_LABEL ?metric_lbl.
+  FILTER(REGEX(?dataset, "Atari 2600 Alien"))
+}
+```

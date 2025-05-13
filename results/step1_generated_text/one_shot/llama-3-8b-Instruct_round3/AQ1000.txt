@@ -1,0 +1,16 @@
+Question:
+List the metrics that are used to evaluate models on the VTAB-1k benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkgc: <http://semantic-scholar.org/codelists/dataset/>
+PREFIX orkgp: <http://semantic-scholar.org/codelists/property/>
+SELECT DISTINCT?metric?metric_lbl
+WHERE {
+  {
+    SELECT?metric?metric_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "VTAB-1k")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                     

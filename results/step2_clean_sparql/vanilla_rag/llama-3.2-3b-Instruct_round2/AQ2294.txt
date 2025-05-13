@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?paperTitle ?implementation
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasCode ?implementation.
+  ?paper orkg:hasMethod ?method.
+  FILTER (str(?method) = "Duel hs")
+}
+ORDER BY ?paperTitle
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK <http://orkg.org/orkg/instance/Cheetah>.
+  ?evaluation orkg:HAS_SCORE ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

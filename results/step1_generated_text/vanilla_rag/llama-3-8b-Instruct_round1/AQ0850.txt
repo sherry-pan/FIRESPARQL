@@ -1,0 +1,16 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the TempEval-3 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?evaluationMetric
+WHERE {
+ ?paper a orkg:Paper;
+         orkg:HAS_EVALUATION?evaluationMetric.
+ ?evaluationMetric a orkg:EvaluationMetric;
+                    orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET?dataset.
+  FILTER (?dataset = "TempEval-3")
+}<|eot_id|>

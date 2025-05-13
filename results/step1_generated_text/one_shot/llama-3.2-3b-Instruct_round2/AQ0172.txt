@@ -1,0 +1,15 @@
+Question:
+Could you provide a list of models that have been tested on the GENIA - LAS benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?benchmark        orkgp:HAS_DATASET      ?dataset;
+                         orkgp:HAS_MODEL      ?model.
+      ?dataset         a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "GENIA - LAS")
+      ?benchmark      orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                   ?metric          rdfs:label              ?metric_lbl.}
+     }<|eot_id|>

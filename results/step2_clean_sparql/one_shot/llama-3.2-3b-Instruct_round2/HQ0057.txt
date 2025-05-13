@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?compared_study orkgp:HAS_BENCHMARK ?benchmark;
+                  orkgp:P32 ?compared_study.
+  ?data_source orkgp:HAS_DATA_SOURCE ?data_source.
+  ?data_source a orkg:DataSource;
+               rdfs:label ?data_source_lbl.
+  FILTER (str(?data_source_lbl) = "compared studies")
+}
+```

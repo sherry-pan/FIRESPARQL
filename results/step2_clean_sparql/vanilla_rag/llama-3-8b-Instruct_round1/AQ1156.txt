@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:HAS_BENCHMARK ?evaluation ;
+    orkg:HAS_DATASET <http://orkg.org/orkg/resource/SQuAD2.0>.
+  ?evaluation orkg:HAS_EVALUATION ?metric, ?value.
+  FILTER (?metric = "top")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

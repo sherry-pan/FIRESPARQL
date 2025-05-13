@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/paper/>
+
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "6 layer QRNN")
+  
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_MODEL ?model;
+         orkgp:HAS_SOURCE_CODE ?code.
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Macro Recall".
+  ?dataset a orkgc:Dataset;
+           rdfs:label "NLP-TDMS (Exp, arXiv only)".
+  ?result a orkgc:Result;
+          orkgc:computedOn ?dataset;
+          orkgc:hasValue ?value;
+          orkgc:hasMetric ?metric;
+          orkgc:producedBy ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

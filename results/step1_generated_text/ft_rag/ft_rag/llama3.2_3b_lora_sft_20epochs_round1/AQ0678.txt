@@ -1,0 +1,20 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PWC Leaderboards (restricted) dataset?
+
+Generated SPARQL:
+ SELECT?papers?papers_lbl
+     WHERE {
+      ?papers orkgp:P31?cont.
+      ?cont orkgp:P32?benchmark.
+      ?benchmark orkgp:HAS_BENCHMARK?has_benchmark.
+       FILTER(?has_benchmark = "PWC Leaderboards (restricted)")
+      ?papers orkgp:P5042?eval.
+      ?eval orkgp:HAS_EVALUATION?evalu.
+      ?eval orkgp:P5043?benchmark.
+      ?benchmark orkgp:P5040?dataset.
+       FILTER(?dataset = "PWC Leaderboards")
+      ?papers orkgp:HAS_BENCHMARK?benchmark
+      ?benchmark orkgp:P5020?papers_lbl
+     }
+     ORDER BY ASC(?papers_lbl)
+     LIMIT 1<|eot_id|>

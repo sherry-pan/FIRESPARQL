@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model (MAX(?nllScore) as ?maxNLLScore)
+WHERE {
+  ?model a orkg:Method.
+  ?model csvw:evaluation ?evaluation.
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:metric ?metric.
+  ?metric a orkg:Metric.
+  ?metric orkg:property orkg:NLL.
+  ?evaluation orkg:score ?nllScore.
+  ?model csvw:dataset ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:name "Nottingham".
+}
+GROUP BY ?model
+ORDER BY DESC(?maxNLLScore)
+LIMIT 1
+```

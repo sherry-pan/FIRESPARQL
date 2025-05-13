@@ -1,0 +1,29 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Reacher, easy (DMControl100k)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?evaluation orkgp:HAS_EVALUATION ?benchmark;
+              orkgp:EVALUATION_METRIC ?metric.
+  
+  ?metric orkgp:HAS_VALUE ?value.
+  
+  OPTIONAL {
+    ?metric orkgp:P31 ?constant;
+            orkgp:HAS_VALUE ?value.
+    ?constant rdfs:label ?constant_lbl.
+    ?model orkgp:HAS_METHOD ?method;
+           orkgp:HAS_APPROACH ?approach.
+    ?approach rdfs:label ?approach_lbl.
+    ?model rdfs:label ?model_lbl.
+  }
+  
+  ORDER BY DESC(?value)
+  LIMIT 1
+}
+```

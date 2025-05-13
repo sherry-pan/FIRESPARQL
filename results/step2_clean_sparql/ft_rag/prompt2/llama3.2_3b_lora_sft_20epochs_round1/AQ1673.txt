@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "MLDoc Zero-Shot English-to-German")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?model orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:P71075 ?metric.
+      ?metric orkgp:P71081 ?value.
+      BIND(xsd:float(?value) AS ?value)
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the ImageNet ReaL dataset in terms of Params metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?model?modelLabel?params
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_METHOD?method.
+ ?method orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_DATASET?dataset.
+ ?dataset orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark csvw:Number?params.
+ ?dataset csvw:datasetIRI <http://www.image-net.org/realtag/>.
+  FILTER (?params = max(?params) )
+}<|eot_id|>

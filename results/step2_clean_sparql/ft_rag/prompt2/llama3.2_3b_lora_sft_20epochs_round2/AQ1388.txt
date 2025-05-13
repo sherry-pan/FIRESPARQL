@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL04")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_CSVW_Number ?number.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_EVALUATION ?eval;
+         orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?number)
+LIMIT 1
+```

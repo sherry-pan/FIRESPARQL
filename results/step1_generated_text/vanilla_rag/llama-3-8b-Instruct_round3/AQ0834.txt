@@ -1,0 +1,14 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+    orkg:evaluatedOn <http://orkg.org/dataset/QNLI> ;
+    orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+  FILTER (?metric in (orkg:Accuracy, orkg:Recall, orkg:macro-F1, orkg:micro-F1))
+}<|eot_id|>

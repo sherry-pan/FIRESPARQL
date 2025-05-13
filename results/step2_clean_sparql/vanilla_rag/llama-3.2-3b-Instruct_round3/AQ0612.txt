@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_title ?benchmarkTitle.
+    ?paper orkg:has_title ?title.
+    ?paper orkg:has_id ?id.
+    FILTER (CONTAINS(LCASE(?benchmarkTitle), "atari 2600 defender"))
+}
+```

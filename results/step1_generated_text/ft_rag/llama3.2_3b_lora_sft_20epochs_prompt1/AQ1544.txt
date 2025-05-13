@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the OntoNotes benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl      = "OntoNotes")
+                || str(?dataset_lbl      = "OntoNotes (Test)"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:P71080        ?micro_f1;
+                          orkgp:P71082        ?macro_f1.
+         OPTIONAL {?eval           orkgp:P97135        ?matching_strategy.
+                  ?benchmark      orkgp:P97127        ?rejected;
+                                     orkgp:P97128        ?accepted.}
+        ?model      orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {?model      rdfs:label              ?model_lbl.}
+         FILTER(?macro_f1 = "0.955"^^xsd:string)
+     }<|eot_id|>

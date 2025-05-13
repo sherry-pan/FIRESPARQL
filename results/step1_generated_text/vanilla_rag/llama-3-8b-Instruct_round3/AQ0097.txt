@@ -1,0 +1,16 @@
+Question:
+Can you list the models that have been evaluated on the Multimodal PISA dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX pisa: <http://orkg.org/orkg/dataset/PISA/>
+
+SELECT DISTINCT?model
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation?hasEvaluation.
+ ?hasEvaluation orkg:evaluation?evaluation.
+ ?evaluation orkg:hasMethod?method.
+ ?method orkg:method?model.
+ ?evaluation orkg:hasDataset pisa:Multimodal_PISA.
+}<|eot_id|>

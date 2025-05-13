@@ -1,0 +1,24 @@
+Question:
+What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "NCBI Disease")
+               || str(?dataset_lbl      = "NCBI Disease (Test)")
+               || str(?dataset_lbl      = "NCBI Disease (Train)"))
+      ?benchmark        orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+      ?eval             orkgp:HAS_VALUE        ?value.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                ?metric           orkgp:HAS_VALUE        ?value.}
+       OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.}
+      ?model          rdfs:label              ?model_lbl.
+      ?benchmark      orkgp:HAS_MODEL         ?model.
+      ?benchmark      orkgp:HAS_EVALUATION   ?eval.
+      ?value         orkgp:HAS_VALUE        ?value.
+      ?value         rdfs:label              ?value_lbl.
+       FILTER(?value_lbl = "macro-F1"^^xsd:string)
+     }<|eot_id|>

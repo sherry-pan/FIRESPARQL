@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Solaris"
+          || str(?dataset_lbl) = "Atari 2600 Solaris (Test)"
+          || str(?dataset_lbl) = "Atari 2600 Solaris (Validation)"
+         )
+  ?evaluation orkgp:HAS_DATASET ?dataset;
+              orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?cont;
+        orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_lbl.
+  ?model orkgp:HAS_METHOD ?method;
+         rdfs:label ?model_lbl.
+}
+```

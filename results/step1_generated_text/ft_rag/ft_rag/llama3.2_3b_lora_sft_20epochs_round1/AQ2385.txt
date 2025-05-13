@@ -1,0 +1,20 @@
+Question:
+Where can I find code references in papers that have used the EfficientNetV2-L model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?code.
+      ?code orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P5049?eval.
+      ?eval orkgp:P5048?dataset.
+      ?dataset rdfs:label?dataset_lbl.
+       FILTER(REGEX(STR(?dataset_lbl), "EfficientNetV2-L"))
+      ?cont orkgp:P33?method.
+      ?method rdfs:label?method_lbl.
+       FILTER(REGEX(STR(?method_lbl), "benchmarking"))
+      ?cont orkgp:P34?implementation.
+      ?implementation rdfs:label?implementation_lbl.
+       FILTER(REGEX(STR(?implementation_lbl), "code"))
+     }<|eot_id|>

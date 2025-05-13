@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT DISTINCT ?metric ?score
+WHERE {
+  ?paper a orkg:PaperField ;
+    orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:CSVW_Name ?metric ;
+              csvw:CSVW_Value ?score.
+}
+ORDER BY DESC(?score) LIMIT 1
+```

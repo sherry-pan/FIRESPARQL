@@ -1,0 +1,20 @@
+Question:
+What is the highest benchmark result achieved on the WNLI dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?evaluation orkg:hasValue?value.
+ ?benchmark orkg:hasDataset?dataset.
+ ?dataset rdfs:label "WNLI".
+  FILTER (?metric =?value).
+  FILTER (?evaluation ORKG:hasDataset?dataset).
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?benchmark ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:has_dataset orkg:Atari_2600_Ice_Hockey.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:value ?value.
+  ?evaluation orkg:metric ?metric.
+  FILTER (?metric = "top benchmark score")
+}
+```

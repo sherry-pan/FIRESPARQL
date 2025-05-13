@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX wos: <http://orkg.org/orkg/ontology/WOS_5736/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasDataset wos:WOS_5736 ;
+    orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric ?metric ;
+    orkg:value ?value.
+  FILTER (?metric != "undefined")
+  FILTER (?value != "undefined")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  orkgr:R70642 orkgp:evaluate {
+    ?metric orkgp:P71079 ?recall .
+    ?metric orkgp:P71080 ?micro_F1 .
+    ?metric orkgp:P71081 ?accuracy .
+    ?metric orkgp:P71082 ?macro_F1 .
+    ?metric orkgp:P71075 ?eval .
+    FILTER(REGEX(?eval, "SciTLDR"))
+  }
+}
+GROUP BY ?metric
+ORDER BY DESC(COUNT(?metric))
+LIMIT 1
+```

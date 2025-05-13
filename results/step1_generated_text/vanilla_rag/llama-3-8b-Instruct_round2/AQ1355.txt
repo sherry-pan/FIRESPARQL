@@ -1,0 +1,24 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Sequential MNIST dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?benchmark?metric?score
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+           orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?evaluationResult.
+ ?evaluationResult orkg:HAS_METRIC?metric ;
+                   orkg:HAS_SCORE?score.
+ ?benchmark orkg:HAS_DATASET "Sequential MNIST".
+  FILTER(?evaluationResult = (
+    SELECT?evaluationResult
+    WHERE {
+     ?evaluationResult orkg:HAS_DATASET "Sequential MNIST".
+     ?evaluationResult orkg:HAS_METRIC?metric.
+     ?evaluationResult orkg:HAS_SCORE?score.
+      ORDER BY DESC(?score)
+    }
+  ) LIMIT 1)
+}<|eot_id|>

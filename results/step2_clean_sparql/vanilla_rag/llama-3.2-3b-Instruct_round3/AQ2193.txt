@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?code ?link
+WHERE {
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_METHOD "Transformer-XL Base".
+  ?benchmark orkg:HAS_IMPLEMENTATION ?code.
+  ?code orkg:HAS_LINK ?link.
+  FILTER (STRSTARTS(?link, "https://github.com/"))
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "BERTwwm + SQuAD 2")
+  ?benchmark orkgp:HAS_BENCHMARK ?event.
+  OPTIONAL {
+    ?event orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_SOURCE_CODE ?code.
+  }
+  OPTIONAL {
+    ?event orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_SOURCE_CODE ?code.
+  }
+  ?benchmark orkgp:HAS_METHOD ?method;
+             orkgp:HAS_IMPLEMENTATION ?impl.
+  OPTIONAL {
+    ?impl orkgp:HAS_SOURCE_CODE ?code.
+  }
+}
+```

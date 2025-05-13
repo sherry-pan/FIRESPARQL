@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset MLDoc Zero-Shot German-to-French?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET <http://orkg.org/dataset/MLDoc_Zero-Shot_German-to-French> ;
+    orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric ;
+    orkg:CSVW_Value?value.
+  FILTER (?metric = (SELECT?metric2 FROM (SELECT?metric2?value2 WHERE {?benchmark orkg:HAS_EVALUATION?evaluation2 ;?evaluation2 orkg:HAS_METRIC?metric2 ; orkg:CSVW_Value?value2 } GROUP BY?metric2 ORDER BY DESC(?value2)) LIMIT 1))
+}<|eot_id|>

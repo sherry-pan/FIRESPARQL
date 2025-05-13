@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model
+WHERE {
+  ?evaluation a orkg:Evaluation ;
+              orkg:hasEvaluation ?metric ;
+              orkg:hasResult ?result.
+  ?metric a orkg:Metric ;
+          orkg:metricType "accuracy".
+  ?property a orkg:Property ;
+            orkg:label "Accuracy".
+  ?result a orkg:Result ;
+          orkg:metric ?metric ;
+          orkg:property ?property ;
+          orkg:propertyValue "1-of-100"^^xsd:float ;
+          orkg:hasModel ?model.
+  ?model a orkg:Model.
+}
+```

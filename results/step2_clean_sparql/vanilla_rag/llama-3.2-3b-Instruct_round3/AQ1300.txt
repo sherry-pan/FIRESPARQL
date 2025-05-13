@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?benchmark ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:has_dataset orkg:Atari_2600_Ice_Hockey.
+    ?benchmark orkg:has_benchmark ?benchmark_score.
+    ?benchmark_score orkg:value ?score.
+    ?benchmark orkg:compared_with ?compared_benchmark.
+    ?compared_benchmark orkg:value ?compared_score.
+    FILTER (?score > ?compared_score)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

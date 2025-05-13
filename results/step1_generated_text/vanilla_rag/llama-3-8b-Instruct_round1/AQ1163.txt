@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ARC (Challenge)?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/dataset/ARC_Challenge>.
+ ?benchmark orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?metric?value.
+  FILTER(?metric =?top_metric)  // filter for the top metric
+  ORDER BY DESC(?value)  // sort by value in descending order
+  LIMIT 1  // return only the top result
+}<|eot_id|>

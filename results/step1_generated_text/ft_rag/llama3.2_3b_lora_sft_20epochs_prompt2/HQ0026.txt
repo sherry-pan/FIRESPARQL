@@ -1,0 +1,16 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ SELECT DISTINCT?benchmark?benchmark_lbl
+     WHERE {
+      ?benchmark {
+        ?evaluaton?number_of_questions.
+         FILTER(?number_of_questions > 10000)
+       }
+      ?evaluaton a orkgc:Evaluation;
+                rdfs:label?evaluaton_lbl.
+       FILTER(REGEX(?evaluaton_lbl, "number of questions"))
+      ?benchmark orkgp:HAS_EVALUATION?evaluaton.
+      ?benchmark rdfs:label?benchmark_lbl.
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?benchmark ?code
+WHERE {
+    ?paper orkg:hasImplementation ?implementation.
+    ?implementation orkg:hasBenchmark ?benchmark.
+    ?benchmark rdfs:label ?benchmarkLabel.
+    ?implementation orkg:hasCode ?code.
+    FILTER (strcontains(?benchmarkLabel, 'POP3D'))
+}
+```

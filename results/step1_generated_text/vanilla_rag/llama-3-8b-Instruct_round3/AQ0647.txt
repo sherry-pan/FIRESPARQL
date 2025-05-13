@@ -1,0 +1,17 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WOS-46985 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT?paper?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:HAS_DATASET <http://example.org/WOS-46985>.
+ ?paper orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METHOD?method.
+ ?paper csvw:CSVW_Titles?title.
+ ?paper orkg:ID?id.
+}<|eot_id|>

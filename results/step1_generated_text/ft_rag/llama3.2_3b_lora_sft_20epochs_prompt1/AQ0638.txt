@@ -1,0 +1,18 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the TREC-6 dataset?
+
+Generated SPARQL:
+ SELECT?title?identifier
+     WHERE {
+       orkgr:R155561 {
+         rdfs:label?title.
+         orkgp:HAS_BENCHMARK?benchmark.
+        ?benchmark orkgp:HAS_DATASET?dataset.
+         FILTER(REGEX(STR(?dataset), "TREC-6"))
+        ?dataset orkgp:HAS_DATASET?dataset2.
+         orkgp:P32?cont.
+         orkgp:P31?cont;
+                  rdfs:label?title.
+         FILTER(?title =?title)
+       }
+     }<|eot_id|>

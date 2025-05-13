@@ -1,0 +1,14 @@
+Question:
+What is the top benchmark score and its metric on the Cheetah, run (DMControl500k) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?score?metric
+WHERE {
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/DMControl500k>.
+ ?benchmark orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?evaluation orkg:HAS_SCORE?score.
+  FILTER (?score = max(?score))
+}<|eot_id|>

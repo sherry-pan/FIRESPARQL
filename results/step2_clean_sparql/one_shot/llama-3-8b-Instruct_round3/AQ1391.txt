@@ -1,0 +1,31 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "RE+ Micro F1")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+     ?dataset a orkgc:Dataset;
+              rdfs:label ?dataset_lbl.
+     FILTER (str(?dataset_lbl) = "ACE 2004")
+     ?benchmark orkgp:HAS_DATASET ?dataset;
+                orkgp:HAS_MODEL ?model.
+     ?model rdfs:label ?model_lbl.
+     ?benchmark orkgp:ACHIEVES ?achievement.
+     ?achievement orkgp:HAS_METRIC ?metric;
+                  orkgp:HAS_VALUE ?value.
+     FILTER NOT EXISTS {
+       ?otherModel rdfs:label ?otherModel_lbl.
+       ?benchmark2 orkgp:HAS_DATASET ?dataset;
+                   orkgp:HAS_MODEL ?otherModel.
+       ?otherModel orkgp:ACHIEVES ?otherAchievement.
+       ?otherAchievement orkgp:HAS_METRIC ?metric;
+                         orkgp:HAS_VALUE ?otherValue.
+       FILTER (?otherValue > ?value)
+     }
+    }
+  }
+}
+```

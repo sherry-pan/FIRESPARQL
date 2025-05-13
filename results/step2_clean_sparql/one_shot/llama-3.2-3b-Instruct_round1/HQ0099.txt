@@ -1,0 +1,12 @@
+```sparql
+SELECT ?material ?response_time
+WHERE {
+  orkgr:R155266 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43156 ?efficency.
+  ?efficency orkgp:material ?material.
+  ?efficency orkgp:responseTime ?response_time.
+  BIND(xsd:float(?response_time) AS ?response_time_value).
+}
+ORDER BY ASC(?response_time_value)
+LIMIT 1
+```

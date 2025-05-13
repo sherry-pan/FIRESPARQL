@@ -1,0 +1,18 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Montezuma's Revenge benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?score
+     WHERE {
+    ?model orkg:HAS_METHOD?method.
+    ?method orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_DATASET?dataset.
+    ?dataset orkg:HAS_EVALUATION?evaluation.
+    ?evaluation orkg:HAS_SCORE?score.
+    ?model orkg:HAS_METHOD?method.
+    ?method orkg:P71081?score.
+     FILTER (STR(?score) = "best" OR STR(?score) = "highest")
+     }
+     }<|eot_id|>

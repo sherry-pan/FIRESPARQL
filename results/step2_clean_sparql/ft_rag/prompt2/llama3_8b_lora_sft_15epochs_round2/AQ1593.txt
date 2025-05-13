@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "1-of-100 Accuracy")
+  
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?metric;
+        orkgp:P36 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

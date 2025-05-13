@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasTrainingSet ?trainingSet.
+  ?trainingSet orkg:hasDataset ?dataset.
+  ?model orkg:P71075 ?accuracy.
+  FILTER (CONTAINS(LCASE(?accuracy), '1-of-100')).
+  FILTER (CONTAINS(LCASE(?dataset), 'polyai')).
+}
+```

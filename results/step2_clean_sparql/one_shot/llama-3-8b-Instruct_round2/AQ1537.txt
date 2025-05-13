@@ -1,0 +1,18 @@
+```sparql
+PREFIX benchmark: <http://example.org/benchmark/>
+PREFIX dataset: <http://example.org/dataset/>
+PREFIX model: <http://example.org/model/>
+PREFIX performance: <http://example.org/performance/>
+
+SELECT ?modelName
+WHERE {
+  ?evaluation performance:hasDataset dataset:PennTreebankCharacterLevel ;
+              performance:hasMetric performance:NumberOfParams ;
+              performance:hasScore ?score ;
+              performance:forModel ?model .
+
+  ?model model:hasName ?modelName .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

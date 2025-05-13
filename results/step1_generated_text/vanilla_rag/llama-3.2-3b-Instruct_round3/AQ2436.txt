@@ -1,0 +1,16 @@
+Question:
+Can you provide links to code used in papers that benchmark the ImageNet + iNat on WS-DAN model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paper?code
+     WHERE {
+      ?paper a orkg:Paper.
+       orkg:has_implementation?impl.
+      ?impl orkg:has_benchmark "ImageNet + iNat on WS-DAN".
+      ?impl orkg:has_dataset "ImageNet".
+      ?impl orkg:has_dataset "iNat".
+      ?impl orkg:has_code?code.
+       FILTER (STRLIKE(STR(?code), "https://*") || STRLIKE(STR(?code), "github.com/*") || STRLIKE(STR(?code), "gitlab.com/*") || STRLIKE(STR(?code), "bitbucket.org/*"))
+     }<|eot_id|>

@@ -1,0 +1,26 @@
+Question:
+Can you provide links to code used in papers that benchmark the FG fine-grained gate model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?paper?implementation?benchmark
+     WHERE {
+     {
+    ?paper a orkg:Paper.
+    ?paper orkg:has_method orkg:Method.
+    ?paper orkg:has_evaluation orkg:Evaluation.
+    ?paper orkg:has_implementation orkg:Implementation.
+    ?paper orkg:has_benchmark orkg:HasBenchmark.
+    ?paper orkg:has_method?method.
+    ?method orkg:has_name "FG fine-grained gate model".
+    ?paper orkg:has_evaluation?evaluation.
+    ?evaluation orkg:has_type orkg:EvaluationType.
+    ?evaluation orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_type orkg:Benchmark.
+    ?benchmark orkg:has_link?link.
+     FILTER (STRLIKE(STR(?link), "https://github.com/.*") || STRLIKE(STR(?link), "https://github.com/.*")).
+     }
+     GROUP BY?paper
+     HAVING (COUNT(DISTINCT?benchmark) > 1 )
+     ORDER BY (COUNT(DISTINCT?benchmark) DESC)
+     LIMIT 10<|eot_id|>

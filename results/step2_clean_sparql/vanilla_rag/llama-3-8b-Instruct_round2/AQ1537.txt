@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model ?modelName
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK orkg:Penn_Treebank_Character_Level.
+  ?evaluation orkg:Number ?paramsScore.
+  ?model orkg:CSVW_Name ?modelName.
+}
+ORDER BY DESC(?paramsScore) 
+LIMIT 1
+```

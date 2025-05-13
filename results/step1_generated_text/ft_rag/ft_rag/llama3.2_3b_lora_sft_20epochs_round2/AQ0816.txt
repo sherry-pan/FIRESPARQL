@@ -1,0 +1,15 @@
+Question:
+List the metrics that are used to evaluate models on the Rotowire (Content Selection) benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R70692 orkgp:evaluate {
+         orkgp:P34?metric {
+           orkgp:HAS_VALUE?metric?value.
+           BIND(xsd:float(?value) AS?float_value)
+         }
+       }
+       FILTER(?float_value > 0)
+      ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "FG fine-grained gate"))
+  ?model orkgp:P37590 ?eval.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P37675 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(?code_lbl, "code"))
+}
+```

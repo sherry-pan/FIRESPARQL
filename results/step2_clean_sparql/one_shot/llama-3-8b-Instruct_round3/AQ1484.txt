@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkgc: <http://schema.orkg.org/collection/>
+PREFIX orkgp: <http://schema.orkg.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Natural Questions (long)")
+      ?result orkgp:P36 ?dataset;
+              orkgp:P35 ?model;
+              orkgp:P38 ?value;
+              orkgp:P37 ?metric.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

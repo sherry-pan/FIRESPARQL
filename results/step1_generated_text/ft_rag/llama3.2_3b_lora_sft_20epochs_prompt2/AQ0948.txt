@@ -1,0 +1,17 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Skiing dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?evaluatio
+     WHERE {
+       orkgr:R6908 orkgp:HAS_EVALUATION?evaluatio.
+       orkgr:R6908 orkgp:P70025?dataset.
+      ?dataset orkgp:HAS_DATASET?dataset_;
+      ?dataset_ orkgp:P70026?cont.
+       FILTER(REGEX(?cont, "Atari 2600 Skiing"))
+      ?cont orkgp:P70027?evaluatio
+       FILTER(?evaluatio = "micro-F1"^^xsd:string
+               ||?evaluatio = "macro-F1"^^xsd:string
+               ||?evaluatio = "Accuracy"^^xsd:string
+               ||?evaluatio = "NDCG@10"^^xsd:string)
+     }<|eot_id|>

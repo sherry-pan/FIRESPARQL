@@ -1,0 +1,24 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Seaquest dataset in terms of Score metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Atari 2600 Seaquest")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION     ?eval.
+       ?eval           orkgp:HAS_METRIC        ?metric;
+                        orkgp:HAS_VALUE         ?value.
+       ?metric         orkgp:HAS_LABEL         ?metric_lbl.
+        BIND(
+           IF(?metric_lbl = "Score",?value, NULL)
+           AS?score
+         )           as?score_lbl
+       ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                       orkgp:HAS_MODEL         ?model.
+       ?model        rdfs:label              ?model_lbl.
+        ORDER BY DESC(?score_lbl)
+        LIMIT 1
+     }<|eot_id|>

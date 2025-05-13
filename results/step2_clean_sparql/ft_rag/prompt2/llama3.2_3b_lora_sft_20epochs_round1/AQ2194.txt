@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "Adaptive Input Large"))
+  ?paper orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl orkgp:HAS_CODE ?code.
+}
+```

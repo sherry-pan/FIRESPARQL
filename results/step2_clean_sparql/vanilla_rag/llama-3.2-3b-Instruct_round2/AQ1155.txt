@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX w3c: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Dataset.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:Metric ?metric.
+  ?benchmark orkg:Score ?score.
+  FILTER (?metric = "Natural Questions (long)")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

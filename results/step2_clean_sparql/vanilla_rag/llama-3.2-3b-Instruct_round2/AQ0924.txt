@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+    ?metric orkg:hasEvaluation ?e.
+    ?e orkg:hasTrainingSet "Atari 2600 Double Dunk".
+    ?metric orkg:label ?label.
+    FILTER (CONTAINS(STR(?label), "F1") || CONTAINS(STR(?label), "Accuracy") || CONTAINS(STR(?label), "Recall") || CONTAINS(STR(?label), "Macro"))
+}
+```

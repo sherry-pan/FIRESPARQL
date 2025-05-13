@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model (MAX(?f1) AS ?bestF1) 
+WHERE {
+  ?model orkg:hasModelPerformance ?performance.
+  ?performance orkg:hasMetric ?metric.
+  ?metric orkg:hasMetricType orkg:Metric_F1.
+  ?metric rdfs:label "F1".
+  ?performance orkg:datasetUsed "BC5CDR-disease".
+  ?performance orkg:metricValue ?f1.
+} GROUP BY ?model
+ORDER BY DESC(?bestF1)
+LIMIT 1
+```

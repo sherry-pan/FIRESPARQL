@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?sequenceError
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasResult ?result.
+  ?result orkg:sequenceError ?sequenceError.
+  ?evaluation orkg:hasTrainingSet ?trainingSet.
+  ?trainingSet rdfs:label "FSNS - Test".
+  ?evaluation orkg:validationSet ?validationSet.
+  ?validationSet rdfs:label "FSNS - Test".
+  FILTER (NOT EXISTS {
+    ?model orkg:hasEvaluation ?otherEvaluation.
+    ?otherEvaluation orkg:hasResult ?otherResult.
+    ?otherResult orkg:sequenceError ?otherSequenceError.
+    FILTER (?otherSequenceError < ?sequenceError)
+  })
+}
+```

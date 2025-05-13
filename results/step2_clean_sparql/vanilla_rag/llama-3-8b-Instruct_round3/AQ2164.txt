@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?codeLink
+WHERE {
+ ?paper a orkg:Paper ;
+        orkg:HAS_METHOD orkg:AWDLSTM ;
+        orkg:HAS_BENCHMARK ?benchmark ;
+        orkg:HAS_IMPLEMENTATION ?implementation.
+ ?implementation orkg:HAS_CODE ?codeLink.
+ FILTER (?benchmark != "" && ?codeLink != "")
+}
+```

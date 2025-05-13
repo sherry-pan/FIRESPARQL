@@ -1,0 +1,25 @@
+Question:
+What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words to classfy user feedback as feature request? 
+
+Generated SPARQL:
+ SELECT?precision?recall?f1
+    WHERE {
+      orkgr:R69478 orkgp:compareContribution?contrib.
+     ?contrib orkgp:P71093?eval.
+     ?eval rdfs:label?eval_labels;
+            orkgp:P71070?metric_values.
+     ?metric_values orkgp:P71075?precision;
+                    orkgp:P71076?recall;
+                    orkgp:P71077?f1.
+     ?contrib orkgp:P97142?algorithm;
+              orkgp:P71064?feature;
+              orkgp:P71094?classification.
+     ?algorithm rdfs:label?algorithm_labels;
+                orkgp:P97143?method.
+     ?method rdfs:label?method_labels;
+             orkgp:P97144?method_value.
+     ?feature rdfs:label?feature_labels.
+     ?classification rdfs:label?classification_labels.
+      FILTER(REGEX(STR(?algorithm_labels), "naive bayes") &&
+             REGEX(STR(?method_value), "bag of words"))
+    }<|eot_id|>

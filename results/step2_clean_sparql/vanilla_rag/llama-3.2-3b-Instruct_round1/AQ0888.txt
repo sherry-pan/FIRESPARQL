@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+SELECT ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmarkDataset ?dataset.
+    ?dataset orkg:hasEvaluationMetric ?metric.
+    ?metric rdfs:label ?label.
+    FILTER (str(?label) = "Cheetah" || str(?label) = "DMControl500k")
+}
+```

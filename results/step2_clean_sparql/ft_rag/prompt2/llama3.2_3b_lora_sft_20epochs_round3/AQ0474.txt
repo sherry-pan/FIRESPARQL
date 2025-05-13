@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?paper ?title ?paper_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "RotoWire (Relation Generation)")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?eval orkgp:HAS_PAPER ?paper.
+    ?paper orkgp:HAS_TITLE ?title.
+  }
+  OPTIONAL {
+    ?paper rdfs:label ?paper_lbl.
+  }
+}
+```

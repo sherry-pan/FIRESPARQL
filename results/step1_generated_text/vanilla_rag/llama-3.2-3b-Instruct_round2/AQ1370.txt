@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the Nottingham dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?benchmarkScore?metric
+     WHERE {
+      ?benchmark a orkg:Benchmark.
+      ?benchmark orkg:hasBenchmark?benchmarkScore.
+      ?benchmark orkg:hasDataset "Nottingham".
+      ?benchmark orkg:hasMethod?metric.
+      ?benchmark orkg:hasEvaluation?evaluation.
+      ?benchmark orkg:hasEvaluation?evaluation2.
+       FILTER (str(?metric) = "top").
+      ?benchmark orkg:hasEvaluation?evaluation.
+      ?evaluation orkg:hasMetric?metric.
+       FILTER (str(?benchmarkScore) = "top").
+     }<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX ork: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+  ?model ork:has_method ?method.
+  ?method ork:has_dataset ?dataset.
+  ?dataset ork:has_benchmark ?benchmark.
+  ?benchmark ork:has_ranking ?ranking.
+  ?benchmark ork:has_score ?score.
+  FILTER (?benchmark/orkg:benchmarkName = "Habitat 2020 Object Nav test-std")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

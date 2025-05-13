@@ -1,0 +1,21 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciERC dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_title
+     WHERE {
+      ?paper a orkgc:Paper.
+      ?paper orkgp:P31 [
+         rdfs:label?paper_title.
+       ];
+        orkgp:P5002?benchmark.
+      ?benchmark orkgp:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_title.
+       FILTER(REGEX(?dataset_title, "SciERC"))
+      ?benchmark orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P31 [
+         rdfs:label?eval_title.
+       ]
+     }
+     ORDER BY ASC(?paper_title)
+     LIMIT 10<|eot_id|>

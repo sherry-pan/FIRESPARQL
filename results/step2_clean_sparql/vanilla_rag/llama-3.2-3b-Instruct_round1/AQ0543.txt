@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:has_dataset ?dataset.
+    ?dataset orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_method ?method.
+    ?benchmark orkg:has_implementation ?benchmarkImplementation.
+    ?benchmark orkg:has_title ?title.
+    ?benchmark orkg:has_id ?id.
+    FILTER (CONTAINS(LCASE(?title), "cart pole (openai gym)") OR CONTAINS(LCASE(?id), "cart pole (openai gym)"))
+}
+```

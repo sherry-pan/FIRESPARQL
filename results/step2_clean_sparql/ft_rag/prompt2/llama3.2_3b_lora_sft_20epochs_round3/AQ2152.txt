@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?contrib orkgp:P32 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(STR(?code_lbl), "Past Decode Reg. + AWD-LSTM-MoS + dyn. eval."))
+  ?paper orkgp:P31 ?contrib.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P31 ?eval.
+  ?eval orkgp:P5043 ?cont.
+  ?cont orkgp:P5042 ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(STR(?method_lbl), "Past Decode Reg. + AWD-LSTM-MoS"))
+}
+```

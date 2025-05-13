@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?evaluation a :Evaluation ;
+              :onDataset :CIFAR-100 ;
+              :metric :FLOPS ;
+              :achievedBy ?model ;
+              :result ?result .
+  
+  ?comparison a :Evaluation ;
+              :onDataset :CIFAR-100 ;
+              :metric :FLOPS ;
+              :result ?otherResult .
+  
+  FILTER(?result >= ?otherResult)
+}
+LIMIT 1
+```

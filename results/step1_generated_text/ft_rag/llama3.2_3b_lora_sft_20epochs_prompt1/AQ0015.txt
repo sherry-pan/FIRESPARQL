@@ -1,0 +1,16 @@
+Question:
+What models are being evaluated on the Softcite dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Softcite")
+               && has_evaluation:has_evaluation          ?eval
+               &&?evalHAS_DATASET              has_dataset      ?dataset
+               &&?datasetHAS_APPROACH         has_approach     ?approach
+               &&?approachHAS_EVALUATION      has_evaluation    ?eval
+               &&?evalHAS_MODEL            has_model        ?model)
+      ?model    rdfs:label              ?model_lbl.
+     }<|eot_id|>

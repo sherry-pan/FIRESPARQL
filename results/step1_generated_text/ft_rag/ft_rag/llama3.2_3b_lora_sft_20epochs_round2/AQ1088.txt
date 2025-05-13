@@ -1,0 +1,38 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the ACE 2005 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R6908 orkgp:apply {
+         orkgp:P71075?eval.
+         OPTIONAL {
+          ?eval?metric?value.
+           BIND(xsd:float(?value) AS?value)
+         }
+       }
+       OPTIONAL {
+        ?eval?metric?value.
+         BIND(xsd:float(?value) AS?value)
+       }
+       BIND(
+         IF(
+          ?eval = "hasEvaluation"^^xsd:string,
+           CONCAT(
+            ?metric_lbl, " : ",
+             IF(
+              ?metric = "macro-F1"^^xsd:string,
+              ?value,
+               IF(
+                ?metric = "micro-F1"^^xsd:string,
+                ?value,
+                ?metric_lbl
+               )
+             )
+           ),
+          ?metric_lbl
+         ) AS?eval_lbl
+       )
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

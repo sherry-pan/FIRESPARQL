@@ -1,0 +1,19 @@
+Question:
+Can you provide links to code used in papers that benchmark the MEMEN (single model) model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+
+     SELECT?paper?paperCode 
+     WHERE {
+      ?paper orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg:HAS_IMPLEMENTATION?implementation.
+      ?benchmark orkg:HAS_METHOD "MEMEN".
+      ?implementation orkg:HAS_CODE?code.
+      ?paper orkg:HAS_ID?paperId.
+       FILTER (STRLIKE(STR(?paperId), 'https://...') || STRLIKE(STR(?paperId), 'https://...'))
+       FILTER (STR(?benchmark) = 'benchmark MEMEN')
+     }
+     GROUP BY?paper
+     HAVING (COUNT(DISTINCT?paperCode) > 0)
+     ORDER BY DESC<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?value
+WHERE {
+  orkgr:R155222 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P41379 ?value.
+  ?value orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P41378 ?location.
+  ?location rdfs:label ?name.
+  FILTER(REGEX(?name, "Elorza"))
+  ?value orkgp:HAS_VALUE ?quantity.
+  BIND(xsd:float(?quantity) AS ?value)
+}
+```

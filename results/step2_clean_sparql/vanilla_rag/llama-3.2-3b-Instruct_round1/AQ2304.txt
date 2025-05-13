@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasImplementation ?implementation.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset orkg:hasCode ?code.
+  FILTER (strcontains(iri(?benchmark), "Rational DQN Average") || strcontains(iri(?evaluation), "Rational DQN Average") || strcontains(iri(?dataset), "Rational DQN Average"))
+}
+```

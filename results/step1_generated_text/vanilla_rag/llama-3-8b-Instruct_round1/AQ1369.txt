@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset IMDb-B?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET orkg:IMDb-B ;
+    orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METHOD?method ;
+    csvw:CSVW_Value?value.
+ ?method orkg:HAS_PROPERTY csvw:CSVW_Number.
+ ?evaluation orkg:HAS_PROPERTY?metric.
+  FILTER (?metric!= csvw:CSVW_Number)
+}<|eot_id|>

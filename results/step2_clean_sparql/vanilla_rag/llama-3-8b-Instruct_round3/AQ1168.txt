@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?metricValue
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasEvaluation ?evaluation ;
+    orkg:hasDataset "Supervised:".
+ ?evaluation orkg:hasMetric ?metric ;
+    orkg:hasMetricValue ?metricValue.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

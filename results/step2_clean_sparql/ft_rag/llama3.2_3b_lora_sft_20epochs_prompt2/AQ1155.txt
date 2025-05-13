@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?score
+WHERE {
+  ?benchmark orkgp:P97152 ?metric.
+  ?eval orkgp:P71080 ?score.
+  ?dataset orkgp:HAS_DATASET ?benchmark;
+           orkgp:P71066 ?dataset_type.
+  FILTER(?dataset_type = "Natural Questions (long)"^^xsd:string)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric ?score
+WHERE {
+  ?evaluation a orkg:BenchmarkEvaluation.
+  ?evaluation orkg:hasEvaluation ?evaluationResult.
+  ?evaluationResult orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasMetric ?metric.
+  ?benchmark orkg:hasScore ?score.
+  ?benchmark orkg:dataset ?dataset.
+  ?dataset orkg:datasetName "WMT2014 French-English".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

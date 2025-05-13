@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://schema.orkg.org/cargo#>
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Atari 2600 Centipede".
+  ?benchmark orkgc:benchmarksDataset ?dataset;
+             orkgc:benchmarkedBy ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

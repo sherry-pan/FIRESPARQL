@@ -1,0 +1,14 @@
+Question:
+Which model has achieved the highest MACs score on the ImageNet benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?macsScore
+     WHERE {
+      ?model orkg:HAS_METHOD?method.
+      ?method orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg:HAS_DATASET "ImageNet".
+      ?benchmark orkg:HAS_EVALUATION?evaluation.
+      ?evaluation orkg:HAS_MACRO?macsScore.
+       FILTER (?macsScore IS NUMERIC)
+     }<|eot_id|>

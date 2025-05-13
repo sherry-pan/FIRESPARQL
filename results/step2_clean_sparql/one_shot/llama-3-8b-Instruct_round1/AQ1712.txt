@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Score".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "Atari 2600 Enduro".
+      ?benchmark a orkgc:Benchmark;
+                 orkgc:evaluatesOn ?dataset;
+                 orkgc:usesMetric ?metric;
+                 orkgc:hasScore ?score;
+                 orkgc:hasModel ?model.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?score)
+    LIMIT 1
+  }
+}
+```

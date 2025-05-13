@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Natural Questions \\(long\\)"))
+  
+  ?dataset orkgp:P7042 ?eval.
+  ?eval orkgp:has_metric ?metric.
+  ?metric orkgp:micro-F1 ?f1.
+  ?f1 orkgp:value ?value.
+
+  FILTER(?value > 0.9)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

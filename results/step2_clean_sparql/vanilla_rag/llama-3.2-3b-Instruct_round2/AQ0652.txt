@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "http://example.org/patient_data/PubMed_20kRCT".
+  ?paper orkg:titles ?title.
+  ?paper orkg:Number ?id.
+  FILTER (REGEX(str(?id), "^PUBMED-") && REGEX(str(?id), "000000"))
+}
+LIMIT 10
+```

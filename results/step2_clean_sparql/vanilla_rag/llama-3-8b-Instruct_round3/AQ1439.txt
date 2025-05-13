@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?bitsPerDim
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/dataset/ImageNet_64x64>.
+ ?benchmark orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METRIC orkg:BitsPerDim.
+ ?evaluation orkg:HAS_VALUE ?bitsPerDim.
+}
+ORDER BY ASC(?bitsPerDim)
+LIMIT 1
+```

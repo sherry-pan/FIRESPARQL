@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code 
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "BiT-S \\(ResNet\\)")).
+  ?method orkgp:P2006 ?implementation.
+  ?implementation rdfs:label ?implementation_lbl.
+  FILTER(REGEX(?implementation_lbl, "code")).
+  ?implementation orkgp:P407 ?code.
+}
+```

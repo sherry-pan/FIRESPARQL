@@ -1,0 +1,18 @@
+Question:
+Where did the study with maximal geographic scale take place?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?city
+WHERE {
+ ?study a orkg:Study.
+ ?study orkg:P97144?city.
+ ?study orkg:P97145?maxScale.
+  FILTER (?maxScale = max(?scales).
+ ?scales xsd:integer?scale.
+ ?study orkg:P97145?scales.
+  ORDER BY DESC(?scale)
+  LIMIT 1
+}<|eot_id|>

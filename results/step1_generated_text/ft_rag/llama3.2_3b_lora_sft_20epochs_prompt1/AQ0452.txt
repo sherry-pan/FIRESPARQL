@@ -1,0 +1,18 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?
+
+Generated SPARQL:
+ SELECT?titles?number
+     WHERE {
+        ?papers orkgp:P31?cont.
+        ?cont orkgp:P34?papers.
+        ?papers orkgp:HAS_BENCHMARK?benchmark.
+         FILTER(REGEX(?benchmark, "PubMedQA"))
+        ?papers orkgp:P32?number.
+         BIND(xsd:int(?number) AS?number)
+        ?papers orkgp:HAS_BENCHMARK?benchmark.
+        ?cont orkgp:HAS_BENCHMARK?benchmark.
+         BIND(xsd:int(?number) AS?number)
+        ?papers orkgp:P33?titles.
+         BIND(xsd:string(?titles) AS?titles)
+     }<|eot_id|>

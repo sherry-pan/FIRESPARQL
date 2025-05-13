@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_title.
+  OPTIONAL {
+    ?paper orkgp:P31 ?cont.
+    ?cont orkgp:P32 ?dataset.
+  }
+  ?benchmark orkgp:P5046 ?paper.
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+}
+```

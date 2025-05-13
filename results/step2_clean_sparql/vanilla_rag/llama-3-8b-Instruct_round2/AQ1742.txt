@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?name ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset csvw:datasetName "Sequential CIFAR-10".
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_VALUE ?accuracy.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:METRIC_NAME "Unpermuted Accuracy".
+  ?model orkg:CSVW_Name ?name.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+Question:
+What models are being evaluated on the FTD dataset dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "FTD dataset")
+               && has_evaluation:HAS_DATASET?dataset      ?dataset_lbl)
+      ?benchmark      orkgp:HAS_DATASET      ?dataset      ?dataset;
+                      orkgp:HAS_EVALUATION     ?eval          ?eval.
+      ?eval           orkgp:HAS_MODEL         ?model     .  
+      ?model        rdfs:label              ?model_lbl.
+     }<|eot_id|>

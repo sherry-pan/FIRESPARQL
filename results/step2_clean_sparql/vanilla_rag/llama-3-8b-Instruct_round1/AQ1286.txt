@@ -1,0 +1,16 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:has_dataset <http://orkg.org/orkg/dataset/Atari_2600_Alien> ;
+             orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_metric ?metric ;
+              orkg:has_score ?score.
+  FILTER(?score = (SELECT MAX(?s) WHERE {
+    ?b orkg:has_dataset <http://orkg.org/orkg/dataset/Atari_2600_Alien> ;
+       orkg:has_evaluation ?e.
+    ?e orkg:has_score ?s.
+  }))
+}

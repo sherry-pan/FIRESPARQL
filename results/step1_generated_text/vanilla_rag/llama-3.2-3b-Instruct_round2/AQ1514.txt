@@ -1,0 +1,13 @@
+Question:
+What is the best performing model benchmarking the ANLI test dataset in terms of A3 metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?model?metric
+     WHERE {
+    ?model orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_DATASET "ANLI test dataset"@en.
+    ?benchmark orkg:HAS_EVALUATION?metric.
+     FILTER (STRLIKE(?metric, "A3") && IS_NUMBER(?metric))
+     }<|eot_id|>

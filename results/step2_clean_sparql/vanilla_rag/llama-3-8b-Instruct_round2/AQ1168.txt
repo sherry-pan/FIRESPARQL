@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:METRIC_VALUE ?value.
+  ?benchmark orkg:HAS_DATASET "Supervised:".
+  FILTER NOT EXISTS {
+    ?otherBenchmark orkg:HAS_BENCHMARK ?otherEvaluation.
+    ?otherEvaluation orkg:HAS_METRIC ?metric.
+    ?otherEvaluation orkg:METRIC_VALUE ?otherValue.
+    FILTER (?otherValue > ?value)
+  }
+}
+```

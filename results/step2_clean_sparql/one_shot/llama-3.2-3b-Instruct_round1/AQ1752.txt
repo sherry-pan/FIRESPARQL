@@ -1,0 +1,34 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl 
+WHERE {
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  
+  FILTER (str(?dataset_lbl) = "Atari 2600 Montezuma's Revenge")
+
+  ?eval orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SCORE ?score.
+  
+  ?model rdfs:label ?model_lbl.
+  
+  ?score orkgp:HAS_METRIC ?metric;
+         orkgp:HAS_VALUE ?value.
+
+  ?metric rdfs:label ?metric_lbl.
+  
+  FILTER (str(?metric_lbl) = "Score")
+
+  FILTER NOT EXISTS {
+    ?other_eval orkgp:HAS_MODEL ?other_model;
+                orkgp:HAS_SCORE ?other_score.
+    
+    ?other_score orkgp:HAS_METRIC ?metric;
+                 orkgp:HAS_VALUE ?other_value.
+
+    FILTER(?other_value > ?value)    
+  }
+}
+```

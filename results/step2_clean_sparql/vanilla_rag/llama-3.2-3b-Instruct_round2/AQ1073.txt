@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?benchmark orkg:hasScore ?score.
+  FILTER (bif:contains(str(?metric), "Pubmed") AND bif:contains(str(?score), "best"))
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset <http://orkg.org/orkg/resource/Dataset/Atari_2600_Enduro> ;
+             orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasValue ?value ;
+             orkg:hasMetric ?metric.
+  FILTER (?metric != "time" && ?metric != "memory")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

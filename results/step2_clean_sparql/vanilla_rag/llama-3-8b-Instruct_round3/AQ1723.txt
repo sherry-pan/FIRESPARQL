@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark orkg:Benchmark_2600_Tennis.
+  ?evaluation orkg:score ?scoreMetric.
+  FILTER NOT EXISTS {
+    ?model orkg:hasEvaluation ?otherEvaluation.
+    ?otherEvaluation orkg:hasBenchmark orkg:Benchmark_2600_Tennis;
+                     orkg:score ?otherScore.
+    FILTER(?otherScore > ?scoreMetric)
+  }
+}
+ORDER BY DESC(?scoreMetric) 
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?author
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?paper rdfs:label ?title.
+  ?paper orkgp:P27 ?author.
+  ?paper orkgp:P35 ?number_of_articles.
+  ?number_of_articles orkgp:HAS_VALUE ?value.
+  FILTER CONTAINS(LCASE(?title), "coronavirus")
+}
+ORDER BY DESC(xsd:integer(?value))
+LIMIT 1
+```

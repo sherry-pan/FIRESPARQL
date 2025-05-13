@@ -1,0 +1,24 @@
+Question:
+Where can I find code references in papers that have used the AxCell model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgr:R110932 {
+         rdfs:label       a            orkgr:Paper;
+                   has_dataset       a            orkgr:Dataset;
+                             rdfs:label      ?dataset_label
+                 }
+         orkgr:R110932        orkgr:HAS_BENCHMARK       orkgr:HAS_BENCHMARK_lbl;
+                           orkgr:P32            orkgr:HAS_EVALUATION.
+         orkgr:HAS_BENCHMARK_lbl       orkgr:P31            orkgr:HAS_METHOD;
+                           rdfs:label      ?method_label.
+         orkgr:HAS_METHOD           orkgr:HAS_IMPLEMENTATION   orkgr:HAS_IMPLEMENTATION_lbl;
+                           orkgr:P32            orkgr:HAS_CODE.
+         orkgr:HAS_IMPLEMENTATION_lbl       orkgr:HAS_CODE            orkgr:HAS_SOURCE_CODE;
+                           rdfs:label      ?code_label.
+        ?code            orkgr:HAS_SOURCE_CODE      ?source_code
+       }
+       FILTER(REGEX(STR(?dataset_label), "AxCell"))
+      ?source_code       orkgr:HAS_BENCHMARK       orkgr:HAS_BENCHMARK_lbl.
+     }<|eot_id|>

@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgr:R155561361 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P32 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation rdfs:label ?metric_lbl.
+  ?contrib orkgp:P31 ?dataset.
+  ?dataset orkgp:HAS_DATASET ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "DRI Corpus"))
+}
+```

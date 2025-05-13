@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?metric
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationMetrics.
+  ?evaluationMetrics orkg:HAS_METRIC ?metric.
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_METHOD ?method.
+  FILTER(?method = "Atari 2600 HERO")
+}
+ORDER BY ?metric
+```

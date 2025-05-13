@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_implementation ?implementation.
+  FILTER (regex(str(?implementation), "SRU++")).
+  ?paper orkg:has_code ?code.
+}
+```

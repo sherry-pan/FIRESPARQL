@@ -1,0 +1,16 @@
+Question:
+What are the models that have been benchmarked on the MNIST dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT?model
+WHERE {
+ ?model orkg:HAS_METHOD?method.
+ ?method orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/object/MNIST>.
+ ?method orkg:HAS_APPROACH?approach.
+ ?approach orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_EVALUATION_TYPE?evaluation_type.
+  FILTER (?evaluation_type = "benchmarking")
+}<|eot_id|>

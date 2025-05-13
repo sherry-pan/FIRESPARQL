@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71080: <http://orkg.org/orkg/predicate/P71080>
+
+SELECT ?model ?modelLabel ?f1Score
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation p71080:micro-F1 ?f1Score.
+  ?model orkg:HAS_DATASET ?dataset.
+  FILTER(?dataset = "BUCC Chinese-to-English benchmark dataset").
+  ?model rdfs:label ?modelLabel.
+  FILTER(LANG(?modelLabel) = "en").
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

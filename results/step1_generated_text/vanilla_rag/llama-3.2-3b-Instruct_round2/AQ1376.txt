@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest F1 score score on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model (SERVICE <http://orkg.org/orkg/predicate/uri2iri>) 
+     WHERE {
+     {
+    ?model orkg:hasEvaluation?e.
+    ?e orkg:hasDataset?dataset.
+    ?dataset orkg:hasBenchmark "Penn Treebank".
+    ?e orkg:hasMetric "micro-F1".
+     FILTER (?e orkg:hasEvaluation?model).
+     FILTER (?dataset orkg:hasTrainingSet?trainingSet).
+    ?trainingSet orkg:hasModel?model.
+     }
+     ORDER BY DESC(?e orkg:microF1)
+     LIMIT 1<|eot_id|>

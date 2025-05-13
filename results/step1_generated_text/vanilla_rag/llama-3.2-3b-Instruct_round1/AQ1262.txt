@@ -1,0 +1,24 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset AESLC?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric?value
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:metric?metric.
+    ?evaluation orkg:value?value.
+    ?benchmark orkg:hasDataset?dataset.
+     FILTER (?dataset orkg:label = "AESLC").
+    ?benchmark orkg:method?method.
+    ?method orkg:appliedTo?appliedTo.
+    ?appliedTo a orkg:Method.
+    ?appliedTo rdfs:label?methodLabel.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:metric?metric.
+    ?benchmark orkg:value?value.
+     ORDER BY DESC(?value)
+     }
+    <|eot_id|>

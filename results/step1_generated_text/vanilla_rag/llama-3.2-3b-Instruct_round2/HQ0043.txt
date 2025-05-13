@@ -1,0 +1,17 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ SELECT?v 
+     WHERE {
+      ?v a ora:Variable.
+       SERVICE orkg.sparql {
+         SELECT?v (COUNT(?v) AS?count) 
+         GROUP BY?v 
+         HAVING (COUNT(?v) = (SELECT MAX(count) FROM {
+          ?v ora:variableType ora:isSubsetOf ora:AtmosphereModel.
+          ?v ora:variableType ora:isSubsetOf ora:AtmosphereModel.
+          ?v ora:variableType ora:isSubsetOf ora:AtmosphereModel.
+         })) 
+       }
+     }<|eot_id|>

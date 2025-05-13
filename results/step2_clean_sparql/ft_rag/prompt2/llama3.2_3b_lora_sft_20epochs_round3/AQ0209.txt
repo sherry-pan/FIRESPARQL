@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "ClueWeb09-B"))
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  ?evalu orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

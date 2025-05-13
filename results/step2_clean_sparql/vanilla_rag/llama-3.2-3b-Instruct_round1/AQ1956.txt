@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?paper_id ?code_reference
+WHERE {
+    ?paper orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_implementation ?implementation.
+    ?benchmark orkg:has_method ?method.
+    ?paper orkg:has_method ?method.
+    ?implementation orkg:has_code_reference ?code_reference.
+    FILTER (str(?method) = "CATTS-XSUM" AND str(?implementation) = "benchmark")
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER(CONTAINS(?model_lbl, "VTAB-1k"))
+  ?benchmark orkgp:HAS_MODEL ?model;
+             orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?model orkgp:P8042 ?params.
+  ?params orkgp:P8045 ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

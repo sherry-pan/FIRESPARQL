@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  ?model ?property_iri_1 orkgp:HAS_VALUE ?value_1.
+  ?property_iri_1 rdfs:label ?property_lbl_1.
+  FILTER(REGEX(?property_lbl_1, "Number of params"))
+  BIND(xsd:float(?value_1) AS ?number_of_params)
+  ?model ?benchmark_1 orkgp:P31 ?cont_1.
+  ?cont_1 rdfs:label ?cont_lbl_1.
+  FILTER(REGEX(?cont_lbl_1, "Penn Treebank (Character Level)"))
+}
+ORDER BY DESC(?number_of_params)
+LIMIT 1
+```

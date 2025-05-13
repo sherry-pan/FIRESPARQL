@@ -1,0 +1,85 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+      ?study       a            orkgc:Study;
+                  rdfs:label      ?study_label.
+        FILTER(REGEX(?study_label, "study"))
+       ?location       a            orkgc:Location;
+                        rdfs:label      ?location_label.
+        {
+          SELECT?location
+          WHERE {
+           ?location       a            orkgc:Location;
+                            rdfs:label      ?location_label.
+           ?location       orkgp:HAS_LOCATION      ?location;
+                             orkgp:P5049           ?study.
+           ?study         orkgp:P5047           ?location.
+            FILTER(REGEX(?location_label, "city"))
+          }
+          ORDER BY DESC(COUNT(?location))
+          LIMIT 1
+        }
+        UNION
+        {
+          SELECT?location
+          WHERE {
+           ?location       a            orkgc:Location;
+                            rdfs:label      ?location_label.
+           ?location       orkgc:P5048           ?location;
+                             rdfs:label      ?location_label.
+           ?location       orkgp:P5049           ?study.
+           ?study         orkgp:P5047           ?location.
+            FILTER(REGEX(?location_label, "country"))
+          }
+          ORDER BY DESC(COUNT(?location))
+          LIMIT 1
+        }
+        UNION
+        {
+          SELECT?location
+          WHERE {
+           ?location       a            orkgc:Location;
+                            rdfs:label      ?location_label.
+           ?location       orkgp:P5048           ?location;
+                             rdfs:label      ?location_label.
+           ?location       orkgp:P5049           ?study.
+           ?study         orkgp:P5047           ?location.
+            FILTER(REGEX(?location_label, "geographical region"))
+          }
+          ORDER BY DESC(COUNT(?location))
+          LIMIT 1
+        }
+        UNION
+        {
+          SELECT?location
+          WHERE {
+           ?location       a            orkgc:Location;
+                            rdfs:label      ?location_label.
+           ?location       orkgp:P5048           ?location;
+                             rdfs:label      ?location_label.
+           ?location       orkgp:P5049           ?study.
+           ?study         orkgp:P5047           ?location.
+            FILTER(REGEX(?location_label, "location"))
+          }
+          ORDER BY DESC(COUNT(?location))
+          LIMIT 1
+        }
+        UNION
+        {
+          SELECT?location
+          WHERE {
+           ?location       a            orkgc:Location;
+                            rdfs:label      ?location_label.
+           ?location       orkgp:P5048           ?location;
+                             rdfs:label      ?location_label.
+           ?location       orkgp:P5049           ?study.
+           ?study         orkgp:P5047           ?location.
+            FILTER(REGEX(?location_label, "study"))
+          }
+          ORDER BY DESC(COUNT(?location))
+          LIMIT 1
+        }
+      }<|eot_id|>

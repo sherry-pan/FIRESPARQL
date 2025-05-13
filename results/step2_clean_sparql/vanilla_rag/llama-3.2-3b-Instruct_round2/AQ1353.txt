@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric ?value 
+WHERE {
+  ?s orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:CSVW_Value ?value.
+  ?benchmark orkg:HAS_METHOD ?method.
+  ?benchmark orkg:HAS_DATASET ?metric.
+  FILTER(?metric = "Birdsnap")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

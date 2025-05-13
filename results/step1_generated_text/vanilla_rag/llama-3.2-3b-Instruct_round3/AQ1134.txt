@@ -1,0 +1,27 @@
+Question:
+What is the top benchmark score and its metric on the Hendrycks Test dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT?benchmark?metric
+WHERE {
+ ?benchmark a orkg:benchmark.
+  FILTER (bc:has_dataset / orkg:has_dataset "Hendrycks Test".
+          AND bc:has_benchmark?benchmark.
+          AND?benchmark rdfs:label?label.
+          FILTER (STR(?label) = "Top Benchmark Score".
+                  OR STR(?label) = "Top Score".
+                  OR STR(?label) = "Top Metric".
+                  OR STR(?label) = "Top Metric Score".
+                  OR STR(?label) = "Top Score Metric".
+                  OR STR(?label) = "Top Metric").
+          AND?benchmark rdfs:label?metric.
+          AND?benchmark rdfs:label?metric.
+          AND (bc:has_metric?metric.
+               OR?benchmark rdfs:label?metric.
+               OR?benchmark rdfs:label?metric.
+               OR?benchmark rdfs:label?metric.
+               OR?benchmark rdfs:label?metric))
+}
+```<|eot_id|>

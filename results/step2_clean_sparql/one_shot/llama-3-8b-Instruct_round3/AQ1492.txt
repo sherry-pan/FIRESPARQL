@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/concept/>
+PREFIX orkgp: <http://www.semanticweb.org/orkg/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Precision")
+  ?dataset a orkgc:Dataset;
+           rdfs:label "RotoWire (Relation Generation)".
+  ?result orkgp:hasMetric ?metric;
+          orkgp:hasResultValue ?value;
+          orkgp:hasModel ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

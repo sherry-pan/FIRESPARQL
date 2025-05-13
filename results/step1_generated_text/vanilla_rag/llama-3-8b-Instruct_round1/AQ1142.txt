@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the CoQA dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX coqa: <http://example.org/coqa/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_BENCHMARK?evaluation ;
+    orkg:HAS_EVALUATION?evaluation ;
+    orkg:HAS_DATASET coqa:CoQA ;
+   ?evaluation orkg:METRIC?metric ;
+   ?evaluation orkg:VALUE?value.
+  FILTER (?metric = "Highest Value" )
+  FILTER (?value = MAX(?value) )
+}<|eot_id|>

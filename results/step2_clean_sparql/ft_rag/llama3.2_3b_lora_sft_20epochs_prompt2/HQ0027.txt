@@ -1,0 +1,11 @@
+```sparql
+SELECT ?country WHERE {
+  ?country a orkgc:Country;
+           rdfs:label ?country_label.
+  ?study orkgp:P23109 ?prevalence.
+  ?prevalence orkgp:P23112 ?value.
+  BIND(xsd:float(?value) AS ?p_value)
+}
+ORDER BY DESC(?p_value)
+LIMIT 1
+```

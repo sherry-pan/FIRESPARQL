@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark <http://orkg.org/orkg/benchmark/RotoWire_Content_Ordering> ;
+    orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER (str(?metric) IN ("Recall", "micro-F1", "Accuracy", "macro-F1"))
+}
+```

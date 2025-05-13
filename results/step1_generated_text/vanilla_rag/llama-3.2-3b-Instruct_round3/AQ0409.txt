@@ -1,0 +1,15 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WLPC dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+
+     SELECT?title?id
+     WHERE {
+      ?paper orkg:has_dataset <http://orkg.org/orkg/dataset/WLPC>.
+      ?paper orkg:has_benchmark?benchmark.
+      ?benchmark orkg:has_evaluation?evaluation.
+      ?paper orkg:CSVW_Titles?title.
+      ?paper orkg:CSVW_Number?id.
+       FILTER (?benchmark orkg:has_dataset <http://orkg.org/orkg/dataset/WLPC> OR?benchmark orkg:has_dataset <http://orkg.org/orkg/dataset/WLPC>)
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?benchmark ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:dataset <http://orkg.org/orkg/dataset/Words_in_Context>.
+  ?evaluation orkg:metric ?metric.
+  ?evaluation orkg:score ?score.
+  FILTER (?metric IN (orkg:Recall, orkg:micro-F1, orkg:Accuracy, orkg:macro-F1)).
+  FILTER (?benchmark orkg:reporting_level "top").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

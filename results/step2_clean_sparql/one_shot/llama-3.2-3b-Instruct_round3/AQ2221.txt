@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "AlexNet")
+  
+  ?model orkgp:HAS_MODEL ?model2.
+  FILTER (str(?model2) = "MultiGrasp")
+
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
+}
+```

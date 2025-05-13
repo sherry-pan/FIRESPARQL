@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?metricLabel ?evaluation
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationMetric.
+  ?evaluationMetric orkg:HAS_BENCHMARK <http://orkg.org/orkg/instance/ObjectNet>.
+  ?evaluationMetric orkg:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER(?metricLabel IN ("Accuracy", "Recall", "macro-F1", "micro-F1"))
+}
+ORDER BY ?metricLabel
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/dataset/AAPD>.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?metric.
+  ?evaluation csvw:CSVW_Value ?score.
+  FILTER (?metric != "method")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

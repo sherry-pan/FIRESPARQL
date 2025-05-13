@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "Number of params".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "Penn Treebank (Character Level)".
+      ?benchmark orkgc:hasMetricResult ?metricResult;
+                 orkgc:hasModel ?model.
+      ?metricResult orkgc:hasValue ?value;
+                    orkgc:forMetric ?metric.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

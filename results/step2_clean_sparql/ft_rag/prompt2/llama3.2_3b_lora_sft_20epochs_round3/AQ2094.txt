@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?benchmark.
+  ?benchmark orkgp:HAS_BENCHMARK ?has_benchmark.
+  FILTER(REGEX(?has_benchmark, "OTF spelling+lemma"))
+  ?has_benchmark orkgp:P31 ?implementation.
+  ?implementation orkgp:HAS_IMPLEMENTATION ?implementation_has_code.
+  ?implementation_has_code orkgp:P31 ?code.
+  ?implementation orkgp:HAS_METHOD ?method.
+  FILTER(REGEX(?method, "OTF spelling+lemma"))
+}
+```

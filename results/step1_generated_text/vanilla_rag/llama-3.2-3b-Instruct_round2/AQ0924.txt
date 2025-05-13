@@ -1,0 +1,13 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Double Dunk dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric 
+     WHERE {
+    ?metric orkg:hasEvaluation?e.
+     FILTER (bc:dataset "Atari 2600 Double Dunk" IN VALUES?e orkg:hasTrainingSet).
+    ?metric orkg:label?label.
+     FILTER (strContains(STR(?label), "F1") || strContains(STR(?label), "Accuracy") || strContains(STR(?label), "Recall") || strContains(STR(?label), "Macro")) 
+     }
+    <|eot_id|>

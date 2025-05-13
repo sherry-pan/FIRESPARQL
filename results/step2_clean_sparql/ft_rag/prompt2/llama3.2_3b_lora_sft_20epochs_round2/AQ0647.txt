@@ -1,0 +1,14 @@
+```sparql
+SELECT ?paper ?paper_lbl ?paper_ID
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WOS-46985")
+  
+  ?paper orkgp:HAS_BENCHMARK ?benchmark;
+         rdfs:label ?paper_lbl;
+         orkgp:HAS_ID ?paper_ID.
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+}
+```

@@ -1,0 +1,15 @@
+Question:
+What is the best performing model benchmarking the X-Sum dataset in terms of ROUGE-2 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "X-Sum")
+               && has_benchmark     ?benchmark)
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval         orkgp:P32               ?model.
+      ?model      rdfs:label              ?model_lbl.
+     }<|eot_id|>

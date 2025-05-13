@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?dataset {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasDataset ?dataset1.
+  ?dataset1 orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?dataset orkg:hasMethod ?method.
+  FILTER (strlike(STR(?benchmark), "NLI") AND strlike(STR(?method), "benchmark"))
+}
+GROUP BY ?dataset
+```

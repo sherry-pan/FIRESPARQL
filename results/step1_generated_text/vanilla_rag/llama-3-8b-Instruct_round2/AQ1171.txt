@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?score?metric
+WHERE {
+ ?evaluation a orkg:Benchmark;
+    orkg:hasEvaluation?evaluationData;
+    orkg:evaluatedOn?dataset;
+    orkg:hasScore?score;
+    orkg:scoreMetric?metric.
+ ?dataset rdfs:label "MultiNLI".
+ ?evaluationData orkg:hasMetric?metric.
+  FILTER(?metric IN (orkg:Recall, orkg:micro-F1, orkg:Accuracy, orkg:macro-F1)).
+  FILTER(?score > (SELECT MAX(?score2) AS maxScore {?evaluation a orkg:Benchmark; orkg:hasScore?score2 }))
+
+}
+ORDER BY DESC(?score) LIMIT 1<|eot_id|>

@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?implementation.
+  ?implementation orkgp:P5047 ?code.
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P7043 ?benchmark.
+  ?benchmark orkgp:P5045 ?eval.
+  ?eval orkgp:P5046 ?approach.
+  FILTER(REGEX(?approach, "CRF with sentence expansion"))
+  ?implementation orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(?method_lbl = "CRF with sentence expansion")
+  ?code rdfs:label ?code_lbl.
+  FILTER(?code_lbl = "code")
+}
+```

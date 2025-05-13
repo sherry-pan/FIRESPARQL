@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?name ?value WHERE {
+    ?model orkg:has_method ?method.
+    ?model orkg:has_dataset ?dataset.
+    ?model orkg:has_approach ?approach.
+    ?model orkg:has_implementation ?implementation.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?benchmark orkg:has_value ?value.
+    ?benchmark orkg:has_dataset ?dataset.
+    FILTER (str(?dataset) = 'VTAB-1k').
+    FILTER (str(?approach) = 'Top-1 Accuracy').
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

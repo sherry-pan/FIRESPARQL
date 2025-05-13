@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?method ?value 
+WHERE {
+    ?benchmark orkg:HAS_BENCHMARK ?method.
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_DATASET "http://orkg.org/orkg/dataset/IMDb-B".
+    ?evaluation orkg:CSVW_Value ?value.
+    ?benchmark orkg:HAS_NUMBER ?number.
+    FILTER (?number > 0)
+}
+```

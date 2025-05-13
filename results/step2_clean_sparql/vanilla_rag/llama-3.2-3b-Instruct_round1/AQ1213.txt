@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?metric ?value.
+  FILTER (?dataset = "BC2GM")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

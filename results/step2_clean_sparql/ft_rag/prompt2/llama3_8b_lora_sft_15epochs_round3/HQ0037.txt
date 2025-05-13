@@ -1,0 +1,12 @@
+```sparql
+SELECT ?author ?author_label
+WHERE {
+  ?article orkgp:P31 orkgc:Coronavirus.
+  ?article orkgp:P32 ?contrib.
+  ?contrib orkgp:HAS_AGENT ?author.
+  ?author rdfs:label ?author_label.
+}
+GROUP BY ?author ?author_label
+ORDER BY DESC(COUNT(?article))
+LIMIT 1
+```

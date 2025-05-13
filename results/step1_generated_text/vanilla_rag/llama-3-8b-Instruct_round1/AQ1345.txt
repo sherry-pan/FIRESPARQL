@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the ImageNet V2 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?benchmark?metric?score
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/dataset/imagenet-v2>.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METHOD?metric.
+ ?evaluation orkg:HAS_SCORE?score.
+  FILTER (?metric = (SELECT?m WHERE {?benchmark orkg:HAS_METHOD?m } ORDER BY DESC(?m) LIMIT 1))
+}<|eot_id|>

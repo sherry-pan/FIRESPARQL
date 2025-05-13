@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?paper.
+  ?paper orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P5043 ?benchmark.
+  ?benchmark orkgp:P5044 ?eval.
+  FILTER(REGEX(?eval, "AxCell"))
+  ?eval orkgp:P5047 ?code.
+  ?code rdfs:label ?title.
+  FILTER(REGEX(?title, "benchmark"))
+}
+```

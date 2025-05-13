@@ -1,0 +1,39 @@
+Question:
+What is the best performing model benchmarking the ImageNet dataset in terms of Number of params metric?
+
+Generated SPARQL:
+ SELECT?implementation?implementation_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "ImageNet")
+               && has_benchmark        :     orkgp:eval-000.
+               && has_dataset          :     orkgp:HAS_DATASET
+               && has_evaluation      :     orkgp:HAS_EVALUATION
+               && has_number          :     orkgp:CSVW_Number
+               && has_number           :     orkgp:HAS_NUMBER_OF_PARAMS
+               && has_method         :     orkgp:HAS_METHOD
+               && has_implementation  :     orkgp:HAS_IMPLEMENTATION)
+      ?implementation       a                orkgp:Implementation;
+                          rdfs:label              ?implementation_lbl.
+      ?cont           orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION      ?eval.
+      ?eval         orkgp:HAS_VALUE          ?value;
+                    orkgp:HAS_NUMBER          ?number.
+      ?number      orkgp:HAS_DATASET          ?dataset;
+                  orkgp:HAS_NUMBER_OF_PARAMS     ?params.
+      ?params     orkgp:HAS_VALUE              ?value;
+                  orkgp:HAS_NUMBER              ?number.
+      ?value     orkgp:HAS_DATASET          ?dataset;
+                 orkgp:HAS_EVALUATION        ?eval.
+      ?eval      orkgp:HAS_VALUE              ?value.
+       OPTIONAL {
+        ?cont           orkgp:HAS_VALUE          ?value;
+                        orkgp:HAS_NUMBER          ?number.
+        ?number      orkgp:HAS_DATASET          ?dataset;
+                    orkgp:HAS_NUMBER_OF_PARAMS     ?params.
+        ?params     orkgp:HAS_VALUE              ?value;
+                    orkgp:HAS_NUMBER              ?number.}
+      ?implementation       a                orkgp:Implementation.
+       FILTER(REGEX(?implementation_lbl, "^[^:]*"))
+     }<|eot_id|>

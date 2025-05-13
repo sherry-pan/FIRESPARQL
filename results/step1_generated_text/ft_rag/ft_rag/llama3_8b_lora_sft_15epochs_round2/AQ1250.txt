@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset MLDoc Zero-Shot German-to-French?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "MLDoc Zero-Shot German-to-French")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:P34               ?cont.
+      ?eval          orkgp:HAS_VALUE         ?value.
+       OPTIONAL {?eval           orkgp:P30               ?metric.
+               ?metric           rdfs:label              ?metric_lbl.}
+      ?value         a                orkgc:Value;
+                      rdfs:label      ?value_lbl.
+       BIND(xsd:float(?value_lbl) AS?value)
+     }
+     ORDER BY DESC(?score)<|eot_id|>

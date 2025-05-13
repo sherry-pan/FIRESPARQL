@@ -1,0 +1,25 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://example.org/ontology#>
+
+SELECT ?model
+WHERE {
+  ?result ex:benchmark "WMT2016 English-German" ;
+          ex:metric "BLEU" ;
+          ex:score ?score ;
+          ex:model ?model .
+  
+  ?highestResult ex:benchmark "WMT2016 English-German" ;
+                 ex:metric "BLEU" ;
+                 ex:score ?highestScore .
+  
+  FILTER NOT EXISTS {
+    ?comparisonResult ex:benchmark "WMT2016 English-German" ;
+                      ex:metric "BLEU" ;
+                      ex:score ?comparisonScore .
+    FILTER (?comparisonScore > ?score)
+  }
+}
+LIMIT 1
+```

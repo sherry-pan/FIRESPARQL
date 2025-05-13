@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?score) AS ?top_score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Atari 2600 Centipede"))
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?evaluatio.
+  ?evaluatio orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?score)
+  ?metric orkgp:HAS_EVALUATION ?evaluatio;
+          rdfs:label ?metric_lbl.
+}
+```

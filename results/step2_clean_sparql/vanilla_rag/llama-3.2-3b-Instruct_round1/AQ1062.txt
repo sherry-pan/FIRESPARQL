@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Evaluation.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:metric ?metric.
+    ?evaluation orkg:hasScore ?score.
+    ?benchmark orkg:dataset "Automatically labeled Medline abstracts corpus".
+    FILTER (str(?metric) = "Accuracy" OR str(?metric) = "Recall" OR str(?metric) = "macro-F1" OR str(?metric) = "micro-F1")
+}
+```

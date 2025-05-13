@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "SAC")
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?paper orkgp:P31 ?has_implementation.
+  ?has_implementation orkgp:P32 ?implementation.
+  ?implementation orkgp:P37571 ?code.
+}
+```

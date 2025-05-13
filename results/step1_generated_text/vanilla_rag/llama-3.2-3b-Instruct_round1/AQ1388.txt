@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest RE+ Micro F1 score on the CoNLL04 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?method?score
+     WHERE {
+    ?method orkg:HAS_METHOD?model.
+    ?model orkg:HAS_EVALUATION?evaluation.
+    ?evaluation orkg:HAS_DATASET "CoNLL04".
+    ?evaluation orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_CSVW_Number?score.
+    ?method orkg:HAS_APPROACH?approach.
+     FILTER (?score > (SELECT?score FROM?benchmark WHERE?benchmark orkg:HAS_BENCHMARK?model))
+     }<|eot_id|>

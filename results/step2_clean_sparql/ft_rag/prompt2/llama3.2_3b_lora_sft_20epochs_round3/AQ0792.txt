@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgr:R69072 orkgp:evaluate ?eval.
+  ?eval orkgp:P71079 ?recall.
+  ?recall rdfs:label ?metric_lbl.
+  ?eval orkgp:P71075 ?evaluation;
+        orkgp:P71080 ?micro_f1.
+  ?evaluation rdfs:label ?evaluation_lbl.
+  FILTER(REGEX(?evaluation_lbl, "Quasart-T"))
+  ?evaluation orkgp:P71065 ?ndcg_10.
+  ?ndcg_10 rdfs:label ?metric_lbl.
+}
+```

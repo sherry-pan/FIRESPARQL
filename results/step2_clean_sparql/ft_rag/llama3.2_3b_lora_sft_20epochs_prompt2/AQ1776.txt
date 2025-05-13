@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?implementation
+WHERE {
+  ?event orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_BENCHMARK ?event;
+        orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_METHOD ?method;
+        orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "Number of params"))
+  FILTER(REGEX(?dataset, "ImageNet"))
+}
+ORDER BY DESC(?value)
+```

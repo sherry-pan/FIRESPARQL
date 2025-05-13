@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:has_dataset ?dataset.
+  ?dataset orkg:dataset_label "BUCC German-to-English".
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_title ?title.
+  ?paper orkg:number ?id.
+  FILTER EXISTS { ?benchmark orkg:has_benchmark_for ?dataset }
+}
+```

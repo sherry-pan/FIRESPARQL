@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?benchmark a orkgp:Benchmark;
+             rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "NCBI-disease")
+  ?model orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:P31 ?model;
+         orkgp:HAS_MODEL ?benchmark;
+         rdfs:label ?paper_lbl.
+}
+```

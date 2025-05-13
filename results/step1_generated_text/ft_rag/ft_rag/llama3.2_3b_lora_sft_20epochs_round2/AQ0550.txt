@@ -1,0 +1,15 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Gibson PointGoal Navigation dataset?
+
+Generated SPARQL:
+ SELECT?title?id
+     WHERE {
+       orkgr:R44985 orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P31?cont.
+      ?cont orkgp:P32?paper.
+      ?paper orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "Gibson PointGoal Navigation"))
+      ?paper orkgp:HAS_BENCHMARK?benchmark
+      ?benchmark orkgp:HAS_TITLE?title.
+       BIND(xsd:string(?title) AS?id)
+     }<|eot_id|>

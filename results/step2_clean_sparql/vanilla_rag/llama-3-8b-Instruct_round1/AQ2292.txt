@@ -1,0 +1,12 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?paper ?paperTitle ?codeLink
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_CODE ?codeLink.
+  FILTER regex(?method, "C51 noop model").
+  ?paper dc:title ?paperTitle.
+}

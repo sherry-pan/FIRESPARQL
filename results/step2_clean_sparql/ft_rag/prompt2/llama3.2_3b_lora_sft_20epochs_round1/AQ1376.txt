@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Penn Treebank".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark;
+              orkgp:P71075 ?eval.
+  ?metric orkgp:P71080 ?eval.
+  ?cont orkgp:P71100 ?metric;
+        orkgp:P71101 ?cont.
+  ?model orkgp:P71103 ?cont;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

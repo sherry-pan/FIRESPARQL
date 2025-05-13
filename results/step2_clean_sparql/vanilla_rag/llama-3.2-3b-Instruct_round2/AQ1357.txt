@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?score
+WHERE {
+  ?bm orkg:HAS_BENCHMARK ?benchmark .
+  ?benchmark orkg:HAS_EVALUATION ?ev .
+  ?benchmark orkg:HAS_METHOD ?m .
+  ?ev orkg:CSVW_Value ?score .
+  ?ev orkg:HAS_METRIC ?metric .
+  FILTER (STR(?benchmark) = "BUCC German-to-English") .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

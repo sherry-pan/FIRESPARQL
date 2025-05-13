@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dataset: <http://example.org/dataset#>
+PREFIX score: <http://example.org/score#>
+
+SELECT ?benchmarkScore ?metric
+WHERE {
+  ?dataset rdf:type dataset:ModelNet40 .
+  ?dataset score:hasBenchmark ?benchmark .
+  ?benchmark score:hasScore ?benchmarkScore .
+  ?benchmark score:hasMetric ?metric .
+} 
+ORDER BY DESC(?benchmarkScore)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:hasEvaluation ?metric ;
+              orkg:hasDataset ?dataset ;
+              orkg:hasScore ?score.
+  ?dataset schema:name "CINIC-10".
+  FILTER (?metric != "implementation" && ?metric != "method" && ?metric != "has dataset")
+}
+```

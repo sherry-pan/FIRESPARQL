@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkgc: <http://www.semantic-web-journal.net/orkg/c/>
+PREFIX orkgp: <http://www.semantic-web-journal.net/orkg/p/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+ ?metric a orkgc:Metric;
+         rdfs:label ?metric_lbl.
+ FILTER (str(?metric_lbl) = "Test perplexity")
+ ?dataset a orkgc:Dataset;
+          rdfs:label ?dataset_lbl.
+ FILTER (str(?dataset_lbl) = "WikiText-103")
+ ?evaluation a orkgc:Evaluation;
+             orkgp:hasMetric ?metric;
+             orkgp:hasDataset ?dataset;
+             orkgp:reportedValue ?value;
+             orkgp:hasModel ?model.
+ ?model rdfs:label ?model_lbl.
+}
+ORDER BY ?value
+LIMIT 1
+```

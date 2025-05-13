@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?metric ?score
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasMetric ?metric.
+ ?evaluation orkg:hasScore ?score.
+ ?dataset orkg:hasTrainingSet <http://orkg.org/orkg/object/O000001>.
+ ?dataset orkg:hasValidationSet <http://orkg.org/orkg/object/O000001>.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

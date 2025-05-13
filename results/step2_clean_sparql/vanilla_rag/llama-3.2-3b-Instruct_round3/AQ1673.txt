@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:hasDataset ?dataset.
+  ?dataset orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasAccuracy ?accuracy.
+  ?dataset orkg:hasDataset "MLDoc Zero-Shot English-to-German benchmark".
+  ?accuracy orkg:label "Accuracy".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

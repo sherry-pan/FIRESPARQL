@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:HAS_DATASET orkg:IMDb-B ;
+             orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METHOD ?method ;
+              orkg:CSVW_Value ?value.
+  ?method orkg:CSVW_Number ?metric.
+}
+ORDER BY DESC(?value) 
+LIMIT 1
+```

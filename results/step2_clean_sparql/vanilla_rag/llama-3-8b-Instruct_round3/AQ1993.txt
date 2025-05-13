@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/schema/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:used_model ?model.
+  ?model schema:name "PNDec".
+  ?paper orkg:has_implementation ?codeReference.
+  ?benchmark orkg:purpose "benchmarking".
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "RotoWire", "i"))
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark.
+  ?metric orkgp:HAS_EVALUATION ?evaluation;
+          rdfs:label ?metric.
+  ?value orkgp:HAS_EVALUATION ?evaluation;
+         orkgp:P32 ?cont.
+}
+```

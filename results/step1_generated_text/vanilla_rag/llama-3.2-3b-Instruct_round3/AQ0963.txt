@@ -1,0 +1,17 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Bowling dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+     SELECT?metric 
+     WHERE {
+        ?metric rkg:hasEvaluation rkg:Evaluation.
+        ?metric rkg:hasDataset <http://orkg.org/orkg/dataset/atari2600_bowling>.
+        ?metric rkg:hasBenchmark rkg:Benchmark.
+        ?metric rkg:hasClasses?classes.
+        ?classes rdfs:label?label.
+         FILTER (STRLIKE(STR(?label), "Accuracy") OR STRLIKE(STR(?label), "Recall") OR STRLIKE(STR(?label), "macro-F1") OR STRLIKE(STR(?label), "micro-F1"))
+     }<|eot_id|>

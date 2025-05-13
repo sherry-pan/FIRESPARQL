@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ImageNet")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  ?model orkgp:HAS_EVALUATION ?eval;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?macs_score)
+LIMIT 1
+```

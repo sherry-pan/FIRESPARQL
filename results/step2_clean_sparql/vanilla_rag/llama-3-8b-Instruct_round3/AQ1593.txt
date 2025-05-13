@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:P97142 ?method.
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasEvaluation ?accuracy.
+  ?evaluation orkg:P71081 ?accuracy.
+  ?evaluation orkg:P71086 ?dataset.
+  ?dataset orkg:P71081 "PolyAI Reddit benchmark dataset".
+  FILTER(?accuracy = 1/100)
+  FILTER(?method = ?model)
+}
+```

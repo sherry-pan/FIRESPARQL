@@ -1,0 +1,18 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Habitat 2020 Object Nav test-std dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R83510 orkgp:HAS_BENCHMARK {
+         orkgp:P71067 {
+           rdfs:label?label.
+         }
+       }
+       FILTER(REGEX(STR(?label), "Object Nav"))
+       orkgr:R83510 orkgp:P70666?evaluated_by?evaluator.
+      ?evaluator orkgp:P31?cont;
+                 rdfs:label?evaluator_lbl.
+      ?cont orkgp:P70664?metric.
+      ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_DATASET orkg:NYT29.
+  ?benchmark orkg:HAS_BENCHMARK ?result.
+  ?result orkg:METRIC ?metric.
+  ?result orkg:VALUE ?value.
+  FILTER (?metric = "best" || ?metric = "highest").
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

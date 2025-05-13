@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?modelLabel 
+WHERE {
+    ?model orkg:HAS_METHOD ?method.
+    ?method orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:HAS_DATASET ?dataset.
+    ?dataset orkg:HAS_LABEL "GENIA-LAS".
+    ?model orkg:HAS_APPROACH ?approach.
+    FILTER (?approach != <http://orkg.org/orkg/predicate/NO_METHOD>).
+}
+```

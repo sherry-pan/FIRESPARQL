@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT DISTINCT ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasBenchmark <http://orkg.org/orkg/entity/E10124> ; 
+           orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:method ?metric.
+  FILTER (STRSTARTS(STR(?metric), "http://orkg.org/orkg/property/")).
+}
+```

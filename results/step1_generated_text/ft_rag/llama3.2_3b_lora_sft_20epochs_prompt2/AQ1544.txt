@@ -1,0 +1,42 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the OntoNotes benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+       orkgr:R70675 orkgp:compareContribution?cont.
+      ?cont orkgp:P71080?value.
+       BIND(xsd:float(?value) AS?micro_f1)
+      ?cont orkgp:P97135?strategy.
+      ?strategy rdfs:label?strategy_lbl.
+       FILTER(REGEX(?strategy_lbl, "eval"))
+      ?cont orkgp:P71082?value.
+       BIND(xsd:float(?value) AS?macro_f1)
+       FILTER(?macro_f1 =?micro_f1)
+      ?cont orkgp:P97127?accepted.
+       BIND(?accepted AS?accepted_submissions)
+      ?cont orkgp:P97128?rejected.
+       BIND(?rejected AS?rejected_submissions)
+       FILTER(?accepted_submissions >?rejected_submissions)
+       SELECT?model?model_lbl
+       WHERE {
+        ?model orkgp:P70673?cont.
+        ?cont orkgp:P71080?value.
+         BIND(xsd:float(?value) AS?micro_f1)
+        ?cont orkgp:P97135?strategy.
+        ?strategy rdfs:label?strategy_lbl.
+         FILTER(REGEX(?strategy_lbl, "eval"))
+        ?cont orkgp:P71082?value.
+         BIND(xsd:float(?value) AS?macro_f1)
+         FILTER(?macro_f1 =?micro_f1)
+        ?cont orkgp:P97127?accepted.
+         BIND(?accepted AS?accepted_submissions)
+        ?cont orkgp:P97128?rejected.
+         BIND(?rejected AS?rejected_submissions)
+         FILTER(?accepted_submissions >?rejected_submissions)
+         FILTER(?micro_f1 = 1)
+        ?model rdfs:label?model_lbl
+       }
+       ORDER BY DESC(?micro_f1)
+       LIMIT 1
+    <|eot_id|>

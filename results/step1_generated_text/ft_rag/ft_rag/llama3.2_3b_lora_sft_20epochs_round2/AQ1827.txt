@@ -1,0 +1,33 @@
+Question:
+Indicate the model that performed best in terms of Macro Recall metric on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl        = "NLP-TDMS (Exp, arXiv only)")
+               &&?dataset       a                orkgc:Dataset)
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?model      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION       a                orkgp:Evaluation;
+                                              orkgp:P71082          ?eval_value.
+          ?eval_value orkgp:HAS_VALUE        ?value.
+           BIND(xsd:float(?value) AS?value)
+          ?model      orkgp:HAS_EVALUATION      ?eval;
+                        orkgp:P70360          ?cont;
+                        orkgp:P70362          ?eval2.
+          ?cont      orkgp:HAS_VALUE          ?value;
+                      orkgp:HAS_METRIC        ?metric.
+          ?metric    orkgp:P71081          ?macro_rec;
+                      orkgp:P71082          ?eval_value.
+          ?eval      rdfs:label              ?eval_lbl.
+           FILTER(?eval_lbl        = "macro-F1")
+          ?model      rdfs:label              ?model_lbl.
+         }
+         ORDER BY DESC(?macro_rec)
+         LIMIT 1
+       }
+     }<|eot_id|>

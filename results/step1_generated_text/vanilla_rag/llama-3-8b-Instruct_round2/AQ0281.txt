@@ -1,0 +1,21 @@
+Question:
+Can you list the models that have been evaluated on the Atari 2600 Boxing dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_EVALUATION?result.
+ ?result orkg:HAS_METHOD?model.
+ ?model orkg:HAS_IMPLEMENTATION?implementation.
+ ?dataset a orkg:Dataset ;
+           orkg:HAS_NAME "Atari 2600 Boxing".
+ ?evaluation orkg:HAS_DATASET?dataset.
+ ?evaluation orkg:HAS_RESULT?result.
+ ?result rdfs:label?modelLabel.
+  FILTER (lang(?modelLabel) = "en").
+  FILTER (str(?modelLabel) =?model)
+}<|eot_id|>

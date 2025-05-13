@@ -1,0 +1,21 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?dataset ?datasetLabel
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:evaluationMetric ?metric.
+  FILTER (?metric IN (orkg:Recall, orkg:Accuracy, orkg:micro-F1, orkg:macro-F1))
+  ?dataset orkg:hasProperty ?property.
+  ?property rdfs:label ?propertyLabel.
+  FILTER (?propertyLabel IN ("tabular dataset", "column entity annotation", "column type annotation", "column property annotation",
+                            "dataset annotation type", "data splitting method", "Knowledge Graph used for annotation"))
+  FILTER (NOT EXISTS { ?dataset orkg:hasProperty orkg:lessonLearned })
+}
+GROUP BY ?dataset ?datasetLabel
+ORDER BY (COUNT(DISTINCT ?property) DESC)
+LIMIT 10
+```

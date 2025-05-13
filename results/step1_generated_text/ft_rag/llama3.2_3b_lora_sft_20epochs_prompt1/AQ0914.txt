@@ -1,0 +1,20 @@
+Question:
+Can you list the metrics used to evaluate models on the Barabasi-Albert dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R70672 orkgp:evaluate Related
+       FILTER(REGEX(?metric_lbl, "eval"))
+      ?metric orkgp:P7042?eval
+      ?eval orkgp:P71079?recall
+      ?recall rdfs:label?recall_lbl
+      ?eval orkgp:P7042?metric
+      ?metric rdfs:label?metric_lbl
+      ?eval orkgp:P7042?evaluator
+      ?evaluator orkgp:P7041?benchmark
+      ?benchmark orkgp:P7043?cont
+      ?cont orkgp:P7044?eval
+      ?eval orkgp:P7042?metric
+       FILTER(?metric_lbl = "HAS_BENCHMARK"^^xsd:string)
+     }<|eot_id|>

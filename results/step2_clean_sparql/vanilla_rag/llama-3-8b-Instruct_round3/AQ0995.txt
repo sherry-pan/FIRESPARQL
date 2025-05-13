@@ -1,0 +1,13 @@
+```sparql
+PREFIX rct: <http://orkg.org/orkg/resource/>
+PREFIX evaluation: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric ?value
+WHERE {
+  rct:PubMed_20k_RCT ?p ?o.
+  ?p a evaluation:Evaluation.
+  ?o ?evaluationProperty ?metric.
+  ?evaluationProperty a evaluation:Recall, evaluation:Accuracy, evaluation:macro-F1, evaluation:micro-F1.
+  FILTER (?metric != evaluation:HAS_BENCHMARK).
+}
+```

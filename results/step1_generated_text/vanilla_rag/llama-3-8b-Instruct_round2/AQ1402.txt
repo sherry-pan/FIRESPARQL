@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of F1 score when benchmarked on the NYT-single dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?model?modelLabel
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?metric orkg:HAS_VALUE?f1Score.
+ ?benchmark orkg:HAS_DATASET?dataset.
+ ?dataset orkg:NAME "NYT-single".
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_F1_SCORE?f1Score.
+  FILTER (?f1Score = MAX(?f1Score) )
+  SERVICE orkg:iri2label {?model orkg:iri2label?modelLabel }
+}<|eot_id|>

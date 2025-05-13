@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:HAS_METHOD ?method;
+    orkgp:HAS_IMPLEMENTATION ?implementation
+  ].
+  ?implementation orkgp:P5043 ?code.
+  FILTER(REGEX(STR(?title), "Switch Transformer"))
+}
+```

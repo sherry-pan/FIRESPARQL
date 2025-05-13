@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model ?modelLabel ?params
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark csvw:Number ?params.
+  ?dataset csvw:datasetIRI <http://www.image-net.org/realtag/>.
+}
+ORDER BY DESC(?params)
+LIMIT 1
+```

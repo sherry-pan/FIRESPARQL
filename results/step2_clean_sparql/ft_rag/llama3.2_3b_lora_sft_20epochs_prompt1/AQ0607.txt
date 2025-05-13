@@ -1,0 +1,12 @@
+```sparql
+SELECT ?title ?number
+WHERE {
+  ?paper orkgr:HAS_BENCHMARK ?benchmark .
+  ?benchmark orkgr:HAS_EVALUATION ?eval .
+  FILTER(REGEX(?eval, "Atari 2600 Bank Heist"))
+  ?paper orkgr:P31 ?instance .
+  ?instance rdfs:label ?title .
+  ?paper orkgr:HAS_NUMBER ?number .
+  FILTER(?number > 0)
+}
+```

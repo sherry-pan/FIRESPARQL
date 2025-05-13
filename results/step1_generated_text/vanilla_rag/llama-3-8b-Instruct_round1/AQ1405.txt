@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?model?modelLabel?score
+     WHERE {
+      ?model a orkg:Model.
+      ?model orkg:hasEvaluation?evaluation.
+      ?evaluation orkg:hasMetric?metric.
+      ?metric a owl:DatatypeProperty.
+      ?metric orkg:propertyIRI?propertyIRI.
+       FILTER(?propertyIRI = orkg:P71080 ||?propertyIRI = orkg:P71082).
+      ?evaluation orkg:hasValue?score.
+      ?evaluation orkg:hasKnowledgeGraph?knowledgeGraph.
+      ?knowledgeGraph orkg:knowledgeGraphName "SciERC".
+      ?model orkg:method?method.
+       FILTER(?score = MAX(?score))
+     }
+     ORDER BY DESC(?score)<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?study
+WHERE {
+  ?study a orkg:study.
+  ?study orkg:has_subject ?subject.
+  ?subject a orkg:core_participant.
+  ?subject orkg:has_column ?column.
+  ?column orkg:has_data ?data.
+  ?data orkg:has_value ?value.
+  ?value orkg:has_type orkg:numeric.
+  ?value orkg:has_label ?label.
+  FILTER (CONTAINS(LCASE(?label), "children") OR CONTAINS(LCASE(?label), "child"))
+}
+```

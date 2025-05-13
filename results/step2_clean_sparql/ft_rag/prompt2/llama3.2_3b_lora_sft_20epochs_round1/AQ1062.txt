@@ -1,0 +1,10 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?eval orkgp:P70402 ?metric.
+  BIND(xsd:float(?metric) AS ?value)
+  FILTER(?metric = "Accuracy")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

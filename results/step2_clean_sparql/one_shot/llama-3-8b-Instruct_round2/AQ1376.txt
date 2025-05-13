@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model
+WHERE {
+  ?model rdf:type dbo:ArtificialIntelligence .
+  ?model dbo:performance ?performance .
+  ?performance dbo:dataset dbr:Penn_Treebank .
+  ?performance dbo:F1_score ?F1Score .
+}
+ORDER BY DESC(?F1Score)
+LIMIT 1
+```

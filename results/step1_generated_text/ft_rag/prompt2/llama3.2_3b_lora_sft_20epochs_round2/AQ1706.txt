@@ -1,0 +1,32 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Asteroids benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Asteroids")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P32               ?value.
+       OPTIONAL {
+        ?eval           orkgp:P31               ?metric;
+                        orkgp:P32               ?value.
+        ?metric         orkgp:HAS_VALUE          ?value.
+         BIND(xsd:float(?value) AS?value)
+       }
+      ?cont         orkgp:HAS_EVALUATION     ?eval.
+       OPTIONAL {
+        ?cont      orkgp:HAS_METRIC         ?metric.
+        ?metric    orkgp:HAS_VALUE          ?value.
+         BIND(xsd:float(?value) AS?value)
+       }
+      ?cont         orkgp:P31               ?metric;
+                     orkgp:P32               ?value.
+       OPTIONAL {
+        ?cont         orkgp:HAS_MODEL         ?model.
+        ?model       rdfs:label              ?model_lbl.
+       }
+     }<|eot_id|>

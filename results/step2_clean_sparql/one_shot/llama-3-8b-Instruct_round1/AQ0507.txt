@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://www.semantic-web-journal.net/orkg/c/>
+PREFIX orkgp: <http://www.semantic-web-journal.net/orkg/p/>
+
+SELECT ?paper ?paper_title ?paper_id
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_title;
+         orkgc:has_id ?paper_id.
+  ?benchmark orkgp:HAS_DATASET orkgc:Dataset;
+             orkgp:BENCHMARK_OF ?paper.
+  FILTER regex(?paper_title, "TempEval-3", "i")
+}
+```

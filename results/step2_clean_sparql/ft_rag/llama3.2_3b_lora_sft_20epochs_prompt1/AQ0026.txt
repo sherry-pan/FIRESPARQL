@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?method_lbl
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "SciTLDR"))
+  ?eval orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_lbl.
+  ?eval orkgp:HAS_IMPLEMENTATION ?implement.
+  ?implement orkgp:P31 ?model.
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?method ?accuracy
+WHERE {
+    ?model orkg:hasMethod ?method.
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasDataset "Amazon benchmark".
+    ?evaluation orkg:evaluationMetric "accuracy".
+    ?evaluation orkg:accuracyValue ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

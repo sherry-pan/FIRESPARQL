@@ -1,0 +1,14 @@
+Question:
+What are the models that have been benchmarked on the ACE 2005 dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+    WHERE {
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?dataset       orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "ACE 2005")
+     ?benchmark      orkgp:HAS_EVALUATION   ?eval.
+      OPTIONAL {?eval           orkgp:HAS_MODEL      ?model.
+          ?model          rdfs:label              ?model_lbl.}
+    }<|eot_id|>

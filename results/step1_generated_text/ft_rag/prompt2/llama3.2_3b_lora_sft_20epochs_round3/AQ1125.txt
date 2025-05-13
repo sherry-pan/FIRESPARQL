@@ -1,0 +1,29 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Kinetics-600 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?score) AS?score)
+     WHERE {
+       orkgr:R110361 orkgp:P31 [
+         rdfs:label?label
+       ]
+      ?label orkgp:HAS_BENCHMARK {
+         orkgp:HAS_BENCHMARK?benchmark
+       }
+      ?benchmark orkgp:HAS_EVALUATION?eval {
+        ?eval orkgp:HAS_METRIC?metric.
+        ?metric rdfs:label?metric_lbl.
+       }
+      ?benchmark orkgp:HAS_EVALUATION?eval {
+        ?eval orkgp:P31 [
+           rdfs:label?method
+         ]
+       }
+       BIND(
+         IF(?metric = "accuracy"^^xsd:string, "Accuracy", IF(?metric = "F1"^^xsd:string, "F1",?metric_lbl))
+         AS?metric_lbl
+       )
+     }
+     GROUP BY?metric_lbl
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

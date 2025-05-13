@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?modelLabel ?top1Accuracy
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET <http://inaturalist.org/dataset/iNaturalist_2018>.
+  ?evaluation orkg:METRIC ?metric.
+  ?metric owl:hasValue ?top1Accuracy.
+  ?model orkg:hasLabel ?modelLabel.
+  FILTER(?metric = "Top-1 Accuracy")
+}
+```

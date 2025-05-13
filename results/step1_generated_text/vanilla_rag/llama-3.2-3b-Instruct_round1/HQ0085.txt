@@ -1,0 +1,16 @@
+Question:
+What data format does CHEMDNER corpus have?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+    SELECT?format 
+    WHERE {
+     ?CHEMDNER a orkg:Dataset.
+     ?CHEMDNER orkg:hasFormat?format.
+      SERVICE orkg:dataset {
+       ?format orkg:hasFormat?csvFormat.
+       ?csvFormat orkg:hasFormatType?csvFormatType.
+        FILTER (STRLIKE(?csvFormatType, 'text/csv') || STRLIKE(?csvFormatType, 'application/csv'))
+      }
+    }<|eot_id|>

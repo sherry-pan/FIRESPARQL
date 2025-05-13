@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?title;
+         orkgp:P32 ?benchmark;
+         orkgp:P34 ?method.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_CODE ?code.
+  ?method rdfs:label ?method_label;
+          orkgp:P5009 ?cont.
+  FILTER(?cont = "Long Short Transformer")
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:hasDataset ?dataset.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?paper orkg:titles ?title.
+  ?paper orkg:number ?id.
+  FILTER (strLike(STR(?dataset), "Penn Treebank") AND strLike(STR(?id), "[0-9]+"))
+}
+```

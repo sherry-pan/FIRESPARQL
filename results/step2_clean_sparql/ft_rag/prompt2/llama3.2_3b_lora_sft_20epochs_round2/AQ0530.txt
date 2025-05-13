@@ -1,0 +1,26 @@
+```sparql
+SELECT ?paper ?paper_title
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "BC5CDR-disease".
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_EVALUATION ?eval;
+              orkgp:HAS_BENCHMARK ?benchmark.
+  ?method orkgp:HAS_METHOD ?method;
+          orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?paper orkgp:HAS_METHOD ?method;
+         orkgp:HAS_TITLE ?paper_title;
+         orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:HAS_VALUE ?value.
+  
+  FILTER (?value > 0.5 && ?value < 1.0)
+  
+  OPTIONAL {
+    ?paper orkgp:HAS_DATASET ?dataset.
+  }
+}
+ORDER BY DESC(?value)
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?score ?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasDataset ?dataset ;
+    orkg:hasMetric ?metric.
+ ?dataset orkg:hasName "Atari 2600 Seaquest".
+ ?benchmark orkg:hasScore ?score.
+ FILTER(?metric IN (orkg:Accuracy, orkg:macro-F1, orkg:micro-F1))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

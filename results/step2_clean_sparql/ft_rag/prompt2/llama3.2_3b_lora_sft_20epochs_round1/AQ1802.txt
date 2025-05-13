@@ -1,0 +1,24 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Reuters En-De")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             rdfs:label ?cont_lbl.
+
+  ?cont orkgp:HAS_VALUE ?value;
+        rdfs:label ?accuracy.
+  
+  ?cont orkgp:P71084 ?model.
+
+  OPTIONAL {
+    ?model rdfs:label ?model_lbl
+  }
+
+  BIND(?accuracy AS ?score)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

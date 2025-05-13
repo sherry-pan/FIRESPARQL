@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?method ?f1_score
+WHERE {
+  ?method a orkg:Method ;
+          orkg:HAS_EVALUATION ?evaluation ;
+          orkg:HAS_BENCHMARK ?benchmark.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:HAS_VALUE ?f1_score.
+  ?benchmark dcterms:title "SQuAD1.1 dev benchmark".
+  FILTER (isLiteral(?f1_score) && xsd:float(?f1_score))
+}
+ORDER BY DESC(?f1_score)
+LIMIT 1
+```

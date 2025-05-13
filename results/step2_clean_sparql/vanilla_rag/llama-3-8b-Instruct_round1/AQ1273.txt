@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?score.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "Atari 2600 Centipede".
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationResult.
+  ?evaluationResult orkg:HAS_METRIC ?metric.
+  ?evaluationResult orkg:HAS_SCORE ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

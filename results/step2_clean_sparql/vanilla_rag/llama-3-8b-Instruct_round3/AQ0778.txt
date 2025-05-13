@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX p: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasEvaluation ?evaluation ;
+           orkg:hasProperty p:datasetName "ImageNet 64x64".
+  ?evaluation orkg:usesMetric ?metric.
+  ?metric a orkg:Metric;
+          orkg:hasProperty p:benchmarkDataset ?dataset.
+}
+```

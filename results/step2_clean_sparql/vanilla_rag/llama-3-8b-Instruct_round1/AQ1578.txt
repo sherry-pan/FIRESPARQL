@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?rouge2Score
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/entity/X-Sum>.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC <http://orkg.org/orkg/predicate/ROUGE-2>.
+  ?evaluation orkg:HAS_SCORE ?rouge2Score.
+  ?model orkg:LABEL ?modelLabel.
+}
+ORDER BY DESC(xsd:float(?rouge2Score))
+LIMIT 1
+```

@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SQuAD2.0")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  
+  ?metric orkgp:HAS_EVALUATION ?eval;
+          orkgp:P7032 ?cont.
+  
+  ?cont rdfs:label ?metric_lbl.
+  
+  ?eval orkgp:P7031 ?eval_metric.
+  FILTER (str(?eval_metric) = "Accuracy" || str(?eval_metric) = "macro-F1" || str(?eval_metric) = "Recall")
+}
+```

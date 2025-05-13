@@ -1,0 +1,12 @@
+```sparql
+SELECT ?title ?id WHERE {
+  ?paper rdfs:label ?title;
+         orkgp:HAS_DATASET ?dataset;
+         orkgp:P431 ?id.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P405 ?cont.
+  ?cont orkgp:P179 R155621.
+  FILTER(REGEX(?title, "Atari 2600 Asterix", "i"))
+}
+ORDER BY ASC(?id)
+```

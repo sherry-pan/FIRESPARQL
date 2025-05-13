@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkgc: <http://www.scai.fraunhofer.org/orkg/concept/>
+PREFIX orkgp: <http://www.scai.fraunhofer.org/orkg/property/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1")
+  ?dataset a orkgc:Dataset;
+           rdfs:label "BC5CDR-disease".
+  ?evaluation orkgp:hasMetric ?metric;
+              orkgp:hasScore ?score;
+              orkgp:appliedOn ?dataset;
+              orkgp:hasModel ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

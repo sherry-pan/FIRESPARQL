@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?study ?studyLabel
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:has_participant ?participant.
+  ?participant rdfs:label ?participantLabel.
+  FILTER (CONTAINS(LCASE(?participantLabel), "child"))
+}
+```

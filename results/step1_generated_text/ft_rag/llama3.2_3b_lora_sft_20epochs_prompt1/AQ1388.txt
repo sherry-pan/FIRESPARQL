@@ -1,0 +1,30 @@
+Question:
+Which model has achieved the highest RE+ Micro F1 score on the CoNLL04 benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "CoNLL04")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       ?eval         orkgp:HAS_EVALUATION   ?cont;
+                       orkgp:HAS_VALUE        ?value.
+       ?metric        orkgp:HAS_EVALUATION   ?eval;
+                        orkgp:HASProperty     ?prop.
+       ?prop          orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_NUMBER      ?number.
+        BIND(xsd:float(?number) AS "number")
+        OPTIONAL {
+         ?cont           orkgp:HAS_VALUE        ?value.
+          BIND(xsd:float(?value) AS "value")
+         ?cont           orkgp:HAS_METRIC        ?metric.
+         ?metric           orkgp:HAS_PROPERTY     ?prop.
+         ?prop               orkgp:P32               ?method.
+         ?method           orkgp:HAS_IMPLEMENTATION  ?impl.
+         ?impl               rdfs:label              ?model_lbl.
+        }
+        ORDER BY DESC(?value)
+        LIMIT 1<|eot_id|>

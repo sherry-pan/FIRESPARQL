@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets" || str(?dataset_lbl) = "Oxford-IIIT Pets (Test)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?model.
+  ?model rdfs:label ?model_lbl.
+  ?eval orkgp:P97145 ?method.
+  ?cont orkgp:HAS_METHOD ?method;
+        orkgp:P71075 ?eval.
+}
+ORDER BY DESC(?eval)
+LIMIT 1
+```

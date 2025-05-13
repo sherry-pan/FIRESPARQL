@@ -1,0 +1,13 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?model?accuracy
+     WHERE {
+    ?model orkg:HAS_METHOD?method.
+    ?method orkg:HAS_DATASET?dataset.
+    ?dataset orkg:HAS_EVALUATION?evaluation.
+    ?evaluation orkg:Accuracy?accuracy.
+     FILTER (?accuracy > (SELECT MAX(?accuracy) FROM?evaluation).
+     }<|eot_id|>

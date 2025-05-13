@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of Test perplexity metric on the WikiText-103 benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?model?modelLabel?testPerplexity
+WHERE {
+ ?evaluation a orkg:Evaluation ;
+    orkg:HAS_BENCHMARK orkg:WikiText-103 ;
+    orkg:HAS_METRIC "test perplexity".
+ ?evaluation orkg:HAS_RESULT?result.
+ ?result orkg:HAS_MODEL?model ;
+    orkg:HAS_PERFORMANCE?performance.
+ ?model a orkg:Model ;
+    rdfs:label?modelLabel.
+  FILTER (?performance = MIN(?minPerformance) )
+}
+
+Note: The query uses the ORKG prefixes and the provided context to retrieve the best-performing model based on the test perplexity metric on the WikiText-103 benchmark dataset. The `FILTER` clause is used to find the model with the minimum test perplexity value.<|eot_id|>

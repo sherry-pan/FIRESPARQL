@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?method
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:uses_method ?method.
+  FILTER (?method != orkg:Other).
+  FILTER (xsd:string(?method) && STRLEN(?method) > 0).
+}
+GROUP BY ?method
+ORDER BY DESC(COUNT(?paper))
+LIMIT 1
+```

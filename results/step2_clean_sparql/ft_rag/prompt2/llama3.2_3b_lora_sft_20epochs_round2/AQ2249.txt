@@ -1,0 +1,17 @@
+```sparql
+SELECT ?code
+WHERE {
+  orkgr:R8362 orkgp:HAS_BENCHMARK [
+    rdfs:label ?label;
+    orkgp:P32 [
+      orkgp:HAS_DATASET [
+        orkgp:HAS_EVALUATION [
+          orkgp:P5049 ?eval
+        ]
+      ]
+    ]
+  ].
+  FILTER(REGEX(STR(?label), "SemExp")).
+  ?eval orkgp:P5048 ?code.
+}
+```

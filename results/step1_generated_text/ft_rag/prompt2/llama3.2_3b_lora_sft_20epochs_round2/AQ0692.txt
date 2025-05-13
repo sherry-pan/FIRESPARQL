@@ -1,0 +1,61 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the ARC-PDN dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R155370 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P31?cont.
+      ?cont orkgp:P4009?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "F1"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P4316?cont.
+      ?cont orkgp:P4317?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "Accuracy"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4318?cont.
+      ?cont orkgp:P4319?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "NDCG"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4317?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "Quantitative"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4316?cont.
+      ?cont orkgp:P4318?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "Recall"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4319?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "Precision"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4319?cont.
+      ?cont orkgp:P4317?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "Accuracy"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4318?cont.
+      ?cont orkgp:P4317?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "F1"^^xsd:string))
+       UNION
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P4316?cont.
+      ?cont orkgp:P4318?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "Evaluation"^^xsd:string))
+    }
+    ORDER BY DESC(COUNT(?metric_lbl))
+    LIMIT 1<|eot_id|>

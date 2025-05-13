@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset NYT-single?
+
+Generated SPARQL:
+ PREFIX orkg: <https://www.orkg.org/owl/orkg.owl#>
+PREFIX nyt: <https://www.orkg.org/orkg/nyt-single/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark;
+             orkg:hasEvaluation?evaluation;
+             orkg:dataset nyt:NYT-single.
+ ?evaluation orkg:hasMetric?metric;
+             orkg:hasValue?value.
+  FILTER (?metric IN (orkg:Recall, orkg:Micro-F1, orkg:Accuracy, orkg:Macro-F1))
+  FILTER (?evaluation orkg:hasValidationSet?validationSet)
+  FILTER (?evaluation orkg:hasTrainingSet?trainingSet)
+  FILTER (?evaluation orkg:hasDataSplittingMethod?dataSplittingMethod)
+  FILTER (?evaluation orkg:hasReferenceSystem?referenceSystem)
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

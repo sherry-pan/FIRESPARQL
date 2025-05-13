@@ -1,0 +1,18 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the NLP-TDMS dataset?
+
+Generated SPARQL:
+ SELECT?title
+     WHERE {
+       orkgr:R155370
+         orkgp:HAS_DATASET        a       orkgp:Dataset;
+                           rdfs:label       "NLP-TDMS".
+         rdfs:label      ?title.
+         orkgp:HAS_BENCHMARK      orkgp:HAS_EVALUATION      ?eval.
+        ?eval           orkgp:HAS_DATASET        ?dataset.
+        ?dataset       orkgp:HAS_BENCHMARK     ?benchmark.
+        ?benchmark      orkgp:HAS_DATASET        ?dataset.
+         FILTER(REGEX(STR(?dataset), "NLP-TDMS"))
+       }
+     ORDER BY ASC(?title)
+     LIMIT 1<|eot_id|>

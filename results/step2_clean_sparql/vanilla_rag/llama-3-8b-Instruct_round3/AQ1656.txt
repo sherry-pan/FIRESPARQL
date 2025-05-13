@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?flops
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasDataset <http://orkg.org/orkg/resource/Oxford-IIIT_Pets>.
+  ?evaluation orkg:metricValue ?flops.
+  FILTER(?flops = ?maxFlops)
+  {
+    SELECT (MAX(?flops2) AS ?maxFlops)
+    WHERE {
+      ?model orkg:hasEvaluation ?evaluation.
+      ?evaluation orkg:hasDataset <http://orkg.org/orkg/resource/Oxford-IIIT_Pets>.
+      ?evaluation orkg:metricValue ?flops2.
+    }
+  }
+}
+```

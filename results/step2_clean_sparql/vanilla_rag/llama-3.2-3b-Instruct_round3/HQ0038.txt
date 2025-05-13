@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+
+SELECT ?avgCapacity 
+WHERE {
+  ?f1 a orkg:Fuel.
+  ?f1 orkg:hasQuantity ?q.
+  ?q orkg:hasUnit ?u.
+  ?u orkg:isUnitOf ?uType.
+  ?uType a orkg:UnitOfMeasurement.
+  ?uType orkg:hasDefinition ?d.
+  FILTER (STRLIKE(STR(?d), "Capacity"))
+  ?f1 orkg:hasAverage ?avgCapacity.
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BUCC German-to-English")
+  ?benchmark orkgp:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkgp:HAS_EVALUATION ?evaluatio.
+  ?evaluatio orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?evaluatio orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_DATASET ?dataset.
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model;
+         orkg:has_dataset ?dataset;
+         orkg:has_evaluation ?evaluation;
+         orkg:method ?method.
+  ?dataset orkg:benchmark "SST-2".
+  ?evaluation orkg:benchmark ?dataset.
+  FILTER (?method = "Binary classification" || ?method = "binary classification")
+}
+ORDER BY ?modelLabel
+```

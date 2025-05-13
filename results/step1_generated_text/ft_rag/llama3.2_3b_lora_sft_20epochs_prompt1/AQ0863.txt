@@ -1,0 +1,24 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SST-5 Fine-grained classification dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "SST-5 Fine-grained classification")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION     ?eval.
+       OPTIONAL {?eval           orkgp:P71079        ?recall.
+               ?recall           rdfs:label              ?recall_lbl.}
+       OPTIONAL {?eval           orkgp:P71080        ?micro_f1.
+               ?micro_f1         rdfs:label              ?micro_f1_lbl.}
+       OPTIONAL {?eval           orkgp:P71081        ?accuracy.
+               ?accuracy         rdfs:label              ?accuracy_lbl.}
+       OPTIONAL {?eval           orkgp:P71082        ?macro_f1.
+               ?macro_f1         rdfs:label              ?macro_f1_lbl.}
+       OPTIONAL {?eval           orkgp:P97135        ?matching_strat.
+               ?matching_strat      rdfs:label              ?matching_strat_lbl.}
+       OPTIONAL {?eval           orkgp:P97142        ?method.
+               ?method           rdfs:label              ?method_lbl.}
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?senseval2_score
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC orkg:Senseval2Metric.
+  ?evaluation orkg:HAS_VALUE ?senseval2_score.
+  ?model orkg:HAS_BENCHMARK orkg:Supervised.
+}
+ORDER BY DESC(?senseval2_score)
+LIMIT 1
+```

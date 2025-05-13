@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset RotoWire (Relation Generation)?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "RotoWire"^^xsd:string)
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval          orkgp:HAS_EVALUATION    ?results.
+      OPTIONAL {?cont      orkgp:HAS_METHOD     ?method.
+              ?method     rdfs:label           ?method_lbl.}
+     ?results       orkgp:HAS_VALUE         ?value.
+      OPTIONAL {?results      orkgp:HAS_METRIC     ?metric.
+              ?metric         rdfs:label          ?metric_lbl.}
+     ?cont          orkgp:P32               ?results.
+    }
+    ORDER BY DESC(?score)<|eot_id|>

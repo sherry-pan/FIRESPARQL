@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?nllScore
+WHERE {
+  ?model orkg:HAS_NAME ?name.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:NAME "Nottingham".
+  ?method orkg:HAS_NLL ?nllScore.
+  FILTER(?nllScore IS NOT NULL)
+}
+ORDER BY ASC(?nllScore)
+LIMIT 1
+```

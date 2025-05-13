@@ -1,0 +1,17 @@
+Question:
+What is the highest benchmark result achieved on the WMT2016 English-Russian dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark orkg:has_dataset <http://orkg.org/dataset/WMT2016_English-Russian>.
+ ?benchmark orkg:has_benchmark?result.
+ ?result orkg:metric?metric.
+ ?result orkg:value?value.
+  FILTER (?metric = "BLEU" ||?metric = "METEOR" ||?metric = "ROUGE" ||?metric = "TER").
+  FILTER (?value = max(?value) )
+}
+ORDER BY DESC(?value) LIMIT 1<|eot_id|>

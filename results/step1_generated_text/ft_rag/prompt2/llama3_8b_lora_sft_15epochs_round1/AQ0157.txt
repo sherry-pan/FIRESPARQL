@@ -1,0 +1,15 @@
+Question:
+What models are being evaluated on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Penn Treebank (Character Level)")
+      ?evaluation    orkgp:HAS_DATASET      ?dataset.
+      ?evaluation    orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_EVALUATION   ?evaluation.
+      ?paper         orkgp:HAS_MODEL        ?model.
+      ?model         rdfs:label              ?model_lbl.
+     }<|eot_id|>

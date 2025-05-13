@@ -1,0 +1,20 @@
+```sparql
+PREFIX : <http://example.org/schema#>
+
+SELECT ?model
+WHERE {
+  ?evaluation :performedOn :ShAReCLEFeHealthCorpusBenchmarkDataset ;
+               :hasModel ?model ;
+               :hasMetric :F1 ;
+               :hasValue ?value .
+  
+  FILTER NOT EXISTS {
+    ?otherEvaluation :performedOn :ShAReCLEFeHealthCorpusBenchmarkDataset ;
+                      :hasModel ?otherModel ;
+                      :hasMetric :F1 ;
+                      :hasValue ?otherValue .
+
+    FILTER (?otherValue > ?value)
+  }
+}
+```

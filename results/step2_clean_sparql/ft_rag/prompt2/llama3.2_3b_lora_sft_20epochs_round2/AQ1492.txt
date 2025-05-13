@@ -1,0 +1,14 @@
+```sparql
+SELECT ?approach
+WHERE {
+  orkgp:R63885 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_label.
+  FILTER(REGEX(?metric_label, "Precision"))
+  ?eval orkgp:HAS_DATASET orkgp:R63885.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P34 ?approach.
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

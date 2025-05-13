@@ -1,0 +1,17 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Amazon-2 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper ;
+        orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_BENCHMARK?benchmark ;
+              orkg:HAS_DATASET?dataset.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/dataset/Amazon-2> ;
+             orkg:HAS_METRIC?metric.
+  FILTER(?dataset = <http://orkg.org/dataset/Amazon-2>)
+}<|eot_id|>

@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the CommonsenseQA dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "CommonsenseQA")
+      ?evaluation     orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_EVALUATION   ?evaluation.
+      ?cont          orkgp:HAS_METHOD        ?model.
+      ?model         rdfs:label              ?model_lbl.
+     }
+    <|eot_id|>

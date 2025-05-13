@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "BUCC French-to-English".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark.
+  ?metric orkgp:HAS_EVALUATION ?evaluation;
+          rdfs:label ?label.
+  OPTIONAL {
+    ?evaluation orkgp:HAS_VALUE ?value.
+  }
+  OPTIONAL {
+    ?value orkgp:HAS_METRIC ?metric.
+  }
+}
+```

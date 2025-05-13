@@ -1,0 +1,14 @@
+```
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?contrib.
+  ?contrib orkgp:P37530 ?model.
+  ?model rdfs:label ?model_lbl.
+  ?model orkgp:P37529 ?benchmark.
+  FILTER(REGEX(STR(?benchmark), "TCN"))
+  ?benchmark orkgp:P37531 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?eval_lbl.
+  ?contrib orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:P37533 ?code.
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?f1score WHERE {
+  ?model orkg:has_dataset ?dataset.
+  ?dataset orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_f1_score ?f1score.
+  ?dataset orkg:has_name "NYT-single".
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

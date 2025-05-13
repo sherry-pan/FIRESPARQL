@@ -1,0 +1,19 @@
+Question:
+Where can I find code references in papers that have used the DQNMMCe+SR model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper orkgp:P31?contrib.
+      ?contrib orkgp:P32?code.
+      ?paper orkgp:P5049?eval.
+      ?eval orkgp:HAS_EVALUATION?eval_eval.
+      ?eval_eval rdfs:label?eval_label.
+       FILTER(REGEX(?eval_label, "DQNMMCe+SR"))
+      ?contrib orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P5048?implementation.
+      ?implementation orkgp:HAS_IMPLEMENTATION?code.
+      ?contrib orkgp:HAS_METHOD?method.
+      ?method rdfs:label?method_label.
+       FILTER(REGEX(?method_label, "DQNMMCe+SR"))
+     }<|eot_id|>

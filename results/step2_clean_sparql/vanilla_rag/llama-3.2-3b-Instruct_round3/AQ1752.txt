@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?score
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "Atari 2600 Montezuma's Revenge" .
+  ?dataset orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_SCORE ?score.
+  ?method orkg:P71081 ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

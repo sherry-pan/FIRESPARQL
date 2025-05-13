@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark rdfs:label "Atari 2600 Tennis".
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER (?metric = "Score")
+}
+```

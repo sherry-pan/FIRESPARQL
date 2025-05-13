@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkgp:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Natural Questions \\(long\\)"^^xsd:string))
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark;
+           orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P97152 ?metric;
+        orkgp:P71080 ?score.
+  FILTER(REGEX(?metric, "Accuracy"^^xsd:string))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

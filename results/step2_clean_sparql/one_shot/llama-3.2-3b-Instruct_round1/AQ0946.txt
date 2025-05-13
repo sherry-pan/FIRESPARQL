@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  {
+    SELECT ?metric ?metric_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Fishing Derby")
+      ?benchmark orkgp:HAS_DATASET ?dataset;
+    }
+  }
+}
+```

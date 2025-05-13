@@ -1,0 +1,16 @@
+Question:
+Indicate the model that performed best in terms of Senseval 2 metric on the Supervised: benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT?model?senseval2_score
+WHERE {
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?metric orkg:HAS_VALUE?senseval2_score.
+ ?model orkg:HAS_BENCHMARK orkg:Supervised.
+ ?model orkg:HAS_METHOD?method.
+ ?evaluation orkg:COMPARED_WITH?other_model.
+  FILTER(?metric = "Senseval 2" &&?senseval2_score > ALL (?other_model orkg:HAS_EVALUATION?other_senseval2_score))
+}<|eot_id|>

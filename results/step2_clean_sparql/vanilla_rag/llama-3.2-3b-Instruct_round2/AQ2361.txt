@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark rdfs:label ?label.
+  FILTER (STRSTARTS(?label, 'BiT-M'))
+  ?benchmark orkg:has_implementation ?implementation.
+  ?implementation orkg:has_code_link ?code.
+}
+```

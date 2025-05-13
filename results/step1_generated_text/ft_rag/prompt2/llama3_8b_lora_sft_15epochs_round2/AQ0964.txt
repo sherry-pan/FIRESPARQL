@@ -1,0 +1,15 @@
+Question:
+List the metrics that are used to evaluate models on the Atari 2600 Battle Zone benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Battle Zone")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:P31               ?cont;
+                     orkgp:P34               ?metric.
+      ?metric       rdfs:label              ?metric_lbl.
+     }<|eot_id|>

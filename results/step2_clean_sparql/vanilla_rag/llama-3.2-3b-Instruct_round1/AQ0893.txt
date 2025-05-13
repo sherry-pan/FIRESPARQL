@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+  ?e orkg:has_benchmark ?b.
+  ?b orkg:has_dataset ?d.
+  ?d orkg:has_training_set ?ts.
+  ?ts orkg:has_evaluation ?e.
+  ?e orkg:has_metric ?metric.
+  FILTER (str(?metric) = "recall" OR str(?metric) = "accuracy" OR str(?metric) = "micro-F1" OR str(?metric) = "macro-F1" OR str(?metric) = "NDCG@10")
+}
+```

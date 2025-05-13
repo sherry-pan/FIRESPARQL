@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "NYT29"))
+
+    ?cont orkgp:HAS_DATASET ?dataset;
+          orkgp:P32 ?metric;
+          orkgp:P200 ?value.
+    ?metric rdfs:label ?metric_lbl.
+}
+```

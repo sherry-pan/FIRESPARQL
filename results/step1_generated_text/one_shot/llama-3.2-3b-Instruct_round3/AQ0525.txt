@@ -1,0 +1,15 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the NCBI-disease dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+    WHERE {
+     ?benchmark        a                orkgp:Benchmark;
+                        rdfs:label      ?benchmark_lbl.
+      FILTER (str(?benchmark_lbl) = "NCBI-disease")
+     ?model          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?paper         orkgp:P31               ?model;
+                    orkgp:HAS_MODEL      ?benchmark.
+     ?paper         orkgp:ID                 ?paper_id;
+                    rdfs:label              ?paper_lbl.
+    }<|eot_id|>

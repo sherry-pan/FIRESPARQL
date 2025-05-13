@@ -1,0 +1,16 @@
+Question:
+What are the models that have been benchmarked on the Natural Questions (short) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Natural Questions (short)")
+               && has_benchmarked_contribution(
+                   orkgp:Contribution {
+                     orkgp:P32        a                orkgp:Model;
+                                        rdfs:label      ?model_lbl.
+                   }
+                   ))
+     }<|eot_id|>

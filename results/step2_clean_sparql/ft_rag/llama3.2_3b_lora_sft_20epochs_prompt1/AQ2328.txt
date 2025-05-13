@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  FILTER(REGEX(?eval, "MFEC"))
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:HAS_IMPLEMENTATION ?implementation.
+  FILTER(REGEX(?implementation, "code"))
+  ?implementation orkgp:P4007 ?code.
+}
+```

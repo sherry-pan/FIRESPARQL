@@ -1,0 +1,22 @@
+Question:
+What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.scholasticore.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel
+WHERE {
+ ?model orkg:has_benchmark?benchmark.
+ ?benchmark orkg:evaluation?evaluation.
+ ?evaluation orkg:metric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel = "F1 entity level score").
+ ?model orkg:evaluation?evaluation.
+ ?evaluation orkg:metric_value?f1Score.
+ ?evaluation orkg:metric?microF1.
+ ?microF1 rdfs:label "micro-F1".
+ ?evaluation orkg:metric_value?microF1Value.
+  FILTER (?microF1Value = (SELECT max(?value) AS maxF1 FROM {?model orkg:evaluation?evaluation.?evaluation orkg:metric_value?value } ) ).
+ ?model rdfs:label?modelLabel.
+}<|eot_id|>

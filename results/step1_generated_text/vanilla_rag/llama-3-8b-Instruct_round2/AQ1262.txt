@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset AESLC?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/ontology/>
+    PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+    SELECT?metric?value
+    WHERE {
+       ?evaluation a orkg:Evaluation ;
+            orkg:hasDataset <http://orkg.org/orkg/resource/AESLC> ;
+            orkg:hasEvaluation?hasEvaluation.
+       ?hasEvaluation orkg:method?method.
+       ?hasEvaluation orkg:evaluation?evaluation.
+       ?hasEvaluation orkg:metric?metric.
+       ?hasEvaluation csvw:value?value.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1<|eot_id|>

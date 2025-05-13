@@ -1,0 +1,15 @@
+Question:
+What is the best performing model benchmarking the Reacher, easy (DMControl100k) dataset in terms of Score metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?dataset?metric
+     WHERE {
+      ?model orkg:has_benchmark?benchmark.
+      ?benchmark orkg:has_evaluation?evaluation.
+      ?evaluation orkg:has_method?method.
+      ?method orkg:has_dataset?dataset.
+      ?dataset orkg:has_dataset "Reacher, easy (DMControl100k)".
+      ?benchmark orkg:has_evaluation_metric?metric.
+       FILTER (STRLIKE(?metric, "Score") && EXISTS(?benchmark))
+     }<|eot_id|>

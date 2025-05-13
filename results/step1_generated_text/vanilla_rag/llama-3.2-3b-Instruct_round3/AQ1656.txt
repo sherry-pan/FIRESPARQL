@@ -1,0 +1,20 @@
+Question:
+What is the best performing model benchmarking the Oxford-IIIT Pets dataset in terms of FLOPS metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?FLOPS
+     WHERE {
+    ?model orkg:hasEvaluation?eval.
+    ?eval orkg:hasDataset?dataset.
+    ?dataset orkg:hasMethod?method.
+    ?method orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasMetric?metric.
+    ?metric orkg:label "FLOPS"@en.
+     FILTER (STR(?metric) = "FLOPS")
+    ?model orkg:hasDataset?dataset.
+    ?dataset orkg:hasDataset "Oxford-IIIT Pets"@en.
+    ?model orkg:hasMethod?method.
+    ?method orkg:method "benchmark"@en.
+    ?model orkg:hasMetric?metric.
+     }<|eot_id|>

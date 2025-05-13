@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?paper ?code
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_IMPLEMENTATION ?code.
+ ?evaluation orkg:HAS_METHOD ?method.
+ FILTER regex(?method, "SEE", "i").
+}
+```

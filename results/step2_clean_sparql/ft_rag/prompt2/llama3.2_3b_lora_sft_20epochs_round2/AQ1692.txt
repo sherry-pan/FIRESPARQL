@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Atari 2600 Crazy Climber".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label "Score".
+  ?benchmark orkgp:HAS_APPROACH ?approach.
+  ?model orkgp:HAS_METHOD ?approach;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

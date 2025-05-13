@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET orkg:MLDoc_ZeroShot_English_to_French.
+  ?evaluation csvw:CSVW_Cell ?cell.
+  ?cell csvw:CSVW_Value ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

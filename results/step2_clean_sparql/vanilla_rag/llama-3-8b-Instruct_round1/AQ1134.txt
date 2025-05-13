@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71081: <http://orkg.org/orkg/predicate/P71081>
+PREFIX p71082: <http://orkg.org/orkg/predicate/P71082>
+
+SELECT ?metric ?score
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/Hendrycks_Test>.
+  ?evaluation orkg:hasMetric ?metric.
+  ?evaluation p71081:Accuracy ?score.
+  FILTER (?metric = p71081:Accuracy || ?metric = p71082:macro-F1)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

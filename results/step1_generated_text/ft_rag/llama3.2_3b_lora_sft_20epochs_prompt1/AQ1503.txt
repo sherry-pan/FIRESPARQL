@@ -1,0 +1,69 @@
+Question:
+What is the best performing model benchmarking the Supervised: dataset in terms of SemEval 2013 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Supervised")
+               && str(?dataset_lbl      = "Supervised"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:P32             ?metric.
+       OPTIONAL {?eval           orkgp:HAS_METRIC_VALUE  ?metric_value.
+                ?metric           orkgp:P31               ?metric_value.}
+       OPTIONAL {?eval           orkgp:HAS_VALUE        ?value.
+                ?cont           orkgp:HAS_METRIC        ?metric.
+                ?metric          orkgp:P32               ?eval.}
+       OPTIONAL {?eval           orkgp:HAS_METRIC_VALUE  ?metric_value.
+                ?cont           orkgp:HAS_EVALUATION   ?eval.
+                ?eval           orkgp:P31               ?metric_value.}
+       OPTIONAL {?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+                ?model          orkgp:HAS IMPLEMENTATION ?impl.
+                ?impl           orkgp:HAS_SOURCE        ?source.
+                ?source          orkgp:HAS_VALUE          ?value.
+                ?value           orkgp:HAS_METRIC          ?metric.
+                ?metric           orkgp:P31               ?eval.}
+       OPTIONAL {?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+                ?model          orkgp:HAS_EVALUATION   ?eval.
+                ?eval           orkgp:P31               ?metric.
+                ?metric          orkgp:P32               ?value.}
+       OPTIONAL {?cont         orkgp:HAS_EVALUATION   ?eval.
+                ?model          orkgp:HAS_SOURCE        ?source.
+                ?source          orkgp:HAS_VALUE          ?value.
+                ?value           orkgp:HAS_METRIC          ?metric.
+                ?metric           orkgp:P31               ?eval.}
+       OPTIONAL {?cont         orkgp:HAS_EVALUATION   ?eval.
+                ?model          orkgp:HAS_EVALUATION   ?eval.
+                ?eval           orkgp:P32               ?value.}
+       OPTIONAL {?cont         orkgp:HAS_SOURCE        ?source.
+                ?source          orkgp:HAS_VALUE          ?value.
+                ?value           orkgp:HAS_METRIC          ?metric.
+                ?metric           orkgp:P31               ?eval.}
+       OPTIONAL {?cont         orkgp:HAS_SOURCE        ?source.
+                ?source          orkgp:HAS_EVALUATION   ?eval.
+                ?eval           orkgp:P31               ?metric.}
+       OPTIONAL {?cont         orkgp:HAS_EVALUATION   ?eval.
+                ?eval           orkgp:P32               ?value.}
+      ?model          orkgp:HAS_METHOD         ?method.
+      ?method         rdfs:label              ?method_lbl.
+       FILTER(?method_lbl      = "Best")
+       {
+        ?cont           orkgp:HAS_MODEL         ?model.
+        ?model          rdfs:label              ?model_lbl.
+         OPTIONAL {
+          ?cont           orkgp:P31               ?metric.
+          ?metric           orkgp:HAS_VALUE        ?value.
+           FILTER(?value       = "Accuracy")
+          ?eval            orkgp:HAS_DATASET      ?dataset.
+          ?dataset         rdfs:label              ?dataset_lbl.
+           FILTER(?dataset_lbl      = "Supervised" &&?dataset_lbl      = "Supervised")
+          ?eval            orkgp:HAS_BENCHMARK     ?benchmark.
+          ?benchmark      orkgp:HAS_EVALUATION   ?eval.
+          ?eval            orkgp:P32               ?metric
+         }
+       }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

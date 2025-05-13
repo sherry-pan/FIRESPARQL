@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?modelLabel ?benchmark ?evaluation ?method ?implementation ?approach
+WHERE {
+  ?model a orkg:Model ;
+         orkg:has_dataset <http://www.orkg.org/dataset/ShARe-CLEF_eHealth_corpus> ;
+         orkg:evaluation ?evaluation ;
+         orkg:method ?method ;
+         orkg:implementation ?implementation ;
+         orkg:approach ?approach.
+  ?evaluation orkg:has_benchmark ?benchmark.
+  SERVICE orkg:label { ?model rdfs:label ?modelLabel }
+}
+```

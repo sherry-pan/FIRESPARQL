@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Unpermuted Accuracy")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Sequential CIFAR-10")
+      ?benchmark a orkgc:Benchmark;
+                 orkgc:evaluates ?dataset;
+                 orkgc:usesMetric ?metric;
+                 orkgc:resultedIn ?result.
+      ?result orkgc:refersTo ?model;
+              orkgc:hasValue ?value.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

@@ -1,0 +1,16 @@
+Question:
+What is the best performing model benchmarking the PIQA dataset in terms of Accuracy metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71081: <http://orkg.org/orkg/predicate/P71081>
+
+SELECT?model?accuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/dataset/PIQA>.
+ ?evaluation orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark p71081:Accuracy?accuracy.
+  FILTER (?accuracy = MAX(?accuracy))
+}<|eot_id|>

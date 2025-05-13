@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "RotoWire (Content Ordering)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?eval.
+        
+  ?eval orkgp:P34 ?score.
+  ?model orkgp:P32 ?cont;
+         rdfs:label ?model_lbl.
+         
+  ?score a orkgc:Score;
+         rdfs:label ?score_lbl.
+  FILTER (str(?score_lbl) = "BLEU")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

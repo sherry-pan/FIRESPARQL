@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkgc: <http://www.orkg.org/closure/>
+PREFIX orkgp: <http://www.orkg.org/provenance/>
+
+SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU")
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      r

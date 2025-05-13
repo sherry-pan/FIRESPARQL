@@ -1,0 +1,20 @@
+Question:
+What models are being evaluated on the Classic dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Classic")
+               || str(?dataset_lbl      = "twin-SL-1"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_EVALUATION     ?eval.
+      ?eval           orkgp:P32               ?cont;
+                      orkgp:HAS_METHOD        ?method.
+      ?method         rdfs:label              ?method_lbl.
+      ?model          orkgp:HAS_METHOD        ?method.
+      ?model          rdfs:label              ?model_lbl.
+     }<|eot_id|>

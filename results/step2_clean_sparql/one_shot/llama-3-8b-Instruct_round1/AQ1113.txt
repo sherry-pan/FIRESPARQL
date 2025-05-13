@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/ontology/contributions#>
+PREFIX orkgp: <http://www.orkg.org/ontology/peer-review-process#>
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "IWSLT2015 German-English")
+      ?result a orkgc:BenchmarkResult;
+              orkgc:hasDataset ?dataset;
+              orkgc:hasMetric ?metric;
+              orkgc:hasValue ?value.
+      ?metric rdfs:label ?metric_lbl.
+    }
+  }
+}
+```

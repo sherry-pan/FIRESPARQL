@@ -1,0 +1,18 @@
+```sparql
+PREFIX bench: <http://example.org/bench#>
+PREFIX dataset: <http://example.org/dataset#>
+PREFIX model: <http://example.org/model#>
+PREFIX score: <http://example.org/score#>
+
+SELECT ?modelName
+WHERE {
+  ?evaluation benchmark:dataset dataset:CL-SciSumm ;
+              benchmark:score ?score .
+  ?score score:metric "ROUGE-2" ;
+         score:value ?rouge2Score .
+  ?model model:name ?modelName ;
+         model:evaluation ?evaluation .
+}
+ORDER BY DESC(?rouge2Score)
+LIMIT 1
+```

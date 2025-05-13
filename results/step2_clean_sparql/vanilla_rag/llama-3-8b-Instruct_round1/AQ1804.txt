@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX vtab: <http://orkg.org/orkg/resource/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:PARAMS ?params.
+  ?benchmark orkg:HAS_DATASET vtab:VTAB-1k.
+  ?model orkg:NAME ?modelLabel.
+}
+ORDER BY DESC(?params)
+LIMIT 1
+```

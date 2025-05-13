@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+  {
+    SELECT ?model ?model_lbl (MAX(?accuracy) AS ?max_accuracy)
+    WHERE {
+      ?model a orkgc:Model;
+             rdfs:label ?model_lbl;
+             orkgp:HAS_DATASET ?dataset.
+      ?dataset orkgp:HAS_BENCHMARK ?benchmark;
+               rdfs:label ?dataset_lbl.
+      ?benchmark orkgp:HAS_METRIC ?metric.
+      ?cont orkgp:P71081 ?value.
+      ?value rdfs:label ?accuracy_lbl.
+      BIND(xsd:float(?accuracy_lbl) AS ?accuracy)
+    }
+    GROUP BY ?model ?model_lbl
+  }
+}
+ORDER BY DESC(?max_accuracy)
+LIMIT 1
+```

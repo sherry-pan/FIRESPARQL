@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkgc: <http://schema.org/Dataset>
+PREFIX orkgp: <http://schema.org/Evaluation>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?model ?model_lbl ?value
+    WHERE {
+      ?dataset a orkgc:Dataset;
+        rdfs:label "Atari 2600 Montezuma's Revenge".
+      ?evaluation a orkgp:Evaluation;
+        orkgp:hasModel ?model;
+        orkgp:hasMetric orkgp:AverageReturnNoOp;
+        orkgp:hasValue ?value.
+      ?model rdfs:label ?model_lbl.
+    }
+  }
+}
+GROUP BY ?model ?model_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?code.
+  ?code rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "STREET"))
+  ?contrib orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P5049 ?eval.
+  ?eval orkgp:P5048 ?dataset.
+  ?dataset orkgp:P5047 ?implementation.
+  ?implementation orkgp:P31 ?method.
+  FILTER(?method = "STREET")
+}
+```

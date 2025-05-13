@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model
+WHERE {
+    ?evaluation orkg:HAS_EVALUATION ?performanceMetric.
+    ?performanceMetric rdfs:label "Pearson Correlation".
+    ?evaluation orkg:HAS_METHOD ?model.
+    ?evaluation orkg:HAS_BENCHMARK orkg:MedSTS.
+    ?performanceMetric orkg:HAS_VALUE ?value.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

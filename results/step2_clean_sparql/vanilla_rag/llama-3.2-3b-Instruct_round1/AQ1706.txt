@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:has_method ?m.
+    ?m orkg:has_dataset ?dataset.
+    ?dataset orkg:has_benchmark "Atari 2600 Asteroids".
+    ?m orkg:has_evaluation ?ev.
+    ?ev orkg:has_score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

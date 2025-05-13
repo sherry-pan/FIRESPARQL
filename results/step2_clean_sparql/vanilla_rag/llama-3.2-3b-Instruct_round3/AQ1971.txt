@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?code 
+WHERE {
+  ?paper orkg:HAS_IMPLEMENTATION ?impl.
+  ?impl orkg:HAS_METHOD "CRF with sentence expansion model".
+  ?paper orkg:HAS_LINK ?link.
+  ?link orkg:uri ?code.
+  FILTER (CONTAINS(LCASE(?code), "github") OR CONTAINS(LCASE(?code), "gitlab"))
+}
+LIMIT 10
+```

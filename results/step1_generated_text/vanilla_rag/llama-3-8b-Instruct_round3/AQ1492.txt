@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of Precision metric on the RotoWire (Relation Generation) benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?approach
+WHERE {
+ ?evaluation a orkg:Evaluation ;
+    orkg:HAS_EVALUATION?metric ;
+    orkg:HAS_DATASET <http://orkg.org/orkg/resource/dataset/RotoWire>.
+ ?evaluation orkg:HAS_APPROACH?approach.
+ ?evaluation orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:METRIC?metric.
+ ?metric rdfs:label "Precision".
+  FILTER (?metric = "Precision")
+  FILTER (?benchmark = (GROUP_CONCAT(DISTINCT?metric; SEPARATOR=", ") ORDER BY DESC(COUNT(?metric)) LIMIT 1))
+}<|eot_id|>

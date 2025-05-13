@@ -1,0 +1,15 @@
+```sparql
+SELECT ?v
+WHERE {
+  ?v a ora:Variable.
+  SERVICE orkg.sparql {
+    SELECT ?v (COUNT(?v) AS ?count)
+    WHERE {
+      ?v ora:variableType ora:isSubsetOf ora:AtmosphereModel.
+    }
+    GROUP BY ?v
+    ORDER BY DESC(?count)
+    LIMIT 3
+  }
+}
+```

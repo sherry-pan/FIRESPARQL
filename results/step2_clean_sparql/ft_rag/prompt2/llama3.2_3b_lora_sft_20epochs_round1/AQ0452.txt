@@ -1,0 +1,14 @@
+```sparql
+SELECT ?titles ?number
+WHERE {
+  ?paper orkgp:HAS_BENCHMARK ?benchmark .
+  ?benchmark rdfs:label ?has_benchmark .
+  FILTER(REGEX(?has_benchmark, "PubMedQA")) .
+  ?paper orkgp:P31 [
+    rdfs:label ?titles
+  ] .
+  ?paper orkgp:HAS_NUMBER [
+    orkgp:HAS_VALUE ?number
+  ] .
+}
+```

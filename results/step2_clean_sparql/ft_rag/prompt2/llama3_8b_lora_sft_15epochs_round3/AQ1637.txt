@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Cart Pole (OpenAI Gym)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_EVALUATION ?eval;
+         orkgp:SCORE ?score.
+  ?eval orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  
+  ?model orkgp:P32 ?cont;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

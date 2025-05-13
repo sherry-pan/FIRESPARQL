@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+    ?problem a orkgc:Problem;
+             rdfs:label ?problem_lbl.
+    FILTER (str(?problem_lbl) = "Semantic Role Labeling")
+    
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark.
+    ?eval orkgp:HAS_EVALUATION ?eval.
+    ?value orkgp:HAS_DATASET ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+}
+```

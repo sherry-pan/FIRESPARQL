@@ -1,0 +1,24 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+       orkgr:R6898 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P31079?eval.
+      ?eval orkgp:P71075?cont.
+      ?cont orkgp:P97104?metric.
+      ?metric rdfs:label?metric_lbl.
+      ?dataset rdfs:label?dataset_lbl.
+       FILTER(REGEX(?dataset_lbl, "MultiNLI"))
+      ?eval orkgp:P97135?matching_strategy.
+       BIND(
+         IF(?metric_lbl = "Accuracy" ||?metric_lbl = "macro-F1", 
+              MAX(?value), 
+              IF(?metric_lbl = "Recall" ||?metric_lbl = "micro-F1", 
+                   MAX(?value), 
+                   NULL))
+           AS?score)
+     }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

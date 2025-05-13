@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model ?accuracy
+WHERE {
+    ?model orkg:has_method ?method.
+    ?method orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_dataset ?dataset.
+    ?dataset orkg:has_benchmark "Stanford Cars".
+    ?evaluation orkg:has_value ?accuracy.
+    FILTER CONTAINS(STR(?accuracy), "Accuracy")
+}
+```

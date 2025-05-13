@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?score
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?method.
+ ?method orkg:HAS_METHOD?metric.
+ ?evaluation csvw:CSVW_Value?score.
+  FILTER (?benchmark orkg:HAS_DATASET "BUCC German-to-English".
+          ?evaluation orkg:HAS_DATASET "BUCC German-to-English".
+           STR(?score) = FILTER (STR(?score) = MAX(STR(?score)))
+  )
+}<|eot_id|>

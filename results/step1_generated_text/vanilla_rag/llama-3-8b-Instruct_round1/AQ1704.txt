@@ -1,0 +1,15 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 River Raid benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+    SELECT?model?score
+    WHERE {
+     ?model orkg:HAS_BENCHMARK "Atari 2600 River Raid".
+     ?model orkg:HAS_EVALUATION?evaluation.
+     ?evaluation csvw:CSVW_Value?score.
+     ?model orkg:HAS_METHOD?method.
+      FILTER (?score = MAX(?score) )
+    }<|eot_id|>

@@ -1,0 +1,25 @@
+Question:
+Indicate the model that performed best in terms of Macro Precision metric on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX sparql: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+     SELECT?model?metric
+     WHERE {
+      ?model orkg:hasMethod?method.
+      ?method orkg:hasMacroPrecision?metric.
+       FILTER(?metric = "Macro Precision").
+      ?model orkg:hasDataset?dataset.
+      ?dataset orkg:hasTrainingSet?trainSet.
+      ?trainSet orkg:hasClasses?classes.
+      ?classes orkg:hasLabel "NLP-TDMS".
+      ?model orkg:hasBenchmark "Exp".
+      ?model orkg:hasDataset?dataset.
+      ?dataset orkg:hasValidationSet?valSet.
+      ?valSet orkg:hasClasses?classes.
+      ?classes orkg:hasLabel "Exp".
+      ?model orkg:hasPerformanceMeasure?perf.
+       FILTER(?perf = "Macro Precision").
+     }<|eot_id|>

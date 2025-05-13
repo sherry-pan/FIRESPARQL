@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?entityF1Score
+WHERE {
+ ?model orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasMetric ?metric.
+ ?metric orkg:hasValue ?entityF1Score.
+ ?model orkg:method ?method.
+ ?method schema:name ?methodLabel.
+ ?evaluation orkg:hasDataset ?dataset.
+ ?dataset schema:name "SciERC".
+}
+ORDER BY DESC(?entityF1Score)
+LIMIT 1
+```

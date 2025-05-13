@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://data.orkg.org/api/v1/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl>
+
+SELECT ?model ?accuracy ?microF1 ?macroF1 ?recall ?ndcg10
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:usesMetric orkg:Accuracy;
+             orkg:hasValue ?accuracy.
+  ?evaluation orkg:usesMetric orkg:MicroF1;
+             orkg:hasValue ?microF1.
+  ?evaluation orkg:usesMetric orkg:MacroF1;
+             orkg:hasValue ?macroF1.
+  ?evaluation orkg:usesMetric orkg:Recall;
+             orkg:hasValue ?recall.
+  ?evaluation orkg:usesMetric orkg:NDCG@10;
+             orkg:hasValue ?ndcg10.
+  ?model orkg:hasDataset "Supervised".
+}
+```

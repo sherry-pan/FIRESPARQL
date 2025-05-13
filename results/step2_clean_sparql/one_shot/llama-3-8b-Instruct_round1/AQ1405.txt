@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgc: <http://orkg.org/collection/>
+PREFIX orkgp: <http://orkg.org/property/>
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Entity F1")
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SciERC")
+  ?benchmark orkgp:hasDataset ?dataset;
+             orkgp:hasMetric ?metric;
+             orkgp:hasModel ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

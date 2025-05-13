@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX ace: <http://www.ace2004.org/>
+
+SELECT ?model ?modelLabel ?evaluation ?evaluationValue
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?model orkg:HAS_DATASET ace:ACE_2004.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC "RE+ Micro F1".
+  ?evaluation orkg:HAS_VALUE ?evaluationValue.
+  {
+    SELECT ?model (MAX(?evaluationValue) AS ?maxEvaluationValue)
+    WHERE {
+      ?model orkg:HAS_EVALUATION ?evaluation.
+      ?evaluation orkg:HAS_METRIC "RE+ Micro F1".
+      ?evaluation orkg:HAS_VALUE ?evaluationValue.
+    }
+    GROUP BY ?model
+  }
+  FILTER (?evaluationValue = ?maxEvaluationValue)
+}
+```

@@ -1,0 +1,15 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the CUB-200-2011 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?title?id
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasDataset "CUB-200-2011".
+    ?paper orkg:titles?title.
+    ?paper orkg:Number?id.
+     FILTER (?benchmark IS NOT NULL AND?evaluation IS NOT NULL)
+     }
+    <|eot_id|>

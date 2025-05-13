@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71081: <http://orkg.org/orkg/predicate/P71081>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation p71081:Accuracy ?accuracy.
+  ?method orkg:HAS_DATASET ?dataset.
+  ?evaluation orkg:HAS_METHOD ?method.
+  ?dataset a orkg:Dataset; orkg:label "SST-5 Fine-grained classification benchmark dataset".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

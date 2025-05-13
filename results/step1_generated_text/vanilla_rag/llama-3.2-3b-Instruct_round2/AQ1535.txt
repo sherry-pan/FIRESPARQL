@@ -1,0 +1,18 @@
+Question:
+Which model has achieved the highest Test perplexity score on the WikiText-2 benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+     PREFIX p: <http://www.wikidata.org/prop/direct/>
+
+     SELECT?model?testPerplexity
+     WHERE {
+      ?model wdt:P31?class.
+      ?class wdt:P31?subclass.
+      ?subclass rdfs:subClassOf* wd:Q123456. # Replace with actual class URI
+      ?model wdt:P162?evaluation.
+      ?evaluation wdt:P310?testPerplexity.
+       FILTER (str(?testPerplexity) =~ "Wt-2")
+      ?model wdt:HAS_DATASET wd:Q123456. # Replace with actual dataset URI
+     }<|eot_id|>

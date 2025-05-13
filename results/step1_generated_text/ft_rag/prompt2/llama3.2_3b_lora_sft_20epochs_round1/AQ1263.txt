@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Seaquest dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "Atari 2600 Seaquest"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_EVALUATION   ?evaluation.
+        ?evaluation      orkgp:HAS_VALUE        ?value.
+         OPTIONAL {?benchmark      orkgp:P71081           ?metric.
+                  ?metric              rdfs:label              ?metric_lbl.}
+         OPTIONAL {?benchmark      orkgp:P71080           ?micro_f1.
+                  ?micro_f1              rdfs:label              ?micro_f1_lbl.}
+         OPTIONAL {?benchmark      orkgp:P71082           ?macro_f1.
+                  ?macro_f1              rdfs:label              ?macro_f1_lbl.}
+     }<|eot_id|>

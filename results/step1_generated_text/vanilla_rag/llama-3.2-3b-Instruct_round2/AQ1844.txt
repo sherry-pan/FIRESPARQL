@@ -1,0 +1,15 @@
+Question:
+Name the datasets that have been used for benchmarking in the citation classification research problem?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?dataset 
+     WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:has_dataset?dataset_has_dataset.
+    ?dataset_has_dataset orkg:has_evaluation?evaluation.
+    ?evaluation orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_method?dataset_method.
+    ?dataset_method orkg:has_implementation?dataset_implementation.
+     FILTER (str like(?benchmark "citation classification" @english ) )
+     }<|eot_id|>

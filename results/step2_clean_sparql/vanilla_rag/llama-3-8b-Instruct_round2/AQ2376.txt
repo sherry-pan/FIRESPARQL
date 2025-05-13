@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_method ?method.
+  ?method orkg:has_implementation ?implementation.
+  ?implementation orkg:has_code ?code_link.
+  ?paper orkg:has_title ?paper_title.
+  FILTER (?method = "ANODE" || ?method rdfs:subClassOf "ANODE").
+}
+ORDER BY ?paper_title
+```

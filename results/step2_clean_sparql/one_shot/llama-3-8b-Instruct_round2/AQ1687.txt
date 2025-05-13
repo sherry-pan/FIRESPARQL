@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/property/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "ROUGE-1")
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "AESLC")
+  ?evaluation a orkgc:Evaluation;
+              orkgp:includesDataset ?dataset;
+              orkgp:usesMetric ?metric;
+              orkgp:hasValue ?value.
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgp:hasEvaluation ?evaluation.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

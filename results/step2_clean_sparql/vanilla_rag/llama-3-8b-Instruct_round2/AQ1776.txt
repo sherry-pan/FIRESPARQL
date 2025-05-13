@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?params
+WHERE {
+  ?model a orkg:Model;
+         orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://image-net.org/>;
+             orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:Number ?params.
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  FILTER EXISTS {
+    ?implementation orkg:HAS_METHOD ?method.
+    ?method orkg:HAS_METRIC ?metric.
+    FILTER (?metric csvw:Name "Number of params")
+  }
+  FILTER (xsd:integer(?params)).
+}
+ORDER BY DESC(?params)
+LIMIT 1
+```

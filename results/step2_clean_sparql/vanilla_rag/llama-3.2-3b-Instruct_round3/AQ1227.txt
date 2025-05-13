@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric ?metricValue
+WHERE {
+  ?benchmark a orkg:benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric ?metric.
+  ?evaluation orkg:metricValue ?metricValue.
+  ?benchmark orkg:bestResult ?bestResult.
+  FILTER (?metric = "Cartpole, swingup (DMControl500k)"^^xsd:string).
+  ?bestResult orkg:metric ?metric.
+  ?bestResult orkg:metricValue ?bestResultValue.
+  FILTER (?metricValue = ?bestResultValue).
+}
+```

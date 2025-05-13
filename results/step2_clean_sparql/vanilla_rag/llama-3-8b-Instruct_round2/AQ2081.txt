@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_METHOD ?method.
+  ?method orkg:USES_MODEL ?model.
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_CODE ?code.
+  FILTER regex(?model, "BiDAF\\+Self\\ Attention\\+ELMo").
+}
+```

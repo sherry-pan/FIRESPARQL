@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT ?metric
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_METRIC ?metric.
+  FILTER(?benchmark = "Story Cloze Test" && ?metric != "reporting level")
+}
+```

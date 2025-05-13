@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?evaluationValue
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationValue.
+  ?evaluation orkg:HAS_METHOD ?model.
+  ?model rdfs:label ?modelLabel.
+  ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/CoNLL_2012>.
+  ?evaluation orkg:METRIC orkg:P71080.
+} 
+ORDER BY DESC(?evaluationValue)
+LIMIT 1
+```

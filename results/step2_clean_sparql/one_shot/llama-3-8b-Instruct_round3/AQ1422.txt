@@ -1,0 +1,26 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/schema#>
+
+SELECT ?model
+WHERE {
+  ?evaluation :hasBenchmark :IWSLT2014_German_English ;
+              :hasMetric :BLEU ;
+              :hasModel ?model ;
+              :hasScore ?score .
+  
+  {
+    SELECT (MAX(?score) as ?maxScore)
+    WHERE {
+      ?evaluation :hasBenchmark :IWSLT2014_German_English ;
+                  :hasMetric :BLEU ;
+                  :hasScore ?score .
+    }
+  }
+  
+  FILTER(?score = ?maxScore)
+}
+```

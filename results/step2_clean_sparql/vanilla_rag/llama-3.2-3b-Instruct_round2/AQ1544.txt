@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model 
+WHERE {
+  ?model orkg:hasMicroF1 ?microF1.
+  ?model orkg:hasMacroF1 ?macroF1.
+  BIND(IF(?microF1 >= ?macroF1, ?microF1, ?macroF1) AS ?f1)
+} 
+ORDER BY DESC(?f1)
+LIMIT 1
+```

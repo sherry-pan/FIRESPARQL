@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "Penn Treebank (Character Level)")
+  
+  ?model orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P32 ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?number_of_params)
+  
+  ?model orkgp:P703 ?model_lbl.
+}
+ORDER BY DESC(?number_of_params)
+LIMIT 1
+```

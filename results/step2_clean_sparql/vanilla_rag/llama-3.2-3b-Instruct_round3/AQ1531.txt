@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?result
+WHERE {
+    ?model orkg:HAS_MODEL ?m.
+    ?m orkg:HAS_PERFORMANCE ?p.
+    ?p orkg:HAS_RESULT ?r.
+    ?m orkg:HAS_BENCHMARK "WikiText-103".
+    ?m orkg:HAS_METRIC "Test perplexity".
+    ?r orkg:HAS_RESULT ?result.
+    FILTER(?result > 0)
+}
+```

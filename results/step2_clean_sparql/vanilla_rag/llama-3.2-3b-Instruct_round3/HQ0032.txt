@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?compound (COUNT(*) AS ?count) 
+WHERE {
+    ?compound orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:compared_with ?other.
+    ?compound orkg:coexists_with ?other.
+}
+GROUP BY ?compound
+ORDER BY DESC(?count)
+LIMIT 1
+```

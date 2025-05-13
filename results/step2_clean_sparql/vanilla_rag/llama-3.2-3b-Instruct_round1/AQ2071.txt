@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_method ?method.
+  ?method orkg:has_name "FG fine-grained gate model".
+  ?paper orkg:has_implementation ?implementation.
+  ?paper orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_link ?link.
+  FILTER (STRSTARTS(STR(?link), "https://github.com/")).
+}
+GROUP BY ?paper
+HAVING (COUNT(DISTINCT ?benchmark) > 1)
+ORDER BY DESC(COUNT(DISTINCT ?benchmark))
+LIMIT 10
+```

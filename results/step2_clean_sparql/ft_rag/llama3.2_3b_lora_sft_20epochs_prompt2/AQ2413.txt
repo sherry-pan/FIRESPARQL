@@ -1,0 +1,12 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 ?contrib.
+  ?contrib orkgp:P32 ?model.
+  ?model sameAs ?model_iri.
+  ?model_iri rdfs:label ?model_labels.
+  FILTER(REGEX(?model_labels, "CvT-21 (384 res)"))
+  ?papers orkgp:P34 ?code.
+}
+```

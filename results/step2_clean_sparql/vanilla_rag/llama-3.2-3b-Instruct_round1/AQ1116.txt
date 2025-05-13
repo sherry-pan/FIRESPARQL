@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?value
+WHERE {
+  ?s orkg:HAS_DATASET "WMT2016 Czech-English".
+  ?s orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:CSVW_Value ?value.
+  ?evaluation orkg:CSVW_Number ?metric.
+  FILTER (STR(?metric) = "top" AND STR(?value) = "benchmark")
+}
+```

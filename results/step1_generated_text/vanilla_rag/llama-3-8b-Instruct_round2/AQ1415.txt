@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the 200k Short Texts for Humor Detection dataset in terms of F1-score metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.scholarg.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT?model?f1_score
+WHERE {
+ ?model orkg:has_benchmark?benchmark.
+ ?benchmark orkg:has_dataset <http://www.scholarg.org/orkg/dataset/200k_Short_Texts_for_Humor_Detection>.
+ ?benchmark orkg:evaluation?evaluation.
+ ?evaluation orkg:metric "F1-score".
+ ?evaluation orkg:has_value?f1_score.
+ ?model orkg:method?method.
+  FILTER (?f1_score >?best_f1_score)
+  ORDER BY DESC(?f1_score)
+  LIMIT 1
+}<|eot_id|>

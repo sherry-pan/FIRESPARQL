@@ -1,0 +1,12 @@
+```
+PREFIX dataset: <http://example.org/vocab/dataset/>
+PREFIX performance: <http://example.org/vocab/performance/>
+SELECT ?modelName WHERE {
+  ?model a dataset:Model ;
+         dataset:isBenchmarkedOn dataset:VTAB-1k ;
+         performance:hasAccuracy ?accuracy .
+  ?model performance:hasName ?modelName .
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

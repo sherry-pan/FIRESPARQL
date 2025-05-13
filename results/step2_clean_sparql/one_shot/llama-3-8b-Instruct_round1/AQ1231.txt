@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/property/>
+
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Cheetah, run (DMControl500k)")
+      ?evaluation a orkgc:Evaluation;
+                  orkgp:evaluatedOnDataset ?dataset;
+                  orkgp:hasMetric ?metric;
+                  orkgp:hasValue ?value.
+      ?metric rdfs:label ?metric_lbl.
+    }
+  }
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

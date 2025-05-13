@@ -1,0 +1,15 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?dataset rdfs:label "Penn Treebank (Character Level)".
+  ?eval orkgp:P5047 ?number.
+  ?number rdfs:label "Number of params"^^xsd:string.
+}
+ORDER BY DESC(?number)
+LIMIT 1
+```

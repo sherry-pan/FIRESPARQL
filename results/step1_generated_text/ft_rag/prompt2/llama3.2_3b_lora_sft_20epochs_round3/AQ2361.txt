@@ -1,0 +1,24 @@
+Question:
+List the code links in papers that use the BiT-M model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "BiT-M")
+      ?benchmark    orkgp:HAS_BENCHMARK      ?event      ;
+                    orkgp:HAS_EVALUATION      ?eval.
+      ?eval         orkgp:HAS_DATASET        ?dataset      ;
+                    orkgp:HAS_CODE           ?code.
+      ?dataset      orkgp:HAS_DATASET          ?files      ;
+                    orkgp:HAS_EVALUATION      ?eval.
+      ?files       orkgp:HAS_FILE             ?file      ;
+                   orkgp:HAS_IMPLEMENTATION   ?impl.
+      ?impl        orkgp:HAS_SOURCE_CODE     ?code     .
+      ?code      orkgp:HAS_METHOD         ?method     .
+      ?method    orkgp:HAS_MODEL          ?model     .
+      ?model    orkgp:HAS_APPROACH        ?approach     .
+      ?approach   orkgp:COEXISTS_WITH      ?other_approach.
+       FILTER(?other_approach = "other approach"^^xsd:string)
+     }<|eot_id|>

@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the Nottingham dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT?score?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasDataset?dataset ;
+    orkg:hasMethod?method ;
+    orkg:hasScore?score.
+ ?dataset rdfs:label "Nottingham dataset".
+ ?method rdfs:label?metric.
+  FILTER (?dataset =?dataset &&?metric =?metric)
+}<|eot_id|>

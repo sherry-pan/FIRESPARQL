@@ -1,0 +1,20 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ACE 2004?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "ACE 2004")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset.
+     ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?eval          orkgp:P34               ?cont;
+                     orkgp:HAS_VALUE         ?value.
+      OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+              ?metric           rdfs:label              ?metric_lbl.}
+     ?cont2        orkgp:HAS_EVALUATION     ?eval.
+      OPTIONAL {?cont2      orkgp:HAS_METRIC          ?metric2.
+              ?metric2      rdfs:label                ?metric2_lbl.}
+    }
+    ORDER BY DESC(?score)<|eot_id|>

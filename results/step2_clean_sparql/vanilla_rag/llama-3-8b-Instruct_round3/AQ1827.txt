@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?metricValue
+WHERE {
+ ?paper a orkg:Paper ;
+    orkg:HAS_BENCHMARK orkg:NLP-TDMS ;
+    orkg:HAS_DATASET orkg:arXiv ;
+    orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METRIC orkg:macro-F1 ;
+    orkg:HAS_VALUE ?metricValue ;
+    orkg:HAS_METHOD ?model.
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

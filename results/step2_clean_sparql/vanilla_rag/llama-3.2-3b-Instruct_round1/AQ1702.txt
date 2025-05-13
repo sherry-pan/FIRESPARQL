@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model_name
+WHERE {
+  ?model orkg:hasMethod ?method.
+  ?method orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "Atari 2600 Assault".
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasScore ?score.
+  ?model orkg:CSVW_Name ?model_name.
+  FILTER(?score = ?maxScore)
+}
+GROUP BY ?model_name
+HAVING(?score = MAX(?score))
+```

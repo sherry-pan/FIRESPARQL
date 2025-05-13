@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Assault dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+  {
+    SELECT?model?model_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Assault")
+     ?benchmark      orkgp:HAS_DAT

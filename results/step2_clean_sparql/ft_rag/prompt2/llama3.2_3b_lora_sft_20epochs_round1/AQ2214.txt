@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P43189 ?code.
+  ?code orkgp:P5001 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "All-attention network - 18 layers"))
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P5041 ?cont2.
+  ?cont2 orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl orkgp:P31 ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(STR(?method_lbl), "All-attention network - 18 layers"))
+}
+```

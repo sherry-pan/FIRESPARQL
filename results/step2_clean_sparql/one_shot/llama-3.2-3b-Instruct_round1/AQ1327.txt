@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?metric ?value
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+  {
+    SELECT ?benchmark ?value
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "IMDb-M")
+      ?benchmark orkgp:HAS_DATASET ?dataset;
+                 orkgp:HAS_EVALUATION ?eval.
+      ?eval ?metric ?value.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

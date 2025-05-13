@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Enduro dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+    SELECT?model_name 
+    WHERE {
+     ?model orkg:has_method?method.
+     ?method orkg:has_dataset?dataset.
+     ?dataset orkg:has_benchmark?benchmark.
+     ?benchmark orkg:has_evaluation?evaluation.
+     ?evaluation orkg:has_value?score.
+     ?model orkg:has_name?model_name.
+      FILTER (?score = (max(?score)).
+      BIND(STR(?model_name) AS?result)
+    }<|eot_id|>

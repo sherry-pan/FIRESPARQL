@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?percentageError
+WHERE {
+    ?model orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?benchmark orkg:HAS_DATASET "CIFAR-10".
+    ?evaluation orkg:HAS_METRIC "Percentage error".
+    ?evaluation orkg:HAS_METRIC_VALUE ?percentageError.
+}
+ORDER BY ASC(?percentageError)
+LIMIT 1
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?method ?metric
+WHERE {
+    ?model orkg:has_dataset ?dataset.
+    ?dataset orkg:benchmark "HMDB51".
+    ?model orkg:has_method ?method.
+    ?model orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:performance_metric ?metric.
+    FILTER (str(?metric) = "Pre-Training Dataset")
+}
+```

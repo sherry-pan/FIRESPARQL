@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?metric.
+  ?evaluation orkg:CSVW_Value ?value.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:DATASET_NAME "Birdsnap".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

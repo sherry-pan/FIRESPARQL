@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.com/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.com/ontology/property/>
+
+SELECT ?metric ?metric_lbl ?value
+WHERE {
+  ?benchmark orkgp:HAS_DATASET <http://www.openresearchknowledgegraph.com/dataset/RotoWire_Relation_Generation>;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

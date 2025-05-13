@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?benchmark ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark;
+             orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationResult.
+  ?evaluationResult orkg:HAS_METRIC ?metric;
+                    orkg:HAS_SCORE ?score.
+  ?benchmark orkg:HAS_DATASET "Sequential MNIST".
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?country ?prevalence
+WHERE {
+    ?study orkg:QuantitativeMethods ?method.
+    ?study orkg:Method "Prevalence".
+    ?study orkg:MatchingStrategy ?match.
+    ?match orkg:Country ?country.
+    ?study orkg:prevalence ?prevalence.
+    FILTER (STR(?prevalence) > "0")
+}
+ORDER BY DESC(?prevalence)
+LIMIT 1
+```

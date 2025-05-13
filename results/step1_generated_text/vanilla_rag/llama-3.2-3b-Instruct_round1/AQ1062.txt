@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark score and its metric on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark a orkg:Evaluation.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:metric?metric.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasScore?score.
+    ?benchmark orkg:dataset "Automatically labeled Medline abstracts corpus".
+    ?benchmark orkg:hasMetric?metric.
+     FILTER (str(?metric) = "Accuracy" OR str(?metric) = "Recall" OR str(?metric) = "macro-F1" OR str(?metric) = "micro-F1")
+     }<|eot_id|>

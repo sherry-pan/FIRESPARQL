@@ -1,0 +1,13 @@
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:has_benchmark orkg:Atari_2600_Freeway.
+  ?model orkg:evaluation ?evaluation.
+  ?evaluation orkg:metric "Score".
+  ?evaluation orkg:has_value ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1

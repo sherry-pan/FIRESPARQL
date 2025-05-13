@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the MAZEA dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?score?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:hasEvaluation?evaluationMetric ;
+    orkg:evaluationMetric?metric.
+ ?evaluationMetric orkg:hasValue?score.
+ ?benchmark orkg:hasDataset orkg:MAZEA.
+  FILTER (?metric!= "")
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

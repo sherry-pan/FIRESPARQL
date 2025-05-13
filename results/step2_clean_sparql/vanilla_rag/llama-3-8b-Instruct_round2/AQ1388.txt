@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg#>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/CoNLL04>.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark csvw:CSVW_Value ?score.
+  FILTER(?score = (
+    SELECT MAX(?score2)
+    WHERE {
+      ?model a orkg:Model.
+      ?model orkg:HAS_METHOD ?method.
+      ?method orkg:HAS_EVALUATION ?evaluation.
+      ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/CoNLL04>.
+      ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+      ?benchmark csvw:CSVW_Value ?score2.
+    }
+  ))
+}
+```

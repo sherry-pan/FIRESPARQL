@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/Atari_2600_Up_and_Down>.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC "Score".
+  ?evaluation orkg:HAS_VALUE ?score.
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

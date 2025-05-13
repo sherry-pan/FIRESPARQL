@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?modelLabel ?evaluation ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK <http://orkg.org/orkg/resource/Atari_2600_Montezuma's_Revenge>.
+  ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/Atari_2600_Montezuma's_Revenge>.
+  ?evaluation orkg:HAS_SCORE ?score.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER(?metric = "Score").
+  ?model orkg:LABEL ?modelLabel.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

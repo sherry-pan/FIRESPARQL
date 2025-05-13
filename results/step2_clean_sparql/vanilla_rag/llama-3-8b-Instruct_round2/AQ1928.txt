@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/owl/orkg.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:hasMethod ?method.
+   ?method rdfs:label ?methodName.
+   FILTER regex(?methodName, "Tokenlearner", "i").
+   ?paper orkg:hasImplementation ?implementation.
+   ?implementation orkg:hasCode ?code.
+}
+```

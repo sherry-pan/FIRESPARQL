@@ -1,0 +1,15 @@
+Question:
+List the metrics that are used to evaluate models on the SQuAD1.1 benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel IN ("Recall", "micro-F1", "Accuracy", "macro-F1"))
+}<|eot_id|>

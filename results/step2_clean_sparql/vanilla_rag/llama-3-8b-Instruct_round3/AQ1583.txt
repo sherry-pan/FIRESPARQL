@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71081: <http://orkg.org/orkg/predicate/P71081>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?evaluation orkg:HAS_EVALUATION ?evaluationValue.
+  ?evaluation orkg:HAS_METHOD ?model.
+  ?evaluation orkg:HAS_DATASET orkg:Yelp-5.
+  ?evaluation p71081:Accuracy ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

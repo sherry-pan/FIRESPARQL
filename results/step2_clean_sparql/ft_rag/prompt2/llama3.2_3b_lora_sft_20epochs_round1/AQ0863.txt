@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkg:R6908 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71079 ?recall.
+  ?recall rdfs:label ?recall_lbl.
+  FILTER(REGEX(?recall_lbl, "all"))
+  
+  ?eval orkgp:P71080 ?micro_f1.
+  ?micro_f1 rdfs:label ?micro_f1_lbl.
+  FILTER(REGEX(?micro_f1_lbl, "all"))
+  
+  ?eval orkgp:P71081 ?accuracy.
+  ?accuracy rdfs:label ?accuracy_lbl.
+  FILTER(REGEX(?accuracy_lbl, "all"))
+  
+  ?eval orkgp:P71082 ?macro_f1.
+  ?macro_f1 rdfs:label ?macro_f1_lbl.
+  FILTER(REGEX(?macro_f1_lbl, "all"))
+}
+```

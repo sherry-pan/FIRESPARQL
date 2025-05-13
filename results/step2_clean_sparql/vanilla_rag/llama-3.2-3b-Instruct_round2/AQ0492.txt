@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?title
+WHERE {
+  ?paper orkg:has_dataset orkg:enwik8.
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?paper orkg:CSVW_Titles ?title.
+  FILTER (STRLIKE(STR(?benchmark), "enwik8") OR STRLIKE(STR(?evaluation), "enwik8"))
+}
+```

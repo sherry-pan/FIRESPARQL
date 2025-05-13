@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?dataset a orkgc:Dataset;
+             rdfs:label ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "FSNS - Test")
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    ?cont orkgp:HAS_BENCHMARK ?benchmark;
+          orkgp:HAS_EVALUATION ?eval;
+          orkgp:HAS_METHOD ?method.
+    ?method rdfs:label ?method_lbl.
+    ?model orkgp:HAS_IMPLEMENTATION ?impl;
+           orkgp:HAS_APPROACH ?approach.
+    ?approach rdfs:label ?model_lbl.
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "SciERC".
+
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+
+  ?eval orkgp:P71089 ?entity_F1;
+        orkgp:HAS_VALUE ?value.
+
+  ?model orkgp:HAS_BENCHMARK ?benchmark;
+         rdfs:label ?model_lbl.
+
+  FILTER NOT EXISTS {
+    ?otherEval orkgp:HAS_VALUE ?otherValue;
+               orkgp:P71089 ?otherEntity_F1.
+    FILTER (?otherEntity_F1 > ?entity_F1)
+  }
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?entityF1Score
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+  FILTER(?metricLabel = "Entity F1" || ?metricLabel = "micro-F1" || ?metricLabel = "macro-F1").
+  ?evaluation orkg:hasTrainingSet ?dataset.
+  ?dataset rdfs:label "SciERC".
+  ?model orkg:method ?method.
+  ?evaluation orkg:hasResult ?result.
+  ?result orkg:hasValue ?entityF1Score.
+  ?result orkg:hasProperty ?property.
+  FILTER(?property = orkg:P71080 || ?property = orkg:P71082).
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?entityF1Score)
+LIMIT 1
+```

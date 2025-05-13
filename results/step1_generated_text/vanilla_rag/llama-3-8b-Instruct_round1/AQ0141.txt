@@ -1,0 +1,17 @@
+Question:
+Could you provide a list of models that have been tested on the RTE benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel
+WHERE {
+ ?model orkg:HAS_BENCHMARK <http://orkg.org/orkg/resource/Benchmark/RTE>.
+ ?model orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label?datasetLabel.
+  FILTER (LANG(?datasetLabel) = "RTE").
+ ?model orkg:HAS_METHOD?method.
+ ?method rdfs:label?methodLabel.
+}
+ORDER BY?modelLabel<|eot_id|>

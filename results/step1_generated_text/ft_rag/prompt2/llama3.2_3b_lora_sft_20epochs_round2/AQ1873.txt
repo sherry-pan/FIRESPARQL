@@ -1,0 +1,21 @@
+Question:
+Provide a list of benchmarked datasets related to the Audio Classification research area?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                  rdfs:label      ?problem_lbl.  
+         FILTER (str(?problem_lbl) = "Audio Classification")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset.
+        ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+        ?eval          orkgp:HAS_EVALUATION   ?eval.
+        ?eval           rdfs:label              ?eval_lbl.
+        ?dataset_lbl    rdfs:label              ?dataset_lbl.
+        ?cont           orkgp:P32               ?problem;
+                          orkgp:HAS_EVALUATION   ?eval.
+        ?problem         orkgp:P31               ?cont.
+        ?benchmark      orkgp:P31               ?cont.
+        ?eval           orkgp:P31               ?benchmark.
+     }
+     ORDER BY?dataset_lbl<|eot_id|>

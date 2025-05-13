@@ -1,0 +1,15 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Lunar Lander (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?score 
+     WHERE {
+    ?model orkg:HAS_METHOD?method.
+    ?model orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_DATASET "Lunar Lander".
+    ?benchmark orkg:HAS_EVALUATION?evaluation.
+    ?model orkg:HAS_EVALUATION?score.
+     FILTER (STR(?score = "maxValue")
+     ) 
+     }<|eot_id|>

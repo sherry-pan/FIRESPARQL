@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasTrainingSet ?trainingSet.
+    ?trainingSet orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?dataset orkg:label ?label.
+    FILTER (str(?label) = "Stanford Cars")
+}
+```

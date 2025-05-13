@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://orkg.org/orkg/predicate/>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasEvaluation ?evaluation ;
+    orkg:dataset "Words in Context".
+  ?evaluation orkg:hasResult ?result.
+  ?result orkg:score ?score ;
+    orkg:metric ?metric.
+  ?metric a p:Recall | p:micro-F1 | p:Accuracy | p:macro-F1.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

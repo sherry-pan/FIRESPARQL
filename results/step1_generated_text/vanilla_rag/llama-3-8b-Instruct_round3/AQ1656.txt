@@ -1,0 +1,16 @@
+Question:
+What is the best performing model benchmarking the Oxford-IIIT Pets dataset in terms of FLOPS metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/elements/1.1/>
+
+SELECT?model?flops
+WHERE {
+ ?model orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasDataset <http://orkg.org/orkg/resource/Oxford-IIIT_Pets>.
+ ?evaluation orkg:metric p:byteCount.
+ ?evaluation orkg:metricValue?flops.
+  FILTER (?flops = (SELECT MAX(?flops2) AS maxFlops
+                    FROM {?evaluation orkg:metricValue?flops2 }))
+}<|eot_id|>

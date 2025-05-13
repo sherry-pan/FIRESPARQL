@@ -1,0 +1,14 @@
+Question:
+List the metrics that are used to evaluate models on the CommonsenseQA benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation?hasEvaluation.
+ ?hasEvaluation orkg:hasMetric?metric.
+  FILTER (?metric = orkg:Accuracy ||?metric = orkg:Recall ||?metric = orkg:macro-F1 ||?metric = orkg:micro-F1 ||?metric = orkg:NDCG@10)
+}<|eot_id|>

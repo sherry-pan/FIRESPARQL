@@ -1,0 +1,16 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Bowling dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?metric?metricLabel 
+     WHERE {
+    ?metric orkg:hasDataset <http://orkg.org/dataset/atari_2600_bowling>.
+    ?metric orkg:hasEvaluation <http://orkg.org/evaluation/metric/>.
+    ?metric orkg:hasType <http://orkg.org/type/metric/>.
+    ?metric orkg:hasLabel?metricLabel.
+     FILTER (strcontains(lower(?metricLabel), "accuracy") OR
+              strcontains(lower(?metricLabel), "recall") OR
+              strcontains(lower(?metricLabel), "f1") OR
+              strcontains(lower(?metricLabel), "precision") )
+     }<|eot_id|>

@@ -1,0 +1,18 @@
+Question:
+What is the best performing model benchmarking the ANLI test dataset in terms of A3 metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT?model?metricValue
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/ANLI_test>.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?metric csvw:Number?metricValue.
+  FILTER (?metric = "A3").
+  FILTER (?metricValue = (SELECT MAX(?m) AS maxMetricValue FROM {?model?benchmark?evaluation?metric?m } ) ).
+}<|eot_id|>

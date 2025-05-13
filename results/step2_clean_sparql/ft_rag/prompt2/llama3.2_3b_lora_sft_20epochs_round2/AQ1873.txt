@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.  
+  FILTER (str(?problem_lbl) = "Audio Classification")
+  ?cont orkgp:P32 ?problem;
+        orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:P31 ?cont.
+  ?eval orkgp:P31 ?benchmark;
+        rdfs:label ?eval_lbl.
+  ?dataset rdfs:label ?dataset_lbl.
+}
+ORDER BY ?dataset_lbl
+```

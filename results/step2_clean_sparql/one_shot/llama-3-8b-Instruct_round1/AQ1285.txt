@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/c/>
+PREFIX orkgp: <http://www.orkg.org/p/>
+
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  {
+    SELECT ?metric ?metric_lbl ?value
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Atari 2600 Freeway")
+      ?benchmark orkgp:hasMetric ?metric;
+                 orkgp:hasValue ?value.
+      ?metric rdfs:label ?metric_lbl.
+    }
+  }
+}
+```

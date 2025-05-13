@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  FILTER(?eval = "benchmark"^^xsd:string)
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  ?evalu orkgp:HAS_METHOD ?method.
+  FILTER(str(?method) = "NASCell")
+  ?evalu orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:P31 ?code.
+}
+```

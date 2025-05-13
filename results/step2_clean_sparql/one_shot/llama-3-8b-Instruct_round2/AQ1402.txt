@@ -1,0 +1,17 @@
+```
+PREFIX ex: <http://example.org/>
+PREFIX schema: <http://schema.org/>
+SELECT ?modelName
+WHERE {
+  ?model ex:benchmark ex:NYT-single ;
+         ex:performance ?performance .
+  ?performance ex:metric "F1" ;
+               ex:value ?f1Score .
+  FILTER NOT EXISTS {
+    ?otherPerformance ex:metric "F1" ;
+                      ex:value ?otherF1Score .
+    FILTER (?otherF1Score > ?f1Score)
+  }
+  ?model schema:name ?modelName .
+}
+```

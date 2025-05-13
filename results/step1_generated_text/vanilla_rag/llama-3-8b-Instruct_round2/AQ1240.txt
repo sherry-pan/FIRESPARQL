@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset Oxford-IIIT Pets?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?dataset ;
+             orkg:HAS_DATASET?dataset ;
+             csvw:values?values.
+ ?values csvw:value?value.
+ ?dataset orkg:HAS_NAME "Oxford-IIIT Pets".
+ ?evaluation orkg:HAS_METRIC?metric.
+  FILTER (?metric = (SELECT?m WHERE {?evaluation orkg:HAS_METRIC?m } ORDER BY DESC(?m) LIMIT 1))
+}<|eot_id|>

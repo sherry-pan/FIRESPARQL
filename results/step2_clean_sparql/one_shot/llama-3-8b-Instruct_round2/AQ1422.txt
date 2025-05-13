@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkgc: <http://www.semantic-web-journal.net/orkg/codelists/>
+PREFIX orkgp: <http://www.semantic-web-journal.net/orkg/properties/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?result a orkgc:Result;
+          orkgp:hasDataset ?dataset;
+          orkgp:hasMetricValue ?metric_value.
+  ?dataset rdfs:label "IWSLT2014 German-English".
+  ?metric_value orkgp:hasMetric orkgc:BLEU_Score;
+                orkgp:value ?value.
+  ?model orkgp:hasResult ?result;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

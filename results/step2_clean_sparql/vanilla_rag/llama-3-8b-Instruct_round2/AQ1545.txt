@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel ?evaluation ?f1Metric
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?metric.
+  ?metric a orkg:Metric.
+  ?metric orkg:HAS_VALUE ?value.
+  ?metric orkg:HAS_UNIT ?unit.
+  FILTER (?unit = "F1" && ?evaluation orkg:HAS_DATASET orkg:CoNLL_2012).
+  ?evaluation orkg:HAS_METHOD ?model.
+  ?model a orkg:Model.
+  ?model rdfs:label ?modelLabel.
+  FILTER (?metric orkg:HAS_TYPE orkg:micro-F1 || ?metric orkg:HAS_TYPE orkg:macro-F1).
+  ?evaluation orkg:HAS_F1 ?f1Metric.
+}
+ORDER BY DESC(?f1Metric)
+LIMIT 1
+```

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?data_location
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:has_dataset ?dataset.
+  ?dataset orkg:has_data ?data.
+  ?data orkg:data ?data_location.
+  FILTER (strstarts(?data_location, 'https://'))
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?dataset ?datasetLabel
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:has_evaluation ?evaluation.
+ ?evaluation orkg:has_benchmark ?benchmark.
+ ?benchmark orkg:is_related_to orkg:Semantic_Role_Labeling.
+ ?dataset rdfs:label ?datasetLabel.
+ FILTER(LANG(?datasetLabel) = "en")
+}
+```

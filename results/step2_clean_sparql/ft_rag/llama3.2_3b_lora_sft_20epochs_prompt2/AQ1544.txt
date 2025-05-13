@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model orkgp:P70673 ?cont.
+  ?cont orkgp:P71080 ?micro_f1_value.
+  BIND(xsd:float(?micro_f1_value) AS ?micro_f1)
+  ?cont orkgp:P71082 ?macro_f1_value.
+  BIND(xsd:float(?macro_f1_value) AS ?macro_f1)
+  FILTER(?macro_f1 = ?micro_f1)
+  ?cont orkgp:P97127 ?accepted.
+  BIND(?accepted AS ?accepted_submissions)
+  ?cont orkgp:P97128 ?rejected.
+  BIND(?rejected AS ?rejected_submissions)
+  FILTER(?accepted_submissions > ?rejected_submissions)
+  FILTER(?micro_f1 = 1)
+  ?model rdfs:label ?model_lbl
+}
+ORDER BY DESC(?micro_f1)
+LIMIT 1
+```

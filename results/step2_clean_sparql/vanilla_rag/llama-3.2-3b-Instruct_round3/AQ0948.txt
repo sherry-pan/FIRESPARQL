@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric (COUNT(?metric) AS ?count)
+WHERE {
+  ?metric orkg:has_evaluation ?e.
+  ?e orkg:has_dataset <http://orkg.org/dataset/atari_2600_skiing>.
+  ?metric orkg:has_benchmark ?b.
+  FILTER(?b IN (<http://orkg.org/evaluation/metric/Recall>, <http://orkg.org/evaluation/metric/micro-F1>, <http://orkg.org/evaluation/metric/macro-F1>, <http://orkg.org/evaluation/metric/Accuracy>, <http://orkg.org/evaluation/metric/NDCG@10>))
+}
+```

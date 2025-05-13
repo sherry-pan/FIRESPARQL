@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://example.org/schema/>
+
+SELECT ?model
+WHERE {
+  ?dataset rdfs:label "200k Short Texts for Humor Detection" .
+  ?evaluation ex:dataset ?dataset ;
+              ex:metric ex:F1-score ;
+              ex:value ?score ;
+              ex:model ?model .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

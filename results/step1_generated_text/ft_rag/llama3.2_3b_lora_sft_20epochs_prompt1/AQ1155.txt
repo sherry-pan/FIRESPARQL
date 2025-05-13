@@ -1,0 +1,28 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ SELECT?metric?score
+     WHERE {
+       orkgr:R6948 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P71075?benchmark.
+      ?benchmark orkgp:P97152?metric.
+      ?metric rdfs:label?metric_lbl.
+       FILTER(REGEX(?metric_lbl, "F1"))
+      ?benchmark orkgp:P71080?score.
+      ?dataset orkgp:HAS_TRAINING_SET?train.
+      ?train orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P71079?recall.
+      ?recall adfs:label?recall_lbl.
+       FILTER(?recall_lbl = "0.31")
+      ?dataset orkgp:HAS_VALIDATION_SET?validation.
+      ?validation orkgp:P71096?eval.
+      ?eval orkgp:P71075?benchmark.
+      ?benchmark orkgp:P71080?score.
+      ?score adfs:label?score_lbl.
+       FILTER(?score_lbl = "0.99")
+      ?benchmark orkgp:P71066?type.
+      ?type rdfs:label?type_lbl.
+       FILTER(?type_lbl = "Generalization")
+     }<|eot_id|>

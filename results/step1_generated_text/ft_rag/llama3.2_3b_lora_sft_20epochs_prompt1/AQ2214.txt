@@ -1,0 +1,21 @@
+Question:
+Where can I find code references in papers that have used the All-attention network - 18 layers model for benchmarking purposes?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P34?implementation.
+      ?implementation orkgp:HAS_IMPLEMENTATION?implementation_details.
+      ?implementation_details orkgp:HAS_CODE?code.
+      ?paper orkgp:P35?eval.
+      ?eval orkgp:HAS_EVALUATION?eval_details.
+      ?eval_details orkgp:P31?method.
+       FILTER(REGEX(STR(?method), "All-attention network - 18 layers"))
+      ?paper orkgp:P33?benchmark.
+      ?benchmark orkgp:HAS_BENCHMARK?cont2.
+      ?cont2 orkgp:P31?eval2.
+      ?eval2 orkgp:HAS_EVALUATION?eval_details2.
+      ?eval_details2 orkgp:HAS_METHOD?method2.
+       FILTER(REGEX(STR(?method2), "All-attention network - 18 layers"))
+     }<|eot_id|>

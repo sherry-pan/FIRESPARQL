@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgr:R7062 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P71067 ?benchmark.
+  ?benchmark orkgp:P71075 ?eval.
+  ?eval orkgp:P71079 ?recall.
+  ?recall rdfs:label ?metric_lbl.
+  FILTER(REGEX(STR(?metric_lbl), "Object Nav"))
+}
+```

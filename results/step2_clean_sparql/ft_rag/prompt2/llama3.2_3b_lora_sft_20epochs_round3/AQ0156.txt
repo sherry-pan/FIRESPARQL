@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model `hasEvaluation` ?evaluation.
+  ?evaluation `hasDataset` ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "enwiki8"))
+  ?model `HAS_METHOD` ?method.
+  ?method rdfs:label ?method_lbl.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY ?model_lbl
+```

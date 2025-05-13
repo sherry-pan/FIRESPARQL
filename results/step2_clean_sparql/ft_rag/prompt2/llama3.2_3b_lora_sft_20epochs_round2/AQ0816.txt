@@ -1,0 +1,10 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgr:R70692 orkgp:evaluate/orngp:P34 ?metric.
+  ?metric orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?float_value)
+  FILTER(?float_value > 0)
+  ?metric rdfs:label ?metric_lbl.
+}
+```

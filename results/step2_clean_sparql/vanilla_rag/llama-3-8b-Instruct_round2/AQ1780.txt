@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?name
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:has_metric ?metric.
+  ?metric orkg:has_value ?value.
+  ?model orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:name "Oxford-IIIT Pets".
+  ?model orkg:CSVW_Name ?name.
+  FILTER (?value = (SELECT max(?v) FROM {
+    ?model orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:has_metric ?metric.
+    ?metric orkg:has_value ?v
+  }))
+}
+```

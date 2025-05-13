@@ -1,0 +1,26 @@
+```
+PREFIX benchmark: <http://codalab.org/benchmarks/scisumm-corpus/>
+PREFIX model: <http://example.org/model#>
+PREFIX metric: <http://example.org/metric#>
+PREFIX score: <http://example.org/score#>
+
+SELECT ?modelName 
+WHERE {
+  ?model metric:benchmarkedOn benchmark:CL-SciSumm ;
+         metric:hasMetric score:ROUGE-2 ;
+         score:hasScore ?rouge2Score ;
+         model:hasName ?modelName .
+         
+  {
+    SELECT ?model (MAX(?rouge2Score) AS ?maxRouge2Score)
+    WHERE {
+      ?model metric:benchmarkedOn benchmark:CL-SciSumm ;
+             metric:hasMetric score:ROUGE-2 ;
+             score:hasScore ?rouge2Score .
+    }
+    GROUP BY ?model
+  }
+  
+  FILTER(?rouge2Score = ?maxRouge2Score)
+}
+```

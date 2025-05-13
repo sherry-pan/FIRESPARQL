@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Yelp Fine-grained classification")
+  ?benchmark orkgp:HAS_BENCHMARK ?eval.
+  ?eval orkgp:HAS_EVALUATION ?eval_metrics.
+  ?eval_metrics rdfs:label ?metric_lbl.
+}
+```

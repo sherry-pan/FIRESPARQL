@@ -1,0 +1,33 @@
+Question:
+Indicate the model that performed best in terms of BLEU score metric on the WMT2016 English-German benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "WMT2016 English-German")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+       ?eval         orkgp:HAS_EVALUATION   ?eval.
+       ?metric        orkgp:P31             ?metric.
+        OPTIONAL {
+         ?eval           orkgp:P2006           ?score.
+          FILTER (str(?score) = "BLEU")
+          }
+       ?cont         orkgp:HAS_EVALUATION   ?eval.
+        OPTIONAL {
+         ?cont         orkgp:P2005           ?metric_value.
+         ?metric        orkgp:P31             ?metric;
+                        rdfs:label              ?metric_lbl.
+          IF?metric_value = "BLEU" THEN
+            SELECT?model?model_lbl
+            WHERE {
+             ?cont         orkgp:HAS_MODEL     ?model.
+             ?model      rdfs:label              ?model_lbl.
+            }
+          END IF
+        }
+      }
+     ORDER BY DESC(?score)
+     LIMIT 1<|eot_id|>

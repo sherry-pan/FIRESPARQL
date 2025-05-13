@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric 
+WHERE {
+    ?metric orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasBenchmark "FSNS - Test".
+    FILTER (
+        CONTAINS(LCASE(?metric), "accuracy") || 
+        CONTAINS(LCASE(?metric), "macro-f1") || 
+        CONTAINS(LCASE(?metric), "micro-f1") || 
+        CONTAINS(LCASE(?metric), "recall")
+    )
+}
+```

@@ -1,0 +1,11 @@
+Question:
+Which model has achieved the highest Score score on the Cheetah, run (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?score 
+     WHERE {
+    ?model orkg:hasBenchmark "Cheetah".
+    ?model orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:score?score.
+     FILTER (?score > ( SELECT MAX (?score' ) FROM?evaluation ) )
+     }<|eot_id|>

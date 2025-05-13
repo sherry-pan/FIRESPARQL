@@ -1,0 +1,26 @@
+Question:
+What is the name of the top performing model in terms of Number of params score when benchmarked on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?model
+      ?property_iri_1 a orkgc:Property;
+               rdfs:label?property_label_1.
+       FILTER(REGEX(?property_label_1, "Number of params"))
+      ?model?property_iri_2?number_1.
+      ?property_iri_2 orkgp:HAS_VALUE?value_1.
+       BIND(xsd:float(?value_1) AS?number_1)
+      ?model?property_iri_3?eval_1.
+      ?property_iri_3 orkgp:HAS_EVALUATION?eval_value_1.
+      ?eval_value_1 orkgp:P31?evalHAS_VALUE_1.
+      ?evalHAS_VALUE_1 rdfs:label?evalHAS_VALUE_lbl_1.
+       FILTER(REGEX(?evalHAS_VALUE_lbl_1, "Penn Treebank (Character Level)"))
+      ?model?property_iri_4?rank_1.
+      ?property_iri_4 orkgp:HAS_RANKING?rank_value_1.
+      ?rank_value_1 rdfs:label?rank_value_lbl_1.
+       FILTER(?rank_value_lbl_1 = "1")
+      ?model?property_iri_1?name_1.
+      ?property_iri_1 rdfs:label?name_lbl_1.
+       BIND(?name_1 AS?model_lbl)
+     }<|eot_id|>

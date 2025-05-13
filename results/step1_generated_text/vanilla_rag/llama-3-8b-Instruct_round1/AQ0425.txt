@@ -1,0 +1,16 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the WMT2016 German-English dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/ontology/>
+     PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+     SELECT?paper?title?id
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper orkg:HAS_EVALUATION?evaluation.
+      ?evaluation orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg:HAS_DATASET <http://wmt2016.org/dataset/de-en>.
+      ?paper csvw:CSVW_Titles?title.
+      ?paper orkg:ID?id.
+     }<|eot_id|>

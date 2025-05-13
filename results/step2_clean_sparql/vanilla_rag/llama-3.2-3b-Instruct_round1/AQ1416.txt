@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:has_method ?m.
+  ?m orkg:has_dataset ?dataset.
+  ?dataset orkg:has_evaluation ?eval.
+  ?eval orkg:has_metric ?metric.
+  FILTER (str(?metric) = "BLEU" AND str(?dataset) = "WMT2016 English-Russian").
+}
+```

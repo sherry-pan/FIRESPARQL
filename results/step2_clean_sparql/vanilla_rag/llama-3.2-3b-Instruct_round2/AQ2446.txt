@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?code 
+WHERE {
+    ?paper orkg:HAS_METHOD orkg:SHAKE_SHAKE.
+    ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+    ?implementation orkg:HAS_CODE ?code.
+    FILTER (lang(?code) = 'text/plain').
+    FILTER (strstarts(?code, 'https://github.com/')).
+}
+```

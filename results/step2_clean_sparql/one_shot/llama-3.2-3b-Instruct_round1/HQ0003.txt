@@ -1,0 +1,13 @@
+```sparql
+SELECT ?method ?method_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.  
+  FILTER (str(?problem_lbl) = "Knowledge Representation")
+  ?method a orkgc:Method;
+          rdfs:label ?method_lbl.
+  ?benchmark orkgp:HAS_METHOD ?method.
+}
+GROUP BY ?method ?method_lbl
+HAVING (COUNT(?benchmark) > 1)
+```

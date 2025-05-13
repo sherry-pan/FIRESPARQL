@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?benchmark ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:has_dataset ?dataset.
+    ?dataset orkg:has_dataset "Atari 2600 Wizard of Wor".
+    ?benchmark orkg:has_benchmark ?benchmark_score.
+    ?benchmark orkg:evaluation ?evaluation.
+    ?evaluation orkg:value ?score.
+    ?benchmark orkg:compared_with ?comparison.
+    ?comparison orkg:value ?metric.
+    FILTER (?metric > ?score).
+}
+```

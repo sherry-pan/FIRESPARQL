@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "F1".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "CoNLL 2012".
+      ?benchmark orkgp:HAS_DATASET ?dataset;
+                 orkgp:HAS_MODEL ?model.
+      ?model rdfs:label ?model_lbl.
+    }
+  }
+}
+```

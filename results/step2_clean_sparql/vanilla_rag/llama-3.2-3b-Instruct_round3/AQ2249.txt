@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paperLink ?code 
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_method ?method.
+  FILTER (STR(?method) = "SemExp").
+  ?benchmark orkg:has_implementation ?implementation.
+  ?implementation orkg:has_code ?code.
+  BIND(URI(CONCAT("http://orkg.org/paper/", STR(?paper))) AS ?paperLink)
+}
+```

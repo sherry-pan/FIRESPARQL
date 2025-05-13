@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX arxiv: <http://orkg.org/orkg/resource/arxiv/>
+
+SELECT ?model ?macroPrecision
+WHERE {
+  ?paper a orkg:Paper ;
+    orkg:hasResult ?result.
+  ?result a orkg:Result ;
+    orkg:metricValue ?macroPrecision ;
+    orkg:metric orkg:macro-F1.
+  ?result orkg:hasModel ?model.
+  FILTER EXISTS { ?paper arxiv:only arxiv:thisDocument }
+}
+ORDER BY DESC(?macroPrecision)
+LIMIT 1
+```

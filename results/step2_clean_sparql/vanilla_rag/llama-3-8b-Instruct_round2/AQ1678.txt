@@ -1,0 +1,16 @@
+```sparql
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model_name WHERE {
+  ?dataset rdf:type <http://example.org/ns#Dataset> .
+  ?dataset rdfs:label "MLDoc Zero-Shot English-to-French" .
+  ?evaluation qb:dataSet ?dataset .
+  ?evaluation <http://example.org/ns#hasMetric> ?metric .
+  ?metric <http://example.org/ns#accuracy> ?accuracy_score .
+  ?model <http://example.org/ns#evaluatedWith> ?evaluation .
+  ?model rdfs:label ?model_name .
+} ORDER BY DESC(?accuracy_score)
+LIMIT 1
+```

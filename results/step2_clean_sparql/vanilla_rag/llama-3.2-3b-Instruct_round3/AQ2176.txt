@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?paper ?implementation ?dataset ?evaluation
+WHERE {
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_METHOD ?model.
+    ?model orkg:HAS_APPROACH ?approach.
+    ?approach orkg:HAS_IMPLEMENTATION ?implementation.
+    ?approach orkg:HAS_DATASET ?dataset.
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    FILTER (CONTAINS(LCASE(?benchmark), "par transformer large"))
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?variable
+WHERE {
+  ?model a orkg:AtmosphereModel.
+  ?model orkg:has_variable ?variable.
+  FILTER (?variable != orkg:city).
+}
+GROUP BY ?variable
+ORDER BY DESC(COUNT(?variable))
+LIMIT 3
+```

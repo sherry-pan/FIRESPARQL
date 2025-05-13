@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK orkg:Benchmark_ImageNet.
+  ?evaluation orkg:HAS_SCORE ?score.
+  FILTER (?score = 
+    ?maxScore
+  )
+}
+VALUES ?maxScore {
+  (SELECT MAX(?score2)
+   WHERE {
+     ?eval orkg:HAS_BENCHMARK orkg:Benchmark_ImageNet.
+     ?eval orkg:HAS_SCORE ?score2.
+   })
+}
+```

@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of Number of params score when benchmarked on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?model?modelName
+WHERE {
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_BENCHMARK orkg:Penn_Treebank_Character_Level.
+ ?evaluation orkg:Number?paramsScore.
+ ?model orkg:CSVW_Name?modelName.
+  FILTER (?paramsScore = MAX(?paramsScore) )
+  FILTER (?model orkg:HAS_EVALUATION?evaluation)
+}
+ORDER BY DESC(?paramsScore) LIMIT 1<|eot_id|>

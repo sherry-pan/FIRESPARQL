@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper a orkgc:Paper;
+         rdfs:label ?paper_title.
+  FILTER(REGEX(?paper_title, "Fine-Grained Gating"))
+  ?benchmark orkgp:HAS_BENCHMARK ?cont;
+             orkgp:P32 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?eval_cont;
+        orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl orkgp:HAS_CODE ?code.
+}
+```

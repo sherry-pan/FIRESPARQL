@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         csvw:titles ?title ;
+         csvw:Number ?id ;
+         orkg:HAS_BENCHMARK ?benchmark ;
+         orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:NAME "WLPC".
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+}
+```

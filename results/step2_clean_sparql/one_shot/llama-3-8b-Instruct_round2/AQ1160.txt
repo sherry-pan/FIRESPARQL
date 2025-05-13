@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgc: <http://schema.orkg.org/collection#>
+PREFIX orkgp: <http://schema.orkg.org/property#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?metric_lbl ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "RotoWire (Relation Generation)".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METRIC ?metric;
+        orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

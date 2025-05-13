@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?codeLink
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset ?dataset.
+    ?dataset orkg:hasCode ?codeLink.
+    ?paper orkg:hasMethod/orwk:hasApproach ?method.
+    FILTER (?method = "linear-chain CRFs")
+    FILTER (regex(str(?codeLink), "https://.*") || regex(str(?codeLink), "http://.*"))
+}
+```

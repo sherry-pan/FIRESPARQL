@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value 
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasBenchmark ?benchmark_result.
+  ?benchmark_result orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?benchmark_result orkg:hasValue ?value.
+  FILTER (?benchmark_result orkg:forDataset "MLDoc Zero-Shot English-to-Spanish")
+}
+```

@@ -1,0 +1,16 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?author?number
+     WHERE {
+      ?author orkg:has_contribution?contribution.
+      ?contribution orkg:has_topic "coronavirus".
+      ?author orkg:CSVW_Number?number.
+       GROUP BY?author
+       HAVING SUM(?number) = (SELECT MAX(number) FROM {
+        ?author orkg:has_contribution?contribution.
+        ?contribution orkg:has_topic "coronavirus".
+        ?author orkg:CSVW_Number?number.
+       })<|eot_id|>

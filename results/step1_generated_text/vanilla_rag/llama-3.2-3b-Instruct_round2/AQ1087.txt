@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ACE 2004?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?metric?value
+     WHERE {
+    ?b orkg:HAS_BENCHMARK?bm.
+    ?bm orkg:HAS_DATASET?ds.
+    ?ds orkg:HAS_EVALUATION?ev.
+    ?ev orkg:HAS_MESH?m.
+    ?bm orkg:HAS_METHOD?mth.
+    ?bm orkg:HAS_IMPLEMENTATION?imp.
+     FILTER (strlike(iri(?m), "http://orkg.org/orkg/predicate/HAS_MESH:.*" || "http://orkg.org/orkg/predicate/HAS_MESH:" || "http://purl.org/mesh/.*"))
+    ?b orkg:HAS_APPROACH?ap.
+    ?bm orkg:HAS_BENCHMARK?bm.
+    ?bm a orkg:Benchmark.
+    ?bm orkg:hasBenchmark?bm.
+    ?bm orkg:hasMetric?metric.
+    ?bm orkg:hasValue?value.
+     }<|eot_id|>

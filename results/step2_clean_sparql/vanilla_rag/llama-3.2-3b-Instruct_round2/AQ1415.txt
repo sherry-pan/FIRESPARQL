@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset <http://example.org/200kShortTextsForHumorDetection>.
+  ?benchmark orkg:evaluation ?metric.
+  FILTER (CONTAINS(STR(?metric), "F1-score"))
+}
+```

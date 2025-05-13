@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_IMPLEMENTATION ?impl.
+  ?impl orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET "ImageNet V2".
+  ?impl orkg:HAS_EVALUATION ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

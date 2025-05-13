@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?method ?methodLabel ?evaluation ?evaluationValue
+WHERE {
+  ?method orkg:HAS_METHOD ?methodLabel.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation owl:property ?evaluationProperty.
+  ?evaluationProperty rdfs:label "F1 score"@en.
+  ?evaluation owl:value ?evaluationValue.
+  ?method orkg:HAS_BENCHMARK <http://orkg.org/orkg/ontology/BENCHMARK_SQuAD1.1>.
+}
+ORDER BY DESC(?evaluationValue)
+LIMIT 1
+```

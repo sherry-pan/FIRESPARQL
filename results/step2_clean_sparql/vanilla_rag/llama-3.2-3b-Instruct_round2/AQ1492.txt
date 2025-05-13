@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?precision
+WHERE {
+    ?model orkg:hasApproach ?approach.
+    ?approach orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset "RotoWire".
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric "Precision".
+    ?evaluation orkg:hasValue ?precision.
+}
+ORDER BY DESC(?precision)
+LIMIT 1
+```

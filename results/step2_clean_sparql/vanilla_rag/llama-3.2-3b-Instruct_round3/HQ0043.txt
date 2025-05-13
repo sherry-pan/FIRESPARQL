@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?variable (COUNT(*) AS ?freq)
+WHERE {
+    ?variable orkg:label ?label.
+    FILTER (
+        (CONTAINS(LCASE(?label), "atmosphere") OR LCASE(?label) = "atmospheric")
+        AND (CONTAINS(LCASE(?label), "model") OR LCASE(?label) = "models")
+        AND (CONTAINS(LCASE(?label), "variable") OR LCASE(?label) = "variables")
+    )
+}
+GROUP BY ?variable
+ORDER BY DESC(?freq)
+LIMIT 3
+```

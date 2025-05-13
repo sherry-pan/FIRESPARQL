@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?testPerplexity
+WHERE {
+  ?model wdt:P162 ?evaluation.
+  ?evaluation wdt:P310 ?testPerplexity.
+  ?model wdt:HAS_DATASET wd:Q123456. # Replace with actual dataset URI
+}
+ORDER BY DESC(?testPerplexity)
+LIMIT 1
+```

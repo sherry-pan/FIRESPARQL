@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:has_dataset <http://iwslt2015.org/> ;
+             orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_metric ?metric ;
+              orkg:has_score ?score.
+  FILTER (?evaluation = "best")
+}
+```

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+SELECT ?paperID ?title WHERE {
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_DATASET "UCF101".
+    ?benchmark orkg:HAS_METHOD ?method.
+    FILTER (CONTAINS(STR(?method), "finetuned")).
+    ?paper orkg:HAS_NUMBER ?paperID.
+    ?paper orkg:CSVW_Titles ?title.
+}
+```

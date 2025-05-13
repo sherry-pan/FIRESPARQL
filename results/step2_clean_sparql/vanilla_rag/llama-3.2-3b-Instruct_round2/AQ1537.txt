@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?name ?numParams
+WHERE {
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:evaluationMetric ?metric.
+    FILTER (?metric = "Number of params").
+    ?model orkg:hasName ?name.
+    ?model orkg:hasNumber ?numParams.
+    FILTER (?benchmark = "Penn Treebank (Character Level)").
+}
+```

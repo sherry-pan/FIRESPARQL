@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "iNaturalist 2018")
+
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+
+  ?eval orkgp:HAS_METRIC ?metric;
+        orkgp:HAS_VALUE ?value.
+
+  ?metric rdfs:label "Top-1 Accuracy".
+
+  OPTIONAL {
+    ?eval orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+  }
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

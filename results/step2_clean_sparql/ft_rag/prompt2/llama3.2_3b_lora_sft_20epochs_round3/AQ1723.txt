@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Tennis")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?cont;
+        rdfs:label ?eval_lbl.
+  ?cont orkgp:P71081 ?accuracy.
+  ?cont orkgp:P71123 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER (?accuracy = 1)
+}
+```

@@ -1,0 +1,114 @@
+Question:
+Which model has achieved the highest Entity F1 score on the SciERC benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "SciERC")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:P71080           ?micro_F1;
+                      orkgp:P71082           ?macro_F1.
+       OPTIONAL {
+        ?eval           orkgp:P71075          ?cont.
+       }
+       OPTIONAL {
+        ?cont         orkgp:HAS_VALUE        ?value;
+                       orkgp:P71089          ?Avg_Entity.
+       }
+       OPTIONAL {
+        ?eval           orkgp:P71081          ?training_set;
+                        orkgp:P71086          ?dataset.
+       }
+       OPTIONAL {
+        ?training_set    orkgp:HAS_VALUE        ?value;
+                       orkgp:P71069          ?knowledge_graph_name.
+       }
+       BIND(
+         IF(
+          ?eval               orkgp:P71075              ?cont,
+           IF(
+            ?cont           orkgp:P71081              ?training_set,
+              ?training_set
+             )
+          ,
+           ""
+         ) AS?cont_lbl
+       ) AS?cont_lbl
+       BIND(
+         IF(
+          ?eval               orkgp:P71075              ?cont,
+           IF(
+            ?cont           orkgp:P71089              ?Avg_Entity,
+              ?Avg_Entity
+             )
+          ,
+           ""
+         ) AS?Avg_Entity_lbl
+       ) AS?Avg_Entity_lbl
+       BIND(
+         IF(
+          ?eval               orkgp:P71075              ?cont,
+           IF(
+            ?cont           orkgp:P71081              ?training_set,
+            ?training_set
+           )
+         ) AS?training_set_lbl
+       ) AS?training_set_lbl
+       BIND(
+         IF(
+          ?eval               orkgp:P71075              ?cont,
+           IF(
+            ?cont           orkgp:P71069              ?knowledge_graph_name,
+              ?knowledge_graph_name
+             )
+           )
+         ) AS?knowledge_graph_name_lbl
+       ) AS?knowledge_graph_name_lbl
+      ?model      orkgp:HAS_BENCHMARK     ?benchmark;
+                  orkgp:HAS_EVALUATION     ?eval.
+       OPTIONAL {
+        ?model      orkgp:P97145              ?method;
+                    orkgp:HAS_VALUE        ?value.
+         BIND(
+           IF(
+            ?value               orkgp:P71080              ?micro_F1,
+              ?micro_F1
+             ) AS?micro_F1_lbl
+           ) AS?micro_F1_lbl
+         BIND(
+           IF(
+            ?value               orkgp:P71082              ?macro_F1,
+              ?macro_F1
+             ) AS?macro_F1_lbl
+           ) AS?macro_F1_lbl
+         BIND(
+           IF(
+            ?method           orkgp:P97145              ?cont,
+              ?cont_lbl
+             ) AS?method_lbl
+           ) AS?method_lbl
+         BIND(
+           IF(
+            ?value               orkgp:P71089              ?Avg_Entity,
+              ?Avg_Entity_lbl
+             ) AS?Avg_Entity_lbl
+           ) AS?Avg_Entity
+         BIND(
+           IF(
+            ?value               orkgp:P71081              ?training_set,
+              ?training_set_lbl
+             ) AS?training_set_lbl
+           ) AS?training_set
+         BIND(
+           IF(
+            ?method           orkgp:P71069              ?knowledge_graph_name,
+              ?knowledge_graph_name_lbl
+             ) AS?knowledge_graph_name_lbl
+           ) AS?knowledge_graph_name
+       }
+       FILTER(?micro_F1 >?macro_F1)
+     }<|eot_id|>

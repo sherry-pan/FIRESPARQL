@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/cores/2021/03/orkg-c.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  ?dataset a orkgc:BenchmarkDataset;
+           rdfs:label "Atari 2600 Fishing Derby".
+  ?evaluation a orkgc:Evaluation;
+              orkgc:evaluatedOn ?dataset;
+              orkgc:usesMetric ?metric.
+}
+```

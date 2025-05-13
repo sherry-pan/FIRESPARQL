@@ -1,0 +1,21 @@
+Question:
+Which model has achieved the highest F1 score score on the Penn Treebank benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?model_f1
+     WHERE {
+    ?model orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasDataset?dataset.
+    ?dataset orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasMethod?method.
+    ?method orkg:hasMicroF1?microF1.
+    ?model orkg:hasMicroF1?microF1.
+     SERVICE orkg:sparql {
+     SELECT?model (GROUP BY?model) {
+    ?model orkg:hasMicroF1?microF1.
+     ORDER BY DESC(?microF1) LIMIT 1
+     }
+     }
+     }<|eot_id|>

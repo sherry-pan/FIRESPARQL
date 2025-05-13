@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+         orkg:HAS_BENCHMARK ?benchmark ;
+         orkg:HAS_DATASET ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:TITLE "Atari 2600 Skiing".
+  ?benchmark a orkg:Benchmark ;
+             orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation a orkg:Evaluation ;
+              orkg:HAS_METHOD ?method.
+  ?method a orkg:Method ;
+          csvw:titles ?title ;
+          csvw:name ?id.
+}
+```

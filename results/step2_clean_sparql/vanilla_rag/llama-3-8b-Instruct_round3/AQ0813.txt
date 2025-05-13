@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?evaluationMetric
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:HAS_DATASET "SQuAD2.0".
+  ?dataset orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationMetric.
+  FILTER (?evaluationMetric != "implementation")
+}
+```

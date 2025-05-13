@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?title ?id
+WHERE {
+  ?paper orkg:has_dataset ?dataset.
+  ?dataset orkg:has_name "NCBI-disease"@en.
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?paper orkg:CSVW_Titles ?title.
+  ?paper orkg:CSVW_Name ?id.
+  FILTER (STR(?id) =~ "^\d+$")
+}
+```

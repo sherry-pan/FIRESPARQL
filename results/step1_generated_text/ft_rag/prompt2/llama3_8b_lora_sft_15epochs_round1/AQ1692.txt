@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Crazy Climber benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Crazy Climber")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval        orkgp:HAS_EVALUATION    ?evaluation.
+      ?evaluation  orkgp:HAS_VALUE         ?value.
+      ?cont       orkgp:HAS_MODEL          ?model.
+      ?model      rdfs:label               ?model_lbl.
+      ?eval        orkgp:HAS_METRIC         ?metric.
+      ?metric      rdfs:label               ?metric_lbl.
+       FILTER (str(?metric_lbl) = "Score")
+       ORDER BY DESC(?value)
+       LIMIT 1
+     }<|eot_id|>

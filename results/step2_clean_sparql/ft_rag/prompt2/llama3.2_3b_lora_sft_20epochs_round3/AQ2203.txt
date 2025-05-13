@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "6-layer QRNN"))
+  ?eval orkgp:P5040 ?code.
+  ?cont orkgp:P5041 ?implementation.
+  ?implementation orkgp:P5002 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "benchmarking"))
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?sector ?sector_labels (COUNT(?energy) AS ?frequency)
+WHERE {
+  orkgr:R155561 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37041 ?energy.
+  OPTIONAL {?energy rdfs:label ?energy_labels.}
+  OPTIONAL {
+    ?contrib orkgp:P37040 ?sector.
+    ?sector rdfs:label ?sector_labels.
+  }
+}
+GROUP BY ?sector ?sector_labels
+```

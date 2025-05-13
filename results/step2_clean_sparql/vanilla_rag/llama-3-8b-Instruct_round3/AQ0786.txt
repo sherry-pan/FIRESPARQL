@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?metric
+WHERE {
+  ?evaluation orkg:HAS_EVALUATION ?dataset.
+  ?dataset orkg:HAS_DATASET "UCF101 (finetuned)".
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER (?metric != "reporting level" &&
+          ?metric != "data splitting method" &&
+          ?metric != "number of type" &&
+          ?metric != "iteration" &&
+          ?metric != "text feature" &&
+          ?metric != "lemma" &&
+          ?metric != "stemming" &&
+          ?metric != "stopwords" &&
+          ?metric != "NDCG@10")
+}
+```

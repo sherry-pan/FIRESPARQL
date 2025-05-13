@@ -1,0 +1,20 @@
+Question:
+Where can I find code references in papers that have used the Tsetlin Machine model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+
+     SELECT?paper?code
+     WHERE {
+      ?paper a orkg:Paper.
+      ?paper orkg:hasMethod?method.
+       FILTER (bn:label = "Tsetlin Machine"^^xsd:string).
+      ?method orkg:hasImplementation?implementation.
+       FILTER (orkg:hasBenchmark?benchmark.
+               orkg:hasEvaluation?evaluation.
+               orkg:hasCode?code).
+      ?benchmark orkg:hasPaper?evaluation.
+      ?evaluation orkg:hasPaper?paper.
+      ?paper orkg:hasCode?code.
+      ?benchmark orkg:hasCode?code.
+     }<|eot_id|>

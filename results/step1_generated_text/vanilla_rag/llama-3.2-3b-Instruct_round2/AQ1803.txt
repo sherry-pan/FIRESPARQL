@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Accuracy score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?name?value 
+     WHERE {
+     { 
+    ?model orkg:has_dataset orkg:has_dataset "VTAB-1k"@en.
+    ?model orkg:has_benchmark?benchmark.
+    ?benchmark orkg:evaluation orkg:evaluation "Top-1 Accuracy"@en.
+    ?benchmark orkg:value?value.
+    ?model orkg:approach?approach.
+    ?approach orkg:has_implementation?implementation.
+    ?implementation orkg:name?name.
+     FILTER (?value = (max(?value))
+     }
+     GROUP BY?name
+     HAVING COUNT(?value) = 1
+     }<|eot_id|>

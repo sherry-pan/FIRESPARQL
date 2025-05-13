@@ -1,0 +1,15 @@
+Question:
+What is the most common Knowledge representation method?
+
+Generated SPARQL:
+ SELECT DISTINCT?method?method_lbl
+WHERE {
+ ?problem       a                orkgc:Problem;
+                 rdfs:label      ?problem_lbl.  
+  FILTER (str(?problem_lbl) = "Knowledge Representation")
+ ?method       a                orkgc:Method;
+                  rdfs:label      ?method_lbl.
+ ?paper       orkgp:HAS_METHOD      ?method.
+ ?paper       orkgp:HAS_PAPER_COUNT  ?count.
+  FILTER (?count > ALL (SELECT (COUNT(?paper2) as?count2) WHERE {?paper2 orkgp:HAS_METHOD?method}))
+}<|eot_id|>

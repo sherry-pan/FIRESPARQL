@@ -1,0 +1,16 @@
+Question:
+List the title and ID of research papers that contain a benchmark over the Penn Treebank (Word Level) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:CSVW_Name?title.
+ ?paper csvw:CSVW_Value?id.
+ ?paper orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET?dataset.
+ ?dataset csvw:name "Penn Treebank (Word Level)".
+}<|eot_id|>

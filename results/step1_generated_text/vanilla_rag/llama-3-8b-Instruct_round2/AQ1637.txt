@@ -1,0 +1,20 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?model_name
+WHERE {
+ ?benchmark a orkg:HasBenchmark.
+ ?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/OpenAI_Gym_Cart_Pole>.
+ ?benchmark orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:score?score.
+ ?model orkg:hasBenchmark?benchmark.
+ ?model orkg:hasMethod?method.
+ ?model orkg:hasImplementation?implementation.
+ ?model orkg:hasApproach?approach.
+ ?model orkg:name?model_name.
+  FILTER (?score = MAX(?score) )
+  FILTER (?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/OpenAI_Gym_Cart_Pole> )
+}<|eot_id|>

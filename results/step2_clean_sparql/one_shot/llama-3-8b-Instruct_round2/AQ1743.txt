@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/ontology/concept/>
+PREFIX orkgp: <http://www.orkg.org/ontology/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "F1 score")
+  ?benchmark orkgp:hasMetric ?metric;
+             orkgp:hasDataset <http://www.orkg.org/resource/BUCC_German-to-English>;
+             orkgp:hasResult ?result.
+  ?result orkgp:hasValue ?value.
+  ?model a orkgc:Model;
+         orkgp:hasBenchmark ?benchmark;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

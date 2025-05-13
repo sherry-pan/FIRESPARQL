@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset DocRED (Human-annotated)?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET <http://orkg.org/orkg/resource/DocRED> ;
+    orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric ;
+    orkg:HAS_VALUE?value.
+  FILTER (?benchmark orkg:HAS_BENCHMARK?evaluation)
+}<|eot_id|>

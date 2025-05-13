@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?modelLabel ?f1Score
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMicroF1 ?microF1.
+  ?evaluation orkg:hasMacroF1 ?macroF1.
+  ?model orkg:hasDataset ?dataset.
+  ?dataset orkg:label "Natural Questions (long)".
+  ?model orkg:method ?method.
+  FILTER (?microF1 > ?macroF1)
+}
+ORDER BY DESC(?microF1)
+LIMIT 1
+```

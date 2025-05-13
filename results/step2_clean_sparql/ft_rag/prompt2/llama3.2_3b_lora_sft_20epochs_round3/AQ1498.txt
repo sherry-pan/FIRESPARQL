@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PIQA" || str(?dataset_lbl) = "PIQAPL" || str(?dataset_lbl) = "PIQAPL-1.0")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?cont;
+             orkgp:P71080 ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P71081 ?metric.
+  BIND(xsd:float(?value) AS ?value_float)
+  ?model orkgp:HAS_BENCHMARK ?benchmark;
+         rdfs:label ?model_lbl.
+  ORDER BY DESC(?value_float)
+  LIMIT 1
+}
+```

@@ -1,0 +1,29 @@
+Question:
+What is the best performing model benchmarking the Atari 2600 Up and Down dataset in terms of Score metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?modelLabel?score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/Atari_2600_Up_and_Down>.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC "Score".
+ ?evaluation orkg:HAS_VALUE?score.
+ ?model orkg:HAS_IMPLEMENTATION?implementation.
+  FILTER (?score >?bestScore).
+ ?bestScore a xsd:float.
+  FILTER (!bound(?bestScore) ||?score >?bestScore).
+ ?bestScore orkg:HAS_VALUE?bestScore.
+ ?bestScore orkg:HAS_EVALUATION?bestEvaluation.
+ ?bestEvaluation orkg:HAS_MODEL?bestModel.
+ ?bestModel orkg:HAS_IMPLEMENTATION?bestImplementation.
+  FILTER (!bound(?bestImplementation) ||?implementation!=?bestImplementation).
+  FILTER (!bound(?bestModel) ||?model!=?bestModel).
+  FILTER (!bound(?bestEvaluation) ||?evaluation!=?bestEvaluation).
+ ?model rdfs:label?modelLabel.
+}<|eot_id|>

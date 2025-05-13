@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?score) AS ?benchmark_result)
+WHERE {
+  orkgr:R155561 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:P43131 ?score.
+  FILTER(REGEX(STR(?metric_lbl), "WMT2014 French-English"))
+  ?eval orkgp:P43128 ?benchmark.
+  ?benchmark orkgp:P43133 ?method.
+  ?method rdfs:label ?method_lbl.
+}
+```

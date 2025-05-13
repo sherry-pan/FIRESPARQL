@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/schema/ont/1.0>
+PREFIX orkg1: <http://orkg.org/schema/1.0/>
+SELECT ?model ?metric 
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?benchmark orkg:method ?method.
+  ?model orkg:microF1 ?microF1.
+  ?model orkg:macroF1 ?macroF1.
+  FILTER (CONTAINS(STR(?microF1), "F1") AND CONTAINS(STR(?microF1), "entity level"))
+  FILTER (CONTAINS(STR(?macroF1), "F1") AND CONTAINS(STR(?macroF1), "entity level"))
+  ?benchmark orkg:hasMetric ?metric.
+  BIND(STR(?microF1) AS ?metric)
+}
+```

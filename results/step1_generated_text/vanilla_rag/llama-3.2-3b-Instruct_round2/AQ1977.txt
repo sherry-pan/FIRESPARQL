@@ -1,0 +1,14 @@
+Question:
+Where can I find code references in papers that have used the STREET model for benchmarking purposes?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?paper?code
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasImplementation?implementation.
+    ?benchmark orkg:hasMethod "STREET".
+    ?implementation orkg:hasCode?code.
+     FILTER (regex(str(?code, "benchmark") = "true" || regex(str(?code, "benchmarking") = "true"))
+     }
+    <|eot_id|>

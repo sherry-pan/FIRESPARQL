@@ -1,0 +1,29 @@
+Question:
+What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?benchmark       a            orkgc:Dataset       ;
+                      rdfs:label      ?benchmark_lbl.
+         FILTER(REGEX(?benchmark_lbl, "CL-SciSumm", "i"))
+        ?eval         orkgp:HAS_BENCHMARK      ?benchmark;
+                      orkgp:HAS_EVALUATION      ?eval.
+        ?metric         orkgp:P31              ?eval;
+                      rdfs:label              ?metric_lbl.
+         FILTER(REGEX(?metric_lbl, "ROUGE-2", "i"))
+        ?cont         orkgp:HAS_BENCHMARK      ?benchmark;
+                      orkgp:HAS_DATASET          ?dataset.
+        ?model         orkgp:P31              ?cont;
+                      rdfs:label              ?model_lbl.
+        ?cont         orkgp:HAS_EVALUATION      ?eval.
+        ?eval         orkgp:P31              ?metric;
+                      rdfs:label              ?metric_lbl.
+         OPTIONAL {
+          ?cont           orkgp:P31              ?model2;
+                         rdfs:label              ?model_lbl2.
+         }
+         FILTER(IF(?model_lbl2, THEN (NOT(?model_lbl)), TRUE()))
+       }
+     ORDER BY DESC(?metric_lbl)
+     LIMIT 1<|eot_id|>

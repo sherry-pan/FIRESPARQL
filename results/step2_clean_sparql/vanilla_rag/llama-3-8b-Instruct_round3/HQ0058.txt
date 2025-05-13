@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?study ?precision ?recall ?f1
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:usedMethod orkg:P97142; # Assuming `orkg:P97142` refers to Naive Bayes
+         orkg:usedTextFeature orkg:P71064; # Assuming `orkg:P71064` refers to Bag of Words
+         orkg:classifiedWith orkg:P71094. # Assuming `orkg:P71094` refers to user feedback as feature request
+  ?study orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:P71079 ?precision; # Assuming `orkg:P71079` refers to precision
+              orkg:P71080 ?recall; # Assuming `orkg:P71080` refers to recall
+              orkg:P71081 ?f1. # Assuming `orkg:P71081` refers to f1
+}
+```

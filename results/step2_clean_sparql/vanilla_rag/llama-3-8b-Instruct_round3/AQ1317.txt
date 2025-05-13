@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation a orkg:Evaluation ;
+    orkg:HAS_METHOD ?method ;
+    orkg:HAS_DATASET "Atari 2600 Star Gunner" ;
+    orkg:HAS_BENCHMARK_RESULT ?result.
+  ?result orkg:HAS_METRIC ?metric ;
+    orkg:HAS_VALUE ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

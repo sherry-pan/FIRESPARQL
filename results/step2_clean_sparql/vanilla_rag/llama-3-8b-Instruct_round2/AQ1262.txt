@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?value
+WHERE {
+   ?evaluation a orkg:Evaluation ;
+        orkg:hasDataset <http://orkg.org/orkg/resource/AESLC> ;
+        orkg:hasEvaluation ?hasEvaluation.
+   ?hasEvaluation orkg:metric ?metric ;
+                  csvw:value ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

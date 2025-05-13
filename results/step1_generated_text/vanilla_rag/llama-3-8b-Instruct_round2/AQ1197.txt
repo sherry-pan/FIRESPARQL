@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the STS Benchmark dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_DATASET "STS Benchmark" ;
+    orkg:HAS_EVALUATION?metric.
+ ?metric csvw:CSVW_Value?value.
+  FILTER (?value > 0).
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

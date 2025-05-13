@@ -1,0 +1,27 @@
+Question:
+What is the best performing model benchmarking the ImageNet ReaL dataset in terms of Params metric?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl      = "ImageNet ReaL")
+                )
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION      ?eval.
+       ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_METRIC        ?metric.
+       ?metric         orkgp:HAS_PROPERTY     ?prop;
+                      orkgp:HAS_VALUE        ?value.
+       ?prop          orkgp:HAS_NUMBER        ?number;
+                      orkgp:HAS_DATASET      ?dataset;
+                      rdfs:label              ?prop_lbl.
+        FILTER (str(?prop_lbl      = "Params")
+                )
+       ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:HAS_MODEL        ?model.
+       ?model      rdfs:label              ?model_lbl.
+        ORDER BY DESC(?number)
+        LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:HAS_METHOD ?method.
+  ?method rdfs:label ?method_label.
+  FILTER (?method_label = "MEMEN model").
+  ?paper orkg:hasTitle ?paper_title.
+  ?paper orkg:HAS_IMPLEMENTATION ?code_link.
+  ?code_link rdfs:label ?implementation_label.
+  FILTER (CONTAINS(LCASE(?implementation_label), "code") || CONTAINS(LCASE(?implementation_label), "link")).
+}
+```

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?benchmark
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET "BUCC German-to-English".
+  ?benchmark orkg:HAS_F1_SCORE ?f1.
+  FILTER (STRLIKE(STR(?benchmark), "model benchmark") || STRLIKE(STR(?benchmark), "dataset benchmark") || STRLIKE(STR(?benchmark), "performance benchmark") || STRLIKE(STR(?benchmark), "evaluation benchmark"))
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:USES_MODEL ?model.
+  ?model schema:name "Pointer + Coverage + EntailmentGen + QuestionGen".
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark schema:purpose "benchmarking".
+  ?paper orkg:HAS_CODE_REFERENCE ?codeReference.
+}
+```

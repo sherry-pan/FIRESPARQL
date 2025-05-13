@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:HAS_METHOD ?method;
+    orkgp:HAS_IMPLEMENTATION ?implementation
+  ].
+  ?implementation orkgp:P2009 ?code.
+  FILTER(REGEX(STR(?code), "Rainbow+SEER"))
+  FILTER(?code != " ")
+}
+```

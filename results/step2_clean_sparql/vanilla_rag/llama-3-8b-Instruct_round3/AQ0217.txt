@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_dataset <http://orkg.org/dataset/RCV1/RCV2>.
+  ?model orkg:has_evaluation ?evaluation.
+  ?evaluation rdfs:label ?evaluationLabel.
+  FILTER (?evaluationLabel = "tested on" || ?evaluationLabel = "evaluated on").
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY ?modelLabel
+```

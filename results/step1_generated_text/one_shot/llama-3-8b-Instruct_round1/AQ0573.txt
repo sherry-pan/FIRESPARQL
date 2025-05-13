@@ -1,0 +1,15 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the arXiv dataset?
+
+Generated SPARQL:
+ SELECT?paper_title?paper_id?benchmark_id
+WHERE {
+  {
+   ?paper      orkgc:HAS_ID?paper_id;
+                orkgc:HAS_TITLE?paper_title.
+   ?benchmark  orkgp:HAS_DATASET  orkgc:Dataset;
+                rdfs:label  "arXiv";
+                orkgp:HAS_EVALUATION?eval.
+   ?eval       orkgp:HAS_VALUE?value.
+   ?benchmark  orkgp:HAS_CONT?cont.
+   ?cont       orkgp:HAS_PAPER

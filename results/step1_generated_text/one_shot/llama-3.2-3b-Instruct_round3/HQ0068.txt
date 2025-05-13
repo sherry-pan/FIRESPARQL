@@ -1,0 +1,16 @@
+Question:
+Which sectors are modeled as energy sectors and how often?
+
+Generated SPARQL:
+ SELECT?sector?frequency
+     WHERE {
+      ?paper orkgp:compareContribution?contrib.
+      ?contrib orkgp:P31?contribType.
+      ?contrib orkgp:P37586?scenarios.
+      ?scenarios orkgp:P37675?studies.
+      ?studies orkgp:P35205?timeframes.
+      ?contrib orkgp:P37581?sector.
+      ?sector a orkg:EnergySector.
+      ?contrib orkgp:P37682?frequency.
+       FILTER(xsd:int(?timeframes) = 2050)
+     }<|eot_id|>

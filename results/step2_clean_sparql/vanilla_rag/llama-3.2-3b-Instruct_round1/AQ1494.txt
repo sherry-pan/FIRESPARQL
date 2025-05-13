@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?bleu_score
+WHERE {
+  ?model orkg:has_dataset <http://orkg.org/orkg/predicate/HAS_DATASET#RotoWire> .
+  ?model orkg:has_benchmark ?benchmark .
+  ?benchmark orkg:has_evaluation ?evaluation .
+  ?evaluation orkg:has_metric "BLEU" .
+  ?benchmark orkg:has_result ?result .
+  ?result orkg:has_value ?bleu_score .
+  FILTER (STR(?bleu_score) > "0")
+}
+```

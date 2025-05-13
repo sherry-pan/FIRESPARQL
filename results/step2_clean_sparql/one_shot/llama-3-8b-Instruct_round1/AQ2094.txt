@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/ontology/cross-datatype/>
+PREFIX orkgp: <http://www.orkg.org/ontology/paper/>
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "OTF spelling+lemma (single)")
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_MODEL ?model;
+         orkgp:HAS_SOURCE_CODE ?code.
+}
+```

@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Pubmed dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?score
+WHERE {
+ ?benchmark a orkg:benchmark ;
+    orkg:has_evaluation?evaluation.
+ ?evaluation rdfs:label?metric ;
+    orkg:score?score.
+  FILTER (?benchmark orkg:dataset "Pubmed" &&?evaluation orkg:dataset "Pubmed")
+  FILTER (?score IS NOT NULL)
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

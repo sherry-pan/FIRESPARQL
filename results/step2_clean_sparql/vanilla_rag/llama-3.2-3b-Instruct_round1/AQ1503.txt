@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://purl.org/linked-data/cube/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model ?dataset ?metric
+WHERE {
+  ?model rdfs:label ?label .
+  ?model orkg:hasBenchmark ?benchmark .
+  ?benchmark rdfs:label ?benchmarkLabel .
+  ?benchmark orkg:hasDataset ?dataset .
+  ?dataset rdfs:label ?datasetLabel .
+  ?benchmark orkg:hasEvaluation ?evaluation .
+  ?evaluation orkg:evaluationMetric ?metric .
+  FILTER (str(?benchmarkLabel) = "Supervised") .
+  FILTER (str(?datasetLabel) = "Supervised") .
+  FILTER (str(?metric) = "SemEval 2013") .
+}
+```

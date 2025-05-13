@@ -1,0 +1,21 @@
+Question:
+List the code links in papers that use the OTF spelling+lemma (single) model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?code.
+      ?code orkgp:P50134?model.
+      ?model rdfs:label?model_lbl.
+       FILTER(REGEX(?model_lbl, "OTF spelling+lemma"))
+      ?cont orkgp:P50133?eval.
+      ?eval orkgp:P5040?benchmark.
+      ?benchmark orkgp:P5041?cont.
+      ?cont orkgp:HAS_BENCHMARK?benchmark.
+      ?cont orkgp:P50133?eval.
+      ?eval orkgp:P5042?cont.
+      ?cont orkgp:P50133?eval.
+      ?eval orkgp:P5040?benchmark.
+     }
+     LIMIT 1<|eot_id|>

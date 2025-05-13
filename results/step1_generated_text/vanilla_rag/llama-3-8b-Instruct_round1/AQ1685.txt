@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?method
+WHERE {
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?metric xsd:string?rouge2.
+ ?benchmark orkg:HAS_METHOD?method.
+ ?benchmark orkg:HAS_DATASET orkg:CL-SciSumm.
+  FILTER (?rouge2 = MAX(?rouge2) )
+}
+ORDER BY DESC(?rouge2) LIMIT 1<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?precision ?recall ?f1
+WHERE {
+  ?study a orkgc:Study;
+         rdfs:label ?study_lbl;
+         orkgp:HAS_COMPARISON ?comp;
+         orkgp:HAS_RESULT ?result.
+  FILTER (CONTAINS(LCASE(?study_lbl), "naive bayes") && CONTAINS(LCASE(?study_lbl), "machine learning") && CONTAINS(LCASE(?study_lbl), "bag of words") && CONTAINS(LCASE(?study_lbl), "feature request"))
+  
+  ?comp orkgp:HAS_FEATURES ?features.
+  ?features orkgp:HAS_FEATURE_TYPE ?feature.
+  ?feature orkgp:FEATURE_TYPE orkgp:MachineLearningFeature;
+           orkgp:FEATURE_NAME orkgp:bagOfWords.
+  
+  ?result orkgp:PRECISION ?precision;
+          orkgp:RECALL ?recall;
+          orkgp:F1 ?f1.
+}
+```

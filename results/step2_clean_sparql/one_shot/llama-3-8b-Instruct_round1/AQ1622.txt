@@ -1,0 +1,14 @@
+```sparql
+PREFIX ex: <http://example.org/>
+
+SELECT ?model
+WHERE {
+  ?model ex:achievedScore ?score ;
+         ex:onBenchmark ex:ImageNet .
+  FILTER NOT EXISTS {
+    ?otherModel ex:achievedScore ?otherScore ;
+                ex:onBenchmark ex:ImageNet .
+    FILTER (?otherScore > ?score)
+  }
+}
+```

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric 
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmark ?dataset.
+    ?dataset orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasEvaluation ?metric.
+    FILTER (strContains(URI(?metric), "Oxford-IIIT Pets") OR strContains(URI(?metric), "Pets"))
+}
+```

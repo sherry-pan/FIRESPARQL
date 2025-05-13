@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?evaluation a orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  FILTER(?metric_lbl = "Top-1 Error Rate")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "Oxford-IIIT Pets"))
+  
+  ?benchmark orkgp:HAS_BENCHMARK ?cont.
+  ?cont orkgp:P32 ?model.
+  
+  ?cont orkgp:P431 ?evaluation.
+  ?evaluation orkgp:metric ?value.
+  FILTER(?value = "0.0")
+  
+  ?model rdfs:label ?model_lbl.
+}
+```

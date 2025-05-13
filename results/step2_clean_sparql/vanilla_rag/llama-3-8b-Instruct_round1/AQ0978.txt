@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?evaluationMetric.
+  ?evaluation orkg:HAS_BENCHMARK "DBpedia benchmark dataset".
+  ?evaluationMetric a orkg:Metric.
+  ?evaluationMetric rdfs:label ?metric.
+  FILTER (str(?metric) != "evaluation")
+}
+ORDER BY ?metric
+```

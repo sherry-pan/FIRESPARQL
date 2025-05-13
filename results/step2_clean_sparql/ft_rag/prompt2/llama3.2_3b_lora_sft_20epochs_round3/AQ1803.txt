@@ -1,0 +1,13 @@
+```sparql
+SELECT ?name
+WHERE {
+  orkgr:R8342 orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "VTAB-1k"))
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?evaluation.
+  ?benchmark orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_IMPLEMENTATION ?name.
+}
+ORDER BY DESC(xsd:float(?evaluation))
+LIMIT 1
+```

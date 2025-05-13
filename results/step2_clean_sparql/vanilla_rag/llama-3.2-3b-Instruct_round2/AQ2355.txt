@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:HAS_IMPLEMENTATION ?impl.
+  ?impl orkg:HAS_METHOD "BiLSTM-Attention + ELMo".
+  ?impl orkg:HAS_EVALUATION ?eval.
+  ?eval orkg:HAS_LINK ?code.
+  FILTER (STR(?code))
+}
+```

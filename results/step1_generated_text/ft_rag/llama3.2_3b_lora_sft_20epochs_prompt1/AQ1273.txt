@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Centipede dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?evaluatio_1) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "Atari 2600 Centipede"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_EVALUATION     ?evaluatio_1.
+        ?evaluatio_1      orkgp:HAS_VALUE        ?value.
+         BIND(xsd:float(?value) AS?score)
+        ?metric         orkgp:HAS_EVALUATION     ?evaluatio_1.
+        ?metric          rdfs:label              ?metric_lbl.
+        ?method         orkgp:HAS_BENCHMARK     ?benchmark;
+                          orkgp:HAS_DATASET        ?dataset;
+                          orkgp:HAS_EVALUATION     ?evaluatio_1.
+     }<|eot_id|>

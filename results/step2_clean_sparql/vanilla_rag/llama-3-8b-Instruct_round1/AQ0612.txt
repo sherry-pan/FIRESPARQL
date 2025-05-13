@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset csvw:datasetName "Atari 2600 Defender".
+  ?paper orkg:CSVW_Titles ?paperTitle.
+  ?paper orkg:CSVW_Number ?paperId.
+}
+```

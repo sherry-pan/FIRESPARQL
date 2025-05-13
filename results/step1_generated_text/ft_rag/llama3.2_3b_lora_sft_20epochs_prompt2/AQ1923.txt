@@ -1,0 +1,38 @@
+Question:
+List the code links in papers that use the Long Short Transformer model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31 [
+         rdfs:label?title
+       ];
+        orkgp:P32 [
+         ?benchmark
+        ];
+       ?benchmark orkgp:HAS_DATASET {
+         ?dataset.
+        }
+       ?dataset orkgp:HAS_CODE {
+         ?code.
+        }
+       ?paper orkgp:P34 [
+          orkgp:HAS_METHOD {
+           ?method.
+          }
+        ]
+       ?method rdfs:label?method_label;
+                 orkgp:P5009?cont {
+                   filter(?cont = "Long Short Transformer")
+                 }
+       ?paper orkgp:P34 [
+          orkgp:HAS_IMPLEMENTATION {
+           ?implementation.
+          }
+        ]
+       ?implementation orkgp:P5008?cont {
+         ?code.
+        }
+      }
+      ORDER BY DESC(?cont)
+      LIMIT 1<|eot_id|>

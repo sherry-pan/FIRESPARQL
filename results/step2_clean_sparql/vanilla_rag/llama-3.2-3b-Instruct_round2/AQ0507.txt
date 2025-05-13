@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset "TempEval-3".
+    ?paper orkg:hasTitle ?title.
+    ?paper orkg:number ?id.
+    FILTER (REGEX(?id, "^[0-9]+$") || REGEX(?id, "^P[0-9]+$"))
+}
+```

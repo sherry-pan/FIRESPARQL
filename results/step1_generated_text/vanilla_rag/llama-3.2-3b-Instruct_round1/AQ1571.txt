@@ -1,0 +1,18 @@
+Question:
+What is the name of the top performing model in terms of F1 entity level score when benchmarked on the NCBI Disease dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/schema/ont/1.0>
+     PREFIX orkg: <http://orkg.org/schema/1.0/>
+     SELECT?model?metric 
+     WHERE {
+      ?model orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:evaluation?evaluation.
+      ?benchmark orkg:method?method.
+      ?model orkg:microF1?microF1.
+      ?model orkg:macroF1?macroF1.
+       FILTER (strlike(STR(?microF1), "F1") AND strlike(STR(?microF1), "entity level"))
+       FILTER (strlike(STR(?macroF1), "F1") AND strlike(STR(?macroF1), "entity level"))
+      ?benchmark orkg:hasMetric?metric.
+       BIND(STR(?microF1) AS?metric)
+     }<|eot_id|>

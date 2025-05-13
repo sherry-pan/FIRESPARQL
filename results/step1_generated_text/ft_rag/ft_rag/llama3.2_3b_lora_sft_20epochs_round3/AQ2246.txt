@@ -1,0 +1,19 @@
+Question:
+Provide a list of papers that have utilized the SAC model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?implementation.
+      ?implementation orkgp:P37449?code.
+      ?paper orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "SAC"))
+      ?paper orkgp:HAS_METHOD?method.
+       FILTER(REGEX(?method, "SAC"))
+      ?paper orkgp:P31?eval.
+      ?eval orkgp:HAS_EVALUATION?evaluation.
+       FILTER(REGEX(?evaluation, "accuracy"^^xsd:float))
+      ?paper orkgp:P31?approach.
+       FILTER(REGEX(?approach, "SAC"))
+     }<|eot_id|>

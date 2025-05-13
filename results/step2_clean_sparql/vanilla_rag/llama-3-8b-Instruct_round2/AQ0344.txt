@@ -1,0 +1,12 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?paper_title ?paper_id
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper csvw:title ?paper_title.
+  ?paper orkg:has_dataset ?dataset.
+  ?dataset csvw:name "SemEval-2018 Task 7".
+  ?paper orkg:has_benchmark ?benchmark.
+  FILTER(?benchmark = true)
+}

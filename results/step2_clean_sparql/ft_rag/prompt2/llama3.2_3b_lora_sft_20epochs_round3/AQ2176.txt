@@ -1,0 +1,13 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  FILTER(REGEX(?eval, "PAR Transformer Large"))
+  ?cont orkgp:P35 ?implementation.
+  ?implementation orkgp:P5043 ?code.
+  ?code rdfs:label ?code
+}
+ORDER BY DESC(COUNT(?code))
+LIMIT 1
+```

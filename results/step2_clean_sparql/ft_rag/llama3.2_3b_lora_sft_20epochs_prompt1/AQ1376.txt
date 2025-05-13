@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Penn Treebank" || str(?dataset_lbl) = "Penn Treebank (test)")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P71080 ?micro_f1.
+  OPTIONAL {
+    ?eval orkgp:P71082 ?macro_f1.
+  }
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_MODEL ?model.
+  OPTIONAL {
+    ?model rdfs:label ?model_lbl.
+  }
+  BIND(xsd:float(?value) AS ?micro_f1)
+  BIND(xsd:float(?macro_f1) AS ?macro_f1)
+}
+ORDER BY DESC(?micro_f1)
+LIMIT 1
+```

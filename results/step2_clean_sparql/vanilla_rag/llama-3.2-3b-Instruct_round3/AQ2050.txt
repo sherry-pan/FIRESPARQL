@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?code
+WHERE {
+    ?paper orkg:HAS_METHOD orkg:MMV_TSM-50x2.
+    ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+    ?implementation a orkg:Code.
+    ?implementation orkg:identifier ?code.
+    FILTER (CONTAINS(LCASE(?code), "https://github.com/your-repo"))
+}
+LIMIT 10
+```

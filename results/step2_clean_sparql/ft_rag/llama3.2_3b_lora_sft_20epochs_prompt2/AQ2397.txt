@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?contrib.
+  ?contrib orkgp:P34 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(STR(?code_lbl), "DeiT-Ti"))
+  ?contrib orkgp:P20075 ?eval.
+  ?eval orkgp:P43135 ?dataset.
+  ?dataset orkgp:P5009 ?benchmark.
+  ?paper orkgp:P5008 ?benchmark.
+  FILTER(?benchmark = "TiT")
+}
+```

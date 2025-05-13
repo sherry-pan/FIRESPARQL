@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?code_ref
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_MODEL <http://orkg.org/orkg/resource/CATTS-XSUM>.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_IMPLEMENTATION ?code_ref.
+  FILTER (?code_ref != "" && isLiteral(?code_ref))
+}
+```

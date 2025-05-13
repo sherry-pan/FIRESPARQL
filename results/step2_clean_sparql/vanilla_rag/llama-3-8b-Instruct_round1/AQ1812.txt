@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?percentageErrorScore
+WHERE {
+  ?model a orkg:Model.
+  ?evaluation orkg:HAS_EVALUATION ?model.
+  ?evaluation orkg:HAS_METHOD ?method.
+  ?evaluation orkg:HAS_DATASET orkg:SVHN.
+  ?evaluation orkg:HAS_ERROR_SCORE ?percentageErrorScore.
+}
+ORDER BY DESC(?percentageErrorScore)
+LIMIT 1
+```

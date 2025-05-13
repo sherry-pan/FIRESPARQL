@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  FILTER(REGEX(?eval, "CAIT-XS-36"))
+  ?dataset orkgp:HAS_SOURCE_CODE ?code.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:P33 ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "benchmark"))
+  ?cont orkgp:P34 ?approach.
+  ?approach rdfs:label ?approach_lbl.
+  FILTER(REGEX(?approach_lbl, "code"))
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?f1_score
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_DATASET "http://nlp.stanford.edu/projects/CoreNLP/data/conll-2012/en-core-web".
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:has_micro_f1 ?f1_score.
+  FILTER (str(?f1_score) = "0.96")
+}
+```

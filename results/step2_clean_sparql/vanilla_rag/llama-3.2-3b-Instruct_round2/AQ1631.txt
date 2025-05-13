@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?metric
+WHERE {
+  ?model orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_method ?method.
+  ?method orkg:has_dataset ?dataset.
+  ?dataset orkg:has_dataset "Reacher, easy (DMControl100k)".
+  ?benchmark orkg:has_evaluation_metric ?metric.
+  FILTER (STRLIKE(?metric, "Score"))
+}
+```

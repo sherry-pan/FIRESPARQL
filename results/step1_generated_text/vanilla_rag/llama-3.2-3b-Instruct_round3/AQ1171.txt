@@ -1,0 +1,14 @@
+Question:
+What is the top benchmark score and its metric on the MultiNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasMetric?metric.
+    ?benchmark orkg:hasScore?score.
+     FILTER (strlike(iri(?metric), "http://orkg.org/orkg/predicate/*_F1") || strlike(iri(?metric), "http://orkg.org/orkg/predicate/*_Accuracy"))
+     FILTER (strlike(iri(?benchmark), "http://orkg.org/orkg/predicate/P71079" || strlike(iri(?benchmark), "http://orkg.org/orkg/predicate/P71075"))
+     }<|eot_id|>

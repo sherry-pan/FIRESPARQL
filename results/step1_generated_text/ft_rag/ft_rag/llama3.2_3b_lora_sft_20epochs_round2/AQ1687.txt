@@ -1,0 +1,108 @@
+Question:
+What is the best performing model benchmarking the AESLC dataset in terms of ROUGE-1 metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?method?method_lbl
+     WHERE {
+      ?benchmark       a                orkgc:Benchmark;
+                      rdfs:label      ?benchmark_lbl.
+         FILTER (str(?benchmark_lbl) = "AESLC")
+        ?eval           orkgp:HAS_BENCHMARK      ?benchmark;
+                          orkgp:HAS_DATASET          ?dataset.
+        ?cont         orkgp:HAS_EVALUATION     ?eval.
+        ?cont         orkgp:HAS_METRIC         ?metric.
+         OPTIONAL {?eval           orkgp:HAS_VALUE        ?value.
+                  ?value           orkgp:HAS_METRIC        ?metric.
+                  ?metric           orkgp:HAS_VALUE        ?value.}
+         OPTIONAL {
+          ?eval           orkgp:HAS_MODEL         ?model.
+          ?model         orkgp:HAS_DATASET         ?dataset.
+          ?model         rdfs:label              ?model_lbl.}
+        ?cont         orkgp:HAS_COMPARED_WITH   ?compare.
+        ?compare      orkgp:HAS_MODEL         ?model.
+        ?compare      orkgp:HAS_VALUE         ?value.
+        ?value       orkgp:HAS_METRIC         ?metric.
+         OPTIONAL {
+          ?metric      rdfs:label              ?metric_lbl.}
+         BIND(
+           IF(
+            ?metric       rdfs:label              ?metric_lbl,
+            ?metric_lbl,
+            ?metric
+           )   AS?metric_lbl)
+         BIND(
+           IF(
+            ?model      rdfs:label              ?model_lbl,
+            ?model_lbl,
+            ?model
+           )   AS?model_lbl)
+         BIND(
+           IF(
+            ?value      rdfs:label              ?value_lbl,
+            ?value_lbl,
+            ?value
+           )   AS?value_lbl)
+         BIND(
+           IF(
+            ?compare      rdfs:label              ?compare_lbl,
+            ?compare_lbl,
+            ?compare
+           )   AS?compare_lbl)
+         BIND(
+           IF(
+            ?eval           orkgp:HAS_VALUE        ?value,
+            ?value,
+             NULL
+           )   AS?eval_value)
+         BIND(
+           IF(
+            ?eval           orkgp:HAS_MODEL        ?model,
+            ?model,
+             NULL
+           )   AS?eval_model)
+         BIND(
+           IF(
+            ?eval           orkgp:HAS_METRIC        ?metric,
+            ?metric,
+             NULL
+           )   AS?eval_metric)
+         BIND(
+           IF(
+            ?cont           orkgp:HAS_VALUE        ?value,
+            ?value,
+             NULL
+           )   AS?cont_value)
+         BIND(
+           IF(
+            ?cont           orkgp:HAS_METRIC        ?metric,
+            ?metric,
+             NULL
+           )   AS?cont_metric)
+         BIND(
+           IF(
+            ?cont           orkgp:HAS_MODEL        ?model,
+            ?model,
+             NULL
+           )   AS?cont_model)
+         BIND(
+           IF(
+            ?cont           orkgp:HAS_DATASET        ?dataset,
+            ?dataset,
+             NULL
+           )   AS?cont_dataset)
+         BIND(
+           IF(
+            ?cont           orkgp:HAS_BENCHMARK      ?benchmark,
+            ?benchmark,
+             NULL
+           )   AS?cont_benchmark)
+         BIND(
+           IF(
+            ?cont           orkgp:HAS_COMPARED_WITH  ?compare,
+            ?compare,
+             NULL
+           )   AS?cont_compare)
+         ORDER BY DESC(?eval_value)
+         LIMIT 1
+       }
+    <|eot_id|>

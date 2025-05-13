@@ -1,0 +1,17 @@
+Question:
+What is the name of the top performing model in terms of Score score when benchmarked on the Atari 2600 Tutankham dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX csvw: <http://www.w3.org/ns/csvw#>
+     SELECT?model_name?score
+     WHERE {
+      ?model orkg:HAS_METHOD?method.
+      ?model orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg:HAS_EVALUATION?evaluation.
+      ?evaluation orkg:HAS_DATASET?dataset.
+      ?dataset csvw:Name "Atari 2600 Tutankham".
+      ?evaluation csvw:Value?score.
+      ?model csvw:Name?model_name.
+       FILTER (?score = MAX(?score) )
+     }<|eot_id|>

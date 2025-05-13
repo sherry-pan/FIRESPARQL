@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?benchmarkScore ?metric
+WHERE {
+  ?benchmarkScore orkg:HAS_DATASET "http://orkg.org/dataset/ImageNetV2".
+  ?benchmarkScore orkg:HAS_BENCHMARK ?score.
+  ?benchmarkScore orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METHOD ?method.
+  FILTER (STR(?method) = "accuracy" OR STR(?method) = "f1-score" OR STR(?method) = "top-k" OR STR(?method) = "top-1")
+  ?benchmarkScore orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER (STR(?metric) = "accuracy" OR STR(?metric) = "f1-score" OR STR(?metric) = "top-k" OR STR(?metric) = "top-1")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

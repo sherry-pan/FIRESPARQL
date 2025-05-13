@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the CINIC-10 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT?score?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark?evaluation.
+ ?evaluation orkg:hasEvaluation?metric ;
+    orkg:hasDataset?dataset.
+ ?dataset schema:name "CINIC-10".
+ ?evaluation orkg:hasScore?score.
+  FILTER (?metric!= "implementation" &&?metric!= "method" &&?metric!= "has dataset")
+}<|eot_id|>

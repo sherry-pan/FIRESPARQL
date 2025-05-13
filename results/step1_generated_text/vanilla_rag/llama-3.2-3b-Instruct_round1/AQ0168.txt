@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the STS Benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model 
+     WHERE {
+      ?model orkg:hasMethod?m.
+      ?m orkg:hasDataset "STS Benchmark".
+      ?model orkg:hasEvaluation?e.
+      ?e orkg:hasMethod?m.
+      ?m orkg:hasApproach?a.
+      ?model rdfs:label?label.
+       FILTER (strlike(STR(?label), "STS Benchmark") OR strlike(STR(?label), "STS Benchmark Evaluation"))
+     }<|eot_id|>

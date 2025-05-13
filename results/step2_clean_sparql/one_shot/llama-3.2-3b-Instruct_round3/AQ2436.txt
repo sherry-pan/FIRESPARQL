@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label "WS-DAN".
+  ?cont orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code;
+        orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset a orkgd:Dataset.
+  FILTER (str(?benchmark) = "ImageNet + iNat")
+}
+```

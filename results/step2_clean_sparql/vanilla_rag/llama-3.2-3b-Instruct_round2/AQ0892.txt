@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+  ?metric orkg:hasBenchmark "Habitat 2020 Object Nav test-std".
+  ?metric orkg:label ?l.
+  FILTER (
+    CONTAINS(LCASE(?l), "recall") OR 
+    CONTAINS(LCASE(?l), "micro-f1") OR 
+    CONTAINS(LCASE(?l), "accuracy") OR 
+    CONTAINS(LCASE(?l), "macro-f1")
+  )
+}
+```

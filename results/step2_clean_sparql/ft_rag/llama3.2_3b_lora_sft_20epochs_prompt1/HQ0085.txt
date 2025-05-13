@@ -1,0 +1,16 @@
+```sparql
+SELECT ?format
+WHERE {
+  orkgr:R155561 orkgp:properties ?column .
+  ?column a orkgp:Column;
+          rdfs:label ?column_labels.
+  FILTER(REGEX(?column_labels, "data format"))
+
+  ?column orkgp:P31 ?type.
+  ?type rdfs:label ?type_labels.
+  FILTER(REGEX(?type_labels, "text"^^xsd:string))
+
+  ?cont orkgp:P400 ?format.
+  FILTER(REGEX(?format, "csv"))
+}
+```

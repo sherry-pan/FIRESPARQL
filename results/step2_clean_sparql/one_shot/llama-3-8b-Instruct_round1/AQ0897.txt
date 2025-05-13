@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://www.scholardi.org/orkg/c/>
+PREFIX orkgp: <http://www.scholardi.org/orkg/p/>
+
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Oxford-IIIT Pets".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:USES_METRIC ?metric.
+}
+```

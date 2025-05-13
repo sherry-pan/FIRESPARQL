@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the ImageNet 64x64 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT?paperTitle?paperId
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:titles?paperTitle.
+ ?paper orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasDataset?dataset.
+ ?dataset orkg:datasetName "ImageNet 64x64".
+}<|eot_id|>

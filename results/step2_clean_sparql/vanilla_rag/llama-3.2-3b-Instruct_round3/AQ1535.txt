@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?testPerplexity 
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_NAME "WikiText-2".
+  ?evaluation orkg:HAS_PERPLEXITY ?testPerplexity.
+  FILTER(ISNUMERIC(?testPerplexity))
+}
+ORDER BY DESC(?testPerplexity)
+LIMIT 1
+```

@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?f1Value
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasEvaluationResult ?evaluationResult.
+  ?evaluationResult orkg:hasMetric ?metric.
+  ?metric a schema:PropertyValue;
+          orkg:hasProperty orkg:P71080;
+          orkg:hasValue ?f1Value.
+  ?model orkg:hasPaper ?paper;
+         orkg:hasLabel ?modelLabel.
+
+  FILTER (?f1Value = 
+    SELECT MAX(?f1Value2)
+    WHERE {
+      ?paper2 orkg:hasEvaluationResult ?evaluationResult2.
+      ?evaluationResult2 orkg:hasMetric ?metric2.
+      ?metric2 a schema:PropertyValue;
+              orkg:hasProperty orkg:P71080;
+              orkg:hasValue ?f1Value2.
+    }
+  )
+}
+```

@@ -1,0 +1,11 @@
+```sparql
+SELECT ?country (MAX(?prevalence) AS ?highestPrevalence)
+WHERE {
+  ?study orkgp:hasStudyLocation ?country.
+  ?study orkgp:hasContribution ?contrib.
+  ?contrib orkgp:P15585 ?epilepsy.
+  ?epilepsy orkgp:P15573 ?prevalence.
+  FILTER (lang(?prevalence) = 'en')
+}
+GROUP BY ?country
+```

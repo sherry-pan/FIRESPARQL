@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "RACE")
+  ?dataset orkgp:HAS_DATASET ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:P71081 ?accuracy;
+        orkgp:HAS_EVALUATION ?evaluatio;
+        orkgp:HAS_METHOD ?method;
+        orkgp:HAS_IMPLEMENTATION ?implement.
+  ?benchmark orkgp:P7032 ?evaluatio.
+  ?evaluatio rdfs:label ?evaluatio_lbl.
+  FILTER (str(?evaluatio_lbl) = "Accuracy (High)")
+  ?implement rdfs:label ?model_lbl.
+}
+```

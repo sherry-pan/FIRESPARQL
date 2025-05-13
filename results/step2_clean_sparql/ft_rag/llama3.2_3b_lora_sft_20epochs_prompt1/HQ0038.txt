@@ -1,0 +1,12 @@
+```sparql
+SELECT ?mean_capacity
+WHERE {
+  orkgr:R155230 orkgp:compareContribution {
+    orkgp:P43135 ?value.
+    ?value orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:P43133 ?avg_value.
+  }
+  FILTER(?avg_value > 0)
+  BIND(xsd:float(?avg_value) AS ?mean_capacity)
+}
+```

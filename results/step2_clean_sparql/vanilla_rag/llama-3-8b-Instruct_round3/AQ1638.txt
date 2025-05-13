@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:EVALUATION ?score.
+  ?evaluation orkg:HAS_BENCHMARK <http://orkg.org/orkg/resource/Ball_in_cup_catch_DMControl100k>.
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

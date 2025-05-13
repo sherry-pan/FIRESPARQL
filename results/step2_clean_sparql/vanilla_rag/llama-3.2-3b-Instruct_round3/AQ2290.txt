@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?paper ?link
+WHERE {
+  ?paper orkg:HAS_METHOD orkg:GCN_Hybrid.
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_LINK ?link.
+  ?link orkg:LABEL ?label.
+  FILTER (?label = "code" && EXISTS {?paper orkg:HAS_BENCHMARK})
+}
+```

@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledge.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledge.org/ontology/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU score")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label "WMT2016 English-Russian".
+      ?result orkgp:benchmarkOn ?dataset;
+              orkgp:achieves ?metricResult.
+      ?metricResult orkgp:isValueOf ?metric;
+                    orkgp:hasValue ?value.
+      ?model orkgp:hasResult ?result;
+             rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

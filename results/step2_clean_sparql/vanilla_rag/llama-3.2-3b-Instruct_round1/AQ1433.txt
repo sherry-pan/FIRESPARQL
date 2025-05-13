@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?bleuScore
+WHERE {
+    ?model orkg:has_dataset ?dataset.
+    ?dataset orkg:has_benchmark "WMT2016 English-German"@en.
+    ?model orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_metric "BLEU"@en.
+    ?evaluation orkg:has_value ?bleuScore.
+    ?model orkg:has_method ?method.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

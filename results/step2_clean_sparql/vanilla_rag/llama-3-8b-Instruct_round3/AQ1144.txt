@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?metric ?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET orkg:CommonsenseQA ;
+    orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METHOD ?method ;
+    orkg:HAS_APPROACH ?approach.
+ ?evaluation csvw:CSVW_Name ?metric ;
+    csvw:CSVW_Value ?value.
+  FILTER (?metric != "unknown" && isLiteral(?value))
+}
+```

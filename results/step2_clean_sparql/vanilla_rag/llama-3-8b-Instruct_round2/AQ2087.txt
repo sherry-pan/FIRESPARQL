@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_METHOD orkg:MultiPerspectiveMatchingEnsemble.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark rdfs:label ?benchmark_label.
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_CODE_LINK ?code_link.
+  FILTER (?benchmark_label = "any benchmark")
+}
+```

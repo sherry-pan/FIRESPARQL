@@ -1,0 +1,16 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Softcite dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?metric?score
+WHERE {
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/Softcite>.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:CSVW_Value?score.
+ ?evaluation orkg:CSVW_Name?metric.
+  FILTER (?benchmark orkg:HAS_BENCHMARK?evaluation)
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

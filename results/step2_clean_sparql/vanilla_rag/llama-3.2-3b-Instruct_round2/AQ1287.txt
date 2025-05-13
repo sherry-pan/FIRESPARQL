@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value WHERE {
+    ?b orkg:has_benchmark ?bm.
+    ?b orkg:has_dataset "Atari 2600 Enduro".
+    ?bm orkg:evaluation ?ev.
+    ?ev orkg:value ?value.
+    ?ev orkg:metric ?metric.
+    FILTER (?value > 0)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?method ?f1_score
+WHERE {
+  ?benchmark orkg:has_dataset ?dataset.
+  ?benchmark orkg:has_f1_score ?f1_score.
+  ?dataset orkg:has_method ?method.
+  ?dataset orkg:has_benchmark ?benchmark.
+  ?model orkg:has_benchmark ?benchmark.
+  FILTER (STR(?dataset) = "BUCC German-to-English" && ?f1_score = MAX(?f1_score))
+}
+```

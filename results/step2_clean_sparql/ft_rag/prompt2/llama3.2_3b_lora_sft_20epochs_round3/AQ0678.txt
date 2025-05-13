@@ -1,0 +1,23 @@
+```sparql
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper orkgp:P7046 [
+    orkgp:P7045 [
+      orkgp:HAS_BENCHMARK ?benchmark
+    ]
+  ];
+  orkgp:P32 ?title;
+  orkgp:P31 ?id.
+  ?benchmark orkgp:P7044 [
+    rdfs:label ?eval;
+    orkgp:P7034 [
+      orkgp:P7033 [
+        orkgp:P7032 ?dataset
+      ]
+    ]
+  ].
+  FILTER(?eval = "PWC Leaderboards (restricted)")
+}
+ORDER BY ASC(?paper)
+LIMIT 100
+```

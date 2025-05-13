@@ -1,0 +1,18 @@
+```sparql
+PREFIX ns: <http://example.org/ns#>
+
+SELECT ?model
+WHERE {
+  ?run ns:hasBenchmarkDataset ns:DMControl500k ;
+       ns:hasScore ?score ;
+       ns:hasModel ?model .
+  {
+    SELECT (MAX(?score) as ?maxScore)
+    WHERE {
+      ?run ns:hasBenchmarkDataset ns:DMControl500k ;
+           ns:hasScore ?score .
+    }
+  }
+  FILTER(?score = ?maxScore)
+}
+```

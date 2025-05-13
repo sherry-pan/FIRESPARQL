@@ -1,0 +1,14 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://example.org/schema#>
+
+SELECT ?model
+WHERE {
+  ?evaluation :benchmarkedOn :WMT2016_German_English.
+  ?evaluation :hasMetric :BLEU.
+  ?evaluation :hasValue ?bleuScore.
+  ?evaluation :performedBy ?model.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

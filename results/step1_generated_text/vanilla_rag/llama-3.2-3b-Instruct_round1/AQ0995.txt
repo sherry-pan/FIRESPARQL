@@ -1,0 +1,12 @@
+Question:
+What are the metrics of evaluation over the PubMed 20k RCT dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?metric 
+     WHERE {
+        ?s orkg:HAS_EVALUATION?e.
+        ?e orkg:label?label.
+         FILTER (bc:contains(?label, "recall") OR bc:contains(?label, "accuracy") OR bc:contains(?label, "f1") OR bc:contains(?label, "benchmark"))
+        ?s orkg:HAS_BENCHMARK?b.
+     }<|eot_id|>

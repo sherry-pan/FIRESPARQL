@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?model ?f1Score
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?b.
+  ?b orkg:HAS_DATASET ?dataset.
+  ?b orkg:HAS_METHOD ?method.
+  ?b orkg:HAS_F1_SCORE ?f1Score.
+  FILTER (strstarts(str(?dataset), "http://orkg.org/orkg/dataset/BUCC-German-to-English"))
+  FILTER (strcontains(str(?method), "model benchmarking"))
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

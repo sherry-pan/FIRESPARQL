@@ -1,0 +1,19 @@
+```sparql
+SELECT ?paper ?paper_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Penn Treebank (Word Level)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?paper orkgp:HAS_EVALUATION ?eval;
+         orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_LABEL ?label.
+  
+  BIND(xsd:string(?label) AS ?paper_lbl)
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:uses_method orkg:LinearChainCRFsModel.
+  ?paper orkg:evaluated_in ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?paper orkg:has_implementation ?implementation.
+  ?implementation orkg:includes_code ?code_link.
+}
+```

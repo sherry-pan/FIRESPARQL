@@ -1,0 +1,25 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the CoNLL 2012 benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel?evaluation?f1Metric
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_EVALUATION?metric.
+ ?metric a orkg:Metric.
+ ?metric orkg:HAS_VALUE?value.
+ ?metric orkg:HAS_UNIT?unit.
+  FILTER (?unit = "F1" &&?evaluation orkg:HAS_DATASET orkg:CoNLL_2012).
+ ?evaluation orkg:HAS_METHOD?model.
+ ?model a orkg:Model.
+ ?model rdfs:label?modelLabel.
+  FILTER (?metric orkg:HAS_TYPE orkg:micro-F1 ||?metric orkg:HAS_TYPE orkg:macro-F1).
+ ?evaluation orkg:HAS_F1?f1Metric.
+  FILTER (?f1Metric = "best" &&?metric orkg:HAS_TYPE orkg:micro-F1 ||?metric orkg:HAS_TYPE orkg:macro-F1).
+  GROUP BY?model?modelLabel?evaluation
+  ORDER BY DESC(?f1Metric)
+  LIMIT 1
+}<|eot_id|>

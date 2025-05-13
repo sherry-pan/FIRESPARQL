@@ -1,0 +1,19 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Atari 2600 Skiing dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:titles?title.
+ ?paper csvw:name?id.
+ ?paper orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/entity/Atari_2600_Skiing>.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METHOD?method.
+ ?method orkg:HAS_MODEL?model.
+  FILTER (?model orkg:HAS_BENCHMARK?benchmark).
+}<|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?paper ?code 
+WHERE {
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_IMPLEMENTATION ?code.
+    FILTER (
+        CONTAINS(STR(?benchmark), 'ResNet-152 (SAM)') || 
+        CONTAINS(STR(?benchmark), 'ResNet-152') || 
+        CONTAINS(STR(?benchmark), 'ResNet 152') || 
+        CONTAINS(STR(?benchmark), 'resnet-152') || 
+        CONTAINS(STR(?benchmark), 'resnet 152')
+    )
+}
+```

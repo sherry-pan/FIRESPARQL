@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "MPQA".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?impl orkgp:HAS_METHOD ?cont;
+        orkgp:HAS_SOURCE_CODE ?code.
+  ?paper orkgp:HAS_SOURCE_CODE ?code;
+         rdfs:label ?paper_lbl.
+}
+```

@@ -1,0 +1,44 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ SELECT?papers
+     {
+      ?papers orkgp:P31 [
+         orkgp:P2005?dataset
+       ];
+      ?dataset rdfs:label?dataset_labels.
+       FILTER(REGEX(STR(?dataset_labels), "BUCC German-to-English"))
+      ?papers orkgp:P32 [
+         orkgp:HAS_BENCHMARK
+         orkgp:P2004?benchmark
+       ]
+      ?benchmark orkgp:P2003?evaluations
+      ?evaluations orkgp:P23139?number
+       FILTER(?number > 0)
+      ?papers orkgp:HAS_BENCHMARK [
+         orkgp:P2004?benchmark
+       ]
+       {
+         SELECT?papers
+         WHERE {
+          ?papers orkgp:P31 [
+             orkgp:P2005?dataset
+           ];
+          ?dataset rdfs:label?dataset_labels.
+           FILTER(REGEX(STR(?dataset_labels), "BUCC German-to-English"))
+          ?papers orkgp:P32 [
+             orkgp:HAS_BENCHMARK
+             orkgp:P2004?benchmark
+           ]
+          ?benchmark orkgp:P2003?evaluations
+          ?evaluations orkgp:P23139?number
+           FILTER(?number > 0)
+          ?papers orkgp:HAS_BENCHMARK [
+             orkgp:P2004?benchmark
+           ]
+         }
+       }
+     }
+     ORDER BY DESC(?number)
+     LIMIT 10<|eot_id|>

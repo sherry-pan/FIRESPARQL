@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?paper ?title ?id
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper csvw:CSVW_Titles ?title.
+  ?paper csvw:CSVW_Number ?id.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://paperswithcode.com/dataset/snli>.
+}
+```

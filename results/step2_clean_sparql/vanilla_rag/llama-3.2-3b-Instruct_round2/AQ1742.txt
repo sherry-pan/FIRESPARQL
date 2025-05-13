@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?accuracy 
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "Sequential CIFAR-10".
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasValue ?accuracy.
+  ?model orkg:hasEvaluation ?evaluation.
+  FILTER (CONTAINS(LCASE(?evaluation), "unpermuted accuracy"))
+  FILTER (CONTAINS(LCASE(?accuracy), "top performing"))
+}
+```

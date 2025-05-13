@@ -1,0 +1,19 @@
+Question:
+Which are 3 the most common variables for the atmosphere models?
+
+Generated SPARQL:
+ SELECT?var,?var_lbl
+     WHERE {
+      ?model a orkgc:Model;
+              rdfs:label?model_lbl.
+      ?paper orkgp:P31?model;
+              rdfs:label?paper_title.
+      ?paperset orkgp:P32?paper;
+                 rdfs:label?paperset_lbl.
+      ?paperset orkgp:P37042?cont.
+      ?cont orkgp:P43146?var;
+             orkgp:P43147?var_lbl.
+       FILTER(REGEX(STR(?model_lbl), "atmosphere"))
+     }
+     ORDER BY DESC(COUNT(?var,?var_lbl))
+     LIMIT 3<|eot_id|>

@@ -1,0 +1,13 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wmt: <http://www.wmt.org/>
+
+SELECT ?model ?bleuScore
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET wmt:WMT2016_English-Russian.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC "BLEU".
+  ?evaluation orkg:HAS_VALUE ?bleuScore.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1

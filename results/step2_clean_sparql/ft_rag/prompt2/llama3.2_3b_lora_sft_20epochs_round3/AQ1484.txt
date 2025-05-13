@@ -1,0 +1,19 @@
+```sparql
+SELECT ?method ?method_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "Natural Questions \\(long\\)"))
+  ?model orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71080 ?micro_f1.
+  ?eval orkgp:P71082 ?macro_f1.
+  BIND(
+    IF(?micro_f1 > ?macro_f1,
+      CONCAT(?macro_f1, " (macro-F1)"),
+      CONCAT(?micro_f1, " (micro-F1)")
+    ) AS ?method_lbl
+  )
+}
+ORDER BY DESC(?micro_f1)
+LIMIT 1
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?paper_title ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_METHOD orkg:CvT-21_384_res.
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation owl:sameAs ?code_link.
+  ?paper rdfs:label ?paper_title.
+  FILTER (lang(?paper_title) = "en").
+}
+```

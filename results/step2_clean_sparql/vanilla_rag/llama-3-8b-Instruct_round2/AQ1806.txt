@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric owl:propertyValue ?accuracy.
+  ?evaluation orkg:HAS_METRIC orkg:Accuracy.
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:label "ImageNet V2".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC p:Accuracy.
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "PIQA".
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_METRIC_VALUE ?accuracy.
+}
+ORDER BY DESC(xsd:float(?accuracy))
+LIMIT 1
+```

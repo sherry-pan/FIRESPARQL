@@ -1,0 +1,27 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Alien")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_CONT ?cont.
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  ?evalu orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?evalu orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?comp orkgp:HAS_EVALUATION ?eval2.
+  ?comp orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:P32 ?cont2.
+  OPTIONAL {
+    ?cont2 orkgp:HAS_VALUE ?value2.
+    ?evalu orkgp:P31 ?comp;
+           orkgp:P32 ?cont2.
+  }
+  BIND(IF(?value > ?value2, ?value, ?value2) AS ?value)
+}
+ORDER BY DESC(?score)
+```

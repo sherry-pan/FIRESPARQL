@@ -1,0 +1,21 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset MLDoc Zero-Shot English-to-Spanish?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+       orkgr:R155777 orkgp:HAS_BENCHMARK {
+         orkgr:R155777 orkgp:P71071?knowledge.
+        ?knowledge orkgp:P71092?uncertainty.
+         FILTER(?uncertainty = "0")
+       }
+       orkgp:HAS_BENCHMARK {
+         orkgp:P31?cont {
+           rdfs:label?title;
+           orkgp:P5002?eval;
+           orkgp:P5001?method;
+           orkgp:P5003?metric?value.
+         }
+       }
+       FILTER(REGEX(STR(?metric), "top"))
+     }<|eot_id|>

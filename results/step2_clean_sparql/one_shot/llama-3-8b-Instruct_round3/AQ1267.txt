@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/property/>
+
+SELECT DISTINCT ?metric ?metric_lbl ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Double Dunk")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_METRIC ?metric;
+              orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

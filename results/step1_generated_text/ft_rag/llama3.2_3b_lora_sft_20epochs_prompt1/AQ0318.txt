@@ -1,0 +1,18 @@
+Question:
+Can you list the models that have been evaluated on the ImageNet ReaL dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?eval       a                orkgc:Evaluation;
+                  rdfs:label      ?eval_lbl.
+         FILTER (str(?eval_lbl) = "ImageNet ReaL")
+        ?eval           orkgp:HAS_DATASET      ?dataset.
+        ?dataset         orkgp:HAS_MODEL      ?model.
+        ?model          rdfs:label              ?model_lbl.
+        ?eval           orkgp:HAS_EVALUATION   ?eval_value;
+                          orkgp:P71082           ?method.
+        ?method         rdfs:label              ?method_lbl.
+         FILTER (str(?method_lbl) = "ImageNet ReaL")
+     }
+     ORDER BY?model_lbl<|eot_id|>

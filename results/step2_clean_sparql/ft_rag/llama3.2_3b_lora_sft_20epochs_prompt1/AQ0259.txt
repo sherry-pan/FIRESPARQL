@@ -1,0 +1,13 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?eval a orkgc:Evaluation;
+        rdfs:label ?eval_lbl.
+  FILTER (str(?eval_lbl) = "Atari 2600 Solaris")
+  ?eval orkgp:P34 ?dataset.
+  ?dataset orkgp:P34 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+ORDER BY DESC(COUNT(?model_lbl))
+LIMIT 1
+```

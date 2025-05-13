@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric (COUNT(*) AS ?count) 
+WHERE {
+    ?s orkg:HAS_EVALUATION ?e.
+    ?s orkg:HAS_BENCHMARK ?b.
+    ?s orkg:HAS_DATASET ?d.
+    ?e orkg:label ?label.
+    ?b orkg:label ?benchmark.
+    ?d orkg:label ?dataset.
+    FILTER (STRLIKE(?label, "PWC Leaderboards (restricted)") || STRLIKE(?benchmark, "PWC Leaderboards (restricted)") || STRLIKE(?dataset, "PWC Leaderboards (restricted)"))
+}
+GROUP BY ?metric
+HAVING (COUNT(*) >= 1)
+```

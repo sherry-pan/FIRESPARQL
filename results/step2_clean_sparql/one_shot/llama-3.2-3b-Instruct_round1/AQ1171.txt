@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label "MultiNLI";
+             orkgp:HAS_EVALUATION ?eval;
+             orkgp:HAS_DATASET ?dataset.
+  ?metric orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  ?eval orkgp:HAS_BEST_SCORE ?score.
+  ?score orkgp:HAS_VALUE ?value;
+         orkgp:HAS_METRIC ?metric.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

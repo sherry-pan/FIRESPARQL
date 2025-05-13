@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:HAS_F1_SCORE ?f1Score.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:NAME "NYT-single".
+  ?metric orkg:HAS_VALUE ?f1Score.
+  FILTER(?f1Score = MAX(?f1Score))
+  SERVICE orkg:iri2label { ?model orkg:iri2label ?modelLabel }
+}
+```

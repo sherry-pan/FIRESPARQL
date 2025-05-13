@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_DATASET orkg:Atari_2600_Centipede.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC orkg:Score.
+  ?evaluation orkg:HAS_SCORE ?score.
+  FILTER (datatype(?score) = xsd:integer).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

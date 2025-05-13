@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasBenchmark true ;
+             orkg:hasEvaluation ?evaluation ;
+             orkg:dataset "Cartpole, swingup (DMControl500k)".
+  ?evaluation orkg:hasMetric ?metric ;
+              orkg:hasMetricValue ?value.
+  ?benchmark orkg:bestResult ?evaluation.
+  FILTER(datatype(?value) = xsd:double).
+}
+ORDER BY DESC(?value) 
+LIMIT 1
+```

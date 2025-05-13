@@ -1,0 +1,21 @@
+Question:
+What is the name of the top performing model in terms of NLL score when benchmarked on the Nottingham dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Nottingham")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+       ?eval           orkgp:HAS_VALUE        ?value;
+                      orkgp:P32               ?metric.
+       ?metric         orkgp:P200             ?cont;
+                      orkgp:P431               ?evaluaton.
+       ?cont          orkgp:HAS_VALUE        ?value.
+        BIND(xsd:float(?value) AS?value)
+       ?model      orkgp:HAS_METHOD       ?method;
+                   orkgp:HAS_EVALUATION   ?eval.
+       ?method    orkgp:HAS_LABEL        ?method_lbl.
+     }<|eot_id|>

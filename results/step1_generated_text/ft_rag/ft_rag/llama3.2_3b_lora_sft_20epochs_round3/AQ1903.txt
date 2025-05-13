@@ -1,0 +1,21 @@
+Question:
+List the datasets benchmarked under the Fine-Grained Image Classification research problem?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                  rdfs:label      ?problem_lbl.
+        FILTER (str(?problem_lbl) = "Fine-Grained Image Classification")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset.
+       ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+       ?eval          orkgp:HAS_EVALUATION   ?eval.
+       ?eval           rdfs:label              ?eval_lbl;
+                        orkgp:P32               ?cont;
+                        orkgp:P31               ?problem.
+       ?method         orkgp:HAS_EVALUATION   ?eval;
+                        orkgp:P375               ?cont.
+       ?method          rdfs:label              ?method_lbl.
+       ?dataset         orkgp:HAS_DATASET      ?benchmark.
+       ?dataset          rdfs:label              ?dataset_lbl.
+      }<|eot_id|>

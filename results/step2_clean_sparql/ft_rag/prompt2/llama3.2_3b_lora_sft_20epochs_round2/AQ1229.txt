@@ -1,0 +1,10 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R69081 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P43149 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:P43148 ?value.
+  FILTER(?metric = "Accuracy"^^xsd:string)
+}
+```

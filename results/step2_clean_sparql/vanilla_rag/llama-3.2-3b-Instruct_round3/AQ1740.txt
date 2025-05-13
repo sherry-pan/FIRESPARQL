@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?accuracy
+WHERE {
+    ?model orkg:HAS_DATASET Sequential MNIST.
+    ?model orkg:HAS_METHOD ?method.
+    ?method orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_PROPERTY Accuracy.
+    ?model orkg:HAS_PROPERTY ?property.
+    FILTER (str(?property) = "Permuted Accuracy").
+    ?model orkg:HAS_PROPERTY ?accuracy.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

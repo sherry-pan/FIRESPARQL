@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL++")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_EVALUATION ?eval;
+         orkgp:HAS_METHOD ?method.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:P71080 ?micro_f1.
+  ?method rdfs:label ?model_lbl.
+  ?model orkgp:P31 ?method;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?micro_f1)
+LIMIT 1
+```

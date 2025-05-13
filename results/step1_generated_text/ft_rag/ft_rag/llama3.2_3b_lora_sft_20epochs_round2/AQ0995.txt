@@ -1,0 +1,23 @@
+Question:
+What are the metrics of evaluation over the PubMed 20k RCT dataset?
+
+Generated SPARQL:
+ SELECT?evaluation_metrics
+     WHERE {
+       orkgr:R69075 orkgp:HAS_EVALUATION?evaluation.
+      ?evaluation orkgp:P7032?metrics.
+      ?metrics rdfs:label?metrics_labels.
+       FILTER(REGEX(?metrics_labels, "recall|accuracy|macro-F1|micro-F1"))
+      ?evaluation orkgp:HAS_BENCHMARK?benchmark.
+       BIND(
+         IF(
+          ?benchmark = "PubMed 20k RCT",
+           CONCAT(
+            ?metrics_labels,
+             " as evaluation_metrics"
+           ),
+           "No evaluation metrics available" AS?evaluation_metrics
+         ) 
+         AS?evaluation_metrics
+       )
+     }<|eot_id|>

@@ -1,0 +1,22 @@
+Question:
+Indicate the model that performed best in terms of Macro Precision metric on the NLP-TDMS (Exp, arXiv only) benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/terms/>
+
+SELECT?model?metricValue
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper orkg:has_contribution?contribution.
+ ?contribution orkg:uses_model?model.
+ ?contribution orkg:evaluated_on?benchmark.
+ ?benchmark orkg:dataset?dataset.
+ ?dataset orkg:dataset_name "NLP-TDMS (Exp, arXiv only)".
+ ?contribution orkg:metric?metric.
+ ?metric orkg:metric_name "macro-F1".
+ ?contribution orkg:metric_value?metricValue.
+  FILTER (?metricValue > 0)
+  ORDER BY DESC(?metricValue)
+  LIMIT 1
+}<|eot_id|>

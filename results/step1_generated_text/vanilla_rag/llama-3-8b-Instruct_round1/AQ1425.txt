@@ -1,0 +1,20 @@
+Question:
+What is the best performing model benchmarking the WMT2014 German-English dataset in terms of BLEU metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?model?modelLabel?evaluationValue
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasDataset <http://orkg.org/orkg/resource/WMT2014_German_English>.
+ ?benchmark orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:metric "BLEU".
+ ?evaluation orkg:value?evaluationValue.
+ ?model orkg:method?method.
+ ?method orkg:metric?metric.
+  FILTER (?metric = "BLEU").
+  FILTER (?evaluationValue > (SELECT max(?e) AS maxEvaluationValue FROM {?m orkg:hasEvaluation?e } ) ).
+  SERVICE orkg:label {?model rdfs:label?modelLabel }
+}<|eot_id|>

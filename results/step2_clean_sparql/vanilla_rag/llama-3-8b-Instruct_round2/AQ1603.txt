@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?model ?flops
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:HAS_VALUE ?flops.
+  ?evaluation orkg:HAS_DATASET orkg:DATASET_CIFAR100.
+  ?metric rdf:type orkg:Metric_FLOPS.
+}
+```

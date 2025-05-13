@@ -1,0 +1,31 @@
+Question:
+Provide a list of papers that have utilized the MEMEN model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?paper?paper_title?code_link
+     WHERE {
+      ?paper a orkg:ResearchPaper.
+      ?paper orkg:HAS_METHOD?method.
+      ?method rdfs:label?method_label.
+       FILTER (?method_label = "MEMEN model").
+      ?paper orkg:HAS_IMPLEMENTATION?implementation.
+      ?implementation rdfs:label?implementation_label.
+       FILTER (CONTAINS(LCASE(?implementation_label), "code") || CONTAINS(LCASE(?implementation_label), "link")).
+      ?paper orkg:HAS_EVALUATION?evaluation.
+      ?evaluation rdfs:label?evaluation_label.
+       FILTER (CONTAINS(LCASE(?evaluation_label), "code") || CONTAINS(LCASE(?evaluation_label), "link")).
+      ?paper orkg:HAS_DATASET?dataset.
+      ?dataset rdfs:label?dataset_label.
+       FILTER (CONTAINS(LCASE(?dataset_label), "code") || CONTAINS(LCASE(?dataset_label), "link")).
+      ?paper orkg:HAS_APPROACH?approach.
+      ?approach rdfs:label?approach_label.
+       FILTER (CONTAINS(LCASE(?approach_label), "code") || CONTAINS(LCASE(?approach_label), "link")).
+      ?paper orkg:hasReference?reference.
+      ?reference orkg:hasDOI?doi.
+      ?paper orkg:hasTitle?paper_title.
+      ?code_link a orkg:Code.
+      ?code_link orkg:hasReference?reference.
+      ?code_link orkg:hasDOI?doi.
+     }<|eot_id|>

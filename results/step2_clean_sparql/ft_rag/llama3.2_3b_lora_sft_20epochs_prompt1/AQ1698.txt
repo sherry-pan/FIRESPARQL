@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Centipede" 
+          || str(?dataset_lbl) = "AtariAge" 
+          || str(?dataset_lbl) = "Centipede" 
+          || str(?dataset_lbl) = "Centipede (Atari 2600)" 
+          || str(?dataset_lbl) = "Centipede (AtariAge)")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  {
+    SELECT ?model WHERE {
+      ?benchmark orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:HAS_VALUE ?value.
+      ORDER BY DESC(?value)
+      LIMIT 1
+    }
+  }
+}
+```

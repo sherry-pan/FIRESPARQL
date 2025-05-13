@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the PROTEINS dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?modelLabel
+     WHERE {
+    ?model orkg:has_dataset?dataset.
+    ?dataset orkg:has_dataset <http://orkg.org/orkg/dataset/proteins>.
+    ?model orkg:evaluation?evaluation.
+    ?evaluation orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_dataset?dataset.
+    ?model orkg:has_method?method.
+     FILTER (STR(?dataset = <http://orkg.org/orkg/dataset/proteins> AND EXISTS (?benchmark))
+     }<|eot_id|>

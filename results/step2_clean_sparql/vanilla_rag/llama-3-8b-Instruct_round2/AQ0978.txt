@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+
+SELECT DISTINCT ?metric
+WHERE {
+ ?evaluation orkg:HAS_EVALUATION ?model.
+ ?model orkg:HAS_BENCHMARK dbpedia:DBpedia.
+ ?evaluation orkg:HAS_METRIC ?metric.
+ FILTER (?metric != orkg:P71066 && ?metric != orkg:P71068)
+}
+```

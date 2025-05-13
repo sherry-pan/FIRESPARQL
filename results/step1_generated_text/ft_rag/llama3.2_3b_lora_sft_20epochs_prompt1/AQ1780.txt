@@ -1,0 +1,25 @@
+Question:
+What is the name of the top performing model in terms of Top-1 Error Rate score when benchmarked on the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Oxford-IIIT Pets")
+               && has_dataset   ?dataset       && has_benchmark  ?benchmark)
+      ?benchmark      orkgp:HAS_MODEL  ?model.
+      ?model         rdfs:label        ?model_lbl.
+      ?benchmark      orkgp:P33        ?eval.
+      ?eval           orkgp:HAS_VALUE    ?value.
+       BIND(
+         IF(?value     = "0.00"
+             , "0.00"
+             , CONCAT(
+                ROUND(?value)
+               , "."
+               , ROUND(?value * 100)
+                ))
+       AS?top1_error_rate)
+       FILTER(?top1_error_rate = "0.00")
+     }<|eot_id|>

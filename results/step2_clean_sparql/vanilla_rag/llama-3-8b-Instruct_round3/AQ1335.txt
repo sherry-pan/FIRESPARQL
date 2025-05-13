@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark ?evaluation ;
+    orkg:hasDataset ?dataset.
+  ?evaluation orkg:evaluation ?metric ;
+    orkg:value ?value.
+  ?dataset orkg:datasetName "Yelp-14".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

@@ -1,0 +1,21 @@
+Question:
+What is the name of the top performing model in terms of Accuracy score when benchmarked on the TriviaQA dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?model?name
+     WHERE {
+    ?model orkg:has_dataset?dataset.
+    ?dataset orkg:has_method?method.
+    ?method orkg:has_evaluation?evaluation.
+    ?evaluation orkg:has_benchmark?benchmark.
+    ?benchmark orkg:has_implementation?impl.
+    ?impl orkg:has_name?name.
+     FILTER (?benchmark orkg:has_dataset "TriviaQA".
+             AND?benchmark orkg:has_evaluation orkg:Accuracy.
+             AND?benchmark orkg:has_evaluation?evaluation.
+             AND?evaluation orkg:has_score?accuracy.
+             AND?accuracy > ( SELECT MAX (?accuracy ) FROM?evaluation ) )
+     }
+     ORDER BY DESC?accuracy<|eot_id|>

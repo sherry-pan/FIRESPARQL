@@ -1,0 +1,53 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the WebQuestions dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "WebQuestions")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION   ?eval.
+                ?eval               orkgp:HAS_VALUE        ?value.}
+       OPTIONAL {?paper      orkgp:HAS_IMPLEMENTATION ?impl.
+                ?impl               orkgp:HAS_CODE          ?code.}
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION   ?eval.
+                ?eval               orkgp:HAS_METHOD        ?method.}
+       OPTIONAL {?paper      orkgp:HAS_IMPLEMENTATION ?impl.
+                ?impl               orkgp:HAS_METHOD        ?method.}
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION   ?eval.
+                ?eval               orkgp:HAS_TITLES        ?titles.}
+       OPTIONAL {?paper      orkgp:HAS_IMPLEMENTATION ?impl.
+                ?impl               orkgp:HAS_TITLES        ?titles.}
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION   ?eval.
+                ?eval               orkgp:HAS_NUMBER        ?number.}
+       OPTIONAL {?paper      orkgp:HAS_IMPLEMENTATION ?impl.
+                ?impl               orkgp:HAS_NUMBER        ?number.}
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION   ?eval.
+                ?eval               orkgp:HAS_NAME         ?name.}
+       OPTIONAL {?paper      orkgp:HAS_IMPLEMENTATION ?impl.
+                ?impl               orkgp:HAS_NAME         ?name.}
+       OPTIONAL {?paper      orkgp:HAS_EVALUATION   ?eval.
+                ?eval               orkgp:HAS_lbl          ?label.}
+       OPTIONAL {?paper      orkgp:HAS_IMPLEMENTATION ?impl.
+                ?impl               orkgp:HAS_lbl          ?label.}
+      ?paper       orkgp:CSVW_Name              ?name.
+       OPTIONAL {?paper      orkgp:HAS_TITLES        ?titles.
+                 rdfs:label              ?paper_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_NUMBER        ?number.
+                 rdfs:label              ?paper_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_lbl          ?label.
+                 rdfs:label              ?paper_lbl.}
+      ?paper       orkgp:CSVW_Number           ?number.
+       OPTIONAL {?paper      orkgp:HAS_VALUE        ?value.
+                 rdfs:label              ?paper_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_METHOD        ?method.
+                 rdfs:label              ?paper_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_CODE          ?code.
+                 rdfs:label              ?paper_lbl.}
+       OPTIONAL {?paper      orkgp:HAS_NAME         ?name.
+                 rdfs:label              ?paper_lbl.}
+    }<|eot_id|>

@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric rdfs:label "Score".
+  ?evaluation orkg:HAS_PERFORMANCE ?performance.
+  ?performance orkg:HAS_SCORE ?score.
+  ?model orkg:HAS_DATASET <http://orkg.org/orkg/ontology/Dataset/Atari_2600_Centipede>.
+  FILTER NOT EXISTS {
+    ?model2 a orkg:Model.
+    ?model2 orkg:HAS_BENCHMARK ?benchmark2.
+    ?benchmark2 orkg:HAS_EVALUATION ?evaluation2.
+    ?evaluation2 orkg:HAS_METRIC ?metric2.
+    ?metric2 rdfs:label "Score".
+    ?evaluation2 orkg:HAS_PERFORMANCE ?performance2.
+    ?performance2 orkg:HAS_SCORE ?score2.
+    ?model2 orkg:HAS_DATASET <http://orkg.org/orkg/ontology/Dataset/Atari_2600_Centipede>.
+    FILTER (?score2 > ?score)
+  }
+}
+```

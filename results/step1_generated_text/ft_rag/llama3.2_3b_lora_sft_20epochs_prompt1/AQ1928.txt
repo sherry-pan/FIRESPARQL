@@ -1,0 +1,32 @@
+Question:
+Provide a list of papers that have utilized the Tokenlearner model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper a orkgc:Paper.
+      ?paper orkgp:P31 [
+         rdfs:label?title.
+       ];
+       orkgp:HAS_DATASET {
+         orkgp:HAS_DATASET_VALUE?dataset.
+        ?dataset orkgp:HAS_SOURCE_CODE?code.
+       }
+      ?paper orkgp:P5009 [
+         orkgp:P5008?model.
+         rdfs:label?model_labels.
+       ];
+       orkgp:P5008?model;
+         orkgp:P31 [
+           rdfs:label?model_labels.
+         ]
+      ?paper orkgp:P5005 [
+         orkgp:P5004?eval.
+         rdfs:label?eval_labels.
+       ];
+       orkgp:P5004 [
+         orkgp:P5003?implementation.
+         rdfs:label?implementation_labels.
+       ]
+       FILTER(REGEX(STR(?model_labels), "Tokenlearner"))
+     }<|eot_id|>

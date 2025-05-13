@@ -1,0 +1,28 @@
+Question:
+Provide a list of papers that have utilized the SAN (single) model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?model.
+       FILTER(REGEX(?model, "SAN (single)"))
+      ?model rdfs:label?model_lbl.
+       OPTIONAL {
+        ?model orkgp:implementation?implementation.
+        ?implementation rdfs:label?implementation_lbl.
+       }
+       OPTIONAL {
+        ?paper orkgp:has_benchmark?benchmark.
+       }
+       OPTIONAL {
+        ?paper orkgp:has_dataset?dataset.
+       }
+       OPTIONAL {
+        ?paper orkgp:evaluation?eval.
+       }
+       OPTIONAL {
+        ?paper orkgp:method?method.
+         FILTER(REGEX(?method, "SAN"))
+       }
+     }<|eot_id|>

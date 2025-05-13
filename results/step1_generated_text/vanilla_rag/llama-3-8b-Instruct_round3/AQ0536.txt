@@ -1,0 +1,17 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Walker, walk (DMControl100k) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?paper_title?paper_id
+WHERE {
+ ?paper a orkg:ResearchPaper ;
+    orkg:has_dataset?dataset.
+ ?dataset rdfs:label "Walker, walk (DMControl100k)".
+ ?paper orkg:has_benchmark?benchmark.
+ ?benchmark orkg:evaluates?model.
+ ?model rdfs:label?paper_title.
+ ?paper orkg:has_id?paper_id.
+}<|eot_id|>

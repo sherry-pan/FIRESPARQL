@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/codelists/dataset/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/properties/>
+
+SELECT DISTINCT ?paper ?paper_title ?paper_id
+WHERE {
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BUCC German-to-English")
+  ?paper orkgp:HAS_BENCHMARK ?benchmark;
+         a orkgp:Paper;
+         rdfs:label ?paper_title;
+         orkgp:ID ?paper_id.
+}
+```

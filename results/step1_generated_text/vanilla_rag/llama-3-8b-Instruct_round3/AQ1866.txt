@@ -1,0 +1,19 @@
+Question:
+What are the most commonly used benchmark datasets for the Natural Language Inference research field?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?dataset?datasetLabel
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label?datasetLabel.
+ ?dataset orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark a orkg:Benchmark.
+  FILTER (?benchmark orkg:IS_BENCHMARK_FOR_NLI = true)
+  GROUP BY?dataset
+  ORDER BY DESC (COUNT (?paper))
+  LIMIT 10
+}<|eot_id|>

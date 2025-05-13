@@ -1,0 +1,22 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset AESLC?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation?hasEvaluation.
+ ?hasEvaluation orkg:dataset?dataset.
+ ?dataset orkg:id "AESLC".
+ ?evaluation orkg:metric?metric.
+ ?evaluation csvw:value?value.
+  FILTER (?evaluation orkg:method?method.
+         ?method orkg:methodAppliedToUnitMembranesYieldsStainingResult?stainingResult.
+         ?stainingResult orkg:hasEvaluation?evaluation.
+          FILTER (?metric =?stainingResult).
+          FILTER (?value = max(?value)) )
+}
+ORDER BY DESC(?value) LIMIT 1<|eot_id|>

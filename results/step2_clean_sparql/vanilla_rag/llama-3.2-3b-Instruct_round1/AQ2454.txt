@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?code
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_implementation ?implementation.
+  ?implementation orkg:has_code ?code.
+  ?benchmark orkg:has_dataset ?dataset.
+  ?dataset orkg:has_evaluation ?evaluation.
+  FILTER (contains(lcase(str(?benchmark)), "gpt-2 small") || contains(lcase(str(?evaluation)), "gpt-2 small"))
+}
+```

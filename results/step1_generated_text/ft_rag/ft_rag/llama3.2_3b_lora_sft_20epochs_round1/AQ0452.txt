@@ -1,0 +1,22 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?
+
+Generated SPARQL:
+ SELECT?titles?number
+     WHERE {
+       orkgr:R155621 orkgp:HAS_BENCHMARK {
+         orkgr:R155621 orkgp:HAS_BENCHMARK {
+           FILTER(REGEX(?has_benchmark, "PubMedQA"))
+         }
+         FILTER(?has_benchmark = "T")
+       }
+       orkgp:P31 [
+         rdfs:label?titles
+       ]
+       orkgp:HAS_BENCHMARK {
+         rdfs:label?has_benchmark
+       }
+       orkgp:HAS_NUMBER {
+         orkgp:HAS_VALUE?number
+       }
+     }<|eot_id|>

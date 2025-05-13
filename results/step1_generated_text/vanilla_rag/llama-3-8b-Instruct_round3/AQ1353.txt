@@ -1,0 +1,18 @@
+Question:
+What is the highest benchmark result achieved on the Birdsnap dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?metric.
+ ?evaluation orkg:CSVW_Value?value.
+  FILTER (?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/dataset/Birdsnap> &&
+         ?evaluation orkg:HAS_METHOD?method.
+          FILTER (?metric!= "Method")
+          ORDER BY DESC(?value)
+          LIMIT 1
+  )<|eot_id|>

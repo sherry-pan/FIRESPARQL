@@ -1,0 +1,11 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R44985 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?evalu.
+  ?evalu orkgp:HAS_VALUE ?value.
+  ?evalu orkgp:HAS_METRIC ?metric.
+  BIND(IF(?metric = "F1", ?metric, "N/A") AS ?metric_lbl)
+}
+```

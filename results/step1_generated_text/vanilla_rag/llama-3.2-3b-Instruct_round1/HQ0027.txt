@@ -1,0 +1,30 @@
+Question:
+For which country of study overall prevalence of epilepsy is the highest?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?country?prevalence
+     WHERE {
+    ?study orkg:method?method.
+    ?study orkg:method orkg:P97142 "epidemiological study".
+    ?study orkg:method orkg:P97142 orkg:P97142 "epidemiological study".
+    ?study orkg:method orkg:P97142?method.
+    ?study orkg:matchingStrategy?strategy.
+    ?study orkg:matchingStrategy orkg:P97135 "within country".
+    ?study orkg:matchingStrategy?strategy.
+    ?study orkg:QuantitativeMethods?method.
+    ?study orkg:QuantitativeMethods orkg:P97104 "surveys".
+    ?study orkg:QuantitativeMethods?method.
+    ?study orkg:prevalence?prevalence.
+    ?study orkg:prevalence orkg:P97135?strategy.
+    ?study orkg:prevalence orkg:P97104?method.
+    ?study orkg:prevalence?prevalence.
+    ?country orkg:country?country.
+    ?country orkg:country orkg:P97104?prevalence.
+     FILTER (STRFTIME(?prevalence, "%Y") > "2010").
+     GROUP BY?country
+     HAVING SUM(?prevalence) = (SELECT MAX(prevalence) FROM?study)
+     ORDER BY DESC
+     LIMIT 1
+     }
+    <|eot_id|>

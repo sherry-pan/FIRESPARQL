@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?country ?prevalence
+WHERE {
+    ?study orkg:method orkg:P97142 "epidemiological study".
+    ?study orkg:matchingStrategy orkg:P97135 "within country".
+    ?study orkg:QuantitativeMethods orkg:P97104 "surveys".
+    ?study orkg:prevalence ?prevalence.
+    ?study orkg:country ?country.
+    FILTER (STRFTIME(?prevalence, "%Y") > "2010").
+}
+ORDER BY DESC(?prevalence)
+LIMIT 1
+```

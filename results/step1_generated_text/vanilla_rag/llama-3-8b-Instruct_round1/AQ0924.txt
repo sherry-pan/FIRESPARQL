@@ -1,0 +1,17 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Double Dunk dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?dataset a orkg:Dataset ;
+    orkg:hasName "Atari 2600 Double Dunk".
+ ?dataset orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?evaluation orkg:hasValue?value.
+  FILTER (?metric IN (orkg:Recall, orkg:Accuracy, orkg:micro-F1, orkg:macro-F1))
+}<|eot_id|>

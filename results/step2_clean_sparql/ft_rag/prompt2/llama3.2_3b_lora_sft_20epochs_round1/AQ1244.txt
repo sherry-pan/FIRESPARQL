@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?evalu) AS ?score)
+WHERE {
+  orkgr:R110361 orkgp:compareContribution ?cont.
+  ?cont orkgp:P43135 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  ?eval ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(?metric_lbl = "F1")
+  ?cont orkgp:P43133 ?benchmark.
+  ?benchmark orkgp:HAS_BENCHMARK ?benchmark.
+}
+```

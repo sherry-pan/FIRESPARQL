@@ -1,0 +1,25 @@
+Question:
+Indicate the model that performed best in terms of Senseval 2 metric on the Supervised: benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model
+WHERE {
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?metric rdfs:label?senseval2Metric.
+  FILTER(?senseval2Metric = "Senseval 2").
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET?dataset.
+  FILTER(?dataset = "Supervised").
+ ?model orkg:HAS_METHOD?method.
+ ?model orkg:COMPARED_WITH?otherModel.
+  FILTER(?otherModel!=?model).
+ ?evaluation orkg:HAS_VALUE?value.
+ ?evaluation orkg:HAS_RANK?rank.
+  FILTER(?rank = 1).
+ ?model rdfs:label?modelName.
+  FILTER(?modelName = "BEST_MODEL")
+}<|eot_id|>

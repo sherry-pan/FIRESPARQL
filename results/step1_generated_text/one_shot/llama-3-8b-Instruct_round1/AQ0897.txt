@@ -1,0 +1,16 @@
+Question:
+List the metrics that are used to evaluate models on the Oxford-IIIT Pets benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkgc: <http://www.scholardi.org/orkg/c/>
+PREFIX orkgp: <http://www.scholardi.org/orkg/p/>
+
+SELECT DISTINCT?metric?metric_lbl
+WHERE {
+ ?metric     a       orkgc:Metric;
+              rdfs:label ?metric_lbl.
+  {
+   ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+    FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets")
+   ?benchmark      orkgp:HAS_DAT

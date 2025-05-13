@@ -1,0 +1,104 @@
+Question:
+What is the most common lead compound?
+
+Generated SPARQL:
+ SELECT?compound
+     WHERE {
+      ?papers rdf:type orkgc:Paper.
+      ?papers orkgp:P31?compounds.
+      ?compounds rdfs:label?compounds_labels.
+       {
+         SELECT?compounds_labels AS?compound
+         WHERE {
+          ?papers orkgp:P31?compounds.
+          ?compounds rdfs:label?compounds_labels.
+          ?compounds orkgp:P37586?eval.
+           FILTER(REGEX(?eval, "evalUation"))
+          ?eval orkgp:P37587?benchmark.
+          ?benchmark orkgp:P37583?active_compounds.
+          ?active_compounds rdfs:label?active_compounds_labels.
+           FILTER(?active_compounds_labels =?compounds_labels)
+         }
+       }
+       UNION
+       {
+         SELECT?compounds_labels AS?compound
+         WHERE {
+          ?papers orkgp:P31?compounds.
+          ?compounds rdfs:label?compounds_labels.
+          ?compounds orkgp:P37586?eval.
+           FILTER(REGEX(?eval, "evalUation"))
+          ?eval orkgp:P37587?benchmark.
+          ?benchmark orkgp:P37583?active_compounds.
+          ?active_compounds orkgp:P37584?coexists.
+          ?coexists orkgp:P37582?other_compounds.
+          ?other_compounds rdfs:label?other_compounds_labels.
+           FILTER(?other_compounds_labels =?compounds_labels)
+         }
+       }
+       UNION
+       {
+         SELECT?compounds_labels AS?compound
+         WHERE {
+          ?papers orkgp:P31?compounds.
+          ?compounds rdfs:label?compounds_labels.
+          ?compounds orkgp:P37586?eval.
+           FILTER(REGEX(?eval, "evalUation"))
+          ?eval orkgp:P37587?benchmark.
+          ?benchmark orkgp:P37583?active_compounds.
+          ?active_compounds orkgp:P37584?coexists.
+          ?coexists orkgp:P37582?other_compounds.
+          ?other_compounds orkgp:P37585?compared_with.
+          ?compared_with orkgp:P37589?other_compounds_labels.
+          ?other_compounds_labels rdfs:label?other_compounds_labels.
+           FILTER(?other_compounds_labels =?compounds_labels)
+         }
+       }
+       UNION
+       {
+         SELECT?compounds_labels AS?compound
+         WHERE {
+          ?papers orkgp:P31?compounds.
+          ?compounds rdfs:label?compounds_labels.
+          ?compounds orkgp:P37586?eval.
+           FILTER(REGEX(?eval, "evalUation"))
+          ?eval orkgp:P37587?benchmark.
+          ?benchmark orkgp:P37583?active_compounds.
+          ?active_compounds orkgp:P37584?coexists.
+          ?coexists orkgp:P37582?other_compounds.
+          ?other_compounds orkgp:P37584?coexists2.
+          ?coexists2 orkgp:P37582?other_compounds2.
+          ?other_compounds2 orkgp:P37585?compared_with.
+          ?compared_with orkgp:P37589?other_compounds_labels.
+          ?other_compounds_labels rdfs:label?other_compounds_labels.
+           FILTER(?other_compounds_labels =?compounds_labels)
+         }
+       }
+       UNION
+       {
+         SELECT?compounds_labels AS?compound
+         WHERE {
+          ?papers orkgp:P31?compounds.
+          ?compounds rdfs:label?compounds_labels.
+          ?compounds orkgp:P37586?eval.
+           FILTER(REGEX(?eval, "evalUation"))
+          ?eval orkgp:P37587?benchmark.
+          ?benchmark orkgp:P37583?active_compounds.
+          ?active_compounds orkgp:P37584?coexists.
+          ?coexists orkgp:P37582?other_compounds.
+          ?other_compounds orkgp:P37584?coexists2.
+          ?coexists2 orkgp:P37582?other_compounds2.
+          ?other_compounds2 orkgp:P37584?coexists3.
+          ?coexists3 orkgp:P37582?other_compounds3.
+          ?other_compounds3 orkgp:P37585?compared_with.
+          ?compared_with orkgp:P37589?other_compounds_labels.
+          ?other_compounds_labels rdfs:label?other_compounds_labels.
+           FILTER(?other_compounds_labels =?compounds_labels)
+         }
+       }
+       UNION
+       {
+         SELECT?compounds_labels AS?compound
+         WHERE {
+          ?papers orkgp:P31?compounds.
+

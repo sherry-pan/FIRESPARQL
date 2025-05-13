@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?modelLabel ?testPerplexity
+WHERE {
+ ?model orkg:HAS_MODEL ?modelLabel.
+ ?model orkg:HAS_BENCHMARK <http://orkg.org/orkg/instance/WikiText-103>.
+ ?model orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_METRIC orkg:TEST_PERPLEXITY.
+ ?evaluation orkg:HAS_RESULT ?testPerplexity.
+}
+ORDER BY ASC(?testPerplexity)
+LIMIT 1
+```

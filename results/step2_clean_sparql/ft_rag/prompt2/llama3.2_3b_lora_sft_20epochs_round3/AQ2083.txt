@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label "MEMEN (single model)".
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?eval;
+        orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_SOURCE_CODE ?code.
+  ?implementation orkgp:HAS_SOURCE_CODE ?code;
+                  orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_DATASET ?dataset;
+          orkgp:HAS_EVALUATION ?eval.
+}
+ORDER BY DESC(COUNT(?code))
+LIMIT 1
+```

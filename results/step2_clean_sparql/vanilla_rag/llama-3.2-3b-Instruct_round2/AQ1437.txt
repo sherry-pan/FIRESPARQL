@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?bleuScore
+WHERE {
+  ?model orkg:hasMethod ?method.
+  ?method orkg:hasBenchmark "WMT2016 Romanian-English".
+  ?method orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric "BLEU score".
+  ?evaluation orkg:scoreValue ?bleuScore.
+}
+ORDER BY DESC(?bleuScore)
+LIMIT 1
+```

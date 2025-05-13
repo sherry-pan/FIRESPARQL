@@ -1,0 +1,30 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SciERC")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?eval orkgp:HAS_EVALUATION ?eval.
+  
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?eval.
+  
+  OPTIONAL {
+    ?cont orkgp:HAS_METHOD ?method.
+    ?method rdfs:label ?method_lbl.
+  }
+  
+  OPTIONAL {
+    ?cont orkgp:HAS_IMPLEMENTATION ?impl;
+          orkgp:HAS_APPROACH ?approach.
+    ?approach rdfs:label ?approach_lbl.
+  }
+  
+  ?model orkgp:HAS_IMPLEMENTATION ?impl;
+         rdfs:label ?model_lbl.
+}
+```

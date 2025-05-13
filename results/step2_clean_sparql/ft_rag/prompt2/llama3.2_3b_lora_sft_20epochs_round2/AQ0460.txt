@@ -1,0 +1,15 @@
+```sparql
+SELECT ?title ?paper_id
+WHERE {
+  ?paper_id orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "WebQuestions"))
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_MODEL ?model.
+    ?model orkgp:HAS_IMPLEMENTATION ?implementation.
+    ?implementation orkgp:HAS_METHOD ?method.
+    ?paper_id rdfs:label ?title.
+  }
+}
+```

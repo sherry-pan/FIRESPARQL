@@ -1,0 +1,14 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Up and Down dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R8364 orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P97127?split.
+      ?split orkgp:P71068?reporting_level.
+       FILTER(REGEX(?reporting_level, "micro-"))
+      ?eval orkgp:P71080?metric.
+      ?metric rdfs:label?metric_lbl.
+     }<|eot_id|>

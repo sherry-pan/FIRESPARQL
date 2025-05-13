@@ -1,0 +1,39 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the enwik8 dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "enwik8")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION   ?eval.
+      ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+       OPTIONAL {
+        ?paper      orkgp:HAS_EVALUATION   ?eval
+        ?eval        orkgp:HAS_DATASET      ?dataset.
+        ?dataset      rdfs:label              ?dataset_lbl
+         FILTER (str(?dataset_lbl) = "enwik8")
+       }
+      ?paper      rdfs:label              ?paper_lbl.
+       OPTIONAL {
+        ?paper         orkgp:HAS_EVALUATION   ?eval
+        ?eval           orkgp:HAS_METHOD        ?method.
+        ?method         rdfs:label              ?method_lbl
+       }
+       OPTIONAL {
+        ?paper         orkgp:HAS_EVALUATION   ?eval
+        ?eval           orkgp:HAS_IMPLEMENTATION ?impl.
+        ?impl           rdfs:label              ?impl_lbl
+       }
+       OPTIONAL {
+        ?paper         orkgp:HAS_EVALUATION   ?eval
+        ?eval           orkgp:HAS_DATASET      ?dataset.
+        ?dataset         orkgp:HAS_MODEL         ?model.
+        ?model           rdfs:label              ?model_lbl
+       }
+      ?paper         rdfs:label              ?paper_lbl
+     }
+     ORDER BY DESC(?paper_lbl)
+     LIMIT 100<|eot_id|>

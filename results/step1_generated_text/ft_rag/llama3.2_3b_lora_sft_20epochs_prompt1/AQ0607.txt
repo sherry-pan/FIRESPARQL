@@ -1,0 +1,23 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Bank Heist dataset?
+
+Generated SPARQL:
+ SELECT?titles?number
+     WHERE {
+       orkgr:R155561 {
+         orkgr:HAS_BENCHMARK {
+           orkgr:HAS_EVALUATION?eval.
+         }
+         FILTER(REGEX(?eval, "Atari 2600 Bank Heist"))
+         orkgr:HAS_BENCHMARK {
+           orkgr:P31 [
+             rdfs:label?title
+           ]
+         }
+         orkgr:P31 [
+           rdfs:label?titles
+         ]
+         orkgr:HAS_NUMBER?number
+       }
+       FILTER(?number > 0)
+     }<|eot_id|>

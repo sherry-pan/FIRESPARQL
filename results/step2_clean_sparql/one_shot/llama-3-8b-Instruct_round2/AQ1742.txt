@@ -1,0 +1,17 @@
+```sparql
+PREFIX ex: <http://example.org/>
+
+SELECT ?modelName
+WHERE {
+  ?benchmark ex:dataset "Sequential CIFAR-10";
+             ex:model ?model;
+             ex:metric ?metric.
+             
+  ?metric ex:name "Unpermuted Accuracy";
+          ex:score ?score.
+          
+  ?model ex:name ?modelName.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

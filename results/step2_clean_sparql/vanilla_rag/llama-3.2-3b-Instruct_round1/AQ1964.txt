@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Papers.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark schema:benchmarkCode ?benchmarkCode.
+  ?paper orkg:hasImplementation ?implementation.
+  ?implementation schema:softwareCode ?code.
+  ?paper orkg:hasDataset ?dataset.
+  ?dataset schema:datasetCode ?datasetCode.
+  ?paper orkg:hasEvaluation ?evaluation.
+  ?evaluation schema:evaluationMethod ?evaluationMethod.
+  ?evaluation orkg:approach ?approach.
+  FILTER (CONTAINS(LCASE(STR(?approach)), "linear-chain crfs") || CONTAINS(LCASE(STR(?evaluationMethod)), "linear-chain crfs")).
+  FILTER (CONTAINS(LCASE(STR(?benchmarkCode)), "linear-chain crfs") || CONTAINS(LCASE(STR(?datasetCode)), "linear-chain crfs")).
+}
+```

@@ -1,0 +1,16 @@
+Question:
+Could you provide a list of models that have been tested on the SciCite benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/ontology/>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?model?modelLabel
+     WHERE {
+      ?model a orkg:Method.
+      ?model orkg:HAS_BENCHMARK schema:SciCite.
+      ?model orkg:HAS_EVALUATION?evaluation.
+      ?evaluation orkg:HAS_METHOD?model.
+      ?model orkg:HAS_IMPLEMENTATION?implementation.
+      ?implementation rdfs:label?modelLabel.
+     }<|eot_id|>

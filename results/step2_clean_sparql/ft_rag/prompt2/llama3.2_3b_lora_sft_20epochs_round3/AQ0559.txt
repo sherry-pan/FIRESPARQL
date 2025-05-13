@@ -1,0 +1,16 @@
+```sparql
+SELECT ?paper ?paper_title 
+WHERE {
+  ?dataset a orkgc:Dataset; rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "AAPD"))
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_EVALUATION ?benchmark.
+  
+  OPTIONAL { ?benchmark orkgp:HAS_TITLES ?titles. }
+  ?titles orkgp:HAS_VALUE ?title.
+  FILTER(REGEX(?title, "perform"))
+
+  BIND(?title AS ?paper_title)
+}
+```

@@ -1,0 +1,19 @@
+Question:
+What is the best performing model benchmarking the Supervised: dataset in terms of SemEval 2013 metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://schema.org/>
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+
+    SELECT?model?score?dataset?datasetName?metric
+    WHERE {
+     ?model a orkg:Model.
+     ?model orkg:hasBenchmark?benchmark.
+     ?benchmark orkg:hasEvaluation?evaluation.
+     ?evaluation orkg:hasMetric?metric.
+     ?model orkg:hasEvaluation?evaluation.
+     ?evaluation orkg:hasScore?score.
+     ?model orkg:hasDataset?dataset.
+     ?dataset rdfs:label?datasetName.
+      FILTER (?metric = "F1" &&?datasetName = "Supervised: dataset" &&?score = "macro-F1")
+    }<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "NCBI Disease" || str(?dataset_lbl) = "NCBI Disease (Test)" || str(?dataset_lbl) = "NCBI Disease (Train)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_MODEL ?model;
+             orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  
+  ?metric rdfs:label "macro-F1"^^xsd:string.
+  
+  ?model rdfs:label ?model_lbl.
+}
+```

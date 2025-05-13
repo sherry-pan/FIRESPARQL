@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT DISTINCT ?metric
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:has_evaluation_metric ?evaluation.
+  ?evaluation orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_dataset ?dataset.
+  ?dataset dbo:datasetName "Habitat 2020 Object Nav test-std".
+  ?evaluation orkg:uses_metric ?metric.
+  FILTER (?metric = orkg:P71079 || ?metric = orkg:P71080 || ?metric = orkg:P71081 || ?metric = orkg:P71082)
+}
+```

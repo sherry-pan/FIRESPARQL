@@ -1,0 +1,17 @@
+```sparql
+SELECT ?prec ?rec ?f1
+WHERE {
+  ?study orkgp:HAS_CONTRIBUTION ?study_contribution.
+  ?study_contribution orkgp:HAS_ALGORITHM ?algorithm.
+  FILTER (str(?algorithm) = "Naive Bayes")
+  ?study_contribution orkgp:HAS_FEATURE ?feature.
+  FILTER (str(?feature) = "Bag of Words")
+  ?study_contribution orkgp:HAS_RESULT ?result.
+  ?result orkgp:HAS_MEASUREMENT ?measurement.
+  ?measurement rdfs:label ?prec.
+  ?result orkgp:HAS_MEASUREMENT ?measurement2.
+  ?measurement2 rdfs:label ?rec.
+  ?result orkgp:HAS_MEASUREMENT ?measurement3.
+  ?measurement3 rdfs:label ?f1.
+}
+```

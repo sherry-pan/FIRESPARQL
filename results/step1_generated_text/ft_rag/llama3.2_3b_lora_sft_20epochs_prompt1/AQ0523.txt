@@ -1,0 +1,63 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the Yelp Binary classification dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_title
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+        FILTER (str(?dataset_lbl) = "Yelp Binary")
+       ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+       ?cont         orkgp:HAS_EVALUATION   ?eval;
+                      orkgp:HAS_METHOD      ?method.
+       ?eval         orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_IMPLEMENTATION?impl.
+       ?impl         orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_DATASET      ?dataset.
+        OPTIONAL {
+         ?cont           orkgp:HAS_DATASET      ?dataset.
+         ?cont           orkgp:HAS_EVALUATION   ?eval;
+                            orkgp:HAS_METHOD      ?method.
+         ?cont           orkgp:HAS_IMPLEMENTATION?impl.
+         ?impl           orkgp:HAS_DATASET      ?dataset.
+         ?eval           orkgp:HAS_DATASET      ?dataset.
+         ?method         orkgp:HAS_DATASET      ?dataset.
+         ?impl           orkgp:HAS_DATASET      ?dataset.
+         ?dataset       orkgp:HAS_DATASET      ?dataset.
+        }
+        BIND(
+          IF(
+           ?cont        a                orkgp:Container;
+                        orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval;
+                        orkgp:HAS_METHOD      ?method;
+                        orkgp:HAS_IMPLEMENTATION?impl
+          ) 
+          AS?paper
+        )
+        BIND(
+          IF(
+           ?cont                a                orkgp:Container;
+                              orkgp:HAS_DATASET      ?dataset;
+                              orkgp:HAS_EVALUATION   ?eval;
+                              orkgp:HAS_METHOD      ?method;
+                              orkgp:HAS_IMPLEMENTATION?impl
+          ) 
+          AS?paper_title
+        )
+        BIND(
+          CONCAT(
+            IF(
+             ?cont                a                orkgp:Container;
+                                  orkgp:HAS_DATASET      ?dataset;
+                                  orkgp:HAS_EVALUATION   ?eval;
+                                  orkgp:HAS_METHOD      ?method;
+                                  orkgp:HAS_IMPLEMENTATION?impl
+            ) 
+            AS?paper
+          ) 
+          AS?paper_title
+        )
+      }<|eot_id|>

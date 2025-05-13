@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://www.scai.fraunhofer.org/orkg/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?model ?f1
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:has_result ?result.
+ ?result orkg:has_evaluation ?evaluation.
+ ?evaluation orkg:has_metric dcterms:F1.
+ ?evaluation orkg:has_value ?f1.
+ ?result orkg:has_dataset <http://bio2rdf.org/biocadds:BC5CDR-disease>.
+ ?evaluation orkg:has_metric_type "micro-F1".
+  FILTER (?f1 > 0).
+}
+```

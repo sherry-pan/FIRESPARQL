@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?microF1
+WHERE {
+    ?model orkg:method ?m.
+    ?m orkg:hasTrainingSet ?ts.
+    ?ts orkg:hasEvaluation ?ev.
+    ?ev orkg:microF1 ?microF1.
+    FILTER (STR(?microF1) > 0)
+}
+LIMIT 1
+```

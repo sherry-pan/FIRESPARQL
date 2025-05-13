@@ -1,0 +1,14 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Atari 2600 Asterix dataset?
+
+Generated SPARQL:
+ SELECT?titles?number
+     WHERE {
+       orkgr:R155009 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+       FILTER(REGEX(?benchmark, "Atari 2600 Asterix"))
+      ?benchmark orkgp:P43179?paper.
+      ?paper orkgp:P43178?titles;
+              orkgp:HAS_NUMBER?number.
+       FILTER(?number > 0)
+     }<|eot_id|>

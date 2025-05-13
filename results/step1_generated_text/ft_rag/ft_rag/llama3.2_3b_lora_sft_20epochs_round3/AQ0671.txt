@@ -1,0 +1,40 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the BUCC German-to-English dataset?
+
+Generated SPARQL:
+ SELECT?titles?number
+     WHERE {
+       orkgr:R155561 (HAS_DATASET?dataset).
+      ?dataset rdfs:label?dataset_lbl.
+       FILTER(REGEX(?dataset_lbl, "BUCC German-to-English"))
+      ?dataset orkgrp:HAS_BENCHMARK?benchmark.
+       OPTIONAL {
+        ?benchmark orkgr:HAS_BENCHMARK_VALUE?value.
+         FILTER(?value = "T"^^xsd:string)
+       }
+       OPTIONAL {
+        ?benchmark orkgr:HAS_BENCHMARK_VALUE?value.
+         FILTER(?value = "F"^^xsd:string)
+       }
+       OPTIONAL {
+        ?benchmark orkgr:HAS_BENCHMARK_VALUE?value.
+         FILTER(?value = "T"^^xsd:string)
+       }
+      ?benchmark orkgp:P32?paper.
+       OPTIONAL {
+        ?paper orkgp:P5042?titles.
+         FILTER(STRLEN(?titles) > 0)
+       }
+       OPTIONAL {
+        ?paper orkgp:P5042?titles.
+         FILTER(STRLEN(?titles) = 0)
+       }
+       OPTIONAL {
+        ?paper orkgp:P5042?titles.
+         FILTER(STRLEN(?titles) = 1)
+       }
+      ?paper orkgp:P5041?number.
+       FILTER(?number = "R155561"^^xsd:string)
+     }
+     ORDER BY DESC(?number)
+     LIMIT 1<|eot_id|>

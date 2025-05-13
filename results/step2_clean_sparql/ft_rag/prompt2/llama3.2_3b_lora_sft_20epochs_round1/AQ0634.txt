@@ -1,0 +1,12 @@
+```sparql
+SELECT ?title ?number
+WHERE {
+  orkgr:R155621 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  FILTER(REGEX(?benchmark, "Amazon-2"))
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:P5002 ?number.
+  ?cont orkgp:P5001 ?title.
+  FILTER(?number > 0)
+}
+```

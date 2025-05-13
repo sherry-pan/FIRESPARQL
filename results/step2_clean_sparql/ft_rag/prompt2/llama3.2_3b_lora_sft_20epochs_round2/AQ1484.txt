@@ -1,0 +1,11 @@
+```sparql
+SELECT ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71080 ?micro_f1;
+        orkgp:P71082 ?macro_f1.
+  FILTER(?micro_f1 = ?macro_f1 && ?macro_f1 = "1.00")
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "BiDAF + Self Attention + ELMo (single model)")
+  ?benchmark orkgp:HAS_BENCHMARK ?event;
+             orkgp:P32 ?cont.
+  ?cont orkgp:HAS_MODEL ?model.
+  ?model orkgp:P31 ?implementation.
+  ?implementation orkgp:HAS_SOURCE_CODE ?code.
+}
+```

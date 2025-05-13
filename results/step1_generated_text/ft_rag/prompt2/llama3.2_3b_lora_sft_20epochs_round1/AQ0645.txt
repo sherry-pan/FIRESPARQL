@@ -1,0 +1,18 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the HoC dataset?
+
+Generated SPARQL:
+ SELECT?title?number
+     WHERE {
+       orkgr:R6382 orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "HoC"))
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+       OPTIONAL {
+        ?benchmark orkgp:HAS_BENCHMARK_VALUE?value.
+        ?value rdfs:label?title.
+       }
+       OPTIONAL {
+        ?dataset orkgp:P32?paper.
+        ?paper orkgp:HAS_NUMBER?number.
+       }
+     }<|eot_id|>

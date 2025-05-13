@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?modelLabel ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/DMControl100k>.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC orkg:Score.
+  ?evaluation orkg:HAS_SCORE ?score.
+  FILTER NOT EXISTS {
+    ?model2 a orkg:Model.
+    ?model2 orkg:HAS_BENCHMARK ?benchmark2.
+    ?benchmark2 orkg:HAS_DATASET <http://orkg.org/orkg/resource/DMControl100k>.
+    ?benchmark2 orkg:HAS_EVALUATION ?evaluation2.
+    ?evaluation2 orkg:HAS_METRIC orkg:Score.
+    ?evaluation2 orkg:HAS_SCORE ?score2.
+    FILTER(?score2 > ?score)
+  }
+}
+```

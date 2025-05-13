@@ -1,0 +1,16 @@
+```sparql
+SELECT ?location WHERE {
+  {
+    SELECT ?location (COUNT(?location) AS ?count) WHERE {
+      ?study a orkgc:Study;
+             orkgp:P5047 ?location.
+      ?location a orkgc:Location;
+                 rdfs:label ?location_label.
+      FILTER(REGEX(?location_label, "city|country|geographical region|location|study"))
+    }
+    GROUP BY ?location
+    ORDER BY DESC(?count)
+    LIMIT 1
+  }
+}
+```

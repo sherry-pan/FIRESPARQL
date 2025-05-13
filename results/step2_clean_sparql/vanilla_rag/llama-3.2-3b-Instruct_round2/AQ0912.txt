@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:label ?metric.
+    FILTER (lang(?metric) = 'en' && ?metric IN ('accuracy', 'F1-score', 'precision', 'recall'))
+}
+```

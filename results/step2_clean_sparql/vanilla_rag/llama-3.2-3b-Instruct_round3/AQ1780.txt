@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?top1ErrorRate 
+WHERE {
+    ?model orkg:hasDataset ?dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:evaluation ?evaluation.
+    ?evaluation orkg:Top1ErrorRate ?top1ErrorRate.
+    FILTER (str(?dataset) = "Oxford-IIIT Pets")
+}
+ORDER BY ?top1ErrorRate
+LIMIT 1
+```

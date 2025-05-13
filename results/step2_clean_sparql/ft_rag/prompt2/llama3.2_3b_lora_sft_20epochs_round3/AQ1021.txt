@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PWC Leaderboards (restricted)")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  
+  OPTIONAL {
+    { ?benchmark orkgp:P71079 ?metric. }
+    UNION
+    { ?benchmark orkgp:P71080 ?metric. }
+    UNION
+    { ?benchmark orkgp:P71082 ?metric. }
+    UNION
+    { ?benchmark orkgp:P71081 ?metric. }
+    UNION
+    { ?benchmark orkgp:P71066 ?number. }
+    UNION
+    { ?benchmark orkgp:P71089 ?metric. }
+    
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+```

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER(?metric IN (
+    orkg:Recall,
+    orkg:Accuracy,
+    orkg:Micro-F1,
+    orkg:Macro-F1,
+    orkg:NDCG@10
+  ))
+}
+```

@@ -1,0 +1,46 @@
+Question:
+What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words to classfy user feedback as feature request? 
+
+Generated SPARQL:
+ SELECT?precision?recall?micro_f1?accuracy?macro_f1
+     WHERE {
+       orkgr:R44985 orkgp:compareContribution?compare.
+      ?compare orkgp:P71079?precision.
+      ?compare orkgp:P71080?micro_f1.
+      ?compare orkgp:P71082?macro_f1.
+      ?compare orkgp:P97142?algorithm.
+       FILTER(REGEX(?algorithm, "naive bayes"))
+      ?algorithm orkgp:P71064?text_feature.
+       FILTER(REGEX(?text_feature, "bag of words"))
+      ?compare orkgp:P71094?classification_task.
+       FILTER(REGEX(?classification_task, "user feedback as feature requests"))
+      ?classification_task rdfs:label?label.
+       FILTER(?label = "feature request")
+      ?classification_task orkgp:P31?cont.
+      ?cont orkgp:P7001?eval.
+      ?eval orkgp:P7002?metric.
+      ?metric rdfs:label?metric_lbl.
+       IF(?metric_lbl = "precision"^^xsd:string) {
+        ?eval orkgp:P71078?accuracy.
+        ?accuracy rdfs:label?accuracy_lbl.
+         FILTER(?accuracy_lbl = "Accuracy"^^xsd:string)
+       }
+       UNION
+       IF(?metric_lbl = "recall"^^xsd:string) {
+        ?eval orkgp:P71079?precision.
+        ?precision rdfs:label?precision_lbl.
+         FILTER(?precision_lbl = "precision"^^xsd:string)
+       }
+       UNION
+       IF(?metric_lbl = "F1"^^xsd:string) {
+        ?eval orkgp:P71080?micro_f1.
+        ?micro_f1 rdfs:label?micro_f1_lbl.
+         FILTER(?micro_f1_lbl = "micro-F1"^^xsd:string)
+       }
+       UNION
+       IF(?metric_lbl = "macro-F1"^^xsd:string) {
+        ?eval orkgp:P71082?macro_f1.
+        ?macro_f1 rdfs:label?macro_f1_lbl.
+         FILTER(?macro_f1_lbl = "macro-F1"^^xsd:string)
+       }
+     }<|eot_id|>

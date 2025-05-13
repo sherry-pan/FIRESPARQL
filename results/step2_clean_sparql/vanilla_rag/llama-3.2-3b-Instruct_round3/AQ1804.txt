@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?params
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?benchmark orkg:hasParams ?params.
+  FILTER (str(?params) > 0).
+  FILTER (?dataset = <http://orkg.org/orkg/dataset/VTAB-1k>)
+}
+ORDER BY DESC(?params)
+LIMIT 1
+```

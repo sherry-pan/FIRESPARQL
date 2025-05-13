@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model_name ?score
+WHERE {
+    ?model rdfs:label ?model_name.
+    ?model orkg:method ?method.
+    ?model orkg:has_dataset "Atari 2600 Tutankham".
+    ?model orkg:has_score ?score.
+    FILTER regex(?score, "Score").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

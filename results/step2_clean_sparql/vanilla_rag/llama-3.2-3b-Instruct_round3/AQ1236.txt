@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+SELECT ?metric ?score
+WHERE {
+  ?benchmark orkg:hasBenchmark ?benchmarkResult.
+  ?benchmarkResult orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMethod ?method.
+  ?evaluation orkg:hasMetric ?metric.
+  ?benchmarkResult orkg:score ?score.
+  ?benchmark orkg:hasDataset "Gibson PointGoal Navigation".
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

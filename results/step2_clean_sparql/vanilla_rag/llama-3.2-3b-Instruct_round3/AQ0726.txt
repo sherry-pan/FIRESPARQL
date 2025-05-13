@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX seel: <http://seel.cse.lsu.edu/>
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?dataset orkg:has_dataset ?dataset_url.
+  ?dataset_url orkg:has_dataset <http://seel.cse.lsu.edu/data/re17.zip>.
+  ?dataset orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_metric ?metric.
+  FILTER (STR(?metric) IN ("Accuracy", "macro-F1", "micro-F1"))
+}
+```

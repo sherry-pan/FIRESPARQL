@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Fashion-MNIST")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark;
+              orkgp:HAS_EVALUATION ?evaluation.
+  ?metric a orkgp:Metric;
+          rdfs:label ?metric_lbl.
+  ?evaluation orkgp:P31 ?metric.
+}
+```

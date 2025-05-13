@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "STS Benchmark".
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?approach orkgp:HAS_EVALUATION ?eval;
+            orkgp:HAS_METHOD ?method.
+  ?model orkgp:HAS_APPROACH ?approach.
+  OPTIONAL {
+    ?model rdfs:label ?model_lbl.
+  }
+}
+```

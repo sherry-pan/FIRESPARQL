@@ -1,0 +1,12 @@
+```sparql
+SELECT ?method
+WHERE {
+  orkgr:R6898 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P32 ?metric.
+  ?metric rdfs:label ?metric_label.
+  FILTER(REGEX(?metric_label, "Accuracy"))
+  ?evaluation orkgp:P31 ?model.
+  ?model rdfs:label ?method.
+}
+```

@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset ACE 2004?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET <http://orkg.org/dataset/ACE2004> ;
+    orkg:HAS_BENCHMARK?result.
+ ?result orkg:HAS_EVALUATION?evaluation ;
+    orkg:HAS_METRIC?metric ;
+    orkg:HAS_VALUE?value.
+  FILTER (?evaluation = "benchmark_result" &&?metric =?metric)
+}<|eot_id|>

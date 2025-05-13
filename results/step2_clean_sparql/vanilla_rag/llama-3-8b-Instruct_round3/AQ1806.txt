@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC orkg:Accuracy ?accuracy.
+  ?implementation orkg:HAS_BENCHMARK orkg:ImageNet_V2.
+  ?model orkg:HAS_DATASET orkg:ImageNet_V2.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

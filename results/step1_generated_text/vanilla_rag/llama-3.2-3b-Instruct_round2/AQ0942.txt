@@ -1,0 +1,14 @@
+Question:
+Can you list the metrics used to evaluate models on the Atari 2600 Freeway dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+    SELECT?metric (COUNT(?metric) AS "count")
+    WHERE {
+     ?s orkg:hasEvaluation?e.
+     ?e orkg:label "Evaluation metrics"@en.
+     ?s orkg:hasMetric?metric.
+     ?metric orkg:label?m.
+      FILTER (STRLIKE(STR(?m), "Recall" || "micro-F1" || "Accuracy" || "macro-F1" || "Avg Characters" || "Avg words" || "Avg Entity" || "Avg Concept" || "Avg Length")
+    }<|eot_id|>

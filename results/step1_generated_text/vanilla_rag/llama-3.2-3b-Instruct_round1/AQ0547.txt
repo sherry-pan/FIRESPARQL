@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Walker, walk (DMControl500k) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?title?id
+     WHERE {
+      ?paper orkg:hasBenchmark?benchmark.
+      ?benchmark orkg:hasEvaluation?evaluation.
+      ?evaluation orkg:evaluationFor?walkerPaper.
+      ?walkerPaper orkg:hasTitle?title.
+      ?walkerPaper orkg:hasId?id.
+       FILTER (CONTAINS(LCASE(?benchmark), "walker, walk (DMControl500k)")
+       }
+     }<|eot_id|>

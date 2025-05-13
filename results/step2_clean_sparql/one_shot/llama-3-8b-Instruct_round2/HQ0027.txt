@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgr: <http://rdf.or.kr/orkg/resource/>
+PREFIX orkgp: <http://rdf.or.kr/orkg/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?country ?highestPrevalence
+WHERE {
+  {
+    SELECT ?country (MAX(?epilepsyPrevalence) AS ?highestPrevalence)
+    WHERE {
+      ?study orkgp:compareContribution ?contrib.
+      ?contrib orkgp:studyLocation ?location.
+      ?location orkgp:P2345 ?country.
+      ?study orkgp:P1234 ?epilepsyPrevalence.
+    }
+    GROUP BY ?country
+  }
+}
+ORDER BY DESC(?highestPrevalence)
+LIMIT 1
+```

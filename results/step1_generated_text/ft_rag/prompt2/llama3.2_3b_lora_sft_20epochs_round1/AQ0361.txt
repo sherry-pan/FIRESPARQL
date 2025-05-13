@@ -1,0 +1,16 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SciERC dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_title
+     WHERE {
+       orkgr:R155561 {
+         orkgrp:HAS_BENCHMARK?benchmark.
+         FILTER(?benchmark = "SciERC"^^xsd:string)
+        ?benchmark orkgp:HAS_DATASET?dataset.
+        ?dataset orkgp:P31?paper.
+        ?paper orkgp:P5003?eval.
+        ?eval orkgp:P5002?cont.
+        ?cont orkgp:P5001?paper_title.
+       }
+     }<|eot_id|>

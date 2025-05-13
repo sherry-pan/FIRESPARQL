@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?title ?paper_id
+WHERE {
+  ?paper orkgc:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_DATASET ?dataset2.
+  ?dataset2 rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PWC Leaderboards (restricted"))
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:HAS_PAPER_ID ?paper_id.
+  ?benchmark orkgp:HAS_MODEL ?model.
+  ?model orkgp:HAS_TITLE ?title.
+}
+```

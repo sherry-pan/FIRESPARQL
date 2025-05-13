@@ -1,0 +1,15 @@
+Question:
+Could you provide a list of models that have been tested on the IMDb-M benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+    WHERE {
+     ?benchmark        a                orkgp:Benchmark;
+                        rdfs:label      ?benchmark_lbl.
+      FILTER (str(?benchmark_lbl) = "IMDb-M")
+     ?model          orkgp:HAS_BENCHMARK     ?benchmark.
+     ?model          orkgp:P31               ?benchmark.
+     ?paper         orkgp:HAS_MODEL        ?model.
+     ?paper         orkgp:P31               ?paper.
+     ?paper         rdfs:label              ?model_lbl.
+    }<|eot_id|>

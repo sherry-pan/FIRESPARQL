@@ -1,0 +1,26 @@
+Question:
+Does paper "Disambiguating authors in citations on the web and authorship correlations" employe Cosine similarity?
+
+Generated SPARQL:
+ SELECT?uses_cosine
+     WHERE {
+      ?paper orkgp:P31 [
+         rdfs:label?title.
+       ];
+         orkgp:P32 [
+           orkgp:P5049?eval.
+         ];
+         orkgp:P5048?approach.
+      ?approach rdfs:label?approach_labels.
+       FILTER(REGEX(STR(?approach_labels), "Cosine"))
+      ?eval orkgp:P5047?method.
+      ?method rdfs:label?method_labels.
+       FILTER(REGEX(STR(?method_labels), "employe"))
+      ?uses_cosine = IF(
+        ?method_labels = "Cosine similarity",
+         "yes",
+         "no"
+       )
+     }
+     ORDER BY DESC(?uses_cosine)
+     LIMIT 1<|eot_id|>

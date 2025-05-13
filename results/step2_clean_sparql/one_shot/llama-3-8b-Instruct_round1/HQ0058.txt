@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/codelists/model/>
+PREFIX orkgp: <http://www.orkg.org/codelists/paper/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?study ?precision ?recall ?f1
+WHERE {
+  ?study a orkgc:Study;
+         rdfs:label ?study_lbl;
+         orkgp:HAS_METHOD ?method;
+         orkgp:CLASSIFY_FEEDBACK ?feedback.
+  FILTER (str(?study_lbl) = "naive bayes")
+  
+  ?method orkgp:USES_FEATURE ?bag_of_words.
+  ?bag_of_words rdfs:label "bag of words".
+  
+  ?feedback orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  
+  BIND (?precision AS ?metric_lbl).
+  BIND (?recall AS ?metric_lbl).
+  BIND (?f1 AS ?metric_lbl).
+}
+```

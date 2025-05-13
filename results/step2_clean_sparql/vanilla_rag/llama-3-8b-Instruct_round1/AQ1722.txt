@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?model_name
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET orkg:Atari_2600_Tutankham.
+  ?evaluation csvw:CSVW_Name ?model_name.
+  ?evaluation csvw:CSVW_Value ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

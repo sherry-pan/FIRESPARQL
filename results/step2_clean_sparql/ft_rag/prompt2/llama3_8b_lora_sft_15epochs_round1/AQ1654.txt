@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "FGVC Aircraft".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_EVALUATION ?evaluation;
+         orkgp:HAS_METHOD ?model.
+  ?evaluation orkgp:HAS_VALUE ?value.
+  ?model rdfs:label ?model_lbl.
+  ?value a orkgc:Value;
+         rdfs:label "PARAMS".
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

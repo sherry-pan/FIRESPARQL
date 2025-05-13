@@ -1,0 +1,20 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACE 2004")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval;
+             orkgp:HAS_VALUE ?value;
+             orkgp:HAS_METRIC ?metric.
+  ?metric a orkgp:Metric.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_APPROACH ?approach;
+        orkgp:HAS_DATASET ?dataset.
+  ?approach orkgp:HAS_METHOD ?method.
+  ?method orkgp:HAS_IMPLEMENTATION ?impl.
+  ?impl rdfs:label ?impl_lbl.
+  FILTER (str(?impl_lbl) = "top")
+}
+```

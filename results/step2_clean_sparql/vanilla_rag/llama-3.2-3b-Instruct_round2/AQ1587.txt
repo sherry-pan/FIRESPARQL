@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?microF1
+WHERE {
+  ?model orkg:hasTrainingSet ?trainingSet.
+  ?trainingSet orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMethod ?method.
+  ?method orkg:hasMicroF1 ?microF1.
+  ?model orkg:label ?modelLabel.
+  FILTER (STR(?modelLabel) = "PubMed 20k RCT benchmark").
+}
+ORDER BY DESC(?microF1)
+LIMIT 1
+```

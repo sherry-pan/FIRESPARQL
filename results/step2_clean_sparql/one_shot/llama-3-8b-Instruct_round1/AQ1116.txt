@@ -1,0 +1,16 @@
+```sparql
+PREFIX res: <http://example.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?evaluation obo:OBI_0000312 res:WMT2016_Czech_English .
+  ?evaluation obo:OBI_0000181 ?result .
+  ?result res:metric ?metric ;
+          obo:OBI_0001938 ?value .
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

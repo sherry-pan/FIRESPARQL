@@ -1,0 +1,12 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT ?dataset
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:has_benchmark ?benchmark.
+ ?benchmark rdfs:label ?label.
+ FILTER (STRSTARTS(STR(?label), "Text Summarization"))
+}
+```

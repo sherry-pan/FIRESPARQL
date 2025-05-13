@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "BLEU".
+  
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WMT2014 German-English".
+  
+  ?benchmark orkgp:HAS_BENCHMARKED_MODEL ?model.
+  ?model rdfs:label ?model_lbl;
+         orkgp:BENCHMARKED_ON ?dataset;
+         orkgp:PERFORMANCE_MEASURED_WITH ?metric.
+  
+  ?performance orkgp:PERFORMANCE_OF ?model;
+               orkgp:PERFORMANCE_MEASURE ?metric;
+               orkgp:HAS_VALUE ?value.
+  
+  FILTER NOT EXISTS {
+    ?other_performance orkgp:PERFORMANCE_OF ?model;
+                       orkgp:PERFORMANCE_MEASURE ?metric;
+                       orkgp:HAS_VALUE ?other_value.
+    FILTER (?other_value > ?value)
+  }
+}
+```

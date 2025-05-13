@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value 
+WHERE {
+    ?benchmark orkg:HAS_DATASET "IMDb-M".
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:METRIC ?metric.
+    ?benchmark orkg:HAS_BENCHMARK ?benchmark_result.
+    ?benchmark_result orkg:VALUE ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

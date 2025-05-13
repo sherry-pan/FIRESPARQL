@@ -1,0 +1,17 @@
+Question:
+What is the best performing model benchmarking the BUCC German-to-English dataset in terms of F1 score metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?f1Score
+WHERE {
+ ?model orkg:HAS_MODEL true.
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_DATASET orkg:BUCC_German_to_English.
+ ?evaluation orkg:HAS_F1_SCORE?f1Score.
+ ?model orkg:HAS_METHOD?method.
+  FILTER (?f1Score = MAX(?f1Score) )
+}<|eot_id|>

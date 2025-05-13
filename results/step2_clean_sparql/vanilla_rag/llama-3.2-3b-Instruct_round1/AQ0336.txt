@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model orkg:hasDataset ?dataset.
+  ?dataset orkg:hasBenchmark "NLP-TDMS"@en.
+  ?model rdfs:label ?modelLabel.
+  FILTER (STR(?modelLabel) != "")
+}
+```

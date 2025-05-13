@@ -1,0 +1,15 @@
+Question:
+List the code links in papers that use the LSTM (Bai et al., 2018) model in any benchmark?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+    WHERE {
+     ?paper   a            orkgc:Paper;
+            orkgp:HAS_MODEL       ?model.
+       ?model    orkg:ModelLabel   ?model_lbl;
+                  rdfs:label    "LSTM (Bai et al., 2018)" @en.
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont           orkgp:HAS_MODEL         ?model;
+                        orkgp:HAS_SOURCE_CODE   ?code.
+}<|eot_id|>

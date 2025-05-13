@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model_name
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_VALUE ?accuracy.
+  ?model orkg:HAS_DATASET orkg:VTAB-1k.
+  ?model orkg:CSVW_Name ?model_name.
+  FILTER (?accuracy = (SELECT max(?a) AS maxAccuracy 
+                       WHERE {
+                         ?model orkg:HAS_BENCHMARK ?benchmark.
+                         ?benchmark orkg:HAS_EVALUATION ?evaluation.
+                         ?evaluation orkg:HAS_VALUE ?a.
+                       } ) )
+}
+```

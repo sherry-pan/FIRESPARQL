@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?topScore ?metric
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:HAS_DATASET ?dataset.
+    FILTER (str(?dataset) = "https://orkg.org/orkg/dataset/Atari_2600_Seaquest").
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_Metric ?metric.
+    ?metric orkg:label ?metricLabel.
+    ?benchmark orkg:HAS_BenchmarkScore ?benchmarkScore.
+    ?benchmarkScore orkg:label ?topScore.
+    FILTER (str(?metricLabel) = "Accuracy" || str(?metricLabel) = "Macro-F1" || str(?metricLabel) = "Micro-F1").
+}
+```

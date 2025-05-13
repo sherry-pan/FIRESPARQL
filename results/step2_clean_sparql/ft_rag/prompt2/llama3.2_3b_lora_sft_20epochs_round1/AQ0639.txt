@@ -1,0 +1,13 @@
+```sparql
+SELECT ?title ?number
+WHERE {
+  orkgr:R155561 {
+    rdfs:label ?title.
+    orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_DATASET ?dataset.
+    FILTER(REGEX(?dataset, "Ohsumed"))
+    ?dataset orkgp:P32 ?paper.
+    ?paper orkgp:P5044 ?number.
+  }
+}
+```

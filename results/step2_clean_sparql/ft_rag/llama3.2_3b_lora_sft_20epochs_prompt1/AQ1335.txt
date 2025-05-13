@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  orkgr:R6908 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P34 ?metric;
+               orkgp:HAS_VALUE ?value.
+  FILTER(REGEX(?metric, "eval"))
+  ?cont orkgp:P1554 ?benchmark;
+         orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P5043 ?value.
+  BIND(xsd:float(?value) AS ?value)
+}
+```

@@ -1,0 +1,16 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the STEM-ECR v1.0 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?dataset a orkg:Dataset ;
+           orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:uses?metric.
+  FILTER (?dataset <http://stem-ecr.org/dataset/STEM-ECR_v1.0> && 
+           rdfs:label(?metric)?metric_label.
+           FILTER (?metric_label IN ("Accuracy", "Recall", "micro-F1", "macro-F1"))
+}<|eot_id|>

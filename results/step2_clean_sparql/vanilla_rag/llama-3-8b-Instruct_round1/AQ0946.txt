@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+    orkg:hasBenchmark <http://orkg.org/orkg/entity/E1786> ; 
+    orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:method ?metric.
+  FILTER (?metric != orkg:None)
+}
+ORDER BY ?metric
+```

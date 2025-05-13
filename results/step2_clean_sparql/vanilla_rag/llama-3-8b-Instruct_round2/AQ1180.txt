@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX hutter: <http://orkg.org/orkg/resource/HutterPrize/>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation a orkg:Evaluation ;
+              orkg:HAS_SCORE ?score ;
+              orkg:HAS_METRIC ?metric.
+  FILTER (?benchmark = hutter:HutterPrize).
+}
+```

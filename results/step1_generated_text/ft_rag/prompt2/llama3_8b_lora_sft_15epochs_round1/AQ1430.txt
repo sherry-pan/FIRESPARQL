@@ -1,0 +1,37 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2014 English-German benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "WMT2014 English-German")
+      ?evaluation     a                orkgc:Evaluation.
+      ?cont          orkgp:HAS_EVALUATION       ?evaluation;
+                      orkgp:HAS_DATASET          ?dataset.
+      ?method        orkgp:HAS_SOURCE_CODE     ?source_code.
+      ?model         orkgp:P32                   ?method;
+                      rdfs:label                 ?model_lbl.
+      ?cont          orkgp:HAS_METRIC_VALUE     ?metric_value;
+                      orkgp:P43111              ?evaluation.
+      ?metric       orkgp:P43110               ?metric_lbl.
+      ?metric_value       orkgp:P43112           ?score.
+       FILTER (str(?metric_lbl) = "BLEU" &&?score = xsd:float(?bleu_score))
+       FILTER (xsd:float(?bleu_score) = MAX(xsd:float(?bleu_score2)))
+       {
+         SELECT?model?model_lbl?bleu_score2
+         WHERE {
+          ?cont      orkgp:HAS_METRIC_VALUE     ?metric_value2;
+                      orkgp:P43111              ?evaluation.
+          ?metric2   orkgp:P43110               ?metric_lbl2.
+          ?metric_value2       orkgp:P43112           ?score2.
+          ?cont2      orkgp:HAS_METHOD          ?method2.
+          ?model2      orkgp:P32                   ?method2;
+                        rdfs:label                 ?model_lbl2.
+           FILTER (str(?metric_lbl2) = "BLEU")
+         }
+         ORDER BY DESC(xsd:float(?score2))
+       }
+     }
+     ORDER BY DESC(xsd:float(?bleu_score))<|eot_id|>

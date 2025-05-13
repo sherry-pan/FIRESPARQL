@@ -1,0 +1,17 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl;
+         orkgp:P5043 ?implementation.
+  ?implementation orkgp:P5044 ?code.
+  FILTER(REGEX(STR(?model_lbl), "Long Short Transformer"))
+}
+ORDER BY DESC(COUNT(?code))
+LIMIT 1
+```

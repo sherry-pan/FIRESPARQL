@@ -1,0 +1,29 @@
+Question:
+Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?metric     a       orkgc:Metric;
+                   rdfs:label ?metric_lbl.
+       FILTER (str(?metric_lbl) = "F1")
+       {
+         SELECT?model?model_lbl
+         WHERE {
+          ?paper      orkgp:P31               ?cont;
+                       orkgp:P32              ?model.
+          ?model      rdfs:label              ?model_lbl.
+          ?cont       orkgp:P34               ?eval.
+          ?eval       orkgp:P36               ?metric;
+                       orkgp:P37               ?value.
+          ?benchmark   orkgp:P31               ?has_benchmark_cont;
+                       orkgp:P32              ?dataset.
+          ?has_benchmark_cont     orkgp:P2008       ?benchmark_name.
+           FILTER (str(?benchmark_name) = "SQuAD1.1" && str(?metric_lbl) = "F1")
+           ORDER BY DESC(?value)
+           LIMIT 1
+         }
+       }
+     }
+     ORDER BY DESC(?value)
+     LIMIT 1<|eot_id|>

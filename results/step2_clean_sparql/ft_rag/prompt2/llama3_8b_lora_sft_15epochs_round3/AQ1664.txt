@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "CIFAR-10 Image Classification".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:P34 ?value;
+              orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?cont orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  ?model orkgp:P32 ?cont1.
+  ?cont1 orkgp:HAS_EVALUATION ?eval1.
+  ?eval1 orkgp:P34 ?value1;
+        orkgp:P33 ?metric1.
+  ?metric1 rdfs:label "Percentage error".
+  FILTER(?value1 < ?value)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

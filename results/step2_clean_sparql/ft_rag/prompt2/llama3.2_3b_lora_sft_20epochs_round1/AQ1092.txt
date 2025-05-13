@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R155561991 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P43149 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(?metric_lbl = "Recall"^^xsd:string)
+}
+```

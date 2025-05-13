@@ -1,0 +1,17 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric?score
+     WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:Evaluation?evaluation.
+    ?evaluation orkg:Metric?metric.
+    ?benchmark orkg:Score?score.
+     FILTER (?metric = "Accuracy" OR?metric = "F1" OR?metric = "Recall")
+     ORDER BY DESC(?score)
+     LIMIT 1
+     }
+    <|eot_id|>

@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?paper orkgp:P31 ?cont;
+         orkgp:P5008 ?eval.
+  OPTIONAL {
+    ?eval orkgp:P2316 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+  }
+  FILTER(?eval != orkg:eval_undef)
+}
+ORDER BY DESC(COUNT(?dataset))
+LIMIT 10
+```

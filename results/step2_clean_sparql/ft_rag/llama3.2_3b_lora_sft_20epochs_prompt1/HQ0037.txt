@@ -1,0 +1,14 @@
+```sparql
+SELECT ?author
+WHERE {
+  ?biblioteek orkgp:P31 ?contributor.
+  ?contributor orkgp:P32 ?author.
+  ?author orkgp:HAS_BIBLIOTEK ?biblioteek.
+  ?biblioteek orkgp:HAS_SOURCE ?source.
+  ?source orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P37491 ?number_of_articles.
+  FILTER(REGEX(?number_of_articles, "^1"))
+}
+ORDER BY DESC(?number_of_articles)
+LIMIT 1
+```

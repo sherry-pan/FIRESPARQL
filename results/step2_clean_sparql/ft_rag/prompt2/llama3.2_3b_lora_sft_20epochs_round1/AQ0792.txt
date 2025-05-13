@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkg:R70642 orkgp:HAS_EVALUATION ?eval.
+  {
+    ?eval orkgp:P71079 ?recall.
+    ?recall rdfs:label ?metric_lbl.
+    FILTER(REGEX(STR(?metric_lbl), "Recall"))
+  }
+  UNION
+  {
+    ?eval orkgp:P71075 ?eval2.
+    ?eval2 orkgp:P71080 ?micro_f1.
+    ?micro_f1 rdfs:label ?metric_lbl.
+    FILTER(REGEX(STR(?metric_lbl), "micro-F1"))
+  }
+}
+```

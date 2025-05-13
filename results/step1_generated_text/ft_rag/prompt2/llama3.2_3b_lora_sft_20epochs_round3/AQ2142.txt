@@ -1,0 +1,17 @@
+Question:
+List the code links in papers that use the 12-layer Transformer-XL model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?code.
+      ?code orkgp:P5043?model.
+      ?model rdfs:label?model_lbl.
+       FILTER(REGEX(STR(?model_lbl), "12-layer Transformer-XL"))
+      ?paper orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:P5042?eval.
+      ?eval orkgp:P5040?approach.
+      ?approach rdfs:label?approach_lbl.
+       FILTER(REGEX(STR(?approach_lbl), "Transformer-XL"))
+     }<|eot_id|>

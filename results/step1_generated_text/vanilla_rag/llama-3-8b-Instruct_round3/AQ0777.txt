@@ -1,0 +1,18 @@
+Question:
+What are the metrics of evaluation over the Stanford Cars dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?metric?metricLabel
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation?hasEvaluation.
+ ?evaluation orkg:hasTrainingSet?trainingSet.
+ ?trainingSet dc:title "Stanford Cars dataset".
+ ?evaluation orkg:evaluatedOn?metric.
+ ?metric a orkg:Metric.
+ ?metric orkg:hasLabel?metricLabel.
+  FILTER (?metricLabel IN (orkg:Recall, orkg:Accuracy, orkg:micro-F1, orkg:macro-F1))
+}<|eot_id|>

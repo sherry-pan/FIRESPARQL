@@ -1,0 +1,20 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model ?property_iri_1 a orkgc:Property;
+         rdfs:label ?property_lbl_1.
+  FILTER(REGEX(?property_lbl_1, "Number of params"))
+  ?model ?property_iri_2 orkgp:HAS_BENCHMARK.
+  ?property_iri_2 rdfs:label ?property_lbl_2.
+  FILTER(REGEX(?property_lbl_2, "Penn Treebank (Character Level)"))
+  ?model ?property_iri_3 orkgp:HAS_EVALUATION.
+  ?property_iri_3 orkgp:P31 ?cont;
+                 orkgp:P31 ?eval.
+  ?eval orkgp:P32 ?metric;
+        orkgp:P33 ?score.
+  BIND(xsd:float(?score) AS ?number_of_params)
+  ?cont rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?number_of_params)
+LIMIT 1
+```

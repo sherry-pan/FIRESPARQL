@@ -1,0 +1,22 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "MLDoc Zero-Shot English-to-French")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_NUMBER ?number.
+  
+  ?model orkgp:HAS_METHOD ?method;
+         orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?method orkgp:HAS_LABEL ?label.
+  
+  BIND(xsd:float(?number) AS ?accuracy)
+  BIND(if(?number = ?accuracy, ?label, "") AS ?model_lbl)
+}
+```

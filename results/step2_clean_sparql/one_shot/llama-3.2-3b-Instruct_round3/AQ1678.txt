@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Accuracy")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "MLDoc Zero-Shot English-to-French")
+      ?evaluation a orkgc:Evaluation;
+                  orkgc:evaluatedOn ?dataset;
+                  orkgc:hasMetricValue ?metricValue.
+      ?metricValue orkgc:hasMetric ?metric;
+                   orkgc:hasValue ?value.
+      ?model a orkgc:Model;
+             rdfs:label ?model_lbl;
+             orkgc:hasEvaluation ?evaluation.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

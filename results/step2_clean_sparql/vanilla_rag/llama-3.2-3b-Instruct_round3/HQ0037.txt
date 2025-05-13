@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?author (COUNT(?contribution) AS ?number)
+WHERE {
+  ?author orkg:has_contribution ?contribution.
+  ?contribution orkg:has_topic "coronavirus".
+}
+GROUP BY ?author
+ORDER BY DESC(?number)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?castValue) AS ?score)
+WHERE {
+  orkgr:R4498 orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:double(?value) AS ?castValue)
+  ?benchmark rdfs:label ?title.
+  FILTER(REGEX(STR(?title), "Atari 2600 Star Gunner"))
+  ?metric rdfs:label ?metric_lbl.
+  ?metric orkgp:P32 ?eval.
+}
+```

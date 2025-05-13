@@ -1,0 +1,13 @@
+```sparql
+SELECT ?model ?score 
+WHERE {
+  ?result wdt:P31 wd:Q7889;       # assuming Q7889 is the class for "result"
+          wdt:P453 wd:Q116982305; # assuming Q116982305 is the identifier for the X-Sum dataset
+          wdt:P101 wd:Q184647;    # assuming Q184647 is for the ROUGE-2 metric
+          wdt:P135 wd:Q2539;      # presuming P135 is for the model
+          wdt:P1082 ?score.       # assuming P1082 is the property for score
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,22 @@
+Question:
+Which model has achieved the highest Score score on the Atari 2600 Yars Revenge benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl        = "Atari 2600 Yars Revenge")
+               || str(?dataset_lbl        = "Atari 2600 Yars Revenge (Test)"))
+      ?benchmark       orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?cont         orkgp:HAS_EVALUATION   ?eval.
+      ?eval         rdfs:label              ?eval_lbl.
+       BIND(xsd:int(?eval_lbl        ) AS Score)
+      ?model        orkgp:HAS_EVALUATION   ?eval.
+      ?model        rdfs:label              ?model_lbl.
+       FILTER(?Score = 100)
+       ORDER BY DESC(?Score)
+       LIMIT 1
+     }<|eot_id|>

@@ -1,0 +1,16 @@
+Question:
+Can you list the models that have been evaluated on the ShARe/CLEF eHealth corpus dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://www.semantic-web-journal.net/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT?model
+WHERE {
+ ?model a orkg:Model ;
+         orkg:has_dataset <http://www.semantic-web-journal.net/orkg/datasets/ShARe-CLEF-eHealth> ;
+         orkg:evaluation?evaluation.
+  FILTER(?evaluation = "evaluation" ||?evaluation = "assessed on" ||?evaluation = "tested on").
+ ?model orkg:has_benchmark?benchmark.
+}<|eot_id|>

@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "Multimodal PISA"))
+  ?eval orkgp:HAS_EVALUATION ?evalu.
+  BIND(xsd:string(?evalu) AS ?model_lbl)
+  ?cont orkgp:P35 ?model.
+}
+```

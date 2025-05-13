@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?score
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasBenchmark ?benchmark_result.
+    ?benchmark_result orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:metric ?metric.
+    ?benchmark_result orkg:score ?score.
+    FILTER (?benchmark_result = bnode:dataset/kinetics-600)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

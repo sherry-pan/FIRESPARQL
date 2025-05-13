@@ -1,0 +1,14 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  ?eval orkgp:P5043 ?benchmark.
+  ?benchmark orkgp:HAS_BENCHMARK ?has_benchmark;
+             orkgp:P5042 ?cont.
+  ?cont orkgp:HAS_IMPLEMENTATION ?impl;
+        orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P43135 ?method.
+  FILTER(REGEX(STR(?method), "Tsetlin Machine"))
+}
+```

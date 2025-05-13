@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?link 
+WHERE {
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_dataset ?dataset.
+  ?dataset orkg:has_implementation ?implementation.
+  ?benchmark orkg:has_method "Temporal Convolutional Network".
+  ?paper orkg:has_link ?link.
+  FILTER (CONTAINS(STR(?link), "https://github.com/")
+      || CONTAINS(STR(?link), "https://arxiv.org/")
+      || CONTAINS(STR(?link), "https://doi.org/"))
+}
+```

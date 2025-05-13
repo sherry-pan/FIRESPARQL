@@ -1,0 +1,24 @@
+Question:
+List the code links in papers that use the Unsupervised NMT + weight-sharing model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgr:R155561 (
+         rdfs:label      ?label
+       );
+        orkgp:HAS_BENCHMARK      ?benchmark;
+                          orkgp:HAS_EVALUATION      ?evaluation.
+       ?benchmark orkgp:HAS_METHOD      ?method.
+       ?method rdfs:label      ?method_label.
+        FILTER(REGEX(STR(?method_label), "Unsupervised NMT + weight-sharing"))
+       ?benchmark orkgp:HAS_APPROACH      ?approach.
+       ?approach rdfs:label      ?approach_label.
+        FILTER(REGEX(STR(?approach_label), "Unsupervised NMT + weight-sharing"))
+       ?approach orkgp:HAS_IMPLEMENTATION      ?implementation.
+       ?implementation rdfs:label      ?implementation_label.
+        FILTER(REGEX(STR(?implementation_label), "code"))
+       ?implementation orkgp:HAS_SOURCE_CODE      ?code
+      }
+      ORDER BY DESC(COUNT(?code))
+      LIMIT 1<|eot_id|>

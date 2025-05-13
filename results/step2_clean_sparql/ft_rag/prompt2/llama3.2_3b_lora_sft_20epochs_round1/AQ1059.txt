@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6898 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 [].
+  ?eval orkgp:P2006 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?benchmark orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value)
+}
+```

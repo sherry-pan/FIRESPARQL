@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value WHERE {
+  ?b orkg:hasBenchmark ?bBenchmark.
+  ?b orkg:hasDataset "CoQA".
+  ?b orkg:hasEvaluation ?e.
+  ?e orkg:hasMetric ?metric.
+  ?e orkg:hasValue ?value.
+  FILTER (?metric = <http://orkg.org/orkg/metric/accuracy> 
+      || ?metric = <http://orkg.org/orkg/metric/f1> 
+      || ?metric = <http://orkg.org/orkg/metric/mcc>)
+  FILTER NOT EXISTS {
+    SELECT ?value WHERE {
+      ?b orkg:hasBenchmark ?bBenchmark.
+      ?b orkg:hasDataset "CoQA".
+      ?b orkg:hasEvaluation ?eInner.
+      ?eInner orkg:hasMetric ?metric.
+      ?eInner orkg:hasValue ?valueInner
+      FILTER(?valueInner > ?value)
+    }
+  }
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R7060 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P7002 ?eval.
+  ?eval orkgp:P7009 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?dataset, "Words in Context"))
+  ?eval orkgp:P7008 ?value.
+  BIND(xsd:float(?value) AS ?value)
+}
+```

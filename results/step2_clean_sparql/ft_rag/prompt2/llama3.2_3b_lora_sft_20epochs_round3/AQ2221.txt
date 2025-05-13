@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P31 [
+    rdfs:label ?model
+  ].
+  FILTER(REGEX(STR(?model), "AlexNet") || REGEX(STR(?model), "MultiGrasp"))
+  ?paper orkgp:P32 [
+    orkgp:HAS_IMPLEMENTATION [
+      orkgp:HAS_CODE ?code
+    ]
+  ]
+}
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?benchmark ?evaluation
+WHERE {
+    ?benchmark a orkg:benchmark.
+    ?benchmark orkg:has_dataset <http://orkg.org/orkg/dataset/WMT2016-English-Russian>.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?benchmark orkg:has_method ?method.
+    ?method orkg:has_metric ?metric.
+    ?metric rdfs:label ?metricLabel.
+    FILTER (str(?metricLabel) = "BLEU score").
+    ?model orkg:has_metric ?metric.
+}
+```

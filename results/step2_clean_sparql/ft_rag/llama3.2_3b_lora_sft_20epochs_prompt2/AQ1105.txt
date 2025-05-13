@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?score
+WHERE {
+  orkgr:R69042 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P70321 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(?metric_lbl, "WMT2014 French-English"))
+  ?eval orkgp:P70322 ?score.
+  ?score rdfs:label ?score_lbl.
+  FILTER(REGEX(?score_lbl, "higher is better"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

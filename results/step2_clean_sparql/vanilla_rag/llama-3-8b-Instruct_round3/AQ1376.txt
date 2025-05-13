@@ -1,0 +1,12 @@
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?f1Score
+WHERE {
+ ?model orkg:P71075 ?evaluation.
+ ?evaluation orkg:P71080 ?f1Score.
+ ?evaluation orkg:P71067 ?dataset.
+ ?dataset rdfs:label "Penn Treebank".
+} 
+ORDER BY DESC(?f1Score)
+LIMIT 1

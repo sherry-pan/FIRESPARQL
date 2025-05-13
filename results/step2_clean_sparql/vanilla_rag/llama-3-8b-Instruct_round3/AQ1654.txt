@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?params_value
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK <http://orkg.org/orkg/benchmark/FGVC_Aircraft>.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_label.
+  FILTER (?metric_label = "PARAMS").
+  ?evaluation orkg:HAS_VALUE ?params_value.
+}
+```

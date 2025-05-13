@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://purl.org/csvw/>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:HAS_DATASET <http://orkg.org/orkg/ontology/MLDoc-ZeroShot-English-to-French>.
+  ?model orkg:CSVW_Name ?name.
+  ?name csvw:CSVW_Value ?score.
+  FILTER (isNumeric(?score))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

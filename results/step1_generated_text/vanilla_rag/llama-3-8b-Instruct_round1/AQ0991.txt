@@ -1,0 +1,22 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Reuters De-En dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?evaluation a orkg:Evaluation ;
+    orkg:hasEvaluation?hasEvaluation ;
+    orkg:hasDataset?dataset.
+ ?dataset orkg:hasData?data ;
+    orkg:hasDataSplittingMethod?splittingMethod ;
+    orkg:hasReferenceSystem?referenceSystem.
+ ?data orkg:hasClasses?classes ;
+    orkg:hasTrainingSet?trainingSet ;
+    orkg:hasValidationSet?validationSet.
+ ?classes orkg:hasLabel?label.
+ ?evaluation orkg:uses?metric.
+  FILTER(?dataset = "Reuters De-En" &&?metric = "Recall" ||?metric = "Accuracy" ||?metric = "micro-F1" ||?metric = "macro-F1")
+}<|eot_id|>

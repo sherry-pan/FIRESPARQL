@@ -1,0 +1,15 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:HAS_DATASET "BUCC German-to-English" ;
+             orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_DATASET "BUCC German-to-English" ;
+              orkg:HAS_EVALUATION ?method.
+  ?method orkg:HAS_METHOD ?metric.
+  ?evaluation csvw:CSVW_Value ?score.
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1

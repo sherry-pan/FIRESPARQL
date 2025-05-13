@@ -1,0 +1,25 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CommonsenseQA"
+          || str(?dataset_lbl) = "WikiLinker"
+          || str(?dataset_lbl) = "T2T:CommonSenseQA"
+          || str(?dataset_lbl) = "T2T:WikiLinker")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?eval orkgp:P71075 ?cont.
+  }
+  OPTIONAL {
+    ?cont orkgp:P71081 ?accuracy.
+  }
+  OPTIONAL {
+    ?accuracy orkgp:P97142 ?method.
+  }
+  BIND(IF(?accuracy = "1.00", ?method, ?method) AS ?model_lbl)
+  BIND(?model_lbl AS ?model)
+}
+```

@@ -1,0 +1,12 @@
+```sparql
+SELECT ?name
+WHERE {
+  ?dataset orkgp:HAS_EVALUATION ?eval .
+  ?eval orkgp:P43156 ?score .
+  ?model orkgp:HAS_DATASET ?dataset .
+  ?model rdfs:label ?name .
+  FILTER(REGEX(?dataset, "Tutankham"))
+} 
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

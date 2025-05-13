@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model_name
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasDataset <http://orkg.org/orkg/dataset/OpenAI_Gym_Cart_Pole> ;
+    orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:score ?score.
+  ?model a orkg:Model ;
+    orkg:hasBenchmark ?benchmark ;
+    orkg:hasName ?model_name.
+}
+ORDER BY DESC(?score) LIMIT 1
+```

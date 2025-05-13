@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "DrQA")
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:P32 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_IMPLEMENTATION ?implementation;
+           orkgp:HAS_CODE ?code.
+}
+```

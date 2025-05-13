@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?metricLabel
+WHERE {
+  ?metric orkg:hasDataset <http://orkg.org/dataset/atari_2600_bowling>.
+  ?metric orkg:hasEvaluation <http://orkg.org/evaluation/metric/>.
+  ?metric orkg:hasLabel ?metricLabel.
+  FILTER (strcontains(lower(?metricLabel), "accuracy") ||
+          strcontains(lower(?metricLabel), "recall") ||
+          strcontains(lower(?metricLabel), "f1") ||
+          strcontains(lower(?metricLabel), "precision"))
+}
+```

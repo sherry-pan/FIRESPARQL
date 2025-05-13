@@ -1,0 +1,14 @@
+Question:
+What is the name of the top performing model in terms of ROUGE-2 score when benchmarked on the CL-SciSumm dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?score
+     WHERE {
+    ?benchmark orkg:has_dataset <http://example.org/CL-SciSumm>.
+    ?benchmark orkg:has_evaluation orkg:evaluation.
+    ?benchmark orkg:has_method?method.
+    ?method orkg:has_score?score.
+    ?model orkg:has_method?method.
+     FILTER (STR(?score = "top performing") && STR(?score >= "ROUGE-2")).
+     }<|eot_id|>

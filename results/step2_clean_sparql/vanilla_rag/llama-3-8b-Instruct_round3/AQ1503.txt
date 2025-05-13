@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://schema.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?model ?score ?dataset ?datasetName ?metric
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?evaluation orkg:hasScore ?score.
+  ?model orkg:hasDataset ?dataset.
+  ?dataset rdfs:label ?datasetName.
+  FILTER (?metric = "F1" && ?datasetName = "Supervised: dataset" && ?score = "macro-F1")
+}
+```

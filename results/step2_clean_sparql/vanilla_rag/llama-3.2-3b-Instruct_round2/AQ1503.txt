@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearch.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?model ?modelLabel ?metric
+WHERE {
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasDataset "Supervised".
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasEvaluationMetric ?metric.
+    ?metric rdfs:label ?metricLabel.
+    ?model orkg:hasLabel ?modelLabel.
+    FILTER (str(?metricLabel) = "SemEval 2013").
+}
+```

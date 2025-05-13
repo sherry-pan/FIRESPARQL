@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6908 orkgp:evaluate {
+    orkgp:P43145 ?metric ?metric_lbl.
+    ?metric orkgp:P43146 ?value.
+    OPTIONAL {
+      ?value orkgp:P43147 ?cont
+    }
+  }
+  FILTER(REGEX(?metric_lbl, "Recall"^^xsd:string))
+  FILTER(?cont = "Words in Context"^^xsd:string)
+}
+```

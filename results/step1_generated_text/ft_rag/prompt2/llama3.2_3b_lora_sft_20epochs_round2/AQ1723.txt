@@ -1,0 +1,60 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Tennis benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl = "Atari 2600 Tennis")
+               || str(?dataset_lbl = "Atari 2600 Tennis (test)"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION     ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value;
+                       orkgp:P71075          ?cont.
+      ?cont         orkgp:HAS_VALUE        ?value;
+                     orkgp:P71081          ?metric.
+       BIND(xsd:float(?metric) AS?metric_lbl)
+      ?cont         rdfs:label              ?cont_lbl.
+       OPTIONAL {
+        ?cont         orkgp:P71079          ?recall;
+                       orkgp:P71080          ?macro_f1;
+                       orkgp:P71082          ?micro_f1.
+        ?recall      rdfs:label              ?recall_lbl.
+         OPTIONAL {
+          ?macro_f1      orkgp:P71079          ?recall;
+                         orkgp:P71080          ?macro_f1.
+          ?macro_f1      rdfs:label              ?macro_f1_lbl.
+           OPTIONAL {
+            ?micro_f1      orkgp:P71079          ?recall;
+                           orkgp:P71080          ?macro_f1.
+            ?micro_f1      rdfs:label              ?micro_f1_lbl.
+           }
+         }
+         OPTIONAL {
+          ?cont         orkgp:P71066          ?num_types.
+          ?num_types   rdfs:label              ?num_types_lbl.
+         }
+         BIND(xsd:integer(?cont) AS?cont_lbl)
+       }
+       OPTIONAL {
+        ?cont         orkgp:P71066          ?num_types.
+        ?num_types   rdfs:label              ?num_types_lbl.
+       }
+       OPTIONAL {
+        ?cont         orkgp:P71069          ?system;
+                       orkgp:P71066          ?num_types.
+        ?system      rdfs:label              ?system_lbl.
+       }
+       BIND(xsd:float(?value) AS?value_lbl)
+       BIND(xsd:string(?metric_lbl) AS?metric_lbl)
+       BIND(xsd:string(?cont_lbl) AS?cont_lbl)
+       BIND(xsd:string(?recall_lbl) AS?recall_lbl)
+       BIND(xsd:string(?macro_f1_lbl) AS?macro_f1_lbl)
+       BIND(xsd:string(?micro_f1_lbl) AS?micro_f1_lbl)
+       BIND(xsd:string(?system_lbl) AS?system_lbl)
+       BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+       BIND(xsd:string(?benchmark_lbl) AS?benchmark_lbl)
+       ORDER BY DESC(?value_lbl)
+       LIMIT 1
+     }<|eot_id|>

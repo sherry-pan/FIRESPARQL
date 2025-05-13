@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset WMT2016 Czech-English?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark?evaluation ;
+    orkg:hasDataset?dataset.
+ ?evaluation orkg:hasEvaluation?metric ;
+    csvw:value?value.
+ ?dataset orkg:hasDataset "WMT2016 Czech-English".
+  FILTER(?metric!= "Method")
+}
+ORDER BY DESC(?value)
+LIMIT 1<|eot_id|>

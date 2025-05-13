@@ -1,0 +1,15 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STS Benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper orkg:HAS_ID?id.
+    ?paper orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:HAS_DATASET?dataset.
+    ?dataset orkg:CSVW_Name?datasetName.
+    ?paper orkg:CSVW_Titles?title.
+     FILTER (strstarts-with(?datasetName, "STS Benchmark"))
+     }
+    <|eot_id|>

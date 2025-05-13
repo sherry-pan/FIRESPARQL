@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title
+  ];
+  orkgp:P32 [
+    orkgp:P5049 ?implementation
+  ];
+  orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_label.
+  FILTER(REGEX(?method_label, "DQN-PixelCNN"))
+  ?implementation orkgp:P7043 ?code.
+}
+```

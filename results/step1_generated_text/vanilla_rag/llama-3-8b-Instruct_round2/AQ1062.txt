@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark score and its metric on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric?score
+WHERE {
+ ?evaluation a orkg:Evaluation ;
+              orkg:hasDataset <http://orkg.org/orkg/dataset/Automatically_labeled_Medline_abstracts_corpus> ;
+              orkg:hasMetric?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER(?metricLabel = "top benchmark score" ||?metricLabel = "top score").
+ ?evaluation orkg:hasScore?score.
+}<|eot_id|>

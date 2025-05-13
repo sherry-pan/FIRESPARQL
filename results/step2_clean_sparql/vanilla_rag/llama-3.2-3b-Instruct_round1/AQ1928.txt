@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+SELECT ?paper ?paperLabel ?code
+WHERE {
+  ?paper orkg:hasDataset ?dataset.
+  ?dataset orkg:method "Tokenlearner".
+  ?paper orkg:implementation ?implementation.
+  ?implementation orkg:link ?code.
+  FILTER (STRLIKE(STR(?paperLabel), "Tokenlearner"))
+}
+```

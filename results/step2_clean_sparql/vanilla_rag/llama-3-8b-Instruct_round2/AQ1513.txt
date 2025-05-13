@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/ANLI_test_dataset>.
+  ?evaluation orkg:HAS_A2_SCORE ?a2Score.
+  ?model rdfs:label ?modelLabel.
+}
+ORDER BY DESC(?a2Score)
+LIMIT 1
+```

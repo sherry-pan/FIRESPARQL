@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model
+WHERE {
+    ?model orkg:has_dataset "RotoWire (Content Ordering)".
+    ?model orkg:has_method ?method.
+    ?method orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_metric "BLEU".
+    ?evaluation orkg:has_score ?score.
+    FILTER (xsd:decimal(?score) IS NUMERIC).
+}
+ORDER BY DESC(xsd:decimal(?score))
+LIMIT 1
+```

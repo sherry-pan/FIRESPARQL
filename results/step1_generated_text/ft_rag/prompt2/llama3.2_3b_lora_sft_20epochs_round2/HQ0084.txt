@@ -1,0 +1,19 @@
+Question:
+What is the emergency type of AMBER Alert?
+
+Generated SPARQL:
+ SELECT?emergency_type
+     WHERE {
+      ?rf       a            orkgc:Emergency;
+                 rdfs:label      ?rf_label.
+       FILTER(REGEX(?rf_label, "AMBER"))
+      ?emergency      orkgp:P31       ?rf;
+                      rdfs:label      ?rf_label.
+       OPTIONAL {
+        ?emergency      orkgp:P32               ?type;
+                       rdfs:label              ?type_label.}
+       IF(?type_label = "child abduction")
+       THEN
+         BIND(?type_label AS?emergency_type)
+       ENDIF
+     }<|eot_id|>

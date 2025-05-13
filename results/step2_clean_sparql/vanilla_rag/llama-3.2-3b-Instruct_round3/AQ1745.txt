@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?f1score
+WHERE {
+    ?model orkg:HAS_METHOD ?m.
+    ?m orkg:HAS_EVALUATION ?e.
+    ?e orkg:HAS_DATASET ?d.
+    ?d orkg:has_dataset "BUCC Chinese-to-English benchmark".
+    ?m orkg:P71080 ?f1score.
+}
+ORDER BY DESC(?f1score)
+LIMIT 1
+```

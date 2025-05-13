@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BC2GM?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/BC2GM>.
+ ?benchmark orkg:HAS_BENCHMARK?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?metric?value.
+  FILTER (?metric =?value).
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

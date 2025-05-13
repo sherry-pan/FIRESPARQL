@@ -1,0 +1,13 @@
+```sparql
+SELECT ?paper ?paper_title
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "BIOSSES", "i"))
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:HAS_DATASET ?dataset;
+         orkgp:HAS_EVALUATION ?evaluation.
+  OPTIONAL {?paper orkgp:CSVW_Titles ?paper_title.}
+}
+```

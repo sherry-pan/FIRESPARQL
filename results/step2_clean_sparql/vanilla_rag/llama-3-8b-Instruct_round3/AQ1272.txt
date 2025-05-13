@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?score ?metric
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:HAS_SCORE ?score.
+  FILTER(?paper dc:title "Atari 2600 Breakout").
+  FILTER(?metric = "benchmark score").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

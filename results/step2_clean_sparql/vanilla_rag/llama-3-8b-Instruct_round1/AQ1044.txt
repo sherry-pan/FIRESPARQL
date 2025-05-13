@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasDataset orkg:Softcite ;
+    orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMethod ?method ;
+    orkg:hasMetric ?metric.
+  ?metric csvw:value ?score.
+  FILTER (xsd:float(?score) > 0)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,26 @@
+Question:
+What is the highest benchmark result achieved on the Supervised: dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_value
+     WHERE {
+       orkgr:R6908 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:HAS_METRIC?metric.
+      ?metric rdfs:label?metric_lbl.
+       BIND(
+         IF(?metric_lbl = "F1 score", 
+              CONCAT(
+                ROUND(?eval(?metric) AS?metric_value)
+              )
+          , 
+           CONCAT(
+             ROUND(?eval(?metric) AS?metric_value)
+           )
+         ) 
+       AS?metric_value
+       )
+     }
+     ORDER BY DESC(?metric_value)
+     LIMIT 1<|eot_id|>

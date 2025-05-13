@@ -1,0 +1,18 @@
+PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?modelLabel ?f1Score
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:method ?method.
+  ?evaluation orkg:metric ?metric.
+  ?metric orkg:hasValue ?f1Score.
+  ?metric orkg:hasUnit dcterms:F1.
+  ?method orkg:hasDataset <http://ncbi.nlm.nih.gov/pubmed/.../dataset/NCBI_Disease>.
+  ?metric orkg:metricType orkg:EntityLevel.
+  SERVICE orkg:label { ?model rdfs:label ?modelLabel. }
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1

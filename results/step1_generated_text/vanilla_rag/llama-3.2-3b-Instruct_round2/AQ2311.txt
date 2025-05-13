@@ -1,0 +1,15 @@
+Question:
+List the code links in papers that use the POP3D model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+     SELECT?paper?benchmark?code
+     WHERE {
+    ?paper orkg:hasImplementation?implementation.
+    ?implementation orkg:hasBenchmark?benchmark.
+    ?benchmark rdfs:label?benchmarkLabel.
+    ?implementation orkg:hasCode?code.
+     FILTER (str.contains(?benchmarkLabel, 'POPD3D') OR str.contains(?benchmarkLabel, 'POPD3D'))
+     }<|eot_id|>

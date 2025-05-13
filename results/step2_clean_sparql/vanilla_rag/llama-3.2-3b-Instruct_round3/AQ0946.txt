@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:method ?method.
+ FILTER (?benchmark rdfs:label = "Atari 2600 Fishing Derby"@en).
+ ?metric orkg:hasMetric ?metricValue.
+ FILTER (?metricValue IN ("accuracy", "f1 score", "loss", "rewards", "win rate"))
+}
+```

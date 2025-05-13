@@ -1,0 +1,27 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric
+WHERE {
+    ?benchmark a orkg:benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?benchmark orkg:hasBenchmarkDataset "Atari 2600 Fishing Derby".
+    FILTER (
+        CONTAINS(LCASE(?metric), "accuracy") ||
+        CONTAINS(LCASE(?metric), "loss") ||
+        CONTAINS(LCASE(?metric), "f1") ||
+        CONTAINS(LCASE(?metric), "precision") ||
+        CONTAINS(LCASE(?metric), "recall") ||
+        CONTAINS(LCASE(?metric), "f1 score") ||
+        CONTAINS(LCASE(?metric), "accuracy score") ||
+        CONTAINS(LCASE(?metric), "mean squared error") ||
+        CONTAINS(LCASE(?metric), "mean absolute error") ||
+        CONTAINS(LCASE(?metric), "mean squared log loss") ||
+        CONTAINS(LCASE(?metric), "mean absolute log loss") ||
+        CONTAINS(LCASE(?metric), "auc-roc") ||
+        CONTAINS(LCASE(?metric), "auc-roc score") ||
+        CONTAINS(LCASE(?metric), "auc-pr") ||
+        CONTAINS(LCASE(?metric), "auc-pr score")
+    )
+}
+```

@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?study ?precision ?recall ?f1
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:usedAlgorithm orkg:NaiveBayes.
+  ?study orkg:usedTextFeature orkg:BagOfWords.
+  ?study orkg:classifiedAs orkg:FeatureRequest.
+  ?study orkg:evaluationMetric ?evaluation1.
+  ?evaluation1 orkg:metricType orkg:Precision.
+  ?evaluation1 orkg:metricValue ?precision.
+  ?study orkg:evaluationMetric ?evaluation2.
+  ?evaluation2 orkg:metricType orkg:Recall.
+  ?evaluation2 orkg:metricValue ?recall.
+  ?study orkg:evaluationMetric ?evaluation3.
+  ?evaluation3 orkg:metricType orkg:MicroF1.
+  ?evaluation3 orkg:metricValue ?f1.
+}
+```

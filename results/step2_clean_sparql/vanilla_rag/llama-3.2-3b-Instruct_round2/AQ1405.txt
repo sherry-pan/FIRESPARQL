@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?f1Score 
+WHERE {
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:method ?method.
+    ?evaluation orkg:hasTrainingSet ?trainingSet.
+    ?trainingSet orkg:knowledgeGraphName "SciERC".
+    ?model orkg:hasEntityF1 ?f1Score.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

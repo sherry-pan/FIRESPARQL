@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:HAS_METHOD ?method.
+    ?model orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:CSVW_Number ?score.
+    FILTER (STR(?benchmark) = "CoNLL04" && STR(?method) = "RE+ Micro F1")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

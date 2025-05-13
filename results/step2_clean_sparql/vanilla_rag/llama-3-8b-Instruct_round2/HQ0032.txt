@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT DISTINCT ?compound 
+WHERE {
+ ?compound a orkg:Compound.
+ ?compound orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+} 
+GROUP BY ?compound
+ORDER BY DESC(COUNT(?benchmark))
+LIMIT 1
+```

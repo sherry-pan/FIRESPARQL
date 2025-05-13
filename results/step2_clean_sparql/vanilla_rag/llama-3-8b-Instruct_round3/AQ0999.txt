@@ -1,0 +1,21 @@
+```
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?evaluation ?accuracy ?recall ?microF1 ?macroF1
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasEvaluation ?evaluation.
+  FILTER (?dataset = <http://orkg.org/orkg/dataset/Classical_music_5_seconds_at_12_kHz>).
+
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric orkg:hasProperty ?property.
+  ?property rdfs:label ?metricLabel.
+  FILTER (?metricLabel IN ("Accuracy", "Recall", "micro-F1", "macro-F1")).
+
+  ?evaluation orkg:hasProperty orkg:P71081 ?accuracy.
+  ?evaluation orkg:hasProperty orkg:P71079 ?recall.
+  ?evaluation orkg:hasProperty orkg:P71080 ?microF1.
+  ?evaluation orkg:hasProperty orkg:P71082 ?macroF1.
+}
+```

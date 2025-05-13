@@ -1,0 +1,17 @@
+```sparql
+SELECT ?precision ?recall ?micro_f1 ?macro_f1
+WHERE {
+  orkgr:R44985 orkgp:compareContribution ?compare.
+  ?compare orkgp:P71079 ?precision.
+  ?compare orkgp:P71080 ?micro_f1.
+  ?compare orkgp:P71082 ?macro_f1.
+  ?compare orkgp:P97142 ?algorithm.
+  FILTER(REGEX(?algorithm, "naive bayes"))
+  ?algorithm orkgp:P71064 ?text_feature.
+  FILTER(REGEX(?text_feature, "bag of words"))
+  ?compare orkgp:P71094 ?classification_task.
+  FILTER(REGEX(?classification_task, "user feedback as feature requests"))
+  ?classification_task rdfs:label ?label.
+  FILTER(?label = "feature request")
+}
+```

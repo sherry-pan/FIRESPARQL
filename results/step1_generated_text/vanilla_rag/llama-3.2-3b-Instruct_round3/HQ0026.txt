@@ -1,0 +1,15 @@
+Question:
+Which QA benchmarks incorporating more than 10000 questions?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?benchmark?count 
+     WHERE {
+     {
+    ?benchmark orkg:has_benchmark?b.
+    ?b orkg:has_dataset?d.
+    ?d orkg:has_evaluation?e.
+    ?e orkg:DATA?data.
+     FILTER (str(?data) LIKE "*10000*"i).
+     }
+     RETURNING?benchmark?count<|eot_id|>

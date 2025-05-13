@@ -1,0 +1,12 @@
+Question:
+Can you list the metrics used to evaluate models on the QNLI dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+       orkgr:R70600 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:P70402?eval.
+      ?eval orkgp:P31?eval_metric.
+      ?eval_metric rdfs:label?metric_lbl.
+       FILTER(REGEX(STR(?metric_lbl), "Accuracy|Recall|macro-F1|micro-F1"))
+     }<|eot_id|>

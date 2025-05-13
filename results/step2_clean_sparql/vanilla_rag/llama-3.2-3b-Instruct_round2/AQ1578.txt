@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?benchmark
+WHERE {
+    ?benchmark orkg:hasBenchmark ?b.
+    ?b orkg:hasDataset ?d.
+    ?d orkg:hasEvaluation ?e.
+    ?e orkg:evaluationMetric ?metric.
+    ?metric rdfs:label "ROUGE-2"@en.
+    ?benchmark orkg:hasResult ?result.
+    ?result orkg:hasMetric ?metric2.
+    ?metric2 rdfs:label "ROUGE-2"@en.
+    ?benchmark orkg:hasBestResult ?bestBenchmark.
+    FILTER (str(?bestBenchmark) = "X-Sum"@en)
+}
+```

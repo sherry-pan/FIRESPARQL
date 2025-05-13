@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?code 
+WHERE {
+    ?paper a orkg:Paper.
+    ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+    ?implementation orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_CODE ?code.
+    FILTER (CONTAINS(?code, "SEE") || CONTAINS(?code, "benchmark")).
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/owl/orkg.owl#>
+PREFIX nyt: <https://www.orkg.org/orkg/nyt-single/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark;
+             orkg:hasEvaluation ?evaluation;
+             orkg:dataset nyt:NYT-single.
+  ?evaluation orkg:hasMetric ?metric;
+              orkg:hasValue ?value.
+  FILTER (?metric IN (orkg:Recall, orkg:Micro-F1, orkg:Accuracy, orkg:Macro-F1))
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

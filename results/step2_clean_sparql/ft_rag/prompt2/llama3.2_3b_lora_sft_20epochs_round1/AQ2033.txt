@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?implementation.
+  ?implementation orkgp:P31 ?code.
+  ?paper orkgp:P50007 ?eval.
+  ?eval orkgp:P5008 ?benchmark.
+  FILTER(REGEX(?benchmark, "unsupervised_nmt_weight_sharing_"))
+  ?paper orkgp:P5009 ?approach.
+  ?approach rdfs:label ?method.
+  FILTER(?method = "Unsupervised NMT + weight-sharing")
+}
+```

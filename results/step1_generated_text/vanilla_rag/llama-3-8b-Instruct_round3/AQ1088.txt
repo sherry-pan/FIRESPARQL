@@ -1,0 +1,19 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the ACE 2005 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX ace: <http://www.ace2005.org/>
+
+SELECT?metric?score
+WHERE {
+ ?dataset a orkg:Dataset ; 
+           orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasResult?result.
+ ?result orkg:dataset?dataset ; 
+          ?metric?score.
+  FILTER(?dataset = ace:ACE2005)
+  FILTER(?metric IN (orkg:Recall, orkg:Accuracy, orkg:macro-F1, orkg:micro-F1))
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest BLEU score score on the WMT2016 Romanian-English benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?model?score
+     WHERE {
+    ?model orkg:has_method?m.
+    ?m orkg:has_benchmark "WMT2016 Romanian-English".
+    ?m orkg:has_evaluation?e.
+    ?e a orkg:EvaluationMetric.
+    ?e orkg:has_property "BLEU score".
+    ?model orkg:has_dataset?d.
+    ?d orkg:has_benchmark "WMT2016 Romanian-English".
+    ?model orkg:has_approach?a.
+    ?a orkg:has_property "Model with highest BLEU score".
+     }
+     GROUP BY?model
+     HAVING (COUNT(?e) = (SELECT MAX(e) FROM {?e a orkg:EvaluationMetric. }))
+     ORDER BY DESC(?e)<|eot_id|>

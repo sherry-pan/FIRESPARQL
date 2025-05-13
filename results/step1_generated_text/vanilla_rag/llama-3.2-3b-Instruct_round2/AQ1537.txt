@@ -1,0 +1,16 @@
+Question:
+What is the name of the top performing model in terms of Number of params score when benchmarked on the Penn Treebank (Character Level) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?numParams 
+     WHERE {
+     {
+    ?model orkg:hasBenchmark orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:evaluationMetric orkg:evaluationMetric?metric.
+     FILTER (bif:label?metric "Number of params"^^xsd:integer).
+    ?model orkg:hasName?name.
+    ?model orkg:hasNumber?numParams.
+     FILTER (bif:label?benchmark "Penn Treebank (Character Level)"^^xsd:string).
+     }<|eot_id|>

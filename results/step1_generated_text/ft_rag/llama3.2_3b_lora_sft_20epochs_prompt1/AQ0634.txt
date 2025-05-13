@@ -1,0 +1,14 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Amazon-2 dataset?
+
+Generated SPARQL:
+ SELECT?title?number
+     WHERE {
+       orkgr:R44985 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+       FILTER(REGEX(?benchmark, "Amazon-2"))
+      ?benchmark orkgp:P43179?paper.
+      ?paper orkgp:P43178?title.
+      ?paper orkgp:HAS_DATASET?dataset.
+       BIND(xsd:integer(?dataset) AS?number)
+     }<|eot_id|>

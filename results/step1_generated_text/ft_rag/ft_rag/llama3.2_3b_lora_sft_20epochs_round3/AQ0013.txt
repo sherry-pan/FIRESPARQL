@@ -1,0 +1,19 @@
+Question:
+Can you list the models that have been evaluated on the CommonsenseQA dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?method
+     WHERE {
+      ?r       a                orkgc:Resource;
+                rdfs:label      ?rlabel.
+       FILTER(REGEX(?rlabel, "CommonsenseQA"))
+      ?evaluation   orkgp:HAS_EVALUATION  ?eval;
+                    orkgp:P32               ?cont.
+      ?cont         orkgp:HAS_DATASET      ?dataset.
+      ?dataset      orkgp:HAS_BENCHMARK     ?benchmark;
+                    rdfs:label              ?benchmark_label.
+      ?benchmark   orkgp:HAS_METHOD        ?method.
+      ?method    orkgp:HAS_IMPLEMENTATION  ?impl;
+                  orkgp:HAS_APPROACH     ?approach.
+       FILTER(REGEX(?approach, "eval"))
+     }<|eot_id|>

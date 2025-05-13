@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://example.org/schema#>
+
+SELECT ?model
+WHERE {
+  ?submission :onBenchmark :objectNavTestStd ;
+              :hasScore ?score ;
+              :achievedBy ?model .
+  ?score :hasMetric :SUCCESS ;
+         :hasValue ?successValue .
+}
+ORDER BY DESC(?successValue)
+LIMIT 1
+```

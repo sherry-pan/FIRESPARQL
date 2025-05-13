@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/ontology/corpus#>
+PREFIX orkgp: <http://www.semanticweb.org/orkg/ontology/pipeline#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?model_lbl
+WHERE {
+  ?evaluation a orkgc:Evaluation;
+              orkgc:hasMetric ?metric;
+              orkgc:hasModel ?model;
+              orkgc:hasValue ?value;
+              orkgc:onDataset ?dataset.
+  ?metric rdfs:label ?metric_lbl.
+  ?model rdfs:label ?model_lbl.
+  ?dataset rdfs:label ?dataset_lbl.
+  
+  FILTER (str(?metric_lbl) = "BLEU")
+  FILTER (str(?dataset_lbl) = "WMT2016 Romanian-English")
+
+} ORDER BY DESC(?value) LIMIT 1
+```

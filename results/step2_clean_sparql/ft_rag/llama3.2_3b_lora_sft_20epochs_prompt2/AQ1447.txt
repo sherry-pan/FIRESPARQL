@@ -1,0 +1,24 @@
+```sparql
+SELECT ?method
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "HMDB51"))
+
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  
+  ?evaluation orkgp:HAS_EVALUATION ?eval.
+
+  ?metric orkgp:HAS_VALUE ?eval;
+          orkgp:HAS_DATASET ?dataset;
+          orkgp:POTION_VALUE_TYPE ?property_type.
+  FILTER(REGEX(?property_type, "Pre-Training Dataset"))
+
+  ?cont orkgp:POTION_VALUE ?metric.
+  
+  ?method orkgp:HAS_EVALUATION ?eval.
+
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

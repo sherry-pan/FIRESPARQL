@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?code_link ?paper_title 
+WHERE {
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_DATASET ?dataset.
+    ?dataset orkg:HAS_IMPLEMENTATION ?code_link.
+    ?paper orkg:TITLE ?paper_title.
+    FILTER (CONTAINS(STR(?paper_title), "DrQA"))
+}
+```

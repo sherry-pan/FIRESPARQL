@@ -1,0 +1,16 @@
+Question:
+List the metrics that are used to evaluate models on the ART/CoreSC benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ART/CoreSC")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_BENCHMARK     ?benchmark.
+      ?metric         orkgp:HAS_EVALUATION  ?evaluation.
+      ?evaluation      rdfs:label              ?metric_lbl.
+      ?cont           orkgp:HAS_IMPLEMENTATION  ?implementation.
+       FILTER(REGEX(?implementation, "t5-"))
+     }<|eot_id|>

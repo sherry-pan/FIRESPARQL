@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "X-Sum")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_METRIC ?metric;
+              orkgp:HAS_VALUE ?value.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "ROUGE-2" && ?value = ?best_value)
+  ?model orkgp:P32 ?cont;
+         rdfs:label ?model_lbl.
+  ?cont_best orkgp:HAS_EVALUATION ?evaluation_best.
+  ?evaluation_best orkgp:HAS_VALUE ?best_value.
+}
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.openresearcher.org/ontology/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value 
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?evaluation orkg:value ?value.
+  ?benchmark orkg:dataset orkg:datasetURI "https://example.com/dataset/nyt-single".
+  FILTER (?metric = "Recall" || ?metric = "Micro-F1" || ?metric = "Accuracy" || ?metric = "Macro-F1")
+}
+```

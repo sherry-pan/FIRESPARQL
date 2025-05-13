@@ -1,0 +1,23 @@
+Question:
+Can you provide links to code used in papers that benchmark the NASCell model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                rdfs:label   ?model_lbl.
+       FILTER (str(?model_lbl) = "NASCell")
+      ?benchmark    orkgp:HAS_BENCHMARK       ?eval.
+      ?eval         orkgp:HAS_EVALUATION       ?eval_lbl.
+      ?eval_lbl     orkgp:HAS_VALUE           ?value.
+      ?value         orkgp:HAS_DATASET         ?dataset.
+      ?dataset       orkgp:HAS_BENCHMARK     ?benchmark;
+                        orkgp:HAS_DATASET         ?dataset_lbl.
+      ?dataset_lbl   orkgp:HAS_SOURCE_CODE     ?code.
+      ?code         orkgp:HAS_IMPLEMENTATION   ?impl;
+                       orkgp:HAS_EVALUATION     ?eval_lbl.
+      ?impl          orkgp:HAS_MODEL          ?model.
+      ?model         orkgp:HASHAS_METHOD        ?method.
+      ?method        rdfs:label   ?method_lbl.
+       FILTER (str(?method_lbl) = "NASCell")
+     }<|eot_id|>

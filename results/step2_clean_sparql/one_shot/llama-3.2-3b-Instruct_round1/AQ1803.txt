@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Top-1 Accuracy")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "VTAB-1k")
+      ?evaluation a orkgc:Evaluation;
+                  orkgc:hasModel ?model;
+                  orkgc:hasDataset ?dataset;
+                  orkgc:hasMetric ?metric;
+                  orkgc:hasScore ?score.
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?score)
+    LIMIT 1
+  }
+}
+```

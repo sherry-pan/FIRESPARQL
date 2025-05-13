@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/2019/07/orkg-core-concept#>
+PREFIX orkgp: <http://www.semanticweb.org/orkg/2019/07/orkg-paper#>
+SELECT DISTINCT ?code
+WHERE {
+  ?cont a orkgp:Paper;
+        orkgp:HAS_MODEL ?model;
+        orkgp:HAS_SOURCE_CODE ?code.
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+  FILTER (str(?model_lbl) = "BiT-M")
+}
+```

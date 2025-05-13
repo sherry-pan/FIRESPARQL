@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?location (COUNT(?location) as ?count) 
+WHERE {
+  ?study a orkg:Study.
+  ?study orkg:has_location ?location.
+  ?location rdfs:label ?location_label.
+  FILTER (lang(?location_label) = "en").
+}
+GROUP BY ?location
+ORDER BY DESC(?count)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?model a orkgc:Model;
+           rdfs:label ?model_lbl;
+           orkgp:HAS_DATASET ?dataset.
+    ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:P32 ?cont.
+    ?cont orkgp:P31 ?model.
+    FILTER(REGEX(?model_lbl, "MACs"))
+}
+```

@@ -1,0 +1,14 @@
+```
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?codeReference
+WHERE {
+  ?paper dbo:abstract ?abstract .
+  ?paper dcterms:subject dbr:Benchmarking .
+  ?paper dbo:isPartOf ?journal .
+  ?paper dbo:codeReference ?codeReference .
+  FILTER(CONTAINS(LCASE(?abstract), "layernorm hm-lstm"))
+}
+```

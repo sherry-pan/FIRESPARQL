@@ -1,0 +1,15 @@
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?variable (COUNT(?model) AS ?modelCount) 
+WHERE {
+  ?model rdf:type dbo:AtmosphereModel .
+  ?model dbo:variable ?variable .
+}
+GROUP BY ?variable
+ORDER BY DESC(?modelCount)
+LIMIT 3
+```

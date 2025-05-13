@@ -1,0 +1,14 @@
+```
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?model
+WHERE {
+  ?evaluation dbr:Evaluates dbr:200k_Short_Texts_for_Humor_Detection ;
+              dbr:HasMetric dbr:F1-score ;
+              dbo:score ?f1Score ;
+              dbo:forModel ?model .
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

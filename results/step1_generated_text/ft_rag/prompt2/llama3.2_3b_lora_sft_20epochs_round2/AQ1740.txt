@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Sequential MNIST")
+               && has_dataset       ?dataset       && has_evaluation     ?eval
+               && has_method       ?method
+               &&?eval           orkgp:HAS_VALUE  ?value
+               &&?value           orkgp:P71081     ?accuracy
+               &&?accuracy         orkgp:P43177     ?model)
+      ?model    orkgp:P31       ?classification;
+                 rdfs:label      ?model_lbl.
+     }<|eot_id|>

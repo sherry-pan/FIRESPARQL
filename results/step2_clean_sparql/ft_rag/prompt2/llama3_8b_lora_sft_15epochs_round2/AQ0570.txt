@@ -1,0 +1,11 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(?dataset, "WSC"))
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  OPTIONAL {?paper orkgp:P29 ?paper_lbl.}
+}
+```

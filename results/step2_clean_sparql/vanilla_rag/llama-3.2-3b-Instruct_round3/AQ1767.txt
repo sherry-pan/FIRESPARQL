@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?evaluation ?dataset
+WHERE {
+    ?model orkg:has_approach ?approach.
+    ?approach orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_dataset ?dataset.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    FILTER (CONTAINS(STR(?evaluation), "Accuracy")).
+}
+ORDER BY DESC(?evaluation)
+LIMIT 1
+```

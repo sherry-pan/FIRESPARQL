@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?evaluatio_value) AS ?score)
+WHERE {
+  orkgr:R69081 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P70028 ?evaluatio.
+  ?evaluatio orkgp:P71075 ?evaluatio_value.
+  BIND(xsd:float(?evaluatio_value) AS ?evaluatio_value)
+  OPTIONAL {
+    ?evaluatio orkgp:P71075 ?cont.
+    ?cont orkgp:P70027 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+}
+```

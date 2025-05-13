@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semanticweb.org/orkg/ontology#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?f1score
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:hasBenchmark ?benchmark.
+ ?benchmark orkg:hasDataset <http://www.orkg.org/dataset/200k_Short_Texts_for_Humor_Detection>.
+ ?benchmark orkg:evaluation ?evaluation.
+ ?evaluation schema:metric "F1-score".
+ ?evaluation orkg:hasValue ?f1score.
+}
+```

@@ -1,0 +1,28 @@
+Question:
+Where can all the data sets used in the compared studies be found?
+
+Generated SPARQL:
+ SELECT?location
+     WHERE {
+      ?comparison       a            orkgc:Comparison;
+                      rdfs:label      ?comparison_lbl.
+     ?comparison       orkgp:HAS_DATASET      ?dataset.
+     ?dataset         orkgp:HAS_EVALUATION      ?eval.
+     ?eval            orkgp:HAS_VALUE          ?value.
+     ?value           orkgp:HAS_DATASET        ?dataset.
+     ?dataset         rdfs:label              ?dataset_lbl.
+      OPTIONAL {
+        ?eval           orkgp:HAS_LOCATION        ?location.
+         FILTER(STRLEN(?location) > 0)
+       }
+     ?comparison       orkgp:HAS_METHOD         ?method.
+     ?method         orkgp:HAS_DATASET        ?dataset.
+      OPTIONAL {
+        ?dataset         orkgp:HAS_IMPLEMENTATION  ?impl.
+        ?impl           orkgp:HAS_VALUE          ?value.
+        ?value           orkgp:HAS_LOCATION        ?location.
+         FILTER(STRLEN(?location) > 0)
+       }
+    }
+    ORDER BY DESC(?comparison_lbl)
+    LIMIT 1<|eot_id|>

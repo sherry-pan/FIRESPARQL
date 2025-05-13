@@ -1,0 +1,17 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Paper Field dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT DISTINCT?metric?score
+WHERE {
+ ?paper a orkg:PaperField ;
+    orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation csvw:CSVW_Name?metric ;
+               csvw:CSVW_Value?score.
+  FILTER (?metric = "highest benchmark result")
+}
+ORDER BY DESC(?score) LIMIT 1<|eot_id|>

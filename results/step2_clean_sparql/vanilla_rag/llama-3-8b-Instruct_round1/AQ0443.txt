@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://www.semantic-web.at/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?paperTitle ?paperID
+WHERE {
+    ?paper orkg:HAS_BENCHMARK true.
+    ?paper orkg:HAS_DATASET orkg:UCF101.
+    ?paper orkg:HAS_METHOD ?method.
+    FILTER (?method = "finetuned").
+    ?paper csvw:CSVW_Titles ?paperTitle.
+    ?paper csvw:CSVW_Number ?paperID.
+}
+```

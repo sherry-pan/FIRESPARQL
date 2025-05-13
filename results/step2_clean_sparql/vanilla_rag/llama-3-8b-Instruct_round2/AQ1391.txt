@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX ace: <http://orkg.org/orkg/resource/ACE_2004>
+
+SELECT ?model ?modelLabel ?evaluation ?evaluationValue
+WHERE {
+  ?model orkg:HAS_BENCHMARK ace:.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC "RE+ Micro F1".
+  ?evaluation orkg:HAS_VALUE ?evaluationValue.
+  ?evaluation orkg:HAS_DATASET ace:.
+  ?model orkg:LABEL ?modelLabel.
+}
+ORDER BY DESC(?evaluationValue)
+LIMIT 1
+```

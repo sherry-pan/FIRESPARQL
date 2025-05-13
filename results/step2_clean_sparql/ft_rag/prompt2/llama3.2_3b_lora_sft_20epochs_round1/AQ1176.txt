@@ -1,0 +1,16 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6908 orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER(REGEX(STR(?metric), "accuracy"^^xsd:string))
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(?dataset_lbl = "WNLI")
+  ?benchmark orkgp:HAS_VALUE ?value.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

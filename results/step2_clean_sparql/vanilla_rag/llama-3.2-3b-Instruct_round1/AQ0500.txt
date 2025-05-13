@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:hasDataset ?dataset.
+    ?dataset orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?benchmark orkg:hasBenchmarkModel ?model.
+    ?model orkg:hasTitle ?title.
+    ?model orkg:number ?id.
+    FILTER (CONTAINS(STR(?dataset), "Penn Treebank (Character Level)"))
+}
+```

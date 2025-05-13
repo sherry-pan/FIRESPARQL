@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_title ?paper_id
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WikiText-2")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?paper orkgp:HAS_BENCHMARK ?benchmark;
+         a orkgp:ResearchPaper;
+         orkgp:hasTitle ?paper_title;
+         orkgp:hasId ?paper_id.
+}
+```

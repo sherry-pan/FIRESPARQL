@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?microF1Score
+WHERE {
+    ?model orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:evaluation ?evaluation.
+    ?benchmark orkg:microF1 ?microF1Score.
+    FILTER (str(?evaluation) = "NCBI Disease")
+}
+ORDER BY DESC(?microF1Score)
+LIMIT 1
+```

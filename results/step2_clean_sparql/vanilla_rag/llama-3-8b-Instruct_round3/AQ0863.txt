@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper ;
+         orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET "SST-5 Fine-grained classification dataset".
+  ?evaluation orkg:HAS_DATATYPE orkg:Classification.
+  FILTER(?metric != orkg:Accuracy && ?metric != orkg:Recall && ?metric != orkg:macro-F1 && ?metric != orkg:micro-F1)
+}
+```

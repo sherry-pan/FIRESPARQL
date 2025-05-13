@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/pav/>
+
+SELECT ?model
+WHERE {
+  ?evaluation a orkg:Evaluation;
+              orkg:hasEvaluation ?accuracy;
+              orkg:hasMethod ?method;
+              orkg:hasDataset <http://orkg.org/orkg/dataset/Kuzushiji-MNIST>.
+  ?accuracy a p:Value;
+            p:hasValue ?value.
+  ?method orkg:hasModel ?model.
+  
+  FILTER NOT EXISTS {
+    ?otherEval a orkg:Evaluation;
+               orkg:hasEvaluation ?otherAcc;
+               orkg:hasDataset <http://orkg.org/orkg/dataset/Kuzushiji-MNIST>.
+    ?otherAcc a p:Value;
+              p:hasValue ?otherValue.
+    FILTER (?otherValue > ?value)
+  }
+}
+```

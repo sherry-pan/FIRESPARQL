@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score 
+WHERE {
+    ?dataset a orkg:Dataset.
+    ?dataset orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:evaluation ?metric.
+    ?evaluation orkg:hasScore ?score.
+    ?dataset orkg:hasDatasetFile "seel.cse.lsu.edu/data/re17.zip".
+    FILTER(?metric = "micro-F1" OR ?metric = "Accuracy")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,17 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Cart Pole (OpenAI Gym) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric?score?method WHERE {
+      ?benchmark a orkg:Benchmark.
+      ?benchmark orkg:hasEvaluation?evaluation.
+      ?evaluation orkg:metric?metric.
+      ?evaluation orkg:score?score.
+      ?benchmark orkg:method?method.
+       FILTER (STRLIKE(BCD(STR(?metric), "Cart Pole") AND STRLIKE(BCD(STR(?metric), "OpenAI Gym") OR STRLIKE(BCD(STR(?metric), "CartPole") OR STRLIKE(BCD(STR(?metric), "CartPole-v1") OR STRLIKE(BCD(STR(?metric), "CartPole-v2")))))
+       )
+       BIND(STR(?metric) AS?metric)
+       BIND(STR(?score) AS?score)
+       BIND(STR(?method) AS?method)
+     }<|eot_id|>

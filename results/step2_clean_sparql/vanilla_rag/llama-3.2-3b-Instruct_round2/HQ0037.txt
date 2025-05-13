@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?author ?num_articles
+WHERE {
+  ?author orkg:has_contribution ?contribution.
+  ?contribution orkg:has_subject ?article.
+  ?article orkg:has_author ?author.
+  ?contribution orkg:CSVW_Number ?num_articles.
+}
+GROUP BY ?author
+HAVING (?num_articles = MAX(?num_articles))
+```

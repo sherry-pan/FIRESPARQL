@@ -1,0 +1,17 @@
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:hasEvaluation ?result.
+  ?result orkg:score ?score.
+  ?evaluation orkg:hasMethod ?method.
+  ?method orkg:method ?model.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:dataset "Atari 2600 Seaquest".
+  ?evaluation orkg:evaluation ?metric.
+  ?metric orkg:metric "Score".
+}
+ORDER BY DESC(?score)
+LIMIT 1

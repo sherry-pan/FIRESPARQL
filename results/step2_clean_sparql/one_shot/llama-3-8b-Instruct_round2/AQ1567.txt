@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgc: <http://semantic-web-journal.org/orkg/ontology/concept/>
+PREFIX orkgp: <http://semantic-web-journal.org/orkg/ontology/property/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label ?metric_lbl.
+    FILTER (str(?metric_lbl) = "F1")
+
+    ?dataset a orkgc:Dataset;
+             rdfs:label "CoNLL++".
+    ?evaluation orkgp:hasMetric ?metric;
+                orkgp:evaluates ?model;
+                orkgp:usesDataset ?dataset.
+    ?model rdfs:label ?model_lbl.
+}
+```

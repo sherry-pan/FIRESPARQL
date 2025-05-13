@@ -1,0 +1,24 @@
+Question:
+Provide a list of papers that have utilized the XLNet (base) model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX wdt: <http://www.wikidata.org/property/>
+     SELECT?paper?code 
+     WHERE {
+    ?paper orkg:HAS_IMPLEMENTATION?implementation.
+    ?implementation wdt:P301?implementationCode.
+     FILTER (CONTAINS(?implementationCode, 'XLNet (base)') || CONTAINS(?implementationCode, 'XLNet')).
+    ?paper orkg:HAS_METHOD?method.
+    ?method wdt:P31?methodType.
+     FILTER (?methodType = wdt:P31 "Model" ||?methodType = wdt:P31 "Method").
+    ?paper orkg:HAS_DATASET?dataset.
+    ?dataset wdt:P31?datasetType.
+     FILTER (?datasetType = wdt:P31 "Dataset").
+    ?paper orkg:HAS_EVALUATION?evaluation.
+    ?evaluation wdt:P31?evaluationType.
+     FILTER (?evaluationType = wdt:P31 "Evaluation").
+    ?paper orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark wdt:P31?benchmarkType.
+     FILTER (?benchmarkType = wdt:P31 "Benchmark").
+     }<|eot_id|>

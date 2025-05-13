@@ -1,0 +1,12 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?code ?code_label
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_MODEL orkg:T-ConvS2S.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:HAS_IMPLEMENTATION ?code.
+  ?code schema:name ?code_label.
+}

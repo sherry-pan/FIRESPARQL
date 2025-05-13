@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_METHOD ?method.
+  ?method rdfs:label ?method_label.
+  FILTER (?method_label = "AcrE model").
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_CODE ?code.
+  ?code orkg:HAS_LINK ?code_link.
+}
+```

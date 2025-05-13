@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX duie: <http://orkg.org/orkg/resource/DuIE/>
+
+SELECT ?metric ?value
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasEvaluation ?hasEvaluation.
+  ?hasEvaluation orkg:hasMetric ?metric.
+  ?metric orkg:label ?metricLabel.
+  FILTER (?metricLabel IN ("Recall", "micro-F1", "Accuracy", "macro-F1"))
+  FILTER (?evaluation orkg:hasDataset duie:DuIE)
+}
+```

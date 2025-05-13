@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric (COUNT(?metric) AS ?count)
+WHERE {
+    ?metric orkg:hasLabel "Evaluation metric"@en.
+    ?dataset orkg:hasLabel "Reuters De-En"@en.
+    ?metric orkg:hasDefinition "Evaluation metric"@en.
+    ?someEntity orkg:someRelation ?metric.
+    ?someEntity orkg:someRelation ?dataset.
+}
+GROUP BY ?metric
+HAVING (COUNT(?metric) > 1)
+ORDER BY DESC(?count)
+```

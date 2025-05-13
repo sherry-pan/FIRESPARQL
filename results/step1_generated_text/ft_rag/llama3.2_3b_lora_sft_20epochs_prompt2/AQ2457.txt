@@ -1,0 +1,17 @@
+Question:
+Can you provide links to code used in papers that benchmark the COMET - Direct model?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "COMET - Direct")
+      ?benchmark    orkgp:HAS_BENCHMARK       ?eval;
+                    orkgp:HAS_EVALUATION      ?eval2.
+      ?eval         orkgp:HAS_EVALUATION      ?eval2;
+                    orkgp:HAS_CODE          ?code.
+      ?eval2         orkgp:HAS_IMPLEMENTATION  ?impl;
+                      orkgp:HAS_METHOD        ?method.
+      ?method       orkgp:HAS_SOURCE_CODE     ?code.
+     }<|eot_id|>

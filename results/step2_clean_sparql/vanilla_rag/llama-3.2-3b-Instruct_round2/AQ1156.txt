@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark orkg:HAS_BENCHMARK ?metric ?value.
+    ?benchmark orkg:HAS_DATASET "http://example.org/SQuAD2.0".
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_METHOD ?method.
+    ?benchmark orkg:HAS_IMPLEMENTATION ?implementation.
+    FILTER (STRREGEX(STR(?metric), "F1-score|Accuracy|ROUGE-N|Precision|Recall"))
+}
+```

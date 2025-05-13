@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX w3c: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?model ?benchmark
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasBenchmark ?model.
+  ?benchmark orkg:hasDataset "ANLI test dataset".
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:evaluationMetric ?metric.
+  ?metric w3c:label "A3".
+  ?benchmark orkg:hasValue ?benchmarkValue.
+  ?benchmarkValue orkg:CSVW_Number ?number.
+  FILTER (?number >= 1)
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:hasEvaluation ?evaluationResult.
+  ?evaluationResult orkg:hasMetric ?metric ;
+                    orkg:hasValue ?value.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset rdfs:label "MLDoc Zero-Shot English-to-Spanish".
+  FILTER (?metric != "uncertainty value")
+}
+```

@@ -1,0 +1,39 @@
+```sparql
+SELECT DISTINCT ?metric_lbl (MAX(?score) AS ?highest_score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACE 2005")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+             
+  OPTIONAL {
+    ?eval orkgp:HAS_RECALL ?recall.
+    ?recall orkgp:HAS_VALUE ?value.
+    BIND("Recall"^^xsd:string AS ?metric_lbl)
+  }
+  OPTIONAL {
+    ?eval orkgp:HAS_ACCURACY ?accuracy.
+    ?accuracy orkgp:HAS_VALUE ?value.
+    BIND("Accuracy"^^xsd:string AS ?metric_lbl)
+  }
+  OPTIONAL {
+    ?eval orkgp:HAS_MACRO_F1 ?macro_f1.
+    ?macro_f1 orkgp:HAS_VALUE ?value.
+    BIND("macro-F1"^^xsd:string AS ?metric_lbl)
+  }
+  OPTIONAL {
+    ?eval orkgp:HAS_MICRO_F1 ?micro_f1.
+    ?micro_f1 orkgp:HAS_VALUE ?value.
+    BIND("micro-F1"^^xsd:string AS ?metric_lbl)
+  }
+  
+  BIND(IF(BOUND(?recall), ?value, 
+      IF(BOUND(?accuracy), ?value, 
+      IF(BOUND(?macro_f1), ?value, 
+      ?micro_f1))) AS ?score)
+}
+ORDER BY DESC(?highest_score)
+LIMIT 1
+```

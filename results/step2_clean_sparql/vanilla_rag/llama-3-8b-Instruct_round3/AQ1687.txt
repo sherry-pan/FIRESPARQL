@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?modelLabel ?evaluation ?evaluationValue
+WHERE {
+  ?benchmark a orkg:HasBenchmark.
+  ?benchmark orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:evaluationMetric "ROUGE-1".
+  ?evaluation orkg:hasDataset ?dataset.
+  ?dataset orkg:label "AESLC".
+  ?benchmark orkg:comparedWith ?model.
+  ?model orkg:label ?modelLabel.
+  ?evaluation orkg:evaluationValue ?evaluationValue.
+}
+ORDER BY DESC(?evaluationValue)
+LIMIT 1
+```

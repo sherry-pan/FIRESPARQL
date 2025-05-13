@@ -1,0 +1,15 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the WMT2014 English-German dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wmt: <http://wmt.org/>
+
+SELECT DISTINCT?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:HAS_DATASET wmt:WMT2014_English_German ;
+    orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+  FILTER (?metric IN (orkg:Accuracy, orkg:Recall, orkg:micro-F1))
+}<|eot_id|>

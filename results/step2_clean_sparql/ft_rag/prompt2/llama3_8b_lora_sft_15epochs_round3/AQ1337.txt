@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?numeric_value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Paper Field".
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?eval_values.
+  ?eval orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval_values orkgp:HAS_VALUE ?value.
+  ?value orkgp:P32 ?numeric_value.
+}
+ORDER BY DESC(?score)
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX p: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model ?flops
+WHERE {
+  ?model p:P71075 ?evaluation.
+  ?evaluation p:P71086 <http://orkg.org/orkg/resource/dataset/Oxford-IIIT_Pets>.
+  ?evaluation p:P97145 ?method.
+  ?method p:hasMetricValue ?flops.
+  FILTER (?flops > 0)
+}
+ORDER BY DESC(?flops)
+LIMIT 1
+```

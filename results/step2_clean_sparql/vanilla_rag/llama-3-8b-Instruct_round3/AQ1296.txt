@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?benchmark ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:has_dataset <http://orkg.org/orkg/dataset/Atari_2600_Wizard_of_Wor>.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:evaluation_metric ?metric.
+  ?evaluation orkg:evaluation_score ?score.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

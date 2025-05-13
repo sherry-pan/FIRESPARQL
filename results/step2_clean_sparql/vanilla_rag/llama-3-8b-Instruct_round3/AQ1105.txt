@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wmt: <http://wmt2014.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+    orkg:hasEvaluation ?evaluation .
+  ?evaluation orkg:metric ?metric ;
+    orkg:score ?score ;
+    orkg:dataset ?dataset .
+  FILTER (?dataset = wmt:FrenchEnglishDataset)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

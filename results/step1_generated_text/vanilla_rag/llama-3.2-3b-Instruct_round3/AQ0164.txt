@@ -1,0 +1,15 @@
+Question:
+What models are being evaluated on the TempEval-3 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+     SELECT?model 
+     WHERE {
+      ?model orkg:HAS_EVALUATION?e.
+      ?e orkg:HAS_DATASET "http://orkg.org/orkg/dataset/TempEval-3".
+      ?model orkg:HAS_METHOD?m.
+      ?m rdfs:label?modelLabel.
+       FILTER (STRLIKE(STR(?modelLabel), "model") || STRLIKE(STR(?modelLabel), "approach"))
+     }
+    <|eot_id|>

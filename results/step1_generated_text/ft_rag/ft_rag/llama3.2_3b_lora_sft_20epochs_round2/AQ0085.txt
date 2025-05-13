@@ -1,0 +1,18 @@
+Question:
+Can you list the models that have been evaluated on the WMT2016 English-German dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                  rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl    = "WMT2016 English-German")
+              || str(?dataset_lbl    = "WMT2016 German-English"))
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:HAS_EVALUATION     ?eval.
+      ?eval           orkgp:HAS_VALUE        ?value.
+       OPTIONAL {?eval           orkgp:HAS_METRIC        ?metric.
+                ?metric          rdfs:label              ?metric_lbl.}
+       OPTIONAL {?eval           orkgp:HAS_MODEL         ?model.
+                ?model          rdfs:label              ?model_lbl.}
+     }<|eot_id|>

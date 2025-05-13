@@ -1,0 +1,18 @@
+Question:
+Indicate the model that performed best in terms of Score metric on the Atari 2600 Tennis benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?score
+WHERE {
+ ?model orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasBenchmark orkg:Benchmark_Atiari_2600_Tennis.
+ ?evaluation orkg:method?modelType.
+ ?evaluation orkg:Score?score.
+  FILTER (?score > 0).
+  FILTER (?modelType!= "baseline").
+  FILTER (!bound(?modelType)).
+}
+ORDER BY DESC(?score)<|eot_id|>

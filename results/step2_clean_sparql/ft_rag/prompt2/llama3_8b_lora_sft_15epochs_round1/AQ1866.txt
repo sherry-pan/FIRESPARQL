@@ -1,0 +1,12 @@
+```sparql
+SELECT ?dataset ?dataset_lbl
+WHERE {
+  ?papers orkgp:P31 ?cont;
+          rdfs:label ?papers_lbl.
+  FILTER(REGEX(STR(?papers_lbl), "Natural Language Inference", "i"))
+  ?cont orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+}
+ORDER BY DESC(COUNT(?dataset_lbl))
+LIMIT 10
+```

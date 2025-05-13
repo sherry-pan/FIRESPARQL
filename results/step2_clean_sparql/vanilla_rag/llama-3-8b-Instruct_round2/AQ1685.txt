@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?method
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?score.
+  ?evaluation orkg:HAS_METRIC "ROUGE-2".
+  ?evaluation orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:NAME "CL-SciSumm".
+  ?benchmark orkg:HAS_METHOD ?method.
+  FILTER (?score = MAX(?score))
+}
+GROUP BY ?method
+```

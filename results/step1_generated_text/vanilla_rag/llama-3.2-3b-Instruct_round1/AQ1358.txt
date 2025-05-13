@@ -1,0 +1,24 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BUCC French-to-English?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     SELECT?metric?value 
+     WHERE {
+    ?b orkg:HAS_BENCHMARK?m.
+    ?m orkg:HAS_EVALUATION?e.
+    ?m orkg:HAS_DATASET "http://orkg.org/orkg/dataset/BUCC-French-English".
+    ?m orkg:HAS_METHOD?mt.
+    ?e orkg:CSVW_Value?value.
+    ?m orkg:HAS_BENCHMARK?b.
+    ?b orkg:HAS_EVALUATION?e.
+    ?m orkg:HAS_METHOD?mt.
+    ?mt rdfs:label?metric.
+    ?b orkg:HAS_BENCHMARK?b.
+    ?b orkg:HAS_EVALUATION?e.
+    ?e orkg:CSVW_Value?value.
+     }
+     GROUP BY?metric
+     HAVING COUNT(?value) = (SELECT COUNT(*) FROM?b)
+     ORDER BY DESC(?value)<|eot_id|>

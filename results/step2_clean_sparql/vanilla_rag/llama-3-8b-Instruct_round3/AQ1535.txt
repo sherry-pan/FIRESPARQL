@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?testPerplexity
+WHERE {
+  ?evaluation orkg:HAS_EVALUATION ?testPerplexity.
+  ?evaluation orkg:HAS_METHOD ?method.
+  ?evaluation orkg:HAS_DATASET orkg:WikiText-2.
+  ?method orkg:HAS_MODEL ?model.
+  FILTER (?testPerplexity > 0).
+}
+ORDER BY DESC(?testPerplexity)
+LIMIT 1
+```

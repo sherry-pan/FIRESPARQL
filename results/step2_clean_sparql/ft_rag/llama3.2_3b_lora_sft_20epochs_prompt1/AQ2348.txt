@@ -1,0 +1,33 @@
+```sparql
+SELECT ?code
+WHERE {
+  ?papers rdfs:label ?papers_labels.
+  FILTER(REGEX(?papers_labels, "KD-LSTMreg"))
+  ?papers orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  OPTIONAL {
+    ?benchmark orkgp:P4009 ?code.
+    ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  }
+  UNION {
+    ?dataset orkgp:P4009 ?code.
+    ?eval orkgp:HAS_DATASET ?dataset.
+  }
+  UNION {
+    ?evaluations orkgp:P43131 ?code.
+    ?eval orkgp:HAS_EVALUATION ?evaluations.
+  }
+  UNION {
+    ?method orkgp:P4009 ?code.
+    ?eval orkgp:HAS_METHOD ?method.
+  }
+  UNION {
+    ?approach orkgp:P4009 ?code.
+    ?eval orkgp:HAS_APPROACH ?approach.
+  }
+  UNION {
+    ?mesh orkgp:P4009 ?code.
+    ?eval orkgp:HAS_MESH ?mesh.
+  }
+}
+```

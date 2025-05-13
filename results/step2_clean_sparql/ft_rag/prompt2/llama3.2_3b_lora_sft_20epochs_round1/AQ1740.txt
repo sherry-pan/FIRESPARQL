@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Sequential MNIST".
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:P31 ?type.
+  ?type rdfs:label ?model_lbl.
+  ?model orkgp:HAS_EVALUATION ?eval.
+  ?eval HAS_VALUE ?value.
+  ?method orkgp:P7042 ?accuracy_prop.
+  FILTER(?accuracy_prop = "Permuted Accuracy")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

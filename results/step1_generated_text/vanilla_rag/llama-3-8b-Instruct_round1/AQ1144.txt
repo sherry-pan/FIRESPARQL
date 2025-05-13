@@ -1,0 +1,19 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset CommonsenseQA?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/ontology/>
+     PREFIX csvw: <http://www.w3.org/ns/csvw#>
+     SELECT?metric?value
+     WHERE {
+      ?benchmark a orkg:Benchmark ;
+                 orkg:HAS_BENCHMARK?evaluation.
+      ?evaluation a orkg:Evaluation ;
+                 orkg:HAS_DATASET <http://orkg.org/orkg/resource/CommonsenseQA> ;
+                 orkg:HAS_EVALUATION?result.
+      ?result csvw:table?table.
+      ?table csvw:row?row.
+      ?row csvw:cell?cell.
+      ?cell csvw:Datatype?metric.
+      ?cell csvw:value?value.
+     }<|eot_id|>

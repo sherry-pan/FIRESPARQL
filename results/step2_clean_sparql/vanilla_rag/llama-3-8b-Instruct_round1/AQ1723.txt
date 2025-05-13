@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark orkg:Atari_2600_Tennis.
+  ?evaluation orkg:Score ?score.
+  FILTER (isLiteral(?score)).
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6908 orkgp:evaluate {
+    ?metric a orkgp:Metric;
+            rdfs:label ?metric_lbl.
+    ?eval hasEvaluation ?evaluate;
+          ?metric ?value.
+    ?cont orkgp:P31 ?eval;
+          orkgp:P31 ?dataset.
+    ?dataset rdfs:label ?dataset_lbl.
+    FILTER(REGEX(?dataset_lbl, "ACE 2005"))
+  }
+}
+```

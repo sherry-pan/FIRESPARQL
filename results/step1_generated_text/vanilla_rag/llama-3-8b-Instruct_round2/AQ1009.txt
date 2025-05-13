@@ -1,0 +1,17 @@
+Question:
+What are the metrics of evaluation over the ObjectNet dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?metric?metricLabel?evaluation
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_EVALUATION?evaluationMetric.
+ ?evaluationMetric orkg:HAS_BENCHMARK <http://orkg.org/orkg/instance/ObjectNet>.
+ ?evaluationMetric orkg:HAS_METRIC?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER(?metricLabel IN ("Accuracy", "Recall", "macro-F1", "micro-F1"))
+}
+ORDER BY?metricLabel<|eot_id|>

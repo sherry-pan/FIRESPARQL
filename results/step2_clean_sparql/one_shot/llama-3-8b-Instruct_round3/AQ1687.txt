@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgc: <http://purl.org/orkg/concepts/>
+PREFIX orkgp: <http://purl.org/orkg/properties/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+    ?metric a orkgc:Metric;
+            rdfs:label "ROUGE-1".
+    ?dataset a orkgc:Dataset;
+             rdfs:label "AESLC".
+    ?benchmark orkgp:hasMetric ?metric;
+               orkgp:onDataset ?dataset;
+               orkgp:hasModel ?model.
+    ?model rdfs:label ?model_lbl.
+}
+```

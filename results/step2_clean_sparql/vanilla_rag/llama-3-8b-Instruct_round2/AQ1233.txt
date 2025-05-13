@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?metric ?metricValue
+WHERE {
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:METRIC ?metric.
+  ?evaluation orkg:METRIC_VALUE ?metricValue.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "Walker, walk (DMControl500k)".
+  FILTER(?metric = "highest")
+}
+```

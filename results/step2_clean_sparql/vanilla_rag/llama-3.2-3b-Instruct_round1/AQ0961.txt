@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?metricLabel
+WHERE {
+  ?s orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "Atari 2600 Frostbite".
+  ?dataset orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?metric rdfs:label ?metricLabel.
+}
+```

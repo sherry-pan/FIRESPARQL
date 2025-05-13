@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model_name
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:HAS_BENCHMARK orkg:TriviaQA.
+  ?evaluation orkg:HAS_EVALUATION ?evaluation_result.
+  ?evaluation_result orkg:HAS_METRIC orkg:Accuracy.
+  ?evaluation_result orkg:HAS_VALUE ?accuracy_score.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation csvw:Name ?model_name.
+}
+ORDER BY DESC(?accuracy_score)
+LIMIT 1
+```

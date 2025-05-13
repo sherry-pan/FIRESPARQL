@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?paperTitle ?paperLink
+WHERE {
+    ?paper orkg:HAS_METHOD orkg:BiT-S_ResNet.
+    ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+    ?implementation orkg:has_link ?link.
+    ?link orkg:has_resource ?paperLink.
+    ?paper rdfs:label ?paperTitle.
+    FILTER (lang(?paperTitle) = "en")
+}
+ORDER BY ?paperTitle
+```

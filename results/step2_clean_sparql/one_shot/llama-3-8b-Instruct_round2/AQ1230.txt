@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkgc: <http://schema.orkg.org/ontology/orkg-core.owl#>
+PREFIX orkgp: <http://schema.orkg.org/ontology/orkg-protocol.owl#>
+SELECT DISTINCT ?metric ?metric_lbl ?value ?model ?model_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             orkgc:forDataset "Ball in cup, catch (DMControl100k)";
+             orkgc:hasResult ?result.
+  ?result orkgc:hasMetric ?metric;
+          orkgc:hasScore ?value.
+  ?metric rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Score")
+} 
+ORDER BY DESC(?value)
+LIMIT 1
+```

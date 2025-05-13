@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:ResearchPaper ;
+        orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark ?benchmark;
+              orkg:hasMetric ?metric.
+  ?benchmark orkg:hasDataset ?dataset.
+  ?dataset orkg:hasClasses ?classes.
+  FILTER (?benchmark = <http://orkg.org/orkg/benchmark/Atari_2600_Battle_Zone> && ?dataset = <http://orkg.org/orkg/dataset/Atari_2600_Battle_Zone>)
+}
+```

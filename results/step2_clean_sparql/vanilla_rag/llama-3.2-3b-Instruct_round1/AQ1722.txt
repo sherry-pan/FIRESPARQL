@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model ?score 
+WHERE {
+    ?model orkg:HAS_METHOD ?method.
+    ?method orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_DATASET "Atari 2600 Tutankham".
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:CSVW_Value ?score.
+    FILTER (isNumeric(?score))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?eval a orkgc:Evaluation;
+        rdfs:label ?eval_lbl.
+  FILTER (str(?eval_lbl) = "BLEU score")
+  ?benchmark orkgp:HAS_BENCHMARK ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?dataset orkgp:HAS_DATASET ?benchmark;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2016 English-German")
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_EVALUATION ?eval.
+  ?model orkgp:HAS_EVALUATION ?eval;
+         orkgp:HAS_DATASET ?dataset.
+  ?model rdfs:label ?model_lbl.
+  BIND(xsd:float(?eval_lbl) AS ?eval_value)
+}
+ORDER BY DESC(?eval_value)
+LIMIT 1
+```

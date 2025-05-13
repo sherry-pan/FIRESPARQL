@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX seel: <http://seel.cse.lsu.edu/data/>
+
+SELECT ?metric ?score
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:evaluation ?metric ;
+              orkg:score ?score;
+              orkg:dataset seel:re17.zip.
+  FILTER (?metric IN (orkg:Recall, orkg:Accuracy, orkg:micro-F1, orkg:macro-F1))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

@@ -1,0 +1,19 @@
+```sparql
+SELECT ?metric ?value
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "WOS-5736"))
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?evaluation orkgp:HAS_BENCHMARK ?benchmark;
+              orkgp:EVALUATION ?evaluation.
+              
+  ?evaluation orkgp:EVALUATION_METRIC ?metric;
+              orkgp:EVALUATION_VALUE ?value.
+}
+ORDER BY DESC(xsd:float(?value))
+LIMIT 1
+```

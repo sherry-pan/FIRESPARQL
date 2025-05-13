@@ -1,0 +1,26 @@
+Question:
+For which country of study overall prevalence of epilepsy is the highest?
+
+Generated SPARQL:
+ SELECT?country {
+      ?country a orkgc:Country;
+                 rdfs:label?country_label.
+      ?study orkgp:P23109?prevalence.
+      ?prevalence orkgp:P23110?quantitative_methods.
+      ?quantitative_methods rdfs:label?quantitative_methods_label.
+      ?study orkgp:P23108?matching_strategy.
+      ?matching_strategy rdfs:label?matching_strategy_label.
+      ?study orkgp:P23111?method.
+      ?method rdfs:label?method_label.
+      ?prevalence orkgp:P23112?value.
+       BIND(xsd:float(?value) AS?p_value)
+       ORDER BY DESC(?p_value)
+       LIMIT 1
+     }
+     WHERE {
+       orkgp:P23102?location?country.
+      ?country rdfs:label?country_label.
+       orkgp:P23107?study.
+      ?study orkgp:P23109?prevalence.
+       FILTER(REGEX(?country_label, "United States"))
+     }<|eot_id|>

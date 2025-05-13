@@ -1,0 +1,13 @@
+```sparql
+SELECT ?metric ?metric_value
+WHERE {
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC_VALUE ?metric_value.
+  }
+  FILTER(REGEX(STR(?metric_lbl), "Supervised:"))
+}
+```

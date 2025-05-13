@@ -1,0 +1,16 @@
+Question:
+What is the highest benchmark result achieved on the WMT2016 English-Russian dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:has_dataset <http://orkg.org/orkg/dataset/WMT2016_English-Russian> ;
+    orkg:has_benchmark?result.
+ ?result orkg:metric?metric ;
+    orkg:value?value.
+  FILTER (?metric!= "unknown" &&?value!= "unknown")
+}
+ORDER BY DESC(?value) LIMIT 1<|eot_id|>

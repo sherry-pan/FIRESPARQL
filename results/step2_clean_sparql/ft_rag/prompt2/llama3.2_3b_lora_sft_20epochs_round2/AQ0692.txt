@@ -1,0 +1,21 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  orkgr:R155370 orkgp:HAS_DATASET ?dataset.
+  {
+    ?dataset orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:P31 ?cont.
+    ?cont orkgp:P4009 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    FILTER(REGEX(?metric_lbl, "F1|Accuracy|NDCG|Quantitative|Recall|Precision|Evaluation"^^xsd:string))
+  }
+  UNION
+  {
+    ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkgp:P4316 ?cont.
+    ?cont orkgp:P4317 ?metric.
+    ?metric rdfs:label ?metric_lbl.
+    FILTER(REGEX(?metric_lbl, "F1|Accuracy|NDCG|Quantitative|Recall|Precision|Evaluation"^^xsd:string))
+  }
+}
+```

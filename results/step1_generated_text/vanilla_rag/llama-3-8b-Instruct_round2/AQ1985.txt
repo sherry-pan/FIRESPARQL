@@ -1,0 +1,18 @@
+Question:
+Provide a list of papers that have utilized the BART model and include the links to their code?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?paper?paperTitle?codeLink
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_METHOD?method.
+ ?method orkg:IMPLEMENTED_MODEL?model.
+ ?model orkg:NAME "BART".
+ ?paper orkg:HAS_IMPLEMENTATION?implementation.
+ ?implementation orkg:HAS_CODE?codeLink.
+  SERVICE orkg:query {
+   ?paper orkg:TITLE?paperTitle.
+  }
+}<|eot_id|>

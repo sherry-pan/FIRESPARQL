@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?benchmark ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasBenchmark ?bm.
+  ?bm orkg:hasEvaluation ?eval.
+  ?eval orkg:hasMetric ?metric.
+  ?eval orkg:hasScore ?score.
+  ?benchmark orkg:hasMethod ?method.
+  FILTER (?bm = "Atari 2600 Berzerk" AND ?eval = "Atari 2600 Berker")
+}
+```

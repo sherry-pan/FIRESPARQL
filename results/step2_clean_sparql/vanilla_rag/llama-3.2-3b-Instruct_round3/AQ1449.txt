@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?model ?name ?accuracy
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasAccuracy ?accuracy.
+  ?benchmark orkg:hasDataset "RACE".
+  ?benchmark orkg:hasMethod ?method.
+  ?method orkg:hasImplementation ?implementation.
+  ?implementation orkg:hasApproach ?approach.
+  ?approach orkg:hasName ?name.
+  FILTER (?accuracy = "High")
+}
+```

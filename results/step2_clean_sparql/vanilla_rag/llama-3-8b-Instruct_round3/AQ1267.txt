@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:evaluation ?metric ;
+    csvw:value ?value.
+  FILTER (?metric = "Atari 2600 Double Dunk" && ?benchmark orkg:BenchmarkResultType = "highest")
+}
+```

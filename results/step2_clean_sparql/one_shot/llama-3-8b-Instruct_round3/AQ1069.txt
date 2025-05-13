@@ -1,0 +1,14 @@
+```sparql
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX bench: <http://example.org/bench#>
+
+SELECT ?metric ?score
+WHERE {
+  ?result prov:wasGeneratedBy ?activity .
+  ?activity bench:used <http://seel.cse.lsu.edu/data/re17.zip> .
+  ?result bench:hasMetric ?metric .
+  ?result bench:hasScore ?score .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

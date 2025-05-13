@@ -1,0 +1,24 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "FGVC Aircraft")
+  
+  ?dataset orkgp:has_benchmark ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval;
+             orkgp:P32 ?cont;
+             orkgp:P31 ?evaluer.
+  
+  ?eval orkgp:HAS_VALUE ?value;
+        orkgp:HAS_METRIC ?metric.
+  
+  ?metric orkgp:P200 ?cont;
+          orkgp:P200 ?param;
+          rdfs:label ?metric_lbl.
+  
+  ?cont orkgp:HAS_MODEL ?model.
+  
+  ?model rdfs:label ?model_lbl.
+}
+```

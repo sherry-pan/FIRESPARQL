@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?paperId ?citation ?citationId
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasImplementation ?implementation.
+  ?benchmark orkg:hasMethod ?method.
+  ?paper orkg:hasCitation ?citation.
+  ?citation orkg:hasCitationId ?citationId.
+  ?implementation orkg:hasCode ?code.
+  ?code orkg:hasReference ?reference.
+  ?reference orkg:hasReferenceId ?referenceId.
+  ?method orkg:hasModel ?model.
+  ?model orkg:hasName "CATTS-XSUM".
+  ?paper orkg:hasId ?paperId.
+}
+```

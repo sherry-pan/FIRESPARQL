@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL 2003 (English)")
+  ?dataset orkgp:HAS_DATASET ?cont.
+  ?cont orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P32 ?evaluators.
+  ?evaluators orkgp:P31 ?contrib.
+  ?contrib orkgp:HAS_MODEL ?model.
+  ?model rdfs:label ?model_lbl.
+  ?eval orkgp:HAS_SCORE ?score;
+        orkgp:METRIC orkgc:F1.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

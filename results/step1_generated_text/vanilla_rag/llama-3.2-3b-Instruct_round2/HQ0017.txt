@@ -1,0 +1,16 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?location (COUNT(?study) AS?count) 
+     WHERE {
+    ?study a orkg:Study.
+    ?study orkg:location?location.
+     BIND(rdfs:label(?location) AS?locationLabel)
+     GROUP BY?location
+     HAVING (COUNT(?study) > 1)
+     ORDER BY DESC(?count)
+     LIMIT 1
+     }
+    <|eot_id|>

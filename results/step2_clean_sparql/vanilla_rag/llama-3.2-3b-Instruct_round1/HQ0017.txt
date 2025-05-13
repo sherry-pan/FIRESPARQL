@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?location (COUNT(*) AS ?freq) 
+WHERE {
+  ?study orkg:has_study ?s .
+  ?s orkg:location ?location .
+}
+GROUP BY ?location
+HAVING (COUNT(*) > 1)
+```

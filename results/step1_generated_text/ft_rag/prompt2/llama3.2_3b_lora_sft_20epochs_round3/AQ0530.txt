@@ -1,0 +1,20 @@
+Question:
+Provide a list of research paper titles and IDs that have benchmarked models on the BC5CDR-disease dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_title
+     WHERE {
+       orkgr:R155561 {
+         orkgrp:HAS_DATASET?dataset.
+        ?dataset a orkgp:Dataset;
+                   rdfs:label?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "BC5CDR-disease"))
+         orkgrp:HAS_BENCHMARK?benchmark.
+        ?benchmark orkgp:P43149?eval.
+        ?eval orkgp:P43150?cont.
+        ?cont orkgp:P43151?method.
+        ?method rdfs:label?method_lbl.
+         orkgp:P43152?paper.
+        ?paper rdfs:label?paper_title.
+       }
+     }<|eot_id|>

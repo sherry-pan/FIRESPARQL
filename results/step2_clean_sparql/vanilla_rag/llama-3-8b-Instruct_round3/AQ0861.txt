@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/property/>
+PREFIX schema: <http://schema.org/>
+
+SELECT DISTINCT ?metric
+WHERE {
+ ?dataset a schema:Dataset.
+ ?dataset orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasMetric ?metric.
+ FILTER (?metric = "Recall" || ?metric = "micro-F1" || ?metric = "Accuracy")
+}
+```

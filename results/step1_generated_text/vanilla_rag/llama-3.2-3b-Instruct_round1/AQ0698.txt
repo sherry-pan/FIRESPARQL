@@ -1,0 +1,19 @@
+Question:
+Can you list the metrics used to evaluate models on the TDM Tagged Corpus dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX schema: <http://schema.org/>
+
+     SELECT?metric
+     WHERE {
+    ?metric rkg:isMetricFor?dataset.
+     FILTER (?dataset rkg:isDatasetFor "TDM Tagged Corpus".
+    ?metric rkg:isMetricFor?dataset.
+     FILTER (?metric rkg:isMetricType "accuracy" OR 
+    ?metric rkg:isMetricType "recall" OR 
+    ?metric rkg:isMetricType "macro-F1" OR 
+    ?metric rkg:isMetricType "micro-F1" OR 
+    ?metric rkg:isMetricType "NDCG@10" )
+     }<|eot_id|>

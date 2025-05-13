@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:hasCode ?code.
+  ?paper orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasModel ?benchmarkModel.
+  ?benchmarkModel orkg:hasImplementation ?benchmarkImplementation.
+  ?benchmarkImplementation orkg:hasCode ?benchmarkImplementationCode.
+  FILTER (CONTAINS(LCASE(?benchmarkImplementationCode), "concept mention extraction"))
+}
+```

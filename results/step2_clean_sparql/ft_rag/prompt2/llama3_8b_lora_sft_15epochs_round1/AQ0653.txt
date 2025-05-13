@@ -1,0 +1,13 @@
+```
+SELECT DISTINCT ?paper ?paper_lbl
+WHERE {
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?ont.
+  ?ont rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "SciCite")
+  ?paper orkgp:P31 ?cont.
+  ?cont rdfs:label ?paper_lbl.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+}
+ORDER BY ?paper_lbl
+```

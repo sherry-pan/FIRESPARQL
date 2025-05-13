@@ -1,0 +1,12 @@
+```sparql
+SELECT ?titles ?number
+WHERE {
+  orkgr:R155621 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  FILTER(REGEX(?benchmark, "Amazon-2"))
+  ?paper orkgp:CSVW_Titles ?titles.
+  ?paper orkgp:P2009 ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:integer(?value) AS ?number)
+}
+```

@@ -1,0 +1,36 @@
+Question:
+Provide a list of papers that have utilized the Large mLSTM model and include the links to their code?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?paper?paperTitle?codeLink
+WHERE {
+ ?paper a orkg:Paper.
+ ?paper orkg:HAS_METHOD?method.
+ ?method rdfs:label?methodName.
+  FILTER (?methodName = "Large mLSTM").
+ ?paper orkg:HAS_IMPLEMENTATION?implementation.
+ ?implementation rdfs:label?implementationLabel.
+  FILTER (strstarts(?implementationLabel, "https://") || strstarts(?implementationLabel, "git@github.com")).
+ ?paper orkg:HAS_EVALUATION?evaluation.
+ ?evaluation rdfs:label?evaluationLabel.
+  FILTER (strstarts(?evaluationLabel, "https://") || strstarts(?evaluationLabel, "git@github.com")).
+ ?paper orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label?datasetLabel.
+  FILTER (strstarts(?datasetLabel, "https://") || strstarts(?datasetLabel, "git@github.com")).
+ ?paper orkg:HAS_APPROACH?approach.
+ ?approach rdfs:label?approachLabel.
+  FILTER (strstarts(?approachLabel, "https://") || strstarts(?approachLabel, "git@github.com")).
+ ?paper orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark rdfs:label?benchmarkLabel.
+  FILTER (strstarts(?benchmarkLabel, "https://") || strstarts(?benchmarkLabel, "git@github.com")).
+ ?paper orkg:HAS_CODE?code.
+ ?code rdfs:label?codeLabel.
+  FILTER (strstarts(?codeLabel, "https://") || strstarts(?codeLabel, "git@github.com")).
+ ?paper orkg:TITLE?paperTitle.
+ ?code orkg:TITLE?codeLabel.
+  FILTER (?paperTitle!= "" &&?codeLabel!= "").
+  BIND (concat("https://",?paperTitle, "#",?codeLabel) AS?codeLink).
+}<|eot_id|>

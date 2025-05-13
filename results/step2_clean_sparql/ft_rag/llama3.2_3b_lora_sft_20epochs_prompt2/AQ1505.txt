@@ -1,0 +1,20 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Supervised")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+        orkgp:HAS_EVALUATION ?eval;
+        orkgp:HAS_METHOD ?method.
+  BIND(xsd:float(?eval) AS ?eval_value)
+  ?method orkgp:HAS_COMPARED_WITH ?compare;
+          orkgp:HAS_MODEL ?model.
+  ?compare orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_value)
+  FILTER(?value_value = 0.95454)
+  BIND(?method AS ?model_lbl)
+}
+```

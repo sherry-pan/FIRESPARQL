@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://www.scholarge.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?metric ?score
+WHERE {
+ ?evaluation a orkg:Evaluation ;
+             orkg:hasMetric ?metric ;
+             orkg:hasScore ?score.
+ ?evaluation orkg:evaluates ?dataset.
+ ?dataset orkg:name "Natural Questions (long)".
+ FILTER (?metric = xsd:string("Accuracy") || ?metric = xsd:string("Recall") || ?metric = xsd:string("F1"))
+ FILTER (?score > 0)
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

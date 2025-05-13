@@ -1,0 +1,14 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the MLDoc Zero-Shot English-to-Russian dataset?
+
+Generated SPARQL:
+ SELECT?title?number
+     WHERE {
+       orkgr:R155230 (http://orkg.org/orkg/predicate/HAS_DATASET)?dataset.
+      ?dataset orkgr:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgr:HAS_EVALUATION?eval.
+       FILTER(REGEX(?eval, "MLDoc Zero-Shot English-to-Russian"))
+      ?benchmark orkgr:HAS_BENCHMARKED_BY?cont.
+      ?cont orkgr:HAS TitlE?title.
+      ?cont orkgr:HAS_NUMBER?number
+     }<|eot_id|>

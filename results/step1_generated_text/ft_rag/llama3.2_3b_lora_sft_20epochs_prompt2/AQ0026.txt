@@ -1,0 +1,16 @@
+Question:
+Can you list the models that have been evaluated on the SciTLDR dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P32?eval.
+      ?eval orkgp:HAS_DATASET?dataset.
+       FILTER(REGEX(?dataset, "SciTLDR"))
+      ?eval orkgp:HAS_EVALUATION?evalu
+      ?eval orkgp:HAS_METHOD?method.
+      ?method rdfs:label?method_lbl
+      ?eval orkgp:HAS_MODEL?model.
+      ?model rdfs:label?model_lbl
+     }<|eot_id|>

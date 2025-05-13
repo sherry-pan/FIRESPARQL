@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark score and its metric on the WOS-46985 dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX wos: <http://www.wikidata.org/entity/Q>
+
+SELECT?benchmark?metric
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:HAS_DATASET wos:Q46985.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?evaluation orkg:HAS_BENCHMARK?benchmark.
+  FILTER (?benchmark orkg:HAS_BENCHMARK = true).
+  ORDER BY DESC(?metric)
+  LIMIT 1
+}<|eot_id|>

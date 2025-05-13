@@ -1,0 +1,15 @@
+```sparql
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT ?score ?metric WHERE {
+  dbr:Alien_(Atari_2600) dbo:abstract ?abstract;
+                         dbo:benchmark ?benchmark .
+  ?benchmark dct:hasPart ?part .
+  ?part dbo:score ?score ;
+        dcterms:metric ?metric .
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

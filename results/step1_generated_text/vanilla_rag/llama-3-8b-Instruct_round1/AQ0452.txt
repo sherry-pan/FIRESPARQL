@@ -1,0 +1,16 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the PubMedQA dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT?title?id
+WHERE {
+ ?paper a orkg:ResearchPaper.
+ ?paper csvw:Titles?title.
+ ?paper orkg:HasBenchmark?hasBenchmark.
+ ?hasBenchmark a orkg:Benchmark.
+ ?paper orkg:Number?id.
+  FILTER(?hasBenchmark orkg:includesPubMedQABenchmark)
+}<|eot_id|>

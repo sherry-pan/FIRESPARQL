@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+ ?dataset a orkg:Dataset ; 
+          orkg:has_benchmark ?benchmark.
+ ?benchmark orkg:evaluation ?evaluation.
+ ?evaluation orkg:metric ?metric ; 
+             orkg:score ?score.
+  FILTER(?dataset = orkg:DMControl100k && ?metric = "highest")
+}
+ORDER BY DESC(?score) 
+LIMIT 1
+```

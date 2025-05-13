@@ -1,0 +1,16 @@
+Question:
+What models are being evaluated on the Atari 2600 Chopper Command dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Atari 2600 Chopper Command")
+      ?evaluation     orkgp:HAS_DATASET      ?dataset.
+      ?evaluation     orkgp:HAS_EVALUATION   ?benchmark.
+      ?benchmark      orkgp:HAS_VALUE        ?value.
+      ?cont          orkgp:HAS_EVALUATION   ?evaluation.
+      ?cont          orkgp:HAS_METHOD        ?model.
+      ?model         rdfs:label              ?model_lbl.
+     }<|eot_id|>

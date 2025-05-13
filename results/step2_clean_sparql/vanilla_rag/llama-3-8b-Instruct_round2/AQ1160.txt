@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?value
+WHERE {
+    ?benchmark a orkg:Benchmark ;
+               orkg:HAS_BENCHMARK ?evaluation ;
+               orkg:HAS_DATASET <http://orkg.org/dataset/RotoWire>.
+    ?evaluation orkg:HAS_EVALUATION ?result.
+    ?result rdfs:label ?metric ;
+            orkg:HAS_VALUE ?value.
+}
+```

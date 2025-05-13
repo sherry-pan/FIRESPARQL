@@ -1,0 +1,29 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the BIOSSES dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "BIOSSES")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_EVALUATION    ?assessment.
+      ?assessment   orkgp:HAS_VALUE         ?value.
+      ?paper        orkgp:P31               ?cont;
+                     orkgp:P29              ?author.
+      ?paper       orkgp:P31               ?cont2;
+                    orkgp:P29              ?author2.
+       OPTIONAL {?paper       orkgp:HAS_BENCHMARK     ?benchmark2.
+               ?benchmark2     orkgp:HAS_DATASET      ?dataset2.
+               ?dataset2      rdfs:label              ?dataset2_lbl.}
+      ?paper       orkgp:P31               ?cont;
+                    orkgp:P29              ?author.
+      ?paper       orkgp:P29              ?author.
+      ?paper       orkgp:P31               ?cont;
+                    orkgp:P29              ?author.
+      ?paper       orkgp:P29              ?author.
+      ?paper       orkgp:HAS_ID            ?paper_id.
+      ?paper       orkgp:P70327            ?paper_lbl.
+     }<|eot_id|>

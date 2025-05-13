@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?dataset ?datasetLabel
+WHERE {
+  ?dataset a orkg:Dataset.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?datasetLabel.
+  FILTER(?datasetLabel != "null")
+}
+GROUP BY ?dataset ?datasetLabel
+ORDER BY DESC(COUNT(?benchmark))
+```

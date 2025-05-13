@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Score score on the Reacher, easy (DMControl500k) benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?model?score
+WHERE {
+ ?model orkg:hasBenchmark <http://orkg.org/orkg/benchmark/DMControl500k>.
+ ?model orkg:evaluation?evaluation.
+ ?evaluation orkg:value?score.
+  FILTER (?score IS DATATYPE(XSD:float) &&?score > 0).
+  FILTER (?model orkg:method?method).
+  FILTER (?method!= "").
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

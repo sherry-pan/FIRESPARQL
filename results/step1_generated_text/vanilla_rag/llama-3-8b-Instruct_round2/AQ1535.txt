@@ -1,0 +1,16 @@
+Question:
+Which model has achieved the highest Test perplexity score on the WikiText-2 benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?model?testPerplexity
+WHERE {
+ ?model orkg:HAS_METHOD?method.
+ ?model orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_METRIC?metric.
+ ?evaluation orkg:HAS_VALUE?testPerplexity.
+ ?evaluation orkg:HAS_DATASET orkg:WikiText-2.
+  FILTER (?metric = "test perplexity").
+  FILTER (?testPerplexity = max(?testPerplexity) )
+}<|eot_id|>

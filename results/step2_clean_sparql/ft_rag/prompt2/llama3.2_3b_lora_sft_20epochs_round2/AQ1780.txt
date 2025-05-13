@@ -1,0 +1,18 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgp:P43179 ?eval.
+  ?eval orkgp:P43180 ?metric;
+        orkgp:P43181 ?cont.
+  ?metric rdfs:label "Top-1 Error Rate".
+  ?cont orkgp:P43183 ?perf.
+  ?perf rdfs:label ?perf_lbl.
+  FILTER(REGEX(?perf_lbl, "^\d+\.\d+$"))
+  ?eval orkgp:P43186 ?rank.
+  FILTER(REGEX(STR(?model), "Oxford-IIIT Pets"))
+}
+ORDER BY DESC(?rank)
+LIMIT 1
+```

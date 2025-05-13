@@ -1,0 +1,15 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6898 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31079 ?eval.
+  ?eval orkgp:P71075 ?cont.
+  ?cont orkgp:P97104 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "MultiNLI"))
+}
+GROUP BY ?metric ?metric_lbl
+ORDER BY DESC(?score)
+LIMIT 1
+```

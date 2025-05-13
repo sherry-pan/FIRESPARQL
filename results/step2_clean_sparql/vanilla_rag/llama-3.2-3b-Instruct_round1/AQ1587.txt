@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/> 
+SELECT ?model ?microF1 ?macroF1 
+WHERE { 
+    ?model orkg:hasTrainingSet ?trainSet. 
+    ?trainSet orkg:hasEvaluation ?evaluation. 
+    ?evaluation orkg:hasMethod ?method. 
+    ?method orkg:hasProperty ?microF1. 
+    ?microF1 orkg:label "micro-F1". 
+    ?model orkg:hasProperty ?macroF1. 
+    ?macroF1 orkg:label "macro-F1". 
+    FILTER (str(?microF1) = "PubMed 20k RCT" && str(?macroF1) = "PubMed 20k RCT") 
+}
+```

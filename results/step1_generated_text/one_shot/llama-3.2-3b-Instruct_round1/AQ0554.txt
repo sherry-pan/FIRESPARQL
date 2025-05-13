@@ -1,0 +1,17 @@
+Question:
+What are the titles and IDs of research papers that include a benchmark for the Oxford-IIIT Pets dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?paper?paper_id?paper_lbl?benchmark?benchmark_id?benchmark_lbl
+    WHERE {
+     ?dataset       a                orkgc:Dataset;
+                    rdfs:label      ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Oxford-IIIT Pets")
+     ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                    orkgp:HAS_EVALUATION   ?eval.
+     ?paper         orkgp:HAS_BENCHMARK     ?benchmark.
+     ?paper orkgp:HAS_MODEL         ?model.
+     ?model      rdfs:label              ?model_lbl.
+     ?paper orkgp:has_id      ?paper_id.
+     ?benchmark orkgp:has_id      ?benchmark_id.
+    }<|eot_id|>

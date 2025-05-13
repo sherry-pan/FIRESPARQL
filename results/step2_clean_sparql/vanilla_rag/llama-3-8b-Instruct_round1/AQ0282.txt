@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model
+WHERE {
+  ?model orkg:has_dataset <http://orkg.org/dataset/Atari_2600_Space_Invaders>.
+  ?model orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation rdfs:label ?evaluationLabel.
+  FILTER (STRSTARTS(?evaluationLabel, "Atari 2600 Space Invaders"))
+}
+```

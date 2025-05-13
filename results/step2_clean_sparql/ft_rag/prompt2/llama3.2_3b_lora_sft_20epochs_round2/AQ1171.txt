@@ -1,0 +1,17 @@
+```sparql
+SELECT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R6908 orkgp:evaluate {
+    orkgp:P71079 ?value.
+    BIND(xsd:float(?value) AS ?value)
+  }
+  FILTER(?value > 0)
+  ?metric {
+    rdfs:label ?metric_lbl.
+  }
+  ?eval orkgp:P71075 ?cont.
+  ?cont orkgp:P97104 ?quant_methods.
+  ?eval orkgp:P97135 ?matching_strategy.
+}
+ORDER BY DESC(?value)
+```

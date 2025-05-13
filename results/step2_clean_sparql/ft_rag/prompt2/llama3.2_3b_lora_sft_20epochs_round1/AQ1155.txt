@@ -1,0 +1,14 @@
+```sparql
+SELECT ?metric ?score
+WHERE {
+  orkgr:R6908 orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?cont.
+  ?cont orkgp:P71075 ?result.
+  ?result orkgp:P71080 ?score.
+  ?eval orkgp:P97152 ?metric.
+  FILTER(REGEX(?metric, "Natural Questions \\(long\\)"))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

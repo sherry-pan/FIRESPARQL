@@ -1,0 +1,18 @@
+Question:
+List the datasets benchmarked under the Common Sense Reasoning research problem?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                  rdfs:label      ?problem_lbl.
+       FILTER (str(?problem_lbl) = "Common Sense Reasoning")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?dataset       orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_BENCHMARK     ?benchmark.
+      ?benchmark      orkgp:HAS_METHOD        ?method.
+      ?method         orkgp:HAS_APPROACH      ?approach.
+      ?approach       orkgp:HAS_IMPLEMENTATION ?impl;
+                      orkgp:HAS_DATASET        ?dataset.
+      ?impl           rdfs:label              ?dataset_lbl.
+     }<|eot_id|>

@@ -1,0 +1,29 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Natural Questions (long) dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?score
+     WHERE {
+       orkgr:R6908 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:P71075?benchmark.
+      ?benchmark orkgp:P97152?metric.
+       FILTER(REGEX(?metric, "Accuracy"^^xsd:string))
+      ?eval orkgp:P71080?score.
+      ?dataset orkgp:HAS_TRAINING_SET?training.
+      ?training orkgp:P71081?accuracy.
+      ?accuracy a orkgp:Value;
+                 rdfs:label?accuracy_lbl.
+       FILTER(?accuracy_lbl = "Accuracy"^^xsd:string)
+      ?dataset orkgp:HAS_VALIDATION_SET?validation.
+      ?validation orkgp:P71096?validation_accuracy.
+      ?validation_accuracy a orkgp:Value;
+                           rdfs:label?validation_lbl.
+       FILTER(?validation_lbl = "Accuracy"^^xsd:string)
+      ?dataset orkgp:P71066?dataset_type.
+       FILTER(?dataset_type = "Natural Questions (long)"^^xsd:string)
+      ?benchmark orkgp:P71079?recall.
+      ?recall a orkgp:Value;
+                 rdfs:label?recall_lbl.
+       FILTER(?recall_lbl = "Accuracy"^^xsd:string)
+     }<|eot_id|>

@@ -1,0 +1,13 @@
+Question:
+Can you list the metrics used to evaluate models on the Atari 2600 Zaxxon dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric
+     WHERE {
+    ?metric orkg:hasEvaluation?evaluation.
+     FILTER (bn:dataset "Atari 2600 Zaxxon" && orkg:hasClassificationSystem?classificationSystem).
+    ?metric orkg:hasLabel?label.
+     FILTER (STR(?label) = "Recall" || STR(?label) = "Accuracy" || STR(?label) = "micro-F1" || STR(?label) = "macro-F1")
+     }
+    <|eot_id|>

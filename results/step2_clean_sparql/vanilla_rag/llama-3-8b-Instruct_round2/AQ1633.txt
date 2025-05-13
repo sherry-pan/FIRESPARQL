@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?model ?score
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasValue ?score.
+  FILTER (?benchmark orkg:hasName "DMControl500k" && ?evaluation orkg:hasMetric "Score").
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

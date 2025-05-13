@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric
+WHERE {
+    ?metric orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:label ?metric.
+    FILTER (STRLIKE(STR(?metric), "DRI Corpus") || STRLIKE(STR(?metric), "F1 score") || 
+            STRLIKE(STR(?metric), "accuracy") || STRLIKE(STR(?metric), "precision") || 
+            STRLIKE(STR(?metric), "recall") || STRLIKE(STR(?metric), "ROC-AUC"))
+}
+```

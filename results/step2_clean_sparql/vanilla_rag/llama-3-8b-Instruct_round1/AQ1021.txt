@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX pwc: <http://pwc.org/>
+
+SELECT ?evaluation ?recall ?microF1 ?macroF1 ?accuracy ?numType ?avgEntity
+WHERE {
+ ?dataset a orkg:Dataset ;
+           orkg:hasBenchmark ?benchmark ;
+           orkg:hasEvaluation ?evaluation.
+
+ ?evaluation orkg:hasMetric ?metric.
+ ?metric orkg:hasValue ?value.
+ FILTER (?benchmark = "PWC Leaderboards (restricted)").
+
+ ?evaluation orkg:hasMetric orkg:P71079 ?recall.
+ ?evaluation orkg:hasMetric orkg:P71080 ?microF1.
+ ?evaluation orkg:hasMetric orkg:P71082 ?macroF1.
+ ?evaluation orkg:hasMetric orkg:P71081 ?accuracy.
+ ?dataset orkg:hasProperty orkg:P71066 ?numType.
+ ?dataset orkg:hasProperty orkg:P71089 ?avgEntity.
+}
+```

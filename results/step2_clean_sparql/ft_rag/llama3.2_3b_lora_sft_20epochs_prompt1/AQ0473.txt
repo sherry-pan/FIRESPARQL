@@ -1,0 +1,19 @@
+```sparql
+SELECT ?paper ?paper_lbl ?paper_id
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Rotowire (Content Selection)".
+           
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  
+  ?paper orkgp:HAS_EVALUATION ?eval;
+         orkgp:HAS_METHOD ?method;
+         rdfs:label ?paper_lbl.
+
+  OPTIONAL {
+    ?paper orkgp:HAS_ID ?paper_id.
+  }
+}
+```

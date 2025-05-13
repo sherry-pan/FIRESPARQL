@@ -1,0 +1,18 @@
+```sparql
+SELECT ?title ?number
+WHERE {
+  ?paper rdfs:label ?title.
+  ?paper orkgp:HAS_BENCHMARK ?benchmarkResource.
+  ?benchmarkResource rdfs:label ?benchmark.
+  FILTER(REGEX(?benchmark, "WSC"))
+  
+  ?paper orkgp:HAS_DATASET ?datasetResource.
+  ?datasetResource rdfs:label ?dataset.
+  FILTER(REGEX(?dataset, "WSC"))
+  
+  ?paper orkgp:HAS_VALUE ?valueResource.
+  ?valueResource orkgp:P7049 ?cont.
+  BIND(xsd:integer(?cont) AS ?number)
+}
+ORDER BY ASC(?number)
+```

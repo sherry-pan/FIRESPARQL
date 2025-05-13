@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+SELECT ?model ?method ?f1Score
+WHERE {
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "200k Short Texts for Humor Detection".
+  ?benchmark orkg:evaluation orkg:F1Score ?f1Score.
+  ?model orkg:method ?method.
+}
+ORDER BY DESC(?f1Score)
+LIMIT 1
+```

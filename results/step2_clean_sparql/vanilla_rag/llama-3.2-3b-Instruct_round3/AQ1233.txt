@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?metricValue
+WHERE {
+    ?benchmark orkg:hasBenchmark ?method.
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:metric ?metric.
+    ?benchmark orkg:hasMetricValue ?metricValue.
+    FILTER(?metric = "Walker, walk (DMControl500k)")
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "WMT2016 English-Russian")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  OPTIONAL {
+    ?benchmark orkgp:HAS_EVALUATION ?eval.
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?benchmark orkgp:HAS_VALUE ?value.
+}
+ORDER BY DESC(?score)
+```

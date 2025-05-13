@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkgc: <http://schema.orkg.org/click/click#>
+PREFIX orkgp: <http://schema.orkg.org/predicate/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?emergencyType ?emergencyType_lbl
+WHERE {
+  ?alert a orkgc:Alert;
+         rdfs:label ?alert_lbl.
+  FILTER (str(?alert_lbl) = "AMBER Alert")
+  ?alert orkgp:HAS_EMERGENCY_TYPE ?emergencyType.
+  OPTIONAL {?emergencyType rdfs:label ?emergencyType_lbl.}
+}
+```

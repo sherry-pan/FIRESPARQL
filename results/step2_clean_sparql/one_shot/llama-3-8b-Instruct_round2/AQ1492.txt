@@ -1,0 +1,22 @@
+```sparql
+SELECT ?model
+WHERE {
+  ?evaluation a :Evaluation ;
+    :onDataset :RotoWire_Relation_Generation ;
+    :hasMetric :Precision ;
+    :metricValue ?value ;
+    :evaluatedModel ?model .
+  
+  {
+    SELECT (MAX(?value) AS ?maxValue)
+    WHERE {
+      ?evaluation a :Evaluation ;
+        :onDataset :RotoWire_Relation_Generation ;
+        :hasMetric :Precision ;
+        :metricValue ?value .
+    }
+  }
+  
+  FILTER(?value = ?maxValue)
+}
+```

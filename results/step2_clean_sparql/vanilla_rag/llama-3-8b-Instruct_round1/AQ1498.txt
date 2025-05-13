@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71081: <http://orkg.org/orkg/predicate/P71081>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_DATASET <http://orkg.org/orkg/resource/PIQA>.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark p71081:Accuracy ?accuracy.
+  FILTER NOT EXISTS {
+    ?model orkg:HAS_EVALUATION ?evaluation2.
+    ?evaluation2 orkg:HAS_BENCHMARK ?benchmark2.
+    ?benchmark2 p71081:Accuracy ?accuracy2.
+    FILTER (?accuracy2 > ?accuracy)
+  }
+}
+LIMIT 1
+```

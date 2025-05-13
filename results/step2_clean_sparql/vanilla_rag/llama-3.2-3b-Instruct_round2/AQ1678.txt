@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?model
+WHERE {
+    ?model orkg:HAS_METHOD ?method.
+    ?model orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_DATASET ?dataset.
+    ?evaluation orkg:CSVW_Value ?accuracy.
+    FILTER(?accuracy > 0)
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

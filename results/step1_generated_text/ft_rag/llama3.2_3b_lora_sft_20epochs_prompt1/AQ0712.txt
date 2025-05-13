@@ -1,0 +1,33 @@
+Question:
+List the metrics that are used to evaluate models on the SciTLDR benchmark dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl
+     WHERE {
+       orkgr:R70642 orkgp:evaluate {
+        ?metric orkgp:P71079?recall.
+        ?metric orkgp:P71080?micro_F1.
+        ?metric orkgp:P71081?accuracy.
+        ?metric orkgp:P71082?macro_F1.
+        ?metric orkgp:P71075?eval.
+         FILTER(REGEX(?eval, "SciTLDR"))
+         FILTER(?eval = "pass")
+         FILTER(?macro_F1 =?accuracy)
+         FILTER(?micro_F1 =?recall)
+       }
+       UNION
+       orkgr:R70642 orkgp:evaluate {
+        ?metric orkgp:P71079?recall.
+        ?metric orkgp:P71080?micro_F1.
+        ?metric orkgp:P71081?accuracy.
+        ?metric orkgp:P71082?macro_F1.
+        ?metric orkgp:P71075?eval.
+         FILTER(REGEX(?eval, "SciTLDR"))
+         FILTER(?eval = "fail")
+         FILTER(?macro_F1 =?accuracy)
+         FILTER(?micro_F1 =?recall)
+       }
+     }
+     GROUP BY?metric
+     ORDER BY DESC(COUNT(?metric))
+     LIMIT 1<|eot_id|>

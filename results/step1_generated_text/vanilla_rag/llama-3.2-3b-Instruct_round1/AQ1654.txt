@@ -1,0 +1,18 @@
+Question:
+Indicate the model that performed best in terms of PARAMS metric on the FGVC Aircraft benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX fgvc: <http://orkg.org/orkg/predicate/fgvc/>
+     PREFIX param: <http://orkg.org/orkg/predicate/param/>
+
+     SELECT?model?param
+     WHERE {
+      ?model a orkg:Model.
+      ?model fgvc:has_dataset?dataset.
+      ?dataset orkg:has_benchmark "FGVC Aircraft benchmark".
+      ?model param:has_param?param.
+      ?param orkg:has_evaluation?evaluation.
+      ?evaluation param:PARAMS.
+       FILTER (?evaluation > 0)
+     }<|eot_id|>

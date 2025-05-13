@@ -1,0 +1,27 @@
+Question:
+Provide a list of papers that have utilized the HRLRE model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+     WHERE {
+      ?paper orkgp:P31 [
+         rdfs:label?title
+       ];
+        orkgp:P32 [
+          orkgp:P34 {
+            orkgp:P4007?implementation.
+            orkgp:P4008?code.
+          }
+        ];
+        orkgp:P4009 [
+          orkgp:P27?method.
+          FILTER(REGEX(?method, "HRLRE"))
+        ];
+        orkgp:P28 [
+          orkgp:P43131?evaluation.
+          orkgp:P43132?dataset.
+          orkgp:P43133?benchmark.
+        ]
+      }
+      FILTER(REGEX(?title, "HRLRE"))
+   <|eot_id|>

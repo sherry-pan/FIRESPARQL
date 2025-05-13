@@ -1,0 +1,20 @@
+Question:
+Provide a list of papers that have utilized the CL-Titles-Parser model and include the links to their code?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+       orkgr:R8364 orkgp:HAS_METHOD?method.
+       FILTER(REGEX(?method, "CL-Titles-Parser"))
+      ?method orkgp:P7002?implementation.
+       OPTIONAL {
+        ?implementation orkgp:P7043?code.
+       }
+      ?implementation orkgp:P7042?dataset.
+       OPTIONAL {
+        ?dataset orkgp:HAS_EVALUATION?eval.
+         FILTER(REGEX(?eval, "eval32"))
+       }
+      ?implementation orkgp:P7009?approach.
+       FILTER(REGEX(?approach, "CL-Titles-Parser"))
+     }<|eot_id|>

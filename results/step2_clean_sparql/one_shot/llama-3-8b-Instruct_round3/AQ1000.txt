@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkgc: <http://semantic-scholar.org/codelists/dataset/>
+PREFIX orkgp: <http://semantic-scholar.org/codelists/property/>
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "VTAB-1k")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_METRIC ?metric.
+  ?metric rdfs:label ?metric_lbl.
+}
+```

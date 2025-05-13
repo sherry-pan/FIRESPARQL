@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+ ?benchmark a orkgp:Benchmark;
+            rdfs:label ?benchmark_lbl.
+ FILTER (str(?benchmark_lbl) = "Quasart-T")
+ ?evaluation orkgp:HAS_BENCHMARK ?benchmark;
+             orkgp:HAS_METRIC ?metric.
+ OPTIONAL {
+   ?evaluation rdfs:label ?evaluation_lbl.
+   ?metric rdfs:label ?metric_lbl.
+ }
+}
+```

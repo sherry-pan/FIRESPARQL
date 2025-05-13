@@ -1,0 +1,18 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "Reacher, easy (DMControl100k)".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_BENCHMARK ?benchmark.
+  ?evaluation orkgp:HAS_EVALUATION ?evaluation.
+  ?metric orkgp:EVALUATION_METRIC ?metric.
+  OPTIONAL { ?evaluation orkgp:P31 ?classification. }
+  ?model orkgp:HAS_METHOD ?method;
+         orkgp:HAS_EVALUATION ?evaluation;
+         rdfs:label ?model_lbl.
+  OPTIONAL { ?classification rdfs:label ?classification_lbl. }
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

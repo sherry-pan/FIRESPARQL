@@ -1,0 +1,17 @@
+Question:
+What are the most commonly used benchmark datasets for the Text Summarization research field?
+
+Generated SPARQL:
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT?dataset
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:has_benchmark?benchmark.
+ ?benchmark orkg:has_evaluation?evaluation.
+ ?evaluation orkg:has_dataset?dataset.
+  FILTER (?benchmark rdfs:label?label.
+           STRSTARTS(STR(?label), "Text Summarization")
+           )
+}<|eot_id|>

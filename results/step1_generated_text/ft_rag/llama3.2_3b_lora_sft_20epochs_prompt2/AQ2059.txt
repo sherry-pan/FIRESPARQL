@@ -1,0 +1,15 @@
+Question:
+List the code links in papers that use the DrQA model in any benchmark?
+
+Generated SPARQL:
+ SELECT?code
+     WHERE {
+      ?model    a            orkgc:Model;
+                rdfs:label      ?model_lbl.
+       FILTER (str(?model_lbl) = "DrQA")
+      ?benchmark      orkgp:HAS_BENCHMARK      ?cont;
+                      orkgp:HAS_DATASET        ?dataset.
+      ?cont         orkgp:HAS_EVALUATION     ?eval;
+                     orkgp:HAS_IMPLEMENTATION ?implementation.
+      ?implementation orkgp:HAS_CODE          ?code.
+     }<|eot_id|>

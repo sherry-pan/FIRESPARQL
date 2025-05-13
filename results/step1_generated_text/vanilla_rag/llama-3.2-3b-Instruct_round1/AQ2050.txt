@@ -1,0 +1,22 @@
+Question:
+Provide a list of papers that have utilized the MMV TSM-50x2 model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?paper?code
+     WHERE {
+    ?paper orkg:HAS_METHOD orkg:MMV_TSM_50x2.
+    ?paper orkg:HAS_IMPLEMENTATION?implementation.
+    ?implementation a orkg:Code.
+    ?paper rdfs:label?paperLabel.
+     SERVICE orkg:sparql
+     { 
+     SELECT?paper?paperLabel?code
+     WHERE {
+    ?paper orkg:HAS_METHOD orkg:MMV_TSM_50x2.
+    ?paper orkg:HAS_IMPLEMENTATION?implementation.
+    ?implementation orkg:code?code.
+    ?paper rdfs:label?paperLabel.
+     FILTER(lang(?paperLabel) = "en")
+     }
+     }<|eot_id|>

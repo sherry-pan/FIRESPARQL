@@ -1,0 +1,23 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Gibson PointGoal Navigation dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "Gibson PointGoal Navigation")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+      ?eval           orkgp:HAS_METRIC        ?metric;
+                       orkgp:HAS_SCORE         ?score.
+       OPTIONAL {?score  orkgp:HAS_VALUE        ?value.
+               ?value   orkgp:HAS_UNIT          ?unit.}
+      ?cont        orkgp:HAS_BENCHMARK     ?benchmark;
+                    orkgp:HAS_METHOD         ?method.
+      ?method      rdfs:label              ?method_lbl.
+       OPTIONAL {?method      orkgp:HAS_SOURCE_CODE   ?source_code.
+                ?source_code orkgp:P31?cont.}
+      ?metric      rdfs:label              ?metric_lbl.
+     }
+     ORDER BY DESC(?score)<|eot_id|>

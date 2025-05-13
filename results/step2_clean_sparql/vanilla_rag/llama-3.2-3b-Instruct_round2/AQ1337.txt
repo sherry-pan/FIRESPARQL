@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?score
+WHERE {
+  ?paper orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:CSVW_Name ?metric.
+  ?evaluation orkg:CSVW_Value ?score.
+  FILTER (CONTAINS(str(?metric), 'Paper Field'))
+}
+ORDER BY DESC(?score)
+```

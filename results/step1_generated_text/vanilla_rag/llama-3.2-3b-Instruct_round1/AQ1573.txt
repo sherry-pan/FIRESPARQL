@@ -1,0 +1,20 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the ShARe/CLEF eHealth corpus benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+     SELECT?model (COUNT(?f1) AS?f1_count) 
+     WHERE {
+     {
+    ?model orkg:hasEvaluation?e.
+    ?e orkg:hasTrainingSet?trainSet.
+    ?trainSet orkg:hasDataset?dataset.
+    ?dataset skos:prefLabel?name.
+     FILTER (STR(?name) = "ShARe/CLEF eHealth corpus").
+    ?model orkg:method?m.
+    ?m orkg:hasEvaluation?em.
+    ?em orkg:microF1?f1.
+     }
+     GROUP BY?model
+     HAVING COUNT(?f1) > 0<|eot_id|>

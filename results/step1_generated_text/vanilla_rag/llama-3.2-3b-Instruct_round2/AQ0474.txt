@@ -1,0 +1,15 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the RotoWire (Relation Generation) dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearch.org/ontology/orkg#>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset "RotoWire".
+    ?benchmark orkg:evaluation?evaluation.
+    ?evaluation orkg:title?evaluationTitle.
+    ?paper orkg:title?title.
+    ?paper orkg:id?id.
+     FILTER (strstarts-with(?evaluationTitle, "RotoWireBenchmark"))
+     }<|eot_id|>

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METHOD ?method.
+  ?method rdfs:label ?methodLabel.
+  FILTER (?methodLabel = "BiDAF + Self Attention + ELMo" || ?methodLabel = "BiDAF+Self Attention+ELMo").
+  ?paper orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_CODE ?code.
+  FILTER (?code != "").
+}
+```

@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?method ?f1score
+WHERE {
+  ?model orkg:has_dataset <http://orkg.org/orkg/resource/Natural_Questions_long>.
+  ?model orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:micro-F1 ?f1score.
+  FILTER (?f1score = ?maxF1score)
+  ?model orkg:method ?method.
+  {
+    SELECT (MAX(?f1score2) as ?maxF1score)
+    WHERE {
+      ?model orkg:has_benchmark ?benchmark2.
+      ?benchmark2 orkg:evaluation ?evaluation2.
+      ?evaluation2 orkg:micro-F1 ?f1score2.
+    }
+  }
+}
+```

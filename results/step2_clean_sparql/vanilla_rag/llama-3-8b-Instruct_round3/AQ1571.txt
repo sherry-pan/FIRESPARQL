@@ -1,0 +1,24 @@
+PREFIX orkg: <http://rdf.orkg.org/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:has_metric ?metric.
+  ?metric schema:name "micro-F1".
+  ?evaluation orkg:has_result ?result.
+  ?result schema:value ?score.
+  FILTER (?score = 
+    SELECT max(?score2) {
+      ?model orkg:has_benchmark ?bm.
+      ?bm orkg:evaluation ?ev.
+      ?ev orkg:has_metric ?mtr.
+      ?mtr schema:name "micro-F1".
+      ?ev orkg:has_result ?res.
+      ?res schema:value ?score2.
+    }
+  ).
+  ?model schema:name ?modelLabel.
+}

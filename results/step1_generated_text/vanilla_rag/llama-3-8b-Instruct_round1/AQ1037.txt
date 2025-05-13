@@ -1,0 +1,21 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?metric?score
+WHERE {
+ ?dataset a orkg:Dataset.
+ ?dataset orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric.
+ ?evaluation orkg:hasScore?score.
+ ?dataset orkg:hasTrainingSet <http://orkg.org/orkg/object/O000001>.
+ ?dataset orkg:hasValidationSet <http://orkg.org/orkg/object/O000001>.
+  FILTER(?metric =?bestMetric)
+  ORDER BY DESC(?score)
+  LIMIT 1
+}
+GROUP BY?metric
+HAVING (COUNT(DISTINCT?score) = 1)
+```<|eot_id|>

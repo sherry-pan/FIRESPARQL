@@ -1,0 +1,17 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?contrib.
+  ?contrib orkgp:P34 ?code.
+  ?code rdfs:label ?code_lbl.
+  FILTER(REGEX(STR(?code_lbl), "MMV"))
+  ?contrib orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P5005 ?eval.
+  ?eval orkgp:P31 ?eval_method.
+  ?eval_method orkgp:P5047 ?implementation.
+  ?implementation orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P31 ?cont.
+  ?cont orkgp:HAS_EVALUATION ?eval2.
+  FILTER(?eval2 = ?eval)
+}
+```

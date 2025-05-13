@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "PubMed 20k RCT" || str(?dataset_lbl) = "PubMed 20k RCT (Test)")
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  
+  ?eval orkgp:P71082 ?macro_f1.
+  ?macro_f1 rdfs:label ?macro_f1_lbl.
+  
+  ?benchmark orkgp:P71042 ?method.
+  ?method rdfs:label ?method_lbl.
+  
+  FILTER(?macro_f1_lbl = "0.908")
+  
+  ?model orkgp:HAS_METHOD ?method;
+         rdfs:label ?model_lbl.
+}
+```

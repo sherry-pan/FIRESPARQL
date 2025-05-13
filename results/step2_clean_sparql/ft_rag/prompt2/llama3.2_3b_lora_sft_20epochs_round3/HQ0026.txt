@@ -1,0 +1,17 @@
+```sparql
+SELECT ?benchmark ?benchmark_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "Q*"))
+  
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?value orkgp:HAS_NUMBER ?number.
+  ?number orkgp:HAS_VALUE ?val.
+  FILTER(xsd:integer(?val) > 10000)
+  
+  ?benchmark rdfs:label ?benchmark_lbl.
+}
+```

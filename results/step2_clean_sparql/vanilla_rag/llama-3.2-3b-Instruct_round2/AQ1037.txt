@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?benchmarkResult ?metric ?score
+WHERE {
+    ?benchmarkResult orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasTrainingSet ?trainingSet.
+    ?trainingSet orkg:hasValidationSet ?validationSet.
+    ?benchmarkResult orkg:hasMetric ?metric.
+    ?benchmarkResult orkg:hasScore ?score.
+    FILTER (STR(?metric) = "benchmark" && STR(?score) = "result")
+}
+```

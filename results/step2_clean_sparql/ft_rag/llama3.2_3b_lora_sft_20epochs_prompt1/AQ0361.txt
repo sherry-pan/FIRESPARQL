@@ -1,0 +1,15 @@
+```sparql
+SELECT ?paper ?paper_title
+WHERE {
+  ?paper a orkgr:Paper;
+         rdfs:label ?paper_title;
+         orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "SciERC"))
+  ?paper orkgp:P5043 ?benchmark.
+  ?benchmark orkgp:P5042 ?eval.
+  ?eval orkgp:P5041 ?has_benchmark.
+  FILTER(?has_benchmark = "T"^^xsd:string)
+}
+```

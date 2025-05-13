@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_dataset "WMT2014 German-English".
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_metric "BLEU".
+    ?evaluation orkg:has_score ?score.
+    FILTER (isNumeric(?score))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

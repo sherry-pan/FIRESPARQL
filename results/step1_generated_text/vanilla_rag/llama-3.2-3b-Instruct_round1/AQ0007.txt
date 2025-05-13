@@ -1,0 +1,14 @@
+Question:
+What models are being evaluated on the ACL Anthology dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearch.org/ontology#>
+     SELECT?model
+     WHERE {
+        ?model orkg:evaluation?evaluation.
+        ?evaluation orkg:hasDataset "ACL Anthology Dataset".
+        ?model orkg:method?method.
+        ?method orkg:approach?approach.
+        ?approach orkg:implementation?implementation.
+         FILTER (strContains(?method, "ACL") OR strContains(?approach, "ACL"))
+     }<|eot_id|>

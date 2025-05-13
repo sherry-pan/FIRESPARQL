@@ -1,0 +1,16 @@
+Question:
+Which model has achieved the highest Score score on the Ball in cup, catch (DMControl100k) benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT?model (COUNT(?score) AS?score) 
+WHERE {
+ ?model orkg:hasBenchmark?benchmark.
+ ?benchmark orkg:hasDataset "DMControl100k".
+ ?benchmark orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:value?score.
+  FILTER(?score IS NUMERIC)
+  ORDER BY DESC(?score)
+  LIMIT 1
+}<|eot_id|>

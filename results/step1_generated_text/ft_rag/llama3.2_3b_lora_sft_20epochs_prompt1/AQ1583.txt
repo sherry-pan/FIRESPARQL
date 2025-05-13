@@ -1,0 +1,25 @@
+Question:
+Which model has achieved the highest Accuracy score on the Yelp-5 benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "Yelp-5")
+               &&?dataset       a                orkgc:Dataset)
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                      orkgp:P9029         ?eval.
+      ?eval         orkgp:HAS_VALUE        ?value;
+                      orkgp:HAS_PROPERTY   ?prop.
+       OPTIONAL {
+        ?prop      orkgp:P71081        ?value.
+        ?prop      rdfs:label          ?prop_lbl. 
+       }
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P7022         ?model.
+       OPTIONAL {
+        ?model      rdfs:label          ?model_lbl.
+       }
+      ?model      rdfs:label              ?model_lbl.
+     }<|eot_id|>

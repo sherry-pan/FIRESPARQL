@@ -1,0 +1,20 @@
+Question:
+What are the metrics of evaluation over the Atari 2600 Tutankham dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?evaluation?accuracy?recall?microF1?macroF1
+WHERE {
+ ?paper a orkg:Paper ;
+        orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_METRIC?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel IN ("Accuracy", "Recall", "micro-F1", "macro-F1")).
+ ?evaluation orkg:P71081?accuracy.
+ ?evaluation orkg:P71079?recall.
+ ?evaluation orkg:P71080?microF1.
+ ?evaluation orkg:P71082?macroF1.
+}<|eot_id|>

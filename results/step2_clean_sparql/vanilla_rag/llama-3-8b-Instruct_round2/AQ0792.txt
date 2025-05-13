@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:hasEvaluation ?hasEvaluation.
+ ?hasEvaluation orkg:metric ?metric.
+ FILTER (?metric = orkg:Recall || ?metric = orkg:Micro-F1 || ?metric = orkg:Accuracy || ?metric = orkg:Macro-F1 || ?metric = orkg:NDCG@10)
+}
+```

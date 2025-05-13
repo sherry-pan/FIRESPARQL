@@ -1,0 +1,38 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the ACE 2005 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "ACE 2005")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                       orkgp:HAS_EVALUATION   ?eval.
+       OPTIONAL {?eval           orkgp:HAS_RECALL        ?recall.
+               ?recall          orkgp:HAS_VALUE          ?value
+                                   ?predicate             ?value.}
+       OPTIONAL {?eval           orkgp:HAS_ACCURACY      ?accuracy.
+                ?accuracy      orkgp:HAS_VALUE          ?value
+                                    ?predicate             ?value.}
+       OPTIONAL {?eval           orkgp:HAS_MACRO_F1       ?macro_f1.
+                ?macro_f1      orkgp:HAS_VALUE          ?value
+                                    ?predicate             ?value.}
+       OPTIONAL {?eval           orkgp:HAS_MICRO_F1      ?micro_f1.
+                ?micro_f1      orkgp:HAS_VALUE          ?value
+                                    ?predicate             ?value.}
+       BIND(
+         IF(?recall      IS NOT NULL,?value, 
+             IF(?accuracy  IS NOT NULL,?value, 
+                 IF(?macro_f1  IS NOT NULL,?value,?micro_f1)))
+         AS?score
+       )
+       BIND(
+         IF(?recall      IS NOT NULL, "Recall"^^xsd:string, 
+             IF(?accuracy  IS NOT NULL, "Accuracy"^^xsd:string, 
+                 IF(?macro_f1  IS NOT NULL, "macro-F1"^^xsd:string, "micro-F1"^^xsd:string)))
+         AS?metric_lbl
+       )
+     }
+     ORDER BY?metric?score
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <https://www.orkg.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code_link
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_method ?method.
+  ?method rdfs:label ?method_label.
+  FILTER (?method_label = "Linear-Chain CRFs Model").
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark a orkg:Benchmark.
+  ?paper orkg:has_implementation ?implementation.
+  ?implementation orkg:has_code_link ?code_link.
+}
+```

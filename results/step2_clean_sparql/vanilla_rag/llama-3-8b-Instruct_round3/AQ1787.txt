@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:has_dataset <http://orkg.org/orkg/dataset/Atari_2600_Yars_Revenge> ;
+             orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:evaluation_score ?score.
+  ?benchmark orkg:has_method ?model.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

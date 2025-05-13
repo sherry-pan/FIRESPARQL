@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Penn Treebank (Character Level)")
+  ?evaluation orkgp:HAS_DATASET ?dataset;
+              orkgp:HAS_EVALUATION ?cont.
+  ?cont orkgp:HAS_VALUE ?value.
+  ?paper orkgp:P31 ?cont;
+         orkgp:P29 ?model.
+  ?model rdfs:label ?model_lbl.
+}
+```

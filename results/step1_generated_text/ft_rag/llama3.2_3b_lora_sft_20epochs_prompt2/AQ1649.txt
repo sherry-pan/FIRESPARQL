@@ -1,0 +1,65 @@
+Question:
+Which model has achieved the highest SUCCESS score on the Habitat 2020 Object Nav test-std benchmark dataset?
+
+Generated SPARQL:
+ SELECT?model?model_lbl
+     WHERE {
+      ?model `http://orkg.org/orkg/predicate/HAS_DATASET`           ?dataset.
+        ?dataset `http://orkg.org/orkg/predicate/HAS_BENCHMARK`       ?benchmark.
+          ?benchmark     `http://orkg.org/orkg/predicate/HAS_EVALUATION`   ?eval.
+            ?eval           `http://orkg.org/orkg/predicate/HAS_VALUE`       ?value.
+              ?value           `http://orkg.org/orkg/predicate/HAS_METRIC`   ?metric.
+                ?metric           `http://orkg.org/orkg/predicate/HAS_DATATYPE`   ?datatype.
+                ?datatype           rdfs:label              ?datatype_lbl.
+                ?metric           `http://orkg.org/orkg/predicate/HAS_VALUE`   ?value.
+                ?value           `http://orkg.org/orkg/predicate/HAS_METRIC`   ?metric.
+                ?metric           `http://orkg.org/orkg/predicate/HAS_DATATYPE`   ?datatype.
+                ?datatype           rdfs:label              ?datatype_lbl.
+                ?metric           `http://orkg.org/orkg/predicate/HAS_TARGET`   ?target.
+                ?target           `http://orkg.org/orkg/predicate/HAS_VALUE`   ?value.
+                ?value           `http://orkg.org/orkg/predicate/HAS_METRIC`   ?metric.
+                ?metric           `http://orkg.org/orkg/predicate/HAS_DATATYPE`   ?datatype.
+                ?datatype           rdfs:label              ?datatype_lbl.
+                ?metric           `http://orkg.org/orkg/predicate/HAS_NAME`     ?name.
+                ?name           `rdfs:label              ?model_lbl.
+                 FILTER(?metric = "SUCCESS")
+                 {
+                   SELECT?model_lbl
+                   WHERE {
+                    ?model `http://orkg.org/orkg/predicate/HAS_DATASET`           ?dataset.
+                      ?dataset `http://orkg.org/orkg/predicate/HAS_BENCHMARK`       ?benchmark.
+                        ?benchmark     `http://orkg.org/orkg/predicate/HAS_EVALUATION`   ?eval.
+                          ?eval           `http://orkg.org/orkg/predicate/HAS_VALUE`       ?value.
+                            ?value           `http://orkg.org/orkg/predicate/HAS_METRIC`   ?metric.
+                              ?metric           `http://orkg.org/orkg/predicate/HAS_DATATYPE`   ?datatype.
+                              ?datatype           rdfs:label              ?datatype_lbl.
+                              ?metric           `http://orkg.org/orkg/predicate/HAS_NAME`     ?name.
+                               FILTER(?name = "Object Nav")
+                              ?model `http://orkg.org/orkg/predicate/HAS_LABEL`     ?model_lbl
+                             }
+                           ORDER BY DESC(?model_lbl)
+                           LIMIT 1
+                         }
+                       {
+                        ?model `http://orkg.org/orkg/predicate/HAS_DATASET`           ?dataset.
+                          ?dataset `http://orkg.org/orkg/predicate/HAS_BENCHMARK`       ?benchmark.
+                            ?benchmark     `http://orkg.org/orkg/predicate/HAS_EVALUATION`   ?eval.
+                              ?eval           `http://orkg.org/orkg/predicate/HAS_VALUE`       ?value.
+                                ?value           `http://orkg.org/orkg/predicate/HAS_METRIC`   ?metric.
+                                  ?metric           `http://orkg.org/orkg/predicate/HAS_DATATYPE`   ?datatype.
+                                  ?datatype           rdfs:label              ?datatype_lbl.
+                                  ?metric           `http://orkg.org/orkg/predicate/HAS_NAME`     ?name.
+                                   FILTER(?name = "Object Nav")
+                                  ?model `http://orkg.org/orkg/predicate/HAS_LABEL`     ?model_lbl
+                                 }
+                               ORDER BY DESC(?model_lbl)
+                               LIMIT 1
+                             }
+                           {
+                            ?model `http://orkg.org/orkg/predicate/HAS_DATASET`           ?dataset.
+                              ?dataset `http://orkg.org/orkg/predicate/HAS_BENCHMARK`       ?benchmark.
+                                ?benchmark     `http://orkg.org/orkg/predicate/HAS_EVALUATION`   ?eval.
+                                  ?eval           `http://orkg.org/orkg/predicate/HAS_VALUE`       ?value.
+                                    ?value           `http://orkg.org/orkg/predicate/HAS_METRIC`   ?metric.
+                                      ?metric           `http://orkg.org/orkg/predicate/HAS_DATATYPE`   ?datatype.
+                                      ?datatype           rdfs:label              ?datatype_lbl

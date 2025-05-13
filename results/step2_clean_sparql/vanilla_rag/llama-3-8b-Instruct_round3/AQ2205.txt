@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paper ?code
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:has_method orkg:NASCell.
+  ?paper orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_implementation ?code.
+  FILTER (?benchmark != "" && ?code != "")
+}
+```

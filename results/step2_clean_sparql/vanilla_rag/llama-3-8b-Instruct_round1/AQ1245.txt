@@ -1,0 +1,15 @@
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/AAPD>.
+  ?benchmark orkg:HAS_BENCHMARK ?hasBenchmark.
+  ?hasBenchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation csvw:CSVW_Value ?score.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER(?metric != "undefined")
+  FILTER(?score != "undefined")
+}
+ORDER BY DESC(?score)
+LIMIT 1

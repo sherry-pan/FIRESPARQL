@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX vtab: <http://orkg.org/vtab/>
+
+SELECT ?model ?modelLabel ?paramsScore
+WHERE {
+  ?model orkg:HasBenchmark ?benchmark.
+  ?benchmark orkg:Params ?paramsScore.
+  ?benchmark orkg:HasDataset vtab:VTAB-1k.
+  ?model orkg:isModel ?modelLabel.
+}
+ORDER BY DESC(?paramsScore)
+LIMIT 1
+```

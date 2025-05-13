@@ -1,0 +1,29 @@
+Question:
+What is the best performing model benchmarking the AESLC dataset in terms of ROUGE-1 metric?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?model?evaluation
+WHERE {
+ ?benchmark a orkg:Benchmark.
+ ?benchmark orkg:has_dataset <http://orkg.org/orkg/entity/AESLC>.
+ ?benchmark orkg:has_evaluation?evaluation.
+ ?evaluation orkg:has_metric xsd:string("ROUGE-1").
+ ?benchmark orkg:compared_with?models.
+ ?models orkg:has_method?method.
+ ?method orkg:has_result?result.
+ ?result orkg:has_value?value.
+  FILTER (?value > (SELECT max(?value2) AS max_value 
+                    FROM {?benchmark2 a orkg:Benchmark.
+                         ?benchmark2 orkg:has_dataset <http://orkg.org/orkg/entity/AESLC>.
+                         ?benchmark2 orkg:has_evaluation?evaluation2.
+                         ?evaluation2 orkg:has_metric xsd:string("ROUGE-1").
+                         ?benchmark2 orkg:compared_with?models2.
+                         ?models2 orkg:has_method?method2.
+                         ?method2 orkg:has_result?result2.
+                         ?result2 orkg:has_value?value2 })))
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

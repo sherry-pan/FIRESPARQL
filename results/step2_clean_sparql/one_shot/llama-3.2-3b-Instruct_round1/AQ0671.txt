@@ -1,0 +1,14 @@
+```sparql
+SELECT DISTINCT ?paper ?paper_lbl ?benchmark_lbl ?benchmark_id
+WHERE {
+  ?benchmark a orkgp:Benchmark;
+             orkgp:HAS_DATASET ?dataset.
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "BUCC German-to-English")
+  ?paper orkgp:HAS_BENCHMARK ?benchmark.
+  ?paper orkgp:hasTitle ?paper_lbl.
+  ?benchmark orkgp:hasTitle ?benchmark_lbl.
+  ?benchmark orkgp:hasID ?benchmark_id.
+}
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?model_name
+WHERE {
+  ?model orkg:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET <http://orkg.org/orkg/resource/ANLI_test_dataset>.
+  ?evaluation orkg:HAS_A2_SCORE ?score.
+  ?model orkg:HAS_METHOD ?method.
+  ?model rdfs:label ?model_name.
+} ORDER BY DESC(?score) LIMIT 1
+```

@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model
+WHERE {
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:HAS_NAME "Senseval 2".
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_VALUE ?metricValue.
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET "Supervised".
+}
+ORDER BY DESC(?metricValue)
+LIMIT 1
+```

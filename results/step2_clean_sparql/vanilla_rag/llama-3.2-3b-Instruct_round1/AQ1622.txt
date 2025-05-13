@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?macsScore
+WHERE {
+  ?model orkg:hasMethod ?method.
+  ?method orkg:hasDataset "ImageNet".
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasBenchmark "ImageNet".
+  ?model orkg:hasApproach ?approach.
+  ?approach orkg:hasMacScore ?macsScore.
+  FILTER (isNumeric(?macsScore))
+}
+ORDER BY DESC(?macsScore)
+LIMIT 1
+```

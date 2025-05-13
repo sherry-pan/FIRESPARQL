@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?model
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC p:macro-Recall.
+  ?evaluation orkg:HAS_BENCHMARK orkg:NLP-TDMS.
+  ?evaluation orkg:HAS_DATASET orkg:arXiv.
+  ?evaluation orkg:HAS_METHOD ?model.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:HAS_VALUE ?value.
+  FILTER (?value = "best")
+}
+```

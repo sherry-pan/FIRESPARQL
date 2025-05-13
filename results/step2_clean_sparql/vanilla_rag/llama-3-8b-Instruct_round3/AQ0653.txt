@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?paper ?title ?id
+WHERE {
+    ?paper a orkg:ResearchPaper.
+    ?paper orkg:HAS_BENCHMARK ?benchmark.
+    ?benchmark orkg:HAS_DATASET ?dataset.
+    FILTER (?dataset = <http://orkg.org/orkg/resource/SciCite>).
+    ?paper orkg:CSVW_Titles ?title.
+    ?paper orkg:CSVW_Number ?id.
+}
+```

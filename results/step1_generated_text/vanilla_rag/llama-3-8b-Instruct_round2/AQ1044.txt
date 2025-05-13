@@ -1,0 +1,20 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Softcite dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+    PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+    SELECT?metric?score
+    WHERE {
+       ?benchmark a orkg:Benchmark ;
+                    orkg:HAS_DATASET orkg:Softcite ;
+                    orkg:HAS_EVALUATION?evaluation.
+       ?evaluation orkg:HAS_METHOD?method ;
+                    csvw:values?metric.
+       ?metric csvw:CSVW_Name?name ;
+                csvw:CSVW_Value?score.
+        FILTER (?name = "highest benchmark result" && isLiteral(?score) && str(?score)^(xsd:float|xsd:integer) )
+    }
+    ORDER BY DESC(?score)
+    LIMIT 1<|eot_id|>

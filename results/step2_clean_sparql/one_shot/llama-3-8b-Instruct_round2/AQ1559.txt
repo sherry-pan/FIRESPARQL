@@ -1,0 +1,14 @@
+```
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <http://example.org/schema#>
+
+SELECT ?model
+WHERE {
+  ?result a ex:BenchmarkResult ;
+          ex:benchmark ex:SST5 ;
+          ex:accuracy ?accuracy ;
+          ex:model ?model .
+}
+ORDER BY DESC(xsd:decimal(?accuracy))
+LIMIT 1
+```

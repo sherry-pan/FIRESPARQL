@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:has_dataset ?dataset.
+    ?dataset orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_title ?title.
+    ?benchmark orkg:has_number ?id.
+    FILTER (bif:contains(?dataset, "TempEval-3") || bif:contains(?id, "TempEval-3"))
+}
+```

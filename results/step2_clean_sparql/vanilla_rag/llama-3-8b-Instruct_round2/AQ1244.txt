@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?score
+WHERE {
+  ?result orkg:HAS_BENCHMARK "DTD".
+  ?result orkg:HAS_EVALUATION ?evaluation.
+  ?result orkg:HAS_METHOD ?metric.
+  ?result orkg:HAS_SCORE ?score.
+  ?evaluation rdfs:label ?evaluationLabel.
+  FILTER (?evaluationLabel = "best" || ?evaluationLabel = "highest")
+}
+```

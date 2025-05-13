@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:HAS_BENCHMARK ?evaluation.
+  ?evaluation orkg:HAS_EVALUATION ?dataset.
+  ?dataset rdfs:label "Gibson PointGoal Navigation".
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?evaluation orkg:HAS_SCORE ?score.
+  FILTER (?metric != "undefined" && isLiteral(?score))
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

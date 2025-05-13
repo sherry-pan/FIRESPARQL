@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score 
+WHERE {
+    ?s orkg:has_benchmark ?b.
+    ?b orkg:has_evaluation ?e.
+    ?e orkg:has_metric ?metric.
+    ?e orkg:has_score ?score.
+    ?b orkg:has_approach ?a.
+    FILTER (strstarts(?metric, "Ball in cup, catch") && ?metric = "DMControl100k")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

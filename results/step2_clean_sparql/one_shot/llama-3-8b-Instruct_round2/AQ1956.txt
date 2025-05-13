@@ -1,0 +1,13 @@
+```sparql
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?paper ?codeReference
+WHERE {
+  ?paper a schema:ScholarlyArticle;
+         dcterms:subject "CATTS-XSUM";
+         dcterms:references ?codeReference.
+  FILTER(CONTAINS(LCASE(STR(?codeReference)), "benchmark"))
+}
+```

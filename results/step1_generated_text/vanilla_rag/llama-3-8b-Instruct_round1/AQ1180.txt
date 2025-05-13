@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the Hutter Prize dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX hutter: <http://orkg.org/orkg/ontology/hutter-prize/>
+
+SELECT?benchmarkScore?metric
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_EVALUATION?evaluationMetrics.
+ ?evaluationMetrics orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_BENCHMARK_NAME "Hutter Prize".
+ ?evaluationMetrics orkg:HAS_SCORE?benchmarkScore.
+ ?evaluationMetrics orkg:HAS_METRIC?metric.
+  FILTER (?benchmarkScore = max(?benchmarkScore) )
+}<|eot_id|>

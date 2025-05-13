@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/predicate/>
+     SELECT?metric?score 
+     WHERE {
+    ?benchmark orkg:hasBenchmark?evaluation.
+    ?evaluation orkg:hasEvaluation?evaluationResult.
+    ?evaluation orkg:hasEvaluation?evaluationResult.
+    ?evaluationResult orkg:hasEvaluation?evaluationMetric.
+    ?evaluationMetric orkg:hasMetric?metric.
+    ?benchmark orkg:hasEvaluation?benchmarkResult.
+    ?benchmarkResult orkg:hasScore?score.
+     FILTER (strContains(benchmarkResult, "Atari 2600 Berzerk") AND
+           strContains(evaluationMetric, "accuracy") AND
+           strContains(evaluationMetric, "score"))
+     }<|eot_id|>

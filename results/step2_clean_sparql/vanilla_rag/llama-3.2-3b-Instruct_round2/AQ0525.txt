@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?title ?id
+WHERE {
+    ?paper orkg:has_dataset ?dataset.
+    FILTER (CONTAINS(LCASE(?dataset), "ncbi-disease")).
+    ?paper orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_title ?title.
+    ?paper orkg:CSVW_Name ?id.
+}
+```

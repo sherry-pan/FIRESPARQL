@@ -1,0 +1,15 @@
+Question:
+What are the metrics of evaluation over the PubMed 20k RCT dataset?
+
+Generated SPARQL:
+PREFIX rct: <http://orkg.org/orkg/resource/PubMed_20k_RCT>
+PREFIX evaluation: <http://orkg.org/orkg/predicate/>
+
+SELECT?metric?value
+WHERE {
+  rct:PubMed_20k_RCT?p?o.
+ ?p a evaluation:Evaluation.
+ ?o?evaluationProperty?metric.
+ ?evaluationProperty a evaluation:Recall | evaluation:Accuracy | evaluation:macro-F1 | evaluation:micro-F1 | evaluation:HAS_BENCHMARK.
+  FILTER (?metric!= evaluation:HAS_BENCHMARK).
+}<|eot_id|>

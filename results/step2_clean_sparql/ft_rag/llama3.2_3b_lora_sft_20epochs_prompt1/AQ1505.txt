@@ -1,0 +1,26 @@
+```sparql
+SELECT DISTINCT ?model ?model_label
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Senseval 2")
+
+  ?comparison a orkgp:Comparison;
+              rdfs:label ?comp_label;
+              orkgp:HAS_METRIC ?metric;
+              orkgp:HAS_VALUE ?metric_value.
+  FILTER(?metric_value = "max")
+
+  ?cont orkgp:HAS_BENCHMARK ?benchmark;
+         orkgp:HAS_DATASET ?dataset;
+         orkgp:HAS_METHOD ?method;
+         orkgp:HAS_EVALUATION ?eval;
+         orkgp:HAS_VALUE ?eval_value;
+         orkgp:COMPARED_WITH ?comparison;
+         orkgp:P31 ?model.
+  
+  BIND(?model AS ?model_label)
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

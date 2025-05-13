@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark orkg:hasDataset <http://orkg.org/orkg/dataset/Amazon-2>.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:metric ?metric.
+  ?evaluation orkg:value ?value.
+  FILTER(?metric = "highest benchmark result")
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

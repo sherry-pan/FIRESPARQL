@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "CoNLL++")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:HAS_EVALUATION ?cont.
+  ?value orkgp:CSVW_VALUE ?num.
+  ?name orkgp:CSVW_NAME ?str.
+  BIND(xsd:float(?num) AS ?value)
+  BIND(?str AS ?metric_lbl)
+}
+ORDER BY DESC(?score)
+```

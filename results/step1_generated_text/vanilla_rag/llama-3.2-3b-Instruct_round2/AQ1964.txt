@@ -1,0 +1,16 @@
+Question:
+List the code links in papers that use the linear-chain CRFs model in any benchmark?
+
+Generated SPARQL:
+ PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg#>
+     PREFIX orkg: <http://www.openresearchknowledgegraph.org/ontology/orkg/>
+     SELECT?code_link
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset?dataset.
+    ?dataset orkg:hasImplementation?implementation.
+    ?implementation orkg:method orkg:approach?method.
+    ?method orkg:label "linear-chain CRFs".
+    ?paper orkg:hasCode?code_link.
+     FILTER (STRLIKE(?benchmark, "linear-chain CRFs") || STRLIKE(?dataset, "linear-chain CRFs") || STRLIKE(?implementation, "linear-chain CRFs") || STRLIKE(?method, "linear-chain CRFs"))
+     }<|eot_id|>

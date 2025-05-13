@@ -1,0 +1,20 @@
+Question:
+List the datasets benchmarked under the SPARQL query optimization research problem?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?problem       a                orkgc:Problem;
+                  rdfs:label      ?problem_lbl.  
+       FILTER (str(?problem_lbl) = "SPARQL query optimization")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?dataset       orkgp:HAS_BENCHMARK     ?benchmark;
+                      orkgp:P32               ?problem.
+      ?benchmark      orkgp:HAS_EVALUATION     ?eval.
+      ?eval           orkgp:HAS_VALUE          ?value.
+       BIND(xsd:float(?value) AS?eval_lbl)
+      ?benchmark      orkgp:HAS_METHOD         ?method.
+      ?method        orkgp:P32               ?problem;
+                      orkgp:HAS_DATASET      ?dataset.
+      ?dataset       rdfs:label              ?dataset_lbl.
+     }<|eot_id|>

@@ -1,0 +1,17 @@
+Question:
+What are the models that have been benchmarked on the Automatically labeled Medline abstracts corpus dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?model?modelLabel?dataset?datasetLabel?evaluation
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:HAS_DATASET?dataset.
+ ?dataset rdfs:label?datasetLabel.
+ ?benchmark orkg:HAS_METHOD?method.
+ ?benchmark orkg:HAS_EVALUATION?evaluation.
+  FILTER(?datasetLabel = "Automatically labeled Medline abstracts corpus dataset").
+}<|eot_id|>

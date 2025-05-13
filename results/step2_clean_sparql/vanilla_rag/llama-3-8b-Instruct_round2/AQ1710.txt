@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://www.orkg.org/api.owl#>
+PREFIX benchmark: <http://www.orkg.org/benchmark.owl#>
+PREFIX evaluation: <http://www.orkg.org/evaluation.owl#>
+PREFIX method: <http://www.orkg.org/method.owl#>
+
+SELECT ?model ?score
+WHERE {
+  ?model a method:Method.
+  ?model evaluation:evaluated ?evaluation.
+  ?model evaluation:has_benchmark benchmark:Atari_2600_Freeway.
+  ?evaluation evaluation:has_metric evaluation:Score.
+  ?evaluation evaluation:has_value ?score.
+  FILTER NOT EXISTS {
+    ?other_evaluation evaluation:has_metric evaluation:Score;
+                      evaluation:has_value ?other_score.
+    ?model evaluation:evaluated ?other_evaluation.
+    FILTER (?other_score > ?score)
+  }
+}
+```

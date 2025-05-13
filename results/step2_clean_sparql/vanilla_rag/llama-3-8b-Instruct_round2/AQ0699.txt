@@ -1,0 +1,10 @@
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasEvaluation ?hasEvaluation.
+  ?hasEvaluation orkg:hasMetric ?metric.
+  FILTER (?metric IN (orkg:Accuracy, orkg:Recall, orkg:macro-F1, orkg:micro-F1, orkg:NDCG@10))
+}

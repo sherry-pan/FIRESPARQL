@@ -1,0 +1,15 @@
+Question:
+Are children examined in the studies?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?study?studyLabel
+WHERE {
+ ?study a orkg:Study.
+ ?study orkg:hasParticipant?participant.
+ ?participant rdfs:label?participantLabel.
+  FILTER (CONTAINS(LCASE(?participantLabel), "child") || CONTAINS(LCASE(?participantLabel), "children"))
+}<|eot_id|>

@@ -1,0 +1,19 @@
+Question:
+What is the highest benchmark result achieved on the WOS-5736 dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX wos: <http://orkg.org/orkg/ontology/WOS_5736/>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+    orkg:hasDataset wos:WOS_5736 ;
+    orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:metric?metric ;
+    orkg:value?value.
+  FILTER (?metric!= "undefined")
+  FILTER (?value!= "undefined")
+  ORDER BY DESC(?value)
+  LIMIT 1
+}<|eot_id|>

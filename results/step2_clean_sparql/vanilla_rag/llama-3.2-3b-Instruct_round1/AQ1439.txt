@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?benchmark
+WHERE {
+    ?model orkg:has_benchmark ?benchmark.
+    ?benchmark orkg:has_dataset "http://orkg.org/orkg/dataset/imagenet_64x64".
+    ?benchmark orkg:has_evaluation orkg:EvaluationBitsPerDim ?bitsPerDim.
+    FILTER (isNumeric(?bitsPerDim))
+}
+```

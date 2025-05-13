@@ -1,0 +1,19 @@
+Question:
+Can you list the models that have been evaluated on the enwiki8 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?modelLabel
+     WHERE {
+    ?model orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasDataset?dataset.
+    ?dataset orkg:hasDataset?enwiki8.
+    ?model orkg:hasMethod?method.
+    ?method orkg:hasEvaluation?evaluation.
+    ?evaluation orkg:hasDataset?enwiki8.
+     FILTER (str(?modelLabel)!= "")
+     }
+     GROUP BY?model
+     HAVING (COUNT(?model) > 1)
+     ORDER BY DESC
+     LIMIT 10<|eot_id|>

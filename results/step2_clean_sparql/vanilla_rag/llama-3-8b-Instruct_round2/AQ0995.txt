@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?evaluation ?recall ?accuracy ?macroF1 ?microF1
+WHERE {
+ ?dataset a orkg:PubMed20kRCTDataset.
+ ?dataset orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation orkg:HAS_RECALL ?recall.
+ ?evaluation orkg:HAS_ACCURACY ?accuracy.
+ ?evaluation orkg:HAS_MACRO_F1 ?macroF1.
+ ?evaluation orkg:HAS_MICRO_F1 ?microF1.
+ ?dataset orkg:HAS_BENCHMARK ?benchmark.
+ FILTER(?benchmark = "PubMed 20k RCT dataset").
+}
+```

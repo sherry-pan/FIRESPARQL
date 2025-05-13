@@ -1,0 +1,18 @@
+```sparql
+SELECT ?implementation
+WHERE {
+  ?paper orkgp:P31 [
+    rdfs:label ?title;
+    orkgp:P32 [
+      orkgp:HAS_SOURCE_CODE ?code;
+      orkgp:HAS_METHOD ?method;
+      FILTER(CONTAINS(?method, "Long Short Transformer"))
+    ]
+  ];
+  orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_SOURCE_CODE ?code.
+  ?code orkgp:HAS_IMPLEMENTATION ?implementation.
+}
+ORDER BY DESC(COUNT(?implementation))
+LIMIT 1
+```

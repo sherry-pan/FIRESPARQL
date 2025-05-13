@@ -1,0 +1,17 @@
+Question:
+Which model has achieved the highest Permuted Accuracy score on the Sequential MNIST benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p71081: <http://orkg.org/orkg/predicate/P71081>
+
+SELECT?model?modelLabel?permutedAccuracy
+WHERE {
+ ?model a orkg:Model.
+ ?model orkg:HAS_METHOD?method.
+ ?method orkg:HAS_EVALUATION?evaluation.
+ ?evaluation p71081:HAS_VALUE?permutedAccuracy.
+ ?evaluation orkg:HAS_DATASET orkg:SequentialMNIST.
+ ?model orkg:LABEL?modelLabel.
+  FILTER (?permutedAccuracy = MAX(?permutedAccuracy))
+}<|eot_id|>

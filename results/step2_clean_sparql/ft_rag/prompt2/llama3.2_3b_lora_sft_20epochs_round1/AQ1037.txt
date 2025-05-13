@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R15580030 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P71075 ?dataset.
+  ?dataset orkgp:P71086 ?training_set.
+  ?training_set orkgp:P71096 ?validation_set.
+  ?validation_set orkgp:P73131 ?benchmark.
+  ?benchmark orkgp:P23169 ?evalU;
+             orkgp:P23170 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?evalU orkgp:P23172 ?value.
+  FILTER(?value > 0)
+}
+```

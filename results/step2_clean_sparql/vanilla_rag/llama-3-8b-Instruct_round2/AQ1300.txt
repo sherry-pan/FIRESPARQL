@@ -1,0 +1,21 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?benchmark ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+             orkg:hasDataset <http://orkg.org/orkg/resource/Atari_2600_Ice_Hockey> ;
+             orkg:hasEvaluation ?evaluation.
+
+  ?evaluation orkg:metric ?metric ;
+              orkg:value ?score.
+
+  FILTER NOT EXISTS {
+    ?otherEvaluation orkg:metric ?metric ;
+                     orkg:value ?otherScore.
+    FILTER(?score < ?otherScore)
+  }
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

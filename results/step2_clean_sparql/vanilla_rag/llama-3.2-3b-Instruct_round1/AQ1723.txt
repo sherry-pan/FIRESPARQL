@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?score
+WHERE {
+    ?model orkg:hasBenchmark orkg:hasBenchmark/orkg:hasBenchmark/0.
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?metric orkg:label "Score"@en.
+    ?model orkg:hasTrainingSet ?trainingSet.
+    FILTER (bif:contains(str(?trainingSet), "Atari 2600 Tennis"@en)).
+    ?model orkg:hasScore ?score.
+}
+```

@@ -1,0 +1,23 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ACL Anthology")
+  ?dataset orkgp:HAS_DATASET ?has_dataset.
+  ?has_dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?eval orkgp:HAS_MODEL ?model.
+    ?model rdfs:label ?model_lbl.
+  }
+  OPTIONAL {
+    ?eval orkgp:HAS_METHOD ?method.
+    ?method rdfs:label ?method_lbl.
+  }
+  OPTIONAL {
+    ?eval orkgp:HAS_IMPLEMENTATION ?impl.
+    ?impl rdfs:label ?impl_lbl.
+  }
+}
+```

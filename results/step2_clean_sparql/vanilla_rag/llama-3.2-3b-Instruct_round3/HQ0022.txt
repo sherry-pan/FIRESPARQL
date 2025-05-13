@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?paper ?method ?evaluation
+WHERE {
+    ?paper orkg:hasPaper ?p1.
+    ?p1 orkg:hasMethod ?method.
+    ?method orkg:hasEvaluation ?evaluation.
+    FILTER (CONTAINS(LCASE(?evaluation), "cosine similarity") ||
+            CONTAINS(LCASE(?method), "cosine similarity"))
+}
+```

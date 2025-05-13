@@ -1,0 +1,15 @@
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX bench: <http://arbenchmarks.org/ontology#>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper rdf:type bench:ResearchPaper ;
+         dcterms:title ?paperTitle ;
+         dcterms:identifier ?paperId ;
+         bench:benchmarksUsed ?benchmark .
+  ?benchmark rdf:type bench:BenchmarkDataset ;
+             dcterms:title "BC5CDR-disease" .
+}
+```

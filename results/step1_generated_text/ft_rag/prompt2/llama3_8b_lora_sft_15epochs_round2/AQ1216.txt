@@ -1,0 +1,17 @@
+Question:
+What is the top benchmark score and its metric on the BC5CDR-disease dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "BC5CDR-disease")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont          orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval          orkgp:HAS_CONT          ?cont.
+      ?eval          orkgp:HAS_VALUE         ?value.
+       OPTIONAL {?eval           orkgp:HAS_METRIC      ?metric.
+               ?metric           rdfs:label            ?metric_lbl.}
+       ORDER BY DESC(?value)
+     }<|eot_id|>

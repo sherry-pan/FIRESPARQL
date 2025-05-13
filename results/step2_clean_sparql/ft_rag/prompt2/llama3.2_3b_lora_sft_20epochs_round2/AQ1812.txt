@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "SVHN".
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset orkgp:HAS_DATASET ?dataset_;
+               orkgp:P32 ?cont.
+      ?cont orkgp:P31 ?model;
+            orkgp:HAS_EVALUATION ?eval.
+      ?eval orkgp:P400 ?error.
+      BIND(xsd:float(?error) AS ?percentage_error)
+      ?model rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?percentage_error)
+    LIMIT 1
+  }
+}
+```

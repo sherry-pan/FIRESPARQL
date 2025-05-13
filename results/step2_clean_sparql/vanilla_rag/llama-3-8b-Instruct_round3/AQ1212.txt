@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?metric ?value
+WHERE {
+  ?benchmark a orkg:Benchmark ;
+    orkg:hasDataset <http://orkg.org/orkg/resource/BC5CDR-chemical> ;
+    orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasCSVWValue ?value ;
+    csvw:property ?metric.
+  FILTER (?metric != orkg:implementation && ?metric != orkg:approach)
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

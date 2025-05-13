@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  ?evaluation orkg:hasScore ?score.
+  FILTER (strcontains(STR(?metric), "ACE 2005") AND strcontains(STR(?score), "best"))
+}
+```

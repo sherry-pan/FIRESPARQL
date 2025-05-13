@@ -1,0 +1,22 @@
+```sparql
+SELECT ?material
+WHERE {
+  orkgr:R155371 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  ?eval orkgp:HAS_UNIT ?unit.
+  FILTER(REGEX(?unit, "second"))
+  ?cont orkgp:P31 ?mat;
+        orkgp:P32 ?material.
+  ?material orkgp:P36 ?mesh.
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  ?cont orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "least"))
+  ?eval orkgp:P34 ?time.
+  ?time orkgp:P36 ?min_max;
+        orkgp:P37 ?value.
+  FILTER(?value = "minimum"^^xsd:string)
+}
+ORDER BY ASC(?value)
+LIMIT 1
+```

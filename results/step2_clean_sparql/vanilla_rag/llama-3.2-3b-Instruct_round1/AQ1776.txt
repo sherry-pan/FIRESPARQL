@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?benchmark ?params
+WHERE {
+  ?model orkg:HAS_IMPLEMENTATION ?imply.
+  ?imply orkg:HAS_METHOD ?method.
+  ?method orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET "ImageNet".
+  ?benchmark orkg:HAS_EVALUATION ?params.
+  FILTER (str(?params) = "Number of params")
+}
+```

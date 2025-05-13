@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?score ?metric
+WHERE {
+  ?benchmark a orkg:Benchmark.
+  ?benchmark orkg:hasBenchmark ?evaluation.
+  ?evaluation orkg:hasDataset orkg:Atari_2600_Seaquest.
+  ?evaluation orkg:hasEvaluation ?result.
+  ?result orkg:hasMetric ?metric.
+  ?result orkg:score ?score.
+  FILTER (?metric IN (orkg:Accuracy, orkg:macro-F1, orkg:micro-F1))
+}
+ORDER BY DESC(xsd:float(?score))
+LIMIT 1
+```

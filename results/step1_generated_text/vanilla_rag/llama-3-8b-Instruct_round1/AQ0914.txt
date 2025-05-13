@@ -1,0 +1,16 @@
+Question:
+Can you list the metrics used to evaluate models on the Barabasi-Albert dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://purl.org/dc/elements/1.1/>
+
+SELECT?metric
+WHERE {
+ ?evaluation orkg:HAS_EVALUATION?dataset.
+ ?dataset orkg:HAS_MODEL?model.
+ ?model orkg:USES?metric.
+ ?metric a orkg:Metric.
+  FILTER (?metric!= orkg:Avg Entity &&?metric!= orkg:Avg Concept)
+}
+ORDER BY?metric<|eot_id|>

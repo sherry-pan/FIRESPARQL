@@ -1,0 +1,12 @@
+```sparql
+SELECT ?paper ?paper_title ?paper_id
+WHERE {
+  ?dataset orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?eval.
+  FILTER(REGEX(?eval, "STS"))
+  ?benchmark orkgp:P7002 ?paper.
+  ?paper orkgp:HAS_ID ?paper_id.
+  ?paper orkgp:HAS_TITLE ?title.
+  BIND(xsd:string(?title) AS ?paper_title)
+}
+```

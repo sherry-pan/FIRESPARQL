@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+
+SELECT ?model_name
+WHERE {
+  ?model orkg:has_method ?method.
+  ?method orkg:has_dataset ?dataset.
+  ?dataset orkg:has_benchmark ?benchmark.
+  ?benchmark orkg:has_evaluation ?evaluation.
+  ?evaluation orkg:has_value ?score.
+  ?model orkg:has_name ?model_name.
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

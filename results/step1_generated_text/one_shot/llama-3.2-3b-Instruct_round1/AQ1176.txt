@@ -1,0 +1,16 @@
+Question:
+What is the highest benchmark result achieved on the WNLI dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT DISTINCT?metric?metric_lbl (MAX(?value) AS?score)
+    WHERE {
+      {
+        SELECT?metric?metric_lbl?value
+        WHERE {
+         ?dataset       a                orkgc:Dataset;
+                        rdfs:label      ?dataset_lbl.
+          FILTER (str(?dataset_lbl) = "WNLI")
+         ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                        orkgp:HAS_EVALUATION   ?eval.
+         ?eval           orkgp:HAS_VALUE        ?value.
+          OPTIONAL {?eval           orkgp

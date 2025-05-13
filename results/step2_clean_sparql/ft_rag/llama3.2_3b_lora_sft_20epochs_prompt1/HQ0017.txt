@@ -1,0 +1,27 @@
+```sparql
+SELECT ?location
+WHERE {
+  {
+    ?s orkgp:Location/rdfs:label ?location.
+    FILTER(REGEX(STR(?location), "city"))
+  }
+  UNION
+  {
+    ?s orkgp:Location/rdfs:label ?location.
+    FILTER(REGEX(STR(?location), "country"))
+  }
+  UNION
+  {
+    ?s orkgp:Location/rdfs:label ?location.
+    FILTER(REGEX(STR(?location), "geographical region"))
+  }
+  UNION
+  {
+    ?s orkgp:Location/rdfs:label ?location.
+    FILTER(REGEX(STR(?location), "location"))
+  }
+}
+GROUP BY ?location
+ORDER BY DESC(COUNT(?location))
+LIMIT 1
+```

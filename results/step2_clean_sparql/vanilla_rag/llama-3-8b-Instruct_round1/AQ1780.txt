@@ -1,0 +1,17 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+SELECT ?model_name
+WHERE {
+  ?model a orkg:Model ;
+         orkg:hasEvaluation ?evaluation ;
+         orkg:hasDataset ?dataset ;
+         csvw:datasetName ?dataset_name ;
+         orkg:CSVW_Name ?model_name.
+  ?evaluation orkg:hasTop1ErrorRate ?top1ErrorRate.
+  FILTER (?dataset_name = "Oxford-IIIT Pets")
+}
+ORDER BY ASC(?top1ErrorRate)
+LIMIT 1
+```

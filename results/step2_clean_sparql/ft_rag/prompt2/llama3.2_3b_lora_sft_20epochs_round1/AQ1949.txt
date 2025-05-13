@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?papers rdf:type orkgc:Paper.
+  ?papers orkgp:P31 [
+    orkgp:P5005 ?model
+  ].
+  ?model orkgp:P4139 ?implementation.
+  ?implementation orkgp:P5045 ?code.
+  FILTER(REGEX(STR(?model), "BERT + BiLSTM + CRF Decoding"))
+}
+```

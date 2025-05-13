@@ -1,0 +1,12 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?model `hasEvaluation` ?eval.
+  ?eval `HAS_DATASET` orkgp:dataset-987654.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(STR(?dataset_lbl), "enwiki8"))
+  ?model rdfs:label ?model_lbl.
+  FILTER(?model_lbl != "unknown_label")
+}
+ORDER BY ?model_lbl
+```

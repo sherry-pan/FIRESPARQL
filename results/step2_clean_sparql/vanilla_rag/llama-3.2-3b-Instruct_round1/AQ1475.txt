@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?accuracy
+WHERE {
+    ?model orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasAccuracy ?accuracy.
+    ?evaluation orkg:hasTrainingSet ?trainingSet.
+    ?trainingSet orkg:hasBenchmark ?benchmark.
+    ?benchmark orkg:label "Story Cloze Test".
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

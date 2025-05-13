@@ -1,0 +1,15 @@
+Question:
+What models are being evaluated on the TempEval-3 dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "TempEval-3")
+      ?evaluation     orkgp:HAS_DATASET      ?dataset.
+      ?evaluation     orkgp:HAS_METHOD        ?method.
+      ?method          rdfs:label              ?model_lbl.
+       OPTIONAL {?method          orkgp:HAS_IMPLEMENTATION  ?implementation.
+               ?implementation     rdfs:label              ?model}}
+     ORDER BY?model_lbl<|eot_id|>

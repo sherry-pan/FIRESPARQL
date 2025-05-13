@@ -1,0 +1,36 @@
+```sparql
+SELECT ?compound
+WHERE {
+  {
+    SELECT ?compounds_labels AS ?compound
+    WHERE {
+      ?papers rdf:type orkgc:Paper.
+      ?papers orkgp:P31 ?compounds.
+      ?compounds rdfs:label ?compounds_labels.
+      ?compounds orkgp:P37586 ?eval.
+      FILTER(REGEX(?eval, "evalUation"))
+      ?eval orkgp:P37587 ?benchmark.
+      ?benchmark orkgp:P37583 ?active_compounds.
+      ?active_compounds rdfs:label ?active_compounds_labels.
+      FILTER(?active_compounds_labels = ?compounds_labels)
+    }
+  }
+  UNION
+  {
+    SELECT ?compounds_labels AS ?compound
+    WHERE {
+      ?papers rdf:type orkgc:Paper.
+      ?papers orkgp:P31 ?compounds.
+      ?compounds rdfs:label ?compounds_labels.
+      ?compounds orkgp:P37586 ?eval.
+      FILTER(REGEX(?eval, "evalUation"))
+      ?eval orkgp:P37587 ?benchmark.
+      ?benchmark orkgp:P37583 ?active_compounds.
+      ?active_compounds orkgp:P37584 ?coexists.
+      ?coexists orkgp:P37582 ?other_compounds.
+      ?other_compounds rdfs:label ?other_compounds_labels.
+      FILTER(?other_compounds_labels = ?compounds_labels)
+    }
+  }
+}
+```

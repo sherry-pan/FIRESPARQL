@@ -1,0 +1,33 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the STS Benchmark dataset?
+
+Generated SPARQL:
+ SELECT?paper?paper_title
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                      rdfs:label      ?dataset_lbl.
+         FILTER(REGEX(?dataset_lbl, "STS Benchmark"))
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:HAS_EVALUATION   ?eval.
+        ?eval           orkgp:HAS_BENCHMARK     ?benchmark.
+         OPTIONAL {
+          ?benchmark      orkgp:HAS_METHOD        ?method.
+          ?method        orkgp:HAS_IMPLEMENTATION  ?impl.
+          ?impl          orkgp:HAS_CODE           ?code.
+           BIND(xsd:string(?code) AS?paper)
+           FILTER(REGEX(?paper, "^[^ ]*"))
+           BIND(xsd:string(?method) AS?method)
+           BIND(xsd:string(?dataset_lbl) AS?dataset_lbl)
+           BIND(xsd:string(?eval) AS?eval)
+           BIND(xsd:string(?benchmark) AS?benchmark)
+           BIND(xsd:string(?paper_lbl) AS?paper_title)
+         }
+        ?benchmark      orkgp:HAS_PUBLICATION     ?publication.
+        ?publication   orkgp:HAS_ID              ?paper.
+         OPTIONAL {
+          ?publication      orkgp:HAS_APPROACH        ?approach.
+           BIND(xsd:string(?approach) AS?approach)
+         }
+       }
+       ORDER BY DESC(COUNT(?paper))
+       LIMIT 10<|eot_id|>

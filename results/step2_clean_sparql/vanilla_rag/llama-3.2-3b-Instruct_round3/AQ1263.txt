@@ -1,0 +1,12 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?metric ?score 
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:hasDataset "Atari 2600 Seaquest".
+    ?benchmark orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasMetric ?metric.
+    ?evaluation orkg:hasScore ?score.
+    FILTER (CONTAINS(LCASE(?metric), "accuracy") OR CONTAINS(LCASE(?metric), "f1"))
+}
+```

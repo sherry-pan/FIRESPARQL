@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkgc: <http://www.openresearchknowledgegraph.org/ontology/concept/>
+PREFIX orkgp: <http://www.openresearchknowledgegraph.org/ontology/project/>
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label "BLEU".
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WMT2014 German-English".
+  ?benchmark orkgc:benchmarks ?model;
+             orkgc:uses ?dataset;
+             orkgc:reports ?metric.
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl.
+}
+ORDER BY DESC(?metric)
+LIMIT 1
+```

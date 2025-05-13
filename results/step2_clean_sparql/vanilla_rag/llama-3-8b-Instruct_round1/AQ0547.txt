@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?paperTitle ?paperId
+WHERE {
+  ?paper a orkg:ResearchPaper.
+  ?paper orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_WALKER_WALK ?walk.
+  ?walk orkg:NAME "walk (DMControl500k)".
+  ?paper csvw:title ?paperTitle.
+  ?paper orkg:id ?paperId.
+}
+```

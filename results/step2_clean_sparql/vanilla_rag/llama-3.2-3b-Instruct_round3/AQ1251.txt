@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?metric ?value 
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:has_benchmark ?benchmark_result.
+    ?benchmark_result orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_metric ?metric.
+    ?evaluation orkg:has_value ?value.
+    ?benchmark orkg:has_dataset "MLDoc Zero-Shot English-to-Spanish".
+}
+LIMIT 1
+```

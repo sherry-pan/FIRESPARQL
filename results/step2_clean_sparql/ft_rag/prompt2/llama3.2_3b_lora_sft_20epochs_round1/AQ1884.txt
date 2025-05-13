@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?dataset ?dataset_lbl
+WHERE {
+  ?problem a orkgc:Problem;
+           rdfs:label ?problem_lbl.  
+  FILTER (str(?problem_lbl) = "Text Summarization")
+  ?benchmark orkgp:HAS_DATASET ?dataset.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?eval orkgp:P7032 ?cont;
+        orkgp:P7033 ?benchmark;
+        orkgp:P7031 ?problem.
+  ?dataset orkgp:P7030 ?eval;
+           rdfs:label ?dataset_lbl.
+}
+```

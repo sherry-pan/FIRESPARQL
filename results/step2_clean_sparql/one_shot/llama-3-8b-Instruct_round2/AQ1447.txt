@@ -1,0 +1,22 @@
+```sparql
+PREFIX orkgc: <http://www.semanticweb.org/orkg/codelists/concept/>
+PREFIX orkgp: <http://www.semanticweb.org/orkg/properties/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "Pre-Training Dataset")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset.
+      ?result orkgp:dataset ?dataset;
+              orkgp:metric ?metric;
+              orkgp:benchmark orkgc:HMDB51;
+              orkgp:performedBy ?model.
+      ?model rdfs:label ?model_lbl.
+    }
+  }
+}
+```

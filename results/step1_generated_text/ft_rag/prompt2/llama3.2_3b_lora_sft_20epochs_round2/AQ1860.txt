@@ -1,0 +1,20 @@
+Question:
+Provide a list of benchmarked datasets related to the Reading Comprehension research area?
+
+Generated SPARQL:
+ SELECT DISTINCT?dataset?dataset_lbl
+     WHERE {
+      ?paper orkgp:P31 [
+         rdfs:label?title.
+       ] {
+         orkgp:P32 [
+           orkgp:HAS_DATASET?dataset.
+          ?dataset orkgp:HAS_BENCHMARK?benchmark.
+          ?benchmark orkgp:P5003?eval.
+           FILTER(REGEX(?eval, "Reading Comprehension"))
+          ?dataset orkgp:P31?paper.
+          ?paper rdfs:label?title.
+           BIND(xsd:string(?title) AS?dataset_lbl)
+         }
+       }
+     }<|eot_id|>

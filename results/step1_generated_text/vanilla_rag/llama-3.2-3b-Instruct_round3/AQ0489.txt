@@ -1,0 +1,14 @@
+Question:
+Give me a list of research papers along with their titles and IDs, that have performed benchmarks on the SNLI dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+     SELECT?paper?title?id
+     WHERE {
+    ?paper orkg:hasBenchmark?benchmark.
+    ?benchmark orkg:hasDataset <http://example.org/SNLI>.
+    ?paper orkg:hasEvaluation?evaluation.
+    ?paper orkg:CSVW_Titles?title.
+    ?paper orkg:CSVW_Number?id.
+     FILTER (REGEX(?title, "SNLI") || REGEX(?id, "SNLI"))
+     }<|eot_id|>

@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the PubMed 20k RCT benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?model?microF1
+     WHERE {
+    ?model orkg:hasEvaluation?e.
+    ?e orkg:hasTrainingSet?ts.
+    ?ts orkg:hasDataset "PubMed 20k RCT".
+    ?model orkg:method?method.
+    ?method orkg:hasPerformanceMetric?metric.
+    ?metric orkg:label "micro-F1".
+    ?model orkg:hasPerformanceMetric?metric2.
+    ?metric2 orkg:label "macro-F1".
+    ?model orkg:hasPerformanceMetric?metric3.
+    ?metric3 orkg:label "Accuracy".
+    ?model orkg:hasPerformanceMetric?metric4.
+    ?metric4 orkg:label "Recall".
+     FILTER (?metric = "micro-F1" )
+     }<|eot_id|>

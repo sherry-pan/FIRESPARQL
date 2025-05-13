@@ -1,0 +1,23 @@
+```sparql
+SELECT ?method ?eval
+WHERE {
+  orkgr:R83591 a orkgc:Model;
+               ?property_iri_0 p:HAS_DATASET ?dataset.
+  ?dataset orkgp:HAS_EVALUATION ?eval.
+  ?eval ?property_iri_1 ?value.
+  FILTER(?value = "Accuracy")
+  ?property_iri_1 rdfs:label ?property_iri_0.
+  ?property_iri_0 rdfs:label ?method.
+  ?model orkgp:P31 ?cont.
+  ?cont orkgp:P70031 ?model_.
+  ?model_ orkgp:P70032 ?eval2.
+  ?eval2 rdfs:label ?eval.
+  FILTER(?eval = "0.9726")
+  ?model orkgp:P31 ?cont2.
+  ?cont2 orkgp:P70033 ?implementation.
+  ?implementation rdfs:label ?method2.
+  FILTER(?method = ?method2)
+}
+ORDER BY DESC(?eval)
+LIMIT 1
+```

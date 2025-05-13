@@ -1,0 +1,16 @@
+Question:
+Can you provide links to code used in papers that benchmark the FABIR model?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?code 
+     WHERE {
+    ?paper orkg:HAS_IMPLEMENTATION?implementation.
+    ?implementation orkg:HAS_LINK?link.
+    ?link orkg:is_link_to?code.
+    ?paper orkg:HAS_BENCHMARK?benchmark.
+    ?benchmark orkg:has_evaluation?evaluation.
+    ?evaluation orkg:has_code?code.
+     FILTER (str.contains(STR(?code), "FABIR") || str.contains(STR(?code), "benchmark"))
+     }
+    <|eot_id|>

@@ -1,0 +1,11 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+SELECT ?metric ?value
+WHERE {
+    ?benchmark orkg:HAS_BENCHMARK ?benchmarkResult.
+    ?benchmarkResult orkg:HAS_DATASET <http://orkg.org/orkg/dataset/Oxford-IIIT-Pets>.
+    ?benchmarkResult orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:CSVW_Value ?value.
+    FILTER (str(?value) = "top")
+}
+```

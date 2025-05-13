@@ -1,0 +1,13 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT DISTINCT ?metric
+WHERE {
+ ?dataset a orkg:YelpFineGrainedClassificationDataset.
+ ?dataset orkg:HAS_BENCHMARK ?benchmark.
+ ?benchmark orkg:HAS_EVALUATION ?evaluation.
+ ?evaluation rdfs:label ?metric.
+ FILTER (LANG(?metric) = "en")
+}
+```

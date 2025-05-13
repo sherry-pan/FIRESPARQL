@@ -1,0 +1,24 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw>
+
+SELECT ?model ?modelName
+WHERE {
+  ?model a orkg:Model.
+  ?model csvw:Name ?modelName.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark csvw:Name "Penn Treebank (Character Level)".
+  ?evaluation orkg:HAS_NUMBER ?score.
+  FILTER(?score = (
+    SELECT MAX(?score)
+    WHERE {
+      ?m a orkg:Model.
+      ?m orkg:HAS_EVALUATION ?eval.
+      ?eval orkg:HAS_BENCHMARK ?b.
+      ?b csvw:Name "Penn Treebank (Character Level)".
+      ?eval orkg:HAS_NUMBER ?score.
+    }
+  ))
+}
+```

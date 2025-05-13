@@ -1,0 +1,16 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the SciGEN dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?paper orkg:HAS_EVALUATION?evaluation.
+ ?evaluation orkg:HAS_BENCHMARK <http://orkg.org/orkg/resource/SciGEN>.
+ ?evaluation orkg:HAS_METHOD?method.
+ ?method orkg:HAS_METRIC?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel IN ("Accuracy", "Recall", "micro-F1", "macro-F1"))
+}<|eot_id|>

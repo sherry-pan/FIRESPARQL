@@ -1,0 +1,25 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Atari 2600 Up and Down")
+
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?benchmark orkgc:HAS_DATASET ?dataset;
+                 orkgc:HAS_EVALUATION ?eval.
+      ?eval orkgc:HAS_VALUE ?value;
+            orkgc:HAS_METRIC ?metric.
+      ?metric orkgc:HAS_LABEL ?label.
+      OPTIONAL {?metric orkgc:HAS_MODEL ?model.}
+      OPTIONAL {?eval orkgc:HAS_MODEL ?model.}
+      ?model rdfs:label ?model_lbl.
+      FILTER(?label = "Score")
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

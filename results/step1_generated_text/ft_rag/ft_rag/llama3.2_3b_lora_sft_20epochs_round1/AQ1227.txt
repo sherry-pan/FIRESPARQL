@@ -1,0 +1,43 @@
+Question:
+What is the highest benchmark result achieved on the Cartpole, swingup (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+ SELECT?metric?metric_value
+     WHERE {
+       orkgr:R8342 orkgp:HAS_BENCHMARK {
+         orkgp:HAS_EVALUATION {
+           orkgp:EVALUATION_Predicate         a            orkgp:Evaluation;
+           orkgp:EVALUATION_Predicate         rdfs:label       "accuracy"^^xsd:string.
+         }
+         orkgp:EVALUATION_VALUE           orkgp:HAS_METRIC   {
+           orkgp:HAS_METRIC           a                orkgp:Metric;
+           orkgp:HAS_METRIC           rdfs:label        ?metric.
+         }
+         orkgp:HAS_METRIC           orkgp:HAS_VALUE     {
+           orkgp:HAS_VALUE           orkgp:HAS_METRIC  ?has_metric;
+           orkgp:HAS_VALUE           rdfs:label        ?metric_value.
+         }
+         orkgp:HAS_VALUE           orkgp:HAS_BENCHMARK   {
+           orkgp:HAS_BENCHMARK           a                orkgp:Benchmark;
+           orkgp:HAS_BENCHMARK           rdfs:label         "Cartpole, swingup (DMControl500k)"^^xsd:string.
+         }
+         orkgp:HAS_BENCHMARK           orkgp:HAS_EVALUATION   {
+           orkgp:HAS_EVALUATION           a                orkgp:Evaluation;
+           orkgp:HAS_EVALUATION           rdfs:label        ?eval_label.
+         }
+         orkgp:HAS_EVALUATION           orkgp:HAS_RESULT     {
+           orkgp:HAS_RESULT           orkgp:HAS_VALUE      ?has_value;
+           orkgp:HAS_RESULT           rdfs:label          ?result_label.
+         }
+         orkgp:HAS_VALUE           orkgp:HAS Best_RESULT {
+           orkgp:HAS_BENCHMARK           a                orkgp:Benchmark;
+           orkgp:HAS_BENCHMARK           rdfs:label        ?benchmark_label.
+         }
+       }
+       FILTER(REGEX(STR(?eval_label), "Cartpole, swingup (DMControl500k)"))
+      ?has_value orkgp:HAS_VALUE      ?value.
+       BIND(xsd:float(?value) AS?metric_value)
+       BIND(xsd:float(?result_label) AS?metric)
+     }
+     ORDER BY DESC(?metric_value)
+     LIMIT 1<|eot_id|>

@@ -1,0 +1,19 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "TDM Tagged Corpus"
+          && str(?dataset_lbl) != "TDM Tagged Corpus (TestSet)"
+          && str(?dataset_lbl) != "TDM Tagged Corpus (TrainSet)")
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  OPTIONAL {
+    ?eval orkgp:HAS_METRIC ?metric.
+    ?metric rdfs:label ?metric_lbl.
+  }
+  ?eval orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value_lbl)
+  FILTER(?value_lbl = "Acc" || ?value_lbl = "Rec" || ?value_lbl = "macro-F1" || ?value_lbl = "micro-F1" || ?value_lbl = "Avg Accuracy" || ?value_lbl = "Avg F1" || ?value_lbl = "Avg Recall" || ?value_lbl = "Avg Length" || ?value_lbl = "Avg Entities")
+}
+```

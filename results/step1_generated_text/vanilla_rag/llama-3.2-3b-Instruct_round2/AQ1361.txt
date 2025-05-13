@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the ModelNet40 dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?benchmark?metric
+     WHERE {
+    ?benchmark orkg:HAS_DATASET "http://orkg.org/orkg/dataset/ModelNet40".
+    ?benchmark orkg:HAS_BENCHMARK?benchmarkScore.
+    ?benchmark orkg:HAS_EVALUATION?evaluation.
+    ?evaluation orkg:HAS_METHOD?method.
+    ?benchmarkScore orkg:HAS_METRIC?metric.
+     FILTER (strlike(STR(?metric), "accuracy") OR strlike(STR(?metric), "f1-score") OR strlike(STR(?metric), "precision") OR strlike(STR(?metric), "recall"))
+     }
+    <|eot_id|>

@@ -1,0 +1,16 @@
+Question:
+What is the best performing model benchmarking the PIQA dataset in terms of Accuracy metric?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl      = "PIQA")
+               && has_dataset       ?dataset       && has_benchmark     ?benchmark)
+      ?benchmark      orkgp:HAS_MODEL     ?model.
+      ?model         rdfs:label          ?model_lbl.
+      ?benchmark      orkgp:P71081         ?eval;
+                      orkgp:P50130         ?metric.
+       FILTER(?metric     = "Accuracy")
+     }<|eot_id|>

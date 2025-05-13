@@ -1,0 +1,10 @@
+```sparql
+PREFIX orkg: <http://purl.org/linked-data/orkg/>
+SELECT ?paper ?benchmark ?code
+WHERE {
+  ?paper orkg:hasImplementation ?implementation.
+  ?implementation orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:code ?code.
+  FILTER (CONTAINS(STR(?benchmark), "POP3D") || CONTAINS(STR(?implementation), "POP3D"))
+}
+```

@@ -1,0 +1,16 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "accuracy" || str(?metric_lbl) = "loss" || str(?metric_lbl) = "F1 score" || str(?metric_lbl) = "Precision" || str(?metric_lbl) = "Recall")
+  {
+    SELECT ?dataset ?dataset_lbl
+    WHERE {
+      ?dataset a orkgc:Dataset;
+               rdfs:label ?dataset_lbl.
+      FILTER (str(?dataset_lbl) = "Sequential CIFAR-10")
+    }
+  }
+}
+```

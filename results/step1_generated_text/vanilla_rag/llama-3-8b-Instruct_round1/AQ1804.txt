@@ -1,0 +1,15 @@
+Question:
+What is the name of the top performing model in terms of Params score when benchmarked on the VTAB-1k dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX vtab: <http://orkg.org/orkg/resource/VTAB-1k>
+
+SELECT?model?modelLabel
+WHERE {
+ ?model orkg:HAS_BENCHMARK?benchmark.
+ ?benchmark orkg:PARAMS?params.
+ ?benchmark orkg:HAS_DATASET vtab:VTAB-1k.
+ ?model orkg:NAME?modelLabel.
+  FILTER (?params = MAX(?params) )
+}<|eot_id|>

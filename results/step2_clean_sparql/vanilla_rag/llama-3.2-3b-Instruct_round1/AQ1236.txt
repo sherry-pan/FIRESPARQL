@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/ontology/>
+PREFIX w3c: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?metric ?score
+WHERE {
+  ?gpgn a orkg:Benchmark.
+  ?gpgn orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?benchmark orkg:HAS_METHOD ?method.
+  ?benchmark orkg:METRIC ?metric.
+  ?benchmark orkg:SCORE ?score.
+  FILTER (?metric = "Benchmark Result" && ?score > 0 && str(?method) = "Gibson PointGoal Navigation")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

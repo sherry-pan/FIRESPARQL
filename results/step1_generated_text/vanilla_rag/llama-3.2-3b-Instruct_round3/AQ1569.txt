@@ -1,0 +1,21 @@
+Question:
+Indicate the model that performed best in terms of F1 metric on the BC5CDR-disease benchmark dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/orkg#>
+     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX f1: <http://www.w3.org/2005/10/SPARQL#f1>
+
+     SELECT?model (COUNT(?metric) AS?count) 
+     WHERE {
+      ?model orkg:hasModelPerformance?performance.
+      ?performance orkg:hasMetric?metric.
+      ?metric orkg:hasMetricType f1:F1.
+      ?metric orkg:hasMetricName "F1".
+      ?model orkg:hasDataset "BC5CDR-disease".
+      ?performance orkg:hasMetric?metric.
+      ?metric rdfs:label?metricLabel.
+       FILTER (?metricLabel = "micro-F1" OR?metricLabel = "macro-F1" OR?metricLabel = "Accuracy" OR?metricLabel = "Recall").
+       BIND(f1:F1(?performance) as?f1)
+     } GROUP BY?model<|eot_id|>

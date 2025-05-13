@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?metric 
+WHERE {
+    ?metric orkg:hasEvaluation orkg:Evaluation.
+    ?metric orkg:hasDataset <http://orkg.org/orkg/dataset/atari2600_bowling>.
+    ?metric orkg:hasBenchmark orkg:Benchmark.
+    ?metric orkg:hasClasses ?classes.
+    ?classes rdfs:label ?label.
+    FILTER (STRLIKE(STR(?label), "Accuracy") OR STRLIKE(STR(?label), "Recall") OR STRLIKE(STR(?label), "macro-F1") OR STRLIKE(STR(?label), "micro-F1"))
+}
+```

@@ -1,0 +1,26 @@
+Question:
+Who has contributed to the largest number of articles about coronavirus?
+
+Generated SPARQL:
+ SELECT?author?author_labels
+WHERE {
+  orkgr:R78492 orkgp:compareContribution?contrib.
+ ?contrib orkgp:P36088?author.
+ ?author rdfs:label?author_labels.
+  FILTER (?contrib orkgp:P36088?author && 
+           (SELECT (COUNT(?article) as?count) 
+            {?contrib orkgp:P36092?article. } 
+           ) = (SELECT (MAX(?count) as?max_count) 
+            { 
+             ?contrib orkgp:P36092?article. 
+              SELECT?count 
+              { 
+               ?contrib orkgp:P36092?article. 
+               ?article orkgp:P36088?author. 
+                GROUP BY?author 
+                Aggregate COUNT(?article) as?count 
+              } 
+            } 
+           ) 
+         ) 
+}<|eot_id|>

@@ -1,0 +1,16 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgp:P32 ?cont.
+  ?cont orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_VALUE ?value.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "VTAB-1k"))
+  BIND(xsd:float(?value) AS ?params)
+}
+ORDER BY DESC(?params)
+LIMIT 1
+```

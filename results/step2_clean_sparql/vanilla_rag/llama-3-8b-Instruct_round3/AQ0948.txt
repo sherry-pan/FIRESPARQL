@@ -1,0 +1,19 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?paper a orkg:Paper.
+  ?paper orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET ?dataset.
+  ?dataset rdfs:label "Atari 2600 Skiing".
+  ?evaluation orkg:HAS_METRIC ?metric.
+  FILTER (?metric != orkg:P71079).
+  FILTER (?metric != orkg:P71080).
+  FILTER (?metric != orkg:P71081).
+  FILTER (?metric != orkg:P71082).
+  FILTER (?metric != orkg:P71060).
+}
+```

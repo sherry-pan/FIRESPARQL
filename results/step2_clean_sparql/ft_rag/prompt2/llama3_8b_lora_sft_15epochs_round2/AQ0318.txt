@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "ImageNet ReaL")
+  ?evaluation orkgp:HAS_DATASET ?dataset.
+  ?paper orkgp:HAS_EVALUATION ?evaluation.
+  ?paper orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?model_lbl;
+          orkgp:P71077 ?model.
+}
+```

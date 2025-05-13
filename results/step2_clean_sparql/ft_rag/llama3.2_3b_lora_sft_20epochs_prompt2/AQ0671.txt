@@ -1,0 +1,20 @@
+```sparql
+SELECT ?papers ?paperID ?title
+WHERE {
+  ?papers orkgp:P31 [
+    orkgp:P2005 ?dataset
+  ];
+  orkgp:P1476 ?title;
+  orkgp:PID ?paperID.
+  ?dataset rdfs:label ?dataset_labels.
+  FILTER(REGEX(STR(?dataset_labels), "BUCC German-to-English"))
+  ?papers orkgp:HAS_BENCHMARK [
+    orkgp:P2004 ?benchmark
+  ].
+  ?benchmark orkgp:P2003 ?evaluations.
+  ?evaluations orkgp:P23139 ?number.
+  FILTER(?number > 0)
+}
+ORDER BY DESC(?number)
+LIMIT 10
+```

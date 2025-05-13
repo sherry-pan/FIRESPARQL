@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?metric 
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasEvaluation ?hasEvaluation.
+  ?hasEvaluation orkg:usedMetric ?metric.
+  ?dataset a orkg:Dataset; 
+           orkg:hasName "Reuters De-En".
+  ?evaluation orkg:concerns ?dataset.
+  ?metric rdfs:label ?label.
+  FILTER(?label IN ("Recall", "Accuracy", "micro-F1", "macro-F1"))
+}
+```

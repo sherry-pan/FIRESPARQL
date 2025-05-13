@@ -1,0 +1,23 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+
+SELECT ?model ?modelLabel ?f1
+WHERE {
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasProperty ?property.
+  ?property orkg:label "micro-F1".
+  ?evaluation orkg:hasValue ?f1.
+  ?model orkg:method ?method.
+  ?method orkg:hasProperty ?metricProperty.
+  ?metricProperty orkg:label ?metricLabel.
+  FILTER (?metricLabel = "ShARe/CLEF eHealth corpus" && ?metricProperty = orkg:hasTrainingSet).
+  FILTER NOT EXISTS {
+    ?model_ orkg:hasEvaluation ?evaluation_.
+    ?evaluation_ orkg:hasProperty ?property_.
+    ?property_ orkg:label "micro-F1".
+    ?evaluation_ orkg:hasValue ?f1_.
+    FILTER (?f1_ > ?f1)
+  }
+  ?model orkg:label ?modelLabel.
+}
+```

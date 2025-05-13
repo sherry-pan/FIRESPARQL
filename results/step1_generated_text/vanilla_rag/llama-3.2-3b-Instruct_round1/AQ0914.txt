@@ -1,0 +1,19 @@
+Question:
+Can you list the metrics used to evaluate models on the Barabasi-Albert dataset?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?metric (COUNT(*) AS numMetrics) 
+     WHERE {
+    ?metric orkg:hasBenchmark "Barabasi-Albert". 
+     SERVICE orkg:sparql {
+     SELECT?metric 
+     WHERE {
+    ?metric orkg:hasBenchmark "Barabasi-Albert". 
+    ?metric orkg:label?label. 
+     FILTER (CONTAINS(LCASE(?label), "metric") OR CONTAINS(LCASE(?label), "evaluation"))
+     }
+     }
+     GROUP BY?metric
+     HAVING (COUNT(?metric) > 1)
+     }<|eot_id|>

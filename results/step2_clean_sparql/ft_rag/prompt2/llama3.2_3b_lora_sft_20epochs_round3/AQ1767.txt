@@ -1,0 +1,17 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:HAS_DATASET ?dataset.
+  ?dataset orkgp:P33 ?benchmark.
+  ?benchmark orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?value)
+  ?eval ?compare.
+  ?compare orkgp:COMPARED_WITH ?other.
+  ?other orkgp:P43138 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(?model_lbl, "Accuracy"))
+}
+```

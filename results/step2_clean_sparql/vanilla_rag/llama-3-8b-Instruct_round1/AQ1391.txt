@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?model ?evaluation
+WHERE {
+    ?model a orkg:Model.
+    ?model orkg:HAS_DATASET orkg:ACE_2004.
+    ?model orkg:HAS_EVALUATION ?evaluation.
+    ?evaluation orkg:HAS_METRIC orkg:RE_MICRO_F1.
+    ?evaluation orkg:HAS_VALUE ?value.
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

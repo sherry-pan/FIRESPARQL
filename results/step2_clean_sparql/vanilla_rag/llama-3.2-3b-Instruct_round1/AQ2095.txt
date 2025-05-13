@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://openresearchknowledgegraph.org/ontology/>
+PREFIX orkg: <http://openresearchknowledgegraph.org/schema/>
+
+SELECT ?code
+WHERE {
+   ?paper a orkg:Paper.
+   ?paper orkg:HAS_BENCHMARK ?benchmark.
+   ?benchmark orkg:HAS_IMPLEMENTATION ?implementation.
+   ?benchmark orkg:HAS_METHOD orkg:Fine-GrainedGatingModel.
+   ?implementation orkg:HAS_LINK ?code.
+   FILTER (STR(?code) =~ "https://")
+}
+```

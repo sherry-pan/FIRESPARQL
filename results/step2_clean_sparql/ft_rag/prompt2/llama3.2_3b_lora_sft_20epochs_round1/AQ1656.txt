@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?eval a orkgc:Evaluation;
+        rdfs:label ?eval_lbl.
+  FILTER (str(?eval_lbl) = "Oxford-IIIT Pets")
+  ?eval orkgp:P71075 ?cont.
+  ?cont orkgp:P71086 ?dataset.
+  ?dataset orkgp:hasDataset ?dataset_of_model.
+  ?dataset_of_model orkgp:P97145 ?method.
+  ?method rdfs:label ?method_lbl.
+  ?cont orkgp:P71130 ?FLOPS.
+  ?FLOPS orkgp:HAS_VALUE ?value.
+  OPTIONAL {
+    ?eval orkgp:P71133 ?model.
+    ?model rdfs:label ?model_lbl.
+  }
+}
+ORDER BY DESC(?value)
+LIMIT 1
+```

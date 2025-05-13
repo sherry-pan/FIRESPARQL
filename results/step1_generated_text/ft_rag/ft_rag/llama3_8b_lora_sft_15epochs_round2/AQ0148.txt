@@ -1,0 +1,14 @@
+Question:
+Could you provide a list of models that have been tested on the QNLI benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?benchmark       a                orkgc:Benchmark;
+                        rdfs:label      ?benchmark_lbl.
+       FILTER (str(?benchmark_lbl) = "QNLI")
+      ?dataset        orkgp:HAS_BENCHMARK      ?benchmark.
+      ?cont         orkgp:HAS_DATASET         ?dataset.
+       OPTIONAL {?cont      orkgp:HAS_MODEL          ?model.
+               ?model      rdfs:label               ?model_lbl.}
+     }<|eot_id|>

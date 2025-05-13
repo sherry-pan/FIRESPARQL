@@ -1,0 +1,15 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the UCF101 (finetuned) dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT?evaluationMetric
+WHERE {
+ ?dataset a orkg:Dataset ;
+    orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:HAS_EVALUATION?evaluationMetric.
+  FILTER (?dataset <http://www.robots.ox.ac.uk/~vgg/data/ucf101/> &&?evaluationMetric!= owl:nothing)
+}<|eot_id|>

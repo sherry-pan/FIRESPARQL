@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?code
+WHERE {
+  ?paper orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?eval.
+  ?eval orkgp:HAS_EVALUATION ?evaluation.
+  ?evaluation orkgp:HAS_METHOD ?method.
+  ?method rdfs:label ?method_lbl.
+  FILTER(REGEX(?method_lbl, "PEGASUS"))
+  ?eval orkgp:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkgp:P31 ?cont.
+  ?cont orkgp:HAS_IMPLEMENTATION ?implementation.
+  ?implementation orkgp:P31 ?code.
+}
+```

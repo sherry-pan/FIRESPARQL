@@ -1,0 +1,18 @@
+Question:
+Can you provide the highest benchmark result, including the metric and score, for the Scholarly entity usage detection dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX p: <http://orkg.org/orkg/predicate/>
+
+SELECT?metric?score
+WHERE {
+ ?entity a orkg:ScholarlyEntityUsageDetectionDataset.
+ ?entity p:P71075?evaluation.
+ ?evaluation p:P71079?recall.
+ ?evaluation p:P71080?microF1.
+ ?evaluation p:P71081?accuracy.
+ ?evaluation p:P71082?macroF1.
+  FILTER(?recall = MAX(?recall) ||?microF1 = MAX(?microF1) ||?accuracy = MAX(?accuracy) ||?macroF1 = MAX(?macroF1))
+  FILTER(?entity p:P71086?trainingSet ||?entity p:P71096?validationSet)
+}<|eot_id|>

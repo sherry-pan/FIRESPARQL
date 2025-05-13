@@ -1,0 +1,18 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?metric ?score WHERE {
+  ?result dbo:dataset <http://dbpedia.org/resource/AAPD> ;
+          dbo:metric ?metric ;
+          dbo:score ?score .
+
+  ?highestResult dbo:dataset <http://dbpedia.org/resource/AAPD> ;
+                 dbo:metric ?metric ;
+                 dbo:score ?highestScore .
+  
+  FILTER (?score = ?highestScore)
+} 
+ORDER BY DESC(?score)
+LIMIT 1
+```

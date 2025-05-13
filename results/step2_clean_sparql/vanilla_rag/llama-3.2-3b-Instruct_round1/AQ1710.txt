@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://example.org/orkg#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?model ?Score 
+WHERE {
+  ?model rdfs:label ?modelLabel.
+  ?model orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:hasDataset "Atari 2600 Freeway".
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:Score ?Score.
+}
+ORDER BY DESC(?Score)
+LIMIT 1
+```

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+SELECT ?model ?dataset ?score 
+WHERE {
+    ?benchmark a orkg:Benchmark.
+    ?benchmark orkg:has_benchmark ?model.
+    ?benchmark orkg:has_dataset ?dataset.
+    ?benchmark orkg:has_evaluation ?evaluation.
+    ?evaluation orkg:has_metric orkg:ROUGE1.
+    ?evaluation orkg:has_score ?score.
+    FILTER(?dataset = "AESLC")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

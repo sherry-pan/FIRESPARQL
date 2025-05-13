@@ -1,0 +1,16 @@
+Question:
+What is the most common location in the studies?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?location (COUNT(*) AS freq) 
+     WHERE {
+    ?study orkg:has_study?s.
+    ?s orkg:location?l.
+    ?l orkg:City?city.
+    ?l orkg:Country?country.
+    ?l orkg:GeographicalRegion?region.
+    ?l orkg:Location?loc.
+     GROUP BY?location
+     HAVING COUNT(*) > 1
+     }<|eot_id|>

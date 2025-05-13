@@ -1,0 +1,18 @@
+```sparql
+SELECT ?metric ?metric_value
+WHERE {
+  ?evaluation orkgp:HAS_BENCHMARK [
+    a orkgp:Benchmark;
+    rdfs:label "Cartpole, swingup (DMControl500k)"^^xsd:string
+  ];
+  orkgp:HAS_RESULT [
+    orkgp:HAS_METRIC [
+      a orkgp:Metric;
+      rdfs:label ?metric
+    ];
+    orkgp:HAS_VALUE ?metric_value
+  ].
+}
+ORDER BY DESC(?metric_value)
+LIMIT 1
+```

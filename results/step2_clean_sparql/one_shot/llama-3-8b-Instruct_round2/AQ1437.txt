@@ -1,0 +1,25 @@
+```sparql
+PREFIX orkgc: <http://www.orkg.org/closure/>
+PREFIX orkgp: <http://www.orkg.org/provenance/>
+
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "BLEU")
+  ?dataset a orkgc:Dataset;
+           rdfs:label "WMT2016 Romanian-English".
+  ?evaluation a orkgc:Evaluation;
+              orkgc:evaluates ?model;
+              orkgc:onDataset ?dataset;
+              orkgc:hasMetricValue ?metric_value.
+  ?model rdfs:label ?model_lbl.
+  { SELECT ?model
+    WHERE {
+      ?evaluation orkgc:hasMetricValue ?metric_value.
+    }
+    ORDER BY DESC(?metric_value)
+    LIMIT 1
+  }
+}
+```

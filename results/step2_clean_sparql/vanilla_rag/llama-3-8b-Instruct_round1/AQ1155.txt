@@ -1,0 +1,16 @@
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orkg: <http://www.orkg.org/>
+
+SELECT ?metric ?score
+WHERE {
+  ?evaluation a orkg:Evaluation ;
+              orkg:hasMetric ?metric ;
+              orkg:hasScore ?score ;
+              orkg:hasTrainingSet ?dataset.
+  ?dataset orkg:name "Natural Questions (long)".
+  FILTER (?metric = "Accuracy" || ?metric = "Recall" || ?metric = "F1")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

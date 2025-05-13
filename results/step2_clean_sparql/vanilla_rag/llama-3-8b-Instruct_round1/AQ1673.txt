@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?model ?accuracy
+WHERE {
+  ?model a orkg:Model.
+  ?model orkg:hasEvaluation ?evaluation.
+  ?evaluation orkg:hasMetric orkg:Accuracy.
+  ?evaluation orkg:hasValue ?accuracy.
+  ?model orkg:hasDataset orkg:MLDocZeroShotEnglishToGermanBenchmark.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

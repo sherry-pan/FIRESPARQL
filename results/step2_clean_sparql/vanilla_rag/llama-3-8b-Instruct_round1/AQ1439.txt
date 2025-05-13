@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?model ?modelLabel ?metricValue
+WHERE {
+  ?model orkg:HAS_BENCHMARK ?benchmark.
+  ?benchmark orkg:HAS_DATASET orkg:ImageNet_64x64.
+  ?benchmark orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation schema:evaluationMetric "Bits per dim".
+  ?evaluation schema:evaluationValue ?metricValue.
+  ?model orkg:hasName ?modelLabel.
+}
+ORDER BY ?metricValue
+LIMIT 1
+```

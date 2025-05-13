@@ -1,0 +1,15 @@
+```sparql
+SELECT DISTINCT ?metric ?metric_lbl (MAX(?value) AS ?score)
+WHERE {
+  orkgr:R44980 orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:P31 ?cont.
+  ?cont orkgp:HAS_DATASET ?dataset.
+  ?dataset rdfs:label ?dataset_lbl.
+  FILTER(REGEX(?dataset_lbl, "NYT-single"))
+  ?eval orkgp:P33 ?metric.
+  ?metric rdfs:label ?metric_lbl.
+  ?eval orkgp:P32 ?value.
+  BIND(xsd:float(?value) AS ?value)
+  FILTER(?metric_lbl = "Recall" || ?metric_lbl = "Micro-F1" || ?metric_lbl = "Accuracy" || ?metric_lbl = "Macro-F1")
+}
+```

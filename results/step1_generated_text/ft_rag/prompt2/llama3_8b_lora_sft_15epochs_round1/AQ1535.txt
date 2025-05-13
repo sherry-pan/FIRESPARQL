@@ -1,0 +1,23 @@
+Question:
+Which model has achieved the highest Test perplexity score on the WikiText-2 benchmark dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?dataset        a                orkgc:Dataset;
+                       rdfs:label      ?dataset_lbl.
+       FILTER (str(?dataset_lbl) = "WikiText-2")
+      ?benchmark      orkgp:HAS_DATASET      ?dataset.
+      ?cont         orkgp:HAS_BENCHMARK     ?benchmark.
+      ?eval         orkgp:HAS_VALUE         ?value.
+      ?cont         orkgp:HAS_EVALUATION    ?eval.
+      ?model        orkgp:P32               ?cont;
+                     rdfs:label              ?model_lbl.
+      ?eval         orkgp:P43127             ?metric.
+      ?metric       rdfs:label              ?metric_lbl.
+       FILTER (str(?metric_lbl) = "Test perplexity")
+       FILTER (?value = xsd:float(?value_float)
+               &&?value_float = <TBD> )
+     }
+     ORDER BY DESC(?value_float)
+     LIMIT 1<|eot_id|>

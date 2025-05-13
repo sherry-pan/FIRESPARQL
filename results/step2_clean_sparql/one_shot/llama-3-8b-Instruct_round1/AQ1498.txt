@@ -1,0 +1,14 @@
+```
+PREFIX kgc: <http://example.org/kgc#>
+SELECT ?model ?accuracy
+WHERE {
+  ?evaluation a kgc:Evaluation;
+              kgc:evaluates kgc:PIQA;
+              kgc:hasResult ?result.
+  ?result kgc:metric kgc:Accuracy;
+          kgc:value ?accuracy.
+  ?model kgc:hasEvaluation ?evaluation.
+}
+ORDER BY DESC(?accuracy)
+LIMIT 1
+```

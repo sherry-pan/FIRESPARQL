@@ -1,0 +1,17 @@
+Question:
+What is the best performing model benchmarking the ImageNet dataset in terms of Number of params metric?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX csvw: <http://www.w3.org/ns/csvw#>
+
+     SELECT?model?modelLabel?numParams
+     WHERE {
+      ?model orkg:HAS_BENCHMARK?benchmark.
+      ?benchmark orkg:HAS_DATASET orkg:ImageNet.
+      ?benchmark orkg:HAS_EVALUATION?evaluation.
+      ?evaluation csvw:Number?numParams.
+      ?model orkg:HAS_IMPLEMENTATION?implementation.
+       FILTER (?numParams = (SELECT max(?numParams) AS maxNumParams
+                             FROM {?model?modelLabel?implementation?evaluation?evaluation?numParams }))
+     }<|eot_id|>

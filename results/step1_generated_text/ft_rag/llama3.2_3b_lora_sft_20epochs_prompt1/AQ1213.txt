@@ -1,0 +1,18 @@
+Question:
+What is the top benchmark result (metric and value) over the dataset BC2GM?
+
+Generated SPARQL:
+ SELECT?metric?value
+     WHERE {
+      ?dataset       a                orkgc:Dataset;
+                     rdfs:label      ?dataset_lbl.
+         FILTER (str(?dataset_lbl) = "BC2GM")
+        ?benchmark      orkgp:HAS_DATASET      ?dataset;
+                          orkgp:P32               ?eval.
+        ?eval           orkgp:HAS_EVALUATION     ?eval;
+                          rdfs:label              ?metric.
+        ?eval           orkgp:P31               ?cont.
+        ?cont         orkgp:P32               ?benchmark.
+        ?benchmark      orkgp:P31               ?eval.
+        ?eval           orkgp:P504              ?value.
+     }<|eot_id|>

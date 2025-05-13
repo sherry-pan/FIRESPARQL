@@ -1,0 +1,20 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?metric ?value
+WHERE {
+  ?metric a orkg:Metric ;
+          orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation a orkg:Evaluation ;
+              orkg:HAS_EVALUATION ?value ;
+              orkg:HAS_EVALUATION ?dataset.
+  ?dataset a orkg:Dataset ;
+           orkg:HAS_EVALUATION orkg:Evaluation ;
+           orkg:HAS_EVALUATION ?metric.
+}
+```

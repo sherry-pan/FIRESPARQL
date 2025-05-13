@@ -1,0 +1,21 @@
+```sparql
+SELECT ?precision ?recall ?micro_f1 ?macro_f1
+WHERE {
+  orkgr:R44985 orkgp:compareContribution ?cont.
+  ?cont orkgp:P31023 ?eval.
+  ?eval orkgp:HAS_VALUE ?precision.
+  BIND(xsd:float(?precision) AS ?precision)
+  ?eval orkgp:HAS_VALUE ?recall.
+  BIND(xsd:float(?recall) AS ?recall)
+  ?eval orkgp:P31024 ?micro_f.
+  BIND(xsd:float(?micro_f) AS ?micro_f1)
+  ?eval orkgp:P31025 ?macro_f.
+  BIND(xsd:float(?macro_f) AS ?macro_f1)
+  ?eval orkgp:P97142 ?algorithm.
+  FILTER(REGEX(?algorithm, "Naive Bayes"))
+  ?eval orkgp:P71064 ?feature.
+  FILTER(REGEX(?feature, "Bag of Words"))
+  ?eval orkgp:P71094 ?classification_system.
+  FILTER(REGEX(?classification_system, "user feedback as feature requests"))
+}
+```

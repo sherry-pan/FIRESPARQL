@@ -1,0 +1,14 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?metric
+WHERE {
+  ?dataset a orkg:Dataset ;
+           orkg:hasBenchmark ?benchmark.
+  ?benchmark orkg:evaluation ?evaluation.
+  ?evaluation orkg:hasMetric ?metric.
+  FILTER (?dataset = <http://orkg.org/orkg/dataset/Habitat_2020_Object_Nav_test-std> &&
+          ?metric IN (orkg:P71079, orkg:P71080, orkg:P71081, orkg:P71082))
+}
+```

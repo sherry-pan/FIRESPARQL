@@ -1,0 +1,22 @@
+```
+PREFIX ex: <http://example.org/>
+
+SELECT ?model
+WHERE {
+  ?evaluation ex:dataset "Stanford Cars" ;
+              ex:metric ex:Accuracy ;
+              ex:model ?model ;
+              ex:value ?value .
+              
+  {
+    SELECT (MAX(?value) as ?maxValue)
+    WHERE {
+      ?evaluation ex:dataset "Stanford Cars" ;
+                  ex:metric ex:Accuracy ;
+                  ex:value ?value .
+    }
+  }
+  
+  FILTER(?value = ?maxValue)
+}
+```

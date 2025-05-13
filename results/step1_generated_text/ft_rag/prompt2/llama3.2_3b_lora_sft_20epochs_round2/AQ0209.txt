@@ -1,0 +1,15 @@
+Question:
+Can you list the models that have been evaluated on the ClueWeb09-B dataset?
+
+Generated SPARQL:
+ SELECT DISTINCT?model?model_lbl
+     WHERE {
+      ?paper orkgp:P31?cont.
+      ?cont orkgp:P34?eval.
+      ?eval orkgp:HAS_DATASET?dataset.
+       FILTER(?dataset = "ClueWeb09-B")
+      ?eval orkgp:HAS_EVALUATION_VALUE?eval_value.
+       BIND(xsd:float(?eval_value) AS?eval_value)
+      ?eval orkgp:P4312?model.
+      ?model rdfs:label?model_lbl.
+     }<|eot_id|>

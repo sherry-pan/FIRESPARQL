@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX csvw: <http://purl.org/csw/property/>
+
+SELECT ?model_name ?number_of_params_score
+WHERE {
+  ?model orkg:has_benchmark ?benchmark.
+  ?benchmark csvw:has_evaluation ?evaluation.
+  ?evaluation csvw:evaluation_type "Number of params score".
+  ?model orkg:CSVW_Name ?model_name.
+  ?model orkg:CSVW_Number ?number_of_params_score.
+  FILTER (?benchmark = <http://orkg.org/orkg/iri/ModelBenchmark/Penn Treebank (Character Level)>).
+}
+ORDER BY DESC(?number_of_params_score)
+LIMIT 1
+```

@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+
+SELECT ?compound (COUNT(*) AS ?frequency)
+WHERE {
+    ?compound a orkg:LeadCompound.
+    ?compound orkg:hasEvaluation ?evaluation.
+    ?evaluation orkg:hasBenchmark ?benchmark.
+}
+GROUP BY ?compound
+ORDER BY DESC(?frequency)
+LIMIT 1
+```

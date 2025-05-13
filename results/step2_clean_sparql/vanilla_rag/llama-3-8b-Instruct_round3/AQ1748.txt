@@ -1,0 +1,18 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX csvw: <http://www.w3.org/ns/csvw/>
+
+SELECT ?model_name
+WHERE {
+  ?model a orkg:Method.
+  ?model orkg:HAS_EVALUATION ?evaluation.
+  ?evaluation orkg:HAS_METRIC ?metric.
+  ?metric orkg:METRIC_NAME "NLL".
+  ?metric orkg:METRIC_VALUE ?metric_value.
+  ?model orkg:HAS_DATASET ?dataset.
+  ?dataset orkg:NAME "Nottingham".
+  ?model csvw:name ?model_name.
+}
+ORDER BY ?metric_value
+LIMIT 1
+```

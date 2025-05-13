@@ -1,0 +1,13 @@
+```sparql
+SELECT DISTINCT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label "X-Sum".
+  ?benchmark orkgp:HAS_DATASET ?dataset;
+             orkgp:HAS_EVALUATION ?eval.
+  ?eval orkgp:HAS_VALUE ?value.
+  FILTER(?value = "0.9065624540211568"^^xsd:float)
+  ?cont orkgp:P31 ?model;
+        rdfs:label ?model_lbl.
+}
+```

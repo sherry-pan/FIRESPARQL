@@ -1,0 +1,16 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX ace2005: <http://orkg.org/orkg/dataset/ace2005/>
+
+SELECT ?metric ?score
+WHERE {
+  ?evaluation a orkg:Evaluation.
+  ?evaluation orkg:hasDataset ace2005:ACE_2005.
+  ?evaluation orkg:hasEvaluation ?evaluationResult.
+  ?evaluationResult orkg:hasMetric ?metric.
+  ?evaluationResult orkg:hasScore ?score.
+  FILTER (?metric = "macro-F1" || ?metric = "Accuracy" || ?metric = "Recall" || ?metric = "micro-F1")
+}
+ORDER BY DESC(?score)
+LIMIT 1
+```

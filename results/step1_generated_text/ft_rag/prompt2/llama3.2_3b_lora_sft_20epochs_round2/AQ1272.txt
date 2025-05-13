@@ -1,0 +1,15 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Breakout dataset?
+
+Generated SPARQL:
+ SELECT?metric?metric_lbl (MAX(?eval) AS?score)
+     WHERE {
+       orkgr:R6898 orkgp:HAS_DATASET?dataset.
+      ?dataset orkgp:HAS_BENCHMARK?benchmark.
+      ?benchmark orkgp:HAS_EVALUATION?eval.
+      ?eval orkgp:METRIC?metric.
+       FILTER(REGEX(?metric, "breakout"))
+      ?benchmark orkgp:P32?cont.
+      ?cont orkgp:P31?paper.
+      ?paper orkgp:P5009?eval
+     }<|eot_id|>

@@ -1,0 +1,21 @@
+```sparql
+SELECT ?method
+WHERE {
+  orkgr:R155561 (orkgp:evaluatio* ?eval).
+  ?eval orkgp:P31 ?cont.
+  ?cont orkgp:P32 ?model.
+  ?model rdfs:label ?model_lbl.
+  FILTER(REGEX(STR(?model_lbl), "Accuracy"))
+  ?cont orkgp:HAS_DATASET ?dataset.
+  FILTER(REGEX(STR(?dataset), "Amazon"))
+  ?eval orkgp:P31 ?eval2.
+  ?eval2 orkgp:P50331 ?cont2.
+  ?cont2 orkgp:P5040 ?eval3.
+  ?eval3 orkgp:P8131 ?metric.
+  BIND(xsd:float(?metric) AS ?eval_value)
+  FILTER(?eval_value = 1)
+  BIND(xsd:string(?model_lbl) AS ?method)
+}
+ORDER BY DESC(?eval_value)
+LIMIT 1
+```

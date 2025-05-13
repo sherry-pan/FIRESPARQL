@@ -1,0 +1,13 @@
+```sparql
+PREFIX orkg: <http://www.semantic-mediawiki.org/ontology/orkg#>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+
+SELECT ?metric
+WHERE {
+ ?dataset a orkg:Dataset ; 
+  orkg:hasEvaluation ?evaluation.
+ ?evaluation orkg:hasMetric ?metric.
+  FILTER(?dataset = <http://www.semantic-mediawiki.org/resource/DMControl500k>).
+  FILTER(?metric IN ("Recall", "micro-F1", "macro-F1", "Accuracy"))
+}
+```

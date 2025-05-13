@@ -1,0 +1,21 @@
+Question:
+Provide a list of papers that have utilized the C51 noop model and include the links to their code?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+     SELECT?paper?paperCode 
+     WHERE {
+      ?paper orkg:HAS_METHOD orkg:C51_noop.
+      ?paper orkg:HAS_IMPLEMENTATION?code.
+       SERVICE orkg:sparql {
+         SELECT?paper?paperCode 
+         WHERE {
+          ?paper orkg:HAS_METHOD orkg:C51_noop.
+          ?paper orkg:HAS_IMPLEMENTATION?code.
+           BIND(STR(?code) AS?paperCode) 
+         }
+       }
+     }<|eot_id|>

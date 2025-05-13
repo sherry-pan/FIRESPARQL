@@ -1,0 +1,22 @@
+```sparql
+SELECT DISTINCT ?metric_values
+WHERE {
+  ?algorithm a orkgc:Algorithm;
+             rdfs:label ?algorithm_lbl.
+  FILTER (str(?algorithm_lbl) = "naive bayes")
+  ?cont orkgp:HAS_DATASET ?dataset;
+        orkgp:HAS_EVALUATION ?eval;
+        orkgp:HAS_MODEL ?model;
+        orkgp:HAS_CLASSIFICATION ?classification.
+  ?eval orkgp:HAS_METRIC_VALUES ?metric_values.
+  ?model orkgp:HAS_ALGORITHM ?algorithm;
+         orkgp:HAS_FEATURES ?features.
+  ?features orkgp:P71064 ?feature.
+  ?feature rdfs:label ?feature_lbl.
+  FILTER (str(?feature_lbl) = "bag of words")
+  ?classification orkgp:P71094 ?classification_system;
+                  orkgp:P71095 ?feedback.
+  ?feedback rdfs:label ?feedback_lbl.
+  FILTER (str(?feedback_lbl) = "feature request")
+}
+```

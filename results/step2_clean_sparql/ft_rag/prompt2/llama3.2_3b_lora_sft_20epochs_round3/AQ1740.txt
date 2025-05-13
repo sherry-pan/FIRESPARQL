@@ -1,0 +1,24 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?dataset a orkgc:Dataset;
+           rdfs:label ?dataset_lbl.
+  FILTER (str(?dataset_lbl) = "Sequential MNIST")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?benchmark orkgp:HAS_DATASET ?dataset;
+                 rdfs:label ?dataset_lbl.
+      ?cont orkgp:P70402 ?benchmark;
+            orkgp:P70401 ?eval.
+      ?eval orkgp:HAS_VALUE ?value;
+            rdfs:label ?eval_lbl.
+      FILTER(?eval_lbl = "Permuted Accuracy")
+      ?model orkgp:P70401 ?eval;
+             rdfs:label ?model_lbl.
+    }
+    ORDER BY DESC(?value)
+    LIMIT 1
+  }
+}
+```

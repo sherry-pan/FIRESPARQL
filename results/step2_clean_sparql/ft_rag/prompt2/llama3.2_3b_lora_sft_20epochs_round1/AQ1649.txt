@@ -1,0 +1,22 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?model a orkgc:Model;
+         rdfs:label ?model_lbl;
+         orkgp:HAS_WINNER ?winner.
+  ?winner has_value ?success_score;
+          has_metric ?metric.
+  ?metric a orkgc:Metric;
+          rdfs:label ?metric_lbl.
+  FILTER (str(?metric_lbl) = "SUCCESS")
+  ?winner has_dataset ?dataset.
+  ?dataset has_benchmark ?benchmark.
+  ?benchmark has_result ?result.
+  ?result has_value ?success_score;
+          has_compare ?compare.
+  ?compare rdfs:label ?compare_lbl.
+  FILTER (str(?compare_lbl) = "max")
+}
+ORDER BY DESC(?success_score)
+LIMIT 1
+```

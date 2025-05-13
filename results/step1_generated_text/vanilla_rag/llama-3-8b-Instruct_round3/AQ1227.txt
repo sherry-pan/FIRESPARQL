@@ -1,0 +1,23 @@
+Question:
+What is the highest benchmark result achieved on the Cartpole, swingup (DMControl500k) dataset, including the metric and its value?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?metric?value
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:hasBenchmark true ;
+             orkg:hasEvaluation?evaluation.
+ ?evaluation orkg:hasMetric?metric ;
+             orkg:hasMetricValue?value.
+ ?benchmark orkg:bestResult?evaluation.
+  FILTER (?benchmark orkg:dataset "Cartpole, swingup (DMControl500k)".
+  FILTER (?metric a orkg:Metric).
+  FILTER (?value a xsd:double).
+  FILTER (?evaluation orkg:dataset?benchmark).
+  FILTER (?metric orkg:dataset?benchmark).
+}
+ORDER BY DESC(?value) LIMIT 1<|eot_id|>

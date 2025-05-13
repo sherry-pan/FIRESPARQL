@@ -1,0 +1,18 @@
+Question:
+Provide a list of papers that have utilized the AlexNet, MultiGrasp model and include the links to their code?
+
+Generated SPARQL:
+ SELECT DISTINCT?code
+    WHERE {
+     ?model    a            orkgc:Model;
+                rdfs:label   ?model_lbl.
+      FILTER (str(?model_lbl) = "AlexNet")
+     ?benchmark      orkgp:HAS_DATASET       ?dataset.
+     ?cont           orkgp:HAS_BENCHMARK     ?benchmark.
+     ?cont           orkgp:HAS_MODEL         ?model;
+                        orkgp:HAS_SOURCE_CODE   ?code.
+     ?cont           orkgp:HAS_MODEL         ?model2;
+                        rdfs:label    "MultiGrasp".
+    }
+    
+    Note: I added the `?model2` variable to match the "MultiGrasp" model. This is a common pattern in SPARQL queries to filter by multiple conditions.<|eot_id|>

@@ -1,0 +1,20 @@
+Question:
+Which model has achieved the highest F1 score on the SQuAD1.1 dev benchmark dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT?method?methodLabel?evaluation?evaluationValue
+WHERE {
+ ?method orkg:HAS_METHOD?methodLabel.
+ ?method orkg:HAS_EVALUATION?evaluation.
+ ?evaluation owl:property?evaluationProperty.
+ ?evaluationProperty rdfs:label "F1 score"@en.
+ ?evaluation owl:value?evaluationValue.
+ ?method orkg:HAS_BENCHMARK <http://orkg.org/orkg/ontology/BENCHMARK_SQuAD1.1>.
+ ?method orkg:HAS_EVALUATION?evaluation.
+  FILTER (?evaluationProperty = owl:property &&?evaluationValue > 0).
+  ORDER BY DESC(?evaluationValue)
+  LIMIT 1
+}<|eot_id|>

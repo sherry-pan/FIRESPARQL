@@ -1,0 +1,18 @@
+Question:
+For what piezoresistive material the least response time was obtained?
+
+Generated SPARQL:
+ PREFIX orkg: <http://orkg.org/orkg/>
+     SELECT?material?minResponseTime?method?benchmark
+     WHERE {
+    ?material orkg:HAS_EVALUATION?evaluation.
+    ?evaluation orkg:HAS_METHOD?method.
+    ?evaluation orkg:HAS_BENCHMARK?benchmark.
+    ?material orkg:HAS_MESH?mesh.
+    ?evaluation a orkg:Evaluation.
+     FILTER (STRIKE?evaluation orkg:response_time?minResponseTime).
+     FILTER (IS_BLANK?mesh).
+     ORDER BY?minResponseTime.
+     LIMIT 1
+     }
+    <|eot_id|>

@@ -1,0 +1,15 @@
+```sparql
+PREFIX orkg: <http://orkg.org/orkg/predicate/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?approach
+WHERE {
+  ?evaluation orkg:HAS_EVALUATION ?evaluationResult.
+  ?evaluation orkg:HAS_DATASET orkg:RotoWire.
+  ?evaluation orkg:HAS_PRECISION ?precision.
+  ?evaluation orkg:HAS_APPROACH ?approach.
+  ?evaluation orkg:HAS_BENCHMARK orkg:RotoWire_Benchmark.
+}
+ORDER BY DESC(xsd:float(?precision)) 
+LIMIT 1
+```

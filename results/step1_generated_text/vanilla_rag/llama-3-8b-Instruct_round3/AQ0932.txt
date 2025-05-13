@@ -1,0 +1,17 @@
+Question:
+What evaluation metrics are commonly used when benchmarking models on the Atari 2600 Berzerk dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT?metric
+WHERE {
+ ?evaluation a orkg:Evaluation.
+ ?evaluation orkg:HAS_EVALUATION?metric.
+ ?metric rdfs:label?metricLabel.
+  FILTER (?metricLabel IN ("Accuracy", "Recall", "micro-F1", "macro-F1"))
+  FILTER (?evaluation orkg:HAS_CONTEXT?context.
+          ?context rdfs:label "Atari 2600 Berzerk".
+         )
+}<|eot_id|>

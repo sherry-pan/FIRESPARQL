@@ -1,0 +1,21 @@
+```sparql
+SELECT ?model ?model_lbl
+WHERE {
+  ?benchmark a orkgc:Benchmark;
+             rdfs:label ?benchmark_lbl.
+  FILTER (str(?benchmark_lbl) = "Reacher, easy (DMControl500k)")
+  {
+    SELECT ?model ?model_lbl
+    WHERE {
+      ?model orkgp:HAS_BENCHMARK ?benchmark;
+             orkgp:HAS_EVALUATION ?eval;
+             rdfs:label ?model_lbl.
+      ?eval orkgp:HAS_VALUE ?value.
+      ?value rdfs:label ?score.
+      BIND(xsd:float(?score) AS ?Score)
+    }
+    ORDER BY DESC(?Score)
+    LIMIT 1
+  }
+}
+```

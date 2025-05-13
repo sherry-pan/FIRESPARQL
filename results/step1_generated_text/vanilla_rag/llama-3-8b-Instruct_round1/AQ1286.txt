@@ -1,0 +1,16 @@
+Question:
+What is the top benchmark score and its metric on the Atari 2600 Alien dataset?
+
+Generated SPARQL:
+PREFIX orkg: <http://orkg.org/orkg/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT?score?metric
+WHERE {
+ ?benchmark a orkg:Benchmark ;
+             orkg:has_dataset <http://orkg.org/orkg/dataset/Atari_2600_Alien> ;
+             orkg:has_evaluation?evaluation.
+ ?evaluation orkg:has_metric?metric ;
+             orkg:has_score?score.
+  FILTER(?score = (SELECT MAX(?score) WHERE {?benchmark orkg:has_evaluation?evaluation ; orkg:has_evaluation?evaluation ; orkg:has_score?score } ).
+}<|eot_id|>
