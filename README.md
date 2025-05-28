@@ -45,3 +45,46 @@ We release the **best performing model**, fine-tuned LLaMA-3-8B-Instruct (15 epo
 ## 🧪 Reproducing Results
 
 ### Requirements
+_Coming soon or to be added here..._
+
+---
+
+## 📁 Code Structure
+
+```plaintext
+.
+├── codes/                                 # Core scripts for generation, evaluation, and cleaning
+│   ├── accumulate_exact_match.py          # Aggregates exact match scores for three runs
+│   ├── bleu_rouge.py                      # Computes BLEU and ROUGE metrics
+│   ├── exact_match.py                     # Computes exact match scores
+│   ├── generate_context_rag.py            # Retrieves context using RAG from ORKG
+│   ├── generate_sparql_cuda.py            # Generates SPARQL queries using CUDA
+│   ├── generate_sparql_mps.py             # Generates SPARQL queries using Apple MPS
+│   ├── generate_sparql_one_shot_cuda.py   # One-shot SPARQL generation using CUDA
+│   ├── generate_sparql_rag_cuda.py        # SPARQL generation with RAG using CUDA
+│   ├── generate_sparql_rag_mps.py         # SPARQL generation with RAG using MPS
+│   ├── merge_sparql.ipynb                 # Merges SPARQL results with ground truth for error analysis
+│   ├── ploting.ipynb                      # Visualization of evaluation results
+│   ├── readme.md                          # Additional documentation on the codes
+│   ├── run_all_bleu_rouge.sh              # Script to run all BLEU/ROUGE evaluations on snellius
+│   ├── run_all_cleaning.sh                # Script to clean generated SPARQL on snellius
+│   ├── run_all_exact_match.sh             # Script to compute exact match scores on snellius
+│   ├── run_all_generate.sh                # Script to generate SPARQL in batch on snellius
+│   └── sparql-cleaning-llm.py             # LLM-based SPARQL query cleaning
+│
+├── experiment_datasets/                   # Dataset directory
+│   ├── codes/                             # Code-related preprocessing the dataset
+│   ├── dblp/                              # DBLP dataset
+│   └── sciqa/                             # SciQA benchmark data
+│
+├── results/                               # All output results
+│   ├── context_from_rag/                  # Retrieved context from ORKG using RAG
+│   ├── step1_generated_text/              # Output of generated SPARQL queries
+│   ├── step2_clean_sparql/                # Cleaned/generated SPARQL files
+│   ├── step3_sparql_running_against_qlever/ # Results from QLever SPARQL execution
+│   ├── step4_accumulated_success_metrics/ # Aggregated metrics (e.g., RelaxedEM)
+│   └── step5_error_analysis/              # Failed cases and syntax error breakdown
+│
+├── .gitignore                             # Git ignore rules
+└── README.md                              # Project overview and documentation
+
